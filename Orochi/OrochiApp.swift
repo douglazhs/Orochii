@@ -12,6 +12,8 @@ struct OrochiiApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .padding()
+                .foregroundColor(.clear)
         }
     }
 }
