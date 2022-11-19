@@ -14,7 +14,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		5092DF2129292C590094DC18 /* Orochi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orochi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5092DF2129292C590094DC18 /* Orochii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orochii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5092DF2429292C590094DC18 /* OrochiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrochiApp.swift; sourceTree = "<group>"; };
 		5092DF2629292C590094DC18 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5092DF2829292C5C0094DC18 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -43,7 +43,7 @@
 		5092DF2229292C590094DC18 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5092DF2129292C590094DC18 /* Orochi.app */,
+				5092DF2129292C590094DC18 /* Orochii.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -70,9 +70,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		5092DF2029292C590094DC18 /* Orochi */ = {
+		5092DF2029292C590094DC18 /* Orochii */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5092DF2F29292C5C0094DC18 /* Build configuration list for PBXNativeTarget "Orochi" */;
+			buildConfigurationList = 5092DF2F29292C5C0094DC18 /* Build configuration list for PBXNativeTarget "Orochii" */;
 			buildPhases = (
 				5092DF1D29292C590094DC18 /* Sources */,
 				5092DF1E29292C590094DC18 /* Frameworks */,
@@ -82,9 +82,9 @@
 			);
 			dependencies = (
 			);
-			name = Orochi;
+			name = Orochii;
 			productName = Orochi;
-			productReference = 5092DF2129292C590094DC18 /* Orochi.app */;
+			productReference = 5092DF2129292C590094DC18 /* Orochii.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -102,7 +102,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 5092DF1C29292C590094DC18 /* Build configuration list for PBXProject "Orochi" */;
+			buildConfigurationList = 5092DF1C29292C590094DC18 /* Build configuration list for PBXProject "Orochii" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -115,7 +115,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5092DF2029292C590094DC18 /* Orochi */,
+				5092DF2029292C590094DC18 /* Orochii */,
 			);
 		};
 /* End PBXProject section */
@@ -280,7 +280,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.douglashenrique.orochi.Orochi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.douglashenrique.orochi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -309,7 +309,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.douglashenrique.orochi.Orochi;
+				PRODUCT_BUNDLE_IDENTIFIER = com.douglashenrique.orochi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -320,7 +320,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		5092DF1C29292C590094DC18 /* Build configuration list for PBXProject "Orochi" */ = {
+		5092DF1C29292C590094DC18 /* Build configuration list for PBXProject "Orochii" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5092DF2D29292C5C0094DC18 /* Debug */,
@@ -329,7 +329,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5092DF2F29292C5C0094DC18 /* Build configuration list for PBXNativeTarget "Orochi" */ = {
+		5092DF2F29292C5C0094DC18 /* Build configuration list for PBXNativeTarget "Orochii" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5092DF3029292C5C0094DC18 /* Debug */,
