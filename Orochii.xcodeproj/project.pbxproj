@@ -8,17 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		5092DF2529292C590094DC18 /* OrochiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF2429292C590094DC18 /* OrochiApp.swift */; };
-		5092DF2729292C590094DC18 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF2629292C590094DC18 /* ContentView.swift */; };
 		5092DF2929292C5C0094DC18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5092DF2829292C5C0094DC18 /* Assets.xcassets */; };
 		5092DF2C29292C5C0094DC18 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5092DF2B29292C5C0094DC18 /* Preview Assets.xcassets */; };
+		5092DF35292942A30094DC18 /* DiscoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF34292942A30094DC18 /* DiscoverView.swift */; };
+		5092DF3A292942CA0094DC18 /* DiscoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF39292942CA0094DC18 /* DiscoverViewModel.swift */; };
+		5092DF482929464F0094DC18 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF472929464F0094DC18 /* LibraryView.swift */; };
+		5092DF4A2929465B0094DC18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF492929465B0094DC18 /* SettingsView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		5092DF2129292C590094DC18 /* Orochii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orochii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5092DF2429292C590094DC18 /* OrochiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrochiApp.swift; sourceTree = "<group>"; };
-		5092DF2629292C590094DC18 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		5092DF2829292C5C0094DC18 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5092DF2B29292C5C0094DC18 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		5092DF34292942A30094DC18 /* DiscoverView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverView.swift; sourceTree = "<group>"; };
+		5092DF39292942CA0094DC18 /* DiscoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewModel.swift; sourceTree = "<group>"; };
+		5092DF472929464F0094DC18 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
+		5092DF492929465B0094DC18 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +58,8 @@
 			isa = PBXGroup;
 			children = (
 				5092DF2429292C590094DC18 /* OrochiApp.swift */,
-				5092DF2629292C590094DC18 /* ContentView.swift */,
-				5092DF2829292C5C0094DC18 /* Assets.xcassets */,
+				5092DF33292942820094DC18 /* Resources */,
+				5092DF322929427C0094DC18 /* Scenes */,
 				5092DF2A29292C5C0094DC18 /* Preview Content */,
 			);
 			path = Orochi;
@@ -65,6 +71,81 @@
 				5092DF2B29292C5C0094DC18 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		5092DF322929427C0094DC18 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				5092DF46292946410094DC18 /* Library */,
+				5092DF45292946340094DC18 /* Settings */,
+				5092DF36292942A80094DC18 /* Discover */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		5092DF33292942820094DC18 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5092DF2829292C5C0094DC18 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		5092DF36292942A80094DC18 /* Discover */ = {
+			isa = PBXGroup;
+			children = (
+				5092DF38292942B60094DC18 /* ViewModel */,
+				5092DF37292942B20094DC18 /* View */,
+			);
+			path = Discover;
+			sourceTree = "<group>";
+		};
+		5092DF37292942B20094DC18 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5092DF34292942A30094DC18 /* DiscoverView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5092DF38292942B60094DC18 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				5092DF39292942CA0094DC18 /* DiscoverViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		5092DF45292946340094DC18 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5092DF4B2929469D0094DC18 /* View */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		5092DF46292946410094DC18 /* Library */ = {
+			isa = PBXGroup;
+			children = (
+				5092DF4C292946AC0094DC18 /* View */,
+			);
+			path = Library;
+			sourceTree = "<group>";
+		};
+		5092DF4B2929469D0094DC18 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5092DF492929465B0094DC18 /* SettingsView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		5092DF4C292946AC0094DC18 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				5092DF472929464F0094DC18 /* LibraryView.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -137,8 +218,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5092DF2729292C590094DC18 /* ContentView.swift in Sources */,
+				5092DF4A2929465B0094DC18 /* SettingsView.swift in Sources */,
+				5092DF482929464F0094DC18 /* LibraryView.swift in Sources */,
+				5092DF3A292942CA0094DC18 /* DiscoverViewModel.swift in Sources */,
 				5092DF2529292C590094DC18 /* OrochiApp.swift in Sources */,
+				5092DF35292942A30094DC18 /* DiscoverView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,11 +359,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.douglashenrique.orochi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -304,11 +389,12 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.douglashenrique.orochi;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;

@@ -11,7 +11,24 @@ import SwiftUI
 struct OrochiiApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabView {
+                DiscoverView()
+                    .tabItem { Label(
+                        "Discover",
+                        systemImage: "globe.americas.fill"
+                    ) }
+                LibraryView()
+                    .tabItem { Label(
+                        "Library",
+                        systemImage: "books.vertical"
+                    ) }
+                SettingsView()
+                    .tabItem { Label(
+                        "Settings",
+                        systemImage: "gear"
+                    ) }
+            }
+            .tint(.green)
         }
     }
 }
