@@ -14,21 +14,22 @@ struct OrochiiApp: App {
             TabView {
                 DiscoverView()
                     .tabItem { Label(
-                        "Discover",
+                        String.Discovery.title,
                         systemImage: "globe.americas.fill"
                     ) }
                 LibraryView()
                     .tabItem { Label(
-                        "Library",
+                        String.Library.title,
                         systemImage: "books.vertical"
                     ) }
                 SettingsView()
                     .tabItem { Label(
-                        "Settings",
+                        String.Settings.title,
                         systemImage: "gear"
                     ) }
             }
-            .tint(.green)
+            .tint(.purple)
+            .preferredColorScheme(.dark)
         }
     }
 }

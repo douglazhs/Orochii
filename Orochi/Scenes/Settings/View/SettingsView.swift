@@ -10,9 +10,12 @@ import SwiftUI
 struct SettingsView: View {
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Settings")
-            }.navigationTitle(Text("Settings"))
+            List {
+                
+            }
+            .background(ViewBackground(name: "aesthetic"))
+            .scrollContentBackground(.hidden)
+            .navigationTitle(Text(String.Settings.title))
         }
     }
 }

@@ -7,13 +7,30 @@
 
 import SwiftUI
 
+enum ViewStyle {
+    case search, initial
+}
+
 struct DiscoverView: View {
+    @StateObject var vm = DiscoverViewModel()
+    @State var viewStyle: ViewStyle = .initial
+    @State var mangaSourcePref: Bool = false
     var body: some View {
         NavigationView {
-            VStack {
-                Text("Discover")
-            }.navigationTitle(Text("Discover"))
+            self.content()
+                .navigationTitle(Text(String.Discovery.title))
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        self.mangaSourceButton()
+                    }
+                }
         }
+        .searchable(
+            text: $vm.searchText,
+            placement: .toolbar,
+            prompt: String.Discovery.searchPlaceholder
+        )
+        .onSubmit(of: .search) { viewStyle = .search }
     }
 }
 
@@ -22,3 +39,5 @@ struct DiscoverView_Previews: PreviewProvider {
         DiscoverView()
     }
 }
+
+

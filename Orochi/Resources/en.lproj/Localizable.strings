@@ -1,0 +1,93 @@
+/* 
+  Localizable.strings
+  Orochii
+
+  Created by Douglas Henrique de Souza Pereira on 19/11/22.
+  
+*/
+
+// MARK: - Commons
+
+"common_cancel" = "Cancel";
+"common_done" = "Done";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - DISCOVERY SCREEN
+
+"discovery_title" = "Discover";
+"discovery_search_placeholder" = "Search for manga name";
+
+// MANGA CELL
+
+"discovery_cell_author" = "AUTHOR";
+"discovery_cell_year" = "YEAR";
+"discovery_cell_last_updated" = "UPDATED";
+
+// MANGA STATUS
+
+"discovery_status_ongoing" = "Ongoing";
+"discovery_status_hiatus" = "Hiatus";
+"discovery_status_completed" = "Completed";
+
+// MANGA CELL CONTEXT MENU
+
+"discovery_action_add_to_library" = "Add to library";
+"discovery_action_remove_from_library" = "Remove from library";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - SOURCE PREFERENCES
+
+"manga_source_title" = "MangaDex Source";
+"manga_source_site_footer" = "You will be redirected to _MangaDex_ website";
+"manga_source_language_footer" = "Language that will be used to search your mangas";
+"manga_source_language_header" = "Language";
+"manga_source_quality_header" = "Quality";
+"manga_source_quality_footer" = "Some manga preferences, such as **quality**";
+
+// MANGA QUALITY
+
+"manga_source_low_quality" = "Low";
+"manga_source_medium_quality" = "Medium";
+"manga_source_high_quality" = "High";
+
+// SWIFT ACTIONS
+
+"manga_source_quality_title" = "Manga Quality";
+"manga_source_quality_dialog" = "Choose manga download quality";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - LIBRARY SCREEN
+
+"library_title" = "Library";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - Settings SCREEN
+
+"settings_title" = "Adjusts";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - Filter
+
+"filter_title" = "Filters";
+"filter_filter_by_header" = "Filter by";
+"filter_filter_by_footer" = "Here you have some preferences to change the order of you mangas";
+"filter_order_by_header" = "Order By";
+"filter_order_by_footer" = "Ascending or descending order";
+"filter_manga_info_header" = "Manga Information";
+"filter_manga_info_footer" = "Filter your mangas by their informations";
+"filter_ascending" = "Ascending";
+"filter_descending" = "Descending";
+"filter_none" = "None";
+"filter_name" = "Name";
+"filter_last_updated" = "Last Updated";
+"filter_release_year" = "Release Year";
+"filter_language" = "Language";
+"filter_year" = "Year";
+"filter_public" = "Public";
+"filter_status" = "Status";
+
