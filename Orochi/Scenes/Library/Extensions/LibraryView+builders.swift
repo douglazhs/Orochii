@@ -12,7 +12,7 @@ extension LibraryView {
     /// - Returns: Filtered manga list
     @ViewBuilder
     func content() -> some View {
-        List(samples) { manga in
+        List(MangaDomain.samples) { manga in
             self.cell(of: manga)
                 .listRowBackground(Color.clear)
         }

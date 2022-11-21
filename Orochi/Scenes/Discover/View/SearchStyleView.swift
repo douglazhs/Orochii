@@ -20,7 +20,7 @@ struct SearchStyleView: View {
         self._viewStyle = viewStyle
     }
     var body: some View {
-        List(samples) { manga in
+        List(mangas) { manga in
             self.cell(of: manga)
                 .listRowBackground(Color.clear)
         }
@@ -36,6 +36,6 @@ struct SearchStyleView: View {
 
 struct SearchStyleView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchStyleView(mangas: samples, .constant(.search))
+        SearchStyleView(mangas: MangaDomain.samples, .constant(.search))
     }
 }

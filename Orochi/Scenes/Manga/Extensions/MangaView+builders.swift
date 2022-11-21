@@ -8,7 +8,8 @@
 import SwiftUI
 
 extension MangaView {
-    @ViewBuilder func content() -> some View {
+    @ViewBuilder
+    func content() -> some View {
         List {
             Section {
                 self.header()
@@ -24,7 +25,7 @@ extension MangaView {
             }
             .listRowBackground(Color.clear)
         }
-        .listStyle(.plain)
+        .listStyle(.inset)
         .scrollContentBackground(.hidden)
         .background(ViewBackground(name: manga.cover))
     }
@@ -150,7 +151,8 @@ extension MangaView {
         }
     }
     
-    @ViewBuilder func description() -> some View {
+    @ViewBuilder
+    func description() -> some View {
         Section {
             Text(manga.description)
                 .font(.callout)
@@ -165,38 +167,47 @@ extension MangaView {
     
     @ViewBuilder
     func chapters() -> some View {
-        ForEach(0..<30) { i in
-            self.chapterCell(i)
+        ForEach(ChapterDomain.samples) { chapter in
+            self.chapterCell(chapter)
+                .contextMenu {
+                    // TODO: - Context actions
+                    Button { } label: {
+                        Label {
+                            Text("Mark as read")
+                        } icon: { Image(systemName: "eye.fill") }
+                    }
+                }
         }
     }
     
-    @ViewBuilder func chapterCell(_ i: Int) -> some View {
+    @ViewBuilder func chapterCell(_ chapter: ChapterDomain) -> some View {
         HStack (alignment: .center, spacing: 15) {
             VStack(alignment: .center, spacing: 10) {
-                Text("CH.\(i)")
+                Text("CH.\(chapter.number)")
                     .font(.callout)
                     .fontWeight(.semibold)
                 Text("pt-br")
                     .font(.caption2)
-                Text("20 PAGES")
+                Text(chapter.volume)
+                    .font(.caption2)
+                    .foregroundColor(Color(uiColor: .systemGray))
+            }
+            Divider()
+            VStack(alignment: .leading, spacing: 10) {
+                Text(chapter.title)
+                    .font(.callout)
+                    .fontWeight(.semibold)
+                Text("\(chapter.pages) PAGES")
                     .font(.caption2)
                     .foregroundColor(Color(uiColor: .systemGray))
                     .fontWeight(.light)
                     .fontWeight(.thin)
-            }
-            Divider()
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Blood and war")
-                    .font(.callout)
-                    .fontWeight(.semibold)
-                Text("vol. \(i)")
-                    .font(.caption2)
                 HStack {
-                    Text("UPDATED: 2022-10-21")
+                    Text("UPDATED: \(chapter.updated)")
                         .font(.footnote)
                         .foregroundColor(Color(uiColor: .systemGray))
                     Spacer()
-                    Text("Gravity Scans")
+                    Text(chapter.scanGroup)
                         .font(.footnote)
                         .foregroundColor(Color(uiColor: .systemGray))
                 }

@@ -14,7 +14,7 @@ struct ViewBackground: View {
             .resizable(resizingMode: .stretch)
             .edgesIgnoringSafeArea(.all)
             .blur(radius: 75)
-            .opacity(0.5)
+            .opacity(0.35)
     }
 }
 

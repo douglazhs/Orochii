@@ -20,6 +20,6 @@ struct MangaStandardCell: View {
 
 struct MangaStandardCell_Previews: PreviewProvider {
     static var previews: some View {
-        MangaStandardCell(samples[0])
+        MangaStandardCell(MangaDomain.samples[0])
     }
 }

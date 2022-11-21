@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		506D5753292B1E2900A0C529 /* ChapterDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5752292B1E2900A0C529 /* ChapterDomain.swift */; };
 		5092DF2529292C590094DC18 /* OrochiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF2429292C590094DC18 /* OrochiApp.swift */; };
 		5092DF2929292C5C0094DC18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5092DF2829292C5C0094DC18 /* Assets.xcassets */; };
 		5092DF2C29292C5C0094DC18 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5092DF2B29292C5C0094DC18 /* Preview Assets.xcassets */; };
@@ -46,6 +47,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		506D5752292B1E2900A0C529 /* ChapterDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterDomain.swift; sourceTree = "<group>"; };
 		5092DF2129292C590094DC18 /* Orochii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orochii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5092DF2429292C590094DC18 /* OrochiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrochiApp.swift; sourceTree = "<group>"; };
 		5092DF2829292C5C0094DC18 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -234,6 +236,7 @@
 			isa = PBXGroup;
 			children = (
 				5092DF5529296FFA0094DC18 /* MangaDomain.swift */,
+				506D5752292B1E2900A0C529 /* ChapterDomain.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -479,6 +482,7 @@
 				50FFAFFF292A98C000B87E0E /* MangaStandardImage.swift in Sources */,
 				50FFB00B292AB3DA00B87E0E /* LibraryFilterView+extension.swift in Sources */,
 				50FFAFE1292A6ACD00B87E0E /* MangaQuality.swift in Sources */,
+				506D5753292B1E2900A0C529 /* ChapterDomain.swift in Sources */,
 				50FFB001292AA5CD00B87E0E /* SearchStyleView+builders.swift in Sources */,
 				50FFB00D292ACDF100B87E0E /* MangaInfoFilter.swift in Sources */,
 				5092DF482929464F0094DC18 /* LibraryView.swift in Sources */,

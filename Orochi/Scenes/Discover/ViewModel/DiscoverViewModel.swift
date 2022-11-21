@@ -37,12 +37,12 @@ enum CarouselType: CaseIterable {
 class DiscoverViewModel: ObservableObject {
     @Published var searchText: String = ""
     // TODO: - Change all to api requests
-    @Published var mangas: [MangaDomain] = samples
-    @Published var latestUploaded: [MangaDomain] = samples
-    @Published var moreRelevants: [MangaDomain] = samples
-    @Published var ongoingStatus: [MangaDomain] = samples
-    @Published var thisYear: [MangaDomain] = samples
-    @Published var shounen: [MangaDomain] = samples
-    @Published var seinen: [MangaDomain] = samples
+    @Published var mangas: [MangaDomain] = MangaDomain.samples
+    @Published var latestUploaded: [MangaDomain] = MangaDomain.samples
+    @Published var moreRelevants: [MangaDomain] = MangaDomain.samples
+    @Published var ongoingStatus: [MangaDomain] = MangaDomain.samples
+    @Published var thisYear: [MangaDomain] = MangaDomain.samples
+    @Published var shounen: [MangaDomain] = MangaDomain.samples
+    @Published var seinen: [MangaDomain] = MangaDomain.samples
 }
 

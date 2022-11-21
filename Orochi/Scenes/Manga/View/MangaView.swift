@@ -17,12 +17,11 @@ struct MangaView: View {
     var body: some View {
         self.content()
             .navigationTitle(manga.title)
-//            .navigationBarTitleDisplayMode(.inline)
     }
 }
 
 struct MangaView_Previews: PreviewProvider {
     static var previews: some View {
-        MangaView(samples[0])
+        MangaView(MangaDomain.samples[0])
     }
 }
