@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500183C6292C07580094B223 /* MangaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500183C5292C07580094B223 /* MangaViewModel.swift */; };
+		500183C8292C0BB10094B223 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500183C7292C0BB10094B223 /* Actions.swift */; };
+		500183CB292C0CCA0094B223 /* ChapterStandardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500183CA292C0CCA0094B223 /* ChapterStandardCell.swift */; };
+		500183CD292C0D270094B223 /* ChapterStandardCell+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500183CC292C0D270094B223 /* ChapterStandardCell+builders.swift */; };
+		500DB59D292C608B00F398D6 /* SettingsView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500DB59C292C608B00F398D6 /* SettingsView+builders.swift */; };
+		506D5753292B1E2900A0C529 /* ChapterDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5752292B1E2900A0C529 /* ChapterDomain.swift */; };
 		5092DF2529292C590094DC18 /* OrochiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF2429292C590094DC18 /* OrochiApp.swift */; };
 		5092DF2929292C5C0094DC18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5092DF2829292C5C0094DC18 /* Assets.xcassets */; };
 		5092DF2C29292C5C0094DC18 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5092DF2B29292C5C0094DC18 /* Preview Assets.xcassets */; };
@@ -14,9 +20,46 @@
 		5092DF3A292942CA0094DC18 /* DiscoverViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF39292942CA0094DC18 /* DiscoverViewModel.swift */; };
 		5092DF482929464F0094DC18 /* LibraryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF472929464F0094DC18 /* LibraryView.swift */; };
 		5092DF4A2929465B0094DC18 /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF492929465B0094DC18 /* SettingsView.swift */; };
+		5092DF4E29294C3A0094DC18 /* DiscoveryView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF4D29294C3A0094DC18 /* DiscoveryView+builders.swift */; };
+		5092DF51292957980094DC18 /* UIScreen+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF50292957980094DC18 /* UIScreen+extension.swift */; };
+		5092DF5629296FFA0094DC18 /* MangaDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF5529296FFA0094DC18 /* MangaDomain.swift */; };
+		5092DF59292971580094DC18 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 5092DF5B292971580094DC18 /* Localizable.strings */; };
+		5092DF5E292972F80094DC18 /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF5D292972F80094DC18 /* String+localized.swift */; };
+		5092DF612929831D0094DC18 /* MangaDexPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF602929831D0094DC18 /* MangaDexPreferencesView.swift */; };
+		5092DF6329298B9A0094DC18 /* MangaDexPreferencesView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF6229298B9A0094DC18 /* MangaDexPreferencesView+builders.swift */; };
+		50BC960F292C674500DF13A5 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC960E292C674500DF13A5 /* SettingsViewModel.swift */; };
+		50BC9611292C739E00DF13A5 /* SecurityLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC9610292C739E00DF13A5 /* SecurityLevel.swift */; };
+		50FFAFDC292A668000B87E0E /* LanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFDB292A668000B87E0E /* LanguagesView.swift */; };
+		50FFAFDF292A6A8F00B87E0E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFDE292A6A8F00B87E0E /* Language.swift */; };
+		50FFAFE1292A6ACD00B87E0E /* MangaQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFE0292A6ACD00B87E0E /* MangaQuality.swift */; };
+		50FFAFE3292A6AFE00B87E0E /* MangaStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFE2292A6AFE00B87E0E /* MangaStatus.swift */; };
+		50FFAFE9292A81B100B87E0E /* MangaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFE8292A81B100B87E0E /* MangaView.swift */; };
+		50FFAFEC292A836300B87E0E /* MangaStandardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFEB292A836300B87E0E /* MangaStandardCell.swift */; };
+		50FFAFEE292A83B800B87E0E /* MangaStandardCell+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFED292A83B800B87E0E /* MangaStandardCell+builders.swift */; };
+		50FFAFF2292A84DB00B87E0E /* SearchStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFF1292A84DB00B87E0E /* SearchStyleView.swift */; };
+		50FFAFF4292A84EE00B87E0E /* InitialStyleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFF3292A84EE00B87E0E /* InitialStyleView.swift */; };
+		50FFAFF7292A8C8800B87E0E /* LibraryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFF6292A8C8800B87E0E /* LibraryViewModel.swift */; };
+		50FFAFFA292A8FDF00B87E0E /* LibraryView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFF9292A8FDF00B87E0E /* LibraryView+builders.swift */; };
+		50FFAFFC292A986600B87E0E /* InitialStyleView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFFB292A986600B87E0E /* InitialStyleView+builders.swift */; };
+		50FFAFFF292A98C000B87E0E /* MangaStandardImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFFE292A98C000B87E0E /* MangaStandardImage.swift */; };
+		50FFB001292AA5CD00B87E0E /* SearchStyleView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB000292AA5CD00B87E0E /* SearchStyleView+builders.swift */; };
+		50FFB004292AAD5700B87E0E /* ViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB003292AAD5700B87E0E /* ViewBackground.swift */; };
+		50FFB008292AB28E00B87E0E /* LibraryFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB007292AB28E00B87E0E /* LibraryFilterView.swift */; };
+		50FFB00B292AB3DA00B87E0E /* LibraryFilterView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB00A292AB3DA00B87E0E /* LibraryFilterView+extension.swift */; };
+		50FFB00D292ACDF100B87E0E /* MangaInfoFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB00C292ACDF100B87E0E /* MangaInfoFilter.swift */; };
+		50FFB00F292ACE0400B87E0E /* ObjectFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB00E292ACE0400B87E0E /* ObjectFilter.swift */; };
+		50FFB011292ACE6200B87E0E /* DemoPublic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB010292ACE6200B87E0E /* DemoPublic.swift */; };
+		50FFB013292AD35000B87E0E /* FilterOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB012292AD35000B87E0E /* FilterOrder.swift */; };
+		50FFB016292AE7B800B87E0E /* MangaView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB015292AE7B800B87E0E /* MangaView+builders.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		500183C5292C07580094B223 /* MangaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaViewModel.swift; sourceTree = "<group>"; };
+		500183C7292C0BB10094B223 /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
+		500183CA292C0CCA0094B223 /* ChapterStandardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterStandardCell.swift; sourceTree = "<group>"; };
+		500183CC292C0D270094B223 /* ChapterStandardCell+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChapterStandardCell+builders.swift"; sourceTree = "<group>"; };
+		500DB59C292C608B00F398D6 /* SettingsView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+builders.swift"; sourceTree = "<group>"; };
+		506D5752292B1E2900A0C529 /* ChapterDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterDomain.swift; sourceTree = "<group>"; };
 		5092DF2129292C590094DC18 /* Orochii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orochii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5092DF2429292C590094DC18 /* OrochiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrochiApp.swift; sourceTree = "<group>"; };
 		5092DF2829292C5C0094DC18 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -25,6 +68,38 @@
 		5092DF39292942CA0094DC18 /* DiscoverViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverViewModel.swift; sourceTree = "<group>"; };
 		5092DF472929464F0094DC18 /* LibraryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryView.swift; sourceTree = "<group>"; };
 		5092DF492929465B0094DC18 /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
+		5092DF4D29294C3A0094DC18 /* DiscoveryView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DiscoveryView+builders.swift"; sourceTree = "<group>"; };
+		5092DF50292957980094DC18 /* UIScreen+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIScreen+extension.swift"; sourceTree = "<group>"; };
+		5092DF5529296FFA0094DC18 /* MangaDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaDomain.swift; sourceTree = "<group>"; };
+		5092DF5A292971580094DC18 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		5092DF5C292971B80094DC18 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		5092DF5D292972F80094DC18 /* String+localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
+		5092DF602929831D0094DC18 /* MangaDexPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaDexPreferencesView.swift; sourceTree = "<group>"; };
+		5092DF6229298B9A0094DC18 /* MangaDexPreferencesView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaDexPreferencesView+builders.swift"; sourceTree = "<group>"; };
+		50BC960E292C674500DF13A5 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		50BC9610292C739E00DF13A5 /* SecurityLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityLevel.swift; sourceTree = "<group>"; };
+		50FFAFDB292A668000B87E0E /* LanguagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesView.swift; sourceTree = "<group>"; };
+		50FFAFDE292A6A8F00B87E0E /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
+		50FFAFE0292A6ACD00B87E0E /* MangaQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaQuality.swift; sourceTree = "<group>"; };
+		50FFAFE2292A6AFE00B87E0E /* MangaStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaStatus.swift; sourceTree = "<group>"; };
+		50FFAFE8292A81B100B87E0E /* MangaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaView.swift; sourceTree = "<group>"; };
+		50FFAFEB292A836300B87E0E /* MangaStandardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaStandardCell.swift; sourceTree = "<group>"; };
+		50FFAFED292A83B800B87E0E /* MangaStandardCell+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaStandardCell+builders.swift"; sourceTree = "<group>"; };
+		50FFAFF1292A84DB00B87E0E /* SearchStyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchStyleView.swift; sourceTree = "<group>"; };
+		50FFAFF3292A84EE00B87E0E /* InitialStyleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InitialStyleView.swift; sourceTree = "<group>"; };
+		50FFAFF6292A8C8800B87E0E /* LibraryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryViewModel.swift; sourceTree = "<group>"; };
+		50FFAFF9292A8FDF00B87E0E /* LibraryView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibraryView+builders.swift"; sourceTree = "<group>"; };
+		50FFAFFB292A986600B87E0E /* InitialStyleView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "InitialStyleView+builders.swift"; sourceTree = "<group>"; };
+		50FFAFFE292A98C000B87E0E /* MangaStandardImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaStandardImage.swift; sourceTree = "<group>"; };
+		50FFB000292AA5CD00B87E0E /* SearchStyleView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchStyleView+builders.swift"; sourceTree = "<group>"; };
+		50FFB003292AAD5700B87E0E /* ViewBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBackground.swift; sourceTree = "<group>"; };
+		50FFB007292AB28E00B87E0E /* LibraryFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryFilterView.swift; sourceTree = "<group>"; };
+		50FFB00A292AB3DA00B87E0E /* LibraryFilterView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibraryFilterView+extension.swift"; sourceTree = "<group>"; };
+		50FFB00C292ACDF100B87E0E /* MangaInfoFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaInfoFilter.swift; sourceTree = "<group>"; };
+		50FFB00E292ACE0400B87E0E /* ObjectFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectFilter.swift; sourceTree = "<group>"; };
+		50FFB010292ACE6200B87E0E /* DemoPublic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoPublic.swift; sourceTree = "<group>"; };
+		50FFB012292AD35000B87E0E /* FilterOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOrder.swift; sourceTree = "<group>"; };
+		50FFB015292AE7B800B87E0E /* MangaView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaView+builders.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,6 +113,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		500183C4292C07480094B223 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				500183C5292C07580094B223 /* MangaViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		500183C9292C0CB60094B223 /* ChapterStandardCell */ = {
+			isa = PBXGroup;
+			children = (
+				500183CA292C0CCA0094B223 /* ChapterStandardCell.swift */,
+				500183CC292C0D270094B223 /* ChapterStandardCell+builders.swift */,
+			);
+			path = ChapterStandardCell;
+			sourceTree = "<group>";
+		};
+		500DB59B292C606D00F398D6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				500DB59C292C608B00F398D6 /* SettingsView+builders.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		5092DF1829292C590094DC18 = {
 			isa = PBXGroup;
 			children = (
@@ -58,9 +158,13 @@
 			isa = PBXGroup;
 			children = (
 				5092DF2429292C590094DC18 /* OrochiApp.swift */,
+				50FFAFDD292A6A7F00B87E0E /* Enums */,
+				5092DF5429296FE10094DC18 /* Model */,
+				5092DF4F292957770094DC18 /* Extensions */,
+				5092DF2A29292C5C0094DC18 /* Preview Content */,
 				5092DF33292942820094DC18 /* Resources */,
 				5092DF322929427C0094DC18 /* Scenes */,
-				5092DF2A29292C5C0094DC18 /* Preview Content */,
+				50FFAFEA292A832F00B87E0E /* Shared */,
 			);
 			path = Orochi;
 			sourceTree = "<group>";
@@ -76,6 +180,10 @@
 		5092DF322929427C0094DC18 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				50FFB005292AB15F00B87E0E /* LibraryFilter */,
+				50FFAFE6292A819C00B87E0E /* Manga */,
+				50FFAFE4292A73F400B87E0E /* Languages */,
+				5092DF5F292983050094DC18 /* MangaDexPreferences */,
 				5092DF46292946410094DC18 /* Library */,
 				5092DF45292946340094DC18 /* Settings */,
 				5092DF36292942A80094DC18 /* Discover */,
@@ -86,6 +194,7 @@
 		5092DF33292942820094DC18 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				5092DF5B292971580094DC18 /* Localizable.strings */,
 				5092DF2829292C5C0094DC18 /* Assets.xcassets */,
 			);
 			path = Resources;
@@ -94,6 +203,7 @@
 		5092DF36292942A80094DC18 /* Discover */ = {
 			isa = PBXGroup;
 			children = (
+				50FFAFF0292A84AB00B87E0E /* Extensions */,
 				5092DF38292942B60094DC18 /* ViewModel */,
 				5092DF37292942B20094DC18 /* View */,
 			);
@@ -104,6 +214,8 @@
 			isa = PBXGroup;
 			children = (
 				5092DF34292942A30094DC18 /* DiscoverView.swift */,
+				50FFAFF1292A84DB00B87E0E /* SearchStyleView.swift */,
+				50FFAFF3292A84EE00B87E0E /* InitialStyleView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -119,6 +231,8 @@
 		5092DF45292946340094DC18 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				50BC960D292C673200DF13A5 /* ViewModel */,
+				500DB59B292C606D00F398D6 /* Extensions */,
 				5092DF4B2929469D0094DC18 /* View */,
 			);
 			path = Settings;
@@ -127,6 +241,8 @@
 		5092DF46292946410094DC18 /* Library */ = {
 			isa = PBXGroup;
 			children = (
+				50FFAFF8292A8FC600B87E0E /* Extensions */,
+				50FFAFF5292A8C7B00B87E0E /* ViewModel */,
 				5092DF4C292946AC0094DC18 /* View */,
 			);
 			path = Library;
@@ -146,6 +262,186 @@
 				5092DF472929464F0094DC18 /* LibraryView.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		5092DF4F292957770094DC18 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5092DF50292957980094DC18 /* UIScreen+extension.swift */,
+				5092DF5D292972F80094DC18 /* String+localized.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5092DF5429296FE10094DC18 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				5092DF5529296FFA0094DC18 /* MangaDomain.swift */,
+				506D5752292B1E2900A0C529 /* ChapterDomain.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		5092DF5F292983050094DC18 /* MangaDexPreferences */ = {
+			isa = PBXGroup;
+			children = (
+				5092DF602929831D0094DC18 /* MangaDexPreferencesView.swift */,
+				5092DF6229298B9A0094DC18 /* MangaDexPreferencesView+builders.swift */,
+			);
+			path = MangaDexPreferences;
+			sourceTree = "<group>";
+		};
+		50BC960D292C673200DF13A5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				50BC960E292C674500DF13A5 /* SettingsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		50FFAFDD292A6A7F00B87E0E /* Enums */ = {
+			isa = PBXGroup;
+			children = (
+				50FFAFDE292A6A8F00B87E0E /* Language.swift */,
+				50FFAFE0292A6ACD00B87E0E /* MangaQuality.swift */,
+				50FFAFE2292A6AFE00B87E0E /* MangaStatus.swift */,
+				50FFB00C292ACDF100B87E0E /* MangaInfoFilter.swift */,
+				50FFB00E292ACE0400B87E0E /* ObjectFilter.swift */,
+				50FFB010292ACE6200B87E0E /* DemoPublic.swift */,
+				50FFB012292AD35000B87E0E /* FilterOrder.swift */,
+				500183C7292C0BB10094B223 /* Actions.swift */,
+				50BC9610292C739E00DF13A5 /* SecurityLevel.swift */,
+			);
+			path = Enums;
+			sourceTree = "<group>";
+		};
+		50FFAFE4292A73F400B87E0E /* Languages */ = {
+			isa = PBXGroup;
+			children = (
+				50FFAFE5292A73FC00B87E0E /* View */,
+			);
+			path = Languages;
+			sourceTree = "<group>";
+		};
+		50FFAFE5292A73FC00B87E0E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				50FFAFDB292A668000B87E0E /* LanguagesView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		50FFAFE6292A819C00B87E0E /* Manga */ = {
+			isa = PBXGroup;
+			children = (
+				500183C4292C07480094B223 /* ViewModel */,
+				50FFB014292AE7A700B87E0E /* Extensions */,
+				50FFAFE7292A81A500B87E0E /* View */,
+			);
+			path = Manga;
+			sourceTree = "<group>";
+		};
+		50FFAFE7292A81A500B87E0E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				50FFAFE8292A81B100B87E0E /* MangaView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		50FFAFEA292A832F00B87E0E /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				500183C9292C0CB60094B223 /* ChapterStandardCell */,
+				50FFB002292AAD3900B87E0E /* ViewBackground */,
+				50FFAFFD292A98AD00B87E0E /* MangaStandardImage */,
+				50FFAFEF292A847600B87E0E /* MangaStandardCell */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		50FFAFEF292A847600B87E0E /* MangaStandardCell */ = {
+			isa = PBXGroup;
+			children = (
+				50FFAFEB292A836300B87E0E /* MangaStandardCell.swift */,
+				50FFAFED292A83B800B87E0E /* MangaStandardCell+builders.swift */,
+			);
+			path = MangaStandardCell;
+			sourceTree = "<group>";
+		};
+		50FFAFF0292A84AB00B87E0E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				5092DF4D29294C3A0094DC18 /* DiscoveryView+builders.swift */,
+				50FFAFFB292A986600B87E0E /* InitialStyleView+builders.swift */,
+				50FFB000292AA5CD00B87E0E /* SearchStyleView+builders.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		50FFAFF5292A8C7B00B87E0E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				50FFAFF6292A8C8800B87E0E /* LibraryViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		50FFAFF8292A8FC600B87E0E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				50FFAFF9292A8FDF00B87E0E /* LibraryView+builders.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		50FFAFFD292A98AD00B87E0E /* MangaStandardImage */ = {
+			isa = PBXGroup;
+			children = (
+				50FFAFFE292A98C000B87E0E /* MangaStandardImage.swift */,
+			);
+			path = MangaStandardImage;
+			sourceTree = "<group>";
+		};
+		50FFB002292AAD3900B87E0E /* ViewBackground */ = {
+			isa = PBXGroup;
+			children = (
+				50FFB003292AAD5700B87E0E /* ViewBackground.swift */,
+			);
+			path = ViewBackground;
+			sourceTree = "<group>";
+		};
+		50FFB005292AB15F00B87E0E /* LibraryFilter */ = {
+			isa = PBXGroup;
+			children = (
+				50FFB009292AB3C700B87E0E /* Extensions */,
+				50FFB006292AB27C00B87E0E /* View */,
+			);
+			path = LibraryFilter;
+			sourceTree = "<group>";
+		};
+		50FFB006292AB27C00B87E0E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				50FFB007292AB28E00B87E0E /* LibraryFilterView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		50FFB009292AB3C700B87E0E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				50FFB00A292AB3DA00B87E0E /* LibraryFilterView+extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		50FFB014292AE7A700B87E0E /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				50FFB015292AE7B800B87E0E /* MangaView+builders.swift */,
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,6 +486,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"pt-BR",
 			);
 			mainGroup = 5092DF1829292C590094DC18;
 			productRefGroup = 5092DF2229292C590094DC18 /* Products */;
@@ -207,6 +504,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5092DF2C29292C5C0094DC18 /* Preview Assets.xcassets in Resources */,
+				5092DF59292971580094DC18 /* Localizable.strings in Resources */,
 				5092DF2929292C5C0094DC18 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -218,21 +516,70 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				50FFAFEE292A83B800B87E0E /* MangaStandardCell+builders.swift in Sources */,
+				50FFAFE3292A6AFE00B87E0E /* MangaStatus.swift in Sources */,
+				50FFAFDC292A668000B87E0E /* LanguagesView.swift in Sources */,
+				50FFAFF4292A84EE00B87E0E /* InitialStyleView.swift in Sources */,
+				5092DF612929831D0094DC18 /* MangaDexPreferencesView.swift in Sources */,
 				5092DF4A2929465B0094DC18 /* SettingsView.swift in Sources */,
+				50FFAFFA292A8FDF00B87E0E /* LibraryView+builders.swift in Sources */,
+				50FFB016292AE7B800B87E0E /* MangaView+builders.swift in Sources */,
+				50FFAFEC292A836300B87E0E /* MangaStandardCell.swift in Sources */,
+				50FFAFF7292A8C8800B87E0E /* LibraryViewModel.swift in Sources */,
+				50FFAFF2292A84DB00B87E0E /* SearchStyleView.swift in Sources */,
+				50FFB008292AB28E00B87E0E /* LibraryFilterView.swift in Sources */,
+				500DB59D292C608B00F398D6 /* SettingsView+builders.swift in Sources */,
+				50FFB004292AAD5700B87E0E /* ViewBackground.swift in Sources */,
+				50FFB00F292ACE0400B87E0E /* ObjectFilter.swift in Sources */,
+				50BC960F292C674500DF13A5 /* SettingsViewModel.swift in Sources */,
+				5092DF6329298B9A0094DC18 /* MangaDexPreferencesView+builders.swift in Sources */,
+				50FFB013292AD35000B87E0E /* FilterOrder.swift in Sources */,
+				50FFAFFF292A98C000B87E0E /* MangaStandardImage.swift in Sources */,
+				50FFB00B292AB3DA00B87E0E /* LibraryFilterView+extension.swift in Sources */,
+				50FFAFE1292A6ACD00B87E0E /* MangaQuality.swift in Sources */,
+				506D5753292B1E2900A0C529 /* ChapterDomain.swift in Sources */,
+				50FFB001292AA5CD00B87E0E /* SearchStyleView+builders.swift in Sources */,
+				50FFB00D292ACDF100B87E0E /* MangaInfoFilter.swift in Sources */,
 				5092DF482929464F0094DC18 /* LibraryView.swift in Sources */,
+				50FFB011292ACE6200B87E0E /* DemoPublic.swift in Sources */,
+				500183CD292C0D270094B223 /* ChapterStandardCell+builders.swift in Sources */,
+				5092DF5629296FFA0094DC18 /* MangaDomain.swift in Sources */,
 				5092DF3A292942CA0094DC18 /* DiscoverViewModel.swift in Sources */,
+				50FFAFFC292A986600B87E0E /* InitialStyleView+builders.swift in Sources */,
+				500183C6292C07580094B223 /* MangaViewModel.swift in Sources */,
+				500183CB292C0CCA0094B223 /* ChapterStandardCell.swift in Sources */,
+				50FFAFE9292A81B100B87E0E /* MangaView.swift in Sources */,
 				5092DF2529292C590094DC18 /* OrochiApp.swift in Sources */,
+				50BC9611292C739E00DF13A5 /* SecurityLevel.swift in Sources */,
+				50FFAFDF292A6A8F00B87E0E /* Language.swift in Sources */,
 				5092DF35292942A30094DC18 /* DiscoverView.swift in Sources */,
+				5092DF4E29294C3A0094DC18 /* DiscoveryView+builders.swift in Sources */,
+				500183C8292C0BB10094B223 /* Actions.swift in Sources */,
+				5092DF5E292972F80094DC18 /* String+localized.swift in Sources */,
+				5092DF51292957980094DC18 /* UIScreen+extension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		5092DF5B292971580094DC18 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				5092DF5A292971580094DC18 /* en */,
+				5092DF5C292971B80094DC18 /* pt-BR */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		5092DF2D29292C5C0094DC18 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -279,7 +626,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -293,6 +640,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -333,7 +681,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -359,7 +707,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -389,7 +737,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
