@@ -63,8 +63,7 @@ extension String {
         public static var lowQuality: String  = NSLocalizedString("manga_source_low_quality", comment: "Low manga quality")
         public static var mediumQuality: String = NSLocalizedString("manga_source_medium_quality", comment: "Medium manga quality")
         public static var highQuality: String = NSLocalizedString("manga_source_high_quality", comment: "High manga quality")
-        public static var qualityActionTitle: String = NSLocalizedString("manga_source_quality_title", comment: "Quality action")
-        public static var qualityActionDialog: String = NSLocalizedString("manga_source_quality_dialog", comment: "Manga options description")
+        public static var mangaQuality: String = NSLocalizedString("manga_source_quality", comment: "Manga Quality")
     }
     
     public enum Filter {

@@ -48,6 +48,7 @@
 "manga_source_language_header" = "Linguagens";
 "manga_source_quality_header" = "Qualidade";
 "manga_source_quality_footer" = "Algumas prefernências do manga, como a **qualidade**";
+"manga_source_quality" = "Qualidade do Manga";
 
 // MANGA QUALITY
 

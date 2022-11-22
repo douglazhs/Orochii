@@ -21,7 +21,7 @@ extension LibraryView {
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(ViewBackground(name: "aesthetic"))
+        .background(ViewBackground(with: .view_background))
         .onChange(of: isSearching) { newValue in
             if !newValue {
                 // TODO: - Clear search

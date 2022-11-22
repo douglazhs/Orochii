@@ -32,7 +32,7 @@ extension MangaView {
         }
         .listStyle(.inset)
         .scrollContentBackground(.hidden)
-        .background(ViewBackground(name: manga.cover))
+        .background(ViewBackground(with: manga.cover))
     }
     
     @ViewBuilder

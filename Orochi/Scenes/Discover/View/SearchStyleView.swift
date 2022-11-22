@@ -25,7 +25,7 @@ struct SearchStyleView: View {
                 .listRowBackground(Color.clear)
         }
         .listStyle(.plain)
-        .background(ViewBackground(name: "aesthetic"))
+        .background(ViewBackground(with: .view_background))
         .scrollContentBackground(.hidden)
         .onChange(of: isSearching) { newValue in
             if !newValue { viewStyle = .initial }

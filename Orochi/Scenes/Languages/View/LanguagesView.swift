@@ -17,7 +17,7 @@ struct LanguagesView: View {
         .navigationBarTitleDisplayMode(.inline)
         .listStyle(.grouped)
         .scrollContentBackground(.hidden)
-        .background(ViewBackground(name: "aesthetic"))
+        .background(ViewBackground(with: .view_background))
     }
 }
 

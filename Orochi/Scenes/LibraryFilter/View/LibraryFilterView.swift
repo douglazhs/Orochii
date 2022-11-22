@@ -26,7 +26,7 @@ struct LibraryFilterView: View {
             .navigationTitle(String.Filter.title)
             .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)
-            .background(ViewBackground(name: "aesthetic"))
+            .background(ViewBackground(with: .view_background))
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     self.doneButton()

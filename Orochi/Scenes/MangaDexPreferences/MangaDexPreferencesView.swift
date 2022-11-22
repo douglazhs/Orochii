@@ -32,7 +32,7 @@ struct MangaDexPreferencesView: View {
             .navigationTitle(String.MangaSource.title)
             .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)
-            .background(ViewBackground(name: "aesthetic"))
+            .background(ViewBackground(with: .view_background))
         }
     }
 }

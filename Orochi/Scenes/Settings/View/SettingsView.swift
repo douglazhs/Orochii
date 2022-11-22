@@ -26,7 +26,7 @@ struct SettingsView: View {
             }
             .listStyle(.grouped)
             .animation(.easeInOut(duration: 0.175), value: [vm.faceID, vm.logged])
-            .background(ViewBackground(name: "aesthetic"))
+            .background(ViewBackground(with: .view_background))
             .scrollContentBackground(.hidden)
             .navigationTitle(Text(String.Settings.title))
         }

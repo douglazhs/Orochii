@@ -33,7 +33,7 @@ extension SettingsView {
                 Text(Localized.trackerHeader)
                 HStack{
                     Link(destination: URL(string: "https://anilist.co/home")!) {
-                        Image("AniList_logo")
+                        Image(appImage: .ani_list_logo)
                             .resizable()
                             .cornerRadius(5.5)
                             .frame(
@@ -42,7 +42,7 @@ extension SettingsView {
                             )
                             .shadow(color: .black.opacity(0.3), radius: 1.5, x: 2.5, y: 2.5)
                     }
-                    Text("Anilist")
+                    Text(String.Name.aniList)
                     Spacer()
                     Text(vm.logged ? "34 Mangas" : "")
                         .font(.caption)

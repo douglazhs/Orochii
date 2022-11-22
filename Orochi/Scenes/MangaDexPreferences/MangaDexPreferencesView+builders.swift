@@ -14,17 +14,24 @@ extension MangaDexPreferencesView {
     func siteSection() -> some View {
         Section {
             HStack(alignment: .top, spacing: 5) {
-                Image("mangaDex_icon")
+                Image(appImage: .manga_dex_icon)
                     .resizable()
                     .frame(
                         maxWidth: UIScreen.width/10,
                         maxHeight: UIScreen.width/10
                     )
                     .cornerRadius(5.5)
+                    .shadow(
+                        color: .black.opacity(0.4),
+                        radius: 2,
+                        x: 1.5, y: 1.5
+                    )
                 VStack(alignment: .leading) {
-                    Text("MangaDex")
-                    Link("Website", destination: URL(string: "https://mangadex.org")!)
-                        .foregroundColor(Color(uiColor: .systemGray))
+                    Text(String.Name.mangaDex)
+                    Link(
+                        "Website",
+                        destination: URL(string: "https://mangadex.org")!
+                    ).foregroundColor(Color(uiColor: .systemGray))
                 }
                 Spacer()
                 EmptyView()

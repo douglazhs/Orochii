@@ -29,7 +29,7 @@ struct InitialStyleView: View {
             }
         }
         .listStyle(.inset)
-        .background(ViewBackground(name: "aesthetic"))
+        .background(ViewBackground(with: .view_background))
         .scrollContentBackground(.hidden)
     }
 }

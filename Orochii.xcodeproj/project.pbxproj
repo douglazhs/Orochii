@@ -31,6 +31,8 @@
 		50BC9611292C739E00DF13A5 /* SecurityLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC9610292C739E00DF13A5 /* SecurityLevel.swift */; };
 		50FE08D0292D035600432F21 /* StandardCellGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE08CF292D035600432F21 /* StandardCellGradient.swift */; };
 		50FE08D3292D05DC00432F21 /* LanguagesView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE08D2292D05DC00432F21 /* LanguagesView+builders.swift */; };
+		50FE08D5292D609700432F21 /* String+default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE08D4292D609700432F21 /* String+default.swift */; };
+		50FE08D7292D826100432F21 /* Image+appImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE08D6292D826100432F21 /* Image+appImages.swift */; };
 		50FFAFDC292A668000B87E0E /* LanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFDB292A668000B87E0E /* LanguagesView.swift */; };
 		50FFAFDF292A6A8F00B87E0E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFDE292A6A8F00B87E0E /* Language.swift */; };
 		50FFAFE1292A6ACD00B87E0E /* MangaQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFE0292A6ACD00B87E0E /* MangaQuality.swift */; };
@@ -82,6 +84,8 @@
 		50BC9610292C739E00DF13A5 /* SecurityLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityLevel.swift; sourceTree = "<group>"; };
 		50FE08CF292D035600432F21 /* StandardCellGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardCellGradient.swift; sourceTree = "<group>"; };
 		50FE08D2292D05DC00432F21 /* LanguagesView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LanguagesView+builders.swift"; sourceTree = "<group>"; };
+		50FE08D4292D609700432F21 /* String+default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+default.swift"; sourceTree = "<group>"; };
+		50FE08D6292D826100432F21 /* Image+appImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+appImages.swift"; sourceTree = "<group>"; };
 		50FFAFDB292A668000B87E0E /* LanguagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesView.swift; sourceTree = "<group>"; };
 		50FFAFDE292A6A8F00B87E0E /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		50FFAFE0292A6ACD00B87E0E /* MangaQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaQuality.swift; sourceTree = "<group>"; };
@@ -273,6 +277,8 @@
 			children = (
 				5092DF50292957980094DC18 /* UIScreen+extension.swift */,
 				5092DF5D292972F80094DC18 /* String+localized.swift */,
+				50FE08D4292D609700432F21 /* String+default.swift */,
+				50FE08D6292D826100432F21 /* Image+appImages.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -547,6 +553,7 @@
 				50FFAFFA292A8FDF00B87E0E /* LibraryView+builders.swift in Sources */,
 				50FFB016292AE7B800B87E0E /* MangaView+builders.swift in Sources */,
 				50FFAFEC292A836300B87E0E /* MangaStandardCell.swift in Sources */,
+				50FE08D7292D826100432F21 /* Image+appImages.swift in Sources */,
 				50FFAFF7292A8C8800B87E0E /* LibraryViewModel.swift in Sources */,
 				50FE08D0292D035600432F21 /* StandardCellGradient.swift in Sources */,
 				50FFAFF2292A84DB00B87E0E /* SearchStyleView.swift in Sources */,
@@ -576,6 +583,7 @@
 				50BC9611292C739E00DF13A5 /* SecurityLevel.swift in Sources */,
 				50FFAFDF292A6A8F00B87E0E /* Language.swift in Sources */,
 				5092DF35292942A30094DC18 /* DiscoverView.swift in Sources */,
+				50FE08D5292D609700432F21 /* String+default.swift in Sources */,
 				5092DF4E29294C3A0094DC18 /* DiscoveryView+builders.swift in Sources */,
 				50FE08D3292D05DC00432F21 /* LanguagesView+builders.swift in Sources */,
 				500183C8292C0BB10094B223 /* Actions.swift in Sources */,
