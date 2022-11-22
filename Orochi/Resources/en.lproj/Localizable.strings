@@ -98,7 +98,7 @@
 
 // MARK: - MANGA SCREEN
 
-"manga_author" = "Autor";
+"manga_author" = "Author";
 "manga_status" = "Status";
 "manga_year" = "Year";
 "manga_genres" = "Genres";
@@ -106,3 +106,27 @@
 "manga_start_reading" = "Start Reading";
 "manga_description_header" = "Description";
 "manga_chapter_header" = "Chapters";
+
+// MARK: - ADJUSTS SCREEN
+
+"adjusts_tracker_header" = "Tracker";
+"adjusts_tracker_footer" = "You can connect your **AniList** account and track your mangas";
+"adjusts_tracker_log_in" = "Login";
+"adjusts_tracker_log_out" = "Log Out";
+"adjusts_tracker_user" = "User";
+"adjusts_icloud_header" = "iCloud";
+"adjusts_icloud_footer" = "Your manga library will be saved in the **Cloud** to be accessed from other devices";
+"adjusts_icloud_sync" = "Sync";
+"adjusts_security_header" = "Security";
+"adjusts_security_footer" = "Here you have some options to make your app and your manga more secure";
+"adjusts_security_biometry" = "Biometry";
+"adjusts_security_level" = "Security Level";
+"adjusts_security_library" = "Library";
+"adjusts_security_library_footer" = "Lock only your personal library";
+"adjusts_security_app_footer" = "Lock entry into your app";
+"adjusts_notification_header" = "Notification";
+"adjusts_notification_footer" = "You will be notified every time a new manga chapter is released";
+"adjusts_notification_updated_mangas" = "Chapter Update";
+"adjusts_age_rating_header" = "Age Rating";
+"adjusts_age_rating_footer" = "**Not safe for work**: material that should only be looked at in private because it contains some things that could be _offensive_";
+

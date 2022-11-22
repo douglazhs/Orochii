@@ -97,4 +97,45 @@ extension String {
         static let descHeader: String = NSLocalizedString("manga_description_header", comment: "Manga description title")
         static let chapHeader: String = NSLocalizedString("manga_chapter_header", comment: "Manga chapters title")
     }
+    
+    public enum Adjusts {
+        static let trackerHeader: String = NSLocalizedString("adjusts_tracker_header", comment: "")
+        static var trackerFooter: AttributedString {
+            let string = NSLocalizedString("adjusts_tracker_footer", comment: "")
+            do {
+                return try AttributedString(markdown: string)
+            } catch { print(error.localizedDescription)}
+            return AttributedString(string)
+        }
+        static let trackerUser: String = NSLocalizedString("adjusts_tracker_user", comment: "")
+        static let logIn: String = NSLocalizedString("adjusts_tracker_log_in", comment: "")
+        static let logOut: String = NSLocalizedString("adjusts_tracker_log_out", comment: "")
+        static let icloudHeader: String = NSLocalizedString("adjusts_icloud_header", comment: "")
+        static let icloudSync: String = NSLocalizedString("adjusts_icloud_sync", comment: "")
+        static var icloudFooter: AttributedString {
+            let string = NSLocalizedString("adjusts_icloud_footer", comment: "")
+            do {
+                return try AttributedString(markdown: string)
+            } catch { print(error.localizedDescription)}
+            return AttributedString(string)
+        }
+        static let securityHeader: String = NSLocalizedString("adjusts_security_header", comment: "")
+        static let securityFooter: String = NSLocalizedString("adjusts_security_footer", comment: "")
+        static let securityBiometry: String = NSLocalizedString("adjusts_security_biometry", comment: "")
+        static let securityLevel: String = NSLocalizedString("adjusts_security_level", comment: "")
+        static let securityLibrary: String = NSLocalizedString("adjusts_security_library", comment: "")
+        static let libraryFooter: String = NSLocalizedString("adjusts_security_library_footer", comment: "")
+        static let appFooter: String = NSLocalizedString("adjusts_security_app_footer", comment: "")
+        static let notificationHeader: String = NSLocalizedString("adjusts_notification_header", comment: "")
+        static let notificationFooter: String = NSLocalizedString("adjusts_notification_footer", comment: "")
+        static let notificationUpdate: String = NSLocalizedString("adjusts_notification_updated_mangas", comment: "")
+        static let ageRatingHeader: String = NSLocalizedString("adjusts_age_rating_header", comment: "")
+        static var ageRatingFooter: AttributedString {
+            let string = NSLocalizedString("adjusts_age_rating_footer", comment: "")
+            do {
+                return try AttributedString(markdown: string)
+            } catch { print(error.localizedDescription)}
+            return AttributedString(string)
+        }
+    }
 }

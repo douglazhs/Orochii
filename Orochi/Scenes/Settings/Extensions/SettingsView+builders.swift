@@ -8,25 +8,29 @@
 import SwiftUI
 
 extension SettingsView {
-    @ViewBuilder func anilistSection() -> some View {
+    typealias Localized = String.Adjusts
+    
+    /// App tracker section
+    @ViewBuilder
+    func anilistSection() -> some View {
         Section {
             HStack {
                 Button(role: vm.logged ? .destructive : .none) {
                     vm.logged.toggle()
                     // TODO: - Login on AniList API
                 } label: {
-                    Text(vm.logged ? "LOG OUT" : "LOGIN")
+                    Text(vm.logged ? Localized.logOut.uppercased() : Localized.logIn.uppercased())
                         .font(.caption)
                         .fontWeight(.semibold)
                 }.buttonStyle(.borderless)
                 Spacer()
-                Text(vm.logged ? "User: **douglazhs**" : "")
+                Text(vm.logged ? "\(Localized.trackerUser): **douglazhs**" : "")
                     .font(.caption)
                     .foregroundColor(Color(uiColor: .systemGray))
             }
         } header: {
             VStack(alignment: .leading) {
-                Text("Tracker")
+                Text(Localized.trackerHeader)
                 HStack{
                     Link(destination: URL(string: "https://anilist.co/home")!) {
                         Image("AniList_logo")
@@ -47,11 +51,13 @@ extension SettingsView {
                 .background(StandardCellGradient())
             }
         } footer: {
-            Text("You can connect your **AniList** account and track your mangas")
+            Text(Localized.trackerFooter)
         }
     }
     
-    @ViewBuilder func ageRatingSection() -> some View {
+    /// App Age Rating section
+    @ViewBuilder
+    func ageRatingSection() -> some View {
         Section {
             Toggle(isOn: $vm.nfsw) {
                 Label {
@@ -62,40 +68,44 @@ extension SettingsView {
                 }
             }
         } header: {
-            Text("Age Rating")
+            Text(Localized.ageRatingHeader)
         } footer: {
-            Text("**Not safe for work**: material that should only be looked at in private because it contains some things that could be _offensive_")
+            Text(Localized.ageRatingFooter)
         }
     }
     
-    @ViewBuilder func icloudSection() -> some View {
+    /// App iCloud section
+    @ViewBuilder
+    func icloudSection() -> some View {
         Section {
             Toggle(isOn: $vm.iCloud) {
                 Label {
-                    Text("Synchronization")
+                    Text(Localized.icloudSync)
                 } icon: {
                     Image(systemName: "link.icloud.fill")
                         .foregroundColor(.primary)
                 }
             }
         } header: {
-            Text("iCloud")
+            Text(Localized.icloudHeader)
         } footer: {
-            Text("Your manga library will be saved in the **Cloud** to be accessed from other devices")
+            Text(Localized.icloudFooter)
         }
     }
     
-    @ViewBuilder func securitySection() -> some View {
+    /// App security section
+    @ViewBuilder
+    func securitySection() -> some View {
         Section {
             Toggle(isOn: $vm.faceID) {
                 Label {
-                    Text("Face ID")
+                    Text(Localized.securityBiometry)
                 } icon: {
-                    Image(systemName: "faceid")
+                    Image(systemName: "lock.fill")
                         .foregroundColor(.primary)
                 }
             }
-            Picker("Security Level", selection: $vm.securityLevel) {
+            Picker(Localized.securityLevel, selection: $vm.securityLevel) {
                 ForEach(SecurityLevel.allCases, id: \.self) { level in
                     VStack(alignment: .leading, spacing: 5) {
                         Label {
@@ -111,26 +121,28 @@ extension SettingsView {
             }.pickerStyle(.inline)
             .disabled(!vm.faceID)
         } header: {
-            Text("Security")
+            Text(Localized.securityHeader)
         } footer: {
-            Text("Here you have some options to make your app and your manga more secure")
+            Text(Localized.securityFooter)
         }
     }
     
-    @ViewBuilder func notificationsSection() -> some View {
+    /// Notification section
+    @ViewBuilder
+    func notificationsSection() -> some View {
         Section {
             Toggle(isOn: $vm.notifications) {
                 Label {
-                    Text("Updated Mangas")
+                    Text(Localized.notificationUpdate)
                 } icon: {
                     Image(systemName: "bell.badge")
                         .foregroundColor(.red)
                 }
             }
         } header: {
-            Text("Notification")
+            Text(Localized.notificationHeader)
         } footer: {
-            Text("You will be notified every time a new manga chapter is released")
+            Text(Localized.notificationFooter)
         }
     }
 }
