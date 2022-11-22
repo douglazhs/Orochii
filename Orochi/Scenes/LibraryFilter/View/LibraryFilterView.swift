@@ -22,6 +22,7 @@ struct LibraryFilterView: View {
                 self.mangaInfoSection()
                     .listRowBackground(Color.clear)
             }
+            .listStyle(.grouped)
             .navigationTitle(String.Filter.title)
             .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)

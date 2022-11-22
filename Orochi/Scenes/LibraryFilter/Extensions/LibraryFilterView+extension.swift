@@ -18,8 +18,6 @@ extension LibraryFilterView {
                     Text(object.name)
                 }
             }
-        } header: {
-            Text(String.Filter.filterByHeader)
         } footer: {
             Text(String.Filter.filterByFooter)
         }
@@ -60,20 +58,19 @@ extension LibraryFilterView {
                     ForEach(Language.allCases, id: \.self) { lang in
                         Text(lang.rawValue)
                     }
-                }.pickerStyle(.menu)
+                }
             case .demoPublic:
                 Picker("", selection: $vm.demoPublicSelection) {
                     ForEach(DemoPublic.allCases, id: \.self) { demoPublic in
                         Text(demoPublic.name)
                     }
-                }.pickerStyle(.menu)
+                }
             case .status:
                 Picker("", selection: $vm.statusSelection) {
                     ForEach(MangaStatus.allCases, id: \.self) { status in
                         Text(status.config.name)
                     }
                 }
-                .pickerStyle(.menu)
             case .year:
                 Picker("", selection: $vm.yearSelection) {
                     ForEach(Array<Int>(stride(from: 2000, through: 2022, by: 1)), id: \.hashValue) { year in

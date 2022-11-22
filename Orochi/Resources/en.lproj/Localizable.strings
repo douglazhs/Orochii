@@ -8,8 +8,8 @@
 
 // MARK: - Context Menus
 
-"action_add_to_library" = "Add to library";
-"action_remove_from_library" = "Remove from library";
+"action_add_to_library" = "Add to Library";
+"action_remove_from_library" = "Remove from Library";
 "action_mark_as_read" = "Mark as Read";
 
 // MARK: - Commons
@@ -18,13 +18,13 @@
 "common_done" = "Done";
 "common_add" = "Add";
 "common_remove" = "Remove";
+"common_search" = "Search";
 
 /* ------------------------------------------------------------ */
 
 // MARK: - DISCOVERY SCREEN
 
 "discovery_title" = "Discover";
-"discovery_search_placeholder" = "Search for manga name";
 
 // MANGA CELL
 
@@ -38,19 +38,14 @@
 "discovery_status_hiatus" = "Hiatus";
 "discovery_status_completed" = "Completed";
 
-// MANGA CELL CONTEXT MENU
-
-"discovery_action_add_to_library" = "Add to library";
-"discovery_action_remove_from_library" = "Remove from library";
-
 /* ------------------------------------------------------------ */
 
 // MARK: - SOURCE PREFERENCES
 
 "manga_source_title" = "MangaDex Source";
 "manga_source_site_footer" = "You will be redirected to _MangaDex_ website";
-"manga_source_language_footer" = "Language that will be used to search your mangas";
-"manga_source_language_header" = "Language";
+"manga_source_language_footer" = "Languages that will be used to search your mangas";
+"manga_source_language_header" = "Languages";
 "manga_source_quality_header" = "Quality";
 "manga_source_quality_footer" = "Some manga preferences, such as **quality**";
 
@@ -82,8 +77,8 @@
 // MARK: - Filter
 
 "filter_title" = "Filters";
-"filter_filter_by_header" = "Filter by";
-"filter_filter_by_footer" = "Here you have some preferences to change the order of you mangas";
+"filter_filter_by_header" = "Filter By";
+"filter_filter_by_footer" = "Here you have some preferences to change the order of your mangas";
 "filter_order_by_header" = "Order By";
 "filter_order_by_footer" = "Ascending or descending order";
 "filter_manga_info_header" = "Manga Information";

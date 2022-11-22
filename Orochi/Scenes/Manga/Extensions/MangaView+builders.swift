@@ -27,6 +27,9 @@ extension MangaView {
             }
             .listRowBackground(Color.clear)
         }
+        .refreshable {
+            // TODO: Refresh manga informations
+        }
         .listStyle(.inset)
         .scrollContentBackground(.hidden)
         .background(ViewBackground(name: manga.cover))

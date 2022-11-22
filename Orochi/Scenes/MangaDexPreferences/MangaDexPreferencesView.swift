@@ -16,17 +16,19 @@ struct MangaDexPreferencesView: View {
         NavigationStack {
             List {
                 self.siteSection()
+                    .listRowSeparator(.hidden)
                     .listRowBackground(Color.clear)
                 self.languageSection()
-                    .listRowBackground(Color.accentColor.opacity(0.1))
+                    .listRowBackground(Color.clear)
                 self.qualitySection()
-                    .listRowBackground(Color.accentColor.opacity(0.1))
+                    .listRowBackground(Color.clear)
             }
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .confirmationAction) {
                     self.doneButton()
                 }
             }
+            .listStyle(.grouped)
             .navigationTitle(String.MangaSource.title)
             .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)

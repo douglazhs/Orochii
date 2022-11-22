@@ -15,38 +15,51 @@ extension SettingsView {
                     vm.logged.toggle()
                     // TODO: - Login on AniList API
                 } label: {
-                    Text(vm.logged ? "Log Out" : "Login")
-                }
+                    Text(vm.logged ? "LOG OUT" : "LOGIN")
+                        .font(.caption)
+                        .fontWeight(.semibold)
+                }.buttonStyle(.borderless)
                 Spacer()
-                Text(vm.logged ? "douglazhs" : "")
+                Text(vm.logged ? "User: **douglazhs**" : "")
                     .font(.caption)
                     .foregroundColor(Color(uiColor: .systemGray))
             }
         } header: {
-            HStack{
-                Link(destination: URL(string: "https://anilist.co/home")!) {
-                    Image("AniList_logo")
-                        .resizable()
-                        .cornerRadius(5.5)
-                        .frame(
-                            maxWidth: 45,
-                            maxHeight: 45
-                        )
+            VStack(alignment: .leading) {
+                Text("Tracker")
+                HStack{
+                    Link(destination: URL(string: "https://anilist.co/home")!) {
+                        Image("AniList_logo")
+                            .resizable()
+                            .cornerRadius(5.5)
+                            .frame(
+                                maxWidth: 45,
+                                maxHeight: 45
+                            )
+                            .shadow(color: .black.opacity(0.3), radius: 1.5, x: 2.5, y: 2.5)
+                    }
+                    Text("Anilist")
+                    Spacer()
+                    Text(vm.logged ? "34 Mangas" : "")
+                        .font(.caption)
                 }
-                Text("Anilist")
-                Spacer()
-                Text(vm.logged ? "34 Mangas" : "")
-                    .font(.caption)
+                .padding(10)
+                .background(StandardCellGradient())
             }
         } footer: {
-            Text("Your anilist preferences. You can connect with your anilist account and update your mangas.")
+            Text("You can connect your **AniList** account and track your mangas")
         }
     }
     
     @ViewBuilder func ageRatingSection() -> some View {
         Section {
             Toggle(isOn: $vm.nfsw) {
-                Text("**NSFW** content")
+                Label {
+                    Text("NSFW")
+                } icon: {
+                    Image(systemName: "eyes.inverse")
+                        .foregroundColor(.orange)
+                }
             }
         } header: {
             Text("Age Rating")
@@ -58,7 +71,12 @@ extension SettingsView {
     @ViewBuilder func icloudSection() -> some View {
         Section {
             Toggle(isOn: $vm.iCloud) {
-                Text("Synchronization")
+                Label {
+                    Text("Synchronization")
+                } icon: {
+                    Image(systemName: "link.icloud.fill")
+                        .foregroundColor(.primary)
+                }
             }
         } header: {
             Text("iCloud")
@@ -77,17 +95,21 @@ extension SettingsView {
                         .foregroundColor(.primary)
                 }
             }
-            if vm.faceID {
-                Picker("Security Level", selection: $vm.securityLevel) {
-                    ForEach(SecurityLevel.allCases, id: \.self) { level in
+            Picker("Security Level", selection: $vm.securityLevel) {
+                ForEach(SecurityLevel.allCases, id: \.self) { level in
+                    VStack(alignment: .leading, spacing: 5) {
                         Label {
                             Text(level.info.0)
                         } icon: {
                             Image(systemName: level.info.1)
                         }
+                        Text(level.info.2)
+                            .foregroundColor(Color(uiColor: .systemGray))
+                            .font(.caption2)
                     }
-                }.pickerStyle(.inline)
-            }
+                }
+            }.pickerStyle(.inline)
+            .disabled(!vm.faceID)
         } header: {
             Text("Security")
         } footer: {
@@ -99,16 +121,16 @@ extension SettingsView {
         Section {
             Toggle(isOn: $vm.notifications) {
                 Label {
-                    Text("Notifications")
+                    Text("Updated Mangas")
                 } icon: {
-                    Image(systemName: "bell")
+                    Image(systemName: "bell.badge")
                         .foregroundColor(.red)
                 }
             }
         } header: {
             Text("Notification")
         } footer: {
-            Text("You will be notified every time a new manga chapter is released.")
+            Text("You will be notified every time a new manga chapter is released")
         }
     }
 }

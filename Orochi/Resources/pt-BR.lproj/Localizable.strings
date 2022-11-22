@@ -8,8 +8,8 @@
 
 // MARK: - Context Menus
 
-"action_add_to_library" = "Adicionar à biblioteca";
-"action_remove_from_library" = "Remover da biblioteca";
+"action_add_to_library" = "Adicionar à Biblioteca";
+"action_remove_from_library" = "Remover da Biblioteca";
 "action_mark_as_read" = "Marcar Como Lido";
 
 // MARK: - Commons
@@ -18,13 +18,13 @@
 "common_done" = "Feito";
 "common_add" = "Adicionar";
 "common_remove" = "Remover";
+"common_search" = "Buscar";
 
 /* ------------------------------------------------------------ */
 
 // MARK: - DISCOVERY SCREEN
 
 "discovery_title" = "Descubra";
-"discovery_search_placeholder" = "Procure pelo nome do manga";
 
 // MANGA CELL
 
@@ -44,8 +44,8 @@
 
 "manga_source_title" = "Fonte MangaDex";
 "manga_source_site_footer" = "Você será redirecionado para o site do _MangaDex_";
-"manga_source_language_footer" = "Idioma que será usado para pesquisar seus mangas";
-"manga_source_language_header" = "Linguagem";
+"manga_source_language_footer" = "Idiomas que serão utilizados para pesquisar seus mangas";
+"manga_source_language_header" = "Linguagens";
 "manga_source_quality_header" = "Qualidade";
 "manga_source_quality_footer" = "Algumas prefernências do manga, como a **qualidade**";
 

@@ -10,21 +10,21 @@ import Foundation
 // String+localized 
 extension String {
     public enum ContextMenu {
-        static let markAsRead: String = NSLocalizedString("action_mark_as_read", comment: "")
-        static let addToLib: String = NSLocalizedString("action_add_to_library", comment: "")
-        static let rmvFromLib: String = NSLocalizedString("action_remove_from_library", comment: "")
+        static let markAsRead: String = NSLocalizedString("action_mark_as_read", comment: "Mark chapter as read")
+        static let addToLib: String = NSLocalizedString("action_add_to_library", comment: "Add manga to library")
+        static let rmvFromLib: String = NSLocalizedString("action_remove_from_library", comment: "Remove chapter from library")
     }
     
     public enum Common {
         static let done: String = NSLocalizedString("common_done", comment: "Done")
         static let cancel: String = NSLocalizedString("common_cancel", comment: "Cancel")
-        static let add: String = NSLocalizedString("common_add", comment: "")
-        static let remove: String = NSLocalizedString("common_remove", comment: "")
+        static let add: String = NSLocalizedString("common_add", comment: "Add")
+        static let remove: String = NSLocalizedString("common_remove", comment: "Remove")
+        static let search: String = NSLocalizedString("common_search", comment: "Search bar")
     }
     
     public enum Discovery {
         public static var title: String = NSLocalizedString("discovery_title", comment: "Discovery mangas")
-        public static var searchPlaceholder: String = NSLocalizedString("discovery_search_placeholder", comment: "Search bar placeholder")
         public static var author: String = NSLocalizedString("discovery_cell_author", comment: "Manga public")
         public static var year: String = NSLocalizedString("discovery_cell_year", comment: "Manga year")
         public static var lastUpdated: String = NSLocalizedString("discovery_cell_last_updated", comment: "Last updated manga")
@@ -88,13 +88,13 @@ extension String {
     }
     
     public enum Manga {
-        static let author: String = NSLocalizedString("manga_author", comment: "")
-        static let year: String = NSLocalizedString("manga_year", comment: "")
-        static let status: String = NSLocalizedString("manga_status", comment: "")
-        static let genres: String = NSLocalizedString("manga_genres", comment: "")
-        static let updated: String = NSLocalizedString("manga_updated", comment: "")
-        static let startReading: String = NSLocalizedString("manga_start_reading", comment: "")
-        static let descHeader: String = NSLocalizedString("manga_description_header", comment: "")
-        static let chapHeader: String = NSLocalizedString("manga_chapter_header", comment: "")
+        static let author: String = NSLocalizedString("manga_author", comment: "Manga author")
+        static let year: String = NSLocalizedString("manga_year", comment: "Manga release year")
+        static let status: String = NSLocalizedString("manga_status", comment: "Manga status")
+        static let genres: String = NSLocalizedString("manga_genres", comment: "Manga genres")
+        static let updated: String = NSLocalizedString("manga_updated", comment: "Manga las time updated")
+        static let startReading: String = NSLocalizedString("manga_start_reading", comment: "Manga start reading button")
+        static let descHeader: String = NSLocalizedString("manga_description_header", comment: "Manga description title")
+        static let chapHeader: String = NSLocalizedString("manga_chapter_header", comment: "Manga chapters title")
     }
 }

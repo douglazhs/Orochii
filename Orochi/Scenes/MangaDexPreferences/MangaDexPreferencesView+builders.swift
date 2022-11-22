@@ -26,7 +26,11 @@ extension MangaDexPreferencesView {
                     Link("Website", destination: URL(string: "https://mangadex.org")!)
                         .foregroundColor(Color(uiColor: .systemGray))
                 }
+                Spacer()
+                EmptyView()
             }
+            .padding()
+            .background(StandardCellGradient())
         } footer: { Text(String.MangaSource.siteFooter) }
     }
     
@@ -48,21 +52,11 @@ extension MangaDexPreferencesView {
     @ViewBuilder
     func qualitySection() -> some View {
         Section {
-            Button { showActions = true } label: {
-                Text(selectedQuality.name)
-                    .foregroundColor(.primary)
-            }
-            .confirmationDialog(String.MangaSource.qualityActionTitle, isPresented: $showActions) {
+            Picker("Manga Quality", selection: $selectedQuality) {
                 ForEach(MangaQuality.allCases, id: \.self) { quality in
-                    Button(role: .none) {
-                        self.selectedQuality = quality
-                    } label: {
-                        Text(quality.name)
-                    }
+                    Text(quality.name)
                 }
-                Button(role: .cancel) { } label: { Text(String.Common.cancel) }
-            } message: { Text(String.MangaSource.qualityActionDialog) }
-
+            }.tint(.primary)
         } header: {
             Text(String.MangaSource.qualityHeader)
         } footer: {

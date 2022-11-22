@@ -16,6 +16,9 @@ extension LibraryView {
             self.cell(of: manga)
                 .listRowBackground(Color.clear)
         }
+        .refreshable {
+            // TODO: Refresh library mangas
+        }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(ViewBackground(name: "aesthetic"))
@@ -39,6 +42,18 @@ extension LibraryView {
             .frame(width: 0)
             .opacity(0)
             MangaStandardCell(manga)
+                .overlay(alignment: .topTrailing) {
+                    if manga.hasUpdate {
+                        Image(systemName: "circle.fill")
+                            .resizable()
+                            .frame(
+                                maxWidth: 7.5,
+                                maxHeight: 7.5
+                            )
+                            .foregroundColor(.orange)
+                            .padding(.top, 7.5)
+                    }
+                }
         }
         .contextMenu {
             // TODO: - Implement context menu features
