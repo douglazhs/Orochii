@@ -16,7 +16,7 @@ struct DiscoverView: View {
     @State var viewStyle: ViewStyle = .initial
     @State var mangaSourcePref: Bool = false
     var body: some View {
-        NavigationView {
+        NavigationStack {
             self.content()
                 .navigationTitle(Text(String.Discovery.title))
                 .toolbar {

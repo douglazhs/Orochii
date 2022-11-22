@@ -6,10 +6,18 @@
   
 */
 
+// MARK: - Context Menus
+
+"action_add_to_library" = "Adicionar à biblioteca";
+"action_remove_from_library" = "Remover da biblioteca";
+"action_mark_as_read" = "Marcar Como Lido";
+
 // MARK: - Commons
 
 "common_cancel" = "Cancelar";
 "common_done" = "Feito";
+"common_add" = "Adicionar";
+"common_remove" = "Remover";
 
 /* ------------------------------------------------------------ */
 
@@ -29,11 +37,6 @@
 "discovery_status_ongoing" = "Em andamento";
 "discovery_status_hiatus" = "Hiato";
 "discovery_status_completed" = "Completo";
-
-// MANGA CELL CONTEXT MENU
-
-"discovery_action_add_to_library" = "Adicionar à biblioteca";
-"discovery_action_remove_from_library" = "Remover da biblioteca";
 
 /* ------------------------------------------------------------ */
 
@@ -90,3 +93,16 @@
 "filter_year" = "Ano";
 "filter_public" = "Público";
 "filter_status" = "Status";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - MANGA SCREEN
+
+"manga_author" = "Author";
+"manga_status" = "Status";
+"manga_year" = "Ano";
+"manga_genres" = "Genres";
+"manga_updated" = "Atualizado";
+"manga_start_reading" = "Comece a Ler";
+"manga_description_header" = "Descrição";
+"manga_chapter_header" = "Capítulos";

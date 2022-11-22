@@ -13,20 +13,24 @@ struct MangaDexPreferencesView: View {
     @State var showActions: Bool = false
     @State var languages: [Language] = []
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 self.siteSection()
+                    .listRowBackground(Color.clear)
                 self.languageSection()
+                    .listRowBackground(Color.accentColor.opacity(0.1))
                 self.qualitySection()
+                    .listRowBackground(Color.accentColor.opacity(0.1))
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     self.doneButton()
                 }
             }
-            .listStyle(.insetGrouped)
-            .navigationTitle("MangaDex Source")
+            .navigationTitle(String.MangaSource.title)
             .navigationBarTitleDisplayMode(.inline)
+            .scrollContentBackground(.hidden)
+            .background(ViewBackground(name: "aesthetic"))
         }
     }
 }

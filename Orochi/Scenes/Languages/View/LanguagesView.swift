@@ -27,10 +27,13 @@ struct LanguagesView: View {
                 }
             }
             .foregroundColor(.primary)
+            .listRowBackground(Color.clear)
         }
         .navigationTitle(String.MangaSource.languageHeader)
         .navigationBarTitleDisplayMode(.inline)
         .listStyle(.insetGrouped)
+        .scrollContentBackground(.hidden)
+        .background(ViewBackground(name: "aesthetic"))
     }
 }
 

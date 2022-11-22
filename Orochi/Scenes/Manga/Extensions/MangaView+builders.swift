@@ -9,6 +9,8 @@ import SwiftUI
 
 extension MangaView {
     @ViewBuilder
+    /// Manga all content
+    /// - Returns: All manga information, including the chapters
     func content() -> some View {
         List {
             Section {
@@ -18,7 +20,7 @@ extension MangaView {
             }
             .listRowBackground(Color.clear)
             Section { self.chapters() } header: {
-                Text("CHAPTERS")
+                Text(String.Manga.chapHeader.uppercased())
                     .font(.callout)
                     .foregroundColor(.primary)
                     .fontWeight(.regular)
@@ -31,51 +33,64 @@ extension MangaView {
     }
     
     @ViewBuilder
+    /// Manga info header
+    /// - Returns: All manga information
     func header() -> some View {
+        let portrait = UIScreen.width < UIScreen.height
+        let aspectRatio = 245.0 / 165.0
+        let width = (portrait ? UIScreen.width : UIScreen.height) * 0.325
         HStack {
             MangaStandardImage(
                 cover: manga.cover,
                 size: CGSize(
-                    width: UIScreen.width/3,
-                    height: UIScreen.width/2
-                )
+                    width: width,
+                    height: width
+                ),
+                aspectRatio: aspectRatio
             )
             self.mangaInfo()
         }
     }
     
+    /// Manga information line
+    /// - Parameters:
+    ///   - leading: Leading item
+    ///   - trailing: Trailing item
+    /// - Returns: Manga information items
+    @ViewBuilder func infoLine(
+        leading: (String, String),
+        trailing: (String, String)
+    ) -> some View {
+        HStack {
+            self.item(
+                title: leading.0,
+                leading.1,
+                .leading
+            )
+            Spacer()
+            self.item(
+                title: trailing.0,
+                trailing.1,
+                .trailing
+            )
+        }
+    }
+    
+    /// Manga informations
+    /// - Returns: All grouped manga informations
     @ViewBuilder
     func mangaInfo() -> some View {
         VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                self.item(
-                    title: "AUTHOR",
-                    manga.author,
-                    .leading
-                )
-                Spacer()
-                self.item(
-                    title: "YEAR",
-                    manga.year,
-                    .trailing
-                )
-            }
-            HStack {
-                self.item(
-                    title: "STATUS",
-                    manga.status.config.name.uppercased(),
-                    .leading
-                )
-                Spacer()
-                self.item(
-                    title: "UPDATED",
-                    manga.lastUpdated,
-                    .trailing
-                )
-            }
+            self.infoLine(
+                leading: (String.Manga.author.uppercased() , manga.author),
+                trailing: (String.Manga.year.uppercased(), manga.year)
+            )
+            self.infoLine(
+                leading: (String.Manga.status.uppercased(), manga.status.config.name.uppercased()),
+                trailing: (String.Manga.updated.uppercased(), manga.lastUpdated))
             Divider()
             self.item(
-                title: "GENRES",
+                title: String.Manga.genres.uppercased(),
                 manga.genres.joined(separator: ", "),
                 .leading
             ).lineLimit(2)
@@ -83,24 +98,15 @@ extension MangaView {
             self.startReadingButton()
         }
         .padding(.leading, 5)
-        .padding(.vertical, 5)
+        .padding(.vertical, 7)
     }
     
-    @ViewBuilder
-    func startReadingButton() -> some View {
-        Button {
-            // TODO: Start to read the manga
-        } label: {
-            Text("START READING")
-                .lineLimit(1)
-                .foregroundColor(.primary)
-                .font(.footnote)
-                .fontWeight(.semibold)
-                .frame(maxWidth: .infinity)
-        }
-        .buttonStyle(.borderedProminent)
-    }
-    
+    /// Manga information item
+    /// - Parameters:
+    ///   - title: Manga title
+    ///   - description: Manga item
+    ///   - alignment: Item alignment
+    /// - Returns: Custom manga information item
     @ViewBuilder
     func item(
         title: String,
@@ -117,40 +123,46 @@ extension MangaView {
         }
     }
     
-    @ViewBuilder func actions() -> some View {
+    /// Start reading button
+    /// - Returns: Custom start  reading book
+    @ViewBuilder
+    func startReadingButton() -> some View {
+        Button {
+            // TODO: Start to read the manga
+        } label: {
+            Text(String.Manga.startReading.uppercased())
+                .lineLimit(1)
+                .foregroundColor(.primary)
+                .font(.footnote)
+                .fontWeight(.semibold)
+                .frame(maxWidth: .infinity)
+        }.buttonStyle(.borderedProminent)
+    }
+    
+    /// Buttons actions
+    /// - Returns: All buttons with the respective actions
+    @ViewBuilder
+    func actions() -> some View {
         HStack {
-            Button { } label: {
-                Text("ADD")
-                    .lineLimit(1)
-                    .foregroundColor(.primary)
-                    .font(.footnote)
-                    .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity)
+            ForEach(Actions.allCases, id: \.self) { action in
+                Button(role: (action == .rmvLib) ? .destructive : .none) {
+                    vm.btnAction = action
+                } label: {
+                    Text(action.name.uppercased())
+                        .lineLimit(1)
+                        .foregroundColor((action != .rmvLib) ? .primary : .red)
+                        .font(.footnote)
+                        .fontWeight(.semibold)
+                        .frame(maxWidth: .infinity)
+                }
+                .buttonStyle(.bordered)
+                .tint((action != .rmvLib) ? Color.primary : Color.red)
             }
-            .buttonStyle(.bordered)
-            .tint(.primary)
-            Button { } label: {
-                Text("ANILIST")
-                    .lineLimit(1)
-                    .foregroundColor(.primary)
-                    .font(.footnote)
-                    .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.bordered)
-            .tint(.primary)
-            Button(role: .destructive) { } label: {
-                Text("REMOVE")
-                    .lineLimit(1)
-                    .font(.footnote)
-                    .fontWeight(.semibold)
-                    .frame(maxWidth: .infinity)
-            }
-            .buttonStyle(.bordered)
-            .tint(.red)
         }
     }
     
+    /// Manga description
+    /// - Returns: Manga description section
     @ViewBuilder
     func description() -> some View {
         Section {
@@ -158,60 +170,27 @@ extension MangaView {
                 .font(.callout)
                 .multilineTextAlignment(.leading)
         } header: {
-            Text("DESCRIPTION")
+            Text(String.Manga.descHeader.uppercased())
                 .font(.callout)
                 .foregroundColor(.primary)
                 .fontWeight(.regular)
         }
     }
     
+    /// Manga chapters list
+    /// - Returns: All manga chapters cells
     @ViewBuilder
     func chapters() -> some View {
         ForEach(ChapterDomain.samples) { chapter in
-            self.chapterCell(chapter)
+            ChapterStandardCell(chapter)
                 .contextMenu {
                     // TODO: - Context actions
                     Button { } label: {
                         Label {
-                            Text("Mark as read")
+                            Text(String.ContextMenu.markAsRead)
                         } icon: { Image(systemName: "eye.fill") }
                     }
                 }
-        }
-    }
-    
-    @ViewBuilder func chapterCell(_ chapter: ChapterDomain) -> some View {
-        HStack (alignment: .center, spacing: 15) {
-            VStack(alignment: .center, spacing: 10) {
-                Text("CH.\(chapter.number)")
-                    .font(.callout)
-                    .fontWeight(.semibold)
-                Text("pt-br")
-                    .font(.caption2)
-                Text(chapter.volume)
-                    .font(.caption2)
-                    .foregroundColor(Color(uiColor: .systemGray))
-            }
-            Divider()
-            VStack(alignment: .leading, spacing: 10) {
-                Text(chapter.title)
-                    .font(.callout)
-                    .fontWeight(.semibold)
-                Text("\(chapter.pages) PAGES")
-                    .font(.caption2)
-                    .foregroundColor(Color(uiColor: .systemGray))
-                    .fontWeight(.light)
-                    .fontWeight(.thin)
-                HStack {
-                    Text("UPDATED: \(chapter.updated)")
-                        .font(.footnote)
-                        .foregroundColor(Color(uiColor: .systemGray))
-                    Spacer()
-                    Text(chapter.scanGroup)
-                        .font(.footnote)
-                        .foregroundColor(Color(uiColor: .systemGray))
-                }
-            }
         }
     }
 }

@@ -52,38 +52,37 @@ extension LibraryFilterView {
                 ForEach(MangaInfoFilter.allCases, id:\.self) { filter in
                     Text(filter.name)
                 }
-            }.pickerStyle(.segmented)
+            }
+            .pickerStyle(.segmented)
             switch mangaInfoFilter {
             case .language:
                 Picker("", selection: $vm.languageSelection) {
                     ForEach(Language.allCases, id: \.self) { lang in
                         Text(lang.rawValue)
                     }
-                }
+                }.pickerStyle(.menu)
             case .demoPublic:
                 Picker("", selection: $vm.demoPublicSelection) {
                     ForEach(DemoPublic.allCases, id: \.self) { demoPublic in
                         Text(demoPublic.name)
                     }
-                }
+                }.pickerStyle(.menu)
             case .status:
-                Picker(selection: $vm.statusSelection) {
+                Picker("", selection: $vm.statusSelection) {
                     ForEach(MangaStatus.allCases, id: \.self) { status in
                         Text(status.config.name)
                     }
-                } label: { EmptyView() }
+                }
+                .pickerStyle(.menu)
             case .year:
                 Picker("", selection: $vm.yearSelection) {
                     ForEach(Array<Int>(stride(from: 2000, through: 2022, by: 1)), id: \.hashValue) { year in
                         Text(String(year).replacingOccurrences(of: ".", with: ""))
                     }
-                }.pickerStyle(.wheel)
+                }
+                .pickerStyle(.wheel)
             }
-        } header: {
-            Text(String.Filter.mangaInfoHeader)
-        } footer: {
-            Text(String.Filter.mangaInfoFooter)
-        }
+        } header: { Text(String.Filter.mangaInfoHeader) }
     }
     
     /// Done button

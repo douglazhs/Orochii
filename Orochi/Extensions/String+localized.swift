@@ -9,9 +9,17 @@ import Foundation
 
 // String+localized 
 extension String {
+    public enum ContextMenu {
+        static let markAsRead: String = NSLocalizedString("action_mark_as_read", comment: "")
+        static let addToLib: String = NSLocalizedString("action_add_to_library", comment: "")
+        static let rmvFromLib: String = NSLocalizedString("action_remove_from_library", comment: "")
+    }
+    
     public enum Common {
         static let done: String = NSLocalizedString("common_done", comment: "Done")
         static let cancel: String = NSLocalizedString("common_cancel", comment: "Cancel")
+        static let add: String = NSLocalizedString("common_add", comment: "")
+        static let remove: String = NSLocalizedString("common_remove", comment: "")
     }
     
     public enum Discovery {
@@ -23,8 +31,6 @@ extension String {
         public static var ongoing: String = NSLocalizedString("discovery_status_ongoing", comment: "Ongoing manga")
         public static var hiatus: String = NSLocalizedString("discovery_status_hiatus", comment: "Hiatus manga")
         public static var completed: String = NSLocalizedString("discovery_status_completed", comment: "Completed manga")
-        public static var addToLib: String = NSLocalizedString("discovery_action_add_to_library", comment: "Add to library action")
-        public static var remFromLib: String = NSLocalizedString("discovery_action_remove_from_library", comment: "Remove from library action")
     }
     
     public enum Library {
@@ -79,5 +85,16 @@ extension String {
         static let year: String = NSLocalizedString("filter_year", comment: "")
         static let demoPublic: String = NSLocalizedString("filter_public", comment: "")
         static let status: String = NSLocalizedString("filter_status", comment: "")
+    }
+    
+    public enum Manga {
+        static let author: String = NSLocalizedString("manga_author", comment: "")
+        static let year: String = NSLocalizedString("manga_year", comment: "")
+        static let status: String = NSLocalizedString("manga_status", comment: "")
+        static let genres: String = NSLocalizedString("manga_genres", comment: "")
+        static let updated: String = NSLocalizedString("manga_updated", comment: "")
+        static let startReading: String = NSLocalizedString("manga_start_reading", comment: "")
+        static let descHeader: String = NSLocalizedString("manga_description_header", comment: "")
+        static let chapHeader: String = NSLocalizedString("manga_chapter_header", comment: "")
     }
 }

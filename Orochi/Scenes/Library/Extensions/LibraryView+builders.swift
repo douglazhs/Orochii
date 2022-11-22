@@ -43,10 +43,10 @@ extension LibraryView {
         .contextMenu {
             // TODO: - Implement context menu features
             Button { } label: {
-                Label(String.Discovery.addToLib, systemImage: "plus.rectangle.on.folder")
+                Label(String.ContextMenu.addToLib, systemImage: "plus.rectangle.on.folder")
             }
             Button(role: .destructive) { } label: {
-                Label(String.Discovery.remFromLib, systemImage: "trash")
+                Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
             }
         }
     }

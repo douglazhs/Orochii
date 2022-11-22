@@ -10,17 +10,21 @@ import SwiftUI
 struct MangaStandardImage: View {
     var cover: String
     var size: CGSize
+    var aspectRatio: CGFloat
     
     var body: some View {
         Image(cover)
             .resizable()
             .frame(
                 maxWidth: size.width,
-                maxHeight: size.height
+                maxHeight: size.height * aspectRatio
             )
             .overlay(
                 RoundedRectangle(cornerRadius: 3.5)
-                    .stroke(Color(uiColor: .systemGray), lineWidth: 0.5)
+                    .stroke(
+                        Color(uiColor: .systemGray),
+                        lineWidth: 0.5
+                    )
             )
             .cornerRadius(3.5)
     }
@@ -31,9 +35,10 @@ struct MangaStandardImage_Previews: PreviewProvider {
         MangaStandardImage(
             cover: "jujutsu",
             size: CGSize(
-                width: UIScreen.width/5.5,
-                height: UIScreen.width/4
-            )
+                width: 175,
+                height: 225
+            ),
+            aspectRatio: (225.0 / 175.0)
         )
     }
 }

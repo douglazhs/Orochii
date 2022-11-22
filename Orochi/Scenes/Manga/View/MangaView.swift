@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MangaView: View {
     var manga: MangaDomain
+    @StateObject var vm: MangaViewModel = MangaViewModel()
     
     init(_ manga: MangaDomain) {
         self.manga = manga

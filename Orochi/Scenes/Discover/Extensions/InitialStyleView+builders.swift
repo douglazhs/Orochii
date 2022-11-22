@@ -28,18 +28,23 @@ extension InitialStyleView {
     /// - Parameter manga: Current manga
     /// - Returns: Custom carousel manga cell
     @ViewBuilder func cell(of manga: MangaDomain) -> some View {
+        let portrait = UIScreen.width < UIScreen.height
+        let aspectRatio = 97.5 / 67.5
+        let width = (portrait ? UIScreen.width : UIScreen.height) * 0.215
         VStack {
             MangaStandardImage(
                 cover: manga.cover,
                 size: CGSize(
-                   width: UIScreen.width/5.5,
-                   height: UIScreen.width/4
-                )
+                    width: width,
+                    height: width
+                ),
+                aspectRatio: aspectRatio
             )
             Text(manga.title)
                 .font(.caption)
+                .lineLimit(2)
                 .multilineTextAlignment(.center)
-                .frame(maxWidth: UIScreen.width/5.5)
+                .frame(maxWidth: width)
                 .foregroundColor(Color(uiColor: .systemGray))
             Spacer()
         }
@@ -47,10 +52,10 @@ extension InitialStyleView {
         .contextMenu {
             // TODO: - Implement context menu features
             Button { } label: {
-                Label(String.Discovery.addToLib, systemImage: "plus.rectangle.on.folder")
+                Label(String.ContextMenu.addToLib, systemImage: "plus.rectangle.on.folder")
             }
             Button(role: .destructive) { } label: {
-                Label(String.Discovery.remFromLib, systemImage: "trash")
+                Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
             }
         }
     }

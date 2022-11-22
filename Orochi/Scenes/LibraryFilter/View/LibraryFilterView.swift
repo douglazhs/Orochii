@@ -13,15 +13,19 @@ struct LibraryFilterView: View {
     @State var mangaInfoFilter: MangaInfoFilter = .language
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 self.objectFilterSection()
+                    .listRowBackground(Color.clear)
                 self.orderSection()
+                    .listRowBackground(Color.clear)
                 self.mangaInfoSection()
-                
+                    .listRowBackground(Color.clear)
             }
             .navigationTitle(String.Filter.title)
             .navigationBarTitleDisplayMode(.inline)
+            .scrollContentBackground(.hidden)
+            .background(ViewBackground(name: "aesthetic"))
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     self.doneButton()

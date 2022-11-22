@@ -6,10 +6,18 @@
   
 */
 
+// MARK: - Context Menus
+
+"action_add_to_library" = "Add to library";
+"action_remove_from_library" = "Remove from library";
+"action_mark_as_read" = "Mark as Read";
+
 // MARK: - Commons
 
 "common_cancel" = "Cancel";
 "common_done" = "Done";
+"common_add" = "Add";
+"common_remove" = "Remove";
 
 /* ------------------------------------------------------------ */
 
@@ -65,7 +73,7 @@
 
 /* ------------------------------------------------------------ */
 
-// MARK: - Settings SCREEN
+// MARK: - SETTINGS SCREEN
 
 "settings_title" = "Adjusts";
 
@@ -91,3 +99,15 @@
 "filter_public" = "Public";
 "filter_status" = "Status";
 
+/* ------------------------------------------------------------ */
+
+// MARK: - MANGA SCREEN
+
+"manga_author" = "Autor";
+"manga_status" = "Status";
+"manga_year" = "Year";
+"manga_genres" = "Genres";
+"manga_updated" = "Updated";
+"manga_start_reading" = "Start Reading";
+"manga_description_header" = "Description";
+"manga_chapter_header" = "Chapters";

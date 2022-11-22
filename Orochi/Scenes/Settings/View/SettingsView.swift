@@ -8,11 +8,22 @@
 import SwiftUI
 
 struct SettingsView: View {
+    @StateObject var vm: SettingsViewModel = SettingsViewModel()
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
-                
+                self.anilistSection()
+                    .listRowBackground(Color.clear)
+                self.ageRatingSection()
+                    .listRowBackground(Color.clear)
+                self.icloudSection()
+                    .listRowBackground(Color.clear)
+                self.securitySection()
+                    .listRowBackground(Color.clear)
+                self.notificationsSection()
+                    .listRowBackground(Color.clear)
             }
+            .animation(.easeInOut(duration: 0.175), value: [vm.faceID, vm.logged])
             .background(ViewBackground(name: "aesthetic"))
             .scrollContentBackground(.hidden)
             .navigationTitle(Text(String.Settings.title))

@@ -13,7 +13,7 @@ struct LibraryView: View {
     @State var showFilters: Bool = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             self.content()
                 .navigationTitle(Text(String.Library.title))
                 .toolbar {

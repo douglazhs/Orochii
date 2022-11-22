@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		500183C6292C07580094B223 /* MangaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500183C5292C07580094B223 /* MangaViewModel.swift */; };
+		500183C8292C0BB10094B223 /* Actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500183C7292C0BB10094B223 /* Actions.swift */; };
+		500183CB292C0CCA0094B223 /* ChapterStandardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500183CA292C0CCA0094B223 /* ChapterStandardCell.swift */; };
+		500183CD292C0D270094B223 /* ChapterStandardCell+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500183CC292C0D270094B223 /* ChapterStandardCell+builders.swift */; };
+		500DB59D292C608B00F398D6 /* SettingsView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500DB59C292C608B00F398D6 /* SettingsView+builders.swift */; };
 		506D5753292B1E2900A0C529 /* ChapterDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5752292B1E2900A0C529 /* ChapterDomain.swift */; };
 		5092DF2529292C590094DC18 /* OrochiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF2429292C590094DC18 /* OrochiApp.swift */; };
 		5092DF2929292C5C0094DC18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5092DF2829292C5C0094DC18 /* Assets.xcassets */; };
@@ -22,6 +27,8 @@
 		5092DF5E292972F80094DC18 /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF5D292972F80094DC18 /* String+localized.swift */; };
 		5092DF612929831D0094DC18 /* MangaDexPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF602929831D0094DC18 /* MangaDexPreferencesView.swift */; };
 		5092DF6329298B9A0094DC18 /* MangaDexPreferencesView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF6229298B9A0094DC18 /* MangaDexPreferencesView+builders.swift */; };
+		50BC960F292C674500DF13A5 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC960E292C674500DF13A5 /* SettingsViewModel.swift */; };
+		50BC9611292C739E00DF13A5 /* SecurityLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC9610292C739E00DF13A5 /* SecurityLevel.swift */; };
 		50FFAFDC292A668000B87E0E /* LanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFDB292A668000B87E0E /* LanguagesView.swift */; };
 		50FFAFDF292A6A8F00B87E0E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFDE292A6A8F00B87E0E /* Language.swift */; };
 		50FFAFE1292A6ACD00B87E0E /* MangaQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFE0292A6ACD00B87E0E /* MangaQuality.swift */; };
@@ -47,6 +54,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		500183C5292C07580094B223 /* MangaViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaViewModel.swift; sourceTree = "<group>"; };
+		500183C7292C0BB10094B223 /* Actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actions.swift; sourceTree = "<group>"; };
+		500183CA292C0CCA0094B223 /* ChapterStandardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterStandardCell.swift; sourceTree = "<group>"; };
+		500183CC292C0D270094B223 /* ChapterStandardCell+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChapterStandardCell+builders.swift"; sourceTree = "<group>"; };
+		500DB59C292C608B00F398D6 /* SettingsView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+builders.swift"; sourceTree = "<group>"; };
 		506D5752292B1E2900A0C529 /* ChapterDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterDomain.swift; sourceTree = "<group>"; };
 		5092DF2129292C590094DC18 /* Orochii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orochii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5092DF2429292C590094DC18 /* OrochiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrochiApp.swift; sourceTree = "<group>"; };
@@ -64,6 +76,8 @@
 		5092DF5D292972F80094DC18 /* String+localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
 		5092DF602929831D0094DC18 /* MangaDexPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaDexPreferencesView.swift; sourceTree = "<group>"; };
 		5092DF6229298B9A0094DC18 /* MangaDexPreferencesView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaDexPreferencesView+builders.swift"; sourceTree = "<group>"; };
+		50BC960E292C674500DF13A5 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
+		50BC9610292C739E00DF13A5 /* SecurityLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityLevel.swift; sourceTree = "<group>"; };
 		50FFAFDB292A668000B87E0E /* LanguagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesView.swift; sourceTree = "<group>"; };
 		50FFAFDE292A6A8F00B87E0E /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		50FFAFE0292A6ACD00B87E0E /* MangaQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaQuality.swift; sourceTree = "<group>"; };
@@ -99,6 +113,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		500183C4292C07480094B223 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				500183C5292C07580094B223 /* MangaViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		500183C9292C0CB60094B223 /* ChapterStandardCell */ = {
+			isa = PBXGroup;
+			children = (
+				500183CA292C0CCA0094B223 /* ChapterStandardCell.swift */,
+				500183CC292C0D270094B223 /* ChapterStandardCell+builders.swift */,
+			);
+			path = ChapterStandardCell;
+			sourceTree = "<group>";
+		};
+		500DB59B292C606D00F398D6 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				500DB59C292C608B00F398D6 /* SettingsView+builders.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		5092DF1829292C590094DC18 = {
 			isa = PBXGroup;
 			children = (
@@ -192,6 +231,8 @@
 		5092DF45292946340094DC18 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				50BC960D292C673200DF13A5 /* ViewModel */,
+				500DB59B292C606D00F398D6 /* Extensions */,
 				5092DF4B2929469D0094DC18 /* View */,
 			);
 			path = Settings;
@@ -250,6 +291,14 @@
 			path = MangaDexPreferences;
 			sourceTree = "<group>";
 		};
+		50BC960D292C673200DF13A5 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				50BC960E292C674500DF13A5 /* SettingsViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		50FFAFDD292A6A7F00B87E0E /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -260,6 +309,8 @@
 				50FFB00E292ACE0400B87E0E /* ObjectFilter.swift */,
 				50FFB010292ACE6200B87E0E /* DemoPublic.swift */,
 				50FFB012292AD35000B87E0E /* FilterOrder.swift */,
+				500183C7292C0BB10094B223 /* Actions.swift */,
+				50BC9610292C739E00DF13A5 /* SecurityLevel.swift */,
 			);
 			path = Enums;
 			sourceTree = "<group>";
@@ -283,6 +334,7 @@
 		50FFAFE6292A819C00B87E0E /* Manga */ = {
 			isa = PBXGroup;
 			children = (
+				500183C4292C07480094B223 /* ViewModel */,
 				50FFB014292AE7A700B87E0E /* Extensions */,
 				50FFAFE7292A81A500B87E0E /* View */,
 			);
@@ -300,6 +352,7 @@
 		50FFAFEA292A832F00B87E0E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				500183C9292C0CB60094B223 /* ChapterStandardCell */,
 				50FFB002292AAD3900B87E0E /* ViewBackground */,
 				50FFAFFD292A98AD00B87E0E /* MangaStandardImage */,
 				50FFAFEF292A847600B87E0E /* MangaStandardCell */,
@@ -475,8 +528,10 @@
 				50FFAFF7292A8C8800B87E0E /* LibraryViewModel.swift in Sources */,
 				50FFAFF2292A84DB00B87E0E /* SearchStyleView.swift in Sources */,
 				50FFB008292AB28E00B87E0E /* LibraryFilterView.swift in Sources */,
+				500DB59D292C608B00F398D6 /* SettingsView+builders.swift in Sources */,
 				50FFB004292AAD5700B87E0E /* ViewBackground.swift in Sources */,
 				50FFB00F292ACE0400B87E0E /* ObjectFilter.swift in Sources */,
+				50BC960F292C674500DF13A5 /* SettingsViewModel.swift in Sources */,
 				5092DF6329298B9A0094DC18 /* MangaDexPreferencesView+builders.swift in Sources */,
 				50FFB013292AD35000B87E0E /* FilterOrder.swift in Sources */,
 				50FFAFFF292A98C000B87E0E /* MangaStandardImage.swift in Sources */,
@@ -487,14 +542,19 @@
 				50FFB00D292ACDF100B87E0E /* MangaInfoFilter.swift in Sources */,
 				5092DF482929464F0094DC18 /* LibraryView.swift in Sources */,
 				50FFB011292ACE6200B87E0E /* DemoPublic.swift in Sources */,
+				500183CD292C0D270094B223 /* ChapterStandardCell+builders.swift in Sources */,
 				5092DF5629296FFA0094DC18 /* MangaDomain.swift in Sources */,
 				5092DF3A292942CA0094DC18 /* DiscoverViewModel.swift in Sources */,
 				50FFAFFC292A986600B87E0E /* InitialStyleView+builders.swift in Sources */,
+				500183C6292C07580094B223 /* MangaViewModel.swift in Sources */,
+				500183CB292C0CCA0094B223 /* ChapterStandardCell.swift in Sources */,
 				50FFAFE9292A81B100B87E0E /* MangaView.swift in Sources */,
 				5092DF2529292C590094DC18 /* OrochiApp.swift in Sources */,
+				50BC9611292C739E00DF13A5 /* SecurityLevel.swift in Sources */,
 				50FFAFDF292A6A8F00B87E0E /* Language.swift in Sources */,
 				5092DF35292942A30094DC18 /* DiscoverView.swift in Sources */,
 				5092DF4E29294C3A0094DC18 /* DiscoveryView+builders.swift in Sources */,
+				500183C8292C0BB10094B223 /* Actions.swift in Sources */,
 				5092DF5E292972F80094DC18 /* String+localized.swift in Sources */,
 				5092DF51292957980094DC18 /* UIScreen+extension.swift in Sources */,
 			);
