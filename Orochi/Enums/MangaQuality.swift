@@ -8,11 +8,13 @@
 import SwiftUI
 
 /// Manga image quality
-enum MangaQuality: CaseIterable {
+enum MangaQuality: Pickable {
+    var id: Self { self }
+    
     case low, medium, high
     
     /// Manga quality ID
-    var name: String {
+    var description: String {
         switch self {
         case .low:    return String.MangaSource.lowQuality
         case .medium: return String.MangaSource.mediumQuality

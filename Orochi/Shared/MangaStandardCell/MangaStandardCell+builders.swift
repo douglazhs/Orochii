@@ -70,7 +70,7 @@ extension MangaStandardCell {
             )
             // STATUS
             self.infoLabel(
-                manga.status.config.name.uppercased(),
+                manga.status.description.uppercased(),
                 manga.status.config.icon,
                 manga.status.config.color
             )

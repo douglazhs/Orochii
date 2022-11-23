@@ -89,7 +89,7 @@ extension MangaView {
                 trailing: (String.Manga.year.uppercased(), manga.year)
             )
             self.infoLine(
-                leading: (String.Manga.status.uppercased(), manga.status.config.name.uppercased()),
+                leading: (String.Manga.status.uppercased(), manga.status.description.uppercased()),
                 trailing: (String.Manga.updated.uppercased(), manga.lastUpdated))
             Divider()
             self.item(

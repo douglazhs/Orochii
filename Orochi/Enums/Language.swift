@@ -8,8 +8,16 @@
 import SwiftUI
 
 /// Manga search languages
-enum Language: String, CaseIterable {
-    case ptBr = "Portuguese (Brazil)"
-    case enUS =   "English (U.S.)"
-    case esES = "Spanish (Spain)"
+enum Language: Pickable {
+    var id: Self { self }
+    
+    case ptBr, enUS, esES
+    
+    var description: String {
+        switch self {
+        case .ptBr: return "Portuguese (Brazil)"
+        case .enUS: return "English (U.S.)"
+        case .esES: return "Spanish (Spain)"
+        }
+    }
 }

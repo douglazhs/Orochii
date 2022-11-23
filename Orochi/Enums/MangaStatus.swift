@@ -8,15 +8,26 @@
 import SwiftUI
 
 /// Actual manga status
-enum MangaStatus: CaseIterable {
+enum MangaStatus: Pickable {
+    var id: Self { self }
+    
     case ongoing, hiatus, completed
     
-    /// Manga status configuration
-    var config: (name: String, color: Color, icon: String) {
+    /// Manga status description
+    var description: String {
         switch self {
-        case .ongoing:   return (name: String.Discovery.ongoing,   color: Color("ongoing"),   icon: "clock")
-        case .hiatus:    return (name: String.Discovery.hiatus,    color: Color("hiatus"),    icon: "stopwatch")
-        case .completed: return (name: String.Discovery.completed, color: Color("completed"), icon: "checkmark.circle")
+        case .ongoing:   return String.Discovery.ongoing
+        case .hiatus:    return String.Discovery.hiatus
+        case .completed: return String.Discovery.completed
+        }
+    }
+    
+    /// Manga status configuration
+    var config: (color: Color, icon: String) {
+        switch self {
+        case .ongoing:   return (color: Color("ongoing"),   icon: "clock")
+        case .hiatus:    return (color: Color("hiatus"),    icon: "stopwatch")
+        case .completed: return (color: Color("completed"), icon: "checkmark.circle")
         }
     }
 }

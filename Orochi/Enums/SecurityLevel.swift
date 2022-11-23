@@ -8,19 +8,27 @@
 import Foundation
 
 /// Face ID level protection
-enum SecurityLevel: CaseIterable {
+enum SecurityLevel: Pickable {
+    var id: Self { self }
+    
     case library, app
     
+    /// Security level description
+    var description: String {
+        switch self {
+        case .library: return String.Adjusts.securityLibrary
+        case .app:     return "App"
+        }
+    }
+    
     /// Level information, such as name and icon
-    var info: (String, String, String) {
+    var info: (String, String) {
         switch self {
         case .library: return (
-            String.Adjusts.securityLibrary,
             "books.vertical",
             String.Adjusts.libraryFooter
         )
         case .app: return (
-            "App",
             "house",
             String.Adjusts.appFooter
         )

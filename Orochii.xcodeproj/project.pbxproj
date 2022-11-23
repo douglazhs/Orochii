@@ -33,6 +33,8 @@
 		50FE08D3292D05DC00432F21 /* LanguagesView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE08D2292D05DC00432F21 /* LanguagesView+builders.swift */; };
 		50FE08D5292D609700432F21 /* String+default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE08D4292D609700432F21 /* String+default.swift */; };
 		50FE08D7292D826100432F21 /* Image+appImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE08D6292D826100432F21 /* Image+appImages.swift */; };
+		50FE08DA292D8A6900432F21 /* EnumPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE08D9292D8A6900432F21 /* EnumPicker.swift */; };
+		50FE08DD292D9D0200432F21 /* WebsiteStandardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE08DC292D9D0200432F21 /* WebsiteStandardCell.swift */; };
 		50FFAFDC292A668000B87E0E /* LanguagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFDB292A668000B87E0E /* LanguagesView.swift */; };
 		50FFAFDF292A6A8F00B87E0E /* Language.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFDE292A6A8F00B87E0E /* Language.swift */; };
 		50FFAFE1292A6ACD00B87E0E /* MangaQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFAFE0292A6ACD00B87E0E /* MangaQuality.swift */; };
@@ -49,7 +51,7 @@
 		50FFB001292AA5CD00B87E0E /* SearchStyleView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB000292AA5CD00B87E0E /* SearchStyleView+builders.swift */; };
 		50FFB004292AAD5700B87E0E /* ViewBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB003292AAD5700B87E0E /* ViewBackground.swift */; };
 		50FFB008292AB28E00B87E0E /* LibraryFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB007292AB28E00B87E0E /* LibraryFilterView.swift */; };
-		50FFB00B292AB3DA00B87E0E /* LibraryFilterView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB00A292AB3DA00B87E0E /* LibraryFilterView+extension.swift */; };
+		50FFB00B292AB3DA00B87E0E /* LibraryFilterView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB00A292AB3DA00B87E0E /* LibraryFilterView+builders.swift */; };
 		50FFB00D292ACDF100B87E0E /* MangaInfoFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB00C292ACDF100B87E0E /* MangaInfoFilter.swift */; };
 		50FFB00F292ACE0400B87E0E /* ObjectFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB00E292ACE0400B87E0E /* ObjectFilter.swift */; };
 		50FFB011292ACE6200B87E0E /* DemoPublic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB010292ACE6200B87E0E /* DemoPublic.swift */; };
@@ -86,6 +88,8 @@
 		50FE08D2292D05DC00432F21 /* LanguagesView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LanguagesView+builders.swift"; sourceTree = "<group>"; };
 		50FE08D4292D609700432F21 /* String+default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+default.swift"; sourceTree = "<group>"; };
 		50FE08D6292D826100432F21 /* Image+appImages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Image+appImages.swift"; sourceTree = "<group>"; };
+		50FE08D9292D8A6900432F21 /* EnumPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnumPicker.swift; sourceTree = "<group>"; };
+		50FE08DC292D9D0200432F21 /* WebsiteStandardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebsiteStandardCell.swift; sourceTree = "<group>"; };
 		50FFAFDB292A668000B87E0E /* LanguagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagesView.swift; sourceTree = "<group>"; };
 		50FFAFDE292A6A8F00B87E0E /* Language.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Language.swift; sourceTree = "<group>"; };
 		50FFAFE0292A6ACD00B87E0E /* MangaQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaQuality.swift; sourceTree = "<group>"; };
@@ -102,7 +106,7 @@
 		50FFB000292AA5CD00B87E0E /* SearchStyleView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SearchStyleView+builders.swift"; sourceTree = "<group>"; };
 		50FFB003292AAD5700B87E0E /* ViewBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewBackground.swift; sourceTree = "<group>"; };
 		50FFB007292AB28E00B87E0E /* LibraryFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryFilterView.swift; sourceTree = "<group>"; };
-		50FFB00A292AB3DA00B87E0E /* LibraryFilterView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibraryFilterView+extension.swift"; sourceTree = "<group>"; };
+		50FFB00A292AB3DA00B87E0E /* LibraryFilterView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LibraryFilterView+builders.swift"; sourceTree = "<group>"; };
 		50FFB00C292ACDF100B87E0E /* MangaInfoFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaInfoFilter.swift; sourceTree = "<group>"; };
 		50FFB00E292ACE0400B87E0E /* ObjectFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectFilter.swift; sourceTree = "<group>"; };
 		50FFB010292ACE6200B87E0E /* DemoPublic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoPublic.swift; sourceTree = "<group>"; };
@@ -325,6 +329,22 @@
 			path = "LanguagesView+builders";
 			sourceTree = "<group>";
 		};
+		50FE08D8292D8A4E00432F21 /* Picker */ = {
+			isa = PBXGroup;
+			children = (
+				50FE08D9292D8A6900432F21 /* EnumPicker.swift */,
+			);
+			path = Picker;
+			sourceTree = "<group>";
+		};
+		50FE08DB292D9CDD00432F21 /* WebsiteStandardCell */ = {
+			isa = PBXGroup;
+			children = (
+				50FE08DC292D9D0200432F21 /* WebsiteStandardCell.swift */,
+			);
+			path = WebsiteStandardCell;
+			sourceTree = "<group>";
+		};
 		50FFAFDD292A6A7F00B87E0E /* Enums */ = {
 			isa = PBXGroup;
 			children = (
@@ -379,6 +399,8 @@
 		50FFAFEA292A832F00B87E0E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				50FE08DB292D9CDD00432F21 /* WebsiteStandardCell */,
+				50FE08D8292D8A4E00432F21 /* Picker */,
 				50FE08CC292D032500432F21 /* StandardCellGradient */,
 				500183C9292C0CB60094B223 /* ChapterStandardCell */,
 				50FFB002292AAD3900B87E0E /* ViewBackground */,
@@ -459,7 +481,7 @@
 		50FFB009292AB3C700B87E0E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				50FFB00A292AB3DA00B87E0E /* LibraryFilterView+extension.swift */,
+				50FFB00A292AB3DA00B87E0E /* LibraryFilterView+builders.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -548,6 +570,7 @@
 				50FFAFE3292A6AFE00B87E0E /* MangaStatus.swift in Sources */,
 				50FFAFDC292A668000B87E0E /* LanguagesView.swift in Sources */,
 				50FFAFF4292A84EE00B87E0E /* InitialStyleView.swift in Sources */,
+				50FE08DD292D9D0200432F21 /* WebsiteStandardCell.swift in Sources */,
 				5092DF612929831D0094DC18 /* MangaDexPreferencesView.swift in Sources */,
 				5092DF4A2929465B0094DC18 /* SettingsView.swift in Sources */,
 				50FFAFFA292A8FDF00B87E0E /* LibraryView+builders.swift in Sources */,
@@ -565,7 +588,7 @@
 				5092DF6329298B9A0094DC18 /* MangaDexPreferencesView+builders.swift in Sources */,
 				50FFB013292AD35000B87E0E /* FilterOrder.swift in Sources */,
 				50FFAFFF292A98C000B87E0E /* MangaStandardImage.swift in Sources */,
-				50FFB00B292AB3DA00B87E0E /* LibraryFilterView+extension.swift in Sources */,
+				50FFB00B292AB3DA00B87E0E /* LibraryFilterView+builders.swift in Sources */,
 				50FFAFE1292A6ACD00B87E0E /* MangaQuality.swift in Sources */,
 				506D5753292B1E2900A0C529 /* ChapterDomain.swift in Sources */,
 				50FFB001292AA5CD00B87E0E /* SearchStyleView+builders.swift in Sources */,
@@ -574,6 +597,7 @@
 				50FFB011292ACE6200B87E0E /* DemoPublic.swift in Sources */,
 				500183CD292C0D270094B223 /* ChapterStandardCell+builders.swift in Sources */,
 				5092DF5629296FFA0094DC18 /* MangaDomain.swift in Sources */,
+				50FE08DA292D8A6900432F21 /* EnumPicker.swift in Sources */,
 				5092DF3A292942CA0094DC18 /* DiscoverViewModel.swift in Sources */,
 				50FFAFFC292A986600B87E0E /* InitialStyleView+builders.swift in Sources */,
 				500183C6292C07580094B223 /* MangaViewModel.swift in Sources */,

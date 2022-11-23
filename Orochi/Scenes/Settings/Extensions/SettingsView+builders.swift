@@ -29,27 +29,13 @@ extension SettingsView {
                     .foregroundColor(Color(uiColor: .systemGray))
             }
         } header: {
-            VStack(alignment: .leading) {
-                Text(Localized.trackerHeader)
-                HStack{
-                    Link(destination: URL(string: "https://anilist.co/home")!) {
-                        Image(appImage: .ani_list_logo)
-                            .resizable()
-                            .cornerRadius(5.5)
-                            .frame(
-                                maxWidth: 45,
-                                maxHeight: 45
-                            )
-                            .shadow(color: .black.opacity(0.3), radius: 1.5, x: 2.5, y: 2.5)
-                    }
-                    Text(String.Name.aniList)
-                    Spacer()
-                    Text(vm.logged ? "34 Mangas" : "")
-                        .font(.caption)
-                }
-                .padding(10)
-                .background(StandardCellGradient())
-            }
+            WebsiteStandardCell(
+                header: Localized.trackerHeader,
+                title: String.Name.aniList,
+                urlString: "https://anilist.co/home",
+                image: .ani_list_logo,
+                customInfo: (show: true, description: vm.logged ? "34 Mangas" : "")
+            )
         } footer: {
             Text(Localized.trackerFooter)
         }
@@ -97,7 +83,7 @@ extension SettingsView {
     @ViewBuilder
     func securitySection() -> some View {
         Section {
-            Toggle(isOn: $vm.faceID) {
+            Toggle(isOn: $vm.biometry) {
                 Label {
                     Text(Localized.securityBiometry)
                 } icon: {
@@ -105,21 +91,24 @@ extension SettingsView {
                         .foregroundColor(.primary)
                 }
             }
-            Picker(Localized.securityLevel, selection: $vm.securityLevel) {
-                ForEach(SecurityLevel.allCases, id: \.self) { level in
-                    VStack(alignment: .leading, spacing: 5) {
-                        Label {
-                            Text(level.info.0)
-                        } icon: {
-                            Image(systemName: level.info.1)
+            if vm.biometry {
+                Picker(Localized.securityLevel, selection: $vm.securityLevel) {
+                    ForEach(SecurityLevel.allCases) { level in
+                        VStack(alignment: .leading, spacing: 5) {
+                            Label {
+                                Text(level.description)
+                            } icon: {
+                                Image(systemName: level.info.0)
+                            }
+                            Text(level.info.1)
+                                .foregroundColor(Color(uiColor: .systemGray))
+                                .font(.caption2)
                         }
-                        Text(level.info.2)
-                            .foregroundColor(Color(uiColor: .systemGray))
-                            .font(.caption2)
                     }
                 }
-            }.pickerStyle(.inline)
-            .disabled(!vm.faceID)
+                .pickerStyle(.inline)
+                .disabled(!vm.biometry)
+            }
         } header: {
             Text(Localized.securityHeader)
         } footer: {

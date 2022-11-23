@@ -12,14 +12,14 @@ extension LanguagesView {
     /// Source Languages section
     func languagesSection() -> some View {
         Section {
-            ForEach(Language.allCases, id: \.self) { lang in
+            ForEach(Language.allCases) { lang in
                 Button {
                     if !languages.contains(lang) {
                         languages.append(lang)
                     } else { languages.removeAll(where: { $0 == lang }) }
                 } label: {
                     HStack {
-                        Text(lang.rawValue)
+                        Text(lang.description)
                         Spacer()
                         if languages.contains(lang) {
                             Image(systemName: "checkmark")

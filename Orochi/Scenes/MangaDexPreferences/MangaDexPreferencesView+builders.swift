@@ -13,31 +13,14 @@ extension MangaDexPreferencesView {
     @ViewBuilder
     func siteSection() -> some View {
         Section {
-            HStack(alignment: .top, spacing: 5) {
-                Image(appImage: .manga_dex_icon)
-                    .resizable()
-                    .frame(
-                        maxWidth: UIScreen.width/10,
-                        maxHeight: UIScreen.width/10
-                    )
-                    .cornerRadius(5.5)
-                    .shadow(
-                        color: .black.opacity(0.4),
-                        radius: 2,
-                        x: 1.5, y: 1.5
-                    )
-                VStack(alignment: .leading) {
-                    Text(String.Name.mangaDex)
-                    Link(
-                        "Website",
-                        destination: URL(string: "https://mangadex.org")!
-                    ).foregroundColor(Color(uiColor: .systemGray))
-                }
-                Spacer()
-                EmptyView()
-            }
-            .padding()
-            .background(StandardCellGradient())
+            EmptyView()
+        } header: {
+            WebsiteStandardCell(
+                header: "Source",
+                title: String.Name.mangaDex,
+                urlString: "https://mangadex.org",
+                image: .manga_dex_icon
+            )
         } footer: { Text(String.MangaSource.siteFooter) }
     }
     
@@ -59,11 +42,7 @@ extension MangaDexPreferencesView {
     @ViewBuilder
     func qualitySection() -> some View {
         Section {
-            Picker("Manga Quality", selection: $selectedQuality) {
-                ForEach(MangaQuality.allCases, id: \.self) { quality in
-                    Text(quality.name)
-                }
-            }.tint(.primary)
+            EnumPicker(String.MangaSource.mangaQuality, selection: $selectedQuality)
         } header: {
             Text(String.MangaSource.qualityHeader)
         } footer: {

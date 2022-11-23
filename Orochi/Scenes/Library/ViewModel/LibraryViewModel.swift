@@ -8,6 +8,7 @@
 import SwiftUI
 
 class LibraryViewModel: ObservableObject {
+    let years = Array<Int>(stride(from: 2000, through: 2022, by: 1))
     @Published var query: String = ""
     @Published var objectFilter: ObjectFilter = .name
     @Published var filterOrder: FilterOrder = .empty

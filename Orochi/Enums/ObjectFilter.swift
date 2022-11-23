@@ -8,11 +8,13 @@
 import Foundation
 
 /// Object that will be considerated when you filter some mangas
-enum ObjectFilter: CaseIterable {
+enum ObjectFilter: Pickable {
+    var id: Self { self }
+    
     case name, lastUpdated, releaseYear
     
-    /// Object filter ID
-    var name: String {
+    /// Object filter decription
+    var description: String {
         switch self {
         case .name:        return String.Filter.name
         case .lastUpdated: return String.Filter.lastUpdated

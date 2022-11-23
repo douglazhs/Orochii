@@ -25,7 +25,7 @@ struct SettingsView: View {
                     .listRowBackground(Color.clear)
             }
             .listStyle(.grouped)
-            .animation(.easeInOut(duration: 0.175), value: [vm.faceID, vm.logged])
+            .animation(.easeInOut(duration: 0.175), value: [vm.biometry, vm.logged])
             .background(ViewBackground(with: .view_background))
             .scrollContentBackground(.hidden)
             .navigationTitle(Text(String.Settings.title))
