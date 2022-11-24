@@ -20,17 +20,10 @@ struct SearchStyleView: View {
         self._viewStyle = viewStyle
     }
     var body: some View {
-        List(mangas) { manga in
-            self.cell(of: manga)
-                .listRowBackground(Color.clear)
-        }
-        .listStyle(.plain)
-        .background(ViewBackground(with: .view_background))
-        .scrollContentBackground(.hidden)
-        .onChange(of: isSearching) { newValue in
-            if !newValue { viewStyle = .initial }
-        }
-        .animation(.spring(), value: [isSearching])
+        self.content()
+            .onChange(of: isSearching) { newValue in
+                if !newValue { viewStyle = .initial }
+            }
     }
 }
 

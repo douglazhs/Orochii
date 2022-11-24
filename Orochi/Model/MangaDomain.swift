@@ -9,7 +9,7 @@ import SwiftUI
 
 let testDescription = "Hardship, regret, shame: the negative feelings that humans feel become Curses that lurk in our everyday lives. The Curses run rampant throughout the world, capable of leading people to terrible misfortune and even death. What's more, the Curses can only be exorcised by another Curse."
 
-struct MangaDomain: Identifiable {
+struct MangaDomain: Identifiable, Hashable {
     var id = UUID()
     var title: String
     var genres: [String]

@@ -15,6 +15,17 @@ extension LibraryView {
         List(MangaDomain.samples) { manga in
             self.cell(of: manga)
                 .listRowBackground(Color.clear)
+                .contextMenu {
+                    // TODO: - Implement context menu features
+                    Button { } label: {
+                        Label(String.ContextMenu.addToLib, systemImage: "plus.rectangle.on.folder")
+                    }
+                    Button(role: .destructive) { } label: {
+                        Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
+                    }
+                } preview: {
+                    MangaView(manga)
+                }
         }
         .refreshable {
             // TODO: Refresh library mangas
@@ -22,11 +33,6 @@ extension LibraryView {
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(ViewBackground(with: .view_background))
-        .onChange(of: isSearching) { newValue in
-            if !newValue {
-                // TODO: - Clear search
-            }
-        }
         .animation(.spring(), value: [isSearching])
     }
     
@@ -54,15 +60,6 @@ extension LibraryView {
                             .padding(.top, 7.5)
                     }
                 }
-        }
-        .contextMenu {
-            // TODO: - Implement context menu features
-            Button { } label: {
-                Label(String.ContextMenu.addToLib, systemImage: "plus.rectangle.on.folder")
-            }
-            Button(role: .destructive) { } label: {
-                Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
-            }
         }
     }
     

@@ -13,17 +13,13 @@ extension MangaStandardCell {
     /// - Returns: Custom manga cell
     @ViewBuilder
     func cell() -> some View {
-        let portrait = UIScreen.width < UIScreen.height
-        let aspectRatio = 97.5 / 67.5
-        let width = (portrait ? UIScreen.width : UIScreen.height) * 0.215
         HStack {
             MangaStandardImage(
                 cover: manga.cover,
                 size: CGSize(
-                    width: width,
-                    height: width
-                ),
-                aspectRatio: aspectRatio
+                    width: CGSize.standardImageCell.width,
+                    height: CGSize.standardImageCell.height
+                )
             )
             self.info()
         }

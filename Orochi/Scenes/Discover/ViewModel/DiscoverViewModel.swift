@@ -7,42 +7,25 @@
 
 import SwiftUI
 
-/// Carousel type
-enum CarouselType: CaseIterable {
-    case latestUploaded, mostRelevants, ongoingStatus, thisYear, shounen, seinen
-    var mangas: [MangaDomain] {
-        get { [] }
-        set { }
-    }
-    
-    /// Carousel header
-    var header: String {
-        switch self {
-        case .latestUploaded:
-            return "Latest Uploaded"
-        case .mostRelevants:
-            return "Most Relevants"
-        case .ongoingStatus:
-            return "Ongoing now"
-        case .thisYear:
-            return "This Year - \(Date.now.formatted(.dateTime.year()))"
-        case .shounen:
-            return "Shounen Demographic Public"
-        case .seinen:
-            return "Seinen Demographic Public"
-        }
-    }
-}
+/// Carousel Dictionary Configuration
+typealias CarouselDict = [CarouselType : [MangaDomain]]
 
 class DiscoverViewModel: ObservableObject {
     @Published var searchText: String = ""
-    // TODO: - Change all to api requests
-    @Published var mangas: [MangaDomain] = MangaDomain.samples
-    @Published var latestUploaded: [MangaDomain] = MangaDomain.samples
-    @Published var moreRelevants: [MangaDomain] = MangaDomain.samples
-    @Published var ongoingStatus: [MangaDomain] = MangaDomain.samples
-    @Published var thisYear: [MangaDomain] = MangaDomain.samples
-    @Published var shounen: [MangaDomain] = MangaDomain.samples
-    @Published var seinen: [MangaDomain] = MangaDomain.samples
+    @Published var section: CarouselDict = [:]
+    
+    init() {
+        self.section = generateCarouselDict()
+    }
+    
+    /// Generate Main screen carousel dictionary
+    /// - Returns: All main view carousel
+    func generateCarouselDict() -> CarouselDict {
+        var dict: CarouselDict = [:]
+        CarouselType.allCases.forEach { type in
+            dict[type] = MangaDomain.samples
+        }
+        dict[.thisYear] = []
+        return dict
+    }
 }
-

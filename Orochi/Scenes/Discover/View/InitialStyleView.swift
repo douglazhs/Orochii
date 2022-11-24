@@ -11,9 +11,9 @@ struct InitialStyleView: View {
     @EnvironmentObject var vm: DiscoverViewModel
 
     var body: some View {
-        List(CarouselType.allCases, id: \.self) { carousel in
+        List(CarouselType.allCases, id: \.self) { type in
             Section {
-                self.carousel(of: vm.mangas)
+                self.carousel(of: vm.section[type] ?? [])
                     .listRowInsets(EdgeInsets(
                         top: 10,
                         leading: 0,
@@ -22,7 +22,7 @@ struct InitialStyleView: View {
                     )
                     .listRowBackground(Color.clear)
             } header: {
-                Text(carousel.header.uppercased())
+                Text(type.header.uppercased())
                     .font(.callout)
                     .foregroundColor(.primary)
                     .fontWeight(.regular)
