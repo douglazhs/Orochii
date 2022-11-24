@@ -8,11 +8,13 @@
 import Foundation
 
 /// Order possibilities
-enum FilterOrder: CaseIterable {
+enum FilterOrder: Pickable {
+    var id: Self { self }
+    
     case ascending, descending, empty
     
-    /// Order ID
-    var name: String {
+    /// Order description
+    var description: String {
         switch self {
         case .ascending:  return String.Filter.ascending
         case .descending: return String.Filter.descending

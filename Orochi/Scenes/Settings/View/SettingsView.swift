@@ -13,8 +13,7 @@ struct SettingsView: View {
         NavigationStack {
             List {
                 self.anilistSection()
-                    .listRowBackground(Color.clear)
-                self.ageRatingSection()
+                    .listRowSeparator(.hidden)
                     .listRowBackground(Color.clear)
                 self.icloudSection()
                     .listRowBackground(Color.clear)
@@ -23,8 +22,9 @@ struct SettingsView: View {
                 self.notificationsSection()
                     .listRowBackground(Color.clear)
             }
-            .animation(.easeInOut(duration: 0.175), value: [vm.faceID, vm.logged])
-            .background(ViewBackground(name: "aesthetic"))
+            .listStyle(.grouped)
+            .animation(.easeInOut(duration: 0.175), value: [vm.biometry, vm.logged])
+            .background(ViewBackground(with: .view_background))
             .scrollContentBackground(.hidden)
             .navigationTitle(Text(String.Settings.title))
         }

@@ -10,21 +10,21 @@ import Foundation
 // String+localized 
 extension String {
     public enum ContextMenu {
-        static let markAsRead: String = NSLocalizedString("action_mark_as_read", comment: "")
-        static let addToLib: String = NSLocalizedString("action_add_to_library", comment: "")
-        static let rmvFromLib: String = NSLocalizedString("action_remove_from_library", comment: "")
+        static let markAsRead: String = NSLocalizedString("action_mark_as_read", comment: "Mark chapter as read")
+        static let addToLib: String = NSLocalizedString("action_add_to_library", comment: "Add manga to library")
+        static let rmvFromLib: String = NSLocalizedString("action_remove_from_library", comment: "Remove chapter from library")
     }
     
     public enum Common {
         static let done: String = NSLocalizedString("common_done", comment: "Done")
         static let cancel: String = NSLocalizedString("common_cancel", comment: "Cancel")
-        static let add: String = NSLocalizedString("common_add", comment: "")
-        static let remove: String = NSLocalizedString("common_remove", comment: "")
+        static let add: String = NSLocalizedString("common_add", comment: "Add")
+        static let remove: String = NSLocalizedString("common_remove", comment: "Remove")
+        static let search: String = NSLocalizedString("common_search", comment: "Search bar")
     }
     
     public enum Discovery {
         public static var title: String = NSLocalizedString("discovery_title", comment: "Discovery mangas")
-        public static var searchPlaceholder: String = NSLocalizedString("discovery_search_placeholder", comment: "Search bar placeholder")
         public static var author: String = NSLocalizedString("discovery_cell_author", comment: "Manga public")
         public static var year: String = NSLocalizedString("discovery_cell_year", comment: "Manga year")
         public static var lastUpdated: String = NSLocalizedString("discovery_cell_last_updated", comment: "Last updated manga")
@@ -63,8 +63,7 @@ extension String {
         public static var lowQuality: String  = NSLocalizedString("manga_source_low_quality", comment: "Low manga quality")
         public static var mediumQuality: String = NSLocalizedString("manga_source_medium_quality", comment: "Medium manga quality")
         public static var highQuality: String = NSLocalizedString("manga_source_high_quality", comment: "High manga quality")
-        public static var qualityActionTitle: String = NSLocalizedString("manga_source_quality_title", comment: "Quality action")
-        public static var qualityActionDialog: String = NSLocalizedString("manga_source_quality_dialog", comment: "Manga options description")
+        public static var mangaQuality: String = NSLocalizedString("manga_source_quality", comment: "Manga Quality")
     }
     
     public enum Filter {
@@ -88,13 +87,54 @@ extension String {
     }
     
     public enum Manga {
-        static let author: String = NSLocalizedString("manga_author", comment: "")
-        static let year: String = NSLocalizedString("manga_year", comment: "")
-        static let status: String = NSLocalizedString("manga_status", comment: "")
-        static let genres: String = NSLocalizedString("manga_genres", comment: "")
-        static let updated: String = NSLocalizedString("manga_updated", comment: "")
-        static let startReading: String = NSLocalizedString("manga_start_reading", comment: "")
-        static let descHeader: String = NSLocalizedString("manga_description_header", comment: "")
-        static let chapHeader: String = NSLocalizedString("manga_chapter_header", comment: "")
+        static let author: String = NSLocalizedString("manga_author", comment: "Manga author")
+        static let year: String = NSLocalizedString("manga_year", comment: "Manga release year")
+        static let status: String = NSLocalizedString("manga_status", comment: "Manga status")
+        static let genres: String = NSLocalizedString("manga_genres", comment: "Manga genres")
+        static let updated: String = NSLocalizedString("manga_updated", comment: "Manga las time updated")
+        static let startReading: String = NSLocalizedString("manga_start_reading", comment: "Manga start reading button")
+        static let descHeader: String = NSLocalizedString("manga_description_header", comment: "Manga description title")
+        static let chapHeader: String = NSLocalizedString("manga_chapter_header", comment: "Manga chapters title")
+    }
+    
+    public enum Adjusts {
+        static let trackerHeader: String = NSLocalizedString("adjusts_tracker_header", comment: "")
+        static var trackerFooter: AttributedString {
+            let string = NSLocalizedString("adjusts_tracker_footer", comment: "")
+            do {
+                return try AttributedString(markdown: string)
+            } catch { print(error.localizedDescription)}
+            return AttributedString(string)
+        }
+        static let trackerUser: String = NSLocalizedString("adjusts_tracker_user", comment: "")
+        static let logIn: String = NSLocalizedString("adjusts_tracker_log_in", comment: "")
+        static let logOut: String = NSLocalizedString("adjusts_tracker_log_out", comment: "")
+        static let icloudHeader: String = NSLocalizedString("adjusts_icloud_header", comment: "")
+        static let icloudSync: String = NSLocalizedString("adjusts_icloud_sync", comment: "")
+        static var icloudFooter: AttributedString {
+            let string = NSLocalizedString("adjusts_icloud_footer", comment: "")
+            do {
+                return try AttributedString(markdown: string)
+            } catch { print(error.localizedDescription)}
+            return AttributedString(string)
+        }
+        static let securityHeader: String = NSLocalizedString("adjusts_security_header", comment: "")
+        static let securityFooter: String = NSLocalizedString("adjusts_security_footer", comment: "")
+        static let securityBiometry: String = NSLocalizedString("adjusts_security_biometry", comment: "")
+        static let securityLevel: String = NSLocalizedString("adjusts_security_level", comment: "")
+        static let securityLibrary: String = NSLocalizedString("adjusts_security_library", comment: "")
+        static let libraryFooter: String = NSLocalizedString("adjusts_security_library_footer", comment: "")
+        static let appFooter: String = NSLocalizedString("adjusts_security_app_footer", comment: "")
+        static let notificationHeader: String = NSLocalizedString("adjusts_notification_header", comment: "")
+        static let notificationFooter: String = NSLocalizedString("adjusts_notification_footer", comment: "")
+        static let notificationUpdate: String = NSLocalizedString("adjusts_notification_updated_mangas", comment: "")
+        static let ageRatingHeader: String = NSLocalizedString("adjusts_age_rating_header", comment: "")
+        static var ageRatingFooter: AttributedString {
+            let string = NSLocalizedString("adjusts_age_rating_footer", comment: "")
+            do {
+                return try AttributedString(markdown: string)
+            } catch { print(error.localizedDescription)}
+            return AttributedString(string)
+        }
     }
 }

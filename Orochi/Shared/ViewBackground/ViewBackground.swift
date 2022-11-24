@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct ViewBackground: View {
-    var name: String
+    var image: String
+    
+    init(with image: String) { self.image = image }
+    
+    init(with image: AppImages) { self.image = image.rawValue }
+    
     var body: some View {
-        Image(name)
+        Image(image)
             .resizable(resizingMode: .stretch)
             .edgesIgnoringSafeArea(.all)
             .blur(radius: 75)
@@ -20,6 +25,6 @@ struct ViewBackground: View {
 
 struct ViewBackground_Previews: PreviewProvider {
     static var previews: some View {
-        ViewBackground(name: "aesthetic")
+        ViewBackground(with: .view_background)
     }
 }

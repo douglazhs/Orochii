@@ -27,26 +27,25 @@ extension MangaView {
             }
             .listRowBackground(Color.clear)
         }
+        .refreshable {
+            // TODO: Refresh manga informations
+        }
         .listStyle(.inset)
         .scrollContentBackground(.hidden)
-        .background(ViewBackground(name: manga.cover))
+        .background(ViewBackground(with: manga.cover))
     }
     
     @ViewBuilder
     /// Manga info header
     /// - Returns: All manga information
     func header() -> some View {
-        let portrait = UIScreen.width < UIScreen.height
-        let aspectRatio = 245.0 / 165.0
-        let width = (portrait ? UIScreen.width : UIScreen.height) * 0.325
         HStack {
             MangaStandardImage(
                 cover: manga.cover,
                 size: CGSize(
-                    width: width,
-                    height: width
-                ),
-                aspectRatio: aspectRatio
+                    width: CGSize.dynamicImage.width,
+                    height: CGSize.dynamicImage.height
+                )
             )
             self.mangaInfo()
         }
@@ -86,7 +85,7 @@ extension MangaView {
                 trailing: (String.Manga.year.uppercased(), manga.year)
             )
             self.infoLine(
-                leading: (String.Manga.status.uppercased(), manga.status.config.name.uppercased()),
+                leading: (String.Manga.status.uppercased(), manga.status.description.uppercased()),
                 trailing: (String.Manga.updated.uppercased(), manga.lastUpdated))
             Divider()
             self.item(
@@ -182,15 +181,23 @@ extension MangaView {
     @ViewBuilder
     func chapters() -> some View {
         ForEach(ChapterDomain.samples) { chapter in
-            ChapterStandardCell(chapter)
-                .contextMenu {
-                    // TODO: - Context actions
-                    Button { } label: {
-                        Label {
-                            Text(String.ContextMenu.markAsRead)
-                        } icon: { Image(systemName: "eye.fill") }
-                    }
+            Button { chapterReader = true } label: {
+                ChapterStandardCell(chapter)
+            }
+            .contextMenu {
+                // TODO: - Context actions
+                Button { } label: {
+                    Label {
+                        Text(String.ContextMenu.markAsRead)
+                    } icon: { Image(systemName: "eye.fill") }
                 }
+            } preview: {
+                ChapterView(chapter, of: manga)
+            }
+            .fullScreenCover(isPresented: $chapterReader) {
+                ChapterView(chapter, of: manga)
+                    .presentationDetents([.medium, .large])
+            }
         }
     }
 }

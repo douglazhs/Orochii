@@ -15,15 +15,24 @@ extension LibraryView {
         List(MangaDomain.samples) { manga in
             self.cell(of: manga)
                 .listRowBackground(Color.clear)
+                .contextMenu {
+                    // TODO: - Implement context menu features
+                    Button { } label: {
+                        Label(String.ContextMenu.addToLib, systemImage: "plus.rectangle.on.folder")
+                    }
+                    Button(role: .destructive) { } label: {
+                        Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
+                    }
+                } preview: {
+                    MangaView(manga)
+                }
+        }
+        .refreshable {
+            // TODO: Refresh library mangas
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(ViewBackground(name: "aesthetic"))
-        .onChange(of: isSearching) { newValue in
-            if !newValue {
-                // TODO: - Clear search
-            }
-        }
+        .background(ViewBackground(with: .view_background))
         .animation(.spring(), value: [isSearching])
     }
     
@@ -39,15 +48,18 @@ extension LibraryView {
             .frame(width: 0)
             .opacity(0)
             MangaStandardCell(manga)
-        }
-        .contextMenu {
-            // TODO: - Implement context menu features
-            Button { } label: {
-                Label(String.ContextMenu.addToLib, systemImage: "plus.rectangle.on.folder")
-            }
-            Button(role: .destructive) { } label: {
-                Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
-            }
+                .overlay(alignment: .topTrailing) {
+                    if manga.hasUpdate {
+                        Image(systemName: "circle.fill")
+                            .resizable()
+                            .frame(
+                                maxWidth: 7.5,
+                                maxHeight: 7.5
+                            )
+                            .foregroundColor(.orange)
+                            .padding(.top, 7.5)
+                    }
+                }
         }
     }
     

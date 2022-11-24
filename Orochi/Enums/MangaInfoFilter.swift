@@ -8,11 +8,13 @@
 import Foundation
 
 /// Manga informations that help on user filtering
-enum MangaInfoFilter: CaseIterable {
+enum MangaInfoFilter: Pickable {
+    var id: Self { self }
+    
     case language, year, demoPublic, status
     
-    /// Manga information ID
-    var name: String {
+    /// Manga information description
+    var description: String {
         switch self {
         case .language:   return String.Filter.language
         case .year:       return String.Filter.year

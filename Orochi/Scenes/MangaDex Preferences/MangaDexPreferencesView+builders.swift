@@ -13,20 +13,14 @@ extension MangaDexPreferencesView {
     @ViewBuilder
     func siteSection() -> some View {
         Section {
-            HStack(alignment: .top, spacing: 5) {
-                Image("mangaDex_icon")
-                    .resizable()
-                    .frame(
-                        maxWidth: UIScreen.width/10,
-                        maxHeight: UIScreen.width/10
-                    )
-                    .cornerRadius(5.5)
-                VStack(alignment: .leading) {
-                    Text("MangaDex")
-                    Link("Website", destination: URL(string: "https://mangadex.org")!)
-                        .foregroundColor(Color(uiColor: .systemGray))
-                }
-            }
+            EmptyView()
+        } header: {
+            WebsiteStandardCell(
+                header: "Source",
+                title: String.Name.mangaDex,
+                urlString: "https://mangadex.org",
+                image: .manga_dex_icon
+            )
         } footer: { Text(String.MangaSource.siteFooter) }
     }
     
@@ -48,25 +42,30 @@ extension MangaDexPreferencesView {
     @ViewBuilder
     func qualitySection() -> some View {
         Section {
-            Button { showActions = true } label: {
-                Text(selectedQuality.name)
-                    .foregroundColor(.primary)
-            }
-            .confirmationDialog(String.MangaSource.qualityActionTitle, isPresented: $showActions) {
-                ForEach(MangaQuality.allCases, id: \.self) { quality in
-                    Button(role: .none) {
-                        self.selectedQuality = quality
-                    } label: {
-                        Text(quality.name)
-                    }
-                }
-                Button(role: .cancel) { } label: { Text(String.Common.cancel) }
-            } message: { Text(String.MangaSource.qualityActionDialog) }
-
+            EnumPicker(String.MangaSource.mangaQuality, selection: $selectedQuality)
         } header: {
             Text(String.MangaSource.qualityHeader)
         } footer: {
             Text(String.MangaSource.qualityFooter)
+        }
+    }
+    
+    /// App Age Rating section
+    @ViewBuilder
+    func ageRatingSection() -> some View {
+        Section {
+            Toggle(isOn: $nsfw) {
+                Label {
+                    Text("NSFW")
+                } icon: {
+                    Image(systemName: "eyes.inverse")
+                        .foregroundColor(.orange)
+                }
+            }
+        } header: {
+            Text(String.Adjusts.ageRatingHeader)
+        } footer: {
+            Text(String.Adjusts.ageRatingFooter)
         }
     }
     

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct MangaView: View {
     var manga: MangaDomain
+    @State var chapterReader: Bool = false
     @StateObject var vm: MangaViewModel = MangaViewModel()
     
     init(_ manga: MangaDomain) {

@@ -25,11 +25,7 @@ struct DiscoverView: View {
                     }
                 }
         }
-        .searchable(
-            text: $vm.searchText,
-            placement: .toolbar,
-            prompt: String.Discovery.searchPlaceholder
-        )
+        .searchable(text: $vm.searchText)
         .onSubmit(of: .search) { viewStyle = .search }
     }
 }

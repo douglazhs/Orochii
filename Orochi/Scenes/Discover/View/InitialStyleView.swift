@@ -11,25 +11,29 @@ struct InitialStyleView: View {
     @EnvironmentObject var vm: DiscoverViewModel
 
     var body: some View {
-        List(CarouselType.allCases, id: \.self) { carousel in
-            Section {
-                self.carousel(of: vm.mangas)
-                    .listRowInsets(EdgeInsets(
-                        top: 10,
-                        leading: 0,
-                        bottom: 10,
-                        trailing: 0)
-                    )
-                    .listRowBackground(Color.clear)
-            } header: {
-                Text(carousel.header.uppercased())
-                    .font(.callout)
-                    .foregroundColor(.primary)
-                    .fontWeight(.regular)
+        ScrollView(showsIndicators: false) {
+            Divider()
+            VStack(alignment: .center) {
+                ForEach(CarouselType.allCases, id: \.self) { type in
+                    Section {
+                        self.carousel(of: vm.section[type] ?? [])
+                            .frame(maxHeight: .infinity)
+                    } header: {
+                        HStack(alignment: .top) {
+                            Text(type.header.uppercased())
+                                .font(.callout)
+                                .foregroundColor(.primary)
+                                .fontWeight(.regular)
+                            Spacer()
+                        }
+                        .padding(.leading)
+                    }
+                    .frame(maxHeight: .infinity)
+                    Divider()
+                }
             }
         }
-        .listStyle(.inset)
-        .background(ViewBackground(name: "aesthetic"))
+        .background(ViewBackground(with: .view_background))
         .scrollContentBackground(.hidden)
     }
 }
