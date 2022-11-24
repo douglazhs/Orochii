@@ -41,25 +41,6 @@ extension SettingsView {
         }
     }
     
-    /// App Age Rating section
-    @ViewBuilder
-    func ageRatingSection() -> some View {
-        Section {
-            Toggle(isOn: $vm.nfsw) {
-                Label {
-                    Text("NSFW")
-                } icon: {
-                    Image(systemName: "eyes.inverse")
-                        .foregroundColor(.orange)
-                }
-            }
-        } header: {
-            Text(Localized.ageRatingHeader)
-        } footer: {
-            Text(Localized.ageRatingFooter)
-        }
-    }
-    
     /// App iCloud section
     @ViewBuilder
     func icloudSection() -> some View {

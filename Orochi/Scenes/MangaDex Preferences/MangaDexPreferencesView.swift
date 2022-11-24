@@ -10,6 +10,7 @@ import SwiftUI
 struct MangaDexPreferencesView: View {
     @Environment(\.dismiss) var dismiss
     @State var selectedQuality: MangaQuality = .medium
+    @State var nsfw: Bool = false
     @State var showActions: Bool = false
     @State var languages: [Language] = []
     var body: some View {
@@ -21,6 +22,8 @@ struct MangaDexPreferencesView: View {
                 self.languageSection()
                     .listRowBackground(Color.clear)
                 self.qualitySection()
+                    .listRowBackground(Color.clear)
+                self.ageRatingSection()
                     .listRowBackground(Color.clear)
             }
             .toolbar {

@@ -50,6 +50,25 @@ extension MangaDexPreferencesView {
         }
     }
     
+    /// App Age Rating section
+    @ViewBuilder
+    func ageRatingSection() -> some View {
+        Section {
+            Toggle(isOn: $nsfw) {
+                Label {
+                    Text("NSFW")
+                } icon: {
+                    Image(systemName: "eyes.inverse")
+                        .foregroundColor(.orange)
+                }
+            }
+        } header: {
+            Text(String.Adjusts.ageRatingHeader)
+        } footer: {
+            Text(String.Adjusts.ageRatingFooter)
+        }
+    }
+    
     /// Done button
     /// - Returns: Toolbar done button
     @ViewBuilder func doneButton() -> some View {

@@ -21,8 +21,6 @@ struct SettingsView: View {
                     .listRowBackground(Color.clear)
                 self.notificationsSection()
                     .listRowBackground(Color.clear)
-                self.ageRatingSection()
-                    .listRowBackground(Color.clear)
             }
             .listStyle(.grouped)
             .animation(.easeInOut(duration: 0.175), value: [vm.biometry, vm.logged])

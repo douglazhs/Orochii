@@ -35,6 +35,7 @@ extension InitialStyleView {
                     }
                 }
                 .padding(.horizontal)
+                .frame(height: CGSize.standardImageCell.height + 45.0)
             }
         } else {
             StaticText(of: "PROBLEMS TO LOAD")
@@ -54,15 +55,13 @@ extension InitialStyleView {
                     width: CGSize.standardImageCell.width,
                     height: CGSize.standardImageCell.height
                 )
-            )
+            ).frame(maxHeight: CGSize.standardImageCell.height)
             Text(manga.title)
                 .font(.caption)
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
                 .frame(maxWidth: CGSize.standardImageCell.width)
                 .foregroundColor(Color(uiColor: .systemGray))
-            Spacer()
-        }
-        .frame(maxHeight: .infinity)
+        }/*.frame(maxHeight: .infinity)*/
     }
 }
