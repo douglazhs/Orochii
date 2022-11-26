@@ -10,9 +10,15 @@ import Foundation
 // String+localized 
 extension String {
     public enum ContextMenu {
+        static let asRead: String = NSLocalizedString("action_read", comment: "Mark chapter as read")
+        static let asUnread: String = NSLocalizedString("action_unread", comment: "Mark chapter as unread")
         static let markAsRead: String = NSLocalizedString("action_mark_as_read", comment: "Mark chapter as read")
+        static let markAsUnread: String = NSLocalizedString("action_mark_as_unread", comment: "Mark chapter as unread")
+        static let download: String = NSLocalizedString("action_download", comment: "Download chapter action")
         static let addToLib: String = NSLocalizedString("action_add_to_library", comment: "Add manga to library")
         static let rmvFromLib: String = NSLocalizedString("action_remove_from_library", comment: "Remove chapter from library")
+        static let markPrevious: String = NSLocalizedString("action_mark_previous", comment: "Mark previous chapters")
+        static let savePage: String = NSLocalizedString("action_save_page", comment: "Save chapter page")
     }
     
     public enum Common {
@@ -21,6 +27,9 @@ extension String {
         static let add: String = NSLocalizedString("common_add", comment: "Add")
         static let remove: String = NSLocalizedString("common_remove", comment: "Remove")
         static let search: String = NSLocalizedString("common_search", comment: "Search bar")
+        static let all: String = NSLocalizedString("common_all", comment: "All")
+        static let none: String = NSLocalizedString("common_none", comment: "None")
+        static let of: String = NSLocalizedString("common_of", comment: "Of preposition")
     }
     
     public enum Discovery {
@@ -92,9 +101,17 @@ extension String {
         static let status: String = NSLocalizedString("manga_status", comment: "Manga status")
         static let genres: String = NSLocalizedString("manga_genres", comment: "Manga genres")
         static let updated: String = NSLocalizedString("manga_updated", comment: "Manga las time updated")
+        static let selectChapters: String = NSLocalizedString("manga_selected_chapters", comment: "Select manga chapters")
         static let startReading: String = NSLocalizedString("manga_start_reading", comment: "Manga start reading button")
+        static let addToLibrary: String = NSLocalizedString("manga_add_to_library", comment: "Add to library")
         static let descHeader: String = NSLocalizedString("manga_description_header", comment: "Manga description title")
         static let chapHeader: String = NSLocalizedString("manga_chapter_header", comment: "Manga chapters title")
+        static let mark: String = NSLocalizedString("manga_mark", comment: "Mark chapter")
+        static let selectedChapters: String = NSLocalizedString("manga_selected_chapters", comment: "Selected manga chapters")
+    }
+    
+    public enum Chapter {
+        static let chaptersOf: String = NSLocalizedString("manga_chapters_of", comment: "Chapter Of")
     }
     
     public enum Adjusts {

@@ -15,10 +15,13 @@ extension ChapterView {
             Color.black.edgesIgnoringSafeArea(.all)
             self.mangaPage()
                 .contextMenu {
-                    Button(action: {
+                    Button {
                         // TODO: - Save image on gallery
-                    }) {
-                        Label("Save Page", systemImage: "icloud.and.arrow.down.fill")
+                    } label: {
+                        Label(
+                            String.ContextMenu.savePage,
+                            systemImage: "icloud.and.arrow.down.fill"
+                        )
                     }
                 }
         }

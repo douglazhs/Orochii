@@ -18,12 +18,7 @@ extension SearchStyleView {
                         Button { } label: {
                             Label(String.ContextMenu.addToLib, systemImage: "plus.rectangle.on.folder")
                         }
-                        Button(role: .destructive) { } label: {
-                            Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
-                        }
-                    } preview: {
-                         MangaView(manga)
-                    }
+                    } preview: { MangaView(manga) }
             }
             .listStyle(.plain)
             .background(ViewBackground(with: .view_background))
@@ -43,7 +38,7 @@ extension SearchStyleView {
             }
             .frame(width: 0)
             .opacity(0)
-            MangaStandardCell(manga)
+            MangaStandardCell(manga, isSearch: true)
         }
     }
 }

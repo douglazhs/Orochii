@@ -12,24 +12,37 @@ extension MangaView {
     /// Manga all content
     /// - Returns: All manga information, including the chapters
     func content() -> some View {
-        List {
+        List(selection: $selection) {
             Section {
                 self.header()
                 self.actions()
                 self.description()
-            }
-            .listRowBackground(Color.clear)
+            }.listRowBackground(Color.clear)
             Section { self.chapters() } header: {
-                Text(String.Manga.chapHeader.uppercased())
-                    .font(.callout)
-                    .foregroundColor(.primary)
-                    .fontWeight(.regular)
-            }
-            .listRowBackground(Color.clear)
-        }
-        .refreshable {
-            // TODO: Refresh manga informations
-        }
+                HStack {
+                    Text("\(ChapterDomain.samples.count) " + String.Manga.chapHeader.uppercased())
+                        .font(.callout)
+                        .foregroundColor(.primary)
+                        .fontWeight(.regular)
+                    Spacer()
+                    Button { vm.ascending.toggle() } label: {
+                        Label(
+                            (vm.ascending
+                             ? String.Filter.ascending
+                             : String.Filter.descending).uppercased(),
+                            systemImage: vm.ascending ? "chevron.down" : "chevron.up"
+                        )
+                        .font(.caption)
+                        .fontWeight(.medium)
+                    }.buttonStyle(.borderless)
+                }
+            }.listRowBackground(Color.clear)
+        }.environment(\.editMode, .constant(
+            isEditingMode
+            ? EditMode.active
+            : EditMode.inactive
+        ))
+        .refreshable { }
         .listStyle(.inset)
         .scrollContentBackground(.hidden)
         .background(ViewBackground(with: manga.cover))
@@ -39,15 +52,28 @@ extension MangaView {
     /// Manga info header
     /// - Returns: All manga information
     func header() -> some View {
-        HStack {
-            MangaStandardImage(
-                cover: manga.cover,
-                size: CGSize(
-                    width: CGSize.dynamicImage.width,
-                    height: CGSize.dynamicImage.height
+        Section {
+            HStack {
+                MangaStandardImage(
+                    cover: manga.cover,
+                    size: CGSize(
+                        width: CGSize.dynamicImage.width,
+                        height: CGSize.dynamicImage.height
+                    )
                 )
-            )
-            self.mangaInfo()
+                self.mangaInfo()
+            }
+        } header: {
+            HStack {
+                Text(manga.title)
+                    .fontWeight(.semibold)
+                    .multilineTextAlignment(.leading)
+                Spacer()
+                LanguagePicker(
+                    ["en-US", "pt-BR", "es-SP"],
+                    selectedLang: $vm.titleLang
+                )
+            }.font(.callout)
         }
     }
     
@@ -143,21 +169,32 @@ extension MangaView {
     @ViewBuilder
     func actions() -> some View {
         HStack {
-            ForEach(Actions.allCases, id: \.self) { action in
-                Button(role: (action == .rmvLib) ? .destructive : .none) {
-                    vm.btnAction = action
-                } label: {
-                    Text(action.name.uppercased())
-                        .lineLimit(1)
-                        .foregroundColor((action != .rmvLib) ? .primary : .red)
-                        .font(.footnote)
-                        .fontWeight(.semibold)
-                        .frame(maxWidth: .infinity)
-                }
-                .buttonStyle(.bordered)
-                .tint((action != .rmvLib) ? Color.primary : Color.red)
+            Button(role: vm.mangaOnLib ? .destructive : .none) {
+                vm.mangaOnLib.toggle()
+                vm.btnAction = (vm.btnAction == .addLib)
+                ? .rmvLib
+                : .addLib
+            } label: {
+                Label(
+                    vm.mangaOnLib
+                    ? MangaActions.rmvLib.description
+                    : MangaActions.addLib.description,
+                    systemImage: vm.mangaOnLib ? "trash" : "books.vertical.fill"
+                ).frame(maxWidth: .infinity)
             }
+            .buttonStyle(.bordered)
+            .foregroundColor(vm.mangaOnLib ? .red : .primary)
+            .tint(vm.mangaOnLib ? Color.red : Color.primary)
+            
+            Button { vm.btnAction = .aniList } label: {
+                Text(MangaActions.aniList.description)
+                    .frame(maxWidth: .infinity)
+            }.buttonStyle(.bordered)
         }
+        .lineLimit(1)
+        .font(.footnote)
+        .fontWeight(.medium)
+        .frame(maxWidth: .infinity)
     }
     
     /// Manga description
@@ -169,10 +206,17 @@ extension MangaView {
                 .font(.callout)
                 .multilineTextAlignment(.leading)
         } header: {
-            Text(String.Manga.descHeader.uppercased())
-                .font(.callout)
-                .foregroundColor(.primary)
-                .fontWeight(.regular)
+            HStack {
+                Text(String.Manga.descHeader.uppercased())
+                    .foregroundColor(.primary)
+                Spacer()
+                LanguagePicker(
+                    ["en-US", "pt-BR", "es-SP"],
+                    selectedLang: $vm.descLang
+                )
+            }
+            .font(.callout)
+            .fontWeight(.regular)
         }
     }
     
@@ -183,21 +227,35 @@ extension MangaView {
         ForEach(ChapterDomain.samples) { chapter in
             Button { chapterReader = true } label: {
                 ChapterStandardCell(chapter)
-            }
-            .contextMenu {
-                // TODO: - Context actions
-                Button { } label: {
-                    Label {
-                        Text(String.ContextMenu.markAsRead)
-                    } icon: { Image(systemName: "eye.fill") }
+                    .foregroundColor(chapter.read ? Color(uiColor: .systemGray) : Color.primary)
+                    .disabled(chapter.read)
+            }.contextMenu {
+                ChapterMenu() { _ in
+                    // TODO: - Handle context menu actions
                 }
-            } preview: {
-                ChapterView(chapter, of: manga)
-            }
+            } preview: { ChapterView(chapter, of: manga) }
             .fullScreenCover(isPresented: $chapterReader) {
                 ChapterView(chapter, of: manga)
-                    .presentationDetents([.medium, .large])
             }
+        }
+    }
+    
+    /// Select/Deselect all chapters button
+    @ViewBuilder
+    func selectButton() -> some View {
+        if isEditingMode {
+            Button { selectAll.toggle() } label:
+            { Text(selectAll ? String.Common.none : String.Common.all) }
+        }
+    }
+    
+    /// Editable view actions
+    @ViewBuilder
+    func editButton() ->  some View {
+        Button { isEditingMode.toggle() } label:{
+            if isEditingMode {
+                Text(String.Common.done)
+            } else { Label (String.Manga.selectChapters, systemImage: "checklist") }
         }
     }
 }

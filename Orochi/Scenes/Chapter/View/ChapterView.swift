@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ChapterView: View {
+    @Environment(\.dismiss) var dismiss
     @StateObject var vm: ChapterViewModel
     @State var showReadBars: Visibility = .visible
     @State var showChaptersList: Bool = false

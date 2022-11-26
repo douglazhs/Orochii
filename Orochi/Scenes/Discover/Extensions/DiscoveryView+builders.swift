@@ -12,7 +12,7 @@ extension DiscoverView {
     /// - Returns: Screen variations
     @ViewBuilder func content() -> some View {
         switch viewStyle {
-        case .search:  SearchStyleView(mangas: [], $viewStyle)
+        case .search:  SearchStyleView(mangas: MangaDomain.samples, $viewStyle)
         case .initial: InitialStyleView().environmentObject(vm)
         }
     }

@@ -9,9 +9,11 @@ import SwiftUI
 
 struct MangaStandardCell: View {
     var manga: MangaDomain
+    var isSearch: Bool
     
-    init(_ manga: MangaDomain) {
+    init(_ manga: MangaDomain, isSearch: Bool = false) {
         self.manga = manga
+        self.isSearch = isSearch
     }
     var body: some View {
         self.cell()
