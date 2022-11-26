@@ -12,20 +12,33 @@ extension LibraryView {
     /// - Returns: Filtered manga list
     @ViewBuilder
     func content() -> some View {
-        List(MangaDomain.samples) { manga in
-            self.cell(of: manga)
-                .listRowBackground(Color.clear)
-                .contextMenu {
-                    // TODO: - Implement context menu features
-                    Button { } label: {
-                        Label(String.ContextMenu.addToLib, systemImage: "plus.rectangle.on.folder")
+        List {
+            ForEach(MangaDomain.samples) { manga in
+                self.cell(of: manga)
+                    .listRowBackground(Color.clear)
+                    .swipeActions(edge: .leading) {
+                        //Edit
+                        Label ("AniList", systemImage: "pencil")
                     }
-                    Button(role: .destructive) { } label: {
-                        Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
+                    .swipeActions(edge: .trailing) {
+                        // Delete
+                        Label("Remove", systemImage: "trash")
                     }
-                } preview: {
-                    MangaView(manga)
-                }
+                    .contextMenu {
+                        // TODO: - Implement context menu features
+                        Button { } label: {
+                            Label(String.ContextMenu.addToLib, systemImage: "plus.rectangle.on.folder")
+                        }
+                        Button(role: .destructive) { } label: {
+                            Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
+                        }
+                    } preview: {
+                        MangaView(manga)
+                    }
+            }
+            .onDelete { _ in
+                
+            }
         }
         .refreshable {
             // TODO: Refresh library mangas

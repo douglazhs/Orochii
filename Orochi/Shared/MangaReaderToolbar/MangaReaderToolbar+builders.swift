@@ -27,7 +27,8 @@ extension ReaderToolbar {
                     vm.loadChapter()
                 }
             } header: {
-                Text("CHAPTERS OF:")
+                Text("\(ChapterDomain.samples.count) "
+                     + "\(String.Chapter.chaptersOf.uppercased()):")
             }
             .listRowBackground(Color.clear)
         }
@@ -42,6 +43,8 @@ extension ReaderToolbar {
         VStack {
             Text(vm.actualChapter.title)
                 .font(.caption)
+                .lineLimit(2)
+                .multilineTextAlignment(.center)
                 .fontWeight(.semibold)
                 .foregroundColor(.primary)
             Text("**\(vm.actualChapter.volume)**")
@@ -59,7 +62,9 @@ extension ReaderToolbar {
                 minValue: 0,
                 maxValue: Double(vm.actualChapter.pagesImages.count - 1)
             )
-            Text("\(String(format: "%.0f", vm.actualPage + 1)) **OF** \(vm.actualChapter.pagesImages.count)")
+            Text("\(String(format: "%.0f", vm.actualPage + 1)) "
+                 + "\(String.Common.of.uppercased()) "
+                 + "\(vm.actualChapter.pagesImages.count)")
                 .font(.caption2)
                 .foregroundColor(Color(uiColor: .systemGray))
         }

@@ -10,7 +10,13 @@
 
 "action_add_to_library" = "Adicionar à Biblioteca";
 "action_remove_from_library" = "Remover da Biblioteca";
-"action_mark_as_read" = "Marcar Como Lido";
+"action_mark_as_read" = "Marcar como Lido";
+"action_mark_as_unread" = "Marcar como Não Lido";
+"action_read" = "como Lido";
+"action_unread" = "como Não Lido";
+"action_download" = "Baixar";
+"action_mark_previous" = "Marcar Anteriores";
+"action_save_page" = "Salvar Página";
 
 // MARK: - Commons
 
@@ -19,6 +25,9 @@
 "common_add" = "Adicionar";
 "common_remove" = "Remover";
 "common_search" = "Buscar";
+"common_all" = "Todos";
+"common_none" = "Nenhum";
+"common_of" = "de";
 
 /* ------------------------------------------------------------ */
 
@@ -75,7 +84,7 @@
 
 /* ------------------------------------------------------------ */
 
-// MARK: - Filter
+// MARK: - FILTER
 
 "filter_title" = "Filtros";
 "filter_filter_by_header" = "Filtrar Por";
@@ -105,8 +114,12 @@
 "manga_genres" = "Genres";
 "manga_updated" = "Atualizado";
 "manga_start_reading" = "Comece a Ler";
+"manga_add_to_library" = "Adicionar a Biblioteca";
+"manga_select_chapters" = "Selecione os Capítulos";
 "manga_description_header" = "Descrição";
 "manga_chapter_header" = "Capítulos";
+"manga_selected_chapters" = "Capítulos Selecionados";
+"manga_chapters_of" = "Chapters Of";
 
 // MARK: - ADJUSTS SCREEN
 

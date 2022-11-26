@@ -36,10 +36,12 @@ extension MangaStandardCell {
                 .font(.subheadline)
                 .fontWeight(.semibold)
                 .lineLimit(1)
-            // LAST TIME UPDATED
-            Text("\(String.Discovery.lastUpdated): **\(manga.lastUpdated)**")
-                .font(.caption2)
-                .fontWeight(.light)
+            // AUTHOR
+            Text("**\(manga.author)**")
+                .font(.caption)
+                .foregroundColor(Color(uiColor: .systemGray))
+            Divider()
+            // MANGA INFO
             HStack(alignment: .top) {
                 self.main()
                 Spacer()
@@ -58,18 +60,22 @@ extension MangaStandardCell {
             Text(manga.genres.joined(separator: ", "))
                 .font(.caption)
                 .fontWeight(.medium)
+                .lineLimit(2)
                 .foregroundColor(Color(uiColor: .systemGray))
-            // AUTHOR
-            self.infoLabel(
-                manga.author,
-                "person.crop.circle"
-            )
             // STATUS
             self.infoLabel(
                 manga.status.description.uppercased(),
                 manga.status.config.icon,
                 manga.status.config.color
             )
+            // LAST TIME UPDATED
+            self.infoLabel(
+                manga.lastUpdated,
+                "arrow.triangle.2.circlepath",
+                Color(uiColor: .systemGray),
+                isItalic: true
+            )
+            .foregroundColor(Color(uiColor: .systemGray))
         }
     }
     
@@ -77,7 +83,7 @@ extension MangaStandardCell {
     /// - Returns: Vstack with secondary information
     @ViewBuilder
     func secondary() -> some View {
-        VStack(alignment: .trailing, spacing: 7) {
+        VStack(alignment: .center, spacing: 7) {
             // PUBLISHED
             Text(manga.published.uppercased())
                 .font(.caption2)
@@ -86,6 +92,15 @@ extension MangaStandardCell {
             Text("\(String.Discovery.year): **\(manga.year)**")
                 .font(.caption2)
                 .fontWeight(.light)
+            if !isSearch {
+                // ANILIST
+                Button {
+                    // TODO: - Edit anilist
+                } label: {
+                    Text(String.Name.aniList.uppercased())
+                        .font(.caption)
+                }.buttonStyle(.bordered)
+            }
         }
     }
 
@@ -99,15 +114,15 @@ extension MangaStandardCell {
     func infoLabel(
         _ name: String,
         _ icon: String,
-        _ color: Color = Color(uiColor: .systemGray)
+        _ color: Color = Color(uiColor: .systemGray),
+        isItalic: Bool = false
     ) -> some View {
         Label {
             Text(name)
-                .font(.caption2)
                 .fontWeight(.semibold)
+                .italic(isItalic)
         } icon: {
             Image(systemName: icon)
-                .font(.caption2)
                 .foregroundColor(color)
         }.font(.caption2)
     }
