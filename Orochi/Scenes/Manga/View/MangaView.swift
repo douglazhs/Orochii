@@ -14,6 +14,8 @@ struct MangaView: View {
     @State var selection = Set<UUID>()
     @State var isEditingMode: Bool = false
     @State var selectAll: Bool = false
+    @State var searchOffset: CGFloat = -UIScreen.width
+    @State var headerOffset: CGFloat = 0
     
     init(_ manga: MangaDomain) {
         self.manga = manga
@@ -34,26 +36,10 @@ struct MangaView: View {
                     self.editButton()
                 }
                 ToolbarItemGroup(placement: .bottomBar) {
-                    Button { } label:
-                    { Text(String.ContextMenu.download) }
-                    .disabled(selection.isEmpty)
-                    Menu {
-                        Section {
-                            Button { } label:
-                            { Label(String.ContextMenu.markAsRead, systemImage: "eye.fill") }
-                            Button { } label:
-                            { Label(String.ContextMenu.markAsUnread, systemImage: "eye.slash.fill") }
-                        } header: {
-                            Text("\(selection.count) "
-                                 + String.Manga.selectChapters.uppercased())
-                        }
-                    } label: { Text(String.Manga.mark) }
-                    .disabled(selection.isEmpty)
+                    self.chapterActions()
                 }
-            }.animation(
-                .easeInOut(duration: 0.01),
-                value: [isEditingMode, vm.ascending]
-            )
+            }
+            .animation(.easeInOut, value: isEditingMode)
     }
 }
 

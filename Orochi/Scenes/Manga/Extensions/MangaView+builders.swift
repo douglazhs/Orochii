@@ -14,28 +14,15 @@ extension MangaView {
     func content() -> some View {
         List(selection: $selection) {
             Section {
-                self.header()
-                self.actions()
-                self.description()
-            }.listRowBackground(Color.clear)
-            Section { self.chapters() } header: {
-                HStack {
-                    Text("\(ChapterDomain.samples.count) " + String.Manga.chapHeader.uppercased())
-                        .font(.callout)
-                        .foregroundColor(.primary)
-                        .fontWeight(.regular)
-                    Spacer()
-                    Button { vm.ascending.toggle() } label: {
-                        Label(
-                            (vm.ascending
-                             ? String.Filter.ascending
-                             : String.Filter.descending).uppercased(),
-                            systemImage: vm.ascending ? "chevron.down" : "chevron.up"
-                        )
-                        .font(.caption)
-                        .fontWeight(.medium)
-                    }.buttonStyle(.borderless)
+                if !vm.search {
+                    // ALL MANGA INFORMATION
+                    self.header()
+                    // MANGA ACTIONS: ANILIST, ADD & REMOVE
+                    self.actions()
+                    // MANGA DESCRIPTION
+                    self.description()
                 }
+                self.chapters()
             }.listRowBackground(Color.clear)
         }.environment(\.editMode, .constant(
             isEditingMode
@@ -48,9 +35,103 @@ extension MangaView {
         .background(ViewBackground(with: manga.cover))
     }
     
+    /// Chapter list header
     @ViewBuilder
+    func chaptersHeader() -> some View {
+        ZStack {
+            // STANDARD BAR WITH SOME INFORMATIONS
+            self.standardBar()
+                .offset(x: headerOffset)
+                .frame(maxWidth: .infinity)
+            // SEARCH BAR TO SEARCH A SPECIFIC CHAPTER
+            self.searchBar()
+                .offset(x: searchOffset)
+                .frame(maxWidth: .infinity)
+        }.frame(maxWidth: .infinity)
+    }
+    
+    /// Header chaptes bar
+    @ViewBuilder
+    func standardBar() -> some View {
+        HStack {
+            // CHAPTERS COUNT
+            Text("\(ChapterDomain.samples.count) "
+                 + String.Manga.chapHeader.uppercased())
+                .foregroundColor(.primary)
+                .fontWeight(.regular)
+                .font(.callout)
+                .lineLimit(1)
+            // SEARCH BUTTON
+            Button {
+                withAnimation(.interpolatingSpring(
+                    mass: 2.0,
+                    stiffness: 5,
+                    damping: 5,
+                    initialVelocity: 0).speed(5)
+                ) {
+                    searchOffset = 0
+                    headerOffset = UIScreen.width
+                    vm.search = true
+                    UIApplication.shared.resignFirstResponder()
+                }
+            } label: {
+                Image(systemName: "magnifyingglass")
+                    .font(.footnote)
+                    .foregroundColor(.primary)
+            }.buttonStyle(.bordered)
+            .tint(.accentColor)
+            Spacer()
+            Divider()
+            // ORDER PICKER
+            EnumPicker(
+                String.Filter.orderByHeader,
+                selection: $vm.chaptersOrder
+            ).pickerStyle(.segmented)
+        }
+    }
+    
+    /// Search chapters bar
+    @ViewBuilder
+    func searchBar() -> some View {
+        HStack(alignment: .center) {
+            // TEXTFIELD BAR
+            TextField(text: $vm.queryFilter, axis: .horizontal) {
+                HStack(spacing: 2) {
+                    Text("Search chapter")
+                        .font(.body)
+                        .fontWeight(.regular)
+                        .foregroundColor(.secondary)
+                    Image(systemName: "magnifyingglass")
+                }
+            }.ignoresSafeArea(.keyboard, edges: .bottom)
+            .foregroundColor(.primary)
+            .padding(.horizontal, 7.5)
+            .padding(.vertical, 5.5)
+            .frame(maxWidth: .infinity, maxHeight: 35)
+            .background(
+                Color.primary.opacity(0.1),
+                in: RoundedRectangle(cornerRadius: 6.5)
+            )
+            // CANCEL BUTTON
+            Button {
+                withAnimation(.interpolatingSpring(
+                    mass: 2.0,
+                    stiffness: 5,
+                    damping: 5,
+                    initialVelocity: 0).speed(5)
+                ) {
+                    searchOffset = -UIScreen.width
+                    headerOffset = 0
+                    vm.search = false
+                    UIApplication.shared.endEditing()
+                }
+            } label: { Text(String.Common.cancel) }
+        }
+    }
+    
     /// Manga info header
     /// - Returns: All manga information
+    @ViewBuilder
     func header() -> some View {
         Section {
             HStack {
@@ -70,9 +151,9 @@ extension MangaView {
                     .multilineTextAlignment(.leading)
                 Spacer()
                 LanguagePicker(
-                    ["en-US", "pt-BR", "es-SP"],
+                    mockLanguages,
                     selectedLang: $vm.titleLang
-                )
+                ).pickerStyle(.automatic)
             }.font(.callout)
         }
     }
@@ -82,7 +163,8 @@ extension MangaView {
     ///   - leading: Leading item
     ///   - trailing: Trailing item
     /// - Returns: Manga information items
-    @ViewBuilder func infoLine(
+    @ViewBuilder
+    func infoLine(
         leading: (String, String),
         trailing: (String, String)
     ) -> some View {
@@ -106,20 +188,25 @@ extension MangaView {
     @ViewBuilder
     func mangaInfo() -> some View {
         VStack(alignment: .leading, spacing: 10) {
+            // AUTHOR & YEAR
             self.infoLine(
                 leading: (String.Manga.author.uppercased() , manga.author),
                 trailing: (String.Manga.year.uppercased(), manga.year)
             )
+            // AUTHOR & UPDADATED
             self.infoLine(
                 leading: (String.Manga.status.uppercased(), manga.status.description.uppercased()),
-                trailing: (String.Manga.updated.uppercased(), manga.lastUpdated))
+                trailing: (String.Manga.updated.uppercased(), manga.lastUpdated)
+            )
             Divider()
+            // GENRES
             self.item(
                 title: String.Manga.genres.uppercased(),
                 manga.genres.joined(separator: ", "),
                 .leading
             ).lineLimit(2)
             Spacer()
+            // START READING BUTTON
             self.startReadingButton()
         }
         .padding(.leading, 5)
@@ -169,31 +256,31 @@ extension MangaView {
     @ViewBuilder
     func actions() -> some View {
         HStack {
+            // ADD/REMOVE FROM LIBRARY BUTTON
             Button(role: vm.mangaOnLib ? .destructive : .none) {
                 vm.mangaOnLib.toggle()
                 vm.btnAction = (vm.btnAction == .addLib)
                 ? .rmvLib
                 : .addLib
             } label: {
-                Label(
-                    vm.mangaOnLib
-                    ? MangaActions.rmvLib.description
-                    : MangaActions.addLib.description,
-                    systemImage: vm.mangaOnLib ? "trash" : "books.vertical.fill"
+                Text(vm.mangaOnLib
+                     ? MangaActions.rmvLib.description
+                     : MangaActions.addLib.description
                 ).frame(maxWidth: .infinity)
             }
             .buttonStyle(.bordered)
             .foregroundColor(vm.mangaOnLib ? .red : .primary)
             .tint(vm.mangaOnLib ? Color.red : Color.primary)
-            
+            // ANILIST BUTTON
             Button { vm.btnAction = .aniList } label: {
                 Text(MangaActions.aniList.description)
                     .frame(maxWidth: .infinity)
+                    .foregroundColor(.primary)
             }.buttonStyle(.bordered)
         }
         .lineLimit(1)
         .font(.footnote)
-        .fontWeight(.medium)
+        .fontWeight(.regular)
         .frame(maxWidth: .infinity)
     }
     
@@ -211,7 +298,7 @@ extension MangaView {
                     .foregroundColor(.primary)
                 Spacer()
                 LanguagePicker(
-                    ["en-US", "pt-BR", "es-SP"],
+                    mockLanguages,
                     selectedLang: $vm.descLang
                 )
             }
@@ -224,39 +311,23 @@ extension MangaView {
     /// - Returns: All manga chapters cells
     @ViewBuilder
     func chapters() -> some View {
-        ForEach(ChapterDomain.samples) { chapter in
-            Button { chapterReader = true } label: {
-                ChapterStandardCell(chapter)
-                    .foregroundColor(chapter.read ? Color(uiColor: .systemGray) : Color.primary)
-                    .disabled(chapter.read)
-            }.contextMenu {
-                ChapterMenu() { _ in
-                    // TODO: - Handle context menu actions
+        Section {
+            ForEach(ChapterDomain.samples) { chapter in
+                Button { chapterReader = true } label: {
+                    ChapterStandardCell(chapter)
+                        .foregroundColor(chapter.read ? Color(uiColor: .systemGray) : Color.primary)
+                        .disabled(chapter.read)
+                        .id(chapter.id)
+                }.contextMenu {
+                    ChapterMenu() { _ in
+                        // TODO: - Handle context menu actions
+                    }
+                } preview: { ChapterView(chapter, of: manga) }
+                .fullScreenCover(isPresented: $chapterReader) {
+                    ChapterView(chapter, of: manga)
                 }
-            } preview: { ChapterView(chapter, of: manga) }
-            .fullScreenCover(isPresented: $chapterReader) {
-                ChapterView(chapter, of: manga)
             }
-        }
-    }
-    
-    /// Select/Deselect all chapters button
-    @ViewBuilder
-    func selectButton() -> some View {
-        if isEditingMode {
-            Button { selectAll.toggle() } label:
-            { Text(selectAll ? String.Common.none : String.Common.all) }
-        }
-    }
-    
-    /// Editable view actions
-    @ViewBuilder
-    func editButton() ->  some View {
-        Button { isEditingMode.toggle() } label:{
-            if isEditingMode {
-                Text(String.Common.done)
-            } else { Label (String.Manga.selectChapters, systemImage: "checklist") }
-        }
+        } header: { self.chaptersHeader() }
     }
 }
 

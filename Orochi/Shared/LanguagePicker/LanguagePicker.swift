@@ -8,29 +8,31 @@
 import SwiftUI
 
 struct LanguagePicker: View {
-    var languages: [String]
-    var selectedLang: Binding<String>
+    var languages: [Int : String]
+    var selectedLang: Binding<Int>
     
-    init(_ languages: [String], selectedLang: Binding<String>) {
+    init(
+        _ languages: [Int : String],
+        selectedLang: Binding<Int>
+    ) {
         self.languages = languages
         self.selectedLang = selectedLang
     }
     
     var body: some View {
         Picker(selection: selectedLang){
-            ForEach(languages, id: \.self) { lang in
-                Text(lang.description)
+            ForEach(0..<languages.keys.count, id: \.self) { key in
+                Text(languages[key] ?? "")
             }
         } label: { EmptyView() }
-        .pickerStyle(.menu)
     }
 }
 
 struct LanguagePicker_Previews: PreviewProvider {
     static var previews: some View {
         LanguagePicker(
-            ["en-US", "pt-BR"],
-            selectedLang: .constant("en-US")
+            mockLanguages,
+            selectedLang: .constant(0)
         )
     }
 }

@@ -24,13 +24,8 @@ extension LibraryFilterView {
     @ViewBuilder
     func orderSection() -> some View {
         Section {
-            EnumPicker("", selection: $vm.filterOrder).pickerStyle(.inline)
-            .pickerStyle(.inline)
-        } header: {
-            Text(String.Filter.orderByHeader)
-        } footer: {
-            Text(String.Filter.orderByFooter)
-        }
+            EnumPicker(String.Filter.orderByHeader, selection: $vm.filterOrder)
+        } footer: { Text(String.Filter.orderByFooter) }
     }
     
     /// Manga informations section

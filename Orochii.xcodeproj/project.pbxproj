@@ -11,7 +11,9 @@
 		500183C8292C0BB10094B223 /* MangaActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500183C7292C0BB10094B223 /* MangaActions.swift */; };
 		500183CB292C0CCA0094B223 /* ChapterStandardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500183CA292C0CCA0094B223 /* ChapterStandardCell.swift */; };
 		500183CD292C0D270094B223 /* ChapterStandardCell+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500183CC292C0D270094B223 /* ChapterStandardCell+builders.swift */; };
+		5007A5022933AE3300EAAB84 /* MangaView+editablle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5007A5012933AE3300EAAB84 /* MangaView+editablle.swift */; };
 		500DB59D292C608B00F398D6 /* SettingsView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 500DB59C292C608B00F398D6 /* SettingsView+builders.swift */; };
+		503019A42934212700F5645F /* UIApplications+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503019A32934212700F5645F /* UIApplications+extension.swift */; };
 		505656392932580F0061FD15 /* ChapterMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505656382932580F0061FD15 /* ChapterMenu.swift */; };
 		5056563C2932597F0061FD15 /* LanguagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5056563B2932597F0061FD15 /* LanguagePicker.swift */; };
 		506D5753292B1E2900A0C529 /* ChapterDomain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506D5752292B1E2900A0C529 /* ChapterDomain.swift */; };
@@ -88,7 +90,9 @@
 		500183C7292C0BB10094B223 /* MangaActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaActions.swift; sourceTree = "<group>"; };
 		500183CA292C0CCA0094B223 /* ChapterStandardCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterStandardCell.swift; sourceTree = "<group>"; };
 		500183CC292C0D270094B223 /* ChapterStandardCell+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ChapterStandardCell+builders.swift"; sourceTree = "<group>"; };
+		5007A5012933AE3300EAAB84 /* MangaView+editablle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaView+editablle.swift"; sourceTree = "<group>"; };
 		500DB59C292C608B00F398D6 /* SettingsView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+builders.swift"; sourceTree = "<group>"; };
+		503019A32934212700F5645F /* UIApplications+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplications+extension.swift"; sourceTree = "<group>"; };
 		505656382932580F0061FD15 /* ChapterMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterMenu.swift; sourceTree = "<group>"; };
 		5056563B2932597F0061FD15 /* LanguagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LanguagePicker.swift; sourceTree = "<group>"; };
 		506D5752292B1E2900A0C529 /* ChapterDomain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterDomain.swift; sourceTree = "<group>"; };
@@ -378,6 +382,7 @@
 				50FE08D6292D826100432F21 /* Image+appImages.swift */,
 				50F44447292E9442001B3CF4 /* UIView+extension.swift */,
 				50F44449292F02CC001B3CF4 /* CGSize+extension.swift */,
+				503019A32934212700F5645F /* UIApplications+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -698,6 +703,7 @@
 			isa = PBXGroup;
 			children = (
 				50FFB015292AE7B800B87E0E /* MangaView+builders.swift */,
+				5007A5012933AE3300EAAB84 /* MangaView+editablle.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -834,6 +840,8 @@
 				50F4444F292F08B9001B3CF4 /* MangaReaderToolbar+builders.swift in Sources */,
 				50F44437292E58A4001B3CF4 /* ReaderPreferencesView+builders.swift in Sources */,
 				5092DF35292942A30094DC18 /* DiscoverView.swift in Sources */,
+				5007A5022933AE3300EAAB84 /* MangaView+editablle.swift in Sources */,
+				503019A42934212700F5645F /* UIApplications+extension.swift in Sources */,
 				5056563C2932597F0061FD15 /* LanguagePicker.swift in Sources */,
 				507803DA292DC03C0041D5BD /* LoadingView.swift in Sources */,
 				50F44446292E93F8001B3CF4 /* AlwaysPopoverModifier.swift in Sources */,

@@ -17,43 +17,34 @@ struct ReaderToolbar: ViewModifier {
         content
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button { showChaptersList = true } label: {
-                        Image(systemName: "list.triangle")
-                    }
+                    Button { showChaptersList = true } label:
+                    { Image(systemName: "list.triangle") }
                     .popover(isPresented: $showChaptersList) {
                         switch UIDevice.current.userInterfaceIdiom {
                         case .pad:
                             self.chaptersMenu()
                                 .frame(
-                                    width: UIScreen.width * 0.5,
+                                    width:  UIScreen.width  * 0.5,
                                     height: UIScreen.height * 0.5
                                 )
                         default:
                             self.chaptersMenu()
-                                .presentationDetents([.medium])
+                                .presentationDetents([.medium, .fraction(0.75)])
                                 .presentationDragIndicator(.visible)
                         }
                     }
                 }
-
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button { showReaderPreferences = true } label: {
-                        Image(systemName: "book")
-                    }
+                    Button { showReaderPreferences = true } label:
+                    { Image(systemName: "book") }
                     .sheet(isPresented: $showReaderPreferences) {
                         ReaderPreferencesView().environmentObject(vm)
                             .presentationDetents([.fraction(0.385)])
                             .presentationDragIndicator(.visible)
                     }
                 }
-
-                ToolbarItem(placement: .principal) {
-                    self.principalItem()
-                }
-
-                ToolbarItem(placement: .bottomBar) {
-                    self.pageSlider()
-                }
+                ToolbarItem(placement: .principal) { self.principalItem() }
+                ToolbarItem(placement: .bottomBar) { self.pageSlider() }
             }
     }
 }

@@ -45,7 +45,7 @@ extension MangaStandardCell {
             HStack(alignment: .top) {
                 self.main()
                 Spacer()
-                Divider()
+                Divider().frame(maxHeight: 68.5)
                 self.secondary()
             }
         }.padding(.vertical, 5)
@@ -84,6 +84,16 @@ extension MangaStandardCell {
     @ViewBuilder
     func secondary() -> some View {
         VStack(alignment: .center, spacing: 7) {
+            if !isSearch {
+                // ANILIST
+                Button {
+                    // TODO: - Edit anilist
+                } label: {
+                    Text(String.Name.aniList.uppercased())
+                        .font(.caption)
+                        .fontWeight(.medium)
+                }.buttonStyle(.bordered)
+            }
             // PUBLISHED
             Text(manga.published.uppercased())
                 .font(.caption2)
@@ -92,15 +102,6 @@ extension MangaStandardCell {
             Text("\(String.Discovery.year): **\(manga.year)**")
                 .font(.caption2)
                 .fontWeight(.light)
-            if !isSearch {
-                // ANILIST
-                Button {
-                    // TODO: - Edit anilist
-                } label: {
-                    Text(String.Name.aniList.uppercased())
-                        .font(.caption)
-                }.buttonStyle(.bordered)
-            }
         }
     }
 

@@ -7,10 +7,18 @@
 
 import SwiftUI
 
+let mockLanguages: [Int : String] = [
+    0: "en-US",
+    1: "pt-BR",
+    2: "es-SP"
+]
+
 class MangaViewModel: ObservableObject {
-    @Published var titleLang: String = "en-Us"
-    @Published var descLang: String = "en-US"
+    @Published var titleLang: Int = 0
+    @Published var descLang: Int = 1
     @Published var mangaOnLib: Bool = false
-    @Published var ascending: Bool = false
+    @Published var chaptersOrder: FilterOrder = .ascending
     @Published var btnAction: MangaActions?
+    @Published var queryFilter: String = ""
+    @Published var search: Bool = false
 }
