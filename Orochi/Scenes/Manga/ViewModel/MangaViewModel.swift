@@ -17,6 +17,10 @@ class MangaViewModel: ObservableObject {
     @Published var titleLang: Int = 0
     @Published var descLang: Int = 1
     @Published var mangaOnLib: Bool = false
+    @Published var selectAll: Bool = false
+    @Published var selection = Set<UUID>()
+    @Published var isEditingMode: Bool = false
+    @Published var showBottomBar: Bool = false
     @Published var chaptersOrder: FilterOrder = .ascending
     @Published var btnAction: MangaActions?
     @Published var queryFilter: String = ""

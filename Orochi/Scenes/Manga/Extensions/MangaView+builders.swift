@@ -12,7 +12,7 @@ extension MangaView {
     /// Manga all content
     /// - Returns: All manga information, including the chapters
     func content() -> some View {
-        List(selection: $selection) {
+        List(selection: $vm.selection) {
             Section {
                 if !vm.search {
                     // ALL MANGA INFORMATION
@@ -25,7 +25,7 @@ extension MangaView {
                 self.chapters()
             }.listRowBackground(Color.clear)
         }.environment(\.editMode, .constant(
-            isEditingMode
+            vm.isEditingMode
             ? EditMode.active
             : EditMode.inactive
         ))
@@ -143,13 +143,14 @@ extension MangaView {
                     )
                 )
                 self.mangaInfo()
-            }
+            }.frame(maxHeight: CGSize.dynamicImage.height)
         } header: {
             HStack {
                 Text(manga.title)
                     .fontWeight(.semibold)
                     .multilineTextAlignment(.leading)
                 Spacer()
+                // MANGA TITLE LANGUAGE STANDARD PICKER
                 LanguagePicker(
                     mockLanguages,
                     selectedLang: $vm.titleLang
@@ -208,9 +209,7 @@ extension MangaView {
             Spacer()
             // START READING BUTTON
             self.startReadingButton()
-        }
-        .padding(.leading, 5)
-        .padding(.vertical, 7)
+        }.padding(.leading, 5)
     }
     
     /// Manga information item
@@ -297,6 +296,7 @@ extension MangaView {
                 Text(String.Manga.descHeader.uppercased())
                     .foregroundColor(.primary)
                 Spacer()
+                // MANGA DESCRIPTION LANGUAGE STANDARD PICKER
                 LanguagePicker(
                     mockLanguages,
                     selectedLang: $vm.descLang
@@ -313,17 +313,16 @@ extension MangaView {
     func chapters() -> some View {
         Section {
             ForEach(ChapterDomain.samples) { chapter in
-                Button { chapterReader = true } label: {
+                Button { showChapterReader = true } label: {
                     ChapterStandardCell(chapter)
                         .foregroundColor(chapter.read ? Color(uiColor: .systemGray) : Color.primary)
-                        .disabled(chapter.read)
                         .id(chapter.id)
                 }.contextMenu {
                     ChapterMenu() { _ in
                         // TODO: - Handle context menu actions
                     }
                 } preview: { ChapterView(chapter, of: manga) }
-                .fullScreenCover(isPresented: $chapterReader) {
+                .fullScreenCover(isPresented: $showChapterReader) {
                     ChapterView(chapter, of: manga)
                 }
             }
