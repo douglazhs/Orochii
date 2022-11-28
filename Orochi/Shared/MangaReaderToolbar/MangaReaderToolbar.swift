@@ -38,8 +38,8 @@ struct ReaderToolbar: ViewModifier {
                     Button { showReaderPreferences = true } label:
                     { Image(systemName: "book") }
                     .sheet(isPresented: $showReaderPreferences) {
-                        ReaderPreferencesView().environmentObject(vm)
-                            .presentationDetents([.fraction(0.385)])
+                        ReaderPreferencesView()
+                            .environmentObject(vm)
                             .presentationDragIndicator(.visible)
                     }
                 }

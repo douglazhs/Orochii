@@ -43,12 +43,12 @@ extension MangaView {
         Menu {
             Section {
                 Button { } label:
-                { Label(String.ContextMenu.markAsRead, systemImage: "eye.fill") }
+                { Label(String.ContextMenu.asRead, systemImage: "eye.fill") }
                 Button { } label:
-                { Label(String.ContextMenu.markAsUnread, systemImage: "eye.slash.fill") }
+                { Label(String.ContextMenu.asUnread, systemImage: "eye.slash.fill") }
             } header: {
                 Text("\(vm.selection.count) "
-                     + String.Manga.selectChapters.uppercased())
+                     + String.Manga.selectedChapters.uppercased())
             }
         } label: { Text(String.Manga.mark) }
         .disabled(vm.selection.isEmpty)

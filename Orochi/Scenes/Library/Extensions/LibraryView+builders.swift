@@ -16,14 +16,13 @@ extension LibraryView {
             ForEach(MangaDomain.samples) { manga in
                 self.cell(of: manga)
                     .listRowBackground(Color.clear)
-                    .swipeActions(edge: .leading) {
-                        //Edit
-                        Label ("AniList", systemImage: "pencil")
-                    }
-                    .swipeActions(edge: .trailing) {
-                        // Delete
-                        Label("Remove", systemImage: "trash")
-                    }
+                    .listRowInsets(EdgeInsets(
+                        top: 7.5,
+                        leading: 20,
+                        bottom: 0,
+                        trailing: 20)
+                    )
+                    .listSectionSeparator(.hidden)
                     .contextMenu {
                         // TODO: - Implement context menu features
                         Button(role: .destructive) { } label: {
@@ -35,6 +34,7 @@ extension LibraryView {
                 
             }
         }
+        .scrollIndicators(.hidden)
         .refreshable {
             // TODO: Refresh library mangas
         }
@@ -65,7 +65,7 @@ extension LibraryView {
                                 maxHeight: 7.5
                             )
                             .foregroundColor(.orange)
-                            .padding(.top, 7.5)
+                            .padding(.top, 10)
                     }
                 }
         }
@@ -79,8 +79,10 @@ extension LibraryView {
             Image(systemName: "line.3.horizontal.decrease")
         }
         .sheet(isPresented: $showFilters) {
-            LibraryFilterView().environmentObject(vm)
-                .presentationDetents([.medium, .large])
+            GeometryReader { reader in
+                LibraryFilterView()
+                    .environmentObject(vm)
+            }
         }
     }
 }

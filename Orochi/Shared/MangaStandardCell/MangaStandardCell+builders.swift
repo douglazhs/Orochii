@@ -83,21 +83,27 @@ extension MangaStandardCell {
     /// - Returns: Vstack with secondary information
     @ViewBuilder
     func secondary() -> some View {
-        VStack(alignment: .center, spacing: 7) {
+        VStack(alignment: .center, spacing: 3.75) {
             if !isSearch {
-                // ANILIST
-                Button {
-                    // TODO: - Edit anilist
-                } label: {
+                // ANILIST BUTOON
+                Button { anilist = true } label: {
                     Text(String.Name.aniList.uppercased())
                         .font(.caption)
                         .fontWeight(.medium)
                 }.buttonStyle(.bordered)
+                .coordinateSpace(name: "Button")
+                .sheet(isPresented: $anilist) {
+                    GeometryReader { proxy in
+                        AniListTracker(of: manga)
+                            .presentationDragIndicator(.visible)
+                    }
+                }
             }
             // PUBLISHED
             Text(manga.published.uppercased())
                 .font(.caption2)
                 .fontWeight(.light)
+                .foregroundColor(.secondary)
             // YEAR
             Text("\(String.Discovery.year): **\(manga.year)**")
                 .font(.caption2)

@@ -10,6 +10,7 @@ import SwiftUI
 struct MangaStandardCell: View {
     var manga: MangaDomain
     var isSearch: Bool
+    @State var anilist: Bool = false
     
     init(_ manga: MangaDomain, isSearch: Bool = false) {
         self.manga = manga

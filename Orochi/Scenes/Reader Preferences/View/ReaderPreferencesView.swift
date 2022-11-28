@@ -10,15 +10,26 @@ import SwiftUI
 struct ReaderPreferencesView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var vm: ChapterViewModel
+    @State var sheetHeight: CGFloat = UIScreen.height
     
     var body: some View {
         NavigationStack {
-            List {
-                self.pageLayoutSection()
-                    .listRowBackground(Color.clear)
-                self.readingModeSection()
-                    .listRowBackground(Color.clear)
+            VStack(alignment: .leading) {
+                List {
+                    self.pageLayoutSection().listRowBackground(Color.clear)
+                    self.readingModeSection().listRowBackground(Color.clear)
+                }
             }
+            .background {
+                GeometryReader { proxy in
+                    Color.clear
+                        .onAppear {
+                            sheetHeight = proxy.size.height
+                            print(sheetHeight)
+                        }
+                }
+            }
+            .presentationDetents([.height(sheetHeight)])
             .listStyle(.grouped)
             .scrollContentBackground(.hidden)
             .background(ViewBackground(with: .view_background))
@@ -26,8 +37,10 @@ struct ReaderPreferencesView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button { dismiss() } label: {
-                        Text("Done")
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text(String.Common.done)
                     }
                 }
             }

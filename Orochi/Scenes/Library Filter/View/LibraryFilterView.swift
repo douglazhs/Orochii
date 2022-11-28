@@ -10,7 +10,7 @@ import SwiftUI
 struct LibraryFilterView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var vm: LibraryViewModel
-    @State var mangaInfoFilter: MangaInfoFilter = .language
+    @State var mangaInfoFilter: MangaInfoFilter = .year
     
     var body: some View {
         NavigationStack {
@@ -22,11 +22,12 @@ struct LibraryFilterView: View {
                 self.mangaInfoSection()
                     .listRowBackground(Color.clear)
             }
+            .scrollIndicators(.hidden)
             .listStyle(.grouped)
-            .navigationTitle(String.Filter.title)
-            .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)
             .background(ViewBackground(with: .view_background))
+            .navigationTitle(String.Filter.title)
+            .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     self.doneButton()
