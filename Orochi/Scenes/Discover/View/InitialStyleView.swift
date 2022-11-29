@@ -16,22 +16,18 @@ struct InitialStyleView: View {
                 ForEach(CarouselType.allCases, id: \.self) { type in
                     Section {
                         self.carousel(of: vm.section[type] ?? [])
-                            .frame(maxHeight: .infinity)
                     } header: {
-                        HStack(alignment: .top) {
+                        HStack(alignment: .center) {
                             Text(type.header.uppercased())
                                 .font(.subheadline)
                                 .foregroundColor(.secondary)
                                 .fontWeight(.regular)
-                            Spacer()
-                        }
-                        .padding(.leading)
+                                .padding(.trailing, 7.5)
+                            VStack { Divider() }
+                        }.padding(.leading)
                     }
-                    .frame(maxHeight: .infinity)
-                    Divider()
                 }
-            }
-            .padding(.top)
+            }.padding(.vertical)
         }
         .background(ViewBackground(with: .view_background))
         .scrollContentBackground(.hidden)

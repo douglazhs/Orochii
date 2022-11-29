@@ -18,8 +18,8 @@ enum CarouselType: Int, CaseIterable {
         case .mostRelevants:  return "Most Relevants"
         case .ongoingStatus:  return "Ongoing now"
         case .thisYear:       return "This Year - \(Date.now.formatted(.dateTime.year()))"
-        case .shounen:        return "Shounen Demographic Public"
-        case .seinen:         return "Seinen Demographic Public"
+        case .shounen:        return "Shounen Public"
+        case .seinen:         return "Seinen Public"
         }
     }
 }

@@ -15,12 +15,6 @@ extension SearchStyleView {
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
                     .listSectionSeparator(.hidden)
-                    .listRowInsets(EdgeInsets(
-                        top: 10,
-                        leading: 20,
-                        bottom: 0,
-                        trailing: 20)
-                    )
                     .contextMenu {
                         // TODO: - Implement context menu features
                         Button { } label: {

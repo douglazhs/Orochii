@@ -9,8 +9,11 @@ import SwiftUI
 
 struct ChapterStandardCell: View {
     var chapter: ChapterDomain
-    init(_ chapter: ChapterDomain) {
+    var editingMode: Bool
+    
+    init(_ chapter: ChapterDomain, editingMode: Bool = false) {
         self.chapter = chapter
+        self.editingMode = editingMode
     }
     var body: some View {
         HStack (alignment: .center, spacing: 15) {

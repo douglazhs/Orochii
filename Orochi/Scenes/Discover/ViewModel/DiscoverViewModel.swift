@@ -25,7 +25,6 @@ class DiscoverViewModel: ObservableObject {
         CarouselType.allCases.forEach { type in
             dict[type] = MangaDomain.samples
         }
-        dict[.thisYear] = []
         return dict
     }
 }

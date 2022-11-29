@@ -13,7 +13,7 @@ extension MangaStandardCell {
     /// - Returns: Custom manga cell
     @ViewBuilder
     func cell() -> some View {
-        HStack(alignment: .center) {
+        HStack(alignment: .top) {
             MangaStandardImage(
                 cover: manga.cover,
                 size: CGSize(
@@ -22,7 +22,7 @@ extension MangaStandardCell {
                 )
             )
             self.info()
-        }
+        }.frame(maxHeight: CGSize.standardImageCell.height)
     }
 
     /// Organize all retrieved manga infos
@@ -38,7 +38,7 @@ extension MangaStandardCell {
                 .lineLimit(1)
             HStack {
                 // AUTHOR
-                Text("**\(manga.author)**")
+                Text("\(manga.author)")
                     .font(.caption)
                     .foregroundColor(Color(uiColor: .systemGray))
                 Spacer()
@@ -49,53 +49,63 @@ extension MangaStandardCell {
                     .foregroundColor(Color(uiColor: .systemGray))
             }
             // GENRES
-            Text(manga.genres.joined(separator: ", "))
-                .font(.caption)
-                .fontWeight(.medium)
-                .lineLimit(1)
-                .foregroundColor(Color(uiColor: .systemGray))
-            // MANGA INFO
+            self.allGenres()
+            Divider()
+            // ACTUAL CHAPTER AND VOLUME
+            HStack {
+                Text("CH. 127 / -")
+                Spacer()
+                Text("VOL. 7 / -")
+            }
+            .foregroundColor(Color(uiColor: .systemGray))
+            .font(.caption)
+            /// MAIN INFORMATION
             self.main()
         }
+    }
+    
+    /// All manga genres
+    @ViewBuilder
+    func allGenres() -> some View {
+            HStack(alignment: .top) {
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    ForEach(manga.genres, id: \.self) { genre in
+                        Text(genre)
+                            .padding(3.5)
+                            .background {
+                                Color.primary.opacity(0.1)
+                                    .cornerRadius(4.5)
+                            }
+                    }
+                } else {
+                    Text(manga.genres.joined(separator: ", "))
+                }
+            }
+            .font(.caption2)
+            .fontWeight(.medium)
+            .lineLimit(1)
+            .foregroundColor(.secondary)
     }
     
     /// Main manga information
     /// - Returns: VStack with main information
     @ViewBuilder
     func main() -> some View {
-        VStack(alignment: .leading, spacing: 5.5) {
+        HStack {
+            // STATUS
+            self.infoLabel(
+                manga.status.description.uppercased(),
+                manga.status.config.icon,
+                manga.status.config.color
+            )
+            Spacer()
             // LAST TIME UPDATED
             self.infoLabel(
                 manga.lastUpdated,
                 "arrow.triangle.2.circlepath",
                 Color(uiColor: .systemGray)
             )
-            .foregroundColor(Color(uiColor: .systemGray))
-            HStack {
-                // STATUS
-                self.infoLabel(
-                    manga.status.description.uppercased(),
-                    manga.status.config.icon,
-                    manga.status.config.color
-                )
-                .foregroundColor(Color(uiColor: .systemGray))
-                Spacer()
-                if !isSearch {
-                    // ANILIST BUTOON
-                    Button { anilist = true } label: {
-                        Text(String.Name.aniList.uppercased())
-                            .font(.caption)
-                            .fontWeight(.medium)
-                    }.buttonStyle(.bordered)
-                    .foregroundColor(.primary)
-                    .coordinateSpace(name: "Button")
-                    .sheet(isPresented: $anilist) {
-                        AniListTracker(of: manga)
-                            .presentationDragIndicator(.visible)
-                    }
-                }
-            }
-        }
+        }.foregroundColor(Color(uiColor: .systemGray))
     }
 
     /// Manga Info custom label

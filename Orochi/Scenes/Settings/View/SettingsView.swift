@@ -23,11 +23,14 @@ struct SettingsView: View {
                     .listRowBackground(Color.clear)
             }
             .listStyle(.grouped)
-            .animation(.easeInOut(duration: 0.175), value: [vm.biometry, vm.logged])
+            .toolbarBackground(.visible, for: .tabBar)
+            .navigationBarTitleDisplayMode(.inline)
+            .animation(
+                .easeInOut(duration: 0.175),
+                value: [vm.biometry, vm.logged]
+            )
             .background(ViewBackground(with: .view_background))
             .scrollContentBackground(.hidden)
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbarRole(.editor)
             .navigationTitle(Text(String.Settings.title))
         }
     }

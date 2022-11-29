@@ -22,11 +22,7 @@ extension MangaView {
     func editButton() ->  some View {
         Button {
             vm.isEditingMode.toggle()
-            if !vm.showBottomBar {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.275) {
-                    vm.showBottomBar = true
-                }
-            } else { vm.showBottomBar = false }
+            vm.showBottomBar.toggle()
         } label:{
             if vm.isEditingMode {
                 Text(String.Common.done)

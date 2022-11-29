@@ -12,40 +12,32 @@ extension InitialStyleView {
     /// - Parameter mangas: Retrieved mangas
     /// - Returns: Carousel of mangas
     @ViewBuilder func carousel(of mangas: [MangaDomain]) -> some View {
-        if !mangas.isEmpty {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(alignment: .top) {
-                    ForEach(mangas) { manga in
-                        NavigationLink {
-                            MangaView(manga)
-                        } label: {
-                            self.cell(of: manga)
-                                .contextMenu {
-                                    // TODO: - Implement context menu features
-                                    Button { } label: {
-                                        Label(String.ContextMenu.addToLib, systemImage: "plus.rectangle.on.folder")
-                                    }
-                                    Button(role: .destructive) { } label: {
-                                        Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
-                                    }
-                                } preview: {
-                                    MangaView(manga)
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(alignment: .top) {
+                ForEach(mangas) { manga in
+                    NavigationLink {
+                        MangaView(manga)
+                    } label: {
+                        self.cell(of: manga)
+                            .contextMenu {
+                                // TODO: - Implement context menu features
+                                Button { } label: {
+                                    Label(String.ContextMenu.addToLib, systemImage: "plus.rectangle.on.folder")
                                 }
-                        }
+                                Button(role: .destructive) { } label: {
+                                    Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
+                                }
+                            } preview: { MangaView(manga) }
                     }
                 }
-                .padding(.horizontal)
-                .frame(height: CGSize.standardImageCell.height + 45.0)
             }
-        } else {
-            StaticText(of: "PROBLEMS TO LOAD")
-                .frame(height: CGSize.standardImageCell.height)
-                .padding(.horizontal)
+            .padding(.horizontal)
+            .padding(.vertical, 10)
         }
     }
     
     /// Manga carousel cell
-    /// - Parameter manga: Current manga
+    /// - arameter manga: Current manga
     /// - Returns: Custom carousel manga cell
     @ViewBuilder func cell(of manga: MangaDomain) -> some View {
         VStack {
@@ -55,13 +47,13 @@ extension InitialStyleView {
                     width: CGSize.standardImageCell.width,
                     height: CGSize.standardImageCell.height
                 )
-            ).frame(maxHeight: CGSize.standardImageCell.height)
+            ).frame(height: CGSize.standardImageCell.height)
             Text(manga.title)
-                .font(.caption)
                 .lineLimit(2)
                 .multilineTextAlignment(.center)
+                .font(.system(.footnote, design: .none, weight: .regular))
+                .foregroundColor(.primary.opacity(0.75))
                 .frame(maxWidth: CGSize.standardImageCell.width)
-                .foregroundColor(Color(uiColor: .systemGray))
-        }/*.frame(maxHeight: .infinity)*/
+        }.frame(maxHeight: CGSize.standardImageCell.height + 75)
     }
 }

@@ -19,13 +19,13 @@ struct MangaStandardImage: View {
                 maxHeight: size.height
             )
             .overlay(
-                RoundedRectangle(cornerRadius: 3.5)
+                RoundedRectangle(cornerRadius: 4.5)
                     .stroke(
                         Color(uiColor: .systemGray),
-                        lineWidth: 0.5
+                        lineWidth: 0.85
                     )
             )
-            .cornerRadius(3.5)
+            .cornerRadius(4.5)
     }
 }
 

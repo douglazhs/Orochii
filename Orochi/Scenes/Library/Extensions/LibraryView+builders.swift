@@ -17,12 +17,6 @@ extension LibraryView {
                 self.cell(of: manga)
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
-                    .listRowInsets(EdgeInsets(
-                        top: 10,
-                        leading: 20,
-                        bottom: 0,
-                        trailing: 20)
-                    )
                     .listSectionSeparator(.hidden)
                     .contextMenu {
                         // TODO: - Implement context menu features
@@ -32,7 +26,7 @@ extension LibraryView {
                     } preview: { MangaView(manga) }
             }
             .onDelete { _ in
-                
+                // TODO: - Delete manga
             }
         }
         .scrollIndicators(.hidden)
@@ -62,11 +56,11 @@ extension LibraryView {
                         Image(systemName: "circle.fill")
                             .resizable()
                             .frame(
-                                maxWidth: 7.5,
-                                maxHeight: 7.5
+                                maxWidth: 6.5,
+                                maxHeight: 6.5
                             )
                             .foregroundColor(.orange)
-                            .padding(.top, 10)
+                            .padding(.top, 5.5)
                     }
                 }
         }
