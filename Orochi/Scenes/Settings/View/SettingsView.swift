@@ -26,6 +26,8 @@ struct SettingsView: View {
             .animation(.easeInOut(duration: 0.175), value: [vm.biometry, vm.logged])
             .background(ViewBackground(with: .view_background))
             .scrollContentBackground(.hidden)
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarRole(.editor)
             .navigationTitle(Text(String.Settings.title))
         }
     }

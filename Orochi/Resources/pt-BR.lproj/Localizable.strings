@@ -96,9 +96,9 @@
 "filter_ascending" = "Ascendente";
 "filter_descending" = "Descendente";
 "filter_none" = "Nenhum";
-"filter_name" = "Nome";
+"filter_name" = "Nome (A-Z)";
 "filter_last_updated" = "Último Atualizado";
-"filter_release_year" = "Ano de Lançamento";
+"filter_release_year" = "Lançamento";
 "filter_language" = "Linguagem";
 "filter_year" = "Ano";
 "filter_public" = "Público";

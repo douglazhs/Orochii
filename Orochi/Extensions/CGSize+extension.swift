@@ -11,11 +11,11 @@ extension CGSize {
     /// Dynamic standard image cell size
     static var standardImageCell: CGSize {
         let portrait = UIScreen.width < UIScreen.height
-        let aspectRatio = 97.5 / 67.5
+        let aspectRatio = 92.5 / 62.5
         var proportion: Double {
             switch UIDevice.current.userInterfaceIdiom {
             case .pad: return 0.150
-            default:   return 0.205
+            default:   return 0.185
             }
         }
         let width = (portrait ? UIScreen.width : UIScreen.height) * proportion

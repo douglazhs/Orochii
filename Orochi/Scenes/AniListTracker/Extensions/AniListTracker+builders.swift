@@ -23,6 +23,7 @@ extension AniListTracker {
                     Text(manga.title)
                         .font(.callout)
                         .fontWeight(.semibold)
+                        .foregroundColor(.primary)
                     Spacer()
                     // MANGA YEAR
                     Text(manga.year)

@@ -61,6 +61,7 @@ extension MangaView {
                 .fontWeight(.regular)
                 .font(.callout)
                 .lineLimit(1)
+            Spacer()
             // SEARCH BUTTON
             Button {
                 withAnimation(.interpolatingSpring(
@@ -78,15 +79,22 @@ extension MangaView {
                 Image(systemName: "magnifyingglass")
                     .font(.footnote)
                     .foregroundColor(.primary)
-            }.buttonStyle(.bordered)
+            }.buttonStyle(.borderedProminent)
             .tint(.accentColor)
-            Spacer()
-            Divider()
-            // ORDER PICKER
-            EnumPicker(
-                String.Filter.orderByHeader,
-                selection: $vm.chaptersOrder
-            ).pickerStyle(.segmented)
+            // ORDER MENU
+            Menu {
+                Section {
+                    EnumPicker(
+                        String.Filter.orderByHeader,
+                        selection: $vm.chaptersOrder
+                    ).pickerStyle(.inline)
+                } header: { Text("ORDER") }
+            } label: {
+                Image(systemName: "line.3.horizontal.decrease")
+                    .foregroundColor(.primary)
+            }
+            .tint(.accentColor)
+            .buttonStyle(.borderedProminent)
         }
     }
     

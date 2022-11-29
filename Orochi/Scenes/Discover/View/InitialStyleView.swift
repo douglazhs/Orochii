@@ -12,7 +12,6 @@ struct InitialStyleView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            Divider()
             VStack(alignment: .center) {
                 ForEach(CarouselType.allCases, id: \.self) { type in
                     Section {
@@ -21,8 +20,8 @@ struct InitialStyleView: View {
                     } header: {
                         HStack(alignment: .top) {
                             Text(type.header.uppercased())
-                                .font(.callout)
-                                .foregroundColor(.primary)
+                                .font(.subheadline)
+                                .foregroundColor(.secondary)
                                 .fontWeight(.regular)
                             Spacer()
                         }
@@ -32,6 +31,7 @@ struct InitialStyleView: View {
                     Divider()
                 }
             }
+            .padding(.top)
         }
         .background(ViewBackground(with: .view_background))
         .scrollContentBackground(.hidden)

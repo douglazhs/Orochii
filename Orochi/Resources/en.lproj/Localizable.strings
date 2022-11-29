@@ -96,7 +96,7 @@
 "filter_ascending" = "Ascending";
 "filter_descending" = "Descending";
 "filter_none" = "None";
-"filter_name" = "Name";
+"filter_name" = "Name (A-Z)";
 "filter_last_updated" = "Last Updated";
 "filter_release_year" = "Release Year";
 "filter_language" = "Language";

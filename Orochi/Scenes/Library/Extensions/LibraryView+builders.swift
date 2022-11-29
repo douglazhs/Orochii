@@ -16,8 +16,9 @@ extension LibraryView {
             ForEach(MangaDomain.samples) { manga in
                 self.cell(of: manga)
                     .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
                     .listRowInsets(EdgeInsets(
-                        top: 7.5,
+                        top: 10,
                         leading: 20,
                         bottom: 0,
                         trailing: 20)
@@ -75,14 +76,11 @@ extension LibraryView {
     /// - Returns: Filter manga results button
     @ViewBuilder
     func filterButton() -> some View {
-        Button { showFilters = true } label: {
+        Menu {
+            LibraryFilterView().environmentObject(vm)
+        } label: {
             Image(systemName: "line.3.horizontal.decrease")
         }
-        .sheet(isPresented: $showFilters) {
-            GeometryReader { reader in
-                LibraryFilterView()
-                    .environmentObject(vm)
-            }
-        }
+        .menuStyle(.borderlessButton)
     }
 }

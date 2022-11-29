@@ -13,7 +13,7 @@ extension MangaStandardCell {
     /// - Returns: Custom manga cell
     @ViewBuilder
     func cell() -> some View {
-        HStack {
+        HStack(alignment: .center) {
             MangaStandardImage(
                 cover: manga.cover,
                 size: CGSize(
@@ -30,84 +30,71 @@ extension MangaStandardCell {
     /// - Returns: Manga vertical info
     @ViewBuilder
     func info() -> some View {
-        VStack(alignment: .leading, spacing: 7) {
+        VStack(alignment: .leading, spacing: 5.5) {
             // TITLE
             Text(manga.title)
                 .font(.subheadline)
                 .fontWeight(.semibold)
                 .lineLimit(1)
-            // AUTHOR
-            Text("**\(manga.author)**")
-                .font(.caption)
-                .foregroundColor(Color(uiColor: .systemGray))
-            Divider()
-            // MANGA INFO
-            HStack(alignment: .top) {
-                self.main()
+            HStack {
+                // AUTHOR
+                Text("**\(manga.author)**")
+                    .font(.caption)
+                    .foregroundColor(Color(uiColor: .systemGray))
                 Spacer()
-                Divider().frame(maxHeight: 68.5)
-                self.secondary()
+                // YEAR
+                Text("**\(manga.year)**")
+                    .font(.caption2)
+                    .fontWeight(.light)
+                    .foregroundColor(Color(uiColor: .systemGray))
             }
-        }.padding(.vertical, 5)
+            // GENRES
+            Text(manga.genres.joined(separator: ", "))
+                .font(.caption)
+                .fontWeight(.medium)
+                .lineLimit(1)
+                .foregroundColor(Color(uiColor: .systemGray))
+            // MANGA INFO
+            self.main()
+        }
     }
     
     /// Main manga information
     /// - Returns: VStack with main information
     @ViewBuilder
     func main() -> some View {
-        VStack(alignment: .leading, spacing: 7) {
-            // GENRES
-            Text(manga.genres.joined(separator: ", "))
-                .font(.caption)
-                .fontWeight(.medium)
-                .lineLimit(2)
-                .foregroundColor(Color(uiColor: .systemGray))
-            // STATUS
-            self.infoLabel(
-                manga.status.description.uppercased(),
-                manga.status.config.icon,
-                manga.status.config.color
-            )
+        VStack(alignment: .leading, spacing: 5.5) {
             // LAST TIME UPDATED
             self.infoLabel(
                 manga.lastUpdated,
                 "arrow.triangle.2.circlepath",
-                Color(uiColor: .systemGray),
-                isItalic: true
+                Color(uiColor: .systemGray)
             )
             .foregroundColor(Color(uiColor: .systemGray))
-        }
-    }
-    
-    /// Secondary manga  information
-    /// - Returns: Vstack with secondary information
-    @ViewBuilder
-    func secondary() -> some View {
-        VStack(alignment: .center, spacing: 3.75) {
-            if !isSearch {
-                // ANILIST BUTOON
-                Button { anilist = true } label: {
-                    Text(String.Name.aniList.uppercased())
-                        .font(.caption)
-                        .fontWeight(.medium)
-                }.buttonStyle(.bordered)
-                .coordinateSpace(name: "Button")
-                .sheet(isPresented: $anilist) {
-                    GeometryReader { proxy in
+            HStack {
+                // STATUS
+                self.infoLabel(
+                    manga.status.description.uppercased(),
+                    manga.status.config.icon,
+                    manga.status.config.color
+                )
+                .foregroundColor(Color(uiColor: .systemGray))
+                Spacer()
+                if !isSearch {
+                    // ANILIST BUTOON
+                    Button { anilist = true } label: {
+                        Text(String.Name.aniList.uppercased())
+                            .font(.caption)
+                            .fontWeight(.medium)
+                    }.buttonStyle(.bordered)
+                    .foregroundColor(.primary)
+                    .coordinateSpace(name: "Button")
+                    .sheet(isPresented: $anilist) {
                         AniListTracker(of: manga)
                             .presentationDragIndicator(.visible)
                     }
                 }
             }
-            // PUBLISHED
-            Text(manga.published.uppercased())
-                .font(.caption2)
-                .fontWeight(.light)
-                .foregroundColor(.secondary)
-            // YEAR
-            Text("\(String.Discovery.year): **\(manga.year)**")
-                .font(.caption2)
-                .fontWeight(.light)
         }
     }
 

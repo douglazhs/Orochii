@@ -22,6 +22,8 @@ struct LibraryView: View {
                     }
                 }
                 .navigationTitle(Text(String.Library.title))
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbarBackground(.visible, for: .navigationBar)
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         EditButton()

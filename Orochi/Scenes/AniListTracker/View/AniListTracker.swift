@@ -9,7 +9,7 @@ import SwiftUI
 
 struct AniListTracker: View {
     @StateObject var vm = AniListTrackerViewModel()
-    @State var sheetHeight: CGFloat = 300
+    @State var sheetHeight: CGFloat = UIScreen.height
     var manga: MangaDomain
     
     init(of manga: MangaDomain) {
