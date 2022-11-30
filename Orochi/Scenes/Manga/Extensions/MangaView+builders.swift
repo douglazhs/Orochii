@@ -193,8 +193,10 @@ extension MangaView {
     func description() -> some View {
         Section {
             Text(manga.description)
-                .font(.callout)
+                .font(.subheadline)
+                .foregroundColor(.primary.opacity(0.825))
                 .multilineTextAlignment(.leading)
+                .fontWeight(.regular)
         } header: {
             HStack {
                 Text(String.Manga.descHeader.uppercased())

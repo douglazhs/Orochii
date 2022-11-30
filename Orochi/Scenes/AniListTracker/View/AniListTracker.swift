@@ -36,6 +36,7 @@ struct AniListTracker: View {
         .listSectionSeparator(.hidden)
         .listRowBackground(Color.clear)
         .presentationDetents([.height(sheetHeight)])
+        .presentationDragIndicator(.visible)
         .background(ViewBackground(with: manga.cover))
     }
 }
