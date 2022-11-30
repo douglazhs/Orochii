@@ -35,12 +35,49 @@ extension AniListTracker {
                     .font(.subheadline)
                     .foregroundColor(.secondary)
                 Spacer()
-                // STATUS PICKER
-                EnumPicker("", selection: $vm.status)
-                    .pickerStyle(.menu)
-                    .buttonStyle(.borderedProminent)
             }
         }.frame(maxHeight: 90)
+    }
+    
+    /// Update anilist button
+    @ViewBuilder
+    func actionsButtons() -> some View {
+        HStack {
+            Button {
+                // TODO: - Cancel changes
+                dismiss()
+            } label: {
+                HStack {
+                    Text("Cancel")
+                }
+            }
+            Spacer()
+            Button {
+                // TODO: - Save changes
+                withAnimation(.easeInOut(duration: 0.175)) {
+                    action.wrappedValue = true
+                }
+                Haptics.shared.notify(.success)
+                dismiss()
+            } label: {
+                HStack {
+                    Text("Update")
+                        .fontWeight(.semibold)
+                }
+            }
+        }
+        .tint(.indigo)
+        .buttonStyle(.borderless)
+    }
+    
+    /// Manga status section
+    @ViewBuilder
+    func statusSection() -> some View {
+        Section {
+            EnumPicker("", selection: $vm.status)
+                .pickerStyle(.menu)
+                .buttonStyle(.borderedProminent)
+        } header: { Text("STATUS").font(.footnote) }
     }
     
     /// Manga order section
@@ -50,6 +87,7 @@ extension AniListTracker {
             // CHAPTER CHOOSER
             self.mangaChapters()
             Spacer()
+            Divider().frame(maxHeight: 25)
             // VOLUME CHOOSER
             self.mangaVol()
         }
@@ -68,6 +106,7 @@ extension AniListTracker {
                 Text("\(String(format: "%.0f", vm.chapter)) | -")
                     .frame(maxWidth: .infinity)
                     .foregroundColor(.secondary)
+                    .lineLimit(1)
             }.buttonStyle(.bordered)
             .tint(.secondary)
         } header: { Text("CH.").font(.footnote) }
@@ -79,7 +118,7 @@ extension AniListTracker {
                 cover: manga.cover,
                 format: "%.0f"
             )
-            .presentationDetents([.height(sheetHeight)])
+            .presentationDetents([.height(vm.sheetHeight)])
         }
     }
     
@@ -96,6 +135,7 @@ extension AniListTracker {
                 Text("\(String(format: "%.0f", vm.volume)) | -")
                     .frame(maxWidth: .infinity)
                     .foregroundColor(.secondary)
+                    .lineLimit(1)
             }.buttonStyle(.bordered)
             .tint(.secondary)
         } header: { Text("VOL.").font(.footnote) }
@@ -107,7 +147,7 @@ extension AniListTracker {
                 cover: manga.cover,
                 format: "%.0f"
             )
-            .presentationDetents([.height(sheetHeight)])
+            .presentationDetents([.height(vm.sheetHeight)])
         }
     }
     
@@ -124,6 +164,7 @@ extension AniListTracker {
                 Text("\(String(format: "%.1f", vm.score)) | 10.0")
                     .foregroundColor(.secondary)
                     .frame(maxWidth: .infinity)
+                    .lineLimit(1)
             }.buttonStyle(.bordered)
             .tint(.secondary)
         } header: { Text("SCORE").font(.footnote) }
@@ -135,7 +176,7 @@ extension AniListTracker {
                 cover: manga.cover,
                 format: "%.1f"
             )
-            .presentationDetents([.height(sheetHeight)])
+            .presentationDetents([.height(vm.sheetHeight)])
         }
     }
     
@@ -144,19 +185,23 @@ extension AniListTracker {
     func dateSection() -> some View {
         DatePicker(selection: $vm.startDate, displayedComponents: [.date]) {
             Label {
-                Text("STARTED").font(.footnote)
+                Text("STARTED")
+                    .font(.footnote)
+                    .lineLimit(1)
             } icon: {
                 Image(systemName: "calendar.badge.plus")
-                    .font(.title2)
+                    .font(.headline)
                     .foregroundColor(.secondary)
             }
         }
         DatePicker(selection: $vm.endDate, displayedComponents: [.date]) {
             Label {
-                Text("ENDED").font(.footnote)
+                Text("ENDED")
+                    .font(.footnote)
+                    .lineLimit(1)
             } icon: {
                 Image(systemName: "calendar")
-                    .font(.title2)
+                    .font(.headline)
                     .foregroundColor(.secondary)
             }
         }

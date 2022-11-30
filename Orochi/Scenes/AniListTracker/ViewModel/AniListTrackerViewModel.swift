@@ -17,4 +17,5 @@ class AniListTrackerViewModel: ObservableObject {
     @Published var chapter: Double = 0
     @Published var score: Double = 0
     @Published var volume: Double = 0
+    @Published var sheetHeight: CGFloat = UIScreen.height
 }

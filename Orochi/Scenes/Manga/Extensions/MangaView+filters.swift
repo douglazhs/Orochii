@@ -44,13 +44,15 @@ extension MangaView {
                     ).pickerStyle(.inline)
                 } header: { Text("ORDER") }
             } label: {
-                Image(systemName: "line.3.horizontal.decrease")
+                Image(systemName: "arrow.up.arrow.down")
                     .foregroundColor(.primary)
+                    .font(.footnote)
             }
             .tint(.accentColor)
             .buttonStyle(.borderedProminent)
             // SEARCH BUTTON
             Button {
+                Haptics.shared.play(.medium)
                 withAnimation(.interpolatingSpring(
                     mass: 2.0,
                     stiffness: 5,
@@ -95,6 +97,7 @@ extension MangaView {
             )
             // CANCEL BUTTON
             Button {
+                Haptics.shared.play(.medium)
                 withAnimation(.interpolatingSpring(
                     mass: 2.0,
                     stiffness: 5,

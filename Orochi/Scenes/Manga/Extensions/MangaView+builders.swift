@@ -52,19 +52,6 @@ extension MangaView {
                 )
                 self.mangaInfo()
             }.frame(maxHeight: CGSize.dynamicImage.height)
-        } header: {
-            HStack(alignment: .center) {
-                Text(manga.title)
-                    .fontWeight(.medium)
-                    .multilineTextAlignment(.leading)
-                    .lineLimit(2)
-                Spacer()
-                // MANGA TITLE LANGUAGE STANDARD PICKER
-                LanguagePicker(
-                    mockLanguages,
-                    selectedLang: $vm.titleLang
-                ).pickerStyle(.automatic)
-            }.font(.callout)
         }
     }
     
@@ -145,7 +132,8 @@ extension MangaView {
                 .foregroundColor(.primary)
                 .font(.footnote)
                 .frame(maxWidth: .infinity)
-        }.buttonStyle(.borderedProminent)
+        }
+        .buttonStyle(.borderedProminent)
     }
     
     /// Buttons actions
@@ -154,22 +142,31 @@ extension MangaView {
     func actions() -> some View {
         HStack {
             // ANILIST BUTTON
-            Button { vm.showAniList = true } label: {
+            Button {
+                vm.showAniList = true
+                vm.btnAction = .aniList
+            } label: {
                 Text(MangaActions.aniList.description)
                     .frame(maxWidth: .infinity)
                     .foregroundColor(.primary)
                     .font(.footnote)
             }
             .buttonStyle(.borderedProminent)
-            .sheet(isPresented: $vm.showAniList) {
-                AniListTracker(of: manga)
+            .popover(isPresented: $vm.showAniList) {
+                AniListTracker(of: manga, action: $vm.action)
             }
             // ADD/REMOVE FROM LIBRARY BUTTON
             Button(role: vm.mangaOnLib ? .destructive : .none) {
+                withAnimation(.linear(duration: 0.175)) {
+                    vm.action = true
+                }
                 vm.mangaOnLib.toggle()
                 vm.btnAction = (vm.btnAction == .addLib)
                 ? .rmvLib
                 : .addLib
+                if vm.btnAction == .addLib {
+                    Haptics.shared.notify(.success)
+                } else { Haptics.shared.notify(.error) }
             } label: {
                 Text(vm.mangaOnLib
                      ? MangaActions.rmvLib.description
@@ -181,6 +178,7 @@ extension MangaView {
             .buttonStyle(.bordered)
             .foregroundColor(vm.mangaOnLib ? .red : .primary)
             .tint(vm.mangaOnLib ? Color.red : Color.primary)
+            .disabled(vm.action)
         }
         .lineLimit(1)
         .fontWeight(.regular)

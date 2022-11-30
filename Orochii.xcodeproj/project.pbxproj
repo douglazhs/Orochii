@@ -27,6 +27,8 @@
 		507803D8292DC0020041D5BD /* StaticText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507803D7292DC0020041D5BD /* StaticText.swift */; };
 		507803DA292DC03C0041D5BD /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507803D9292DC03C0041D5BD /* LoadingView.swift */; };
 		507803DC292DC0530041D5BD /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507803DB292DC0530041D5BD /* ActivityIndicator.swift */; };
+		508D1B8F2936FE900069012C /* ActionPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508D1B8E2936FE900069012C /* ActionPopUp.swift */; };
+		508D1B912937055A0069012C /* Haptics+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508D1B902937055A0069012C /* Haptics+extension.swift */; };
 		5092B9DF292FA31F00DCC3CE /* Skeleton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092B9DE292FA31F00DCC3CE /* Skeleton.swift */; };
 		5092DF2529292C590094DC18 /* OrochiApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF2429292C590094DC18 /* OrochiApp.swift */; };
 		5092DF2929292C5C0094DC18 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5092DF2829292C5C0094DC18 /* Assets.xcassets */; };
@@ -112,6 +114,8 @@
 		507803D7292DC0020041D5BD /* StaticText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticText.swift; sourceTree = "<group>"; };
 		507803D9292DC03C0041D5BD /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		507803DB292DC0530041D5BD /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		508D1B8E2936FE900069012C /* ActionPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPopUp.swift; sourceTree = "<group>"; };
+		508D1B902937055A0069012C /* Haptics+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Haptics+extension.swift"; sourceTree = "<group>"; };
 		5092B9DE292FA31F00DCC3CE /* Skeleton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Skeleton.swift; sourceTree = "<group>"; };
 		5092DF2129292C590094DC18 /* Orochii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orochii.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5092DF2429292C590094DC18 /* OrochiApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrochiApp.swift; sourceTree = "<group>"; };
@@ -298,6 +302,14 @@
 			path = Loading;
 			sourceTree = "<group>";
 		};
+		508D1B8D2936FE7B0069012C /* PopUp */ = {
+			isa = PBXGroup;
+			children = (
+				508D1B8E2936FE900069012C /* ActionPopUp.swift */,
+			);
+			path = PopUp;
+			sourceTree = "<group>";
+		};
 		5092DF1829292C590094DC18 = {
 			isa = PBXGroup;
 			children = (
@@ -438,6 +450,7 @@
 				50F44447292E9442001B3CF4 /* UIView+extension.swift */,
 				50F44449292F02CC001B3CF4 /* CGSize+extension.swift */,
 				503019A32934212700F5645F /* UIApplications+extension.swift */,
+				508D1B902937055A0069012C /* Haptics+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -661,6 +674,7 @@
 		50FFAFEA292A832F00B87E0E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				508D1B8D2936FE7B0069012C /* PopUp */,
 				502E8DFF293543F200881F40 /* NumberPicker */,
 				5056563A293259600061FD15 /* LanguagePicker */,
 				50565636293257D80061FD15 /* Menu */,
@@ -873,6 +887,7 @@
 				505656392932580F0061FD15 /* ChapterMenu.swift in Sources */,
 				50BC960F292C674500DF13A5 /* SettingsViewModel.swift in Sources */,
 				5092DF6329298B9A0094DC18 /* MangaDexPreferencesView+builders.swift in Sources */,
+				508D1B912937055A0069012C /* Haptics+extension.swift in Sources */,
 				50FFB013292AD35000B87E0E /* FilterOrder.swift in Sources */,
 				50FFAFFF292A98C000B87E0E /* MangaStandardImage.swift in Sources */,
 				50FFB00B292AB3DA00B87E0E /* LibraryFilterView+builders.swift in Sources */,
@@ -884,6 +899,7 @@
 				50FFB001292AA5CD00B87E0E /* SearchStyleView+builders.swift in Sources */,
 				50F4443C292E6638001B3CF4 /* PageLayout.swift in Sources */,
 				50FFB00D292ACDF100B87E0E /* MangaInfoFilter.swift in Sources */,
+				508D1B8F2936FE900069012C /* ActionPopUp.swift in Sources */,
 				5092DF482929464F0094DC18 /* LibraryView.swift in Sources */,
 				50FFB011292ACE6200B87E0E /* DemoPublic.swift in Sources */,
 				50F4443E292E6645001B3CF4 /* ReadingMode.swift in Sources */,

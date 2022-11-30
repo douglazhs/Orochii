@@ -20,13 +20,26 @@ extension MangaView {
     /// Editable view actions
     @ViewBuilder
     func editButton() ->  some View {
-        Button {
-            vm.isEditingMode.toggle()
-            vm.showBottomBar.toggle()
-        } label:{
-            if vm.isEditingMode {
+        if vm.isEditingMode {
+            Button {
+                vm.isEditingMode.toggle()
+                vm.showBottomBar.toggle()
+            } label: {
                 Text(String.Common.done)
-            } else { Label (String.Manga.selectChapters, systemImage: "checklist") }
+                    .fontWeight(.semibold)
+            }
+        } else {
+            Menu {
+                Button {
+                    vm.isEditingMode.toggle()
+                    vm.showBottomBar.toggle()
+                } label: {
+                    Label (
+                        String.Manga.selectChapters,
+                        systemImage: "checklist"
+                    )
+                }
+            } label: { Image(systemName: "ellipsis.circle.fill") }
         }
     }
     

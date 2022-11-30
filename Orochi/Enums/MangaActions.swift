@@ -19,4 +19,13 @@ enum MangaActions: CaseIterable, CustomStringConvertible {
         case .aniList: return "ANILIST"
         }
     }
+    
+    /// Action message
+    var message: String {
+        switch self {
+        case .addLib:  return "Added successfully"
+        case .aniList: return "Updated successfully"
+        case .rmvLib:  return "Removed successfully"
+        }
+    }
 }

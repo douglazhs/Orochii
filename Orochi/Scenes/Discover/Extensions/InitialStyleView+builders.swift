@@ -54,6 +54,6 @@ extension InitialStyleView {
                 .font(.system(.footnote, design: .none, weight: .regular))
                 .foregroundColor(.primary.opacity(0.75))
                 .frame(maxWidth: CGSize.standardImageCell.width)
-        }.frame(maxHeight: CGSize.standardImageCell.height + 75)
+        }/*.frame(maxHeight: CGSize.standardImageCell.height + 75)*/
     }
 }
