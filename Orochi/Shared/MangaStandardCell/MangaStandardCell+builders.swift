@@ -13,7 +13,7 @@ extension MangaStandardCell {
     /// - Returns: Custom manga cell
     @ViewBuilder
     func cell() -> some View {
-        HStack {
+        HStack(alignment: .top) {
             MangaStandardImage(
                 cover: manga.cover,
                 size: CGSize(
@@ -22,7 +22,7 @@ extension MangaStandardCell {
                 )
             )
             self.info()
-        }
+        }.frame(maxHeight: CGSize.standardImageCell.height)
     }
 
     /// Organize all retrieved manga infos
@@ -30,78 +30,82 @@ extension MangaStandardCell {
     /// - Returns: Manga vertical info
     @ViewBuilder
     func info() -> some View {
-        VStack(alignment: .leading, spacing: 7) {
+        VStack(alignment: .leading, spacing: 5.5) {
             // TITLE
             Text(manga.title)
                 .font(.subheadline)
                 .fontWeight(.semibold)
                 .lineLimit(1)
-            // AUTHOR
-            Text("**\(manga.author)**")
-                .font(.caption)
-                .foregroundColor(Color(uiColor: .systemGray))
-            Divider()
-            // MANGA INFO
-            HStack(alignment: .top) {
-                self.main()
+            HStack {
+                // AUTHOR
+                Text("\(manga.author)")
+                    .font(.caption)
+                    .foregroundColor(Color(uiColor: .systemGray))
                 Spacer()
-                Divider()
-                self.secondary()
+                // YEAR
+                Text("**\(manga.year)**")
+                    .font(.caption2)
+                    .fontWeight(.light)
+                    .foregroundColor(Color(uiColor: .systemGray))
             }
-        }.padding(.vertical, 5)
+            // GENRES
+            self.allGenres()
+            Divider()
+            // ACTUAL CHAPTER AND VOLUME
+            HStack {
+                Text("CH. 127 / -")
+                Spacer()
+                Text("VOL. 7 / -")
+            }
+            .foregroundColor(Color(uiColor: .systemGray))
+            .font(.caption)
+            /// MAIN INFORMATION
+            self.main()
+        }
+    }
+    
+    /// All manga genres
+    @ViewBuilder
+    func allGenres() -> some View {
+            HStack(alignment: .top) {
+                if UIDevice.current.userInterfaceIdiom == .pad {
+                    ForEach(manga.genres, id: \.self) { genre in
+                        Text(genre)
+                            .padding(3.5)
+                            .background {
+                                Color.primary.opacity(0.1)
+                                    .cornerRadius(4.5)
+                            }
+                    }
+                } else {
+                    Text(manga.genres.joined(separator: ", "))
+                }
+            }
+            .font(.caption2)
+            .fontWeight(.medium)
+            .lineLimit(1)
+            .foregroundColor(.secondary)
     }
     
     /// Main manga information
     /// - Returns: VStack with main information
     @ViewBuilder
     func main() -> some View {
-        VStack(alignment: .leading, spacing: 7) {
-            // GENRES
-            Text(manga.genres.joined(separator: ", "))
-                .font(.caption)
-                .fontWeight(.medium)
-                .lineLimit(2)
-                .foregroundColor(Color(uiColor: .systemGray))
+        HStack {
             // STATUS
             self.infoLabel(
                 manga.status.description.uppercased(),
                 manga.status.config.icon,
                 manga.status.config.color
             )
+            Spacer()
             // LAST TIME UPDATED
             self.infoLabel(
                 manga.lastUpdated,
                 "arrow.triangle.2.circlepath",
-                Color(uiColor: .systemGray),
-                isItalic: true
+                Color(uiColor: .systemGray)
             )
-            .foregroundColor(Color(uiColor: .systemGray))
-        }
-    }
-    
-    /// Secondary manga  information
-    /// - Returns: Vstack with secondary information
-    @ViewBuilder
-    func secondary() -> some View {
-        VStack(alignment: .center, spacing: 7) {
-            // PUBLISHED
-            Text(manga.published.uppercased())
-                .font(.caption2)
-                .fontWeight(.light)
-            // YEAR
-            Text("\(String.Discovery.year): **\(manga.year)**")
-                .font(.caption2)
-                .fontWeight(.light)
-            if !isSearch {
-                // ANILIST
-                Button {
-                    // TODO: - Edit anilist
-                } label: {
-                    Text(String.Name.aniList.uppercased())
-                        .font(.caption)
-                }.buttonStyle(.bordered)
-            }
-        }
+        }.foregroundColor(Color(uiColor: .systemGray))
     }
 
     /// Manga Info custom label

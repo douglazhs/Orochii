@@ -13,6 +13,8 @@ extension SearchStyleView {
             List(mangas) { manga in
                 self.cell(of: manga)
                     .listRowBackground(Color.clear)
+                    .listRowSeparator(.hidden)
+                    .listSectionSeparator(.hidden)
                     .contextMenu {
                         // TODO: - Implement context menu features
                         Button { } label: {

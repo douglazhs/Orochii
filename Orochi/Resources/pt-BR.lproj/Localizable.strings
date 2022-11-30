@@ -90,15 +90,15 @@
 "filter_filter_by_header" = "Filtrar Por";
 "filter_filter_by_footer" = "Aqui você tem algumas preferências para mudar a ordem de seus mangas";
 "filter_order_by_header" = "Ordenar Por";
-"filter_order_by" = "Ordem Ascendente ou descendente";
+"filter_order_by_footer" = "Ordem Ascendente ou descendente";
 "filter_manga_info_header" = "Informações do Manga";
 "filter_manga_info_footer" = "Filtre seus mangas pelas suas informações";
 "filter_ascending" = "Ascendente";
 "filter_descending" = "Descendente";
 "filter_none" = "Nenhum";
-"filter_name" = "Nome";
+"filter_name" = "Nome (A-Z)";
 "filter_last_updated" = "Último Atualizado";
-"filter_release_year" = "Ano de Lançamento";
+"filter_release_year" = "Lançamento";
 "filter_language" = "Linguagem";
 "filter_year" = "Ano";
 "filter_public" = "Público";
@@ -115,9 +115,10 @@
 "manga_updated" = "Atualizado";
 "manga_start_reading" = "Comece a Ler";
 "manga_add_to_library" = "Adicionar a Biblioteca";
-"manga_select_chapters" = "Selecione os Capítulos";
+"manga_select_chapters" = "Selecione Capítulos";
 "manga_description_header" = "Descrição";
 "manga_chapter_header" = "Capítulos";
+"manga_mark" = "Marcar";
 "manga_selected_chapters" = "Capítulos Selecionados";
 "manga_chapters_of" = "Chapters Of";
 

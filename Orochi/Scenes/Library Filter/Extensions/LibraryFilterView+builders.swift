@@ -13,10 +13,8 @@ extension LibraryFilterView {
     @ViewBuilder
     func objectFilterSection() -> some View {
         Section {
-            EnumPicker(String.Filter.filterByHeader, selection: $vm.objectFilter)
-        } footer: {
-            Text(String.Filter.filterByFooter)
-        }
+            EnumPicker(vm.objectFilter.description, selection: $vm.objectFilter).pickerStyle(.inline)
+        } header: { Text(String.Filter.filterByHeader.uppercased()) }
     }
     
     /// Order elements
@@ -24,13 +22,8 @@ extension LibraryFilterView {
     @ViewBuilder
     func orderSection() -> some View {
         Section {
-            EnumPicker("", selection: $vm.filterOrder).pickerStyle(.inline)
-            .pickerStyle(.inline)
-        } header: {
-            Text(String.Filter.orderByHeader)
-        } footer: {
-            Text(String.Filter.orderByFooter)
-        }
+            EnumPicker(String.Filter.orderByHeader, selection: $vm.filterOrder).pickerStyle(.automatic)
+        } header: { Text(String.Filter.orderByHeader.uppercased()) }
     }
     
     /// Manga informations section
@@ -38,7 +31,7 @@ extension LibraryFilterView {
     @ViewBuilder
     func mangaInfoSection() -> some View {
         Section {
-            EnumPicker("", selection: $mangaInfoFilter).pickerStyle(.segmented)
+            EnumPicker("", selection: $mangaInfoFilter).pickerStyle(.menu)
             switch mangaInfoFilter {
             case .language:   EnumPicker("", selection: $vm.languageSelection)
             case .demoPublic: EnumPicker("", selection: $vm.demoPublicSelection)
@@ -48,27 +41,8 @@ extension LibraryFilterView {
                     ForEach(vm.years, id: \.hashValue) { year in
                         Text(String(year).replacingOccurrences(of: ".", with: ""))
                     }
-                }.pickerStyle(.wheel)
+                }.pickerStyle(.menu)
             }
         } header: { Text(String.Filter.mangaInfoHeader) }
-    }
-    
-    /// Done button
-    /// - Returns: Toolbar done button
-    @ViewBuilder
-    func doneButton() -> some View {
-        Button { dismiss() } label: {
-            Text(String.Common.done)
-        }
-    }
-    
-    /// Cancel button
-    /// - Returns: Toolbar cancel button
-    @ViewBuilder
-    func cancelButton() -> some View {
-        Button { dismiss() } label: {
-            Text(String.Common.cancel)
-        }
-        .tint(.primary)
     }
 }

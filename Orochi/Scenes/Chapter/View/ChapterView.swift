@@ -30,7 +30,7 @@ struct ChapterView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarRole(.editor)
                 .toolbar(showReadBars, for: .bottomBar, .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar)
+                .toolbarBackground(.visible, for: .navigationBar, .bottomBar)
                 .statusBarHidden(showReadBars == .hidden)
                 .readerToolbar(
                     manga: manga,
@@ -45,6 +45,9 @@ struct ChapterView: View {
 
 struct ChapterView_Previews: PreviewProvider {
     static var previews: some View {
-        ChapterView(ChapterDomain.samples[0], of: MangaDomain.samples[0])
+        ChapterView(
+            ChapterDomain.samples[0],
+            of: MangaDomain.samples[0]
+        )
     }
 }

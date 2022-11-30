@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LibraryView: View {
     @Environment(\.isSearching) var isSearching
+    var device = UIDevice.current.userInterfaceIdiom
     @StateObject var vm: LibraryViewModel = LibraryViewModel()
     @State var showFilters: Bool = false
     
@@ -22,6 +23,9 @@ struct LibraryView: View {
                     }
                 }
                 .navigationTitle(Text(String.Library.title))
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbarBackground(.visible, for: .tabBar)
+                .toolbarBackground(device == .phone ? .visible : .hidden, for: .navigationBar)
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         EditButton()

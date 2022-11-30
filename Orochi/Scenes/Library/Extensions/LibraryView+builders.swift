@@ -16,30 +16,20 @@ extension LibraryView {
             ForEach(MangaDomain.samples) { manga in
                 self.cell(of: manga)
                     .listRowBackground(Color.clear)
-                    .swipeActions(edge: .leading) {
-                        //Edit
-                        Label ("AniList", systemImage: "pencil")
-                    }
-                    .swipeActions(edge: .trailing) {
-                        // Delete
-                        Label("Remove", systemImage: "trash")
-                    }
+                    .listRowSeparator(.hidden)
+                    .listSectionSeparator(.hidden)
                     .contextMenu {
                         // TODO: - Implement context menu features
-                        Button { } label: {
-                            Label(String.ContextMenu.addToLib, systemImage: "plus.rectangle.on.folder")
-                        }
                         Button(role: .destructive) { } label: {
                             Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
                         }
-                    } preview: {
-                        MangaView(manga)
-                    }
+                    } preview: { MangaView(manga) }
             }
             .onDelete { _ in
-                
+                // TODO: - Delete manga
             }
         }
+        .scrollIndicators(.hidden)
         .refreshable {
             // TODO: Refresh library mangas
         }
@@ -66,11 +56,11 @@ extension LibraryView {
                         Image(systemName: "circle.fill")
                             .resizable()
                             .frame(
-                                maxWidth: 7.5,
-                                maxHeight: 7.5
+                                maxWidth: 6.5,
+                                maxHeight: 6.5
                             )
                             .foregroundColor(.orange)
-                            .padding(.top, 7.5)
+                            .padding(.top, 5.5)
                     }
                 }
         }
@@ -80,12 +70,11 @@ extension LibraryView {
     /// - Returns: Filter manga results button
     @ViewBuilder
     func filterButton() -> some View {
-        Button { showFilters = true } label: {
+        Menu {
+            LibraryFilterView().environmentObject(vm)
+        } label: {
             Image(systemName: "line.3.horizontal.decrease")
         }
-        .sheet(isPresented: $showFilters) {
-            LibraryFilterView().environmentObject(vm)
-                .presentationDetents([.medium, .large])
-        }
+        .menuStyle(.borderlessButton)
     }
 }

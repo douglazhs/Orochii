@@ -101,7 +101,7 @@ extension String {
         static let status: String = NSLocalizedString("manga_status", comment: "Manga status")
         static let genres: String = NSLocalizedString("manga_genres", comment: "Manga genres")
         static let updated: String = NSLocalizedString("manga_updated", comment: "Manga las time updated")
-        static let selectChapters: String = NSLocalizedString("manga_selected_chapters", comment: "Select manga chapters")
+        static let selectChapters: String = NSLocalizedString("manga_select_chapters", comment: "Select manga chapters")
         static let startReading: String = NSLocalizedString("manga_start_reading", comment: "Manga start reading button")
         static let addToLibrary: String = NSLocalizedString("manga_add_to_library", comment: "Add to library")
         static let descHeader: String = NSLocalizedString("manga_description_header", comment: "Manga description title")

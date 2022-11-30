@@ -28,7 +28,7 @@ struct OrochiiApp: App {
                         systemImage: "gear"
                     ) }
             }
-            .tint(.purple)
+            .tint(Color.indigo)
             .preferredColorScheme(.dark)
         }
     }

@@ -14,10 +14,8 @@ struct ReaderPreferencesView: View {
     var body: some View {
         NavigationStack {
             List {
-                self.pageLayoutSection()
-                    .listRowBackground(Color.clear)
-                self.readingModeSection()
-                    .listRowBackground(Color.clear)
+                self.pageLayoutSection().listRowBackground(Color.clear)
+                self.readingModeSection().listRowBackground(Color.clear)
             }
             .listStyle(.grouped)
             .scrollContentBackground(.hidden)
@@ -26,8 +24,10 @@ struct ReaderPreferencesView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    Button { dismiss() } label: {
-                        Text("Done")
+                    Button {
+                        dismiss()
+                    } label: {
+                        Text(String.Common.done)
                     }
                 }
             }

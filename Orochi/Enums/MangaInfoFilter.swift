@@ -11,13 +11,13 @@ import Foundation
 enum MangaInfoFilter: Pickable {
     var id: Self { self }
     
-    case language, year, demoPublic, status
+    case year, language, demoPublic, status
     
     /// Manga information description
     var description: String {
         switch self {
-        case .language:   return String.Filter.language
         case .year:       return String.Filter.year
+        case .language:   return String.Filter.language
         case .demoPublic: return String.Filter.demoPublic
         case .status:     return String.Filter.status
         }
