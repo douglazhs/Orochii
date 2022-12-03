@@ -22,6 +22,7 @@ class MangaViewModel: ObservableObject {
     @Published var selection = Set<UUID>()
     @Published var isEditingMode: Bool = false
     @Published var showBottomBar: Bool = false
+    @Published var showHistory: Bool = false
     @Published var showAniList: Bool = false
     @Published var chaptersOrder: FilterOrder = .ascending
     @Published var btnAction: MangaActions?

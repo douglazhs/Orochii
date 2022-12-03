@@ -13,17 +13,24 @@ enum ViewStyle {
 }
 
 struct DiscoverView: View {
+    @EnvironmentObject var router: Router
     @StateObject var vm = DiscoverViewModel()
     var device = UIDevice.current.userInterfaceIdiom
     @State var viewStyle: ViewStyle = .initial
     @State var mangaSourcePref: Bool = false
     var body: some View {
-        NavigationStack {
+        NavigationStack(path: $router.path) {
             self.content()
                 .navigationTitle(Text(String.Discovery.title))
                 .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(.visible, for: .tabBar)
-                .toolbarBackground(device == .phone ? .visible : .hidden, for: .navigationBar)
+                .toolbarBackground(
+                    device == .phone ? .visible : .automatic,
+                    for: .navigationBar
+                )
+                .toolbarBackground(
+                    Color.indigo.opacity(0.075),
+                    for: .navigationBar
+                )
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         self.mangaSourceButton()
@@ -37,7 +44,7 @@ struct DiscoverView: View {
 
 struct DiscoverView_Previews: PreviewProvider {
     static var previews: some View {
-        DiscoverView()
+        DiscoverView().environmentObject(Router())
     }
 }
 

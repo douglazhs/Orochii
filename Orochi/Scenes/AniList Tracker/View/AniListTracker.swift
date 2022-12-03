@@ -19,25 +19,18 @@ struct AniListTracker: View {
     }
     
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            self.actionsButtons()
-            self.mangaInfo()
-            self.statusSection()
-            self.orderSection()
-            self.scoreSection()
-            self.dateSection()
-        }
-        .padding()
-        .background {
-            GeometryReader { proxy in
-                Color.clear
-                    .onAppear { vm.sheetHeight = proxy.size.height }
+        self.content()
+            .padding()
+            .background {
+                GeometryReader { proxy in
+                    Color.clear
+                        .onAppear { vm.sheetHeight = proxy.size.height }
+                }
             }
-        }
-        .presentationDetents([.height(vm.sheetHeight)])
-        .presentationDragIndicator(.visible)
-        .background(ViewBackground(with: manga.cover).opacity(0.75))
-        .interactiveDismissDisabled(true)
+            .presentationDetents([.height(vm.sheetHeight)])
+            .presentationDragIndicator(.visible)
+            .background(ViewBackground(with: manga.cover).opacity(0.75))
+            .interactiveDismissDisabled(true)
     }
 }
 

@@ -18,17 +18,27 @@ extension ReaderToolbar {
                         ChapterListStandardCell(chapter)
                     }
                 } label: {
-                    Text(manga.title).font(.subheadline)
-                        .foregroundColor(.primary)
-                        .fontWeight(.regular)
+                    HStack {
+                        Text(manga.title).font(.subheadline)
+                            .foregroundColor(.primary)
+                            .fontWeight(.regular)
+                        Spacer()
+                    }
                 }
                 .pickerStyle(.inline)
+                .tint(.indigo)
                 .onChange(of: vm.actualChapter) { _ in
                     vm.loadChapter()
                 }
             } header: {
-                Text("\(ChapterDomain.samples.count) "
-                     + "\(String.Chapter.chaptersOf.uppercased()):")
+                HStack {
+                    Text("\(ChapterDomain.samples.count) "
+                         + "\(String.Chapter.chaptersOf.uppercased()):")
+                    Spacer()
+                    Text("**UPDATED**: \(manga.lastUpdated)")
+                        .font(.caption2)
+                        .foregroundColor(.secondary)
+                }
             }
             .listRowBackground(Color.clear)
         }

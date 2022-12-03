@@ -8,15 +8,24 @@
 import SwiftUI
 
 extension MangaView {
-    @ViewBuilder
+    
     /// Manga all content
     /// - Returns: All manga information, including the chapters
+    @ViewBuilder
     func content() -> some View {
         List(selection: $vm.selection) {
             Section {
                 if !vm.search {
+                    // THEMES
+                    self.themes()
+                        .listRowInsets(EdgeInsets(
+                            top: 10,
+                            leading: 0,
+                            bottom: 10,
+                            trailing: 0)
+                        )
                     // ALL MANGA INFORMATION
-                    self.mangaInfoHeader()
+                    self.mangaHeader()
                         .listSectionSeparator(.hidden)
                         .listRowSeparator(.hidden)
                     // MANGA ACTIONS: ANILIST, ADD & REMOVE
@@ -38,9 +47,8 @@ extension MangaView {
     }
     
     /// Manga info header
-    /// - Returns: All manga information
     @ViewBuilder
-    func mangaInfoHeader() -> some View {
+    func mangaHeader() -> some View {
         Section {
             HStack {
                 MangaStandardImage(
@@ -50,30 +58,14 @@ extension MangaView {
                         height: CGSize.dynamicImage.height
                     )
                 )
-                self.mangaInfo()
+                self.mangaTexts()
             }.frame(maxHeight: CGSize.dynamicImage.height)
-        }
-    }
-    
-    /// Manga information line
-    /// - Parameters:
-    ///   - leading: Leading item
-    ///   - trailing: Trailing item
-    @ViewBuilder
-    func infoLine(
-        leading: (String, String),
-        trailing: (String, String)
-    ) -> some View {
-        HStack {
-            self.item(title: leading.0, leading.1, .leading)
-            Spacer()
-            self.item(title: trailing.0, trailing.1, .trailing)
         }
     }
     
     /// All grouped manga informations
     @ViewBuilder
-    func mangaInfo() -> some View {
+    func mangaTexts() -> some View {
         VStack(alignment: .leading, spacing: 10) {
             // AUTHOR & YEAR
             self.infoLine(
@@ -96,93 +88,6 @@ extension MangaView {
             // START READING BUTTON
             self.startReadingButton()
         }.padding(.leading, 5)
-    }
-    
-    /// Manga information item
-    /// - Parameters:
-    ///   - title: Manga title
-    ///   - description: Manga item
-    ///   - alignment: Item alignment
-    /// - Returns: Custom manga information item
-    @ViewBuilder
-    func item(
-        title: String,
-        _ description: String,
-        _ alignment: HorizontalAlignment
-    ) -> some View {
-        VStack(alignment: alignment, spacing: 2.5) {
-            Text(title)
-                .font(.caption2)
-                .foregroundColor(Color(uiColor: .systemGray))
-            Text(description)
-                .font(.caption)
-                .fontWeight(.semibold)
-        }
-    }
-    
-    /// Start reading button
-    /// - Returns: Custom start  reading book
-    @ViewBuilder
-    func startReadingButton() -> some View {
-        Button {
-            // TODO: Start to read the manga
-        } label: {
-            Text(String.Manga.startReading.uppercased())
-                .lineLimit(1)
-                .foregroundColor(.primary)
-                .font(.footnote)
-                .frame(maxWidth: .infinity)
-        }
-        .buttonStyle(.borderedProminent)
-    }
-    
-    /// Buttons actions
-    /// - Returns: All buttons with the respective actions
-    @ViewBuilder
-    func actions() -> some View {
-        HStack {
-            // ANILIST BUTTON
-            Button {
-                vm.showAniList = true
-                vm.btnAction = .aniList
-            } label: {
-                Text(MangaActions.aniList.description)
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(.primary)
-                    .font(.footnote)
-            }
-            .buttonStyle(.borderedProminent)
-            .popover(isPresented: $vm.showAniList) {
-                AniListTracker(of: manga, action: $vm.action)
-            }
-            // ADD/REMOVE FROM LIBRARY BUTTON
-            Button(role: vm.mangaOnLib ? .destructive : .none) {
-                withAnimation(.linear(duration: 0.175)) {
-                    vm.action = true
-                }
-                vm.mangaOnLib.toggle()
-                vm.btnAction = (vm.btnAction == .addLib)
-                ? .rmvLib
-                : .addLib
-                if vm.btnAction == .addLib {
-                    Haptics.shared.notify(.success)
-                } else { Haptics.shared.notify(.error) }
-            } label: {
-                Text(vm.mangaOnLib
-                     ? MangaActions.rmvLib.description
-                     : MangaActions.addLib.description
-                )
-                .frame(maxWidth: .infinity)
-                .font(.footnote)
-            }
-            .buttonStyle(.bordered)
-            .foregroundColor(vm.mangaOnLib ? .red : .primary)
-            .tint(vm.mangaOnLib ? Color.red : Color.primary)
-            .disabled(vm.action)
-        }
-        .lineLimit(1)
-        .fontWeight(.regular)
-        .frame(maxWidth: .infinity)
     }
     
     /// Manga description
@@ -232,6 +137,24 @@ extension MangaView {
             }
         } header: { self.chaptersHeader() }
     }
+    
+    /// Manga themes carousel
+    @ViewBuilder
+    func themes() -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(alignment: .center) {
+                ForEach(manga.genres, id: \.self) { genre in
+                    Text(genre)
+                        .font(.caption2)
+                        .foregroundColor(.primary.opacity(0.75))
+                        .fontWeight(.semibold)
+                        .padding(3.5)
+                        .background {
+                            Color.primary.opacity(0.1)
+                                .cornerRadius(4.5)
+                        }
+                }
+            }.padding(.leading, 17)
+        }
+    }
 }
-
-

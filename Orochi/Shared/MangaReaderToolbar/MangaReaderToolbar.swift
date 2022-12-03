@@ -40,7 +40,6 @@ struct ReaderToolbar: ViewModifier {
                     .sheet(isPresented: $showReaderPreferences) {
                         ReaderPreferencesView()
                             .environmentObject(vm)
-                            .presentationDetents([.medium])
                             .presentationDragIndicator(.visible)
                     }
                 }

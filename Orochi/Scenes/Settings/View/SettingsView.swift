@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @StateObject var vm: SettingsViewModel = SettingsViewModel()
+    var device = UIDevice.current.userInterfaceIdiom
+    
     var body: some View {
         NavigationStack {
             List {
@@ -23,8 +25,15 @@ struct SettingsView: View {
                     .listRowBackground(Color.clear)
             }
             .listStyle(.grouped)
-            .toolbarBackground(.visible, for: .tabBar)
             .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(
+                device == .phone ? .visible : .automatic,
+                for: .navigationBar
+            )
+            .toolbarBackground(
+                Color.indigo.opacity(0.075),
+                for: .navigationBar
+            )
             .animation(
                 .easeInOut(duration: 0.175),
                 value: [vm.biometry, vm.logged]
