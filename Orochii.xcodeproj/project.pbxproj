@@ -462,18 +462,18 @@
 		5092DF322929427C0094DC18 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				50639B49293A483E00D8E3CB /* Manga History */,
-				500B9B692938F1C800961753 /* History */,
 				503019A52934559100F5645F /* AniList Tracker */,
-				50F44431292E5815001B3CF4 /* Reader Preferences */,
 				50F44427292E4236001B3CF4 /* Chapter */,
+				5092DF36292942A80094DC18 /* Discover */,
+				500B9B692938F1C800961753 /* History */,
+				50FFAFE4292A73F400B87E0E /* Languages */,
+				5092DF46292946410094DC18 /* Library */,
 				50FFB005292AB15F00B87E0E /* Library Filter */,
 				50FFAFE6292A819C00B87E0E /* Manga */,
-				50FFAFE4292A73F400B87E0E /* Languages */,
-				5092DF5F292983050094DC18 /* Source Preferences */,
-				5092DF46292946410094DC18 /* Library */,
+				50639B49293A483E00D8E3CB /* Manga History */,
+				50F44431292E5815001B3CF4 /* Reader Preferences */,
 				5092DF45292946340094DC18 /* Settings */,
-				5092DF36292942A80094DC18 /* Discover */,
+				5092DF5F292983050094DC18 /* Source Preferences */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
