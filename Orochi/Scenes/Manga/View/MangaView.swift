@@ -22,7 +22,6 @@ struct MangaView: View {
     
     var body: some View {
         self.content()
-            .navigationTitle(manga.title)
             .navigationBarTitleDisplayMode(.inline)
             .toolbarRole(.editor)
             .toolbar(vm.showBottomBar ? .visible : .hidden, for: .bottomBar)
@@ -38,22 +37,23 @@ struct MangaView: View {
                 ToolbarItemGroup(placement: .bottomBar) {
                     self.chapterActions()
                 }
+                ToolbarItem(placement: .principal) {
+                    ActionPopUp(
+                        title: manga.title,
+                        message: vm.btnAction?.message ?? "",
+                        action: $vm.action
+                    )
+                }
             }
             .animation(
                 .easeInOut,
                 value: [vm.isEditingMode, vm.showBottomBar]
             )
-            .safeAreaInset(edge: .top, content: {
-                ActionPopUp(
-                    message: vm.btnAction?.message ?? "",
-                    action: $vm.action
-                )
-            })
     }
 }
 
 struct MangaView_Previews: PreviewProvider {
     static var previews: some View {
-        MangaView(MangaDomain.samples[0])
+        MangaView(MangaDomain.samples[1])
     }
 }

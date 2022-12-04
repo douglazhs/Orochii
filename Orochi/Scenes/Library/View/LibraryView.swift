@@ -22,7 +22,7 @@ struct LibraryView: View {
                         // TODO: - Clear search
                     }
                 }
-                .navigationTitle(Text(String.Library.title))
+                .navigationTitle(String.Library.title)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarBackground(
                     device == .phone ? .visible : .automatic,

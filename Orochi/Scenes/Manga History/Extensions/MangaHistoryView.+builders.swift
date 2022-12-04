@@ -28,7 +28,7 @@ extension MangaHistoryView {
         .listStyle(.inset)
         .scrollContentBackground(.hidden)
         .background(
-            ViewBackground(with: manga.cover)
+            BlurBackground(with: manga.cover)
                 .opacity(0.75)
         )
     }

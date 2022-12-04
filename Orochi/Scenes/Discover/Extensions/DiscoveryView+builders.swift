@@ -26,7 +26,7 @@ extension DiscoverView {
                 .foregroundColor(.accentColor)
         }
         .sheet(isPresented: $mangaSourcePref) {
-            MangaDexPreferencesView()
+            SourcePreferencesView()
         }
     }
 }

@@ -38,7 +38,7 @@ struct SettingsView: View {
                 .easeInOut(duration: 0.175),
                 value: [vm.biometry, vm.logged]
             )
-            .background(ViewBackground(with: .view_background))
+            .background(BlurBackground(with: .view_background))
             .scrollContentBackground(.hidden)
             .navigationTitle(Text(String.Settings.title))
         }

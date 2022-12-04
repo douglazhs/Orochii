@@ -53,7 +53,7 @@ extension MangaView {
         .disabled(vm.action)
         .buttonStyle(.borderedProminent)
         .popover(isPresented: $vm.showAniList) {
-            AniListTracker(of: manga, action: $vm.action)
+            ALTracker(of: manga, action: $vm.action)
         }
     }
     

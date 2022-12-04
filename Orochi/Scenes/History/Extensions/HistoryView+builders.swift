@@ -50,7 +50,7 @@ extension HistoryView {
                 truncated: $vm.truncated
             )
             if vm.truncated {
-                HorizontalTineline()
+                // TODO: - Show chapters timeline
             }
         } header: {
             Text("27/12/2022")

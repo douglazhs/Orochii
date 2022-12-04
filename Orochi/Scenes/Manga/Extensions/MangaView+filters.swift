@@ -129,8 +129,22 @@ extension MangaView {
                 EnumPicker(
                     String.Filter.orderByHeader,
                     selection: $vm.chaptersOrder
-                ).pickerStyle(.inline)
+                ).pickerStyle(.menu)
             } header: { Text("ORDER") }
+            Section {
+                Button {
+                    vm.downloaded.toggle()
+                } label: {
+                    HStack {
+                        Text("Downloaded")
+                        Spacer()
+                        if vm.downloaded {
+                            Image(systemName: "checkmark")
+                                .foregroundColor(.accentColor)
+                        }
+                    }
+                }
+            }
         } label: {
             Image(systemName: "arrow.up.arrow.down")
                 .foregroundColor(.primary)

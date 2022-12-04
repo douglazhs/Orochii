@@ -8,7 +8,6 @@
 import SwiftUI
 
 extension MangaView {
-    
     /// Manga all content
     /// - Returns: All manga information, including the chapters
     @ViewBuilder
@@ -16,14 +15,6 @@ extension MangaView {
         List(selection: $vm.selection) {
             Section {
                 if !vm.search {
-                    // THEMES
-                    self.themes()
-                        .listRowInsets(EdgeInsets(
-                            top: 10,
-                            leading: 0,
-                            bottom: 10,
-                            trailing: 0)
-                        )
                     // ALL MANGA INFORMATION
                     self.mangaHeader()
                         .listSectionSeparator(.hidden)
@@ -43,7 +34,10 @@ extension MangaView {
         .refreshable { }
         .listStyle(.inset)
         .scrollContentBackground(.hidden)
-        .background(ViewBackground(with: manga.cover))
+        .background(
+            BlurBackground(with: manga.cover)
+                .opacity(0.75)
+        )
     }
     
     /// Manga info header
@@ -136,25 +130,5 @@ extension MangaView {
                 }
             }
         } header: { self.chaptersHeader() }
-    }
-    
-    /// Manga themes carousel
-    @ViewBuilder
-    func themes() -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(alignment: .center) {
-                ForEach(manga.genres, id: \.self) { genre in
-                    Text(genre)
-                        .font(.caption2)
-                        .foregroundColor(.primary.opacity(0.75))
-                        .fontWeight(.semibold)
-                        .padding(3.5)
-                        .background {
-                            Color.primary.opacity(0.1)
-                                .cornerRadius(4.5)
-                        }
-                }
-            }.padding(.leading, 17)
-        }
     }
 }

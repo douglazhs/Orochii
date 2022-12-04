@@ -35,7 +35,7 @@ extension LibraryView {
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(ViewBackground(with: .view_background))
+        .background(BlurBackground(with: .view_background))
         .animation(.spring(), value: [isSearching])
     }
     
