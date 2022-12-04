@@ -464,16 +464,12 @@
 			children = (
 				503019A52934559100F5645F /* AniList Tracker */,
 				50F44427292E4236001B3CF4 /* Chapter */,
-				5092DF36292942A80094DC18 /* Discover */,
-				500B9B692938F1C800961753 /* History */,
 				50FFAFE4292A73F400B87E0E /* Languages */,
-				5092DF46292946410094DC18 /* Library */,
 				50FFB005292AB15F00B87E0E /* Library Filter */,
 				50FFAFE6292A819C00B87E0E /* Manga */,
 				50639B49293A483E00D8E3CB /* Manga History */,
-				50F44431292E5815001B3CF4 /* Reader Preferences */,
-				5092DF45292946340094DC18 /* Settings */,
-				5092DF5F292983050094DC18 /* Source Preferences */,
+				50F6F688293C33AB00142816 /* Preferences */,
+				50F6F687293C333200142816 /* Tabs */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -852,12 +848,32 @@
 			path = Carousel;
 			sourceTree = "<group>";
 		};
-		50FE08D1292D05C200432F21 /* LanguagesView+builders */ = {
+		50F6F687293C333200142816 /* Tabs */ = {
+			isa = PBXGroup;
+			children = (
+				5092DF36292942A80094DC18 /* Discover */,
+				500B9B692938F1C800961753 /* History */,
+				5092DF46292946410094DC18 /* Library */,
+				5092DF45292946340094DC18 /* Settings */,
+			);
+			path = Tabs;
+			sourceTree = "<group>";
+		};
+		50F6F688293C33AB00142816 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				50F44431292E5815001B3CF4 /* Reader Preferences */,
+				5092DF5F292983050094DC18 /* Source Preferences */,
+			);
+			path = Preferences;
+			sourceTree = "<group>";
+		};
+		50FE08D1292D05C200432F21 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
 				50FE08D2292D05DC00432F21 /* LanguagesView+builders.swift */,
 			);
-			path = "LanguagesView+builders";
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 		50FE08D8292D8A4E00432F21 /* EnumPicker */ = {
@@ -893,7 +909,7 @@
 		50FFAFE4292A73F400B87E0E /* Languages */ = {
 			isa = PBXGroup;
 			children = (
-				50FE08D1292D05C200432F21 /* LanguagesView+builders */,
+				50FE08D1292D05C200432F21 /* Extensions */,
 				50FFAFE5292A73FC00B87E0E /* View */,
 			);
 			path = Languages;
