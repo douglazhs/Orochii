@@ -22,10 +22,16 @@ struct LibraryView: View {
                         // TODO: - Clear search
                     }
                 }
-                .navigationTitle(Text(String.Library.title))
+                .navigationTitle(String.Library.title)
                 .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(.visible, for: .tabBar)
-                .toolbarBackground(device == .phone ? .visible : .hidden, for: .navigationBar)
+                .toolbarBackground(
+                    device == .phone ? .visible : .automatic,
+                    for: .navigationBar
+                )
+                .toolbarBackground(
+                    Color.indigo.opacity(0.075),
+                    for: .navigationBar
+                )
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         EditButton()

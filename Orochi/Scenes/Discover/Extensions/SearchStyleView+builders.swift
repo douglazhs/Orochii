@@ -23,10 +23,12 @@ extension SearchStyleView {
                     } preview: { MangaView(manga) }
             }
             .listStyle(.plain)
-            .background(ViewBackground(with: .view_background))
+            .background(BlurBackground(with: .view_background))
             .scrollContentBackground(.hidden)
             .animation(.spring(), value: [isSearching])
-        } else { StaticText(of: "NO RESULTS FOUND") }
+        } else {
+            // TODO: - Show empty view
+        }
     }
     
     /// Custom manga cell

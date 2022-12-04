@@ -9,6 +9,12 @@ import SwiftUI
 
 let testDescription = "Hardship, regret, shame: the negative feelings that humans feel become Curses that lurk in our everyday lives. The Curses run rampant throughout the world, capable of leading people to terrible misfortune and even death. What's more, the Curses can only be exorcised by another Curse."
 
+let mockLanguages: [Int : String] = [
+    0: "en-US",
+    1: "pt-BR",
+    2: "es-SP"
+]
+
 struct MangaDomain: Identifiable, Hashable {
     var id = UUID()
     var title: String

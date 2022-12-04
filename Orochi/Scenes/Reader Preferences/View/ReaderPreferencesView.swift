@@ -19,7 +19,7 @@ struct ReaderPreferencesView: View {
             }
             .listStyle(.grouped)
             .scrollContentBackground(.hidden)
-            .background(ViewBackground(with: .view_background))
+            .background(BlurBackground(with: .view_background))
             .navigationTitle("Reader Preferences")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {

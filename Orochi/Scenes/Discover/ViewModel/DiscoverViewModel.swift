@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Carousel Dictionary Configuration
-typealias CarouselDict = [CarouselType : [MangaDomain]]
+typealias CarouselDict = [Carousel : [MangaDomain]]
 
 class DiscoverViewModel: ObservableObject {
     @Published var searchText: String = ""
@@ -22,7 +22,7 @@ class DiscoverViewModel: ObservableObject {
     /// - Returns: All main view carousel
     func generateCarouselDict() -> CarouselDict {
         var dict: CarouselDict = [:]
-        CarouselType.allCases.forEach { type in
+        Carousel.allCases.forEach { type in
             dict[type] = MangaDomain.samples
         }
         return dict

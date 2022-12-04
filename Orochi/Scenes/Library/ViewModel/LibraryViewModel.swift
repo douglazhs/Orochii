@@ -11,7 +11,7 @@ class LibraryViewModel: ObservableObject {
     let years = Array<Int>(stride(from: 2000, through: 2022, by: 1))
     @Published var query: String = ""
     @Published var objectFilter: ObjectFilter = .name
-    @Published var filterOrder: FilterOrder = .ascending
+    @Published var filterOrder: OrderFilter = .ascending
     @Published var languageSelection: Language = .enUS
     @Published var statusSelection: MangaStatus = .ongoing
     @Published var yearSelection: Int = 2000

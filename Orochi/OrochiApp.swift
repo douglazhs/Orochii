@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct OrochiiApp: App {
+    @StateObject var router = Router()
+    
     var body: some Scene {
         WindowGroup {
             TabView {
                 DiscoverView()
+                    .environmentObject(router)
                     .tabItem { Label(
                         String.Discovery.title,
                         systemImage: "globe.americas.fill"
@@ -21,6 +24,11 @@ struct OrochiiApp: App {
                     .tabItem { Label(
                         String.Library.title,
                         systemImage: "books.vertical"
+                    ) }
+                HistoryView()
+                    .tabItem { Label(
+                        "History",
+                        systemImage: "clock"
                     ) }
                 SettingsView()
                     .tabItem { Label(

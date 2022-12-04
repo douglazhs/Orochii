@@ -10,7 +10,7 @@ import SwiftUI
 struct LibraryFilterView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var vm: LibraryViewModel
-    @State var mangaInfoFilter: MangaInfoFilter = .year
+    @State var mangaInfoFilter: ElementFilter = .year
     
     var body: some View {
         self.objectFilterSection()

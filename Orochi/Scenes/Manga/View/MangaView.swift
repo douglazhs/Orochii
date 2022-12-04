@@ -8,8 +8,10 @@
 import SwiftUI
 
 struct MangaView: View {
+    @EnvironmentObject var router: Router
     var manga: MangaDomain
     @StateObject var vm: MangaViewModel = MangaViewModel()
+    @State var device = UIDevice.current.userInterfaceIdiom
     @State var showChapterReader: Bool = false
     @State var searchOffset: CGFloat = -UIScreen.width
     @State var headerOffset: CGFloat = 0
@@ -24,7 +26,6 @@ struct MangaView: View {
             .toolbarRole(.editor)
             .toolbar(vm.showBottomBar ? .visible : .hidden, for: .bottomBar)
             .toolbar(vm.isEditingMode ? .hidden : .visible, for: .tabBar)
-            .toolbarBackground(.visible, for: .bottomBar)
             .navigationBarBackButtonHidden(vm.isEditingMode)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -53,6 +54,6 @@ struct MangaView: View {
 
 struct MangaView_Previews: PreviewProvider {
     static var previews: some View {
-        MangaView(MangaDomain.samples[0])
+        MangaView(MangaDomain.samples[1])
     }
 }

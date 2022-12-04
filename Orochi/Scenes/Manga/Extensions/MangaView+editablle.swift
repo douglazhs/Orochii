@@ -32,7 +32,11 @@ extension MangaView {
             Menu {
                 Button {
                     vm.isEditingMode.toggle()
-                    vm.showBottomBar.toggle()
+                    if !vm.showBottomBar {
+                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.275) {
+                            vm.showBottomBar = true
+                        }
+                    } else { vm.showBottomBar = false }
                 } label: {
                     Label (
                         String.Manga.selectChapters,

@@ -13,7 +13,7 @@ struct InitialStyleView: View {
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(alignment: .center) {
-                ForEach(CarouselType.allCases, id: \.self) { type in
+                ForEach(Carousel.allCases, id: \.self) { type in
                     Section {
                         self.carousel(of: vm.section[type] ?? [])
                     } header: {
@@ -29,7 +29,7 @@ struct InitialStyleView: View {
                 }
             }.padding(.vertical)
         }
-        .background(ViewBackground(with: .view_background))
+        .background(BlurBackground(with: .view_background))
         .scrollContentBackground(.hidden)
     }
 }
