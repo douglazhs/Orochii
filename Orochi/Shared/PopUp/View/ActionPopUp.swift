@@ -13,7 +13,7 @@ struct ActionPopUp: View {
     var action: Binding<Bool>
     
     var body: some View {
-        VStack(alignment: .center) {
+        VStack(alignment: .center, spacing: 2.5) {
             Text(title)
                 .font(.headline)
                 .fontWeight(.semibold)
@@ -22,9 +22,9 @@ struct ActionPopUp: View {
                     .lineLimit(1)
                     .multilineTextAlignment(.center)
                     .font(.caption2)
-                    .font(.system(size: 11, weight: .regular))
                     .foregroundColor(.primary.opacity(0.65))
                     .fontWeight(.regular)
+                    .padding(.bottom, 5)
             }
         }
         .frame(maxWidth: frame(of: title, and: message))

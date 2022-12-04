@@ -34,7 +34,7 @@ struct HistoryView: View {
                     ToolbarItem(placement: .principal) {
                         ActionPopUp(
                             title: "History",
-                            message: MangaActions.history.message,
+                            message: "Successfully Cleared",
                             action: $vm.action
                         )
                     }

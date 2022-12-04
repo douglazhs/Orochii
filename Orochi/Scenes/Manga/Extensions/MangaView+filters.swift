@@ -35,14 +35,14 @@ extension MangaView {
                 .font(.callout)
                 .lineLimit(1)
             Spacer()
-            // MANGA HISTORY
-            self.history()
+            // HISTORY BUTTON
+            self.historyButton()
             // ORDER MENU
             self.order()
             // SEARCH BUTTON
             self.searchChap()
         }
-        .disabled(vm.action)
+        .disabled(vm.occurredAct)
     }
     
     /// Search chapters bar
@@ -78,15 +78,16 @@ extension MangaView {
     /// Text field to search a specific chapter
     @ViewBuilder
     func textField() -> some View {
-        TextField(text: $vm.queryFilter, axis: .horizontal) {
-            HStack(spacing: 2) {
+        HStack {
+            Image(systemName: "magnifyingglass")
+                .foregroundColor(.secondary)
+            TextField(text: $vm.queryFilter, axis: .horizontal) {
                 Text("Search chapter")
                     .font(.body)
                     .fontWeight(.regular)
                     .foregroundColor(.secondary)
-                Image(systemName: "magnifyingglass")
-            }
-        }.ignoresSafeArea(.keyboard, edges: .bottom)
+            }.ignoresSafeArea(.keyboard, edges: .bottom)
+        }
         .foregroundColor(.primary)
         .padding(.horizontal, 7.5)
         .padding(.vertical, 5.5)
@@ -95,6 +96,7 @@ extension MangaView {
             Color.primary.opacity(0.1),
             in: RoundedRectangle(cornerRadius: 6.5)
         )
+        .focused($field, equals: .search)
     }
     
     /// Search chapter button
@@ -111,7 +113,8 @@ extension MangaView {
                 searchOffset = 0
                 headerOffset = UIScreen.width
                 vm.search = true
-                UIApplication.shared.resignFirstResponder()
+                field = .search
+                UIApplication.shared.becomeFirstResponder()
             }
         } label: {
             Image(systemName: "magnifyingglass")
@@ -126,15 +129,20 @@ extension MangaView {
     func order() -> some View {
         Menu {
             Section {
-                EnumPicker(
-                    String.Filter.orderByHeader,
-                    selection: $vm.chaptersOrder
-                ).pickerStyle(.menu)
-            } header: { Text("ORDER") }
+                Label {
+                    EnumPicker(
+                        vm.chaptersOrder.description,
+                        selection: $vm.chaptersOrder
+                    ).pickerStyle(.menu)
+                } icon: {
+                    Label(
+                        vm.chaptersOrder.description,
+                        systemImage: "arrow.up.arrow.down"
+                    )
+                }
+            } header: { Text(String.Filter.orderByHeader.uppercased()) }
             Section {
-                Button {
-                    vm.downloaded.toggle()
-                } label: {
+                Button { vm.downloaded.toggle() } label: {
                     HStack {
                         Text("Downloaded")
                         Spacer()
@@ -147,8 +155,8 @@ extension MangaView {
             }
         } label: {
             Image(systemName: "arrow.up.arrow.down")
-                .foregroundColor(.primary)
                 .font(.footnote)
+                .foregroundColor(.primary)
         }
         .tint(.accentColor)
         .buttonStyle(.borderedProminent)
@@ -159,24 +167,22 @@ extension MangaView {
     func history() -> some View {
         Menu {
             Button {
-                vm.btnAction = .history
-                vm.showHistory = true
+                vm.startAction(for: .history(clear: true))
             } label:
             { Label("View", systemImage: "eye.fill") }
             Button(role: .destructive) {
-                withAnimation(.easeInOut(duration: 0.175)) { vm.action = true }
-                vm.btnAction = .history
-                Haptics.shared.notify(.error)
+                vm.startAction(for: .history(clear: false))
             } label:
             { Label("Clear", systemImage: "trash") }
         } label: {
-                Image(systemName: "clock.arrow.circlepath")
-                    .foregroundColor(.primary)
-                    .font(.footnote)
+            Image(systemName: "clock.arrow.circlepath")
+                .foregroundColor(.primary)
+                .font(.footnote)
         }
         .buttonStyle(.borderedProminent)
+        .tint(.accentColor)
         .sheet(isPresented: $vm.showHistory) {
-            MangaHistoryView(of: manga, action: $vm.action)
+            MangaHistoryView(of: manga, action: $vm.occurredAct)
                 .presentationDetents([.medium, .large])
         }
     }
