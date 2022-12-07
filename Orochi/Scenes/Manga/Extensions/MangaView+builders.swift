@@ -13,19 +13,21 @@ extension MangaView {
     @ViewBuilder
     func content() -> some View {
         List(selection: $vm.selection) {
-            Section {
+            Group {
+                // ALL MANGA INFORMATION
+                self.mangaInfoArea()
                 if !vm.search {
-                    // ALL MANGA INFORMATION
-                    self.mangaHeader()
-                        .listSectionSeparator(.hidden)
-                        .listRowSeparator(.hidden)
-                    // MANGA ACTIONS: ANILIST, ADD & REMOVE
+                    // MANGA ACTIONS: ANILIST
                     self.actions()
                     // MANGA DESCRIPTION
                     self.description()
+                        .listSectionSeparator(.visible)
                 }
                 self.chapters()
-            }.listRowBackground(Color.clear)
+                    .listSectionSeparator(!vm.search ? .visible : .hidden)
+            }
+            .listSectionSeparator(.hidden)
+            .listRowSeparator(.hidden)
         }.environment(\.editMode, .constant(
             vm.isEditingMode
             ? EditMode.active
@@ -42,7 +44,7 @@ extension MangaView {
     
     /// Manga info header
     @ViewBuilder
-    func mangaHeader() -> some View {
+    func mangaInfoArea() -> some View {
         Section {
             HStack {
                 MangaStandardImage(
@@ -55,6 +57,7 @@ extension MangaView {
                 self.mangaTexts()
             }.frame(maxHeight: CGSize.dynamicImage.height)
         }
+        .listRowBackground(DarkOverlay(image: manga.cover))
     }
     
     /// All grouped manga informations
@@ -107,7 +110,7 @@ extension MangaView {
             }
             .font(.callout)
             .fontWeight(.regular)
-        }
+        }.listRowBackground(Color.clear)
     }
     
     /// Manga chapters list
@@ -129,6 +132,8 @@ extension MangaView {
                     ChapterView(chapter, of: manga)
                 }
             }
-        } header: { self.chaptersHeader() }
+        } header: {
+            self.chaptersHeader()
+        }.listRowBackground(Color.clear)
     }
 }

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct SettingsView: View {
     @StateObject var vm: SettingsViewModel = SettingsViewModel()
-    var device = UIDevice.current.userInterfaceIdiom
     
     var body: some View {
         NavigationStack {
@@ -26,10 +25,6 @@ struct SettingsView: View {
             }
             .listStyle(.grouped)
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(
-                device == .phone ? .visible : .automatic,
-                for: .navigationBar
-            )
             .toolbarBackground(
                 Color.indigo.opacity(0.075),
                 for: .navigationBar

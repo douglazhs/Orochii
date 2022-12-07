@@ -16,9 +16,12 @@ struct ChapterStandardCell: View {
         self.editingMode = editingMode
     }
     var body: some View {
-        HStack (alignment: .center, spacing: 15) {
+        HStack (alignment: .center, spacing: 10.0) {
             self.leftInfo()
-            Divider()
+            Text("-")
+                .foregroundColor(.secondary)
+                .font(.caption)
+                .fontWeight(.medium)
             self.rightInfo()
         }
     }

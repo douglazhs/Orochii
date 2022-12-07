@@ -11,14 +11,13 @@ struct HistoryView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var vm = HistoryViewModel()
     @State var showConfirmAction: Bool = false
-    var device = UIDevice.current.userInterfaceIdiom
     
     var body: some View {
         NavigationStack {
             self.content()
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarBackground(
-                    device == .phone ? .visible : .automatic,
+                    Constants.device == .phone ? .visible : .automatic,
                     for: .navigationBar
                 )
                 .toolbarBackground(
@@ -34,7 +33,7 @@ struct HistoryView: View {
                     ToolbarItem(placement: .principal) {
                         ActionPopUp(
                             title: "History",
-                            message: MangaActions.history.message,
+                            message: "Successfully Cleared",
                             action: $vm.action
                         )
                     }

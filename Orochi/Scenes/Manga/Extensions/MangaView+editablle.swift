@@ -30,20 +30,31 @@ extension MangaView {
             }
         } else {
             Menu {
-                Button {
-                    vm.isEditingMode.toggle()
-                    if !vm.showBottomBar {
-                        DispatchQueue.main.asyncAfter(deadline: .now() + 0.275) {
-                            vm.showBottomBar = true
-                        }
-                    } else { vm.showBottomBar = false }
+                Section {
+                    Button {
+                        vm.isEditingMode.toggle()
+                        if !vm.showBottomBar {
+                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.275) {
+                                vm.showBottomBar = true
+                            }
+                        } else { vm.showBottomBar = false }
+                    } label: {
+                        Label (
+                            String.Manga.selectChapters,
+                            systemImage: "checklist"
+                        )
+                    }
+                    Button { } label: {
+                        Label("View on MangaDex.co", systemImage: "safari.fill")
+                    }
+                } header: { Text(manga.title) }
+                Button(role: .destructive) {
+                    
                 } label: {
-                    Label (
-                        String.Manga.selectChapters,
-                        systemImage: "checklist"
-                    )
+                    Label("Remove all Downloads", systemImage: "trash")
                 }
-            } label: { Image(systemName: "ellipsis.circle.fill") }
+               
+            } label: { Image(systemName: "ellipsis") }
         }
     }
     

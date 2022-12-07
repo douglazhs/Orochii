@@ -30,7 +30,6 @@ struct ALTracker: View {
             .presentationDetents([.height(vm.sheetHeight)])
             .presentationDragIndicator(.visible)
             .background(BlurBackground(with: manga.cover).opacity(0.75))
-            .interactiveDismissDisabled(true)
     }
 }
 

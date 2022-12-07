@@ -68,7 +68,7 @@ extension MangaStandardCell {
     @ViewBuilder
     func allGenres() -> some View {
             HStack(alignment: .top) {
-                if UIDevice.current.userInterfaceIdiom == .pad {
+                if Constants.device == .pad {
                     ForEach(manga.genres, id: \.self) { genre in
                         Text(genre)
                             .padding(3.5)

@@ -7,14 +7,19 @@
 
 import SwiftUI
 
+/// Focused TextField
+enum Field: Int, Hashable {
+    case search
+}
+
 struct MangaView: View {
     @EnvironmentObject var router: Router
     var manga: MangaDomain
     @StateObject var vm: MangaViewModel = MangaViewModel()
-    @State var device = UIDevice.current.userInterfaceIdiom
     @State var showChapterReader: Bool = false
     @State var searchOffset: CGFloat = -UIScreen.width
     @State var headerOffset: CGFloat = 0
+    @FocusState var field: Field?
     
     init(_ manga: MangaDomain) {
         self.manga = manga
@@ -40,8 +45,8 @@ struct MangaView: View {
                 ToolbarItem(placement: .principal) {
                     ActionPopUp(
                         title: manga.title,
-                        message: vm.btnAction?.message ?? "",
-                        action: $vm.action
+                        message: vm.actionMessage,
+                        action: $vm.occurredAct
                     )
                 }
             }
@@ -54,6 +59,6 @@ struct MangaView: View {
 
 struct MangaView_Previews: PreviewProvider {
     static var previews: some View {
-        MangaView(MangaDomain.samples[1])
+        MangaView(MangaDomain.samples[9])
     }
 }
