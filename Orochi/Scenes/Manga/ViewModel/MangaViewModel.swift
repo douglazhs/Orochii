@@ -24,7 +24,6 @@ class MangaViewModel: ObservableObject {
     @Published var search: Bool = false
     @Published var actionMessage: String = ""
     
-    
     /// Start action when a button is pressed
     /// - Parameter action: Actual action
     func startAction(for action: MangaActions) {

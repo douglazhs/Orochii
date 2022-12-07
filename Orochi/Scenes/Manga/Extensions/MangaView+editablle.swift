@@ -44,15 +44,16 @@ extension MangaView {
                             systemImage: "checklist"
                         )
                     }
-                    Button(role: .destructive) {
-                        
-                    } label: {
-                        Label("Remove all Downloads", systemImage: "trash")
+                    Button { } label: {
+                        Label("View on MangaDex.co", systemImage: "safari.fill")
                     }
                 } header: { Text(manga.title) }
-                Button { } label: {
-                    Label("View on MangaDex.co", systemImage: "safari.fill")
+                Button(role: .destructive) {
+                    
+                } label: {
+                    Label("Remove all Downloads", systemImage: "trash")
                 }
+               
             } label: { Image(systemName: "ellipsis") }
         }
     }

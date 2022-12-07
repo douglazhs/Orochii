@@ -24,10 +24,6 @@ extension ALTracker {
     @ViewBuilder
     func actionsButtons() -> some View {
         HStack {
-            Button {
-                // TODO: - Cancel changes
-                dismiss()
-            } label: { Text("Cancel") }
             Spacer()
             Button {
                 // TODO: - Save changes

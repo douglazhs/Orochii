@@ -20,7 +20,7 @@ struct ReaderToolbar: ViewModifier {
                     Button { showChaptersList = true } label:
                     { Image(systemName: "list.triangle") }
                     .popover(isPresented: $showChaptersList) {
-                        switch UIDevice.current.userInterfaceIdiom {
+                        switch Constants.device {
                         case .pad:
                             self.chaptersMenu()
                                 .frame(

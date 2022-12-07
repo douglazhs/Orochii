@@ -18,10 +18,12 @@ extension HistoryMangaCell {
                     .font(.callout)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
-                // READ CHAPTERS
-                self.chapters()
+                    .lineLimit(2)
                 // WHEN
                 self.time()
+                Spacer()
+                // READ CHAPTERS
+                self.chapters()
             }
         }
         .frame(
@@ -61,24 +63,6 @@ extension HistoryMangaCell {
             Text("204 pages")
                 .foregroundColor(.secondary)
                 .font(.caption)
-        }
-    }
-    
-    /// Read chapters
-    @ViewBuilder
-    func showChaptersButton() -> some View {
-        Button {
-            withAnimation(.easeInOut(duration: 0.175)) {
-                truncated.wrappedValue.toggle()
-            }
-        } label: {
-            Image(systemName: truncated.wrappedValue
-                  ? "chevron.up"
-                  : "chevron.down"
-            )
-            .foregroundColor(.accentColor)
-            .font(.caption2)
-            .fontWeight(.bold)
         }
     }
 }

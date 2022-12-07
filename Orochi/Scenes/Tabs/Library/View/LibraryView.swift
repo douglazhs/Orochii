@@ -9,7 +9,6 @@ import SwiftUI
 
 struct LibraryView: View {
     @Environment(\.isSearching) var isSearching
-    var device = UIDevice.current.userInterfaceIdiom
     @StateObject var vm: LibraryViewModel = LibraryViewModel()
     @State var showFilters: Bool = false
     
@@ -25,7 +24,7 @@ struct LibraryView: View {
                 .navigationTitle(String.Library.title)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarBackground(
-                    device == .phone ? .visible : .automatic,
+                    Constants.device == .phone ? .visible : .automatic,
                     for: .navigationBar
                 )
                 .toolbarBackground(

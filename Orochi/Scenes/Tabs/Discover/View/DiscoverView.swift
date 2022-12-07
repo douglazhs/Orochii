@@ -15,7 +15,6 @@ enum ViewStyle {
 struct DiscoverView: View {
     @EnvironmentObject var router: Router
     @StateObject var vm = DiscoverViewModel()
-    var device = UIDevice.current.userInterfaceIdiom
     @State var viewStyle: ViewStyle = .initial
     @State var mangaSourcePref: Bool = false
     var body: some View {
@@ -24,7 +23,7 @@ struct DiscoverView: View {
                 .navigationTitle(Text(String.Discovery.title))
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarBackground(
-                    device == .phone ? .visible : .automatic,
+                    Constants.device == .phone ? .visible : .automatic,
                     for: .navigationBar
                 )
                 .toolbarBackground(

@@ -12,9 +12,18 @@ extension HistoryView {
     @ViewBuilder
     func content() -> some View {
         List {
-            self.dateSection()
+            // TODO: Make a ForEach to show all dates sections
+            self.dateSection("27/12/2022", readMangas: [
+                MangaDomain.samples[1],
+                MangaDomain.samples[11]
+            ])
+            self.dateSection("10/11/2019", readMangas: [
+                MangaDomain.samples[2],
+                MangaDomain.samples[4],
+                MangaDomain.samples[12]
+            ])
         }
-        .listStyle(.plain)
+        .listStyle(.grouped)
     }
     
     /// Clear history button
@@ -26,10 +35,10 @@ extension HistoryView {
         } label: { Image(systemName: "trash") }
         .confirmationDialog(
             "Clear History",
-            isPresented: $showConfirmAction
+            isPresented: $showConfirmAction,
+            titleVisibility: .visible
         ) {
             Button(role: .destructive) {
-                // TODO: Clear history
                 withAnimation(.easeInOut(duration: 0.175)) {
                     vm.action = true
                 }
@@ -43,20 +52,29 @@ extension HistoryView {
     
     /// Read date section
     @ViewBuilder
-    func dateSection() -> some View {
+    func dateSection(
+        _ date: String,
+        readMangas: [MangaDomain]
+    ) -> some View {
         Section {
-            HistoryMangaCell(
-                of: MangaDomain.samples[0],
-                truncated: $vm.truncated
-            )
-            if vm.truncated {
-                // TODO: - Show chapters timeline
+            ForEach(readMangas) { manga in
+                ZStack {
+                    NavigationLink { MangaView(manga) } label: {
+                        EmptyView()
+                    }
+                    .frame(width: 0)
+                    .opacity(0)
+                    HistoryMangaCell(of: manga)
+                }
             }
         } header: {
-            Text("27/12/2022")
-                .font(.footnote)
-                .foregroundColor(.secondary)
-                .fontWeight(.semibold)
+            HStack {
+                Text(date)
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+                    .fontWeight(.regular)
+                VStack { Divider() }
+            }
         }
         .listRowBackground(Color.clear)
         .listRowSeparator(.hidden)

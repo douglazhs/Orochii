@@ -9,26 +9,18 @@ import SwiftUI
 
 struct HistoryMangaCell: View {
     var manga: MangaDomain
-    var truncated: Binding<Bool>
     
-    init(of manga: MangaDomain, truncated: Binding<Bool>) {
+    init(of manga: MangaDomain) {
         self.manga = manga
-        self.truncated = truncated
     }
     
     var body: some View {
         self.cell()
-            .overlay(alignment: .bottomTrailing) {
-                self.showChaptersButton()
-            }
     }
 }
 
 struct HistoryMangaCell_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryMangaCell(
-            of: MangaDomain.samples[0],
-            truncated: .constant(false)
-        )
+        HistoryMangaCell(of: MangaDomain.samples[0])
     }
 }

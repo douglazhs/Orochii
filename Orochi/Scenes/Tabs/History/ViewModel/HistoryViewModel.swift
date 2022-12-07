@@ -9,6 +9,5 @@ import SwiftUI
 
 class HistoryViewModel: ObservableObject {
     @Published var query: String = ""
-    @Published var truncated: Bool = false
     @Published var action: Bool = false
 }
