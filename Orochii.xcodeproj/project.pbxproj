@@ -79,7 +79,6 @@
 		50F44451292F0905001B3CF4 /* MangaReaderToolbar+modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F44450292F0905001B3CF4 /* MangaReaderToolbar+modifier.swift */; };
 		50F44454292F1B21001B3CF4 /* UISliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F44453292F1B21001B3CF4 /* UISliderView.swift */; };
 		50F6F676293BC7BF00142816 /* ActionPopUp+methods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F6F675293BC7BF00142816 /* ActionPopUp+methods.swift */; };
-		50F6F68D293C4C4800142816 /* LibraryTimeline.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F6F68C293C4C4800142816 /* LibraryTimeline.swift */; };
 		50FE08D0292D035600432F21 /* PrimaryGradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE08CF292D035600432F21 /* PrimaryGradient.swift */; };
 		50FE08D3292D05DC00432F21 /* LanguagesView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE08D2292D05DC00432F21 /* LanguagesView+builders.swift */; };
 		50FE08D5292D609700432F21 /* String+default.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FE08D4292D609700432F21 /* String+default.swift */; };
@@ -185,7 +184,6 @@
 		50F44450292F0905001B3CF4 /* MangaReaderToolbar+modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaReaderToolbar+modifier.swift"; sourceTree = "<group>"; };
 		50F44453292F1B21001B3CF4 /* UISliderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UISliderView.swift; sourceTree = "<group>"; };
 		50F6F675293BC7BF00142816 /* ActionPopUp+methods.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ActionPopUp+methods.swift"; sourceTree = "<group>"; };
-		50F6F68C293C4C4800142816 /* LibraryTimeline.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LibraryTimeline.swift; sourceTree = "<group>"; };
 		50FE08CF292D035600432F21 /* PrimaryGradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryGradient.swift; sourceTree = "<group>"; };
 		50FE08D2292D05DC00432F21 /* LanguagesView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LanguagesView+builders.swift"; sourceTree = "<group>"; };
 		50FE08D4292D609700432F21 /* String+default.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+default.swift"; sourceTree = "<group>"; };
@@ -427,7 +425,6 @@
 		5092DF1829292C590094DC18 = {
 			isa = PBXGroup;
 			children = (
-				50F6F68C293C4C4800142816 /* LibraryTimeline.swift */,
 				5092DF2329292C590094DC18 /* Orochi */,
 				5092DF2229292C590094DC18 /* Products */,
 			);
@@ -1180,7 +1177,6 @@
 				50FFAFF2292A84DB00B87E0E /* SearchStyleView.swift in Sources */,
 				502E8E022935440D00881F40 /* NumberPicker.swift in Sources */,
 				507803DC292DC0530041D5BD /* ActivityIndicator.swift in Sources */,
-				50F6F68D293C4C4800142816 /* LibraryTimeline.swift in Sources */,
 				50F44430292E4496001B3CF4 /* ChapterViewModel.swift in Sources */,
 				50FFB008292AB28E00B87E0E /* LibraryFilterView.swift in Sources */,
 				500DB59D292C608B00F398D6 /* SettingsView+builders.swift in Sources */,
