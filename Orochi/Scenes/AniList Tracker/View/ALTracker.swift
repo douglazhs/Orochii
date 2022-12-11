@@ -10,6 +10,7 @@ import SwiftUI
 struct ALTracker: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var vm = ALTrackerViewModel()
+    @State var pickerConfig = PickerConfig()
     var manga: MangaDomain
     var action: Binding<Bool>
     
@@ -19,24 +20,24 @@ struct ALTracker: View {
     }
     
     var body: some View {
-        self.content()
-            .padding()
-            .background {
-                GeometryReader { proxy in
-                    Color.clear
-                        .onAppear { vm.sheetHeight = proxy.size.height }
+        NavigationStack {
+            self.content()
+                .background(BlurBackground(with: manga.cover).opacity(0.75))
+                .navigationTitle(String.Name.aniList)
+                .animation(.easeInOut(duration: 0.125), value: vm.currentPicker)
+                .toolbar {
+                    ToolbarItem(placement: .confirmationAction) {
+                        self.updateTrackingButton()
+                    }
                 }
-            }
-            .presentationDetents([.height(vm.sheetHeight)])
-            .presentationDragIndicator(.visible)
-            .background(BlurBackground(with: manga.cover).opacity(0.75))
+        }
     }
 }
 
 struct ALTracker_Previews: PreviewProvider {
     static var previews: some View {
         ALTracker(
-            of: MangaDomain.samples[0],
+            of: MangaDomain.samples[1],
             action: .constant(true)
         )
     }

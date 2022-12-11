@@ -12,25 +12,42 @@ extension MangaHistoryView {
     @ViewBuilder
     func content() -> some View {
         List {
-            Section {
-                HistoryChapterCell(
-                    of: ChapterDomain.samples[1]
-                )
-            } header: {
-                Text(manga.lastUpdated)
-                    .font(.footnote)
-                    .foregroundColor(.secondary)
-                    .fontWeight(.semibold)
-            }
-            .listRowBackground(Color.clear)
-            .listRowSeparator(.hidden)
+            // TODO: - Make a ForEach to see all read dates
+            self.dateSection("10/12/2021", readChapters: [
+                ChapterDomain.samples[0],
+                ChapterDomain.samples[5]
+            ])
+            self.dateSection("11/03/2022", readChapters: [
+                ChapterDomain.samples[2],
+                ChapterDomain.samples[8],
+                ChapterDomain.samples[3]
+            ])
         }
-        .listStyle(.inset)
+        .listStyle(.grouped)
         .scrollContentBackground(.hidden)
         .background(
             BlurBackground(with: manga.cover)
                 .opacity(0.75)
         )
+    }
+    
+    /// Date with all read chapters
+    @ViewBuilder func dateSection(
+        _ date: String,
+        readChapters: [ChapterDomain]
+    ) -> some View {
+        Section {
+            ForEach(readChapters) { chapter in
+                HistoryChapterCell(of: chapter)
+            }
+        } header: {
+            Text(manga.lastUpdated)
+                .font(.footnote)
+                .foregroundColor(.secondary)
+                .fontWeight(.semibold)
+        }
+        .listRowBackground(Color.clear)
+        .listRowSeparator(.hidden)
     }
     
     /// Clear manga history button
@@ -42,15 +59,13 @@ extension MangaHistoryView {
         } label: { Image(systemName: "trash") }
         .tint(.red)
         .alert("Clear History", isPresented: $showConfirmAction) {
-            Button(role: .destructive) {
+            Button("Clear", role: .destructive) {
                 // TODO: Clear history
                 withAnimation(.easeInOut(duration: 0.175)) {
                     action.wrappedValue = true
                 }
                 Haptics.shared.notify(.error)
                 dismiss()
-            } label: {
-                Text("Clear")
             }
         } message: {
             Text("Are you sure you want to clear your \"\(manga.title)\" chapters history?")

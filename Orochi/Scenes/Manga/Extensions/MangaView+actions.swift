@@ -19,9 +19,6 @@ extension MangaView {
         }
         .lineLimit(1)
         .fontWeight(.regular)
-        .frame(maxWidth: .infinity)
-        .listRowBackground(Color.clear)
-        .padding(.top, 10.0)
     }
     
     /// Start reading button
@@ -34,7 +31,7 @@ extension MangaView {
                 .lineLimit(1)
                 .foregroundColor(.accentColor)
                 .font(.footnote)
-                .frame(maxWidth: .infinity)
+                .frame(maxWidth: CGSize.dynamicImage.width - 22)
                 .fontWeight(.heavy)
         }
         .tint(.primary)
@@ -45,22 +42,20 @@ extension MangaView {
     @ViewBuilder
     func aniListButton() -> some View {
         Button { vm.startAction(for: .aniList) } label: {
-            Label(
-                MangaActions.aniList.description,
-                systemImage: "externaldrive.fill"
-            )
-            .frame(maxWidth: .infinity)
-            .foregroundColor(.primary)
-            .font(.footnote)
-            .fontWeight(.semibold)
+            Image(systemName: "externaldrive.fill")
+                .foregroundColor(.primary)
+                .font(.footnote)
+                .fontWeight(.semibold)
         }
         .disabled(vm.occurredAct)
         .buttonStyle(.borderedProminent)
-        .popover(isPresented: $vm.showAniList) {
+        .sheet(isPresented: $vm.showAniList) {
             ALTracker(
                 of: manga,
                 action: $vm.occurredAct
             )
+            .presentationDetents([.medium, .large])
+            .presentationDragIndicator(.visible)
         }
     }
     
@@ -70,19 +65,17 @@ extension MangaView {
         Button(role: vm.mangaOnLib ? .destructive : .none) {
             vm.startAction(for: .lib)
         } label: {
-            Label(
-                vm.mangaOnLib ? "REMOVE" : "ADD",
-                systemImage: vm.mangaOnLib ? "trash.fill" : "plus"
+            Image(systemName: vm.mangaOnLib
+                  ? "trash.fill"
+                  : "plus"
             )
-            .frame(maxWidth: .infinity)
         }
         .font(.footnote)
-        .fontWeight(.semibold)
+        .fontWeight(.heavy)
         .tint(.primary)
         .foregroundColor(vm.mangaOnLib ? .red : .accentColor)
         .buttonStyle(.borderedProminent)
         .disabled(vm.occurredAct)
-        .listRowBackground(Color.clear)
     }
     
     /// Chapters history button

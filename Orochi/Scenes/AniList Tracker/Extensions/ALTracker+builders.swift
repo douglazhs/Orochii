@@ -11,30 +11,45 @@ extension ALTracker {
     /// All view content
     @ViewBuilder
     func content() -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            self.actionsButtons()
+        List {
             self.mangaSection()
-            self.statesSection()
-            self.scoreSection()
-            self.dateSection()
+                .listSectionSeparator(.hidden)
+                .listRowBackground(Color.clear)
+            self.currentContext()
         }
+        .scrollContentBackground(.hidden)
+        .listStyle(.grouped)
     }
     
     /// Update anilist button
     @ViewBuilder
-    func actionsButtons() -> some View {
-        HStack {
-            Spacer()
-            Button {
-                // TODO: - Save changes
-                withAnimation(.easeInOut(duration: 0.175)) {
-                    action.wrappedValue = true
-                }
-                Haptics.shared.notify(.success)
-                dismiss()
-            } label: { Text("Update").fontWeight(.semibold) }
-        }
+    func updateTrackingButton() -> some View {
+        Button {
+            // TODO: - Save changes
+            withAnimation(.easeInOut(duration: 0.175)) {
+                action.wrappedValue = true
+            }
+            Haptics.shared.notify(.success)
+            dismiss()
+        } label: { Text("Update").fontWeight(.semibold) }
         .tint(.indigo)
         .buttonStyle(.borderless)
+    }
+    
+    /// Current manga context
+    @ViewBuilder
+    func currentContext() -> some View {
+        EnumPicker("", selection: $vm.currentContext)
+            .pickerStyle(.segmented)
+            .listRowBackground(Color.clear)
+            .listRowSeparator(.hidden)
+        switch vm.currentContext {
+        case .states: self.statesSection()
+                .listRowBackground(Color.clear)
+        case .dates:  self.dateSection()
+                .listRowBackground(Color.clear)
+        case .score:  self.scoreSection()
+                .listRowBackground(Color.clear)
+        }
     }
 }

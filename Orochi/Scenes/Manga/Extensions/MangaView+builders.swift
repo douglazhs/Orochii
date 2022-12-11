@@ -17,8 +17,6 @@ extension MangaView {
                 // ALL MANGA INFORMATION
                 self.mangaInfoArea()
                 if !vm.search {
-                    // MANGA ACTIONS: ANILIST
-                    self.actions()
                     // MANGA DESCRIPTION
                     self.description()
                         .listSectionSeparator(.visible)
@@ -46,16 +44,25 @@ extension MangaView {
     @ViewBuilder
     func mangaInfoArea() -> some View {
         Section {
-            HStack {
-                MangaStandardImage(
-                    cover: manga.cover,
-                    size: CGSize(
-                        width: CGSize.dynamicImage.width,
-                        height: CGSize.dynamicImage.height
+            VStack(alignment: .leading) {
+                HStack {
+                    MangaStandardImage(
+                        cover: manga.cover,
+                        size: CGSize(
+                            width: CGSize.dynamicImage.width,
+                            height: CGSize.dynamicImage.height
+                        )
                     )
-                )
-                self.mangaTexts()
-            }.frame(maxHeight: CGSize.dynamicImage.height)
+                    self.mangaTexts()
+                }.frame(maxHeight: CGSize.dynamicImage.height)
+                HStack {
+                    // START READING BUTTON
+                    self.startReadingButton()
+                    Spacer()
+                    // MANGA ACTIONS: ANILIST
+                    self.actions()
+                }
+            }
         }
         .listRowBackground(DarkOverlay(image: manga.cover))
     }
@@ -82,8 +89,6 @@ extension MangaView {
                 .leading
             ).lineLimit(2)
             Spacer()
-            // START READING BUTTON
-            self.startReadingButton()
         }.padding(.leading, 5)
     }
     

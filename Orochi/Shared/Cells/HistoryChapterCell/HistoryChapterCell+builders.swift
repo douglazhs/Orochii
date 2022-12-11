@@ -40,6 +40,7 @@ extension HistoryChapterCell  {
             Text(chapter.title)
                 .font(.subheadline)
                 .fontWeight(.semibold)
+                .foregroundColor(.primary)
             Text("\(chapter.pagesImages.count) pages")
                 .font(.caption)
                 .foregroundColor(.secondary)

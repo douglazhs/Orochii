@@ -12,38 +12,20 @@ struct NumberPicker: View {
     var title: String
     var values: [Double]
     var selection: Binding<Double>
-    var cover: String
     var format: String = "%.1f"
     
     var body: some View {
-        NavigationStack {
-            Picker("", selection: selection) {
+        Section {
+            Picker(title, selection: selection) {
                 ForEach(values, id: \.self) { i in
                     Text(String(format: format, i))
                 }
             }
-            .pickerStyle(.wheel)
-            .navigationTitle(title)
-            .navigationBarTitleDisplayMode(.inline)
-            .background(BlurBackground(with: cover))
-            .interactiveDismissDisabled()
-            .toolbar {
-                ToolbarItem(placement: .confirmationAction) {
-                    Button { dismiss() } label: {
-                        Text(String.Common.done)
-                            .font(.body)
-                            .foregroundColor(.primary)
-                            .fontWeight(.semibold)
-                    }
-                }
-                ToolbarItem(placement: .navigationBarLeading) {
-                    Button { dismiss() } label: {
-                        Text(String.Common.cancel)
-                            .font(.body)
-                            .foregroundColor(.primary)
-                            .fontWeight(.regular)
-                    }
-                }
+//            .pickerStyle(.wheel)
+        } header: {
+            HStack {
+                Text(title.uppercased()).font(.footnote)
+                Spacer()
             }
         }
     }
@@ -55,7 +37,6 @@ struct NumberPicker_Previews: PreviewProvider {
             title: "Score",
             values: Array(stride(from: 0, through: 10.0, by: 1.0)),
             selection: .constant(0.0),
-            cover: "jujutsu",
             format: "%.1f"
         )
     }
