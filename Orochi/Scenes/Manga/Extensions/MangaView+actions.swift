@@ -12,6 +12,9 @@ extension MangaView {
     @ViewBuilder
     func actions() -> some View {
         HStack {
+            // START READING BUTTON
+            self.startReadingButton()
+            Spacer()
             // ANILIST BUTTON
             self.aniListButton()
             // ADD/REMOVE BUTTON
@@ -19,6 +22,7 @@ extension MangaView {
         }
         .lineLimit(1)
         .fontWeight(.regular)
+        .listRowBackground(Color.clear)
     }
     
     /// Start reading button

@@ -59,6 +59,6 @@ struct MangaView: View {
 
 struct MangaView_Previews: PreviewProvider {
     static var previews: some View {
-        MangaView(MangaDomain.samples[9])
+        MangaView(MangaDomain.samples[10])
     }
 }

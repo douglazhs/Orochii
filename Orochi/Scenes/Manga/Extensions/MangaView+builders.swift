@@ -16,11 +16,14 @@ extension MangaView {
             Group {
                 // ALL MANGA INFORMATION
                 self.mangaInfoArea()
+                // MANGA ACTIONS
+                self.actions()
                 if !vm.search {
                     // MANGA DESCRIPTION
                     self.description()
                         .listSectionSeparator(.visible)
                 }
+                // MANGA CHAPTERS
                 self.chapters()
                     .listSectionSeparator(!vm.search ? .visible : .hidden)
             }
@@ -55,16 +58,8 @@ extension MangaView {
                     )
                     self.mangaTexts()
                 }.frame(maxHeight: CGSize.dynamicImage.height)
-                HStack {
-                    // START READING BUTTON
-                    self.startReadingButton()
-                    Spacer()
-                    // MANGA ACTIONS: ANILIST
-                    self.actions()
-                }
             }
-        }
-        .listRowBackground(DarkOverlay(image: manga.cover))
+        }.listRowBackground(DarkOverlay(image: manga.cover))
     }
     
     /// All grouped manga informations
