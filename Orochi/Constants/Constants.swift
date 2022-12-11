@@ -11,4 +11,5 @@ import SwiftUI
 enum Constants {
     /// Current user device
     static let device = UIDevice.current.userInterfaceIdiom
+    static let orientation = UIDevice.current.orientation
 }

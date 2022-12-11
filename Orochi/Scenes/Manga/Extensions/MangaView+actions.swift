@@ -53,13 +53,11 @@ extension MangaView {
         }
         .disabled(vm.occurredAct)
         .buttonStyle(.borderedProminent)
-        .sheet(isPresented: $vm.showAniList) {
+        .popover(isPresented: $vm.showAniList) {
             ALTracker(
                 of: manga,
                 action: $vm.occurredAct
-            )
-            .presentationDetents([.medium, .large])
-            .presentationDragIndicator(.visible)
+            ).presentationDragIndicator(.visible)
         }
     }
     

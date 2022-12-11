@@ -10,27 +10,29 @@ import SwiftUI
 struct ALTracker: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var vm = ALTrackerViewModel()
-    @State var pickerConfig = PickerConfig()
+    @State var height: CGFloat = UIScreen.height
     var manga: MangaDomain
     var action: Binding<Bool>
     
-    init(of manga: MangaDomain, action: Binding<Bool>) {
+    init(
+        of manga: MangaDomain,
+        action: Binding<Bool>
+    ) {
         self.manga = manga
         self.action = action
     }
     
     var body: some View {
-        NavigationStack {
-            self.content()
-                .background(BlurBackground(with: manga.cover).opacity(0.75))
-                .navigationTitle(String.Name.aniList)
-                .animation(.easeInOut(duration: 0.125), value: vm.currentPicker)
-                .toolbar {
-                    ToolbarItem(placement: .confirmationAction) {
-                        self.updateTrackingButton()
-                    }
+        self.content()
+            .background {
+                GeometryReader { proxy in
+                    Color.clear
+                        .onAppear {
+                            height = proxy.size.height
+                        }
                 }
-        }
+            }
+            .presentationDetents([.height(height)])
     }
 }
 

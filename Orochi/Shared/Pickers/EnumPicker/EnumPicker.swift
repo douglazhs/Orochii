@@ -20,6 +20,7 @@ struct EnumPicker<Enum: Pickable, Label: View>: View {
         Picker(selection: $selection) {
             ForEach(Array(Enum.allCases)) { value in
                 Text(value.description).tag(value)
+                    .font(.headline)
             }
         } label: { self.label }
     }

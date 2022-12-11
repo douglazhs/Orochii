@@ -11,71 +11,73 @@ extension ALTracker {
     /// Manga states section
     @ViewBuilder
     func statesSection() -> some View {
-        // CHAPTER CHOOSER
-        self.mangaChapters()
-        // VOLUME CHOOSER
-        self.mangaVol()
+        HStack {
+            // CHAPTER CHOOSER
+            self.mangaChapters()
+            // VOLUME CHOOSER
+            self.mangaVol()
+            // MANGA SCORE
+            self.scoreSection()
+        }
     }
     
     /// Manga chapters picker
     @ViewBuilder
     func mangaChapters() -> some View {
-        Section {
-            HStack {
-                TextField("", value: $vm.chapter, format: .number)
-                    .keyboardType(.numberPad)
-                Stepper("") {
-                    vm.chapter += 1
-                } onDecrement: {
-                    vm.chapter -= 1
-                }
-            }
-        } header: {
-            Text("CHAPTER")
-                .font(.footnote)
-        } footer: {
-            Text("TOTAL: 242")
+        VStack(alignment: .leading, spacing: 5.0) {
+            Text("CH.")
                 .font(.footnote)
                 .foregroundColor(.secondary)
+            Button { vm.currentPicker = .chapter } label: {
+                Text("\(String(format: "%.0f", vm.chapter)) / -")
+                    .frame(maxWidth: .infinity)
+                    .lineLimit(1)
+                    .font(.callout)
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(.primary.opacity(0.15))
         }
     }
     
     /// Manga volume picker
     @ViewBuilder
     func mangaVol() -> some View {
-        Section {
-            HStack {
-                TextField("", value: $vm.volume, format: .number)
-                    .keyboardType(.numberPad)
-                Stepper("") {
-                    vm.volume += 1
-                } onDecrement: {
-                    vm.volume -= 1
-                }
-            }
-        } header: {
-            Text("VOLUME")
-                .font(.footnote)
-        } footer: {
-            Text("TOTAL: Unknown")
+        VStack(alignment: .leading, spacing: 5) {
+            Text("VOL.")
                 .font(.footnote)
                 .foregroundColor(.secondary)
+            Button { vm.currentPicker = .volume } label: {
+                Text("\(String(format: "%.0f", vm.volume)) / -")
+                    .frame(maxWidth: .infinity)
+                    .lineLimit(1)
+                    .font(.callout)
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(.primary.opacity(0.15))
         }
     }
-    
+        
     /// Manga score section
     @ViewBuilder
     func scoreSection() -> some View {
-        Section {
-            HStack {
-                TextField("", value: $vm.score, format: .number)
-                    .keyboardType(.numberPad)
-                Stepper("") {
-                    vm.score += 1
-                } onDecrement: {
-                    vm.score -= 1
-                }
+        VStack(alignment: .leading, spacing: 5) {
+            Text("SCORE")
+                .font(.footnote)
+                .foregroundColor(.secondary)
+            Button { vm.currentPicker = .score } label: {
+                Text("\(String(format: "%.1f", vm.score)) / 10.0")
+                    .frame(maxWidth: .infinity)
+                    .lineLimit(1)
+                    .font(.callout)
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
             }
+            .buttonStyle(.borderedProminent)
+            .tint(.primary.opacity(0.15))
         }
     }
 }
