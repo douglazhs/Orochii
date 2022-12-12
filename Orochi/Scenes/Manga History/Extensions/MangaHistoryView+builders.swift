@@ -53,10 +53,10 @@ extension MangaHistoryView {
     /// Clear manga history button
     @ViewBuilder
     func clearHistoryButton() -> some View {
-        Button(role: .destructive) {
+        Button("Clear", role: .destructive) {
             // TODO: - Clear a specific manga history
             showConfirmAction = true
-        } label: { Image(systemName: "trash") }
+        }
         .tint(.red)
         .alert("Clear History", isPresented: $showConfirmAction) {
             Button("Clear", role: .destructive) {
