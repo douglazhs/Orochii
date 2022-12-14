@@ -181,7 +181,7 @@ extension MangaView {
         }
         .buttonStyle(.borderedProminent)
         .tint(.accentColor)
-        .sheet(isPresented: $vm.showHistory) {
+        .sheet(isPresented: $showHistory) {
             MangaHistoryView(of: manga, action: $vm.occurredAct)
                 .presentationDetents([.medium, .large])
         }

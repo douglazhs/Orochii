@@ -59,6 +59,11 @@
 		50CAD2EC29383B04000C1C0E /* ALTracker+dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAD2EB29383B04000C1C0E /* ALTracker+dates.swift */; };
 		50CAD2EE29383B86000C1C0E /* ALTracker+states.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAD2ED29383B86000C1C0E /* ALTracker+states.swift */; };
 		50CAD2F029383BE9000C1C0E /* ALTracker+manga.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAD2EF29383BE9000C1C0E /* ALTracker+manga.swift */; };
+		50CE85BF2948C4EB00169922 /* RepresentableSheet+modifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE85BE2948C4EB00169922 /* RepresentableSheet+modifier.swift */; };
+		50CE85C12948C54900169922 /* RepresentableSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE85C02948C54900169922 /* RepresentableSheet.swift */; };
+		50CE85C32948C56800169922 /* RepresentableSheet+configutation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE85C22948C56800169922 /* RepresentableSheet+configutation.swift */; };
+		50CE85C62948C5A200169922 /* MeasureSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE85C52948C5A200169922 /* MeasureSize.swift */; };
+		50CE85C92948C61700169922 /* SizePreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CE85C82948C61700169922 /* SizePreference.swift */; };
 		50D7F2852940AC8600FE4814 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50D7F2842940AC8600FE4814 /* Constants.swift */; };
 		50E02110293D276F001C85B5 /* DarkOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50E0210F293D276F001C85B5 /* DarkOverlay.swift */; };
 		50F44429292E4244001B3CF4 /* ChapterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50F44428292E4244001B3CF4 /* ChapterView.swift */; };
@@ -164,6 +169,11 @@
 		50CAD2EB29383B04000C1C0E /* ALTracker+dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALTracker+dates.swift"; sourceTree = "<group>"; };
 		50CAD2ED29383B86000C1C0E /* ALTracker+states.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALTracker+states.swift"; sourceTree = "<group>"; };
 		50CAD2EF29383BE9000C1C0E /* ALTracker+manga.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALTracker+manga.swift"; sourceTree = "<group>"; };
+		50CE85BE2948C4EB00169922 /* RepresentableSheet+modifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepresentableSheet+modifier.swift"; sourceTree = "<group>"; };
+		50CE85C02948C54900169922 /* RepresentableSheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepresentableSheet.swift; sourceTree = "<group>"; };
+		50CE85C22948C56800169922 /* RepresentableSheet+configutation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RepresentableSheet+configutation.swift"; sourceTree = "<group>"; };
+		50CE85C52948C5A200169922 /* MeasureSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MeasureSize.swift; sourceTree = "<group>"; };
+		50CE85C82948C61700169922 /* SizePreference.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SizePreference.swift; sourceTree = "<group>"; };
 		50D7F2842940AC8600FE4814 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		50E0210F293D276F001C85B5 /* DarkOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DarkOverlay.swift; sourceTree = "<group>"; };
 		50F44428292E4244001B3CF4 /* ChapterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterView.swift; sourceTree = "<group>"; };
@@ -601,6 +611,33 @@
 			path = "Manga Reader Toolbar";
 			sourceTree = "<group>";
 		};
+		50CE85BD2948C4CC00169922 /* Representable Sheet */ = {
+			isa = PBXGroup;
+			children = (
+				50CE85BE2948C4EB00169922 /* RepresentableSheet+modifier.swift */,
+				50CE85C02948C54900169922 /* RepresentableSheet.swift */,
+				50CE85C22948C56800169922 /* RepresentableSheet+configutation.swift */,
+			);
+			path = "Representable Sheet";
+			sourceTree = "<group>";
+		};
+		50CE85C42948C59200169922 /* Measure Size */ = {
+			isa = PBXGroup;
+			children = (
+				50CE85C52948C5A200169922 /* MeasureSize.swift */,
+				50CE85C72948C5FB00169922 /* Tools */,
+			);
+			path = "Measure Size";
+			sourceTree = "<group>";
+		};
+		50CE85C72948C5FB00169922 /* Tools */ = {
+			isa = PBXGroup;
+			children = (
+				50CE85C82948C61700169922 /* SizePreference.swift */,
+			);
+			path = Tools;
+			sourceTree = "<group>";
+		};
 		50D7F2832940AC7300FE4814 /* Constants */ = {
 			isa = PBXGroup;
 			children = (
@@ -703,6 +740,8 @@
 		50F4443F292E9293001B3CF4 /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
+				50CE85C42948C59200169922 /* Measure Size */,
+				50CE85BD2948C4CC00169922 /* Representable Sheet */,
 				50CAD2F129384D8F000C1C0E /* Manga Reader Toolbar */,
 				50F44442292E938A001B3CF4 /* Always Popover */,
 			);
@@ -1151,6 +1190,7 @@
 				50FFAFDC292A668000B87E0E /* LanguagesView.swift in Sources */,
 				50F44448292E9442001B3CF4 /* UIView+extension.swift in Sources */,
 				50FFAFF4292A84EE00B87E0E /* InitialStyleView.swift in Sources */,
+				50CE85C32948C56800169922 /* RepresentableSheet+configutation.swift in Sources */,
 				50FE08DD292D9D0200432F21 /* WebsiteStandardCell.swift in Sources */,
 				5092DF612929831D0094DC18 /* SourcePreferencesView.swift in Sources */,
 				5092DF4A2929465B0094DC18 /* SettingsView.swift in Sources */,
@@ -1160,6 +1200,7 @@
 				50FFAFEC292A836300B87E0E /* MangaStandardCell.swift in Sources */,
 				50FE08D7292D826100432F21 /* Image+appImages.swift in Sources */,
 				506EEBF829364D3300D89777 /* MangaView+filters.swift in Sources */,
+				50CE85C92948C61700169922 /* SizePreference.swift in Sources */,
 				50FFAFF7292A8C8800B87E0E /* LibraryViewModel.swift in Sources */,
 				50639B46293A3CF700D8E3CB /* HistoryChapterCell+builders.swift in Sources */,
 				50FE08D0292D035600432F21 /* PrimaryGradient.swift in Sources */,
@@ -1184,6 +1225,7 @@
 				50FFB013292AD35000B87E0E /* OrderFilter.swift in Sources */,
 				50FFAFFF292A98C000B87E0E /* MangaStandardImage.swift in Sources */,
 				50FFB00B292AB3DA00B87E0E /* LibraryFilterView+builders.swift in Sources */,
+				50CE85BF2948C4EB00169922 /* RepresentableSheet+modifier.swift in Sources */,
 				50F44434292E5844001B3CF4 /* ReaderPreferencesView.swift in Sources */,
 				50F4444A292F02CC001B3CF4 /* CGSize+extension.swift in Sources */,
 				50FFAFE1292A6ACD00B87E0E /* MangaQuality.swift in Sources */,
@@ -1197,6 +1239,7 @@
 				50FFB011292ACE6200B87E0E /* DemoPublic.swift in Sources */,
 				50F4443E292E6645001B3CF4 /* ReadingMode.swift in Sources */,
 				500183CD292C0D270094B223 /* ChapterStandardCell+builders.swift in Sources */,
+				50CE85C62948C5A200169922 /* MeasureSize.swift in Sources */,
 				5092DF5629296FFA0094DC18 /* MangaDomain.swift in Sources */,
 				503019AB2934D85F00F5645F /* ALTracker+builders.swift in Sources */,
 				50FE08DA292D8A6900432F21 /* EnumPicker.swift in Sources */,
@@ -1221,6 +1264,7 @@
 				50F44437292E58A4001B3CF4 /* ReaderPreferencesView+builders.swift in Sources */,
 				5092DF35292942A30094DC18 /* DiscoverView.swift in Sources */,
 				5007A5022933AE3300EAAB84 /* MangaView+editablle.swift in Sources */,
+				50CE85C12948C54900169922 /* RepresentableSheet.swift in Sources */,
 				503019A42934212700F5645F /* UIApplications+extension.swift in Sources */,
 				5056563C2932597F0061FD15 /* LanguagePicker.swift in Sources */,
 				507803DA292DC03C0041D5BD /* LoadingView.swift in Sources */,

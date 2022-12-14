@@ -16,6 +16,8 @@ struct MangaView: View {
     @EnvironmentObject var router: Router
     var manga: MangaDomain
     @StateObject var vm: MangaViewModel = MangaViewModel()
+    @State var showAniList: Bool = false
+    @State var showHistory: Bool = false
     @State var showChapterReader: Bool = false
     @State var searchOffset: CGFloat = -UIScreen.width
     @State var headerOffset: CGFloat = 0

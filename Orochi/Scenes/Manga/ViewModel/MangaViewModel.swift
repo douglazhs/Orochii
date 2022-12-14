@@ -15,8 +15,6 @@ class MangaViewModel: ObservableObject {
     @Published var selection = Set<UUID>()
     @Published var isEditingMode: Bool = false
     @Published var showBottomBar: Bool = false
-    @Published var showHistory: Bool = false
-    @Published var showAniList: Bool = false
     @Published var downloaded: Bool = false
     @Published var chaptersOrder: OrderFilter = .ascending
     @Published var btnAction: MangaActions?
@@ -58,7 +56,7 @@ class MangaViewModel: ObservableObject {
     /// - Parameter clear: clear or not the history
     private func historyHandler(_ clear: Bool) {
         if !clear {
-            showHistory = true
+
         } else {
             clearHistory()
         }
@@ -73,9 +71,7 @@ class MangaViewModel: ObservableObject {
     }
     
     /// Anilist update action
-    private func anilistHandler() {
-        showAniList = true
-    }
+    private func anilistHandler() { }
     
     /// Build pop up message
     func buildPopUp() {

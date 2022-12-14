@@ -63,6 +63,20 @@ extension ReaderToolbar {
         }
     }
     
+    /// Reader preferences trailing button
+    @ViewBuilder
+    func readerPreferences() -> some View {
+        Button {
+            showReaderPreferences = true
+        } label: {
+            Image(systemName: "book")
+        }
+        .sheet(isPresented: $showReaderPreferences) {
+            ReaderPreferencesView()
+                .environmentObject(vm)
+        }
+    }
+    
     /// Manga page slider
     @ViewBuilder
     func pageSlider() -> some View {
