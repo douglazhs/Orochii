@@ -11,7 +11,7 @@ extension ChapterView {
     @ViewBuilder
     /// Main view content
     func content() -> some View {
-        ZStack {
+        ZStack(alignment: .center) {
             Color.black.edgesIgnoringSafeArea(.all)
             self.mangaPage()
                 .contextMenu {
