@@ -14,23 +14,19 @@ struct ChapterListStandardCell: View {
         self.chapter = chapter
     }
     var body: some View {
-        HStack(alignment: .center, spacing: 5.0) {
+        HStack(alignment: .center, spacing: 12.5) {
+            // INFORMATIONS, AS CHAPTER NUMBER, VOLUME AND PAGES
             VStack {
-                Text("CH. **\(chapter.number)**")
+                Text("**CH. \(chapter.number)**")
                 Text("**\(chapter.volume)**")
                 Text("**\(chapter.pages)** pages")
             }
             .font(.caption2)
             .foregroundColor(Color(uiColor: .systemGray))
-            Divider()
-            VStack (alignment: .leading, spacing: 7.5){
-                Text(chapter.title)
-                    .font(.subheadline)
-                    .fontWeight(.medium)
-                Text(chapter.language)
-                    .font(.caption2)
-                    .foregroundColor(Color(uiColor: .systemGray))
-            }
+            // TITLE
+            Text(chapter.title)
+                .font(.subheadline)
+                .fontWeight(.medium)
         }
     }
 }

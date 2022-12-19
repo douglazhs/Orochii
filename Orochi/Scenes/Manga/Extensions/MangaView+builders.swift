@@ -8,21 +8,21 @@
 import SwiftUI
 
 extension MangaView {
-    /// Manga all content
-    /// - Returns: All manga information, including the chapters
+    /// All manga information, including  chapters
     @ViewBuilder
     func content() -> some View {
         List(selection: $vm.selection) {
             Group {
                 // ALL MANGA INFORMATION
                 self.mangaInfoArea()
+                // MANGA ACTIONS
+                self.actions()
                 if !vm.search {
-                    // MANGA ACTIONS: ANILIST
-                    self.actions()
                     // MANGA DESCRIPTION
                     self.description()
                         .listSectionSeparator(.visible)
                 }
+                // MANGA CHAPTERS
                 self.chapters()
                     .listSectionSeparator(!vm.search ? .visible : .hidden)
             }
@@ -42,22 +42,23 @@ extension MangaView {
         )
     }
     
-    /// Manga info header
+    /// Manga information area, contatining all main details
     @ViewBuilder
     func mangaInfoArea() -> some View {
         Section {
-            HStack {
-                MangaStandardImage(
-                    cover: manga.cover,
-                    size: CGSize(
-                        width: CGSize.dynamicImage.width,
-                        height: CGSize.dynamicImage.height
+            VStack(alignment: .leading) {
+                HStack {
+                    MangaStandardImage(
+                        cover: manga.cover,
+                        size: CGSize(
+                            width: CGSize.dynamicImage.width,
+                            height: CGSize.dynamicImage.height
+                        )
                     )
-                )
-                self.mangaTexts()
-            }.frame(maxHeight: CGSize.dynamicImage.height)
-        }
-        .listRowBackground(DarkOverlay(image: manga.cover))
+                    self.mangaTexts()
+                }.frame(maxHeight: CGSize.dynamicImage.height)
+            }
+        }.listRowBackground(DarkOverlay(image: manga.cover))
     }
     
     /// All grouped manga informations
@@ -82,8 +83,6 @@ extension MangaView {
                 .leading
             ).lineLimit(2)
             Spacer()
-            // START READING BUTTON
-            self.startReadingButton()
         }.padding(.leading, 5)
     }
     

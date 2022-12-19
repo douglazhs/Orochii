@@ -24,7 +24,7 @@ struct MangaHistoryView: View {
                 .navigationTitle("History")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
-                    ToolbarItem(placement: .destructiveAction) {
+                    ToolbarItem(placement: .navigationBarTrailing) {
                         self.clearHistoryButton()
                     }
                 }
@@ -34,6 +34,9 @@ struct MangaHistoryView: View {
 
 struct MangaHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        MangaHistoryView(of: MangaDomain.samples[0], action: .constant(true))
+        MangaHistoryView(
+            of: MangaDomain.samples[0],
+            action: .constant(true)
+        )
     }
 }

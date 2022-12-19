@@ -39,6 +39,12 @@ extension MangaView {
             Text(title)
                 .font(.caption2)
                 .foregroundColor(Color(uiColor: .systemGray))
+                .shadow(
+                    color: .black.opacity(0.5),
+                    radius: 2.25,
+                    x: 1.0,
+                    y: 1.0
+                )
             Text(description)
                 .font(.caption)
                 .fontWeight(.semibold)

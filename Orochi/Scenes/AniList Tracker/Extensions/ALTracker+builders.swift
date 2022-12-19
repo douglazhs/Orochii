@@ -11,18 +11,21 @@ extension ALTracker {
     /// All view content
     @ViewBuilder
     func content() -> some View {
-        VStack(alignment: .leading, spacing: 10) {
-            self.actionsButtons()
+        VStack(spacing: 22) {
+            // UPDATE BUTTON
+            self.updateTrackingButton()
+            // MANGA INFORMATION
             self.mangaSection()
-            self.statesSection()
-            self.scoreSection()
-            self.dateSection()
+            // ANILIST ACTIONS
+            self.pickers()
         }
+        .padding()
+        .background(BlurBackground(with: manga.cover))
     }
     
     /// Update anilist button
     @ViewBuilder
-    func actionsButtons() -> some View {
+    func updateTrackingButton() -> some View {
         HStack {
             Spacer()
             Button {
@@ -31,10 +34,17 @@ extension ALTracker {
                     action.wrappedValue = true
                 }
                 Haptics.shared.notify(.success)
-                dismiss()
+                isPresented = false
             } label: { Text("Update").fontWeight(.semibold) }
+            .tint(.indigo)
+            .buttonStyle(.borderless)
         }
-        .tint(.indigo)
-        .buttonStyle(.borderless)
+    }
+    
+    /// Current manga context
+    @ViewBuilder
+    func pickers() -> some View {
+        self.statesSection()
+        self.dateSection()
     }
 }

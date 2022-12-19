@@ -34,15 +34,7 @@ struct ReaderToolbar: ViewModifier {
                         }
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    Button { showReaderPreferences = true } label:
-                    { Image(systemName: "book") }
-                    .sheet(isPresented: $showReaderPreferences) {
-                        ReaderPreferencesView()
-                            .environmentObject(vm)
-                            .presentationDragIndicator(.visible)
-                    }
-                }
+                ToolbarItem(placement: .navigationBarTrailing) { self.readerPreferences() }
                 ToolbarItem(placement: .principal) { self.principalItem() }
                 ToolbarItem(placement: .bottomBar) { self.pageSlider() }
             }

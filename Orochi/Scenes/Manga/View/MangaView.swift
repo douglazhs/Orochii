@@ -16,8 +16,10 @@ struct MangaView: View {
     @EnvironmentObject var router: Router
     var manga: MangaDomain
     @StateObject var vm: MangaViewModel = MangaViewModel()
+    @State var showAniList: Bool = false
+    @State var showHistory: Bool = false
     @State var showChapterReader: Bool = false
-    @State var searchOffset: CGFloat = -UIScreen.width
+    @State var searchOffset: CGFloat = -UIScreen.width * 2
     @State var headerOffset: CGFloat = 0
     @FocusState var field: Field?
     
@@ -59,6 +61,6 @@ struct MangaView: View {
 
 struct MangaView_Previews: PreviewProvider {
     static var previews: some View {
-        MangaView(MangaDomain.samples[9])
+        MangaView(MangaDomain.samples[10])
     }
 }

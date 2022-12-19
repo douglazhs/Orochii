@@ -10,33 +10,30 @@ import SwiftUI
 struct ALTracker: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var vm = ALTrackerViewModel()
+    @Binding var isPresented: Bool
     var manga: MangaDomain
     var action: Binding<Bool>
     
-    init(of manga: MangaDomain, action: Binding<Bool>) {
+    init(
+        isPresented: Binding<Bool>,
+        of manga: MangaDomain,
+        action: Binding<Bool>
+    ) {
+        self._isPresented = isPresented
         self.manga = manga
         self.action = action
     }
     
     var body: some View {
         self.content()
-            .padding()
-            .background {
-                GeometryReader { proxy in
-                    Color.clear
-                        .onAppear { vm.sheetHeight = proxy.size.height }
-                }
-            }
-            .presentationDetents([.height(vm.sheetHeight)])
-            .presentationDragIndicator(.visible)
-            .background(BlurBackground(with: manga.cover).opacity(0.75))
     }
 }
 
 struct ALTracker_Previews: PreviewProvider {
     static var previews: some View {
         ALTracker(
-            of: MangaDomain.samples[0],
+            isPresented: .constant(true),
+            of: MangaDomain.samples[1],
             action: .constant(true)
         )
     }

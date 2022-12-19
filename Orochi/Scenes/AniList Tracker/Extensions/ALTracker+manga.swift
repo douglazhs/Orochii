@@ -11,23 +11,24 @@ extension ALTracker {
     /// Manga information
     @ViewBuilder
     func mangaSection() -> some View {
-        HStack(alignment: .top, spacing: 5) {
-            // MANGA COVER
-            Image(manga.cover)
-                .resizable()
-                .cornerRadius(2.5)
-                .frame(width: 65, height: 90)
-            VStack(alignment: .leading) {
-                // TITLE & YEAR
-                self.titleYear()
-                // MANGA AUTHOR
-                Text(manga.author)
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                Spacer()
-                self.status()
-            }
-        }.frame(maxHeight: 90)
+        VStack {
+            HStack(alignment: .top, spacing: 5) {
+                // MANGA COVER
+                Image(manga.cover)
+                    .resizable()
+                    .cornerRadius(2.5)
+                    .frame(width: 65, height: 90)
+                VStack(alignment: .leading) {
+                    // TITLE & YEAR
+                    self.titleYear()
+                    // MANGA AUTHOR
+                    Text(manga.author)
+                        .font(.subheadline)
+                        .foregroundColor(.secondary)
+                    Spacer()
+                }
+            }.frame(maxHeight: 90)
+        }
     }
     
     /// Manga title and release year
@@ -50,12 +51,7 @@ extension ALTracker {
     /// Manga tracking status
     @ViewBuilder
     func status() -> some View {
-        HStack {
-            Spacer()
-            // STATUS
-            EnumPicker("", selection: $vm.status)
-                .pickerStyle(.menu)
-                .buttonStyle(.borderedProminent)
-        }
+        EnumPicker("", selection: $vm.status)
+            .pickerStyle(.wheel)
     }
 }

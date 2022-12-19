@@ -11,99 +11,73 @@ extension ALTracker {
     /// Manga states section
     @ViewBuilder
     func statesSection() -> some View {
-        HStack(alignment: .center) {
+        HStack {
             // CHAPTER CHOOSER
             self.mangaChapters()
-            Spacer()
             // VOLUME CHOOSER
             self.mangaVol()
+            // MANGA SCORE
+            self.scoreSection()
         }
     }
     
     /// Manga chapters picker
     @ViewBuilder
     func mangaChapters() -> some View {
-        let chaptersNumber = Array(stride(
-            from: 0,
-            through: 1000.0,
-            by: 1.0)
-        )
-        Section {
-            Button { vm.showChapterPicker = true } label: {
-                Text("\(String(format: "%.0f", vm.chapter)) | -")
+        VStack(alignment: .leading, spacing: 5.0) {
+            Text("CH.")
+                .font(.footnote)
+                .foregroundColor(.secondary)
+            Button { vm.currentPicker = .chapter } label: {
+                Text("\(String(format: "%.0f", vm.chapter)) / -")
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(.secondary)
                     .lineLimit(1)
-            }.buttonStyle(.bordered)
-            .tint(.secondary)
-        } header: { Text("CH.").font(.footnote) }
-        .sheet(isPresented: $vm.showChapterPicker) {
-            NumberPicker(
-                title: "Chapter",
-                values: chaptersNumber,
-                selection: $vm.chapter,
-                cover: manga.cover,
-                format: "%.0f"
-            )
-            .presentationDetents([.height(vm.sheetHeight)])
+                    .font(.callout)
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(.primary.opacity(0.15))
         }
     }
     
     /// Manga volume picker
     @ViewBuilder
     func mangaVol() -> some View {
-        let volumesNumber = Array(stride(
-            from: 0,
-            through: 1000.0,
-            by: 1.0)
-        )
-        Section {
-            Button { vm.showVolumePicker = true } label: {
-                Text("\(String(format: "%.0f", vm.volume)) | -")
+        VStack(alignment: .leading, spacing: 5) {
+            Text("VOL.")
+                .font(.footnote)
+                .foregroundColor(.secondary)
+            Button { vm.currentPicker = .volume } label: {
+                Text("\(String(format: "%.0f", vm.volume)) / -")
                     .frame(maxWidth: .infinity)
-                    .foregroundColor(.secondary)
                     .lineLimit(1)
-            }.buttonStyle(.bordered)
-            .tint(.secondary)
-        } header: { Text("VOL.").font(.footnote) }
-        .sheet(isPresented: $vm.showVolumePicker) {
-            NumberPicker(
-                title: "Volume",
-                values: volumesNumber,
-                selection: $vm.volume,
-                cover: manga.cover,
-                format: "%.0f"
-            )
-            .presentationDetents([.height(vm.sheetHeight)])
+                    .font(.callout)
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(.primary.opacity(0.15))
         }
     }
-    
+        
     /// Manga score section
     @ViewBuilder
     func scoreSection() -> some View {
-        let scoreNumbers = Array(stride(
-            from: 0,
-            through: 10.0,
-            by: 1.0)
-        )
-        Section {
-            Button { vm.showScorePicker = true } label: {
-                Text("\(String(format: "%.1f", vm.score)) | 10.0")
-                    .foregroundColor(.secondary)
+        VStack(alignment: .leading, spacing: 5) {
+            Text("SCORE")
+                .font(.footnote)
+                .foregroundColor(.secondary)
+            Button { vm.currentPicker = .score } label: {
+                Text("\(String(format: "%.1f", vm.score)) / 10.0")
                     .frame(maxWidth: .infinity)
                     .lineLimit(1)
-            }.buttonStyle(.bordered)
-            .tint(.secondary)
-        } header: { Text("SCORE").font(.footnote) }
-        .sheet(isPresented: $vm.showScorePicker) {
-            NumberPicker(
-                title: "Score",
-                values: scoreNumbers,
-                selection: $vm.score,
-                cover: manga.cover,
-                format: "%.1f"
-            )
-            .presentationDetents([.height(vm.sheetHeight)])
+                    .font(.callout)
+                    .fontWeight(.medium)
+                    .foregroundColor(.primary)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(.primary.opacity(0.15))
         }
     }
 }
