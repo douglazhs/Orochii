@@ -161,29 +161,4 @@ extension MangaView {
         .tint(.accentColor)
         .buttonStyle(.borderedProminent)
     }
-    
-    /// Chapters history button
-    @ViewBuilder
-    func history() -> some View {
-        Menu {
-            Button {
-                vm.startAction(for: .history(clear: true))
-            } label:
-            { Label("View", systemImage: "eye.fill") }
-            Button(role: .destructive) {
-                vm.startAction(for: .history(clear: false))
-            } label:
-            { Label("Clear", systemImage: "trash") }
-        } label: {
-            Image(systemName: "clock.arrow.circlepath")
-                .foregroundColor(.primary)
-                .font(.footnote)
-        }
-        .buttonStyle(.borderedProminent)
-        .tint(.accentColor)
-        .sheet(isPresented: $showHistory) {
-            MangaHistoryView(of: manga, action: $vm.occurredAct)
-                .presentationDetents([.medium, .large])
-        }
-    }
 }

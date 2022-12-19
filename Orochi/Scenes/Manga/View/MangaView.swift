@@ -19,7 +19,7 @@ struct MangaView: View {
     @State var showAniList: Bool = false
     @State var showHistory: Bool = false
     @State var showChapterReader: Bool = false
-    @State var searchOffset: CGFloat = -UIScreen.width
+    @State var searchOffset: CGFloat = -UIScreen.width * 2
     @State var headerOffset: CGFloat = 0
     @FocusState var field: Field?
     

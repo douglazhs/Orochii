@@ -45,7 +45,10 @@ extension MangaView {
     /// AniList tracking button
     @ViewBuilder
     func aniListButton() -> some View {
-        Button { showAniList = true } label: {
+        Button {
+            showAniList = true
+            vm.startAction(for: .aniList)
+        } label: {
             Image(systemName: "externaldrive.fill")
                 .foregroundColor(.primary)
                 .font(.footnote)
@@ -90,6 +93,7 @@ extension MangaView {
         Menu {
             Button {
                 showHistory = true
+                vm.startAction(for: .history(clear: false))
             } label: {
                 Label("View", systemImage: "eye.fill")
             }

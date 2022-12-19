@@ -8,8 +8,7 @@
 import SwiftUI
 
 extension MangaView {
-    /// Manga all content
-    /// - Returns: All manga information, including the chapters
+    /// All manga information, including  chapters
     @ViewBuilder
     func content() -> some View {
         List(selection: $vm.selection) {
@@ -43,7 +42,7 @@ extension MangaView {
         )
     }
     
-    /// Manga info header
+    /// Manga information area, contatining all main details
     @ViewBuilder
     func mangaInfoArea() -> some View {
         Section {

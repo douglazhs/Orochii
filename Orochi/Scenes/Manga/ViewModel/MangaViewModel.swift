@@ -17,7 +17,6 @@ class MangaViewModel: ObservableObject {
     @Published var showBottomBar: Bool = false
     @Published var downloaded: Bool = false
     @Published var chaptersOrder: OrderFilter = .ascending
-    @Published var btnAction: MangaActions?
     @Published var queryFilter: String = ""
     @Published var search: Bool = false
     @Published var actionMessage: String = ""
@@ -25,48 +24,45 @@ class MangaViewModel: ObservableObject {
     /// Start action when a button is pressed
     /// - Parameter action: Actual action
     func startAction(for action: MangaActions) {
-        btnAction = action
         switch action {
-        case .aniList: anilistHandler()
+        case .aniList:            anilistHandler()
         case .history(let clear): historyHandler(clear)
-        case .lib: mangaOnLib ? removeFromLib() : addToLib()
+        case .lib:                libraryHandler()
         }
-        buildPopUp()
+        buildPopUp(for: action)
     }
     
     /// Add manga to library
-    private func addToLib() {
-        withAnimation(.linear(duration: 0.175)) {
-            occurredAct = true
-        }
+    private func addToLib() throws {
+        withAnimation(.linear(duration: 0.175)) { occurredAct = true }
         mangaOnLib = true
         Haptics.shared.notify(.success)
     }
     
     /// Remove manga from library
-    private func removeFromLib() {
-        withAnimation(.linear(duration: 0.175)) {
-            occurredAct = true
-        }
+    private func removeFromLib() throws {
+        withAnimation(.linear(duration: 0.175)) { occurredAct = true }
         mangaOnLib = false
         Haptics.shared.notify(.error)
     }
     
-    /// History actions
-    /// - Parameter clear: clear or not the history
-    private func historyHandler(_ clear: Bool) {
-        if !clear {
-
-        } else {
-            clearHistory()
+    /// Handle manga actions
+    private func libraryHandler() {
+        do {
+            mangaOnLib ? try removeFromLib() :  try addToLib()
+        } catch {
+            print(error.localizedDescription)
         }
+    }
+    
+    /// History actions
+    private func historyHandler(_ clear: Bool) {
+        if clear { clearHistory() }
     }
     
     /// Clear manga history
     private func clearHistory() {
-        withAnimation(.linear(duration: 0.175)) {
-            occurredAct = true
-        }
+        withAnimation(.linear(duration: 0.175)) { occurredAct = true }
         Haptics.shared.notify(.error)
     }
     
@@ -74,15 +70,14 @@ class MangaViewModel: ObservableObject {
     private func anilistHandler() { }
     
     /// Build pop up message
-    func buildPopUp() {
-        switch btnAction {
+    private func buildPopUp(for action: MangaActions) {
+        switch action {
         case .lib:
             actionMessage = mangaOnLib ? "Successfully Added" : "Successfully Removed"
         case .aniList:
             actionMessage = "Successfully Updated"
         case .history:
             actionMessage = "Successfully Cleared"
-        default: break
         }
     }
 }
