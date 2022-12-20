@@ -144,6 +144,7 @@
 		507803D1292DB5F40041D5BD /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
 		507803D9292DC03C0041D5BD /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		507803DB292DC0530041D5BD /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
+		508C2DCC2950AB4800355F13 /* Orochii-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Orochii-Info.plist"; sourceTree = "<group>"; };
 		508D1B8E2936FE900069012C /* ActionPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPopUp.swift; sourceTree = "<group>"; };
 		508D1B902937055A0069012C /* Haptics+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Haptics+extension.swift"; sourceTree = "<group>"; };
 		5092DF2129292C590094DC18 /* Orochii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orochii.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -435,6 +436,7 @@
 		5092DF1829292C590094DC18 = {
 			isa = PBXGroup;
 			children = (
+				508C2DCC2950AB4800355F13 /* Orochii-Info.plist */,
 				5092DF2329292C590094DC18 /* Orochi */,
 				5092DF2229292C590094DC18 /* Products */,
 			);
@@ -1426,7 +1428,7 @@
 				DEVELOPMENT_TEAM = 22298649MR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = "Orochii-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -1456,7 +1458,7 @@
 				DEVELOPMENT_TEAM = 22298649MR;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_FILE = "Orochii-Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
