@@ -65,7 +65,7 @@ extension MangaView {
                 mass: 2.0,
                 stiffness: 5,
                 damping: 5,
-                initialVelocity: 0).speed(5)
+                initialVelocity: 0).speed(10)
             ) {
                 searchOffset = -UIScreen.width
                 headerOffset = 0
@@ -108,7 +108,7 @@ extension MangaView {
                 mass: 2.0,
                 stiffness: 5,
                 damping: 5,
-                initialVelocity: 0).speed(5)
+                initialVelocity: 0).speed(9.5)
             ) {
                 searchOffset = 0
                 headerOffset = UIScreen.width

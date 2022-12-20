@@ -15,9 +15,9 @@ extension MangaView {
             Group {
                 // ALL MANGA INFORMATION
                 self.mangaInfoArea()
-                // MANGA ACTIONS
-                self.actions()
                 if !vm.search {
+                    // MANGA ACTIONS
+                    self.actions()
                     // MANGA DESCRIPTION
                     self.description()
                         .listSectionSeparator(.visible)
