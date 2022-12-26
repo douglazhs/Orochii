@@ -24,7 +24,6 @@ struct SettingsView: View {
                     .listRowBackground(Color.clear)
             }
             .listStyle(.grouped)
-            .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(
                 Color.indigo.opacity(0.075),
                 for: .navigationBar

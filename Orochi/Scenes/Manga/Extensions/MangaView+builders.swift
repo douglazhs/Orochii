@@ -122,7 +122,8 @@ extension MangaView {
                     ChapterStandardCell(chapter, editingMode: vm.isEditingMode)
                         .foregroundColor(chapter.read ? Color(uiColor: .systemGray) : Color.primary)
                         .id(chapter.id)
-                }.contextMenu {
+                }
+                .contextMenu {
                     ChapterMenu() { _ in
                         // TODO: - Handle context menu actions
                     }

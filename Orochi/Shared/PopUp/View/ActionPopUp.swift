@@ -17,6 +17,7 @@ struct ActionPopUp: View {
             Text(title)
                 .font(.headline)
                 .fontWeight(.semibold)
+                .lineLimit(1)
             if action.wrappedValue {
                 Text(message)
                     .lineLimit(1)

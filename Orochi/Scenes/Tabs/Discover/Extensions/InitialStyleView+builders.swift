@@ -11,7 +11,8 @@ extension InitialStyleView {
     /// Carousel
     /// - Parameter mangas: Retrieved mangas
     /// - Returns: Carousel of mangas
-    @ViewBuilder func carousel(of mangas: [MangaDomain]) -> some View {
+    @ViewBuilder
+    func carousel(of mangas: [MangaDomain]) -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(alignment: .top) {
                 ForEach(mangas) { manga in
@@ -39,7 +40,8 @@ extension InitialStyleView {
     /// Manga carousel cell
     /// - arameter manga: Current manga
     /// - Returns: Custom carousel manga cell
-    @ViewBuilder func cell(of manga: MangaDomain) -> some View {
+    @ViewBuilder
+    func cell(of manga: MangaDomain) -> some View {
         VStack {
             MangaStandardImage(
                 cover: manga.cover,

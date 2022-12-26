@@ -67,28 +67,27 @@ extension MangaStandardCell {
     /// All manga genres
     @ViewBuilder
     func allGenres() -> some View {
-            HStack(alignment: .top) {
-                if Constants.device == .pad {
-                    ForEach(manga.genres, id: \.self) { genre in
-                        Text(genre)
-                            .padding(3.5)
-                            .background {
-                                Color.primary.opacity(0.1)
-                                    .cornerRadius(4.5)
-                            }
-                    }
-                } else {
-                    Text(manga.genres.joined(separator: ", "))
+        HStack(alignment: .top) {
+            if Constants.device == .pad {
+                ForEach(manga.genres, id: \.self) { genre in
+                    Text(genre)
+                        .padding(3.5)
+                        .background {
+                            Color.primary.opacity(0.1)
+                                .cornerRadius(4.5)
+                        }
                 }
+            } else {
+                Text(manga.genres.joined(separator: ", "))
             }
-            .font(.caption2)
-            .fontWeight(.medium)
-            .lineLimit(1)
-            .foregroundColor(.secondary)
+        }
+        .font(.caption2)
+        .fontWeight(.medium)
+        .lineLimit(1)
+        .foregroundColor(.secondary)
     }
     
     /// Main manga information
-    /// - Returns: VStack with main information
     @ViewBuilder
     func main() -> some View {
         HStack {
@@ -99,12 +98,6 @@ extension MangaStandardCell {
                 manga.status.config.color
             )
             Spacer()
-            // LAST TIME UPDATED
-            self.infoLabel(
-                manga.lastUpdated,
-                "arrow.triangle.2.circlepath",
-                Color(uiColor: .systemGray)
-            )
         }.foregroundColor(Color(uiColor: .systemGray))
     }
 

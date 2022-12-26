@@ -22,15 +22,6 @@ struct LibraryView: View {
                     }
                 }
                 .navigationTitle(String.Library.title)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(
-                    Constants.device == .phone ? .visible : .automatic,
-                    for: .navigationBar
-                )
-                .toolbarBackground(
-                    Color.indigo.opacity(0.075),
-                    for: .navigationBar
-                )
                 .toolbar {
                     ToolbarItem(placement: .primaryAction) {
                         EditButton()

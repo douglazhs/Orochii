@@ -30,18 +30,18 @@ struct ChapterDomain: Identifiable, Hashable {
     var downloaded: Bool = false
     
     static let samples: [ChapterDomain] = [
-        .init(number: "1", language: "pt-br", volume: "VOL. 1", title: "Ryomen Sukuna", pages: 154, updated: "2018-05-21", scanGroup: "Gravity Scans", pagesImages: images, downloaded: true),
-        .init(number: "2", language: "pt-br", volume: "VOL. 1", title: "Fearsome Womb", pages: 154, updated: "2019-10-21", scanGroup: "Gravity Scans", pagesImages: images, read: true, downloaded: true),
-        .init(number: "3", language: "pt-br", volume: "VOL. 1", title: "Young Fish and Reverse Punishment", pages: 20, updated: "2022-10-21", scanGroup: "Gravity Scans", pagesImages: images),
-        .init(number: "4", language: "pt-br", volume: "VOL. 2", title: "I'm Gonna Kill You!", pages: 19, updated: "2018-10-21", scanGroup: "Gravity Scans", pagesImages: images, read: true),
-        .init(number: "5", language: "pt-br", volume: "VOL. 2", title: "Kyoto Sister School Goodwill Event", pages: 154, updated: "2022-10-21", scanGroup: "Gravity Scans", pagesImages: images, downloaded: true),
-        .init(number: "6", language: "pt-br", volume: "VOL. 2", title: "Black Flash", pages: 23, updated: "2017-10-21", scanGroup: "Gravity Scans", pagesImages: images, read: true),
-        .init(number: "7", language: "pt-br", volume: "VOL. 2", title: "The Origin of Obedience", pages: 22, updated: "2022-10-21", scanGroup: "Gravity Scans", pagesImages: images, downloaded: true),
-        .init(number: "8", language: "pt-br", volume: "VOL. 3", title: "Hidden Inventory", pages: 18, updated: "2021-10-21", scanGroup: "Gravity Scans", pagesImages: images, downloaded: true),
-        .init(number: "9", language: "pt-br", volume: "VOL. 3", title: "Premature Death", pages: 24, updated: "2019-04-21", scanGroup: "Gravity Scans", pagesImages: images),
-        .init(number: "10", language: "pt-br", volume: "VOL. 3", title: "Evening Festival", pages: 21, updated: "2022-10-21", scanGroup: "Gravity Scans", pagesImages: images, read: true),
-        .init(number: "11", language: "pt-br", volume: "VOL. 3", title: "The Shibuya Incident: Opening", pages: 23, updated: "2018-08-21", scanGroup: "Gravity Scans", pagesImages: images, read: true, downloaded: true),
-        .init(number: "12", language: "pt-br", volume: "VOL. 4", title: "The Shibuya Incident: Cloudfall", pages: 22, updated: "2022-07-21", scanGroup: "Gravity Scans", pagesImages: images),
-        .init(number: "13", language: "pt-br", volume: "VOL. 4", title: "The Shibuya Incident: Thunderclap", pages: 25, updated: "2021-12-21", scanGroup: "Gravity Scans", pagesImages: images, downloaded: true)
+        .init(number: "1", language: "pt-br", volume: "vol. 1", title: "Ryomen Sukuna", pages: 154, updated: "2018-05-21", scanGroup: "Gravity Scans", pagesImages: images, downloaded: true),
+        .init(number: "2", language: "pt-br", volume: "vol. 1", title: "Fearsome Womb", pages: 154, updated: "2019-10-21", scanGroup: "Gravity Scans", pagesImages: images, read: true, downloaded: true),
+        .init(number: "3", language: "pt-br", volume: "vol. 1", title: "Young Fish and Reverse Punishment", pages: 20, updated: "2022-10-21", scanGroup: "Gravity Scans", pagesImages: images),
+        .init(number: "4", language: "pt-br", volume: "vol. 2", title: "I'm Gonna Kill You!", pages: 19, updated: "2018-10-21", scanGroup: "Gravity Scans", pagesImages: images, read: true),
+        .init(number: "5", language: "pt-br", volume: "vol. 23", title: "Kyoto Sister School Goodwill Event", pages: 154, updated: "2022-10-21", scanGroup: "Gravity Scans", pagesImages: images, downloaded: true),
+        .init(number: "6", language: "pt-br", volume: "vol. 2", title: "Black Flash", pages: 23, updated: "2017-10-21", scanGroup: "Gravity Scans", pagesImages: images, read: true),
+        .init(number: "7", language: "pt-br", volume: "vol. 11", title: "The Origin of Obedience", pages: 22, updated: "2022-10-21", scanGroup: "Gravity Scans", pagesImages: images, downloaded: true),
+        .init(number: "8", language: "pt-br", volume: "vol. 19", title: "Hidden Inventory", pages: 18, updated: "2021-10-21", scanGroup: "Gravity Scans", pagesImages: images, downloaded: true),
+        .init(number: "9", language: "pt-br", volume: "vol. 12", title: "Premature Death", pages: 24, updated: "2019-04-21", scanGroup: "Gravity Scans", pagesImages: images),
+        .init(number: "10", language: "pt-br", volume: "vol. 3", title: "Evening Festival", pages: 21, updated: "2022-10-21", scanGroup: "Gravity Scans", pagesImages: images, read: true),
+        .init(number: "11", language: "pt-br", volume: "vol. 3", title: "The Shibuya Incident: Opening", pages: 23, updated: "2018-08-21", scanGroup: "Gravity Scans", pagesImages: images, read: true, downloaded: true),
+        .init(number: "12", language: "pt-br", volume: "vol. 32", title: "The Shibuya Incident: Cloudfall", pages: 22, updated: "2022-07-21", scanGroup: "Gravity Scans", pagesImages: images),
+        .init(number: "13", language: "pt-br", volume: "vol. 4", title: "The Shibuya Incident: Thunderclap", pages: 25, updated: "2021-12-21", scanGroup: "Gravity Scans", pagesImages: images, downloaded: true)
     ]
 }

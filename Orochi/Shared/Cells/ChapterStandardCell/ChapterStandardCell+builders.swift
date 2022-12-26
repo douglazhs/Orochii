@@ -9,16 +9,13 @@ import SwiftUI
 
 extension ChapterStandardCell {
     /// Left manga cell information
-    @ViewBuilder func leftInfo() -> some View {
-        VStack(alignment: .center, spacing: 10) {
+    @ViewBuilder
+    func leftInfo() -> some View {
+        VStack(alignment: .center, spacing: 5) {
             // CHAPTER NUMBER
             Text("CH.\(chapter.number)")
                 .font(.subheadline)
                 .fontWeight(.semibold)
-            // LANGUAGE
-            Text(chapter.language)
-                .font(.caption2)
-                .foregroundColor(Color(uiColor: .systemGray))
             // VOLUME
             Text(chapter.volume)
                 .font(.caption2)
@@ -27,8 +24,9 @@ extension ChapterStandardCell {
     }
     
     /// Right manga cell information
-    @ViewBuilder func rightInfo() -> some View {
-        VStack(alignment: .leading, spacing: 10) {
+    @ViewBuilder
+    func rightInfo() -> some View {
+        VStack(alignment: .leading, spacing: 5) {
             HStack(alignment: .center) {
                 // MAIN INFO
                 self.mainInfo()
@@ -41,23 +39,15 @@ extension ChapterStandardCell {
         }
     }
     
-    /// Main chapter infors, as *title* and *number of pages*
+    /// Main chapter infors, as *title*
     @ViewBuilder
     func mainInfo() ->  some View {
-        VStack(alignment: .leading, spacing: 10) {
-            // TITLE
-            Text(chapter.title)
-                .font(.subheadline)
-                .lineLimit(2)
-                .multilineTextAlignment(.leading)
-                .fontWeight(.semibold)
-            // NUMBER OF PAGES
-            Text("\(chapter.pages) PAGES")
-                .font(.caption2)
-                .foregroundColor(Color(uiColor: .systemGray))
-                .fontWeight(.light)
-                .fontWeight(.thin)
-        }
+        // TITLE
+        Text(chapter.title)
+            .font(.subheadline)
+            .lineLimit(2)
+            .multilineTextAlignment(.leading)
+            .fontWeight(.semibold)
     }
     
     /// Download chapter informations
@@ -73,7 +63,8 @@ extension ChapterStandardCell {
     }
     
     /// Chapter scan informations
-    @ViewBuilder func scanInfo() -> some View {
+    @ViewBuilder
+    func scanInfo() -> some View {
         HStack(alignment: .bottom) {
             // UPDATED
             Text(chapter.updated)

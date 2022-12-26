@@ -13,23 +13,19 @@ enum ViewStyle {
 }
 
 struct DiscoverView: View {
-    @EnvironmentObject var router: Router
     @StateObject var vm = DiscoverViewModel()
     @State var viewStyle: ViewStyle = .initial
     @State var mangaSourcePref: Bool = false
+    
     var body: some View {
-        NavigationStack(path: $router.path) {
+        NavigationStack {
             self.content()
                 .navigationTitle(Text(String.Discovery.title))
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(
-                    Constants.device == .phone ? .visible : .automatic,
-                    for: .navigationBar
-                )
-                .toolbarBackground(
-                    Color.indigo.opacity(0.075),
-                    for: .navigationBar
-                )
+//                .navigationBarTitleDisplayMode(.inline)
+//                .toolbarBackground(
+//                    Constants.device == .phone ? .visible : .automatic,
+//                    for: .navigationBar
+//                )
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         self.mangaSourceButton()
