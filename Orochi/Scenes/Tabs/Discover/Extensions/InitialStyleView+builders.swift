@@ -10,7 +10,6 @@ import SwiftUI
 extension InitialStyleView {
     /// Carousel
     /// - Parameter mangas: Retrieved mangas
-    /// - Returns: Carousel of mangas
     @ViewBuilder
     func carousel(of mangas: [MangaDomain]) -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
@@ -39,10 +38,9 @@ extension InitialStyleView {
     
     /// Manga carousel cell
     /// - arameter manga: Current manga
-    /// - Returns: Custom carousel manga cell
     @ViewBuilder
     func cell(of manga: MangaDomain) -> some View {
-        VStack {
+        VStack(spacing: 2.5) {
             MangaStandardImage(
                 cover: manga.cover,
                 size: CGSize(
@@ -56,6 +54,6 @@ extension InitialStyleView {
                 .font(.system(.footnote, design: .none, weight: .regular))
                 .foregroundColor(.primary.opacity(0.75))
                 .frame(maxWidth: CGSize.standardImageCell.width)
-        }/*.frame(maxHeight: CGSize.standardImageCell.height + 75)*/
+        }
     }
 }

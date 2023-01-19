@@ -21,11 +21,6 @@ struct DiscoverView: View {
         NavigationStack {
             self.content()
                 .navigationTitle(Text(String.Discovery.title))
-//                .navigationBarTitleDisplayMode(.inline)
-//                .toolbarBackground(
-//                    Constants.device == .phone ? .visible : .automatic,
-//                    for: .navigationBar
-//                )
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         self.mangaSourceButton()
