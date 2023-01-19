@@ -18,10 +18,10 @@ struct ChapterStandardCell: View {
     var body: some View {
         HStack (alignment: .center, spacing: 10.0) {
             self.leftInfo()
-            Text("-")
+            Text(".")
                 .foregroundColor(.secondary)
                 .font(.caption)
-                .fontWeight(.medium)
+                .fontWeight(.heavy)
             self.rightInfo()
         }
     }

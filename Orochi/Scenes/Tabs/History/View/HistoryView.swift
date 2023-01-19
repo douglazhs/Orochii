@@ -15,27 +15,12 @@ struct HistoryView: View {
     var body: some View {
         NavigationStack {
             self.content()
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(
-                    Constants.device == .phone ? .visible : .automatic,
-                    for: .navigationBar
-                )
-                .toolbarBackground(
-                    Color.indigo.opacity(0.075),
-                    for: .navigationBar
-                )
+                .navigationTitle("History")
                 .scrollContentBackground(.hidden)
                 .background(BlurBackground(with: .view_background))
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         self.clearHistoryButton()
-                    }
-                    ToolbarItem(placement: .principal) {
-                        ActionPopUp(
-                            title: "History",
-                            message: "Successfully Cleared",
-                            action: $vm.action
-                        )
                     }
                 }
                 .searchable(text: $vm.query)

@@ -29,7 +29,7 @@ struct ReaderToolbar: ViewModifier {
                                 )
                         default:
                             self.chaptersMenu()
-                                .presentationDetents([.medium, .fraction(0.75)])
+                                .presentationDetents([.medium, .large])
                                 .presentationDragIndicator(.visible)
                         }
                     }

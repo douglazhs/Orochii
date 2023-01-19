@@ -15,9 +15,9 @@ extension MangaView {
             Group {
                 // ALL MANGA INFORMATION
                 self.mangaInfoArea()
-                // MANGA ACTIONS
-                self.actions()
                 if !vm.search {
+                    // MANGA ACTIONS
+                    self.actions()
                     // MANGA DESCRIPTION
                     self.description()
                         .listSectionSeparator(.visible)
@@ -122,7 +122,8 @@ extension MangaView {
                     ChapterStandardCell(chapter, editingMode: vm.isEditingMode)
                         .foregroundColor(chapter.read ? Color(uiColor: .systemGray) : Color.primary)
                         .id(chapter.id)
-                }.contextMenu {
+                }
+                .contextMenu {
                     ChapterMenu() { _ in
                         // TODO: - Handle context menu actions
                     }

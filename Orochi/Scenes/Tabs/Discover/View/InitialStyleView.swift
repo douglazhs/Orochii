@@ -37,5 +37,6 @@ struct InitialStyleView: View {
 struct InitialStyleView_Previews: PreviewProvider {
     static var previews: some View {
         InitialStyleView()
+            .environmentObject(DiscoverViewModel())
     }
 }

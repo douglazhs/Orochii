@@ -74,6 +74,7 @@ extension ReaderToolbar {
         .sheet(isPresented: $showReaderPreferences) {
             ReaderPreferencesView()
                 .environmentObject(vm)
+                .presentationDetents([.medium, .large])
         }
     }
     
