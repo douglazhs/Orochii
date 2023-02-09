@@ -30,7 +30,7 @@ struct SettingsView: View {
             )
             .animation(
                 .easeInOut(duration: 0.175),
-                value: [vm.biometry, vm.logged]
+                value: [vm.biometryPreference, vm.logged]
             )
             .background(BlurBackground(with: .view_background))
             .scrollContentBackground(.hidden)
