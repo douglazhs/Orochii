@@ -64,7 +64,7 @@ extension SettingsView {
     @ViewBuilder
     func securitySection() -> some View {
         Section {
-            Toggle(isOn: $vm.biometry) {
+            Toggle(isOn: $vm.biometryPreference) {
                 Label {
                     Text(Localized.securityBiometry)
                 } icon: {
@@ -72,7 +72,7 @@ extension SettingsView {
                         .foregroundColor(.primary)
                 }
             }
-            if vm.biometry {
+            if vm.biometric == .active {
                 Picker(Localized.securityLevel, selection: $vm.securityLevel) {
                     ForEach(SecurityLevel.allCases) { level in
                         VStack(alignment: .leading, spacing: 5) {
@@ -88,12 +88,18 @@ extension SettingsView {
                     }
                 }
                 .pickerStyle(.inline)
-                .disabled(!vm.biometry)
+                .disabled(!vm.biometryPreference)
             }
         } header: {
             Text(Localized.securityHeader)
         } footer: {
             Text(Localized.securityFooter)
+        }
+        .onChange(of: vm.biometryPreference) { _ in
+            if vm.error == nil {
+                vm.changeBiometryState()
+            }
+            vm.error = nil
         }
     }
     

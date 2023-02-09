@@ -37,7 +37,7 @@ extension InitialStyleView {
     }
     
     /// Manga carousel cell
-    /// - arameter manga: Current manga
+    /// - Parameter manga: Current manga
     @ViewBuilder
     func cell(of manga: MangaDomain) -> some View {
         VStack(spacing: 2.5) {
