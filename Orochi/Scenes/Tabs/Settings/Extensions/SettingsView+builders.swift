@@ -72,7 +72,7 @@ extension SettingsView {
                         .foregroundColor(.primary)
                 }
             }
-            if vm.biometric == .active {
+            if vm.biometricState == .active {
                 Picker(Localized.securityLevel, selection: $vm.securityLevel) {
                     ForEach(SecurityLevel.allCases) { level in
                         VStack(alignment: .leading, spacing: 5) {
@@ -93,8 +93,14 @@ extension SettingsView {
         } header: {
             Text(Localized.securityHeader)
         } footer: {
-            Text(Localized.securityFooter)
+            VStack(alignment: .leading) {
+                Text(Localized.securityFooter)
+                Text(vm.error?.localizedDescription ?? "")
+                    .foregroundColor(.accentColor)
+                    .bold()
+            }
         }
+        .disabled(!vm.biometrics)
         .onChange(of: vm.biometryPreference) { _ in
             if vm.error == nil {
                 vm.changeBiometryState()
