@@ -32,7 +32,7 @@ extension InitialStyleView {
                 }
             }
             .padding(.horizontal)
-            .padding(.vertical, 10)
+            .padding(.vertical, 3.5)
         }
     }
     
@@ -40,7 +40,7 @@ extension InitialStyleView {
     /// - Parameter manga: Current manga
     @ViewBuilder
     func cell(of manga: MangaDomain) -> some View {
-        VStack(spacing: 2.5) {
+        VStack(alignment: .leading, spacing: 2.5) {
             MangaStandardImage(
                 cover: manga.cover,
                 size: CGSize(
@@ -50,10 +50,10 @@ extension InitialStyleView {
             ).frame(height: CGSize.standardImageCell.height)
             Text(manga.title)
                 .lineLimit(2)
-                .multilineTextAlignment(.center)
+                .multilineTextAlignment(.leading)
                 .font(.system(.footnote, design: .none, weight: .regular))
                 .foregroundColor(.primary.opacity(0.75))
-                .frame(maxWidth: CGSize.standardImageCell.width)
+                .frame(width: CGSize.standardImageCell.width)
         }
     }
 }
