@@ -19,6 +19,37 @@ extension ALTracker {
             // MANGA SCORE
             self.scoreSection()
         }
+        .fullScreenCover(isPresented: $showPopUp) {
+           popUpType()
+        }
+    }
+    
+    /// PopUp type. Possibilities:
+    ///  `Score`, `Volume`, `Chapter`
+    @ViewBuilder
+    func popUpType() -> some View {
+        switch vm.currentPicker {
+        case .score:
+            TrackerPopUp(
+                backgroundCover: manga.cover,
+                context: .score,
+                selection: $vm.score
+            )
+        case .volume:
+            TrackerPopUp(
+                backgroundCover: manga.cover,
+                context: .volume,
+                total: 100,
+                selection: $vm.volume
+            )
+        case.chapter:
+            TrackerPopUp(
+                backgroundCover: manga.cover,
+                context: .chapter,
+                total: 298,
+                selection: $vm.chapter
+            )
+        }
     }
     
     /// Manga chapters picker
@@ -28,7 +59,10 @@ extension ALTracker {
             Text("CH.")
                 .font(.footnote)
                 .foregroundColor(.secondary)
-            Button { vm.currentPicker = .chapter } label: {
+            Button {
+                vm.currentPicker = .chapter
+                showPopUp = true
+            } label: {
                 Text("\(String(format: "%.0f", vm.chapter)) / -")
                     .frame(maxWidth: .infinity)
                     .lineLimit(1)
@@ -48,7 +82,10 @@ extension ALTracker {
             Text("VOL.")
                 .font(.footnote)
                 .foregroundColor(.secondary)
-            Button { vm.currentPicker = .volume } label: {
+            Button {
+                vm.currentPicker = .volume
+                showPopUp = true
+            } label: {
                 Text("\(String(format: "%.0f", vm.volume)) / -")
                     .frame(maxWidth: .infinity)
                     .lineLimit(1)
@@ -68,7 +105,10 @@ extension ALTracker {
             Text("SCORE")
                 .font(.footnote)
                 .foregroundColor(.secondary)
-            Button { vm.currentPicker = .score } label: {
+            Button {
+                vm.currentPicker = .score
+                showPopUp = true
+            } label: {
                 Text("\(String(format: "%.1f", vm.score)) / 10.0")
                     .frame(maxWidth: .infinity)
                     .lineLimit(1)

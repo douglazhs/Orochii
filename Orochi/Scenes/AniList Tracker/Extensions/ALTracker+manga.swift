@@ -12,28 +12,23 @@ extension ALTracker {
     @ViewBuilder
     func mangaSection() -> some View {
         VStack {
+            // TITLE
+            self.title()
             HStack(alignment: .top, spacing: 5) {
                 // MANGA COVER
                 Image(manga.cover)
                     .resizable()
                     .cornerRadius(2.5)
-                    .frame(width: 65, height: 90)
-                VStack(alignment: .leading) {
-                    // TITLE & YEAR
-                    self.titleYear()
-                    // MANGA AUTHOR
-                    Text(manga.author)
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    Spacer()
-                }
-            }.frame(maxHeight: 90)
+                    .frame(width: 77.5, height: 110)
+                // MANGA STATUS
+                self.status()
+            }.frame(maxHeight: 110)
         }
     }
     
     /// Manga title and release year
     @ViewBuilder
-    func titleYear() -> some View {
+    func title() -> some View {
         HStack {
             // MANGA TITLE
             Text(manga.title)
@@ -41,10 +36,6 @@ extension ALTracker {
                 .fontWeight(.semibold)
                 .foregroundColor(.primary)
             Spacer()
-            // MANGA RELEASE YEAR
-            Text(manga.year)
-                .font(.subheadline)
-                .foregroundColor(.secondary)
         }
     }
     
