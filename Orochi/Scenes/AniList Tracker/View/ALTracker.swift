@@ -11,6 +11,7 @@ struct ALTracker: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var vm = ALTrackerViewModel()
     @Binding var isPresented: Bool
+    @State var showPopUp: Bool = false
     var manga: MangaDomain
     var action: Binding<Bool>
     

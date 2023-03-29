@@ -9,11 +9,19 @@ import SwiftUI
 
 /// AniList button field
 enum ALPicker {
-    case status, score, chapter, volume
+    case score, chapter, volume
+    
+    var description: String {
+        switch self {
+        case .score:   return "Score"
+        case .chapter: return "Ch."
+        case .volume:  return "Vol."
+        }
+    }
 }
 
 class ALTrackerViewModel: ObservableObject {
-    @Published var currentPicker: ALPicker = .status
+    @Published var currentPicker: ALPicker = .chapter
     @Published var status: ALStatus = .wantTo
     @Published var startDate: Date = .now
     @Published var endDate: Date = .now
