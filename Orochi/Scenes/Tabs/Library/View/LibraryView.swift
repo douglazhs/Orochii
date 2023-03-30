@@ -16,16 +16,12 @@ struct LibraryView: View {
         NavigationStack {
             self.content()
                 .onChange(of: isSearching) { newValue in
-                    print("Clear Filter!")
                     if !newValue {
                         // TODO: - Clear search
                     }
                 }
                 .navigationTitle(String.Library.title)
                 .toolbar {
-                    ToolbarItem(placement: .primaryAction) {
-                        EditButton()
-                    }
                     ToolbarItem(placement: .navigationBarTrailing) {
                         self.filterButton()
                     }
