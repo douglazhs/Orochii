@@ -51,18 +51,6 @@ extension LibraryView {
             .frame(width: 0)
             .opacity(0)
             MangaStandardCell(manga)
-                .overlay(alignment: .topTrailing) {
-                    if manga.hasUpdate {
-                        Image(systemName: "circle.fill")
-                            .resizable()
-                            .frame(
-                                maxWidth: 6.5,
-                                maxHeight: 6.5
-                            )
-                            .foregroundColor(.orange)
-                            .padding(.top, 5.5)
-                    }
-                }
         }
     }
     

@@ -21,7 +21,7 @@ extension MangaStandardCell {
                     height: CGSize.standardImageCell.height
                 )
             )
-            self.info()
+            self.info().padding(.leading, 5)
         }.frame(maxHeight: CGSize.standardImageCell.height)
     }
 
@@ -31,36 +31,28 @@ extension MangaStandardCell {
     @ViewBuilder
     func info() -> some View {
         VStack(alignment: .leading, spacing: 5.5) {
-            // TITLE
-            Text(manga.title)
-                .font(.subheadline)
-                .fontWeight(.semibold)
-                .lineLimit(1)
             HStack {
-                // AUTHOR
-                Text("\(manga.author)")
-                    .font(.caption)
-                    .foregroundColor(Color(uiColor: .systemGray))
+                // TITLE
+                Text(manga.title)
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                    .lineLimit(1)
                 Spacer()
                 // YEAR
-                Text("**\(manga.year)**")
+                Text("• \(manga.year)")
                     .font(.caption2)
-                    .fontWeight(.light)
+                    .fontWeight(.semibold)
                     .foregroundColor(Color(uiColor: .systemGray))
             }
+            // AUTHOR
+            Text("\(manga.author)")
+                .font(.caption)
+                .foregroundColor(Color(uiColor: .systemGray))
             // GENRES
             self.allGenres()
-            Divider()
-            // ACTUAL CHAPTER AND VOLUME
-            HStack {
-                Text("CH. 127 / -")
-                Spacer()
-                Text("VOL. 7 / -")
-            }
-            .foregroundColor(Color(uiColor: .systemGray))
-            .font(.caption)
-            /// MAIN INFORMATION
-            self.main()
+            Spacer()
+            //STATUS
+            self.status()
         }
     }
     
@@ -89,16 +81,20 @@ extension MangaStandardCell {
     
     /// Main manga information
     @ViewBuilder
-    func main() -> some View {
+    func status() -> some View {
         HStack {
-            // STATUS
+            Spacer()
             self.infoLabel(
                 manga.status.description.uppercased(),
                 manga.status.config.icon,
                 manga.status.config.color
             )
-            Spacer()
-        }.foregroundColor(Color(uiColor: .systemGray))
+            .padding(5.5)
+            .background {
+                LinearGradient(colors: [.clear, Color(uiColor: .systemIndigo).opacity(0.25)], startPoint: .leading, endPoint: .trailing)
+                    .cornerRadius(5.5)
+            }
+        }.foregroundColor(.secondary)
     }
 
     /// Manga Info custom label
@@ -116,7 +112,7 @@ extension MangaStandardCell {
     ) -> some View {
         Label {
             Text(name)
-                .fontWeight(.semibold)
+                .fontWeight(.medium)
                 .italic(isItalic)
         } icon: {
             Image(systemName: icon)
