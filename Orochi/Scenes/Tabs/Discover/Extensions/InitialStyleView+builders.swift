@@ -47,13 +47,13 @@ extension InitialStyleView {
                     width: CGSize.standardImageCell.width,
                     height: CGSize.standardImageCell.height
                 )
-            ).frame(height: CGSize.standardImageCell.height)
+            ).frame(maxHeight: CGSize.standardImageCell.height)
             Text(manga.title)
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
                 .font(.system(.footnote, design: .none, weight: .regular))
                 .foregroundColor(.primary.opacity(0.75))
-                .frame(width: CGSize.standardImageCell.width)
+                .frame(width: CGSize.standardImageCell.width, alignment: .leading)
         }
     }
 }
