@@ -111,6 +111,10 @@
 		50FFB011292ACE6200B87E0E /* DemoPublic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB010292ACE6200B87E0E /* DemoPublic.swift */; };
 		50FFB013292AD35000B87E0E /* OrderFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB012292AD35000B87E0E /* OrderFilter.swift */; };
 		50FFB016292AE7B800B87E0E /* MangaView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB015292AE7B800B87E0E /* MangaView+builders.swift */; };
+		771B766129DC788700F7CCB6 /* anilist_api.json in Resources */ = {isa = PBXBuildFile; fileRef = 771B766029DC788700F7CCB6 /* anilist_api.json */; };
+		77467CB929DD9FA4006C5A85 /* AniListLogin.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77467CB829DD9FA4006C5A85 /* AniListLogin.swift */; };
+		77467CC029DEF7FC006C5A85 /* APIConfigurations.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77467CBF29DEF7FC006C5A85 /* APIConfigurations.swift */; };
+		77467CC329DEF836006C5A85 /* URLBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77467CC229DEF836006C5A85 /* URLBuilder.swift */; };
 		77640E54299E9A5C0076CB26 /* TrackerPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77640E53299E9A5C0076CB26 /* TrackerPopUp.swift */; };
 		77640E56299E9F440076CB26 /* TrackerPopUp+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77640E55299E9F440076CB26 /* TrackerPopUp+builders.swift */; };
 		77FACA4F29D1EBA200A5744A /* OutlinedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FACA4E29D1EBA200A5744A /* OutlinedTextFieldStyle.swift */; };
@@ -227,6 +231,10 @@
 		50FFB010292ACE6200B87E0E /* DemoPublic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoPublic.swift; sourceTree = "<group>"; };
 		50FFB012292AD35000B87E0E /* OrderFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderFilter.swift; sourceTree = "<group>"; };
 		50FFB015292AE7B800B87E0E /* MangaView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaView+builders.swift"; sourceTree = "<group>"; };
+		771B766029DC788700F7CCB6 /* anilist_api.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = anilist_api.json; sourceTree = "<group>"; };
+		77467CB829DD9FA4006C5A85 /* AniListLogin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniListLogin.swift; sourceTree = "<group>"; };
+		77467CBF29DEF7FC006C5A85 /* APIConfigurations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIConfigurations.swift; sourceTree = "<group>"; };
+		77467CC229DEF836006C5A85 /* URLBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLBuilder.swift; sourceTree = "<group>"; };
 		77640E53299E9A5C0076CB26 /* TrackerPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerPopUp.swift; sourceTree = "<group>"; };
 		77640E55299E9F440076CB26 /* TrackerPopUp+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrackerPopUp+builders.swift"; sourceTree = "<group>"; };
 		77FACA4E29D1EBA200A5744A /* OutlinedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlinedTextFieldStyle.swift; sourceTree = "<group>"; };
@@ -455,6 +463,7 @@
 		5092DF2329292C590094DC18 /* Orochi */ = {
 			isa = PBXGroup;
 			children = (
+				77467CBA29DEF792006C5A85 /* Services */,
 				5092DF2429292C590094DC18 /* OrochiApp.swift */,
 				50D7F2832940AC7300FE4814 /* Constants */,
 				50FFAFDD292A6A7F00B87E0E /* Enums */,
@@ -532,6 +541,7 @@
 		5092DF45292946340094DC18 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				77467CB729DD9F7F006C5A85 /* AniList */,
 				50BC960D292C673200DF13A5 /* ViewModel */,
 				500DB59B292C606D00F398D6 /* Extensions */,
 				5092DF4B2929469D0094DC18 /* View */,
@@ -602,6 +612,7 @@
 			isa = PBXGroup;
 			children = (
 				50BC960E292C674500DF13A5 /* SettingsViewModel.swift */,
+				771B766029DC788700F7CCB6 /* anilist_api.json */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1113,6 +1124,55 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		77467CB729DD9F7F006C5A85 /* AniList */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AniList;
+			sourceTree = "<group>";
+		};
+		77467CBA29DEF792006C5A85 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				77467CBB29DEF799006C5A85 /* Anilist */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		77467CBB29DEF799006C5A85 /* Anilist */ = {
+			isa = PBXGroup;
+			children = (
+				77467CC129DEF824006C5A85 /* URL Builder */,
+				77467CBE29DEF7CA006C5A85 /* API Configurations */,
+				77467CBC29DEF79E006C5A85 /* Login */,
+			);
+			path = Anilist;
+			sourceTree = "<group>";
+		};
+		77467CBC29DEF79E006C5A85 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				77467CB829DD9FA4006C5A85 /* AniListLogin.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		77467CBE29DEF7CA006C5A85 /* API Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				77467CBF29DEF7FC006C5A85 /* APIConfigurations.swift */,
+			);
+			path = "API Configurations";
+			sourceTree = "<group>";
+		};
+		77467CC129DEF824006C5A85 /* URL Builder */ = {
+			isa = PBXGroup;
+			children = (
+				77467CC229DEF836006C5A85 /* URLBuilder.swift */,
+			);
+			path = "URL Builder";
+			sourceTree = "<group>";
+		};
 		77640E50299E9A150076CB26 /* Tracker PopUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -1224,6 +1284,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				5092DF2C29292C5C0094DC18 /* Preview Assets.xcassets in Resources */,
+				771B766129DC788700F7CCB6 /* anilist_api.json in Resources */,
 				5092DF59292971580094DC18 /* Localizable.strings in Resources */,
 				5092DF2929292C5C0094DC18 /* Assets.xcassets in Resources */,
 			);
@@ -1261,6 +1322,7 @@
 				506EEBF829364D3300D89777 /* MangaView+filters.swift in Sources */,
 				50CE85C92948C61700169922 /* SizePreference.swift in Sources */,
 				50FFAFF7292A8C8800B87E0E /* LibraryViewModel.swift in Sources */,
+				77467CC329DEF836006C5A85 /* URLBuilder.swift in Sources */,
 				50639B46293A3CF700D8E3CB /* HistoryChapterCell+builders.swift in Sources */,
 				50FE08D0292D035600432F21 /* PrimaryGradient.swift in Sources */,
 				50E02110293D276F001C85B5 /* DarkOverlay.swift in Sources */,
@@ -1275,6 +1337,7 @@
 				50FFB004292AAD5700B87E0E /* BlurBackground.swift in Sources */,
 				50F44451292F0905001B3CF4 /* MangaReaderToolbar+modifier.swift in Sources */,
 				503019A7293455BD00F5645F /* ALTracker.swift in Sources */,
+				77467CB929DD9FA4006C5A85 /* AniListLogin.swift in Sources */,
 				50FFB00F292ACE0400B87E0E /* ObjectFilter.swift in Sources */,
 				77640E54299E9A5C0076CB26 /* TrackerPopUp.swift in Sources */,
 				505656392932580F0061FD15 /* ChapterMenu.swift in Sources */,
@@ -1330,6 +1393,7 @@
 				5056563C2932597F0061FD15 /* LanguagePicker.swift in Sources */,
 				507803DA292DC03C0041D5BD /* LoadingView.swift in Sources */,
 				50F44446292E93F8001B3CF4 /* AlwaysPopover+modifier.swift in Sources */,
+				77467CC029DEF7FC006C5A85 /* APIConfigurations.swift in Sources */,
 				50F4443A292E61CA001B3CF4 /* ChapterListStandardCell.swift in Sources */,
 				50FE08D5292D609700432F21 /* String+default.swift in Sources */,
 				50F44441292E9341001B3CF4 /* AlwaysPopover.swift in Sources */,
@@ -1489,8 +1553,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Orochii-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Orochii;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow to use your device biometrics";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
@@ -1519,8 +1588,13 @@
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Orochii-Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = Orochii;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow to use your device biometrics";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 16.0;

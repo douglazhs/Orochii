@@ -16,6 +16,7 @@ extension SettingsView {
         Section {
             HStack {
                 Button(role: vm.logged ? .destructive : .none) {
+                    vm.anilistLogin.signIn()
                     vm.logged.toggle()
                     // TODO: - Login on AniList API
                 } label: {
