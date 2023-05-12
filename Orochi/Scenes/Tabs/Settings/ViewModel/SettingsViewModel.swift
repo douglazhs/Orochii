@@ -7,13 +7,14 @@
 
 import SwiftUI
 import LocalAuthentication
+import AniListService
 
 class SettingsViewModel: ObservableObject {
     enum LockState {
         case active, inactive, unavailable
     }
     var error: Error? = nil
-    var anilistLogin: AnilistLogin = AnilistLogin()
+    var anilistAcc: ALAccount = ALAccount()
     @Published var biometrics: Bool = false
     @Published var biometricState: LockState = .inactive
     @Published var iCloud: Bool = false
