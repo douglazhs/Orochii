@@ -14,7 +14,7 @@ class SettingsViewModel: ObservableObject {
         case active, inactive, unavailable
     }
     var error: Error? = nil
-    var anilistAcc: ALAccount = ALAccount()
+    var anilist: AniList = AniList()
     @Published var biometrics: Bool = false
     @Published var biometricState: LockState = .inactive
     @Published var iCloud: Bool = false

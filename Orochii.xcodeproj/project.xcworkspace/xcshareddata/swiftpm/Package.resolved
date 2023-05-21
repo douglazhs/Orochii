@@ -5,8 +5,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/douglazhs/Orochii-AniListService.git",
       "state" : {
-        "revision" : "dacc5df41e6d3a68ba994d2e53e5d6185d53aa0f",
-        "version" : "0.0.1"
+        "revision" : "b4eed9fcff9afae1972f8e207807bc8cdd7c73f8",
+        "version" : "0.0.3"
       }
     }
   ],

@@ -112,7 +112,7 @@
 		50FFB013292AD35000B87E0E /* OrderFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB012292AD35000B87E0E /* OrderFilter.swift */; };
 		50FFB016292AE7B800B87E0E /* MangaView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB015292AE7B800B87E0E /* MangaView+builders.swift */; };
 		771B766129DC788700F7CCB6 /* anilist_api.json in Resources */ = {isa = PBXBuildFile; fileRef = 771B766029DC788700F7CCB6 /* anilist_api.json */; };
-		774F049A2A0E766F007ABA9C /* AniListService in Frameworks */ = {isa = PBXBuildFile; productRef = 774F04992A0E766F007ABA9C /* AniListService */; };
+		776323C22A16F776009B5966 /* AniListService in Frameworks */ = {isa = PBXBuildFile; productRef = 776323C12A16F776009B5966 /* AniListService */; };
 		77640E54299E9A5C0076CB26 /* TrackerPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77640E53299E9A5C0076CB26 /* TrackerPopUp.swift */; };
 		77640E56299E9F440076CB26 /* TrackerPopUp+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77640E55299E9F440076CB26 /* TrackerPopUp+builders.swift */; };
 		77FACA4F29D1EBA200A5744A /* OutlinedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FACA4E29D1EBA200A5744A /* OutlinedTextFieldStyle.swift */; };
@@ -243,7 +243,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				774F049A2A0E766F007ABA9C /* AniListService in Frameworks */,
+				776323C22A16F776009B5966 /* AniListService in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,6 +445,7 @@
 				508C2DCC2950AB4800355F13 /* Orochii-Info.plist */,
 				5092DF2329292C590094DC18 /* Orochi */,
 				5092DF2229292C590094DC18 /* Products */,
+				776323BC2A16F000009B5966 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -499,6 +500,7 @@
 		5092DF33292942820094DC18 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				771B766029DC788700F7CCB6 /* anilist_api.json */,
 				5092DF5B292971580094DC18 /* Localizable.strings */,
 				5092DF2829292C5C0094DC18 /* Assets.xcassets */,
 			);
@@ -606,7 +608,6 @@
 			isa = PBXGroup;
 			children = (
 				50BC960E292C674500DF13A5 /* SettingsViewModel.swift */,
-				771B766029DC788700F7CCB6 /* anilist_api.json */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1118,6 +1119,13 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		776323BC2A16F000009B5966 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		77640E50299E9A150076CB26 /* Tracker PopUp */ = {
 			isa = PBXGroup;
 			children = (
@@ -1186,7 +1194,7 @@
 			);
 			name = Orochii;
 			packageProductDependencies = (
-				774F04992A0E766F007ABA9C /* AniListService */,
+				776323C12A16F776009B5966 /* AniListService */,
 			);
 			productName = Orochi;
 			productReference = 5092DF2129292C590094DC18 /* Orochii.app */;
@@ -1218,7 +1226,7 @@
 			);
 			mainGroup = 5092DF1829292C590094DC18;
 			packageReferences = (
-				774F04982A0E766F007ABA9C /* XCRemoteSwiftPackageReference "Orochii-AniListService" */,
+				776323C02A16F776009B5966 /* XCRemoteSwiftPackageReference "Orochii-AniListService" */,
 			);
 			productRefGroup = 5092DF2229292C590094DC18 /* Products */;
 			projectDirPath = "";
@@ -1583,20 +1591,20 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		774F04982A0E766F007ABA9C /* XCRemoteSwiftPackageReference "Orochii-AniListService" */ = {
+		776323C02A16F776009B5966 /* XCRemoteSwiftPackageReference "Orochii-AniListService" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/douglazhs/Orochii-AniListService.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 0.0.1;
+				minimumVersion = 0.0.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		774F04992A0E766F007ABA9C /* AniListService */ = {
+		776323C12A16F776009B5966 /* AniListService */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 774F04982A0E766F007ABA9C /* XCRemoteSwiftPackageReference "Orochii-AniListService" */;
+			package = 776323C02A16F776009B5966 /* XCRemoteSwiftPackageReference "Orochii-AniListService" */;
 			productName = AniListService;
 		};
 /* End XCSwiftPackageProductDependency section */

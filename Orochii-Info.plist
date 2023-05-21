@@ -11,10 +11,9 @@
 			<string>com.orochii.anilist</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>orochiiApp</string>
+				<string>orochii-app</string>
 			</array>
 		</dict>
-		<dict/>
 	</array>
 </dict>
 </plist>
