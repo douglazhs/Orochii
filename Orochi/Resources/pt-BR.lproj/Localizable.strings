@@ -28,6 +28,9 @@
 "common_all" = "Todos";
 "common_none" = "Nenhum";
 "common_of" = "de";
+"common_ok" = "OK";
+"common_attention" = "Atenção";
+"common_error" = "Erro";
 
 /* ------------------------------------------------------------ */
 
@@ -122,6 +125,8 @@
 "manga_selected_chapters" = "Capítulos Selecionados";
 "manga_chapters_of" = "Chapters Of";
 
+/* ------------------------------------------------------------ */
+
 // MARK: - ADJUSTS SCREEN
 
 "adjusts_tracker_header" = "Tracker";
@@ -144,3 +149,16 @@
 "adjusts_notification_updated_mangas" = "Atualização de Capítulo";
 "adjusts_age_rating_header" = "Classificação Etária";
 "adjusts_age_rating_footer" = "**Não é seguro para o trabalho**: material que só deve ser visto em particular porque contém algumas coisas que podem ser _ofensivas_";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - ERRORS
+
+"error_anilist_login" = "Erro ao tentar sair da sua conta AniList.";
+"error_keychain_save" = "Erro ao tentar salvar suas credenciais no Keychain.";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - ANILIST
+
+"anilist_logout" = "Tem certeza de que deseja sair da sua conta AniList?";

@@ -9,6 +9,8 @@ import SwiftUI
 
 struct SettingsView: View {
     @StateObject var vm: SettingsViewModel = SettingsViewModel()
+    @State var showErrorDialog: Bool = false
+    @State var showDialog: Bool = false
     
     var body: some View {
         NavigationStack {

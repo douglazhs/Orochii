@@ -16,9 +16,9 @@ extension SettingsView {
         Section {
             HStack {
                 Button(role: vm.logged ? .destructive : .none) {
-                    vm.anilist.logIn()
-                    vm.logged.toggle()
-                    // TODO: - Login on AniList API
+                    vm.logged
+                    ? (showDialog = true)
+                    : vm.logInAL(showErrorDialog: $showErrorDialog)
                 } label: {
                     Text(vm.logged ? Localized.logOut.uppercased() : Localized.logIn.uppercased())
                         .font(.caption)
@@ -39,6 +39,17 @@ extension SettingsView {
             )
         } footer: {
             Text(Localized.trackerFooter)
+        }
+        .alert(String.Common.error, isPresented: $showErrorDialog) {
+            Button(String.Common.ok) { }
+        } message: {
+            Text(vm.loginMessage)
+        }
+        .alert(String.Common.attention, isPresented: $showDialog) {
+            Button(String.Common.cancel, role: .cancel, action: {})
+            Button(String.Adjusts.logOut, role: .destructive) { vm.logOutAL(showErrorDialog: $showErrorDialog) }
+        } message: {
+            Text(String.Anilist.logOutMessage)
         }
     }
     
@@ -104,7 +115,7 @@ extension SettingsView {
         .disabled(!vm.biometrics)
         .onChange(of: vm.biometryPreference) { _ in
             if vm.error == nil {
-                vm.changeBiometryState()
+                vm.changeLocalAuth()
             }
             vm.error = nil
         }

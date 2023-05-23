@@ -21,6 +21,12 @@ extension String {
         static let savePage: String = NSLocalizedString("action_save_page", comment: "Save chapter page")
     }
     
+    public enum Errors {
+        static let anilistLogInError: String = NSLocalizedString("error_anilist_login", comment: "AniList account LogIn error")
+        static let anilistLogOutError: String = NSLocalizedString("error_anilist_logout", comment: "AniList account LogOut error")
+        static let keychainSave: String = NSLocalizedString("error_keychain_save", comment: "Keychain save error")
+    }
+    
     public enum Common {
         static let done: String = NSLocalizedString("common_done", comment: "Done")
         static let cancel: String = NSLocalizedString("common_cancel", comment: "Cancel")
@@ -30,6 +36,13 @@ extension String {
         static let all: String = NSLocalizedString("common_all", comment: "All")
         static let none: String = NSLocalizedString("common_none", comment: "None")
         static let of: String = NSLocalizedString("common_of", comment: "Of preposition")
+        static let ok: String = NSLocalizedString("common_ok", comment: "OK")
+        static let attention: String = NSLocalizedString("common_attention", comment: "Attention")
+        static let error: String = NSLocalizedString("common_error", comment: "Error")
+    }
+    
+    public enum Anilist {
+        static let logOutMessage: String = NSLocalizedString("anilist_logout", comment: "AniList account LogOut")
     }
     
     public enum Discovery {

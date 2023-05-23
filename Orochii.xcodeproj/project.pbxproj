@@ -115,6 +115,8 @@
 		776323C22A16F776009B5966 /* AniListService in Frameworks */ = {isa = PBXBuildFile; productRef = 776323C12A16F776009B5966 /* AniListService */; };
 		77640E54299E9A5C0076CB26 /* TrackerPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77640E53299E9A5C0076CB26 /* TrackerPopUp.swift */; };
 		77640E56299E9F440076CB26 /* TrackerPopUp+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77640E55299E9F440076CB26 /* TrackerPopUp+builders.swift */; };
+		77B188E42A1CE75B00B11378 /* Biometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188E32A1CE75B00B11378 /* Biometry.swift */; };
+		77B188E62A1CFC3900B11378 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188E52A1CFC3900B11378 /* Keychain.swift */; };
 		77FACA4F29D1EBA200A5744A /* OutlinedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FACA4E29D1EBA200A5744A /* OutlinedTextFieldStyle.swift */; };
 		77FACA5129D30E2B00A5744A /* RoundedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FACA5029D30E2B00A5744A /* RoundedTextFieldStyle.swift */; };
 		77FACA5629D3167900A5744A /* BackgroundClearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FACA5529D3167900A5744A /* BackgroundClearView.swift */; };
@@ -232,6 +234,8 @@
 		771B766029DC788700F7CCB6 /* anilist_api.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = anilist_api.json; sourceTree = "<group>"; };
 		77640E53299E9A5C0076CB26 /* TrackerPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerPopUp.swift; sourceTree = "<group>"; };
 		77640E55299E9F440076CB26 /* TrackerPopUp+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrackerPopUp+builders.swift"; sourceTree = "<group>"; };
+		77B188E32A1CE75B00B11378 /* Biometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometry.swift; sourceTree = "<group>"; };
+		77B188E52A1CFC3900B11378 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		77FACA4E29D1EBA200A5744A /* OutlinedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlinedTextFieldStyle.swift; sourceTree = "<group>"; };
 		77FACA5029D30E2B00A5744A /* RoundedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldStyle.swift; sourceTree = "<group>"; };
 		77FACA5529D3167900A5744A /* BackgroundClearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundClearView.swift; sourceTree = "<group>"; };
@@ -469,6 +473,7 @@
 				5092DF2A29292C5C0094DC18 /* Preview Content */,
 				5092DF33292942820094DC18 /* Resources */,
 				5092DF322929427C0094DC18 /* Scenes */,
+				77B188DF2A1CE01D00B11378 /* Services */,
 				50FFAFEA292A832F00B87E0E /* Shared */,
 			);
 			path = Orochi;
@@ -1153,6 +1158,31 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		77B188DF2A1CE01D00B11378 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				77B188E22A1CE6FC00B11378 /* Biometry */,
+				77B188E02A1CE02A00B11378 /* Keychain */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		77B188E02A1CE02A00B11378 /* Keychain */ = {
+			isa = PBXGroup;
+			children = (
+				77B188E52A1CFC3900B11378 /* Keychain.swift */,
+			);
+			path = Keychain;
+			sourceTree = "<group>";
+		};
+		77B188E22A1CE6FC00B11378 /* Biometry */ = {
+			isa = PBXGroup;
+			children = (
+				77B188E32A1CE75B00B11378 /* Biometry.swift */,
+			);
+			path = Biometry;
+			sourceTree = "<group>";
+		};
 		77FACA4D29D1EB7E00A5744A /* TextFieldStyle */ = {
 			isa = PBXGroup;
 			children = (
@@ -1265,6 +1295,7 @@
 				50FFAFEE292A83B800B87E0E /* MangaStandardCell+builders.swift in Sources */,
 				50FFAFE3292A6AFE00B87E0E /* MangaStatus.swift in Sources */,
 				50FFAFDC292A668000B87E0E /* LanguagesView.swift in Sources */,
+				77B188E62A1CFC3900B11378 /* Keychain.swift in Sources */,
 				50F44448292E9442001B3CF4 /* UIView+extension.swift in Sources */,
 				50FFAFF4292A84EE00B87E0E /* InitialStyleView.swift in Sources */,
 				50CE85C32948C56800169922 /* RepresentableSheet+configutation.swift in Sources */,
@@ -1348,6 +1379,7 @@
 				503019A42934212700F5645F /* UIApplications+extension.swift in Sources */,
 				77FACA5129D30E2B00A5744A /* RoundedTextFieldStyle.swift in Sources */,
 				5056563C2932597F0061FD15 /* LanguagePicker.swift in Sources */,
+				77B188E42A1CE75B00B11378 /* Biometry.swift in Sources */,
 				507803DA292DC03C0041D5BD /* LoadingView.swift in Sources */,
 				50F44446292E93F8001B3CF4 /* AlwaysPopover+modifier.swift in Sources */,
 				50F4443A292E61CA001B3CF4 /* ChapterListStandardCell.swift in Sources */,

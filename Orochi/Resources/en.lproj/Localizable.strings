@@ -28,6 +28,9 @@
 "common_all" = "All";
 "common_none" = "None";
 "common_of" = "of";
+"common_ok" = "OK";
+"common_attention" = "Attention";
+"common_error" = "Error";
 
 /* ------------------------------------------------------------ */
 
@@ -122,12 +125,14 @@
 "manga_selected_chapters" = "Selected Chapters";
 "manga_chapters_of" = "Chapters Of";
 
+/* ------------------------------------------------------------ */
+
 // MARK: - ADJUSTS SCREEN
 
 "adjusts_tracker_header" = "Tracker";
 "adjusts_tracker_footer" = "You can connect your **AniList** account and track your mangas";
-"adjusts_tracker_log_in" = "Login";
-"adjusts_tracker_log_out" = "Log Out";
+"adjusts_tracker_log_in" = "LogIn";
+"adjusts_tracker_log_out" = "LogOut";
 "adjusts_tracker_user" = "User";
 "adjusts_icloud_header" = "iCloud";
 "adjusts_icloud_footer" = "Your manga library will be saved in the **Cloud** to be accessed from other devices";
@@ -144,4 +149,17 @@
 "adjusts_notification_updated_mangas" = "Chapter Update";
 "adjusts_age_rating_header" = "Age Rating";
 "adjusts_age_rating_footer" = "**Not safe for work**: material that should only be looked at in private because it contains some things that could be _offensive_";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - ERRORS
+
+"error_anilist_login" = "Error when trying to logout of your AniList account.";
+"error_keychain_save" = "Error when trying save your credentials on Keychain.";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - ANILIST
+
+"anilist_logout" = "Are you sure you want to LogOut of your AniList account?";
 
