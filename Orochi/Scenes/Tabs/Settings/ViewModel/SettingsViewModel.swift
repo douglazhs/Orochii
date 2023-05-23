@@ -38,7 +38,7 @@ class SettingsViewModel: ObservableObject {
     
     /// Check if the user is logged on AniList account
     func checkALToken() {
-        if let data = Keychain.standard.read(
+        if let _ = Keychain.standard.read(
             service: "access-token",
             account: "anilist"
         ) { logged = true }
@@ -99,18 +99,10 @@ class SettingsViewModel: ObservableObject {
         guard let bearer = token["access_token"],
               let bearerData = bearer.data(using: .utf8)
         else { return }
-        guard let expiresIn = token["expires_in"],
-              let expiresInData = expiresIn.data(using: .utf8)
-        else { return }
         do {
             try Keychain.standard.save(
                 bearerData,
                 service: "access-token",
-                account: "anilist"
-            )
-            try Keychain.standard.save(
-                expiresInData,
-                service: "expire-date",
                 account: "anilist"
             )
             self.logged.toggle()

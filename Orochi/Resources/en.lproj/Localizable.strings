@@ -132,7 +132,7 @@
 "adjusts_tracker_header" = "Tracker";
 "adjusts_tracker_footer" = "You can connect your **AniList** account and track your mangas";
 "adjusts_tracker_log_in" = "LogIn";
-"adjusts_tracker_log_out" = "LogOut";
+"adjusts_tracker_log_out" = "Log Out";
 "adjusts_tracker_user" = "User";
 "adjusts_icloud_header" = "iCloud";
 "adjusts_icloud_footer" = "Your manga library will be saved in the **Cloud** to be accessed from other devices";
@@ -161,5 +161,5 @@
 
 // MARK: - ANILIST
 
-"anilist_logout" = "Are you sure you want to LogOut of your AniList account?";
+"anilist_logout" = "Are you sure you want to Log Out of your AniList account?";
 
