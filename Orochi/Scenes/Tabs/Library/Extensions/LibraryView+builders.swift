@@ -15,6 +15,7 @@ extension LibraryView {
         List {
             ForEach(MangaDomain.samples) { manga in
                 self.cell(of: manga)
+                    .listRowInsets(.init(top: 11, leading: 16, bottom: 0, trailing: 16))
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
                     .listSectionSeparator(.hidden)
@@ -25,10 +26,10 @@ extension LibraryView {
                         }
                     } preview: { MangaView(manga) }
             }
-            .onDelete { _ in
-                // TODO: - Delete manga
-            }
+            /*.onDelete(perform: { _ in })*/
         }
+        .environment(\.defaultMinListHeaderHeight, 12)
+        .environment(\.defaultMinListRowHeight, 12)
         .scrollIndicators(.hidden)
         .refreshable {
             // TODO: Refresh library mangas

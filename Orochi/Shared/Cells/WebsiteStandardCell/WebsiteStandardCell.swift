@@ -12,32 +12,11 @@ struct WebsiteStandardCell: View {
     var title: String
     var urlString: String
     var image: AppImages
-    var customInfo: (show: Bool, description: String) = (show: false, description: "")
+    var avatarURL: URL? = nil
+    var customInfo: String = ""
     
     var body: some View {
-        VStack(alignment: .leading) {
-            Text(header)
-            HStack{
-                Link(destination: URL(string: urlString)!) {
-                    Image(appImage: image)
-                        .resizable()
-                        .cornerRadius(5.5)
-                        .frame(
-                            maxWidth: 45,
-                            maxHeight: 45
-                        )
-                        .shadow(color: .black.opacity(0.3), radius: 1.5, x: 2.5, y: 2.5)
-                }
-                Text(title)
-                Spacer()
-                if customInfo.show {
-                    Text(customInfo.description)
-                        .font(.caption)
-                }
-            }
-            .padding(10)
-            .background(PrimaryGradient())
-        }
+        self.content()
     }
 }
 
@@ -47,7 +26,7 @@ struct WebsiteStandardCell_Previews: PreviewProvider {
             header: "Header",
             title: "Title",
             urlString: "https://mangadex.org",
-            image: .ani_list_logo
+            image: .manga_dex_icon
         )
     }
 }

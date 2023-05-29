@@ -14,29 +14,9 @@ extension SettingsView {
     @ViewBuilder
     func anilistSection() -> some View {
         Section {
-            HStack {
-                Button(role: vm.logged ? .destructive : .none) {
-                    vm.logged
-                    ? (showDialog = true)
-                    : vm.logInAL(showErrorDialog: $showErrorDialog)
-                } label: {
-                    Text(vm.logged ? Localized.logOut.uppercased() : Localized.logIn.uppercased())
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                }.buttonStyle(.borderless)
-                Spacer()
-                Text(vm.logged ? "\(Localized.trackerUser): **douglazhs**" : "")
-                    .font(.caption)
-                    .foregroundColor(Color(uiColor: .systemGray))
-            }
+            self.accButtonHandler()
         } header: {
-            WebsiteStandardCell(
-                header: Localized.trackerHeader,
-                title: String.Name.aniList,
-                urlString: "https://anilist.co/home",
-                image: .ani_list_logo,
-                customInfo: (show: true, description: vm.logged ? "34 Mangas" : "")
-            )
+            self.trackerCell()
         } footer: {
             Text(Localized.trackerFooter)
         }
@@ -47,7 +27,9 @@ extension SettingsView {
         }
         .alert(String.Common.attention, isPresented: $showDialog) {
             Button(String.Common.cancel, role: .cancel, action: {})
-            Button(String.Adjusts.logOut, role: .destructive) { vm.logOutAL(showErrorDialog: $showErrorDialog) }
+            Button(String.Adjusts.logOut, role: .destructive) {
+                vm.logOutAL(showErrorDialog: $showErrorDialog)
+            }
         } message: {
             Text(String.Anilist.logOutMessage)
         }

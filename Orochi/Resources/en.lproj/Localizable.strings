@@ -154,7 +154,7 @@
 
 // MARK: - ERRORS
 
-"error_anilist_login" = "Error when trying to logout of your AniList account.";
+"error_anilist_login" = "Error when trying to login on your AniList account.";
 "error_keychain_save" = "Error when trying save your credentials on Keychain.";
 
 /* ------------------------------------------------------------ */

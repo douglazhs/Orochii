@@ -18,7 +18,7 @@ extension SourcePreferencesView {
             WebsiteStandardCell(
                 header: "Source",
                 title: String.Name.mangaDex,
-                urlString: "https://mangadex.org",
+                urlString: AppURLs.MDSite.description,
                 image: .manga_dex_icon
             )
         } footer: { Text(String.MangaSource.siteFooter) }

@@ -22,7 +22,7 @@ struct MangaStandardImage: View {
                 RoundedRectangle(cornerRadius: 4.5)
                     .stroke(
                         Color(uiColor: .systemGray),
-                        lineWidth: 0.85
+                        lineWidth: 1.05
                     )
             )
             .cornerRadius(4.5)

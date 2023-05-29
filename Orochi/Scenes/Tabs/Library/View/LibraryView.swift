@@ -21,13 +21,25 @@ struct LibraryView: View {
                     }
                 }
                 .navigationTitle(String.Library.title)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbarBackground(
+                    Constants.device == .phone
+                    ? .visible
+                    : .automatic,
+                    for: .navigationBar
+                )
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         self.filterButton()
                     }
                 }
         }
-        .searchable(text: $vm.query)
+        .searchable(
+            text: $vm.query,
+            placement: .navigationBarDrawer(
+                displayMode: .always
+            )
+        )
         .onSubmit(of: .search) {
             // TODO: - Search
         }

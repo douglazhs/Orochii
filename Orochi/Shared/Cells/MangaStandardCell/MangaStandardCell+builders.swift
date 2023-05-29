@@ -35,13 +35,13 @@ extension MangaStandardCell {
                 // TITLE
                 Text(manga.title)
                     .font(.subheadline)
-                    .fontWeight(.semibold)
+                    .fontWeight(.medium)
                     .lineLimit(1)
                 Spacer()
                 // YEAR
                 Text("• \(manga.year)")
                     .font(.caption2)
-                    .fontWeight(.semibold)
+                    .fontWeight(.medium)
                     .foregroundColor(Color(uiColor: .systemGray))
             }
             // AUTHOR
@@ -50,7 +50,6 @@ extension MangaStandardCell {
                 .foregroundColor(Color(uiColor: .systemGray))
             // GENRES
             self.allGenres()
-            Spacer()
             //STATUS
             self.status()
         }
@@ -73,8 +72,7 @@ extension MangaStandardCell {
                 Text(manga.genres.joined(separator: ", "))
             }
         }
-        .font(.caption2)
-        .fontWeight(.medium)
+        .font(.caption)
         .lineLimit(1)
         .foregroundColor(.secondary)
     }
@@ -82,19 +80,13 @@ extension MangaStandardCell {
     /// Main manga information
     @ViewBuilder
     func status() -> some View {
-        HStack {
-            Spacer()
-            self.infoLabel(
-                manga.status.description.uppercased(),
-                manga.status.config.icon,
-                manga.status.config.color
-            )
-            .padding(5.5)
-            .background {
-                LinearGradient(colors: [.clear, Color(uiColor: .systemIndigo).opacity(0.25)], startPoint: .leading, endPoint: .trailing)
-                    .cornerRadius(5.5)
-            }
-        }.foregroundColor(.secondary)
+        HStack(spacing: 5.5) {
+            Text("CH. 1 / 154")
+            Divider().frame(maxHeight: 15).foregroundColor(.primary)
+            Text("VOL. 2")
+        }
+        .foregroundColor(Color(uiColor: .systemGray))
+        .font(.caption2)
     }
 
     /// Manga Info custom label

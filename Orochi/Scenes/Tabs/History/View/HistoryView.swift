@@ -16,6 +16,7 @@ struct HistoryView: View {
         NavigationStack {
             self.content()
                 .navigationTitle("History")
+                .navigationBarTitleDisplayMode(.inline)
                 .scrollContentBackground(.hidden)
                 .background(BlurBackground(with: .view_background))
                 .toolbar {
@@ -23,7 +24,7 @@ struct HistoryView: View {
                         self.clearHistoryButton()
                     }
                 }
-                .searchable(text: $vm.query)
+                .searchable(text: $vm.query, placement: .navigationBarDrawer(displayMode: .always))
         }
     }
 }

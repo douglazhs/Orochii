@@ -20,14 +20,26 @@ struct DiscoverView: View {
     var body: some View {
         NavigationStack {
             self.content()
-                .navigationTitle(Text(String.Discovery.title))
+                .navigationTitle(String.Discovery.title)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbarBackground(
+                    Constants.device == .phone
+                    ? .visible
+                    : .automatic,
+                    for: .navigationBar
+                )
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         self.mangaSourceButton()
                     }
                 }
         }
-        .searchable(text: $vm.searchText)
+        .searchable(
+            text: $vm.searchText,
+            placement: .navigationBarDrawer(
+                displayMode: .always
+            )
+        )
         .onSubmit(of: .search) { viewStyle = .search }
     }
 }

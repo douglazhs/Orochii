@@ -11,6 +11,7 @@ struct SettingsView: View {
     @StateObject var vm: SettingsViewModel = SettingsViewModel()
     @State var showErrorDialog: Bool = false
     @State var showDialog: Bool = false
+    @State var showALAccount: Bool = false
     
     var body: some View {
         NavigationStack {
@@ -26,17 +27,14 @@ struct SettingsView: View {
                     .listRowBackground(Color.clear)
             }
             .listStyle(.grouped)
-            .toolbarBackground(
-                Color.indigo.opacity(0.075),
-                for: .navigationBar
-            )
+            .navigationTitle(Text(String.Settings.title))
+            .navigationBarTitleDisplayMode(.inline)
             .animation(
                 .easeInOut(duration: 0.175),
                 value: [vm.biometryPreference, vm.logged]
             )
             .background(BlurBackground(with: .view_background))
             .scrollContentBackground(.hidden)
-            .navigationTitle(Text(String.Settings.title))
         }
     }
 }

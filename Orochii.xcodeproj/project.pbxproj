@@ -117,6 +117,12 @@
 		77640E56299E9F440076CB26 /* TrackerPopUp+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77640E55299E9F440076CB26 /* TrackerPopUp+builders.swift */; };
 		77B188E42A1CE75B00B11378 /* Biometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188E32A1CE75B00B11378 /* Biometry.swift */; };
 		77B188E62A1CFC3900B11378 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188E52A1CFC3900B11378 /* Keychain.swift */; };
+		77B188EE2A1E5B4300B11378 /* URLSession+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */; };
+		77B188F12A1E96B800B11378 /* AniListAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188F02A1E96B800B11378 /* AniListAccountView.swift */; };
+		77B188F52A1E9A1E00B11378 /* AppURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188F42A1E9A1E00B11378 /* AppURLs.swift */; };
+		77EAE9F12A1EA2A800205562 /* AniListAccountView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EAE9F02A1EA2A800205562 /* AniListAccountView+builders.swift */; };
+		77EAE9F32A1EDE7500205562 /* WebsiteStandardCell+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EAE9F22A1EDE7500205562 /* WebsiteStandardCell+builders.swift */; };
+		77EAE9F52A1EE1F800205562 /* SettingsView+ALSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EAE9F42A1EE1F800205562 /* SettingsView+ALSection.swift */; };
 		77FACA4F29D1EBA200A5744A /* OutlinedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FACA4E29D1EBA200A5744A /* OutlinedTextFieldStyle.swift */; };
 		77FACA5129D30E2B00A5744A /* RoundedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FACA5029D30E2B00A5744A /* RoundedTextFieldStyle.swift */; };
 		77FACA5629D3167900A5744A /* BackgroundClearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FACA5529D3167900A5744A /* BackgroundClearView.swift */; };
@@ -236,6 +242,12 @@
 		77640E55299E9F440076CB26 /* TrackerPopUp+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrackerPopUp+builders.swift"; sourceTree = "<group>"; };
 		77B188E32A1CE75B00B11378 /* Biometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometry.swift; sourceTree = "<group>"; };
 		77B188E52A1CFC3900B11378 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
+		77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+extension.swift"; sourceTree = "<group>"; };
+		77B188F02A1E96B800B11378 /* AniListAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniListAccountView.swift; sourceTree = "<group>"; };
+		77B188F42A1E9A1E00B11378 /* AppURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppURLs.swift; sourceTree = "<group>"; };
+		77EAE9F02A1EA2A800205562 /* AniListAccountView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AniListAccountView+builders.swift"; sourceTree = "<group>"; };
+		77EAE9F22A1EDE7500205562 /* WebsiteStandardCell+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebsiteStandardCell+builders.swift"; sourceTree = "<group>"; };
+		77EAE9F42A1EE1F800205562 /* SettingsView+ALSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+ALSection.swift"; sourceTree = "<group>"; };
 		77FACA4E29D1EBA200A5744A /* OutlinedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlinedTextFieldStyle.swift; sourceTree = "<group>"; };
 		77FACA5029D30E2B00A5744A /* RoundedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldStyle.swift; sourceTree = "<group>"; };
 		77FACA5529D3167900A5744A /* BackgroundClearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundClearView.swift; sourceTree = "<group>"; };
@@ -285,6 +297,7 @@
 			isa = PBXGroup;
 			children = (
 				500DB59C292C608B00F398D6 /* SettingsView+builders.swift */,
+				77EAE9F42A1EE1F800205562 /* SettingsView+ALSection.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -490,6 +503,7 @@
 		5092DF322929427C0094DC18 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				77B188EF2A1E969100B11378 /* AniList Account */,
 				503019A52934559100F5645F /* AniList Tracker */,
 				50F44427292E4236001B3CF4 /* Chapter */,
 				50FFAFE4292A73F400B87E0E /* Languages */,
@@ -587,6 +601,7 @@
 				50F44449292F02CC001B3CF4 /* CGSize+extension.swift */,
 				503019A32934212700F5645F /* UIApplications+extension.swift */,
 				508D1B902937055A0069012C /* Haptics+extension.swift */,
+				77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -980,6 +995,7 @@
 			isa = PBXGroup;
 			children = (
 				50FE08DC292D9D0200432F21 /* WebsiteStandardCell.swift */,
+				77EAE9F22A1EDE7500205562 /* WebsiteStandardCell+builders.swift */,
 			);
 			path = WebsiteStandardCell;
 			sourceTree = "<group>";
@@ -987,6 +1003,7 @@
 		50FFAFDD292A6A7F00B87E0E /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				77B188F32A1E9A0800B11378 /* URL */,
 				50F6F686293C2DD000142816 /* Carousel */,
 				50F6F685293C2DB600142816 /* AniList */,
 				50F6F680293C2BCE00142816 /* Filter */,
@@ -1183,6 +1200,39 @@
 			path = Biometry;
 			sourceTree = "<group>";
 		};
+		77B188EF2A1E969100B11378 /* AniList Account */ = {
+			isa = PBXGroup;
+			children = (
+				77EAE9EF2A1EA28800205562 /* Extensions */,
+				77B188F22A1E96C500B11378 /* View */,
+			);
+			path = "AniList Account";
+			sourceTree = "<group>";
+		};
+		77B188F22A1E96C500B11378 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				77B188F02A1E96B800B11378 /* AniListAccountView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		77B188F32A1E9A0800B11378 /* URL */ = {
+			isa = PBXGroup;
+			children = (
+				77B188F42A1E9A1E00B11378 /* AppURLs.swift */,
+			);
+			path = URL;
+			sourceTree = "<group>";
+		};
+		77EAE9EF2A1EA28800205562 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				77EAE9F02A1EA2A800205562 /* AniListAccountView+builders.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		77FACA4D29D1EB7E00A5744A /* TextFieldStyle */ = {
 			isa = PBXGroup;
 			children = (
@@ -1315,6 +1365,7 @@
 				50639B46293A3CF700D8E3CB /* HistoryChapterCell+builders.swift in Sources */,
 				50FE08D0292D035600432F21 /* PrimaryGradient.swift in Sources */,
 				50E02110293D276F001C85B5 /* DarkOverlay.swift in Sources */,
+				77B188EE2A1E5B4300B11378 /* URLSession+extension.swift in Sources */,
 				507803D2292DB5F40041D5BD /* Carousel.swift in Sources */,
 				50F4442D292E43F9001B3CF4 /* ChapterView+builders.swift in Sources */,
 				50FFAFF2292A84DB00B87E0E /* SearchStyleView.swift in Sources */,
@@ -1327,6 +1378,7 @@
 				50F44451292F0905001B3CF4 /* MangaReaderToolbar+modifier.swift in Sources */,
 				503019A7293455BD00F5645F /* ALTracker.swift in Sources */,
 				50FFB00F292ACE0400B87E0E /* ObjectFilter.swift in Sources */,
+				77EAE9F32A1EDE7500205562 /* WebsiteStandardCell+builders.swift in Sources */,
 				77640E54299E9A5C0076CB26 /* TrackerPopUp.swift in Sources */,
 				505656392932580F0061FD15 /* ChapterMenu.swift in Sources */,
 				50BC960F292C674500DF13A5 /* SettingsViewModel.swift in Sources */,
@@ -1337,6 +1389,7 @@
 				50FFAFFF292A98C000B87E0E /* MangaStandardImage.swift in Sources */,
 				50FFB00B292AB3DA00B87E0E /* LibraryFilterView+builders.swift in Sources */,
 				50CE85BF2948C4EB00169922 /* RepresentableSheet+modifier.swift in Sources */,
+				77EAE9F52A1EE1F800205562 /* SettingsView+ALSection.swift in Sources */,
 				50F44434292E5844001B3CF4 /* ReaderPreferencesView.swift in Sources */,
 				50F4444A292F02CC001B3CF4 /* CGSize+extension.swift in Sources */,
 				50FFAFE1292A6ACD00B87E0E /* MangaQuality.swift in Sources */,
@@ -1351,11 +1404,13 @@
 				50F4443E292E6645001B3CF4 /* ReadingMode.swift in Sources */,
 				500183CD292C0D270094B223 /* ChapterStandardCell+builders.swift in Sources */,
 				50CE85C62948C5A200169922 /* MeasureSize.swift in Sources */,
+				77B188F12A1E96B800B11378 /* AniListAccountView.swift in Sources */,
 				5092DF5629296FFA0094DC18 /* MangaDomain.swift in Sources */,
 				503019AB2934D85F00F5645F /* ALTracker+builders.swift in Sources */,
 				50FE08DA292D8A6900432F21 /* EnumPicker.swift in Sources */,
 				5092DF3A292942CA0094DC18 /* DiscoverViewModel.swift in Sources */,
 				50FFAFFC292A986600B87E0E /* InitialStyleView+builders.swift in Sources */,
+				77EAE9F12A1EA2A800205562 /* AniListAccountView+builders.swift in Sources */,
 				50CAD2E829383887000C1C0E /* MangaView+actions.swift in Sources */,
 				500183C6292C07580094B223 /* MangaViewModel.swift in Sources */,
 				50F44429292E4244001B3CF4 /* ChapterView.swift in Sources */,
@@ -1379,6 +1434,7 @@
 				503019A42934212700F5645F /* UIApplications+extension.swift in Sources */,
 				77FACA5129D30E2B00A5744A /* RoundedTextFieldStyle.swift in Sources */,
 				5056563C2932597F0061FD15 /* LanguagePicker.swift in Sources */,
+				77B188F52A1E9A1E00B11378 /* AppURLs.swift in Sources */,
 				77B188E42A1CE75B00B11378 /* Biometry.swift in Sources */,
 				507803DA292DC03C0041D5BD /* LoadingView.swift in Sources */,
 				50F44446292E93F8001B3CF4 /* AlwaysPopover+modifier.swift in Sources */,

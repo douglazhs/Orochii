@@ -23,10 +23,12 @@ class SettingsViewModel: ObservableObject {
     @Published var biometryPreference: Bool = false
     @Published var notifications: Bool = false
     @Published var securityLevel: SecurityLevel = .library
+    @Published var user: User?
+    @Published var isLoading: Bool = false
     
     init() {
         checkLocalAuth()
-        checkALToken()
+        Task { await checkALToken() }
     }
     
     /// Check the avaibility of the `local authentication`
@@ -37,11 +39,18 @@ class SettingsViewModel: ObservableObject {
     }
     
     /// Check if the user is logged on AniList account
-    func checkALToken() {
-        if let _ = Keychain.standard.read(
-            service: "access-token",
-            account: "anilist"
-        ) { logged = true }
+    func checkALToken() async {
+        Task { @MainActor in
+            self.isLoading = true
+            defer { self.isLoading = false }
+            if let tokenData = Keychain.standard.read(
+                service: "access-token",
+                account: "anilist"
+            ), let token =  String(data: tokenData, encoding: .utf8) {
+                self.logged = true
+                self.user = await anilist.getUser(token: token)
+            }
+        }
     }
     
     /// Change local authentication state
@@ -49,11 +58,15 @@ class SettingsViewModel: ObservableObject {
         Biometry.shared.changeBiometryState { error in
             Task { @MainActor in
                 if error != nil {
-                    self.biometryPreference = self.biometryPreference ? false : true
+                    self.biometryPreference = self.biometryPreference
+                    ? false
+                    : true
                     self.error = error
                     return
                 }
-                self.biometricState = (self.biometricState == .active) ? .inactive : .active
+                self.biometricState = (self.biometricState == .active)
+                ? .inactive
+                : .active
             }
         }
     }
@@ -66,6 +79,7 @@ class SettingsViewModel: ObservableObject {
             case .success(let token):
                 do {
                     try self.storeToken(token)
+                    Task { await self.checkALToken() }
                 } catch {
                     showErrorDialog.wrappedValue = true
                     self.loginMessage = String.Errors.keychainSave
@@ -87,6 +101,7 @@ class SettingsViewModel: ObservableObject {
                 account: "anilist"
             )
             self.logged = false
+            self.user = nil
         } catch {
             showErrorDialog.wrappedValue = true
             loginMessage = String.Errors.anilistLogOutError
@@ -105,7 +120,6 @@ class SettingsViewModel: ObservableObject {
                 service: "access-token",
                 account: "anilist"
             )
-            self.logged.toggle()
         }
     }
 }

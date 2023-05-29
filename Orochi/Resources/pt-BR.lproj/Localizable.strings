@@ -154,7 +154,7 @@
 
 // MARK: - ERRORS
 
-"error_anilist_login" = "Erro ao tentar sair da sua conta AniList.";
+"error_anilist_login" = "Erro ao tentar entrar em sua conta AniList.";
 "error_keychain_save" = "Erro ao tentar salvar suas credenciais no Keychain.";
 
 /* ------------------------------------------------------------ */

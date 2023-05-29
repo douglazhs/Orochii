@@ -8,10 +8,12 @@
 import SwiftUI
 
 extension SearchStyleView {
-    @ViewBuilder func content() -> some View {
+    @ViewBuilder
+    func content() -> some View {
         if !mangas.isEmpty{
             List(mangas) { manga in
                 self.cell(of: manga)
+                    .listRowInsets(.init(top: 11, leading: 16, bottom: 0, trailing: 16))
                     .listRowBackground(Color.clear)
                     .listRowSeparator(.hidden)
                     .listSectionSeparator(.hidden)
