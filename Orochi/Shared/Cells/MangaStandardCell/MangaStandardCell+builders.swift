@@ -88,27 +88,4 @@ extension MangaStandardCell {
         .foregroundColor(Color(uiColor: .systemGray))
         .font(.caption2)
     }
-
-    /// Manga Info custom label
-    /// - Parameters:
-    ///   - name: Label name
-    ///   - icon: Icon name
-    ///   - color: Label icon color
-    /// - Returns: Custom manga informaion label
-    @ViewBuilder
-    func infoLabel(
-        _ name: String,
-        _ icon: String,
-        _ color: Color = Color(uiColor: .systemGray),
-        isItalic: Bool = false
-    ) -> some View {
-        Label {
-            Text(name)
-                .fontWeight(.medium)
-                .italic(isItalic)
-        } icon: {
-            Image(systemName: icon)
-                .foregroundColor(color)
-        }.font(.caption2)
-    }
 }

@@ -13,15 +13,16 @@ extension SourcePreferencesView {
     @ViewBuilder
     func siteSection() -> some View {
         Section {
-            EmptyView()
-        } header: {
             WebsiteStandardCell(
-                header: "Source",
                 title: String.Name.mangaDex,
                 urlString: AppURLs.MDSite.description,
                 image: .manga_dex_icon
             )
-        } footer: { Text(String.MangaSource.siteFooter) }
+        } header: {
+            Text(String.MangaSource.title)
+        } footer: {
+            Text(String.MangaSource.siteFooter)
+        }
     }
     
     /// MangaDex source languages

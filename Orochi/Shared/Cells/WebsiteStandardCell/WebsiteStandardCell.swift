@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct WebsiteStandardCell: View {
-    var header: String
     var title: String
     var urlString: String
     var image: AppImages
@@ -23,7 +22,6 @@ struct WebsiteStandardCell: View {
 struct WebsiteStandardCell_Previews: PreviewProvider {
     static var previews: some View {
         WebsiteStandardCell(
-            header: "Header",
             title: "Title",
             urlString: "https://mangadex.org",
             image: .manga_dex_icon

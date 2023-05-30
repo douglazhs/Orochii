@@ -10,10 +10,15 @@ import AniListService
 
 /// Account information
 struct AniListAccountView: View {
+    @StateObject var vm = AniListAccountViewModel()
     var user: User?
     
     var body: some View {
         self.content()
+            .onAppear {
+                guard let user else { return }
+                Task { await vm.getPeople(user: user.id) }
+            }
     }
 }
 

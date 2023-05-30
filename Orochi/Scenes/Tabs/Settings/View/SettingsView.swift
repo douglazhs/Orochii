@@ -26,12 +26,19 @@ struct SettingsView: View {
                 self.notificationsSection()
                     .listRowBackground(Color.clear)
             }
+            .refreshable {
+                Task { await vm.checkALToken() }
+            }
             .listStyle(.grouped)
-            .navigationTitle(Text(String.Settings.title))
+            .navigationTitle(String.Settings.title)
             .navigationBarTitleDisplayMode(.inline)
             .animation(
                 .easeInOut(duration: 0.175),
-                value: [vm.biometryPreference, vm.logged]
+                value: [
+                    vm.biometryPreference,
+                    vm.logged,
+                    vm.isLoading
+                ]
             )
             .background(BlurBackground(with: .view_background))
             .scrollContentBackground(.hidden)

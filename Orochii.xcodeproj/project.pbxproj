@@ -112,6 +112,7 @@
 		50FFB013292AD35000B87E0E /* OrderFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB012292AD35000B87E0E /* OrderFilter.swift */; };
 		50FFB016292AE7B800B87E0E /* MangaView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB015292AE7B800B87E0E /* MangaView+builders.swift */; };
 		771B766129DC788700F7CCB6 /* anilist_api.json in Resources */ = {isa = PBXBuildFile; fileRef = 771B766029DC788700F7CCB6 /* anilist_api.json */; };
+		773845972A259E22007F1014 /* AniListAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773845962A259E22007F1014 /* AniListAccountViewModel.swift */; };
 		776323C22A16F776009B5966 /* AniListService in Frameworks */ = {isa = PBXBuildFile; productRef = 776323C12A16F776009B5966 /* AniListService */; };
 		77640E54299E9A5C0076CB26 /* TrackerPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77640E53299E9A5C0076CB26 /* TrackerPopUp.swift */; };
 		77640E56299E9F440076CB26 /* TrackerPopUp+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77640E55299E9F440076CB26 /* TrackerPopUp+builders.swift */; };
@@ -238,6 +239,7 @@
 		50FFB012292AD35000B87E0E /* OrderFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderFilter.swift; sourceTree = "<group>"; };
 		50FFB015292AE7B800B87E0E /* MangaView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaView+builders.swift"; sourceTree = "<group>"; };
 		771B766029DC788700F7CCB6 /* anilist_api.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = anilist_api.json; sourceTree = "<group>"; };
+		773845962A259E22007F1014 /* AniListAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniListAccountViewModel.swift; sourceTree = "<group>"; };
 		77640E53299E9A5C0076CB26 /* TrackerPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerPopUp.swift; sourceTree = "<group>"; };
 		77640E55299E9F440076CB26 /* TrackerPopUp+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrackerPopUp+builders.swift"; sourceTree = "<group>"; };
 		77B188E32A1CE75B00B11378 /* Biometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometry.swift; sourceTree = "<group>"; };
@@ -1205,6 +1207,7 @@
 			children = (
 				77EAE9EF2A1EA28800205562 /* Extensions */,
 				77B188F22A1E96C500B11378 /* View */,
+				773845962A259E22007F1014 /* AniListAccountViewModel.swift */,
 			);
 			path = "AniList Account";
 			sourceTree = "<group>";
@@ -1417,6 +1420,7 @@
 				500183CB292C0CCA0094B223 /* ChapterStandardCell.swift in Sources */,
 				500B9B6B2938F1DD00961753 /* HistoryView.swift in Sources */,
 				50FFAFE9292A81B100B87E0E /* MangaView.swift in Sources */,
+				773845972A259E22007F1014 /* AniListAccountViewModel.swift in Sources */,
 				50639B41293A32C100D8E3CB /* HistoryMangaCell.swift in Sources */,
 				50639B48293A3D3000D8E3CB /* HistoryMangaCell+builders.swift in Sources */,
 				5092DF2529292C590094DC18 /* OrochiApp.swift in Sources */,

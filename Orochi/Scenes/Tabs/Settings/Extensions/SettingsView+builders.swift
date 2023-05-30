@@ -14,9 +14,13 @@ extension SettingsView {
     @ViewBuilder
     func anilistSection() -> some View {
         Section {
-            self.accButtonHandler()
-        } header: {
             self.trackerCell()
+                .overlay(alignment: .trailing) {
+                    self.accButtonHandler()
+                        .padding(.trailing, (vm.user != nil) ? 16.0 : 0.0)
+                }
+        } header: {
+            Text(Localized.trackerHeader)
         } footer: {
             Text(Localized.trackerFooter)
         }

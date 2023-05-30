@@ -73,11 +73,7 @@ extension AniListAccountView {
                     .resizable()
                     .scaledToFit()
                     .cornerRadius(12.0)
-            } else {
-                Image(AppImages.ani_list_logo.rawValue)
-                    .resizable()
-                    .cornerRadius(12.0)
-            }
+            } else { ActivityIndicator() }
         }
         .frame(width: 85.0, height: 85.0)
     }
@@ -129,34 +125,39 @@ extension AniListAccountView {
     @ViewBuilder
     func followArea() -> some View {
         HStack(alignment: .center, spacing: 10.0) {
-            Button { } label: {
-                Label {
-                    Text("3")
-                } icon: {
-                    Image(systemName: "person.line.dotted.person.fill")
+            peopleButton(
+                label: "\(vm.following?.count ?? 0)",
+                image: "person.line.dotted.person.fill"
+            )
+            Divider().frame(maxHeight: 17.5)
+            peopleButton(
+                label: "\(vm.followers?.count ?? 0)",
+                image: "person.fill"
+            )
+        }.padding(.bottom, 20.0)
+    }
+    
+    /// Follower and following button sample
+    @ViewBuilder
+    func peopleButton(label: String, image: String) -> some View {
+        Button { } label: {
+            Label {
+                if vm.isLoading {
+                    ActivityIndicator()
+                } else {
+                    Text(label)
+                        .font(.caption)
+                        .fontWeight(.semibold)
                 }
-                .foregroundColor(.white)
-                .fontWeight(.heavy)
+            } icon: {
+                Image(systemName: image)
+                    .foregroundColor(Color(uiColor: .systemGray))
             }
-            .buttonStyle(.borderless)
-            .tint(.indigo)
-            
-            Divider().frame(maxHeight: 25.0)
-            
-            Button { } label: {
-                Label {
-                    Text("3")
-                } icon: {
-                    Image(systemName: "person.fill")
-                }
-                .foregroundColor(.white)
-                .fontWeight(.heavy)
-            }
-            .buttonStyle(.borderless)
-            .tint(.indigo)
+            .foregroundColor(.white)
+            .fontWeight(.heavy)
         }
-        .font(.caption)
-        .padding(.bottom, 20)
+        .buttonStyle(.borderless)
+        .font(.caption2)
         .unredacted()
     }
     
