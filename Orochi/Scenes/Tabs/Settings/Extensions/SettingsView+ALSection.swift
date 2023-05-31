@@ -30,12 +30,6 @@ extension SettingsView {
     @ViewBuilder
     func loggedInfo() -> some View {
         self.avatar()
-            .representableSheet(
-                isPresented: $showALAccount,
-                content: {
-                    AniListAccountView(user: vm.user)
-                }, detents: []
-            )
     }
     
     /// User Avatar
@@ -49,23 +43,33 @@ extension SettingsView {
                     transaction: .init(animation: .linear(duration: 0.25))
                 ) { result in
                     if let image = result.image {
-                        image
-                            .resizable()
-                            .scaledToFill()
-                            .cornerRadius(5.5)
-                            .onTapGesture {
-                                showALAccount = true
-                            }
+                        self.profileNavigation { image }
                     } else { ActivityIndicator() }
                 }
                 .frame(
-                    maxWidth: CGSize.standardImageCell.width,
-                    maxHeight: CGSize.standardImageCell.width
+                    width: CGSize.standardImageCell.width,
+                    height: CGSize.standardImageCell.width
                 )
             }
             // USER STATS AND INFORMATION
             self.userStats()
             Spacer()
+        }
+    }
+    
+    /// Custom navigation link to user profile screen
+    @ViewBuilder
+    func profileNavigation(@ViewBuilder label: () -> Image) -> some View {
+        ZStack {
+            NavigationLink { AniListAccountView(user: vm.user) } label: {
+                EmptyView()
+            }
+            .frame(width: 0)
+            .opacity(0)
+            label()
+                .resizable()
+                .scaledToFill()
+                .cornerRadius(4.5)
         }
     }
     
@@ -78,7 +82,7 @@ extension SettingsView {
                 .font(.subheadline)
                 .fontWeight(.semibold)
             // MANGAS
-            Text("\(vm.user?.statistics?.manga.count ?? 0) MANGAS")
+            Text("\(vm.user?.statistics?.manga?.count ?? 0) MANGAS")
                 .font(.caption)
                 .fontWeight(.regular)
                 .foregroundColor(Color(uiColor: .systemGray))

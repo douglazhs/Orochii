@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct WebsiteStandardCell: View {
+    @State var showWebView: Bool = false
     var title: String
     var urlString: String
     var image: AppImages

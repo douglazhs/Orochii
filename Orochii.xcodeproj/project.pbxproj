@@ -17,7 +17,7 @@
 		502E8E022935440D00881F40 /* NumberPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502E8E012935440C00881F40 /* NumberPicker.swift */; };
 		502E8E0529354E5200881F40 /* ALTrackerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502E8E0429354E5200881F40 /* ALTrackerViewModel.swift */; };
 		502E8E072935511900881F40 /* AniListStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 502E8E062935511900881F40 /* AniListStatus.swift */; };
-		503019A42934212700F5645F /* UIApplications+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503019A32934212700F5645F /* UIApplications+extension.swift */; };
+		503019A42934212700F5645F /* UIApplication+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503019A32934212700F5645F /* UIApplication+extension.swift */; };
 		503019A7293455BD00F5645F /* ALTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503019A6293455BD00F5645F /* ALTracker.swift */; };
 		503019AB2934D85F00F5645F /* ALTracker+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503019AA2934D85F00F5645F /* ALTracker+builders.swift */; };
 		505656392932580F0061FD15 /* ChapterMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505656382932580F0061FD15 /* ChapterMenu.swift */; };
@@ -113,9 +113,17 @@
 		50FFB016292AE7B800B87E0E /* MangaView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB015292AE7B800B87E0E /* MangaView+builders.swift */; };
 		771B766129DC788700F7CCB6 /* anilist_api.json in Resources */ = {isa = PBXBuildFile; fileRef = 771B766029DC788700F7CCB6 /* anilist_api.json */; };
 		773845972A259E22007F1014 /* AniListAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 773845962A259E22007F1014 /* AniListAccountViewModel.swift */; };
+		7738459C2A25AF48007F1014 /* SafariWebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7738459B2A25AF48007F1014 /* SafariWebView.swift */; };
+		776220582A267D85004E93AF /* SocialCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776220572A267D85004E93AF /* SocialCell.swift */; };
+		7762205A2A267DA0004E93AF /* SocialCell+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776220592A267DA0004E93AF /* SocialCell+builders.swift */; };
+		7762205D2A26BE51004E93AF /* AniListAccountView+tabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7762205C2A26BE51004E93AF /* AniListAccountView+tabs.swift */; };
+		7762205F2A26C046004E93AF /* AniListAccountView+main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7762205E2A26C046004E93AF /* AniListAccountView+main.swift */; };
+		776220622A26D40A004E93AF /* ProfileTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776220612A26D40A004E93AF /* ProfileTabs.swift */; };
+		776220642A26D429004E93AF /* SocialAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776220632A26D429004E93AF /* SocialAction.swift */; };
 		776323C22A16F776009B5966 /* AniListService in Frameworks */ = {isa = PBXBuildFile; productRef = 776323C12A16F776009B5966 /* AniListService */; };
 		77640E54299E9A5C0076CB26 /* TrackerPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77640E53299E9A5C0076CB26 /* TrackerPopUp.swift */; };
 		77640E56299E9F440076CB26 /* TrackerPopUp+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77640E55299E9F440076CB26 /* TrackerPopUp+builders.swift */; };
+		77829A1E2A2771530053262E /* AniListAccountView+charts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77829A1D2A2771530053262E /* AniListAccountView+charts.swift */; };
 		77B188E42A1CE75B00B11378 /* Biometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188E32A1CE75B00B11378 /* Biometry.swift */; };
 		77B188E62A1CFC3900B11378 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188E52A1CFC3900B11378 /* Keychain.swift */; };
 		77B188EE2A1E5B4300B11378 /* URLSession+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */; };
@@ -141,7 +149,7 @@
 		502E8E012935440C00881F40 /* NumberPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberPicker.swift; sourceTree = "<group>"; };
 		502E8E0429354E5200881F40 /* ALTrackerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALTrackerViewModel.swift; sourceTree = "<group>"; };
 		502E8E062935511900881F40 /* AniListStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniListStatus.swift; sourceTree = "<group>"; };
-		503019A32934212700F5645F /* UIApplications+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplications+extension.swift"; sourceTree = "<group>"; };
+		503019A32934212700F5645F /* UIApplication+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIApplication+extension.swift"; sourceTree = "<group>"; };
 		503019A6293455BD00F5645F /* ALTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALTracker.swift; sourceTree = "<group>"; };
 		503019AA2934D85F00F5645F /* ALTracker+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALTracker+builders.swift"; sourceTree = "<group>"; };
 		505656382932580F0061FD15 /* ChapterMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterMenu.swift; sourceTree = "<group>"; };
@@ -240,8 +248,16 @@
 		50FFB015292AE7B800B87E0E /* MangaView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaView+builders.swift"; sourceTree = "<group>"; };
 		771B766029DC788700F7CCB6 /* anilist_api.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = anilist_api.json; sourceTree = "<group>"; };
 		773845962A259E22007F1014 /* AniListAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniListAccountViewModel.swift; sourceTree = "<group>"; };
+		7738459B2A25AF48007F1014 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
+		776220572A267D85004E93AF /* SocialCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialCell.swift; sourceTree = "<group>"; };
+		776220592A267DA0004E93AF /* SocialCell+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SocialCell+builders.swift"; sourceTree = "<group>"; };
+		7762205C2A26BE51004E93AF /* AniListAccountView+tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AniListAccountView+tabs.swift"; sourceTree = "<group>"; };
+		7762205E2A26C046004E93AF /* AniListAccountView+main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AniListAccountView+main.swift"; sourceTree = "<group>"; };
+		776220612A26D40A004E93AF /* ProfileTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabs.swift; sourceTree = "<group>"; };
+		776220632A26D429004E93AF /* SocialAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAction.swift; sourceTree = "<group>"; };
 		77640E53299E9A5C0076CB26 /* TrackerPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerPopUp.swift; sourceTree = "<group>"; };
 		77640E55299E9F440076CB26 /* TrackerPopUp+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TrackerPopUp+builders.swift"; sourceTree = "<group>"; };
+		77829A1D2A2771530053262E /* AniListAccountView+charts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AniListAccountView+charts.swift"; sourceTree = "<group>"; };
 		77B188E32A1CE75B00B11378 /* Biometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometry.swift; sourceTree = "<group>"; };
 		77B188E52A1CFC3900B11378 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+extension.swift"; sourceTree = "<group>"; };
@@ -601,7 +617,7 @@
 				50FE08D6292D826100432F21 /* Image+appImages.swift */,
 				50F44447292E9442001B3CF4 /* UIView+extension.swift */,
 				50F44449292F02CC001B3CF4 /* CGSize+extension.swift */,
-				503019A32934212700F5645F /* UIApplications+extension.swift */,
+				503019A32934212700F5645F /* UIApplication+extension.swift */,
 				508D1B902937055A0069012C /* Haptics+extension.swift */,
 				77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */,
 			);
@@ -826,6 +842,7 @@
 		50F6F678293C289C00142816 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				776220542A267D34004E93AF /* SocialCell */,
 				50639B44293A3A8100D8E3CB /* HistoryChapterCell */,
 				50639B3F293A32AB00D8E3CB /* HistoryMangaCell */,
 				50F44438292E618E001B3CF4 /* ChapterMenuCell */,
@@ -1005,6 +1022,7 @@
 		50FFAFDD292A6A7F00B87E0E /* Enums */ = {
 			isa = PBXGroup;
 			children = (
+				776220602A26D3F2004E93AF /* AniListAccount */,
 				77B188F32A1E9A0800B11378 /* URL */,
 				50F6F686293C2DD000142816 /* Carousel */,
 				50F6F685293C2DB600142816 /* AniList */,
@@ -1055,6 +1073,7 @@
 		50FFAFEA292A832F00B87E0E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				7738459A2A25AF3B007F1014 /* SafariWebView */,
 				77640E50299E9A150076CB26 /* Tracker PopUp */,
 				50E0210B293D2725001C85B5 /* Overlay */,
 				50F6F67F293C2B2100142816 /* Background */,
@@ -1143,6 +1162,40 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		773845992A25A6D1007F1014 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				773845962A259E22007F1014 /* AniListAccountViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		7738459A2A25AF3B007F1014 /* SafariWebView */ = {
+			isa = PBXGroup;
+			children = (
+				7738459B2A25AF48007F1014 /* SafariWebView.swift */,
+			);
+			path = SafariWebView;
+			sourceTree = "<group>";
+		};
+		776220542A267D34004E93AF /* SocialCell */ = {
+			isa = PBXGroup;
+			children = (
+				776220572A267D85004E93AF /* SocialCell.swift */,
+				776220592A267DA0004E93AF /* SocialCell+builders.swift */,
+			);
+			path = SocialCell;
+			sourceTree = "<group>";
+		};
+		776220602A26D3F2004E93AF /* AniListAccount */ = {
+			isa = PBXGroup;
+			children = (
+				776220612A26D40A004E93AF /* ProfileTabs.swift */,
+				776220632A26D429004E93AF /* SocialAction.swift */,
+			);
+			path = AniListAccount;
+			sourceTree = "<group>";
+		};
 		776323BC2A16F000009B5966 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1205,9 +1258,9 @@
 		77B188EF2A1E969100B11378 /* AniList Account */ = {
 			isa = PBXGroup;
 			children = (
+				773845992A25A6D1007F1014 /* ViewModel */,
 				77EAE9EF2A1EA28800205562 /* Extensions */,
 				77B188F22A1E96C500B11378 /* View */,
-				773845962A259E22007F1014 /* AniListAccountViewModel.swift */,
 			);
 			path = "AniList Account";
 			sourceTree = "<group>";
@@ -1232,6 +1285,9 @@
 			isa = PBXGroup;
 			children = (
 				77EAE9F02A1EA2A800205562 /* AniListAccountView+builders.swift */,
+				7762205C2A26BE51004E93AF /* AniListAccountView+tabs.swift */,
+				7762205E2A26C046004E93AF /* AniListAccountView+main.swift */,
+				77829A1D2A2771530053262E /* AniListAccountView+charts.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1339,6 +1395,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				776220582A267D85004E93AF /* SocialCell.swift in Sources */,
+				7762205D2A26BE51004E93AF /* AniListAccountView+tabs.swift in Sources */,
 				50F4444D292F08AA001B3CF4 /* ReaderToolbar.swift in Sources */,
 				50F44454292F1B21001B3CF4 /* UISliderView.swift in Sources */,
 				50639B4D293A486900D8E3CB /* MangaHistoryView.swift in Sources */,
@@ -1354,6 +1412,7 @@
 				50CE85C32948C56800169922 /* RepresentableSheet+configutation.swift in Sources */,
 				50FE08DD292D9D0200432F21 /* WebsiteStandardCell.swift in Sources */,
 				5092DF612929831D0094DC18 /* SourcePreferencesView.swift in Sources */,
+				7738459C2A25AF48007F1014 /* SafariWebView.swift in Sources */,
 				77640E56299E9F440076CB26 /* TrackerPopUp+builders.swift in Sources */,
 				5092DF4A2929465B0094DC18 /* SettingsView.swift in Sources */,
 				50FFAFFA292A8FDF00B87E0E /* LibraryView+builders.swift in Sources */,
@@ -1389,6 +1448,7 @@
 				508D1B912937055A0069012C /* Haptics+extension.swift in Sources */,
 				50F6F676293BC7BF00142816 /* ActionPopUp+methods.swift in Sources */,
 				50FFB013292AD35000B87E0E /* OrderFilter.swift in Sources */,
+				776220622A26D40A004E93AF /* ProfileTabs.swift in Sources */,
 				50FFAFFF292A98C000B87E0E /* MangaStandardImage.swift in Sources */,
 				50FFB00B292AB3DA00B87E0E /* LibraryFilterView+builders.swift in Sources */,
 				50CE85BF2948C4EB00169922 /* RepresentableSheet+modifier.swift in Sources */,
@@ -1421,6 +1481,7 @@
 				500B9B6B2938F1DD00961753 /* HistoryView.swift in Sources */,
 				50FFAFE9292A81B100B87E0E /* MangaView.swift in Sources */,
 				773845972A259E22007F1014 /* AniListAccountViewModel.swift in Sources */,
+				7762205F2A26C046004E93AF /* AniListAccountView+main.swift in Sources */,
 				50639B41293A32C100D8E3CB /* HistoryMangaCell.swift in Sources */,
 				50639B48293A3D3000D8E3CB /* HistoryMangaCell+builders.swift in Sources */,
 				5092DF2529292C590094DC18 /* OrochiApp.swift in Sources */,
@@ -1432,10 +1493,12 @@
 				50F4444F292F08B9001B3CF4 /* ReaderToolbar+builders.swift in Sources */,
 				50CAD2F029383BE9000C1C0E /* ALTracker+manga.swift in Sources */,
 				50F44437292E58A4001B3CF4 /* ReaderPreferencesView+builders.swift in Sources */,
+				77829A1E2A2771530053262E /* AniListAccountView+charts.swift in Sources */,
 				5092DF35292942A30094DC18 /* DiscoverView.swift in Sources */,
 				5007A5022933AE3300EAAB84 /* MangaView+editablle.swift in Sources */,
+				7762205A2A267DA0004E93AF /* SocialCell+builders.swift in Sources */,
 				50CE85C12948C54900169922 /* RepresentableSheet.swift in Sources */,
-				503019A42934212700F5645F /* UIApplications+extension.swift in Sources */,
+				503019A42934212700F5645F /* UIApplication+extension.swift in Sources */,
 				77FACA5129D30E2B00A5744A /* RoundedTextFieldStyle.swift in Sources */,
 				5056563C2932597F0061FD15 /* LanguagePicker.swift in Sources */,
 				77B188F52A1E9A1E00B11378 /* AppURLs.swift in Sources */,
@@ -1449,6 +1512,7 @@
 				50FE08D3292D05DC00432F21 /* LanguagesView+builders.swift in Sources */,
 				50CAD2EE29383B86000C1C0E /* ALTracker+states.swift in Sources */,
 				500183C8292C0BB10094B223 /* MangaActions.swift in Sources */,
+				776220642A26D429004E93AF /* SocialAction.swift in Sources */,
 				50639B43293A36DF00D8E3CB /* HistoryChapterCell.swift in Sources */,
 				5092DF5E292972F80094DC18 /* String+localized.swift in Sources */,
 				50D7F2852940AC8600FE4814 /* Constants.swift in Sources */,

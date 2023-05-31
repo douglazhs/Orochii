@@ -14,7 +14,7 @@ struct PrimaryGradient: View {
             startPoint: .leading,
             endPoint: .trailing
         )
-        .cornerRadius(5.5)
+        .cornerRadius(4.5)
     }
 }
 

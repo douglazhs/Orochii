@@ -26,14 +26,20 @@ extension WebsiteStandardCell {
     /// Link to URL
     @ViewBuilder
     func link () -> some View {
-        Link(destination: URL(string: urlString)!) {
+        Button {
+            showWebView = true
+        } label: {
             Image(appImage: image)
                 .resizable()
-                .cornerRadius(5.5)
+                .cornerRadius(4.5)
+                .frame(
+                    width: 45.0,
+                    height: 45.0
+                )
         }
-        .frame(
-            width: 45.0,
-            height: 45.0
-        )
+        .fullScreenCover(isPresented: $showWebView) {
+            SafariWebView(url: URL(string: urlString)!)
+                .ignoresSafeArea()
+        }
     }
 }
