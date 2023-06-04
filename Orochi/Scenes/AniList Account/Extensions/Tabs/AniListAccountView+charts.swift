@@ -16,7 +16,7 @@ extension AniListAccountView {
         VStack(alignment: .leading, spacing: 20.0) {
             Text("GENRES DISTRIBUTION")
                 .font(.caption2)
-                .fontWeight(.semibold)
+                .fontWeight(.regular)
                 .foregroundColor(Color(uiColor: .systemGray))
                 .unredacted()
             if !vm.genresStat.isEmpty {
@@ -37,6 +37,7 @@ extension AniListAccountView {
                 .chartYAxis(.hidden)
                 .chartYAxisLabel("Genres", position: .leading)
                 .chartXAxisLabel("Read chapters", position: .bottom)
+                .frame(height: UIScreen.height * 0.3)
             } else { self.noDataToShow() }
         }
     }
@@ -47,7 +48,7 @@ extension AniListAccountView {
         VStack(alignment: .leading, spacing: 20.0) {
             Text("CHAPTERS READ PER YEAR")
                 .font(.caption2)
-                .fontWeight(.semibold)
+                .fontWeight(.regular)
                 .foregroundColor(Color(uiColor: .systemGray))
                 .unredacted()
             if !vm.startYearsStat.isEmpty {
@@ -79,7 +80,7 @@ extension AniListAccountView {
     /// No data to show view
     @ViewBuilder
     func noDataToShow() -> some View {
-        Text("NO DATA TO SHOW :(")
+        Text("No data to show :(")
             .font(.caption)
             .fontWeight(.semibold)
             .unredacted()

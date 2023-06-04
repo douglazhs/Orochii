@@ -10,19 +10,21 @@ import AniListService
 
 /// AniList account view model
 final class AniListAccountViewModel: ObservableObject, ALServices {
-    @Published var user: User?
-    @Published var handledUser: User?
+    @Published var user: User? = nil
+    @Published var handledUser: User? = nil
     @Published var followers: [User]? = nil
     @Published var following: [User]? = nil
     @Published var isLoading: Bool = false
     @Published var selection: ProfileTabs = .general
     @Published var startYearsStat: [UserStartYearStatistic] = []
     @Published var genresStat: [UserGenreStatistic] = []
+    @Published var activities: [ActivityUnion]? = nil
     var token: String = ""
     
     init(user: User?) {
         self.user = user
         self.loadToken()
+        self.fetch(isRefresh: false)
     }
     
     /// Load Bearer token from keychain
@@ -38,12 +40,22 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
         }
     }
     
-    /// Get authenticated user followers and following people
-    /// - Parameter id: Authenticated user Id
-    func getPeople(user id: Int) async {
+    /// Refresh user data from AniList client
+    func fetch(isRefresh: Bool) {
         Task { @MainActor in
+            guard let user else { return }
             self.isLoading = true
             defer { self.isLoading = false }
+            self.getPeople(user: user.id)
+            self.activities(user: user.id)
+            self.unwrapStats()
+        }
+    }
+    
+    /// Get authenticated user followers and following people
+    /// - Parameter id: Authenticated user Id
+    func getPeople(user id: Int) {
+        Task { @MainActor in
             self.followers = await self.getFollowers(
                 of: id,
                 token: self.token
@@ -55,13 +67,14 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
         }
     }
     
-    /// Refresh user data from AniList client
-    func refresh() async {
+    /// Get current user activities
+    /// - Parameter user: Current user
+    func activities(user: Int) {
         Task { @MainActor in
-            self.user = await getUser(token: self.token)
-            guard let user else { return }
-            await getPeople(user: user.id)
-            self.unwrapStats()
+            self.activities = await getActivities(
+                of: user,
+                token: self.token
+            )
         }
     }
     
@@ -72,8 +85,10 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
             of: user.id,
             token: self.token
         )
-        await self.refresh()
-        Task { @MainActor in self.handledUser = nil }
+        Task { @MainActor in
+            self.getPeople(user: user.id)
+            self.handledUser = nil
+        }
     }
     
     /// Unwrap user stats
@@ -84,7 +99,13 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
               let startYears = manga.startYears,
               let genres = manga.genres
         else { return }
-        self.startYearsStat = startYears
-        self.genresStat = genres
+        let sortedStartYears = startYears.sorted {
+            $0.startYear ?? 0 < $1.startYear ?? 0
+        }
+        let mappedGenres = genres.filter {
+            $0.chaptersRead != 0
+        }
+        self.startYearsStat = sortedStartYears
+        self.genresStat = mappedGenres
     }
 }

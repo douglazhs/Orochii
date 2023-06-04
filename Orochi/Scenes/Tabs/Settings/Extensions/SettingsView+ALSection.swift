@@ -29,53 +29,54 @@ extension SettingsView {
     /// Logged user info
     @ViewBuilder
     func loggedInfo() -> some View {
-        self.avatar()
+        HStack(alignment: .top) {
+            // USER AVATAR
+            self.profileNavigation().unredacted()
+            // USER STATS AND INFORMATION
+            self.userInfo()
+            Spacer()
+        }
     }
     
     /// User Avatar
     @ViewBuilder
     func avatar() -> some View {
-        HStack(alignment: .top) {
-            // USER AVATAR
-            if vm.user != nil || vm.isLoading {
-                AsyncImage(
-                    url: URL(string: vm.user?.avatar?.large ?? ""),
-                    transaction: .init(animation: .linear(duration: 0.25))
-                ) { result in
-                    if let image = result.image {
-                        self.profileNavigation { image }
-                    } else { ActivityIndicator() }
+        if vm.user != nil || vm.isLoading {
+            if let url = URL(string: vm.user?.avatar?.large ?? "") {
+                AsyncCacheImage(
+                    url: url,
+                    placeholder:  { ActivityIndicator() }
+                ) { image in
+                    Image(uiImage: image)
+                        .resizable()
                 }
-                .frame(
-                    width: CGSize.standardImageCell.width,
-                    height: CGSize.standardImageCell.width
-                )
             }
-            // USER STATS AND INFORMATION
-            self.userStats()
-            Spacer()
         }
     }
     
     /// Custom navigation link to user profile screen
     @ViewBuilder
-    func profileNavigation(@ViewBuilder label: () -> Image) -> some View {
+    func profileNavigation() -> some View {
         ZStack {
             NavigationLink { AniListAccountView(user: vm.user) } label: {
                 EmptyView()
             }
             .frame(width: 0)
             .opacity(0)
-            label()
-                .resizable()
-                .scaledToFill()
+            self.avatar()
                 .cornerRadius(4.5)
+                .frame(
+                    width: CGSize.standardImageCell.width,
+                    height: CGSize.standardImageCell.width
+                )
+                .scaledToFill()
+                .clipped()
         }
     }
     
     /// User stats
     @ViewBuilder
-    func userStats() -> some View {
+    func userInfo() -> some View {
         VStack(alignment: .leading, spacing: 5) {
             // USERNAME
             Text(vm.user?.name ?? "Unable to load :(")

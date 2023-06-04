@@ -11,11 +11,12 @@ import AniListService
 
 /// Account information
 struct AniListAccountView: View {
-    @ObservedObject var vm: AniListAccountViewModel
+    @StateObject var vm: AniListAccountViewModel
     @State var showAlert: Bool = false
+    var user: User?
     
     init(user: User?) {
-        vm = AniListAccountViewModel(user: user)
+        _vm = StateObject(wrappedValue: AniListAccountViewModel(user: user))
         UISegmentedControl.appearance().selectedSegmentTintColor = .systemIndigo
         UISegmentedControl.appearance().backgroundColor = .systemIndigo.withAlphaComponent(0.15)
     }
@@ -29,14 +30,9 @@ struct AniListAccountView: View {
                 }
             }
             .animation(
-                .interactiveSpring(dampingFraction: 1.75),
+                .linear(duration: 0.225),
                 value: vm.selection
             )
-            .onAppear {
-                guard let user = vm.user else { return }
-                vm.unwrapStats()
-                Task { await vm.getPeople(user: user.id) }
-            }
     }
 }
 

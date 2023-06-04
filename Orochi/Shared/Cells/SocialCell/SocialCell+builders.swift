@@ -12,12 +12,16 @@ extension SocialCell {
     func content() -> some View {
         HStack(alignment: .top, spacing: 10) {
             self.avatar()
+                .frame(
+                    width: CGSize.standardImageCell.width * 0.65,
+                    height: CGSize.standardImageCell.width * 0.65
+                )
+                .scaledToFill()
+                .clipped()
             self.info()
             Spacer()
         }
-        .overlay(alignment: .trailing) {
-            socialButton()
-        }
+        .overlay(alignment: .trailing) { socialButton() }
     }
     
     /// Follow/Unfollow button
@@ -43,21 +47,16 @@ extension SocialCell {
     /// User avatar
     @ViewBuilder
     func avatar() -> some View {
-        AsyncImage(
-            url: URL(string: user?.avatar?.large ?? ""),
-            transaction: .init(animation: .easeIn(duration: 0.35))
-        ) { image in
-            if let image = image.image {
-                image
+        if let url = URL(string: user?.avatar?.large ?? "") {
+            AsyncCacheImage(
+                url: url,
+                placeholder: { ActivityIndicator() }
+            ) { image in
+                Image(uiImage: image)
                     .resizable()
-                    .scaledToFit()
-                    .cornerRadius(4.5)
-            } else { ActivityIndicator() }
+            }
+            .cornerRadius(4.5)
         }
-        .frame(
-            width: CGSize.standardImageCell.width * 0.65,
-            height: CGSize.standardImageCell.width * 0.65
-        )
     }
     
     /// User information

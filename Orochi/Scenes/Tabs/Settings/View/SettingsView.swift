@@ -43,6 +43,7 @@ struct SettingsView: View {
             .background(BlurBackground(with: .view_background))
             .scrollContentBackground(.hidden)
         }
+        .tint(Color.white)
     }
 }
 

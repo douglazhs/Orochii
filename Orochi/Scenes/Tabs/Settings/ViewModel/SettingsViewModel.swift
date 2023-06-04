@@ -48,7 +48,7 @@ class SettingsViewModel: ObservableObject {
                 account: "anilist"
             ), let token =  String(data: tokenData, encoding: .utf8) {
                 self.logged = true
-                self.user = await anilist.getUser(token: token)
+                self.user = await anilist.getAuthUser(token: token)
             }
         }
     }
