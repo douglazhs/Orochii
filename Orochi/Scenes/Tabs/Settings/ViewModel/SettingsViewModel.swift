@@ -8,14 +8,20 @@
 import SwiftUI
 import AniListService
 
+public struct AlertInfo {
+    var title: String
+    var message: String
+}
+
 class SettingsViewModel: ObservableObject {
     enum LockState {
         case active, inactive, unavailable
     }
-    var error: Error? = nil
     
+    private (set) var biometricsError: Error? = nil
+    private (set) var requestError: Error? = nil
     private (set) var anilist: AniList = AniList()
-    @Published var loginMessage: String = ""
+    private var token: String = ""
     @Published var biometrics: Bool = false
     @Published var biometricState: LockState = .inactive
     @Published var iCloud: Bool = false
@@ -25,76 +31,99 @@ class SettingsViewModel: ObservableObject {
     @Published var securityLevel: SecurityLevel = .library
     @Published var user: User?
     @Published var isLoading: Bool = false
+    @Published var showDialog: Bool = false
+    @Published var showAlert: Bool = false
+    @Published var alertInfo: AlertInfo?
     
     init() {
         checkLocalAuth()
-        Task { await checkALToken() }
+        checkALToken()
     }
     
     /// Check the avaibility of the `local authentication`
     func checkLocalAuth() {
         self.biometrics = Biometry.shared.availableBiometry { error in
-            self.error = error
+            self.biometricsError = error
         }
     }
     
     /// Check if the user is logged on AniList account
-    func checkALToken() async {
+    func checkALToken() {
+        if let tokenData = Keychain.standard.read(
+            service: "access-token",
+            account: "anilist"
+        ), let token =  String(data: tokenData, encoding: .utf8) {
+            self.token = token
+            self.fetchUser()
+            self.logged = true
+        }
+    }
+    
+    /// Fetch authenticated user
+    func fetchUser() {
         Task { @MainActor in
+            self.requestError = nil
             self.isLoading = true
             defer { self.isLoading = false }
-            if let tokenData = Keychain.standard.read(
-                service: "access-token",
-                account: "anilist"
-            ), let token =  String(data: tokenData, encoding: .utf8) {
-                self.logged = true
-                self.user = await anilist.getAuthUser(token: token)
+            do {
+                self.user = try await anilist.getAuthUser(token: token)
+            } catch {
+                self.requestError = error
+                let failureReason = (error as? HTTPStatusCode)?.failureReason
+                self.showAlert(
+                    title: failureReason ?? String.Common.error,
+                    message: error.localizedDescription
+                )
             }
         }
     }
     
     /// Change local authentication state
     func changeLocalAuth() {
-        Biometry.shared.changeBiometryState { error in
-            Task { @MainActor in
-                if error != nil {
-                    self.biometryPreference = self.biometryPreference
-                    ? false
-                    : true
-                    self.error = error
-                    return
+        if self.biometricsError == nil {
+            Biometry.shared.changeBiometryState { error in
+                self.biometricsError = error
+                Task { @MainActor in
+                    if error != nil {
+                        self.biometryPreference = self.biometryPreference
+                        ? false
+                        : true
+                        return
+                    }
+                    self.biometricState = (self.biometricState == .active)
+                    ? .inactive
+                    : .active
                 }
-                self.biometricState = (self.biometricState == .active)
-                ? .inactive
-                : .active
             }
         }
+        self.biometricsError = nil
     }
     
     /// LogIn on AniList account
-    /// - Parameter showErrorDialog: Binding to show possible error messages on screen
-    func logInAL(showErrorDialog: Binding<Bool>) {
+    func logInAL() {
         self.anilist.logIn() { response in
             switch response {
             case .success(let token):
                 do {
                     try self.storeToken(token)
-                    Task { await self.checkALToken() }
                 } catch {
-                    showErrorDialog.wrappedValue = true
-                    self.loginMessage = String.Errors.keychainSave
+                    self.showAlert(
+                        title: String.Common.error,
+                        message: String.Errors.keychainSave
+                    )
                 }
-            case .fail(let error):
-                showErrorDialog.wrappedValue = true
-                dump(error.localizedDescription.debugDescription)
-                self.loginMessage = String.Errors.anilistLogInError
+                self.checkALToken()
+            case .fail(_):
+                self.showAlert(
+                    title: String.Common.error,
+                    message: String.Errors.anilistLogInError
+                )
             }
         }
     }
     
     /// Log Out AniList account
-    /// - Parameter showErrorDialog: Binding to show possible error messages on screen
-    func logOutAL(showErrorDialog: Binding<Bool>) {
+    func logOutAL() {
         do {
             try Keychain.standard.delete(
                 service: "access-token",
@@ -103,8 +132,10 @@ class SettingsViewModel: ObservableObject {
             self.logged = false
             self.user = nil
         } catch {
-            showErrorDialog.wrappedValue = true
-            loginMessage = String.Errors.anilistLogOutError
+            self.showAlert(
+                title: String.Common.error,
+                message: String.Errors.anilistLogOutError
+            )
         }
     }
     
@@ -114,13 +145,26 @@ class SettingsViewModel: ObservableObject {
         guard let bearer = token["access_token"],
               let bearerData = bearer.data(using: .utf8)
         else { return }
-        do {
-            try Keychain.standard.save(
-                bearerData,
-                service: "access-token",
-                account: "anilist"
-            )
-        }
+        try Keychain.standard.save(
+            bearerData,
+            service: "access-token",
+            account: "anilist"
+        )
+    }
+    
+    /// Show alert
+    /// - Parameters:
+    ///   - title: Alert title
+    ///   - message: Alert message
+    func showAlert(
+        title: String,
+        message: String
+    ) {
+        self.showAlert = true
+        self.alertInfo = .init(
+            title: title,
+            message: message
+        )
     }
 }
 

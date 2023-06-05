@@ -149,9 +149,11 @@
 		77B188EE2A1E5B4300B11378 /* URLSession+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */; };
 		77B188F12A1E96B800B11378 /* AniListAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188F02A1E96B800B11378 /* AniListAccountView.swift */; };
 		77B188F52A1E9A1E00B11378 /* AppURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188F42A1E9A1E00B11378 /* AppURLs.swift */; };
+		77DE0EEB2A2D2E1F00BF882D /* SettingsView+about.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DE0EEA2A2D2E1F00BF882D /* SettingsView+about.swift */; };
+		77DE0EEE2A2D3C2300BF882D /* AboutPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DE0EED2A2D3C2300BF882D /* AboutPage.swift */; };
 		77EAE9F12A1EA2A800205562 /* AniListAccountView+content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EAE9F02A1EA2A800205562 /* AniListAccountView+content.swift */; };
 		77EAE9F32A1EDE7500205562 /* WebsiteStandardCell+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EAE9F22A1EDE7500205562 /* WebsiteStandardCell+builders.swift */; };
-		77EAE9F52A1EE1F800205562 /* SettingsView+ALSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EAE9F42A1EE1F800205562 /* SettingsView+ALSection.swift */; };
+		77EAE9F52A1EE1F800205562 /* SettingsView+tracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EAE9F42A1EE1F800205562 /* SettingsView+tracker.swift */; };
 		77FACA4F29D1EBA200A5744A /* OutlinedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FACA4E29D1EBA200A5744A /* OutlinedTextFieldStyle.swift */; };
 		77FACA5129D30E2B00A5744A /* RoundedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FACA5029D30E2B00A5744A /* RoundedTextFieldStyle.swift */; };
 		77FACA5629D3167900A5744A /* BackgroundClearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FACA5529D3167900A5744A /* BackgroundClearView.swift */; };
@@ -282,6 +284,7 @@
 		77612A982A2B96DC002137FC /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
 		77612A9B2A2BCA06002137FC /* MangaActivityView+actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaActivityView+actions.swift"; sourceTree = "<group>"; };
 		77612A9E2A2C0C32002137FC /* MangaActivityView+toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaActivityView+toolbar.swift"; sourceTree = "<group>"; };
+		77612AA22A2C3B52002137FC /* Orochii-AniListService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Orochii-AniListService"; path = "../Packages/Orochii-AniListService"; sourceTree = "<group>"; };
 		776220572A267D85004E93AF /* SocialCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialCell.swift; sourceTree = "<group>"; };
 		776220592A267DA0004E93AF /* SocialCell+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SocialCell+builders.swift"; sourceTree = "<group>"; };
 		7762205C2A26BE51004E93AF /* AniListAccountView+tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AniListAccountView+tabs.swift"; sourceTree = "<group>"; };
@@ -303,9 +306,11 @@
 		77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+extension.swift"; sourceTree = "<group>"; };
 		77B188F02A1E96B800B11378 /* AniListAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniListAccountView.swift; sourceTree = "<group>"; };
 		77B188F42A1E9A1E00B11378 /* AppURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppURLs.swift; sourceTree = "<group>"; };
+		77DE0EEA2A2D2E1F00BF882D /* SettingsView+about.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+about.swift"; sourceTree = "<group>"; };
+		77DE0EED2A2D3C2300BF882D /* AboutPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPage.swift; sourceTree = "<group>"; };
 		77EAE9F02A1EA2A800205562 /* AniListAccountView+content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AniListAccountView+content.swift"; sourceTree = "<group>"; };
 		77EAE9F22A1EDE7500205562 /* WebsiteStandardCell+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebsiteStandardCell+builders.swift"; sourceTree = "<group>"; };
-		77EAE9F42A1EE1F800205562 /* SettingsView+ALSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+ALSection.swift"; sourceTree = "<group>"; };
+		77EAE9F42A1EE1F800205562 /* SettingsView+tracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+tracker.swift"; sourceTree = "<group>"; };
 		77FACA4E29D1EBA200A5744A /* OutlinedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlinedTextFieldStyle.swift; sourceTree = "<group>"; };
 		77FACA5029D30E2B00A5744A /* RoundedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldStyle.swift; sourceTree = "<group>"; };
 		77FACA5529D3167900A5744A /* BackgroundClearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundClearView.swift; sourceTree = "<group>"; };
@@ -355,7 +360,8 @@
 			isa = PBXGroup;
 			children = (
 				500DB59C292C608B00F398D6 /* SettingsView+builders.swift */,
-				77EAE9F42A1EE1F800205562 /* SettingsView+ALSection.swift */,
+				77EAE9F42A1EE1F800205562 /* SettingsView+tracker.swift */,
+				77DE0EEA2A2D2E1F00BF882D /* SettingsView+about.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -517,6 +523,7 @@
 		5092DF1829292C590094DC18 = {
 			isa = PBXGroup;
 			children = (
+				77612AA22A2C3B52002137FC /* Orochii-AniListService */,
 				508C2DCC2950AB4800355F13 /* Orochii-Info.plist */,
 				5092DF2329292C590094DC18 /* Orochi */,
 				5092DF2229292C590094DC18 /* Products */,
@@ -1066,7 +1073,8 @@
 		50FFAFDD292A6A7F00B87E0E /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				776220602A26D3F2004E93AF /* AniListAccount */,
+				77DE0EEC2A2D3C0D00BF882D /* About Page */,
+				776220602A26D3F2004E93AF /* AniList Account */,
 				77B188F32A1E9A0800B11378 /* URL */,
 				50F6F686293C2DD000142816 /* Carousel */,
 				50F6F685293C2DB600142816 /* AniList */,
@@ -1354,13 +1362,13 @@
 			path = SocialCell;
 			sourceTree = "<group>";
 		};
-		776220602A26D3F2004E93AF /* AniListAccount */ = {
+		776220602A26D3F2004E93AF /* AniList Account */ = {
 			isa = PBXGroup;
 			children = (
 				776220612A26D40A004E93AF /* ProfileTabs.swift */,
 				776220632A26D429004E93AF /* SocialAction.swift */,
 			);
-			path = AniListAccount;
+			path = "AniList Account";
 			sourceTree = "<group>";
 		};
 		776323BC2A16F000009B5966 /* Frameworks */ = {
@@ -1467,6 +1475,14 @@
 				77B188F42A1E9A1E00B11378 /* AppURLs.swift */,
 			);
 			path = URL;
+			sourceTree = "<group>";
+		};
+		77DE0EEC2A2D3C0D00BF882D /* About Page */ = {
+			isa = PBXGroup;
+			children = (
+				77DE0EED2A2D3C2300BF882D /* AboutPage.swift */,
+			);
+			path = "About Page";
 			sourceTree = "<group>";
 		};
 		77EAE9EF2A1EA28800205562 /* Extensions */ = {
@@ -1647,7 +1663,7 @@
 				50FFB00B292AB3DA00B87E0E /* LibraryFilterView+builders.swift in Sources */,
 				50CE85BF2948C4EB00169922 /* RepresentableSheet+modifier.swift in Sources */,
 				7731F0812A2A101900A5747E /* AniListAccountView+stats.swift in Sources */,
-				77EAE9F52A1EE1F800205562 /* SettingsView+ALSection.swift in Sources */,
+				77EAE9F52A1EE1F800205562 /* SettingsView+tracker.swift in Sources */,
 				50F44434292E5844001B3CF4 /* ReaderPreferencesView.swift in Sources */,
 				50F4444A292F02CC001B3CF4 /* CGSize+extension.swift in Sources */,
 				50FFAFE1292A6ACD00B87E0E /* MangaQuality.swift in Sources */,
@@ -1690,6 +1706,7 @@
 				5092DF2529292C590094DC18 /* OrochiApp.swift in Sources */,
 				50639B57293A4CE200D8E3CB /* HistoryView+builders.swift in Sources */,
 				7731F0772A2A0DE700A5747E /* AniListAccountView+navBar.swift in Sources */,
+				77DE0EEB2A2D2E1F00BF882D /* SettingsView+about.swift in Sources */,
 				50BC9611292C739E00DF13A5 /* SecurityLevel.swift in Sources */,
 				50FFAFDF292A6A8F00B87E0E /* Language.swift in Sources */,
 				50CAD2EC29383B04000C1C0E /* ALTracker+dates.swift in Sources */,
@@ -1704,6 +1721,7 @@
 				7762205A2A267DA0004E93AF /* SocialCell+builders.swift in Sources */,
 				50CE85C12948C54900169922 /* RepresentableSheet.swift in Sources */,
 				503019A42934212700F5645F /* UIApplication+extension.swift in Sources */,
+				77DE0EEE2A2D3C2300BF882D /* AboutPage.swift in Sources */,
 				77FACA5129D30E2B00A5744A /* RoundedTextFieldStyle.swift in Sources */,
 				5056563C2932597F0061FD15 /* LanguagePicker.swift in Sources */,
 				77B188F52A1E9A1E00B11378 /* AppURLs.swift in Sources */,

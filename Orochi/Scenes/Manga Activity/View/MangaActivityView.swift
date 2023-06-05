@@ -23,11 +23,6 @@ struct MangaActivityView: View {
     var body: some View {
         self.content()
             .onTapGesture { UIApplication.shared.endEditing() }
-            .toolbarBackground(.visible, for: .navigationBar)
-            .toolbarBackground(
-                vm.averageColor.opacity(0.15),
-                for: .navigationBar
-            )
             .navigationTitle(Date.getDateBy(
                 time: vm.activity?.createdAt ?? 0,
                 format: "EEE, HH:mm")

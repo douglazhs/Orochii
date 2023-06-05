@@ -9,6 +9,16 @@ import UIKit
 import SafariServices
 
 extension UIApplication {
+    /// App version
+    static var appVersion: String? {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleShortVersionString") as? String
+    }
+    
+    /// App build number
+    static var appBuild: String? {
+        return Bundle.main.object(forInfoDictionaryKey: "CFBundleVersion") as? String
+    }
+    
     /// Grab root view controller
     var firstKeyWindow: UIWindow? {
         return UIApplication.shared.connectedScenes

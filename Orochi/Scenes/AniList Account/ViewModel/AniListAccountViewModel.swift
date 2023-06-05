@@ -19,7 +19,7 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
     @Published var startYearsStat: [UserStartYearStatistic] = []
     @Published var genresStat: [UserGenreStatistic] = []
     @Published var activities: [ActivityUnion]? = nil
-    var token: String = ""
+    private var token: String = ""
     
     init(user: User?) {
         self.user = user
@@ -56,14 +56,18 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
     /// - Parameter id: Authenticated user Id
     func getPeople(user id: Int) {
         Task { @MainActor in
-            self.followers = await self.getFollowers(
-                of: id,
-                token: self.token
-            )
-            self.following = await self.getFollowing(
-                of: id,
-                token: self.token
-            )
+            do {
+                self.followers = try await self.getFollowers(
+                    of: id,
+                    token: self.token
+                )
+                self.following = try await self.getFollowing(
+                    of: id,
+                    token: self.token
+                )
+            } catch {
+                dump("\(error)")
+            }
         }
     }
     
@@ -71,20 +75,28 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
     /// - Parameter user: Current user
     func activities(user: Int) {
         Task { @MainActor in
-            self.activities = await getActivities(
-                of: user,
-                token: self.token
-            )
+            do {
+                self.activities = try await getActivities(
+                    of: user,
+                    token: self.token
+                )
+            } catch {
+                dump("\(error)")
+            }
         }
     }
     
     /// Toggle user follow
     func socialHandler() async {
         guard let user = self.handledUser else { return }
-        await self.toggleFollow(
-            of: user.id,
-            token: self.token
-        )
+        do {
+            try await self.toggleFollow(
+                of: user.id,
+                token: self.token
+            )
+        } catch {
+            dump("\(error)")
+        }
         Task { @MainActor in
             self.getPeople(user: user.id)
             self.handledUser = nil

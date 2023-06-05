@@ -10,32 +10,52 @@ import SwiftUI
 extension SettingsView {
     typealias Localized = String.Adjusts
     
+    @ViewBuilder
+    func content() -> some View {
+        List {
+            self.anilistSection()
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+            self.icloudSection()
+                .listRowBackground(Color.clear)
+            self.securitySection()
+                .listRowBackground(Color.clear)
+            self.notificationsSection()
+                .listRowBackground(Color.clear)
+            self.aboutApp()
+                .listRowBackground(Color.clear)
+        }
+        .refreshable {
+            vm.fetchUser()
+        }
+        .listStyle(.grouped)
+        .navigationTitle(String.Settings.title)
+        .navigationBarTitleDisplayMode(.inline)
+        .animation(
+            .easeInOut(duration: 0.125),
+            value: [
+                vm.biometryPreference,
+                vm.logged,
+                vm.isLoading
+            ]
+        )
+        .background(BlurBackground(with: .view_background))
+        .scrollContentBackground(.hidden)
+    }
+    
     /// App tracker section
     @ViewBuilder
     func anilistSection() -> some View {
         Section {
             self.trackerCell()
+                .frame(maxWidth: UIScreen.width)
                 .overlay(alignment: .trailing) {
                     self.accButtonHandler()
-                        .padding(.trailing, (vm.user != nil) ? 16.0 : 0.0)
                 }
         } header: {
             Text(Localized.trackerHeader)
         } footer: {
             Text(Localized.trackerFooter)
-        }
-        .alert(String.Common.error, isPresented: $showErrorDialog) {
-            Button(String.Common.ok) { }
-        } message: {
-            Text(vm.loginMessage)
-        }
-        .alert(String.Common.attention, isPresented: $showDialog) {
-            Button(String.Common.cancel, role: .cancel, action: {})
-            Button(String.Adjusts.logOut, role: .destructive) {
-                vm.logOutAL(showErrorDialog: $showErrorDialog)
-            }
-        } message: {
-            Text(String.Anilist.logOutMessage)
         }
     }
     
@@ -93,17 +113,14 @@ extension SettingsView {
         } footer: {
             VStack(alignment: .leading) {
                 Text(Localized.securityFooter)
-                Text(vm.error?.localizedDescription ?? "")
+                Text(vm.biometricsError?.localizedDescription ?? "")
                     .foregroundColor(.accentColor)
                     .bold()
             }
         }
         .disabled(!vm.biometrics)
         .onChange(of: vm.biometryPreference) { _ in
-            if vm.error == nil {
-                vm.changeLocalAuth()
-            }
-            vm.error = nil
+            vm.changeLocalAuth()
         }
     }
     

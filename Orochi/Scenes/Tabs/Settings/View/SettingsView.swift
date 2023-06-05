@@ -9,41 +9,37 @@ import SwiftUI
 
 struct SettingsView: View {
     @StateObject var vm: SettingsViewModel = SettingsViewModel()
-    @State var showErrorDialog: Bool = false
-    @State var showDialog: Bool = false
     @State var showALAccount: Bool = false
     
     var body: some View {
         NavigationStack {
-            List {
-                self.anilistSection()
-                    .listRowSeparator(.hidden)
-                    .listRowBackground(Color.clear)
-                self.icloudSection()
-                    .listRowBackground(Color.clear)
-                self.securitySection()
-                    .listRowBackground(Color.clear)
-                self.notificationsSection()
-                    .listRowBackground(Color.clear)
-            }
-            .refreshable {
-                Task { await vm.checkALToken() }
-            }
-            .listStyle(.grouped)
-            .navigationTitle(String.Settings.title)
-            .navigationBarTitleDisplayMode(.inline)
-            .animation(
-                .easeInOut(duration: 0.175),
-                value: [
-                    vm.biometryPreference,
-                    vm.logged,
-                    vm.isLoading
-                ]
-            )
-            .background(BlurBackground(with: .view_background))
-            .scrollContentBackground(.hidden)
+            self.content()
+                .toolbarBackground(
+                    Constants.device == .phone
+                    ? .visible
+                    : .automatic,
+                    for: .navigationBar
+                )
+                .alert(
+                    vm.alertInfo?.title ?? "",
+                    isPresented: $vm.showAlert
+                ) {
+                    Button(String.Common.ok) { }
+                } message: {
+                    Text(vm.alertInfo?.message ?? "")
+                }
+                .confirmationDialog(
+                    String.Common.attention,
+                    isPresented: $vm.showDialog
+                ) {
+                    Button(String.Common.cancel, role: .cancel, action: {})
+                    Button(String.Adjusts.logOut, role: .destructive) {
+                        vm.logOutAL()
+                    }
+                } message: {
+                    Text(String.Anilist.logOutMessage)
+                }
         }
-        .tint(Color.white)
     }
 }
 

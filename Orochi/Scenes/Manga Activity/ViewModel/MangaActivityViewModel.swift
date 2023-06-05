@@ -14,7 +14,8 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     @Published var activity: ActivityUnion? = nil
     @Published var canSendReply: Bool = false
     @Published var averageColor: Color = .clear
-    var token: String = ""
+    @Published var isLoading: Bool = false
+    private var token: String = ""
     
     init(_ activity: Int) {
         self.loadToken()
@@ -25,10 +26,14 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     /// - Parameter id: Activity Id
     func fetch(_ id: Int) {
         Task { @MainActor in
-            self.activity = await self.getActivity(
-                id: id,
-                token: token
-            )
+            do {
+                self.activity = try await self.getActivity(
+                    id: id,
+                    token: token
+                )
+            } catch {
+                dump("\(error)")
+            }
         }
     }
     
@@ -49,10 +54,14 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     func refresh() {
         Task { @MainActor in
             guard let activity else { return }
-            self.activity = await self.getActivity(
-                id: activity.id,
-                token: token
-            )
+            do {
+                self.activity = try await self.getActivity(
+                    id: activity.id,
+                    token: token
+                )
+            } catch {
+                dump("\(error)")
+            }
         }
     }
     
@@ -60,11 +69,15 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     func sendReply() {
         Task { @MainActor in
             guard let activity else { return }
-            await self.createReply(
-                activiyId: activity.id,
-                text: text,
-                token: token
-            )
+            do {
+                try await self.createReply(
+                    activiyId: activity.id,
+                    text: text,
+                    token: token
+                )
+            } catch {
+                dump("\(error)")
+            }
             self.text = ""
             self.refresh()
         }
@@ -74,10 +87,14 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     /// - Parameter id: Reply Id
     func deleteReply(with id: Int) {
         Task { @MainActor in
-            await self.deleteReply(
-                id: id,
-                token: token
-            )
+            do {
+                try await self.deleteReply(
+                    id: id,
+                    token: token
+                )
+            } catch {
+                dump("\(error)")
+            }
             self.refresh()
         }
     }
@@ -86,10 +103,14 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     func deleteActivity() {
         guard let activity else { return }
         Task { @MainActor in
-            await self.deleteActivity(
-                with: activity.id,
-                token: token
-            )
+            do {
+                try await self.deleteActivity(
+                    with: activity.id,
+                    token: token
+                )
+            } catch {
+                dump("\(error)")
+            }
             self.refresh()
         }
     }
@@ -98,11 +119,15 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     /// - Parameter id: Reply Id
     func updateReply(with id: Int) {
         Task { @MainActor in
-            await self.updateReply(
-                id: id,
-                text: self.text,
-                token: token
-            )
+            do {
+                try await self.updateReply(
+                    id: id,
+                    text: self.text,
+                    token: token
+                )
+            } catch {
+                dump("\(error)")
+            }
             self.refresh()
         }
     }
@@ -113,11 +138,15 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     ///   - type: Object type
     func toggleLike(id: Int, type: LikeableType) {
         Task { @MainActor in
-            await self.toggleLike(
-                of: id,
-                as: type,
-                token: token
-            )
+            do {
+                try await self.toggleLike(
+                    of: id,
+                    as: type,
+                    token: token
+                )
+            } catch {
+                dump("\(error)")
+            }
             self.refresh()
         }
     }
@@ -126,11 +155,15 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     func toggleSubscription() {
         guard let activity else { return }
         Task { @MainActor in
-            await self.toggleSubscription(
-                id: activity.id,
-                subscribe: !(activity.isSubscribed ?? false),
-                token: token
-            )
+            do {
+                try await self.toggleSubscription(
+                    id: activity.id,
+                    subscribe: !(activity.isSubscribed ?? false),
+                    token: token
+                )
+            } catch {
+                dump("\(error)")
+            }
             self.refresh()
         }
     }

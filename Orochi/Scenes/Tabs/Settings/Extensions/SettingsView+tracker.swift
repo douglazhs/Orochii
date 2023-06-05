@@ -1,5 +1,5 @@
 //
-//  SettingsView+ALSection.swift
+//  SettingsView+tracker.swift
 //  Orochii
 //
 //  Created by Douglas Henrique de Souza Pereira on 24/05/23.
@@ -29,29 +29,38 @@ extension SettingsView {
     /// Logged user info
     @ViewBuilder
     func loggedInfo() -> some View {
-        HStack(alignment: .top) {
-            // USER AVATAR
-            self.profileNavigation().unredacted()
-            // USER STATS AND INFORMATION
-            self.userInfo()
-            Spacer()
+        if vm.requestError == nil {
+            HStack(alignment: .top) {
+                // USER AVATAR
+                self.profileNavigation()
+                // USER STATS AND INFORMATION
+                self.userInfo()
+                Spacer()
+            }
+        } else {
+            HStack {
+                Text("Unable to load :(")
+                    .font(.subheadline)
+                    .fontWeight(.semibold)
+                Spacer()
+            }
         }
     }
     
     /// User Avatar
     @ViewBuilder
     func avatar() -> some View {
-        if vm.user != nil || vm.isLoading {
+        if !vm.isLoading {
             if let url = URL(string: vm.user?.avatar?.large ?? "") {
                 AsyncCacheImage(
                     url: url,
-                    placeholder:  { ActivityIndicator() }
+                    placeholder: { ActivityIndicator() }
                 ) { image in
                     Image(uiImage: image)
                         .resizable()
                 }
             }
-        }
+        } else { ActivityIndicator() }
     }
     
     /// Custom navigation link to user profile screen
@@ -64,14 +73,14 @@ extension SettingsView {
             .frame(width: 0)
             .opacity(0)
             self.avatar()
-                .cornerRadius(4.5)
-                .frame(
-                    width: CGSize.standardImageCell.width,
-                    height: CGSize.standardImageCell.width
-                )
-                .scaledToFill()
-                .clipped()
         }
+        .cornerRadius(4.5)
+        .frame(
+            width: CGSize.standardImageCell.width,
+            height: CGSize.standardImageCell.width
+        )
+        .scaledToFill()
+        .clipped()
     }
     
     /// User stats
@@ -79,7 +88,7 @@ extension SettingsView {
     func userInfo() -> some View {
         VStack(alignment: .leading, spacing: 5) {
             // USERNAME
-            Text(vm.user?.name ?? "Unable to load :(")
+            Text(vm.user?.name ?? "Unknown")
                 .font(.subheadline)
                 .fontWeight(.semibold)
             // MANGAS
@@ -95,8 +104,8 @@ extension SettingsView {
     func accButtonHandler() -> some View {
         Button(role: vm.logged ? .destructive : .none) {
             vm.logged
-            ? (showDialog = true)
-            : vm.logInAL(showErrorDialog: $showErrorDialog)
+            ? (vm.showDialog = true)
+            : vm.logInAL()
         } label: {
             Text(vm.logged
                  ? Localized.logOut.uppercased()
