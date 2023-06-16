@@ -12,9 +12,9 @@ extension UserActivityCell {
     @ViewBuilder
     func content() -> some View {
         HStack(alignment: .top) {
-            self.imageCover()
-            self.info()
-        }
+            imageCover()
+            info()
+        }.frame(maxWidth: .infinity)
     }
     
     /// Manga image cover
@@ -41,6 +41,27 @@ extension UserActivityCell {
     /// Activity info
     @ViewBuilder
     func info() -> some View {
+        VStack(alignment: .leading) {
+            //TITLE AND PROGRESS
+            titleProgress()
+                .lineLimit(2)
+                .multilineTextAlignment(.leading)
+            Spacer()
+            HStack {
+                //DATE
+                date()
+                Spacer()
+                //METRICS INFORMATION
+                metricsInfo()
+            }
+        }
+        .padding(.top, 1.5)
+        .frame(maxHeight: CGSize.standardImageCell.height * 0.725)
+    }
+    
+    /// Title and progress
+    @ViewBuilder
+    func titleProgress() -> some View {
         VStack(alignment: .leading, spacing: 5.0) {
             // TITLE
             Text(activity?.media?.title?.romaji ?? "No title")
@@ -60,16 +81,28 @@ extension UserActivityCell {
                 .foregroundColor(Color(uiColor: .systemGray))
                 .fontWeight(.medium)
                 .font(.caption2)
-            
-            Spacer()
-            
-            //DATE
-            Text("\(Date.getDateBy(time: activity?.createdAt ?? 0))")
-                .foregroundColor(Color(uiColor: .systemGray))
-                .font(.caption2)
-                .padding(.bottom, 1.5)
         }
-        .padding(.top, 1.5)
-        .frame(maxHeight: CGSize.standardImageCell.height * 0.725)
+    }
+    
+    /// Activity date
+    @ViewBuilder
+    func date() -> some View {
+        Text("\(Date.relativeDate(of: activity?.createdAt ?? 0))")
+            .foregroundColor(Color(uiColor: .systemGray))
+            .font(.caption2)
+            .padding(.bottom, 1.5)
+    }
+    
+    /// Social information
+    @ViewBuilder
+    func metricsInfo() -> some View {
+        HStack {
+            Label("\(activity?.likeCount ?? 0)", systemImage: "heart.fill")
+            Label("\(activity?.replies?.count ?? 0)", systemImage: "message.fill")
+        }
+        .font(.caption2)
+        .fontWeight(.semibold)
+        .fontDesign(.rounded)
+        .foregroundColor(Color(.systemGray))
     }
 }

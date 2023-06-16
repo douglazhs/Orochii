@@ -11,7 +11,7 @@ extension MangaActivityView {
     /// Custom text editor
     @ViewBuilder
     func textEditor() -> some View {
-        VStack {
+        HStack {
             TextField(
                 "",
                 text: $vm.text,
@@ -23,17 +23,24 @@ extension MangaActivityView {
                     vm.canSendReply = true
                 } else { vm.canSendReply = false }
             }
+            .padding(.horizontal, 12.5)
+            .padding(.vertical, 6.5)
+            .overlay {
+                RoundedRectangle(cornerRadius: 20)
+                    .stroke(vm.averageColor, lineWidth: 0.35)
+            }
+            .tint(vm.averageColor)
+            .background(vm.averageColor.opacity(0.35))
+            .cornerRadius(20)
             .foregroundColor(.white)
             .lineLimit(1...7)
             .font(.subheadline)
             .fontWeight(.regular)
             .multilineTextAlignment(.leading)
-            
-            HStack {
-                Spacer()
-                self.sendReply()
-            }
+            self.sendReply()
         }
+        .padding(.horizontal)
+        .padding(.vertical, 7.5)
     }
     
     /// Send reply button

@@ -22,12 +22,6 @@ struct LibraryView: View {
                 }
                 .navigationTitle(String.Library.title)
                 .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(
-                    Constants.device == .phone
-                    ? .visible
-                    : .automatic,
-                    for: .navigationBar
-                )
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         self.filterButton()
@@ -40,9 +34,7 @@ struct LibraryView: View {
                 displayMode: .always
             )
         )
-        .onSubmit(of: .search) {
-            // TODO: - Search
-        }
+        .onSubmit(of: .search) { }
     }
 }
 

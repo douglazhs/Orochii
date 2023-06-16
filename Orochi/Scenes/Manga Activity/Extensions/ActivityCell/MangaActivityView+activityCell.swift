@@ -13,6 +13,12 @@ extension MangaActivityView {
     func activityCell() -> some View {
         HStack(spacing: 7.5) {
             self.image()
+                .frame(
+                    width: CGSize.standardImageCell.width,
+                    height: CGSize.standardImageCell.height,
+                    alignment: .center
+                )
+                .scaledToFill()
             self.texts()
         }
     }
@@ -30,13 +36,8 @@ extension MangaActivityView {
                     .resizable()
             }
             .cornerRadius(4.5)
-            .frame(
-                width: CGSize.standardImageCell.width,
-                height: CGSize.standardImageCell.height,
-                alignment: .center
-            )
-            .scaledToFill()
-        }
+            
+        } else { ActivityIndicator() }
     }
     
     /// Cell texts
@@ -83,8 +84,8 @@ extension MangaActivityView {
     /// Activity Date
     @ViewBuilder
     func date() -> some View {
-        Text(Date.getDateBy(
-            time: vm.activity?.createdAt ?? 0,
+        Text(Date.getDate(
+            of: vm.activity?.createdAt ?? 0,
             format: "d MMMM yyyy")
         )
         .font(.caption2)

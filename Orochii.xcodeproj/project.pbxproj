@@ -149,11 +149,12 @@
 		77B188EE2A1E5B4300B11378 /* URLSession+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */; };
 		77B188F12A1E96B800B11378 /* AniListAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188F02A1E96B800B11378 /* AniListAccountView.swift */; };
 		77B188F52A1E9A1E00B11378 /* AppURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188F42A1E9A1E00B11378 /* AppURLs.swift */; };
+		77C8BB572A30067E002D7418 /* MangaActivityView+likes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C8BB562A30067E002D7418 /* MangaActivityView+likes.swift */; };
 		77DE0EEB2A2D2E1F00BF882D /* SettingsView+about.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DE0EEA2A2D2E1F00BF882D /* SettingsView+about.swift */; };
-		77DE0EEE2A2D3C2300BF882D /* AboutPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77DE0EED2A2D3C2300BF882D /* AboutPage.swift */; };
 		77EAE9F12A1EA2A800205562 /* AniListAccountView+content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EAE9F02A1EA2A800205562 /* AniListAccountView+content.swift */; };
 		77EAE9F32A1EDE7500205562 /* WebsiteStandardCell+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EAE9F22A1EDE7500205562 /* WebsiteStandardCell+builders.swift */; };
 		77EAE9F52A1EE1F800205562 /* SettingsView+tracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77EAE9F42A1EE1F800205562 /* SettingsView+tracker.swift */; };
+		77ECB1C12A2ECA6300C13619 /* AlertInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77ECB1C02A2ECA6300C13619 /* AlertInfo.swift */; };
 		77FACA4F29D1EBA200A5744A /* OutlinedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FACA4E29D1EBA200A5744A /* OutlinedTextFieldStyle.swift */; };
 		77FACA5129D30E2B00A5744A /* RoundedTextFieldStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FACA5029D30E2B00A5744A /* RoundedTextFieldStyle.swift */; };
 		77FACA5629D3167900A5744A /* BackgroundClearView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FACA5529D3167900A5744A /* BackgroundClearView.swift */; };
@@ -306,11 +307,12 @@
 		77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+extension.swift"; sourceTree = "<group>"; };
 		77B188F02A1E96B800B11378 /* AniListAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AniListAccountView.swift; sourceTree = "<group>"; };
 		77B188F42A1E9A1E00B11378 /* AppURLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppURLs.swift; sourceTree = "<group>"; };
+		77C8BB562A30067E002D7418 /* MangaActivityView+likes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaActivityView+likes.swift"; sourceTree = "<group>"; };
 		77DE0EEA2A2D2E1F00BF882D /* SettingsView+about.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+about.swift"; sourceTree = "<group>"; };
-		77DE0EED2A2D3C2300BF882D /* AboutPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutPage.swift; sourceTree = "<group>"; };
 		77EAE9F02A1EA2A800205562 /* AniListAccountView+content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AniListAccountView+content.swift"; sourceTree = "<group>"; };
 		77EAE9F22A1EDE7500205562 /* WebsiteStandardCell+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WebsiteStandardCell+builders.swift"; sourceTree = "<group>"; };
 		77EAE9F42A1EE1F800205562 /* SettingsView+tracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SettingsView+tracker.swift"; sourceTree = "<group>"; };
+		77ECB1C02A2ECA6300C13619 /* AlertInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertInfo.swift; sourceTree = "<group>"; };
 		77FACA4E29D1EBA200A5744A /* OutlinedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlinedTextFieldStyle.swift; sourceTree = "<group>"; };
 		77FACA5029D30E2B00A5744A /* RoundedTextFieldStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedTextFieldStyle.swift; sourceTree = "<group>"; };
 		77FACA5529D3167900A5744A /* BackgroundClearView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundClearView.swift; sourceTree = "<group>"; };
@@ -1073,7 +1075,6 @@
 		50FFAFDD292A6A7F00B87E0E /* Enums */ = {
 			isa = PBXGroup;
 			children = (
-				77DE0EEC2A2D3C0D00BF882D /* About Page */,
 				776220602A26D3F2004E93AF /* AniList Account */,
 				77B188F32A1E9A0800B11378 /* URL */,
 				50F6F686293C2DD000142816 /* Carousel */,
@@ -1125,19 +1126,8 @@
 		50FFAFEA292A832F00B87E0E /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				7738459A2A25AF3B007F1014 /* SafariWebView */,
-				77640E50299E9A150076CB26 /* Tracker PopUp */,
-				50E0210B293D2725001C85B5 /* Overlay */,
-				50F6F67F293C2B2100142816 /* Background */,
-				50F6F67C293C2A5B00142816 /* Toolbar */,
-				50F6F67B293C2A2000142816 /* Gradient */,
-				50F6F67A293C29FB00142816 /* Image */,
-				50F6F679293C28B700142816 /* Pickers */,
-				50F6F678293C289C00142816 /* Cells */,
-				508D1B8D2936FE7B0069012C /* PopUp */,
-				50565636293257D80061FD15 /* Menus */,
-				50F44452292F1B0F001B3CF4 /* Slider */,
-				507803D4292DBF940041D5BD /* Loading */,
+				77ECB1BF2A2ECA4D00C13619 /* Objects */,
+				77ECB1BE2A2ECA4000C13619 /* View */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -1235,6 +1225,7 @@
 		7731F06B2A29254D00A5747E /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				77C8BB552A300664002D7418 /* Likes */,
 				77612A9D2A2C0C1B002137FC /* Toolbar */,
 				77612A9A2A2BC9F3002137FC /* Actions */,
 				7731F0872A2A283F00A5747E /* Replies */,
@@ -1477,12 +1468,12 @@
 			path = URL;
 			sourceTree = "<group>";
 		};
-		77DE0EEC2A2D3C0D00BF882D /* About Page */ = {
+		77C8BB552A300664002D7418 /* Likes */ = {
 			isa = PBXGroup;
 			children = (
-				77DE0EED2A2D3C2300BF882D /* AboutPage.swift */,
+				77C8BB562A30067E002D7418 /* MangaActivityView+likes.swift */,
 			);
-			path = "About Page";
+			path = Likes;
 			sourceTree = "<group>";
 		};
 		77EAE9EF2A1EA28800205562 /* Extensions */ = {
@@ -1494,6 +1485,34 @@
 				7731F0782A2A0E0C00A5747E /* Tabs */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		77ECB1BE2A2ECA4000C13619 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				7738459A2A25AF3B007F1014 /* SafariWebView */,
+				77640E50299E9A150076CB26 /* Tracker PopUp */,
+				50E0210B293D2725001C85B5 /* Overlay */,
+				50F6F67F293C2B2100142816 /* Background */,
+				50F6F67C293C2A5B00142816 /* Toolbar */,
+				50F6F67B293C2A2000142816 /* Gradient */,
+				50F6F67A293C29FB00142816 /* Image */,
+				50F6F679293C28B700142816 /* Pickers */,
+				50F6F678293C289C00142816 /* Cells */,
+				508D1B8D2936FE7B0069012C /* PopUp */,
+				50565636293257D80061FD15 /* Menus */,
+				50F44452292F1B0F001B3CF4 /* Slider */,
+				507803D4292DBF940041D5BD /* Loading */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		77ECB1BF2A2ECA4D00C13619 /* Objects */ = {
+			isa = PBXGroup;
+			children = (
+				77ECB1C02A2ECA6300C13619 /* AlertInfo.swift */,
+			);
+			path = Objects;
 			sourceTree = "<group>";
 		};
 		77FACA4D29D1EB7E00A5744A /* TextFieldStyle */ = {
@@ -1617,6 +1636,7 @@
 				77612A992A2B96DC002137FC /* UIImage+extension.swift in Sources */,
 				50FE08DD292D9D0200432F21 /* WebsiteStandardCell.swift in Sources */,
 				7796C8C62A281A7B00E26066 /* EnvironmentValues+ImageCache.swift in Sources */,
+				77C8BB572A30067E002D7418 /* MangaActivityView+likes.swift in Sources */,
 				5092DF612929831D0094DC18 /* SourcePreferencesView.swift in Sources */,
 				7738459C2A25AF48007F1014 /* SafariWebView.swift in Sources */,
 				77640E56299E9F440076CB26 /* TrackerPopUp+builders.swift in Sources */,
@@ -1655,6 +1675,7 @@
 				505656392932580F0061FD15 /* ChapterMenu.swift in Sources */,
 				50BC960F292C674500DF13A5 /* SettingsViewModel.swift in Sources */,
 				5092DF6329298B9A0094DC18 /* SourcePreferencesView+builders.swift in Sources */,
+				77ECB1C12A2ECA6300C13619 /* AlertInfo.swift in Sources */,
 				508D1B912937055A0069012C /* Haptics+extension.swift in Sources */,
 				50F6F676293BC7BF00142816 /* ActionPopUp+methods.swift in Sources */,
 				50FFB013292AD35000B87E0E /* OrderFilter.swift in Sources */,
@@ -1721,7 +1742,6 @@
 				7762205A2A267DA0004E93AF /* SocialCell+builders.swift in Sources */,
 				50CE85C12948C54900169922 /* RepresentableSheet.swift in Sources */,
 				503019A42934212700F5645F /* UIApplication+extension.swift in Sources */,
-				77DE0EEE2A2D3C2300BF882D /* AboutPage.swift in Sources */,
 				77FACA5129D30E2B00A5744A /* RoundedTextFieldStyle.swift in Sources */,
 				5056563C2932597F0061FD15 /* LanguagePicker.swift in Sources */,
 				77B188F52A1E9A1E00B11378 /* AppURLs.swift in Sources */,
@@ -1900,7 +1920,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1935,7 +1955,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = "";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.1;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -12,7 +12,7 @@ extension SettingsView {
     @ViewBuilder
     func trackerCell() -> some View {
         if vm.logged {
-            self.loggedInfo()
+            loggedInfo()
                 .redacted(reason: vm.isLoading
                           ? .placeholder
                           : []
@@ -32,9 +32,9 @@ extension SettingsView {
         if vm.requestError == nil {
             HStack(alignment: .top) {
                 // USER AVATAR
-                self.profileNavigation()
+                profileNavigation()
                 // USER STATS AND INFORMATION
-                self.userInfo()
+                userInfo()
                 Spacer()
             }
         } else {
@@ -67,12 +67,12 @@ extension SettingsView {
     @ViewBuilder
     func profileNavigation() -> some View {
         ZStack {
-            NavigationLink { AniListAccountView(user: vm.user) } label: {
+            NavigationLink { AniListAccountView(vm.user?.id ?? 0) } label: {
                 EmptyView()
             }
             .frame(width: 0)
             .opacity(0)
-            self.avatar()
+            avatar()
         }
         .cornerRadius(4.5)
         .frame(

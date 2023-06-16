@@ -8,11 +8,6 @@
 import SwiftUI
 import AniListService
 
-public struct AlertInfo {
-    var title: String
-    var message: String
-}
-
 class SettingsViewModel: ObservableObject {
     enum LockState {
         case active, inactive, unavailable
@@ -33,11 +28,12 @@ class SettingsViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     @Published var showDialog: Bool = false
     @Published var showAlert: Bool = false
-    @Published var alertInfo: AlertInfo?
+    @Published var alertInfo: AlertInfo = .init()
     
     init() {
         checkLocalAuth()
         checkALToken()
+        fetchUser()
     }
     
     /// Check the avaibility of the `local authentication`
@@ -54,7 +50,6 @@ class SettingsViewModel: ObservableObject {
             account: "anilist"
         ), let token =  String(data: tokenData, encoding: .utf8) {
             self.token = token
-            self.fetchUser()
             self.logged = true
         }
     }

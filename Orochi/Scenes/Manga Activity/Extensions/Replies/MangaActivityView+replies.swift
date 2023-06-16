@@ -18,18 +18,20 @@ extension MangaActivityView {
                 .font(.caption2)
                 .fontWeight(.regular)
                 .foregroundColor(Color(uiColor: .systemGray))
+                .padding(.horizontal)
             if let activity = vm.activity,
                let replies = activity.replies,
                let _ = replies.first
             {
                 LazyVStack(alignment: .leading, spacing: 15.0) {
                     ForEach(replies) {
-                        self.replyCell($0)
+                        replyCell($0)
                         if replies.count > 1 {
                             Divider()
+                                .padding(.trailing)
                                 .padding(
                                     .leading,
-                                    (CGSize.standardImageCell.width * 0.65) + 7.5
+                                    (CGSize.standardImageCell.width * 0.65) + 22
                                 )
                         }
                     }
@@ -38,6 +40,7 @@ extension MangaActivityView {
                 Text("No replies yet :(")
                     .font(.caption)
                     .fontWeight(.semibold)
+                    .padding(.horizontal)
             }
         }
     }
@@ -48,10 +51,12 @@ extension MangaActivityView {
         HStack(alignment: .top, spacing: 7.5) {
             self.userAvatar(url: reply.user?.avatar?.large ?? "")
             VStack(alignment: .leading, spacing: 7.5) {
-                self.replyInfo(reply)
-                self.userReply(reply)
+                replyInfo(reply)
+                userReply(reply)
             }
         }
+        .padding(.horizontal)
+        .padding(.vertical, 5.0)
         .contextMenu {
             Button {
                 vm.updateReply(with: reply.id)
@@ -93,13 +98,13 @@ extension MangaActivityView {
                 .font(.subheadline)
                 .fontWeight(.semibold)
             Spacer()
-            self.likeReplyBtn(isLiked: reply.isLiked ?? false) {
+            likeReplyBtn(isLiked: reply.isLiked ?? false) {
                 vm.toggleLike(
                     id: reply.id,
                     type: .activityReply
                 )
             }
-            self.replyDate(reply.createdAt ?? 0)
+            replyDate(reply.createdAt ?? 0)
         }
     }
     
@@ -131,11 +136,11 @@ extension MangaActivityView {
     @ViewBuilder
     func replyDate(_ time: Int) -> some View {
         HStack(alignment: .top) {
-            Text(Date.getDateBy(time: time, format: "MM-dd-yyyy"))
+            Text(Date.relativeDate(of: time))
                 .font(.caption2)
                 .fontWeight(.regular)
             Text("•").font(.caption2)
-            Text(Date.getDateBy(time: time, format:  "HH:mm"))
+            Text(Date.getDate(of: time, format:  "HH:mm a"))
                 .font(.caption2)
                 .fontWeight(.regular)
         }

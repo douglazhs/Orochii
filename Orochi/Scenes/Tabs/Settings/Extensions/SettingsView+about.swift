@@ -12,39 +12,15 @@ extension SettingsView {
     @ViewBuilder
     func aboutApp() -> some View {
         Section {
-            ForEach(AboutPage.allCases) { page in
-                NavigationLink {
-                    self.aboutDestination(page)
-                } label: {
-                    Text(page.description)
-                }
+            NavigationLink {
+                appVersion()
+            } label: {
+                Text("Version")
             }
-            self.gitHub()
+            gitHub()
         } header: { Text("About") } footer: {
             Text("Some informations about the app")
         }
-    }
-    
-    /// About page destination
-    @ViewBuilder
-    func aboutDestination(_ page: AboutPage) -> some View {
-        switch page {
-        case .about:   self.aboutText()
-        case .version: self.appVersion()
-        }
-    }
-    
-    /// App about text
-    @ViewBuilder
-    func aboutText() -> some View {
-        ScrollView(showsIndicators: false) {
-            Text("Orochi is an open source application for reading and tracking manga, written natively in the iOS ecosystem, in the Swift language. \n\nThe app uses the MangaDex website as a source for reading and researching manga. \n\nFor tracking, the AniList website is used.")
-                .font(.footnote)
-                .fontWeight(.regular)
-                .padding()
-        }
-        .navigationTitle("About")
-        .background(BlurBackground(with: .view_background))
     }
     
     /// App version and build

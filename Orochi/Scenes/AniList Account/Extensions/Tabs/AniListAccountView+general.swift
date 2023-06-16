@@ -11,7 +11,7 @@ extension AniListAccountView {
     /// User bio
     @ViewBuilder
     func bio() -> some View {
-        self.item(
+        item(
             title: "BIO",
             value: vm.user?.about?
                 .components(separatedBy: "\n")
@@ -32,20 +32,19 @@ extension AniListAccountView {
                 .font(.caption2)
                 .fontWeight(.regular)
                 .foregroundColor(Color(uiColor: .systemGray))
-                .unredacted()
-            LazyVStack(alignment: vm.isLoading ? .center : .leading, spacing: 10.0) {
+            LazyVStack(alignment: vm.isLoading ? .center : .leading, spacing: 5.5) {
                 if vm.isLoading {
                     ActivityIndicator()
                 } else {
-                    if let activities = vm.activities,
-                        let _ = activities.first
-                    {
+                    if let activities = vm.activities {
                         ForEach(activities) { activity in
                             NavigationLink {
                                 MangaActivityView(activity.id)
                             } label: {
                                 UserActivityCell(activity: activity)
                             }.foregroundColor(.white)
+                            Divider()
+                                .padding(.leading, CGSize.standardImageCell.width * 0.725 + 7.5)
                         }
                     } else {
                         Text("No activities :(")

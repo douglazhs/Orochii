@@ -13,12 +13,12 @@ extension AniListAccountView {
     func stats() -> some View {
         HStack(alignment: .center) {
             VStack(alignment: .leading) {
-                self.item(
+                item(
                     title: "TOTAL MANGAS",
                     value: "\(vm.user?.statistics?.manga?.count ?? 0)"
                 )
                 Spacer()
-                self.item(
+                item(
                     title: "VOLUMES READ",
                     value: "\(vm.user?.statistics?.manga?.volumesRead ?? 0)"
                 )
@@ -27,12 +27,12 @@ extension AniListAccountView {
             Spacer()
             
             VStack(alignment: .leading) {
-                self.item(
+                item(
                     title: "CHAPTERS READ",
                     value: "\(vm.user?.statistics?.manga?.chaptersRead ?? 0)"
                 )
                 Spacer()
-                self.item(
+                item(
                     title: "MEAN SCORE",
                     value: String(
                         format: "%.2f",
@@ -51,7 +51,6 @@ extension AniListAccountView {
                 .font(.caption2)
                 .fontWeight(.regular)
                 .foregroundColor(Color(uiColor: .systemGray))
-                .unredacted()
             Text(value)
                 .font(.caption)
                 .fontWeight(.semibold)

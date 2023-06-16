@@ -14,6 +14,7 @@ struct SocialCell: View {
     
     var body: some View {
         self.content()
+            .frame(maxWidth: .infinity)
     }
 }
 

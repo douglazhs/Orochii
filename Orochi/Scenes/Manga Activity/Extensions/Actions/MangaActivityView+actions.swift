@@ -13,7 +13,7 @@ extension MangaActivityView {
     /// Like actions
     @ViewBuilder
     func actions() -> some View {
-        HStack(alignment: .center, spacing: 7.5) {
+        HStack(alignment: .center, spacing: 3.5) {
             Button {
                 vm.toggleLike(
                     id: vm.activity?.id ?? 0,
@@ -24,32 +24,17 @@ extension MangaActivityView {
                       ? "heart.fill"
                       : "heart"
                 )
-            }
-            .font(.title3)
+            }.font(.title3)
             
-            Button("\(vm.activity?.likeCount ?? 0) Likes") {
-                showLikes = true
-            }
-            .buttonStyle(.borderless)
+            Text("\(vm.activity?.likeCount ?? 0) likes")
             .font(.footnote)
             .fontWeight(.semibold)
             .foregroundColor(vm.averageColor)
-            .popover(isPresented: $showLikes) {
-                if let activity = vm.activity,
-                   let likes = activity.likes {
-                    List(likes) {
-                        Text($0.name ?? "Unknown")
-                    }
-                    .frame(
-                        width: UIScreen.width / 2,
-                        height: UIScreen.height / 2
-                    )
-                }
-                
-            }
+            
             Spacer()
         }
-        .padding(.vertical, 10.0)
+        .padding(.vertical, vm.activity?.likeCount != 0 ? 10.0 : 0)
+        .padding(.top, vm.activity?.likeCount == 0 ? 10.0 : 0)
         .buttonStyle(.borderless)
         .tint(vm.averageColor)
     }

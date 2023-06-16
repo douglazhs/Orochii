@@ -13,16 +13,16 @@ extension SettingsView {
     @ViewBuilder
     func content() -> some View {
         List {
-            self.anilistSection()
+            anilistSection()
                 .listRowSeparator(.hidden)
                 .listRowBackground(Color.clear)
-            self.icloudSection()
+            icloudSection()
                 .listRowBackground(Color.clear)
-            self.securitySection()
+            securitySection()
                 .listRowBackground(Color.clear)
-            self.notificationsSection()
+            notificationsSection()
                 .listRowBackground(Color.clear)
-            self.aboutApp()
+            aboutApp()
                 .listRowBackground(Color.clear)
         }
         .refreshable {
@@ -30,14 +30,9 @@ extension SettingsView {
         }
         .listStyle(.grouped)
         .navigationTitle(String.Settings.title)
-        .navigationBarTitleDisplayMode(.inline)
         .animation(
             .easeInOut(duration: 0.125),
-            value: [
-                vm.biometryPreference,
-                vm.logged,
-                vm.isLoading
-            ]
+            value: vm.biometryPreference
         )
         .background(BlurBackground(with: .view_background))
         .scrollContentBackground(.hidden)
@@ -47,10 +42,10 @@ extension SettingsView {
     @ViewBuilder
     func anilistSection() -> some View {
         Section {
-            self.trackerCell()
+            trackerCell()
                 .frame(maxWidth: UIScreen.width)
                 .overlay(alignment: .trailing) {
-                    self.accButtonHandler()
+                    accButtonHandler()
                 }
         } header: {
             Text(Localized.trackerHeader)

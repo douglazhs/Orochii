@@ -18,7 +18,6 @@ extension AniListAccountView {
                 .font(.caption2)
                 .fontWeight(.regular)
                 .foregroundColor(Color(uiColor: .systemGray))
-                .unredacted()
             if !vm.genresStat.isEmpty {
                 Chart {
                     ForEach(vm.genresStat.indices, id: \.self) { i in
@@ -38,7 +37,7 @@ extension AniListAccountView {
                 .chartYAxisLabel("Genres", position: .leading)
                 .chartXAxisLabel("Read chapters", position: .bottom)
                 .frame(height: UIScreen.height * 0.3)
-            } else { self.noDataToShow() }
+            } else { noDataToShow() }
         }
     }
     
@@ -50,7 +49,6 @@ extension AniListAccountView {
                 .font(.caption2)
                 .fontWeight(.regular)
                 .foregroundColor(Color(uiColor: .systemGray))
-                .unredacted()
             if !vm.startYearsStat.isEmpty {
                 Chart {
                     ForEach(vm.startYearsStat.indices, id: \.self) { i in
@@ -73,8 +71,8 @@ extension AniListAccountView {
                 .chartYAxis(.hidden)
                 .chartXAxisLabel("Year", position: .bottom)
                 .chartYAxisLabel("Chapters read", position: .leading)
-            } else { self.noDataToShow() }
-        }
+            } else { noDataToShow() }
+        }.padding(.bottom, 7.5)
     }
     
     /// No data to show view
@@ -83,6 +81,5 @@ extension AniListAccountView {
         Text("No data to show :(")
             .font(.caption)
             .fontWeight(.semibold)
-            .unredacted()
     }
 }

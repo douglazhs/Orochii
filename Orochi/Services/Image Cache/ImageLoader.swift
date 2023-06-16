@@ -34,7 +34,7 @@ class ImageLoader: ObservableObject {
         guard !isLoading else { return }
 
         if let image = cache?[url] {
-            withAnimation { self.image = image }
+            self.image = image
             return
         }
         

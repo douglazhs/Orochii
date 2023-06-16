@@ -19,12 +19,15 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
     @Published var startYearsStat: [UserStartYearStatistic] = []
     @Published var genresStat: [UserGenreStatistic] = []
     @Published var activities: [ActivityUnion]? = nil
+    @Published var alertInfo: AlertInfo = .init()
+    @Published var showAlert: Bool = false
+    @Published var showDialog: Bool = false
+    private var requestError: Error? = nil
     private var token: String = ""
     
-    init(user: User?) {
-        self.user = user
-        self.loadToken()
-        self.fetch(isRefresh: false)
+    init(_ user: Int) {
+        loadToken()
+        fetch(user)
     }
     
     /// Load Bearer token from keychain
@@ -32,23 +35,43 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
         if let tokenData = Keychain.standard.read(
             service: "access-token",
             account: "anilist"
-        ), let token =  String(
+        ), let resultToken =  String(
             data: tokenData,
             encoding: .utf8
-        ) {
-            self.token = token
-        }
+        ) { token = resultToken }
     }
     
     /// Refresh user data from AniList client
-    func fetch(isRefresh: Bool) {
+    func fetch(_ id: Int) {
+        defer { isLoading = false }
+        isLoading = true
+        getUser(id: id)
+        getPeople(user: id)
+        activities(user: id)
+    }
+    
+    /// Refresh user page
+    func refresh() {
+        guard let user else { return }
+        getPeople(user: user.id)
+        activities(user: user.id)
+        unwrapStats()
+    }
+    
+    /// Get user by Id
+    /// - Parameter id: User Id
+    func getUser(id: Int) {
         Task { @MainActor in
-            guard let user else { return }
-            self.isLoading = true
-            defer { self.isLoading = false }
-            self.getPeople(user: user.id)
-            self.activities(user: user.id)
-            self.unwrapStats()
+            do {
+                user = try await getUser(
+                    by: id,
+                    token: token
+                )
+            } catch {
+                isLoading = false
+                requestError = error
+                showAlert(error)
+            }
         }
     }
     
@@ -57,16 +80,18 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
     func getPeople(user id: Int) {
         Task { @MainActor in
             do {
-                self.followers = try await self.getFollowers(
+                followers = try await getFollowers(
                     of: id,
-                    token: self.token
+                    token: token
                 )
-                self.following = try await self.getFollowing(
+                following = try await getFollowing(
                     of: id,
-                    token: self.token
+                    token: token
                 )
             } catch {
-                dump("\(error)")
+                isLoading = false
+                requestError = error
+                showAlert(error)
             }
         }
     }
@@ -76,36 +101,40 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
     func activities(user: Int) {
         Task { @MainActor in
             do {
-                self.activities = try await getActivities(
+                activities = try await getActivities(
                     of: user,
-                    token: self.token
+                    token: token
                 )
             } catch {
-                dump("\(error)")
+                isLoading = false
+                requestError = error
+                showAlert(error)
             }
         }
     }
     
     /// Toggle user follow
     func socialHandler() async {
-        guard let user = self.handledUser else { return }
+        guard let user = handledUser else { return }
         do {
-            try await self.toggleFollow(
+            try await toggleFollow(
                 of: user.id,
-                token: self.token
+                token: token
             )
         } catch {
-            dump("\(error)")
+            requestError = error
+            showAlert(error)
         }
-        Task { @MainActor in
-            self.getPeople(user: user.id)
-            self.handledUser = nil
+        Task {  @MainActor in
+            guard let user = self.user else { return }
+            getPeople(user: user.id)
+            handledUser = nil
         }
     }
     
     /// Unwrap user stats
     func unwrapStats() {
-        guard let user = self.user,
+        guard let user,
               let stats = user.statistics,
               let manga = stats.manga,
               let startYears = manga.startYears,
@@ -116,8 +145,20 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
         }
         let mappedGenres = genres.filter {
             $0.chaptersRead != 0
-        }
-        self.startYearsStat = sortedStartYears
-        self.genresStat = mappedGenres
+        }.sorted(by: { $0.chaptersRead ?? 0 < $1.chaptersRead ?? 0 })
+        startYearsStat = sortedStartYears
+        genresStat = mappedGenres
+    }
+    
+    /// Show alert
+    /// - Parameters:
+    ///   - error: Throw error
+    func showAlert(_ error: Error) {
+        showAlert = true
+        let failureReason = (error as? HTTPStatusCode)?.failureReason
+        alertInfo = .init(
+            title: failureReason ?? String.Common.error,
+            message: error.localizedDescription
+        )
     }
 }

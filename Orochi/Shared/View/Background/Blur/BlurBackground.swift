@@ -18,8 +18,8 @@ struct BlurBackground: View {
         Image(image)
             .resizable(resizingMode: .stretch)
             .edgesIgnoringSafeArea(.all)
-            .blur(radius: 75)
-            .opacity(0.375)
+            .blur(radius: 65)
+            .opacity(0.425)
     }
 }
 

@@ -11,14 +11,22 @@ import AniListService
 extension AniListAccountView {
     @ViewBuilder
     func content() -> some View {
-        ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading) {
-                self.statsCell()
-                self.tabs()
+        if vm.user != nil {
+            ScrollView(showsIndicators: false) {
+                VStack(alignment: .leading) {
+                    statsCell()
+                    tabs()
+                }
+            }
+            .refreshable { vm.refresh() }
+            .background(BlurBackground(with: .view_background))
+            .scrollContentBackground(.hidden)
+        } else {
+            ZStack {
+                ActivityIndicator()
+                BlurBackground(with: .view_background)
+                    .edgesIgnoringSafeArea(.all)
             }
         }
-        .refreshable { vm.fetch(isRefresh: true) }
-        .background(BlurBackground(with: .view_background))
-        .scrollContentBackground(.hidden)
     }
 }

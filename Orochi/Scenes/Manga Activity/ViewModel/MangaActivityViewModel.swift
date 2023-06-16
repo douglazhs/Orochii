@@ -13,8 +13,13 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     @Published var placeholder: String = "Type here..."
     @Published var activity: ActivityUnion? = nil
     @Published var canSendReply: Bool = false
-    @Published var averageColor: Color = .clear
+    @Published var averageColor: Color = .indigo
     @Published var isLoading: Bool = false
+    @Published var isRefreshing: Bool = false
+    @Published var showDialog: Bool = false
+    @Published var showAlert: Bool = false
+    @Published var alertInfo: AlertInfo = .init()
+    private (set) var requestError: Error? = nil
     private var token: String = ""
     
     init(_ activity: Int) {
@@ -26,13 +31,17 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     /// - Parameter id: Activity Id
     func fetch(_ id: Int) {
         Task { @MainActor in
+            isLoading = true
+            defer { isLoading = false }
             do {
-                self.activity = try await self.getActivity(
+                self.activity = try await getActivity(
                     id: id,
                     token: token
                 )
             } catch {
-                dump("\(error)")
+                isLoading = false
+                requestError = error
+                showAlert(error)
             }
         }
     }
@@ -55,12 +64,16 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
         Task { @MainActor in
             guard let activity else { return }
             do {
+                isRefreshing = true
+                defer { isRefreshing = false }
                 self.activity = try await self.getActivity(
                     id: activity.id,
                     token: token
                 )
             } catch {
-                dump("\(error)")
+                isRefreshing = false
+                requestError = error
+                showAlert(error)
             }
         }
     }
@@ -70,16 +83,17 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
         Task { @MainActor in
             guard let activity else { return }
             do {
-                try await self.createReply(
+                try await createReply(
                     activiyId: activity.id,
                     text: text,
                     token: token
                 )
             } catch {
-                dump("\(error)")
+                requestError = error
+                showAlert(error)
             }
-            self.text = ""
-            self.refresh()
+            text = ""
+            refresh()
         }
     }
     
@@ -88,14 +102,15 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     func deleteReply(with id: Int) {
         Task { @MainActor in
             do {
-                try await self.deleteReply(
+                try await deleteReply(
                     id: id,
                     token: token
                 )
             } catch {
-                dump("\(error)")
+                requestError = error
+                showAlert(error)
             }
-            self.refresh()
+            refresh()
         }
     }
     
@@ -104,14 +119,15 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
         guard let activity else { return }
         Task { @MainActor in
             do {
-                try await self.deleteActivity(
+                try await deleteActivity(
                     with: activity.id,
                     token: token
                 )
             } catch {
-                dump("\(error)")
+                requestError = error
+                showAlert(error)
             }
-            self.refresh()
+            refresh()
         }
     }
     
@@ -120,15 +136,16 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     func updateReply(with id: Int) {
         Task { @MainActor in
             do {
-                try await self.updateReply(
+                try await updateReply(
                     id: id,
-                    text: self.text,
+                    text: text,
                     token: token
                 )
             } catch {
-                dump("\(error)")
+                requestError = error
+                showAlert(error)
             }
-            self.refresh()
+            refresh()
         }
     }
     
@@ -139,15 +156,16 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     func toggleLike(id: Int, type: LikeableType) {
         Task { @MainActor in
             do {
-                try await self.toggleLike(
+                try await toggleLike(
                     of: id,
                     as: type,
                     token: token
                 )
             } catch {
-                dump("\(error)")
+                requestError = error
+                showAlert(error)
             }
-            self.refresh()
+            refresh()
         }
     }
     
@@ -156,15 +174,28 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
         guard let activity else { return }
         Task { @MainActor in
             do {
-                try await self.toggleSubscription(
+                try await toggleSubscription(
                     id: activity.id,
                     subscribe: !(activity.isSubscribed ?? false),
                     token: token
                 )
             } catch {
-                dump("\(error)")
+                requestError = error
+                showAlert(error)
             }
-            self.refresh()
+            refresh()
         }
+    }
+    
+    /// Show alert
+    /// - Parameters:
+    ///   - error: Throw error
+    func showAlert(_ error: Error) {
+        showAlert = true
+        let failureReason = (error as? HTTPStatusCode)?.failureReason
+        alertInfo = .init(
+            title: failureReason ?? String.Common.error,
+            message: error.localizedDescription
+        )
     }
 }

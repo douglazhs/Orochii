@@ -13,16 +13,13 @@ extension AniListAccountView {
     @ViewBuilder
     func statsCell() -> some View {
         ZStack {
-            self.banner()
+            banner()
                 .frame(
-                    maxHeight: CGSize.standardImageCell.width * 2
+                    width: UIScreen.width,
+                    height: CGSize.standardImageCell.width * 2
                 )
                 .clipped()
-            self.userInfo()
-                .redacted(reason: (vm.user == nil)
-                          ? .placeholder
-                          : []
-                )
+            userInfo()
         }
     }
     
@@ -30,15 +27,14 @@ extension AniListAccountView {
     @ViewBuilder
     func userInfo() -> some View {
         HStack(alignment: .top) {
-            self.avatar()
+            avatar()
                 .frame(
                     width: CGSize.standardImageCell.width,
                     height: CGSize.standardImageCell.width
                 )
                 .scaledToFill()
-                .unredacted()
             Spacer()
-            self.stats()
+            stats()
                 .frame(maxHeight: CGSize.standardImageCell.width)
         }.padding()
     }
