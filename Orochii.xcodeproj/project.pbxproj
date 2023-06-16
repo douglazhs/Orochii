@@ -285,7 +285,6 @@
 		77612A982A2B96DC002137FC /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
 		77612A9B2A2BCA06002137FC /* MangaActivityView+actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaActivityView+actions.swift"; sourceTree = "<group>"; };
 		77612A9E2A2C0C32002137FC /* MangaActivityView+toolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaActivityView+toolbar.swift"; sourceTree = "<group>"; };
-		77612AA22A2C3B52002137FC /* Orochii-AniListService */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = "Orochii-AniListService"; path = "../Packages/Orochii-AniListService"; sourceTree = "<group>"; };
 		776220572A267D85004E93AF /* SocialCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialCell.swift; sourceTree = "<group>"; };
 		776220592A267DA0004E93AF /* SocialCell+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SocialCell+builders.swift"; sourceTree = "<group>"; };
 		7762205C2A26BE51004E93AF /* AniListAccountView+tabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AniListAccountView+tabs.swift"; sourceTree = "<group>"; };
@@ -525,7 +524,6 @@
 		5092DF1829292C590094DC18 = {
 			isa = PBXGroup;
 			children = (
-				77612AA22A2C3B52002137FC /* Orochii-AniListService */,
 				508C2DCC2950AB4800355F13 /* Orochii-Info.plist */,
 				5092DF2329292C590094DC18 /* Orochi */,
 				5092DF2229292C590094DC18 /* Products */,

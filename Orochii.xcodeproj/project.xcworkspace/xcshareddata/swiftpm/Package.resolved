@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "orochii-anilistservice",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/douglazhs/Orochii-AniListService.git",
+      "state" : {
+        "revision" : "c915f25ba0e8554cbd5c67971fda87c83b0447b2",
+        "version" : "0.0.4"
+      }
+    }
+  ],
+  "version" : 2
+}
