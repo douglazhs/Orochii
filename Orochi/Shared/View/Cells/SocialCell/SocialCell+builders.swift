@@ -21,7 +21,9 @@ extension SocialCell {
             self.info()
             Spacer()
         }
-        .overlay(alignment: .trailing) { socialButton() }
+        .overlay(alignment: .trailing) {
+            if !authenticated { socialButton() }
+        }
     }
     
     /// Follow/Unfollow button
@@ -63,7 +65,7 @@ extension SocialCell {
     @ViewBuilder
     func info() -> some View {
         VStack(alignment: .leading, spacing: 5) {
-            Text(user?.name ?? "")
+            Text(authenticated ? "You" : user?.name ?? "")
                 .font(.caption)
                 .fontWeight(.semibold)
             Text("\(user?.statistics?.manga?.count ?? 0) MANGAS")

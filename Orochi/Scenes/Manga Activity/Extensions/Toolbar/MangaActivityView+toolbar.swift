@@ -13,7 +13,9 @@ extension MangaActivityView {
     func menu() -> some View {
         Menu {
             self.subscribeSection()
-            self.removeSection()
+            if let activity = vm.activity,
+               vm.isCurrent(activity.userId)
+            { self.removeSection() }
         } label: { Image(systemName: "ellipsis") }
     }
     

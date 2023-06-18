@@ -59,6 +59,27 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
         }
     }
     
+    /// Verify if the user id is already saved
+    /// - Returns: Logged user id
+    func loggedUserId() -> Int? {
+        if let userIdData = Keychain.standard.read(
+            service: "user-id",
+            account: "anilist"
+        ), let userId = Int(data: userIdData)  {
+            return userId
+        }
+        return nil
+    }
+    
+    /// Vertify if the actual user is the authenticated user or not
+    /// - Returns: authenticated and not authenticated
+    func isCurrent(_ id: Int) -> Bool {
+        if let userId = loggedUserId(),
+           userId == id
+        { return true }
+        return false
+    }
+    
     /// Refresh activity information
     func refresh() {
         Task { @MainActor in

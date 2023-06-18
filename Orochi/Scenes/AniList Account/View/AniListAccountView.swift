@@ -11,10 +11,13 @@ import AniListService
 
 /// Account information
 struct AniListAccountView: View {
+    @Environment(\.dismiss) var dismiss
     @StateObject var vm: AniListAccountViewModel
     
     init(_ user: Int) {
-        _vm = StateObject(wrappedValue: AniListAccountViewModel(user))
+        _vm = StateObject(
+            wrappedValue: AniListAccountViewModel(user)
+        )
         UISegmentedControl.appearance().selectedSegmentTintColor = .systemIndigo
         UISegmentedControl.appearance().backgroundColor = .systemIndigo.withAlphaComponent(0.15)
     }
@@ -29,7 +32,11 @@ struct AniListAccountView: View {
                 }
             }
             .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
-                Button(String.Common.ok) { }
+                Button(String.Common.ok) {
+                    if let error = vm.requestError as? HTTPStatusCode {
+                        if error == .notFound { dismiss() }
+                    }
+                }
             } message: { Text(vm.alertInfo.message) }
             .animation(
                 .easeIn(duration: 0.225),

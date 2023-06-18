@@ -22,7 +22,7 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
     @Published var alertInfo: AlertInfo = .init()
     @Published var showAlert: Bool = false
     @Published var showDialog: Bool = false
-    private var requestError: Error? = nil
+    private (set) var requestError: Error? = nil
     private var token: String = ""
     
     init(_ user: Int) {
@@ -31,7 +31,7 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
     }
     
     /// Load Bearer token from keychain
-    func loadToken() {
+    private func loadToken() {
         if let tokenData = Keychain.standard.read(
             service: "access-token",
             account: "anilist"
@@ -42,7 +42,7 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
     }
     
     /// Refresh user data from AniList client
-    func fetch(_ id: Int) {
+    private func fetch(_ id: Int) {
         defer { isLoading = false }
         isLoading = true
         getUser(id: id)
@@ -60,7 +60,7 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
     
     /// Get user by Id
     /// - Parameter id: User Id
-    func getUser(id: Int) {
+    private func getUser(id: Int) {
         Task { @MainActor in
             do {
                 user = try await getUser(
@@ -75,9 +75,30 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
         }
     }
     
+    /// Verify if the user id is already saved
+    /// - Returns: Logged user id
+    private func loggedUserId() -> Int? {
+        if let userIdData = Keychain.standard.read(
+            service: "user-id",
+            account: "anilist"
+        ), let userId = Int(data: userIdData)  {
+            return userId
+        }
+        return nil
+    }
+    
+    /// Vertify if the actual user is the authenticated user or not
+    /// - Returns: authenticated and not authenticated
+    func isCurrent(_ id: Int) -> Bool {
+        if let userId = loggedUserId(),
+           userId == id
+        { return true }
+        return false
+    }
+    
     /// Get authenticated user followers and following people
     /// - Parameter id: Authenticated user Id
-    func getPeople(user id: Int) {
+    private func getPeople(user id: Int) {
         Task { @MainActor in
             do {
                 followers = try await getFollowers(
@@ -98,7 +119,7 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
     
     /// Get current user activities
     /// - Parameter user: Current user
-    func activities(user: Int) {
+    private func activities(user: Int) {
         Task { @MainActor in
             do {
                 activities = try await getActivities(
@@ -153,7 +174,7 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
     /// Show alert
     /// - Parameters:
     ///   - error: Throw error
-    func showAlert(_ error: Error) {
+    private func showAlert(_ error: Error) {
         showAlert = true
         let failureReason = (error as? HTTPStatusCode)?.failureReason
         alertInfo = .init(

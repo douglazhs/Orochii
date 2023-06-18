@@ -33,24 +33,20 @@ extension AniListAccountView {
                 .fontWeight(.regular)
                 .foregroundColor(Color(uiColor: .systemGray))
             LazyVStack(alignment: vm.isLoading ? .center : .leading, spacing: 5.5) {
-                if vm.isLoading {
-                    ActivityIndicator()
-                } else {
-                    if let activities = vm.activities {
-                        ForEach(activities) { activity in
-                            NavigationLink {
-                                MangaActivityView(activity.id)
-                            } label: {
-                                UserActivityCell(activity: activity)
-                            }.foregroundColor(.white)
-                            Divider()
-                                .padding(.leading, CGSize.standardImageCell.width * 0.725 + 7.5)
-                        }
-                    } else {
-                        Text("No activities :(")
-                            .font(.caption)
-                            .fontWeight(.semibold)
+                if let activities = vm.activities {
+                    ForEach(activities) { activity in
+                        NavigationLink {
+                            MangaActivityView(activity.id)
+                        } label: {
+                            UserActivityCell(activity: activity)
+                        }.foregroundColor(.white)
+                        Divider()
+                            .padding(.leading, CGSize.standardImageCell.width * 0.725 + 7.5)
                     }
+                } else {
+                    Text("No activities :(")
+                        .font(.caption)
+                        .fontWeight(.semibold)
                 }
             }
         }

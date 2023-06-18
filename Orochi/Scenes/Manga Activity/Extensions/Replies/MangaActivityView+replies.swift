@@ -58,15 +58,17 @@ extension MangaActivityView {
         .padding(.horizontal)
         .padding(.vertical, 5.0)
         .contextMenu {
-            Button {
-                vm.updateReply(with: reply.id)
-            } label: {
-                Label("Edit", systemImage: "pencil")
-            }
-            Button(role: .destructive) {
-                vm.deleteReply(with: reply.id)
-            } label: {
-                Label("Delete", systemImage: "trash")
+            if let user = reply.user {
+                Button {
+                    vm.updateReply(with: reply.id)
+                } label: {
+                    Label("Edit", systemImage: "pencil")
+                }.disabled(!vm.isCurrent(user.id))
+                Button(role: .destructive) {
+                    vm.deleteReply(with: reply.id)
+                } label: {
+                    Label("Delete", systemImage: "trash")
+                }.disabled(!vm.isCurrent(user.id))
             }
         }
     }
@@ -94,9 +96,14 @@ extension MangaActivityView {
     @ViewBuilder
     func replyInfo(_ reply: ActivityReply) -> some View {
         HStack(alignment: .center) {
-            Text(reply.user?.name ?? "Unknown")
+            if let user = reply.user {
+                Text(vm.isCurrent(user.id)
+                     ? "You"
+                     : user.name ?? "Unknown"
+                )
                 .font(.subheadline)
                 .fontWeight(.semibold)
+            }
             Spacer()
             likeReplyBtn(isLiked: reply.isLiked ?? false) {
                 vm.toggleLike(

@@ -30,14 +30,12 @@ extension AniListAccountView {
     /// General information
     @ViewBuilder
     func general() -> some View {
-        if !vm.isLoading {
-            VStack(alignment: .leading, spacing: 15.0) {
-                bio()
-                Divider()
-                userActivities()
-            }
-            .padding(.horizontal)
-        } else { ActivityIndicator() }
+        VStack(alignment: .leading, spacing: 15.0) {
+            bio()
+            Divider()
+            userActivities()
+        }
+        .padding(.horizontal)
     }
     
     /// User charts
@@ -61,7 +59,10 @@ extension AniListAccountView {
                     NavigationLink {
                         AniListAccountView(user.id)
                     } label: {
-                        SocialCell(user: user) { action, tappedUser in
+                        SocialCell(
+                            user: user,
+                            authenticated: vm.isCurrent(user.id)
+                        ) { action, tappedUser in
                             vm.handledUser = tappedUser
                             switch action {
                             case .follow: Task { await vm.socialHandler() }

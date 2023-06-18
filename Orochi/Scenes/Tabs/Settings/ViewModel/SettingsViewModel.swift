@@ -50,25 +50,38 @@ class SettingsViewModel: ObservableObject {
             account: "anilist"
         ), let token =  String(data: tokenData, encoding: .utf8) {
             self.token = token
-            self.logged = true
+            logged = true
+            fetchUser()
         }
+    }
+    
+    /// Verify if the user id is already saved
+    /// - Returns: `true`: saved
+    ///            `false`: not saved
+    func savedUserId() -> Bool {
+        if let userIdData = Keychain.standard.read(
+            service: "user-id",
+            account: "anilist"
+        ), let _ = Int(data: userIdData)  {
+            return true
+        }
+        return false
     }
     
     /// Fetch authenticated user
     func fetchUser() {
         Task { @MainActor in
-            self.requestError = nil
-            self.isLoading = true
-            defer { self.isLoading = false }
+            requestError = nil
+            isLoading = true
+            defer { isLoading = false }
             do {
-                self.user = try await anilist.getAuthUser(token: token)
+                user = try await anilist.getAuthUser(token: token)
+                if !self.savedUserId() {
+                    if let user = self.user { try storeUser(user.id) }
+                }
             } catch {
-                self.requestError = error
-                let failureReason = (error as? HTTPStatusCode)?.failureReason
-                self.showAlert(
-                    title: failureReason ?? String.Common.error,
-                    message: error.localizedDescription
-                )
+                requestError = error
+                showAlert(error)
             }
         }
     }
@@ -102,17 +115,12 @@ class SettingsViewModel: ObservableObject {
                 do {
                     try self.storeToken(token)
                 } catch {
-                    self.showAlert(
-                        title: String.Common.error,
-                        message: String.Errors.keychainSave
-                    )
+                    self.showAlert(error)
                 }
                 self.checkALToken()
-            case .fail(_):
-                self.showAlert(
-                    title: String.Common.error,
-                    message: String.Errors.anilistLogInError
-                )
+            case .fail(let error):
+                self.requestError = error
+                self.showAlert(error)
             }
         }
     }
@@ -124,19 +132,21 @@ class SettingsViewModel: ObservableObject {
                 service: "access-token",
                 account: "anilist"
             )
-            self.logged = false
-            self.user = nil
-        } catch {
-            self.showAlert(
-                title: String.Common.error,
-                message: String.Errors.anilistLogOutError
+            try Keychain.standard.delete(
+                service: "user-id",
+                account: "anilist"
             )
+            token = ""
+            logged = false
+            user = nil
+        } catch {
+            showAlert(error)
         }
     }
     
     /// Store Bearer token on Keychain
     /// - Parameter token: Bearer token
-    func storeToken(_ token: [String:String]) throws {
+    private func storeToken(_ token: [String:String]) throws {
         guard let bearer = token["access_token"],
               let bearerData = bearer.data(using: .utf8)
         else { return }
@@ -147,18 +157,26 @@ class SettingsViewModel: ObservableObject {
         )
     }
     
+    
+    /// Store authenticated User on Keychain
+    /// - Parameter user: User to be stored
+    private func storeUser(_ userId: Int) throws {
+        try Keychain.standard.save(
+            userId.data,
+            service: "user-id",
+            account: "anilist"
+        )
+    }
+    
     /// Show alert
     /// - Parameters:
-    ///   - title: Alert title
-    ///   - message: Alert message
-    func showAlert(
-        title: String,
-        message: String
-    ) {
-        self.showAlert = true
-        self.alertInfo = .init(
-            title: title,
-            message: message
+    ///   - error: Throw error
+    func showAlert(_ error: Error) {
+        showAlert = true
+        let failureReason = (error as? HTTPStatusCode)?.failureReason
+        alertInfo = .init(
+            title: failureReason ?? String.Common.error,
+            message: error.localizedDescription
         )
     }
 }

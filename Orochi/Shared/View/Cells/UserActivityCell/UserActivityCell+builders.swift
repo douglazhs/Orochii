@@ -96,13 +96,20 @@ extension UserActivityCell {
     /// Social information
     @ViewBuilder
     func metricsInfo() -> some View {
-        HStack {
-            Label("\(activity?.likeCount ?? 0)", systemImage: "heart.fill")
-            Label("\(activity?.replies?.count ?? 0)", systemImage: "message.fill")
+        if let likes = activity?.likes {
+            HStack(spacing: .zero) {
+                ForEach(likes) {
+                   if let url = URL(string: $0.avatar?.large ?? "") {
+                       AsyncCacheImage(url: url, placeholder: { ActivityIndicator() }) { image in
+                           Image(uiImage: image)
+                               .resizable()
+                       }
+                       .frame(width: 21.5, height: 21.5)
+                       .clipShape(Circle())
+                       .offset(x: -10.75)
+                    }
+                }
+            }
         }
-        .font(.caption2)
-        .fontWeight(.semibold)
-        .fontDesign(.rounded)
-        .foregroundColor(Color(.systemGray))
     }
 }

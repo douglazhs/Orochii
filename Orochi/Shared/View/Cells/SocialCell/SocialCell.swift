@@ -10,6 +10,7 @@ import struct AniListService.User
 
 struct SocialCell: View {
     var user: User?
+    var authenticated: Bool = false
     var action: ((SocialAction, User?) -> Void)?
     
     var body: some View {
