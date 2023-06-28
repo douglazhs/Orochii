@@ -29,7 +29,7 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     
     /// Fetch activity information
     /// - Parameter id: Activity Id
-    func fetch(_ id: Int) {
+    private func fetch(_ id: Int) {
         Task { @MainActor in
             isLoading = true
             defer { isLoading = false }
@@ -47,7 +47,7 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     }
     
     /// Load Bearer token from keychain
-    func loadToken() {
+    private func loadToken() {
         if let tokenData = Keychain.standard.read(
             service: "access-token",
             account: "anilist"
@@ -61,7 +61,7 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     
     /// Verify if the user id is already saved
     /// - Returns: Logged user id
-    func loggedUserId() -> Int? {
+    private func loggedUserId() -> Int? {
         if let userIdData = Keychain.standard.read(
             service: "user-id",
             account: "anilist"
@@ -211,7 +211,7 @@ final class MangaActivityViewModel: ObservableObject, ALServices {
     /// Show alert
     /// - Parameters:
     ///   - error: Throw error
-    func showAlert(_ error: Error) {
+    private func showAlert(_ error: Error) {
         showAlert = true
         let failureReason = (error as? HTTPStatusCode)?.failureReason
         alertInfo = .init(

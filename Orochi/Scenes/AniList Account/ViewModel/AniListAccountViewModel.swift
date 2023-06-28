@@ -15,7 +15,7 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
     @Published var followers: [User]? = nil
     @Published var following: [User]? = nil
     @Published var isLoading: Bool = false
-    @Published var selection: ProfileTabs = .general
+    @Published var selection: ProfileTabs = .activity
     @Published var startYearsStat: [UserStartYearStatistic] = []
     @Published var genresStat: [UserGenreStatistic] = []
     @Published var activities: [ActivityUnion]? = nil
@@ -105,16 +105,35 @@ final class AniListAccountViewModel: ObservableObject, ALServices {
                     of: id,
                     token: token
                 )
+                
                 following = try await getFollowing(
                     of: id,
                     token: token
                 )
+                
+                followers = orderUsers(&followers)
+                following = orderUsers(&following)
             } catch {
                 isLoading = false
                 requestError = error
                 showAlert(error)
             }
         }
+    }
+    
+    /// Order users, putting the autheticated user on index 0
+    /// - Parameter users: following/followers users
+    /// - Returns: Sorted array
+    private func orderUsers(_ users: inout [User]?) -> [User]? {
+        users?.indices.forEach({ index in
+            if let user = users?[index], isCurrent(user.id) {
+                users?.move(
+                    fromOffsets: IndexSet(integer: index),
+                    toOffset: 0
+                )
+            }
+        })
+        return users
     }
     
     /// Get current user activities

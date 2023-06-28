@@ -111,6 +111,8 @@
 		50FFB011292ACE6200B87E0E /* DemoPublic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB010292ACE6200B87E0E /* DemoPublic.swift */; };
 		50FFB013292AD35000B87E0E /* OrderFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB012292AD35000B87E0E /* OrderFilter.swift */; };
 		50FFB016292AE7B800B87E0E /* MangaView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB015292AE7B800B87E0E /* MangaView+builders.swift */; };
+		771590422A41D78A00E36CD6 /* String+attributedString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 771590412A41D78A00E36CD6 /* String+attributedString.swift */; };
+		7715904D2A4329CA00E36CD6 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 7715904C2A4329CA00E36CD6 /* Kingfisher */; };
 		771B766129DC788700F7CCB6 /* anilist_api.json in Resources */ = {isa = PBXBuildFile; fileRef = 771B766029DC788700F7CCB6 /* anilist_api.json */; };
 		7731F06A2A29253900A5747E /* MangaActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7731F0692A29253900A5747E /* MangaActivityView.swift */; };
 		7731F06D2A29256400A5747E /* MangaActivityView+content.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7731F06C2A29256400A5747E /* MangaActivityView+content.swift */; };
@@ -145,6 +147,7 @@
 		7796C8C82A281A7B00E26066 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796C8C42A281A7B00E26066 /* ImageLoader.swift */; };
 		7796C8C92A281A7B00E26066 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796C8C52A281A7B00E26066 /* ImageCache.swift */; };
 		7796C8CC2A282ACF00E26066 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796C8CB2A282ACF00E26066 /* Date+extension.swift */; };
+		7797B37B2A4334FA00DBD8C4 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7797B37A2A4334FA00DBD8C4 /* UIColor+extension.swift */; };
 		77B188E42A1CE75B00B11378 /* Biometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188E32A1CE75B00B11378 /* Biometry.swift */; };
 		77B188E62A1CFC3900B11378 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188E52A1CFC3900B11378 /* Keychain.swift */; };
 		77B188EE2A1E5B4300B11378 /* URLSession+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */; };
@@ -270,6 +273,7 @@
 		50FFB010292ACE6200B87E0E /* DemoPublic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoPublic.swift; sourceTree = "<group>"; };
 		50FFB012292AD35000B87E0E /* OrderFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderFilter.swift; sourceTree = "<group>"; };
 		50FFB015292AE7B800B87E0E /* MangaView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaView+builders.swift"; sourceTree = "<group>"; };
+		771590412A41D78A00E36CD6 /* String+attributedString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+attributedString.swift"; sourceTree = "<group>"; };
 		771B766029DC788700F7CCB6 /* anilist_api.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = anilist_api.json; sourceTree = "<group>"; };
 		7731F0692A29253900A5747E /* MangaActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaActivityView.swift; sourceTree = "<group>"; };
 		7731F06C2A29256400A5747E /* MangaActivityView+content.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaActivityView+content.swift"; sourceTree = "<group>"; };
@@ -303,6 +307,7 @@
 		7796C8C42A281A7B00E26066 /* ImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		7796C8C52A281A7B00E26066 /* ImageCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		7796C8CB2A282ACF00E26066 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
+		7797B37A2A4334FA00DBD8C4 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		77B188E32A1CE75B00B11378 /* Biometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometry.swift; sourceTree = "<group>"; };
 		77B188E52A1CFC3900B11378 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+extension.swift"; sourceTree = "<group>"; };
@@ -325,6 +330,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7715904D2A4329CA00E36CD6 /* Kingfisher in Frameworks */,
 				776323C22A16F776009B5966 /* AniListService in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -672,6 +678,8 @@
 				77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */,
 				7796C8CB2A282ACF00E26066 /* Date+extension.swift */,
 				77612A982A2B96DC002137FC /* UIImage+extension.swift */,
+				771590412A41D78A00E36CD6 /* String+attributedString.swift */,
+				7797B37A2A4334FA00DBD8C4 /* UIColor+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1566,6 +1574,7 @@
 			name = Orochii;
 			packageProductDependencies = (
 				776323C12A16F776009B5966 /* AniListService */,
+				7715904C2A4329CA00E36CD6 /* Kingfisher */,
 			);
 			productName = Orochi;
 			productReference = 5092DF2129292C590094DC18 /* Orochii.app */;
@@ -1598,6 +1607,7 @@
 			mainGroup = 5092DF1829292C590094DC18;
 			packageReferences = (
 				776323C02A16F776009B5966 /* XCRemoteSwiftPackageReference "Orochii-AniListService" */,
+				7715904B2A4329CA00E36CD6 /* XCRemoteSwiftPackageReference "Kingfisher" */,
 			);
 			productRefGroup = 5092DF2229292C590094DC18 /* Products */;
 			projectDirPath = "";
@@ -1677,6 +1687,7 @@
 				50FFB004292AAD5700B87E0E /* BlurBackground.swift in Sources */,
 				50F44451292F0905001B3CF4 /* MangaReaderToolbar+modifier.swift in Sources */,
 				503019A7293455BD00F5645F /* ALTracker.swift in Sources */,
+				771590422A41D78A00E36CD6 /* String+attributedString.swift in Sources */,
 				50FFB00F292ACE0400B87E0E /* ObjectFilter.swift in Sources */,
 				77EAE9F32A1EDE7500205562 /* WebsiteStandardCell+builders.swift in Sources */,
 				77640E54299E9A5C0076CB26 /* TrackerPopUp.swift in Sources */,
@@ -1713,6 +1724,7 @@
 				50CE85C62948C5A200169922 /* MeasureSize.swift in Sources */,
 				7731F06D2A29256400A5747E /* MangaActivityView+content.swift in Sources */,
 				77B188F12A1E96B800B11378 /* AniListAccountView.swift in Sources */,
+				7797B37B2A4334FA00DBD8C4 /* UIColor+extension.swift in Sources */,
 				5092DF5629296FFA0094DC18 /* MangaDomain.swift in Sources */,
 				7796C8C72A281A7B00E26066 /* AsyncCacheImage.swift in Sources */,
 				503019AB2934D85F00F5645F /* ALTracker+builders.swift in Sources */,
@@ -2003,6 +2015,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		7715904B2A4329CA00E36CD6 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 7.0.0;
+			};
+		};
 		776323C02A16F776009B5966 /* XCRemoteSwiftPackageReference "Orochii-AniListService" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/douglazhs/Orochii-AniListService.git";
@@ -2014,6 +2034,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		7715904C2A4329CA00E36CD6 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 7715904B2A4329CA00E36CD6 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
 		776323C12A16F776009B5966 /* AniListService */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 776323C02A16F776009B5966 /* XCRemoteSwiftPackageReference "Orochii-AniListService" */;

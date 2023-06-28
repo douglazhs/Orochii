@@ -13,6 +13,7 @@ import AniListService
 struct AniListAccountView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var vm: AniListAccountViewModel
+    @State var showBio: Bool = false
     
     init(_ user: Int) {
         _vm = StateObject(

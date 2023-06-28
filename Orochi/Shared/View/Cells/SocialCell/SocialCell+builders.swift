@@ -6,18 +6,17 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 extension SocialCell {
     @ViewBuilder
     func content() -> some View {
-        HStack(alignment: .top, spacing: 10) {
+        HStack(alignment: .top, spacing: 10.0) {
             self.avatar()
                 .frame(
                     width: CGSize.standardImageCell.width * 0.65,
                     height: CGSize.standardImageCell.width * 0.65
                 )
-                .scaledToFill()
-                .clipped()
             self.info()
             Spacer()
         }
@@ -35,8 +34,8 @@ extension SocialCell {
             : action?(.follow, user)
         } label: {
             Image(systemName: user?.isFollowing ?? false
-                  ? "person.fill.xmark"
-                  : "person.fill.questionmark"
+                  ? "person.crop.circle.fill.badge.minus"
+                  : "person.crop.circle.fill.badge.plus"
             )
             .foregroundColor(user?.isFollowing ?? false
                              ? Color(uiColor: .systemRed)
@@ -49,15 +48,17 @@ extension SocialCell {
     /// User avatar
     @ViewBuilder
     func avatar() -> some View {
-        if let url = URL(string: user?.avatar?.large ?? "") {
-            AsyncCacheImage(
-                url: url,
-                placeholder: { ActivityIndicator() }
-            ) { image in
-                Image(uiImage: image)
-                    .resizable()
-            }
-            .cornerRadius(4.5)
+        if let url = URL(string: user?.avatar?.large ?? ""),
+           let mediumUrl = URL(string: user?.avatar?.medium ?? "") {
+            KFImage.url(url)
+                .fromMemoryCacheOrRefresh()
+                .cacheMemoryOnly()
+                .memoryCacheExpiration(.seconds(10))
+                .fade(duration: 0.375)
+                .lowDataModeSource(.network(mediumUrl))
+                .resizable()
+                .clipShape(Circle())
+                .scaledToFill()
         }
     }
     

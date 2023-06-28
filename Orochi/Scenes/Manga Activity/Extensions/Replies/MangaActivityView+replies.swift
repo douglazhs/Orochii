@@ -7,6 +7,7 @@
 
 import SwiftUI
 import struct AniListService.ActivityReply
+import Kingfisher
 
 extension MangaActivityView {
     /// Comments section
@@ -21,12 +22,12 @@ extension MangaActivityView {
                 .padding(.horizontal)
             if let activity = vm.activity,
                let replies = activity.replies,
-               let _ = replies.first
+               let last = replies.last
             {
                 LazyVStack(alignment: .leading, spacing: 15.0) {
                     ForEach(replies) {
                         replyCell($0)
-                        if replies.count > 1 {
+                        if replies.count > 1 && $0 != last {
                             Divider()
                                 .padding(.trailing)
                                 .padding(
@@ -49,10 +50,16 @@ extension MangaActivityView {
     @ViewBuilder
     func replyCell(_ reply: ActivityReply) -> some View {
         HStack(alignment: .top, spacing: 7.5) {
-            self.userAvatar(url: reply.user?.avatar?.large ?? "")
-            VStack(alignment: .leading, spacing: 7.5) {
-                replyInfo(reply)
-                userReply(reply)
+            if let user = reply.user {
+                NavigationLink {
+                    AniListAccountView(user.id)
+                } label: {
+                    self.userAvatar(url: user.avatar?.large ?? "")
+                }
+                VStack(alignment: .leading, spacing: 7.5) {
+                    replyInfo(reply)
+                    userReply(reply)
+                }
             }
         }
         .padding(.horizontal)
@@ -77,18 +84,17 @@ extension MangaActivityView {
     @ViewBuilder
     func userAvatar(url: String) -> some View {
         if let url = URL(string: url) {
-            AsyncCacheImage(
-                url: url,
-                placeholder: { ActivityIndicator() }
-            ) { image in
-                Image(uiImage: image)
-                    .resizable()
-            }
-            .frame(
-                width: CGSize.standardImageCell.width * 0.65,
-                height: CGSize.standardImageCell.width * 0.65
-            )
-            .clipShape(Circle())
+            KFImage.url(url)
+                .fromMemoryCacheOrRefresh()
+                .cacheMemoryOnly()
+                .memoryCacheExpiration(.seconds(10))
+                .fade(duration: 0.375)
+                .resizable()
+                .frame(
+                    width: CGSize.standardImageCell.width * 0.65,
+                    height: CGSize.standardImageCell.width * 0.65
+                )
+                .clipShape(Circle())
         }
     }
     
@@ -118,7 +124,10 @@ extension MangaActivityView {
     /// User reply content
     @ViewBuilder
     func userReply(_ reply: ActivityReply) -> some View {
-        Text(reply.text ?? "None")
+        let text = reply.text ?? ""
+        let string = try? AttributedString(markdown: text)
+        
+        Text(string ?? "")
             .font(.footnote)
             .fontWeight(.regular)
             .foregroundColor(Color(uiColor: .systemGray))

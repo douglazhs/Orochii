@@ -25,9 +25,7 @@ extension SettingsView {
             aboutApp()
                 .listRowBackground(Color.clear)
         }
-        .refreshable {
-            vm.fetchUser()
-        }
+        .refreshable { vm.fetchUser() }
         .listStyle(.grouped)
         .navigationTitle(String.Settings.title)
         .animation(

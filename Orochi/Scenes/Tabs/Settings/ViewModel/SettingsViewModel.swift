@@ -37,14 +37,14 @@ class SettingsViewModel: ObservableObject {
     }
     
     /// Check the avaibility of the `local authentication`
-    func checkLocalAuth() {
+    private func checkLocalAuth() {
         self.biometrics = Biometry.shared.availableBiometry { error in
             self.biometricsError = error
         }
     }
     
     /// Check if the user is logged on AniList account
-    func checkALToken() {
+    private func checkALToken() {
         if let tokenData = Keychain.standard.read(
             service: "access-token",
             account: "anilist"
@@ -58,7 +58,7 @@ class SettingsViewModel: ObservableObject {
     /// Verify if the user id is already saved
     /// - Returns: `true`: saved
     ///            `false`: not saved
-    func savedUserId() -> Bool {
+    private func savedUserId() -> Bool {
         if let userIdData = Keychain.standard.read(
             service: "user-id",
             account: "anilist"

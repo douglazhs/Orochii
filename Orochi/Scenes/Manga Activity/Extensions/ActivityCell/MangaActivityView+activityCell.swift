@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 extension MangaActivityView {
     /// Activity information cell
@@ -23,21 +24,25 @@ extension MangaActivityView {
         }
     }
     
-    /// Manga image
+    /// Manga cover image
     @ViewBuilder
     func image() -> some View {
-        if let url = URL(string: vm.activity?.media?.coverImage?.extraLarge ?? "") {
-            AsyncCacheImage(
-                url: url,
-                averageColor: $vm.averageColor,
-                placeholder: { ActivityIndicator() }
-            ) { image in
-                Image(uiImage: image)
-                    .resizable()
-            }
-            .cornerRadius(4.5)
-            
-        } else { ActivityIndicator() }
+        if let url = URL(string: vm.activity?.media?.coverImage?.large ?? ""),
+           let mediumUrl = URL(string: vm.activity?.media?.coverImage?.medium ?? "") {
+            KFImage.url(url)
+                .fromMemoryCacheOrRefresh()
+                .cacheMemoryOnly()
+                .memoryCacheExpiration(.seconds(10))
+                .fade(duration: 0.375)
+                .forceTransition()
+                .startLoadingBeforeViewAppear()
+                .lowDataModeSource(.network(mediumUrl))
+                .onSuccess { result in
+                    vm.averageColor = Color(result.image.averageColor ?? .systemIndigo)
+                }
+                .resizable()
+                .cornerRadius(4.5)
+        }
     }
     
     /// Cell texts

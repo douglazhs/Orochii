@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Kingfisher
 
 extension MangaActivityView {
     @ViewBuilder
@@ -50,24 +51,24 @@ extension MangaActivityView {
         }
         .refreshable { vm.refresh() }
         .scrollContentBackground(.hidden)
-        .background (background())
     }
     
     /// Background image
     @ViewBuilder
     func background() -> some View {
-        if let url = URL(string: vm.activity?.media?.coverImage?.extraLarge ?? "") {
-            AsyncCacheImage(
-                url: url,
-                placeholder: { ActivityIndicator() }
-            ) { image in
-                Image(uiImage: image)
-                    .resizable()
-            }
+        if let url = URL(string: vm.activity?.media?.bannerImage ?? "") {
+            KFImage.url(url)
+                .fromMemoryCacheOrRefresh()
+                .cacheMemoryOnly()
+                .memoryCacheExpiration(.seconds(10))
+                .fade(duration: 0.375)
+                .forceTransition()
+                .startLoadingBeforeViewAppear()
+                .resizable()
             .edgesIgnoringSafeArea(.all)
             .scaledToFill()
             .blendMode(.overlay)
-            .blur(radius: 55)
+            .blur(radius: 25)
             .opacity(0.175)
         } else { BlurBackground(with: .view_background) }
     }

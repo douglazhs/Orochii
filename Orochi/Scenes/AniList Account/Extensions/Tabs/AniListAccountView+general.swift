@@ -8,41 +8,27 @@
 import SwiftUI
 
 extension AniListAccountView {
-    /// User bio
-    @ViewBuilder
-    func bio() -> some View {
-        item(
-            title: "BIO",
-            value: vm.user?.about?
-                .components(separatedBy: "\n")
-                .first?
-                .replacingOccurrences(
-                    of: "`",
-                    with: ""
-                )
-            ?? "None"
-        )
-    }
-    
     /// Current user activities list
     @ViewBuilder
     func userActivities() -> some View {
-        VStack(alignment: .leading, spacing: 10.0) {
-            Text("ACTIVITY")
-                .font(.caption2)
-                .fontWeight(.regular)
-                .foregroundColor(Color(uiColor: .systemGray))
-            LazyVStack(alignment: vm.isLoading ? .center : .leading, spacing: 5.5) {
-                if let activities = vm.activities {
-                    ForEach(activities) { activity in
-                        NavigationLink {
-                            MangaActivityView(activity.id)
-                        } label: {
-                            UserActivityCell(activity: activity)
-                        }.foregroundColor(.white)
+        LazyVStack(alignment: vm.activities != nil ? .leading : .center, spacing: 7.5) {
+            if let activities = vm.activities,
+               let last = activities.last {
+                ForEach(activities) { activity in
+                    NavigationLink {
+                        MangaActivityView(activity.id)
+                    } label: {
+                        UserActivityCell(activity: activity)
+                    }.foregroundColor(.white)
+                    if activity != last {
                         Divider()
                             .padding(.leading, CGSize.standardImageCell.width * 0.725 + 7.5)
                     }
+                }
+                .animation(.spring(), value: vm.activities != nil)
+            } else {
+                if vm.activities == nil {
+                    ActivityIndicator()
                 } else {
                     Text("No activities :(")
                         .font(.caption)
@@ -50,5 +36,6 @@ extension AniListAccountView {
                 }
             }
         }
+        .foregroundColor(.white)
     }
 }

@@ -11,11 +11,11 @@ import Foundation
 enum ProfileTabs: Pickable {
     var id:  Self { self}
     
-    case general, stats, following, followers
+    case activity, stats, following, followers
     
     var description: String {
         switch self {
-        case .general:   return "General"
+        case .activity:  return "Activity"
         case .stats:     return "Stats"
         case .following: return "Following"
         case .followers: return "Followers"

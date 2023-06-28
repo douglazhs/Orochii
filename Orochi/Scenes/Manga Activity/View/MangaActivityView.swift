@@ -12,6 +12,7 @@ struct MangaActivityView: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var vm: MangaActivityViewModel
     @State var showAlert: Bool = false
+    @State var showLikes: Bool = false
     
     init(_ activity: Int) {
         _vm = StateObject(
@@ -21,6 +22,7 @@ struct MangaActivityView: View {
     
     var body: some View {
         content()
+            .background(background())
             .toolbar(.hidden, for: .tabBar)
             .toolbarBackground(.visible, for: .navigationBar)
             .navigationTitle(

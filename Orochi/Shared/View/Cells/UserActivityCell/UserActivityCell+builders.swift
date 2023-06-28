@@ -7,6 +7,7 @@
 
 import SwiftUI
 import AniListService
+import Kingfisher
 
 extension UserActivityCell {
     @ViewBuilder
@@ -20,21 +21,22 @@ extension UserActivityCell {
     /// Manga image cover
     @ViewBuilder
     func imageCover() -> some View {
-        if let url = URL(string: activity?.media?.coverImage?.extraLarge ?? "") {
-            AsyncCacheImage(
-                url: url,
-                placeholder: { ActivityIndicator() }
-            ) { image in
-                Image(uiImage: image)
-                    .resizable()
-            }
-            .cornerRadius(4.5)
-            .frame(
-                width: CGSize.standardImageCell.width * 0.725,
-                height: CGSize.standardImageCell.height * 0.725,
-                alignment: .center
-            )
-            .scaledToFill()
+        if let url = URL(string: activity?.media?.coverImage?.large ?? ""),
+           let mediumUrl = URL(string: activity?.media?.coverImage?.medium ?? "")  {
+            KFImage.url(url)
+                .fromMemoryCacheOrRefresh()
+                .cacheMemoryOnly()
+                .memoryCacheExpiration(.seconds(10))
+                .lowDataModeSource(.network(mediumUrl))
+                .fade(duration: 0.375)
+                .resizable()
+                .cornerRadius(4.5)
+                .frame(
+                    width: CGSize.standardImageCell.width * 0.725,
+                    height: CGSize.standardImageCell.height * 0.725,
+                    alignment: .center
+                )
+                .scaledToFill()
         }
     }
     
@@ -98,16 +100,27 @@ extension UserActivityCell {
     func metricsInfo() -> some View {
         if let likes = activity?.likes {
             HStack(spacing: .zero) {
-                ForEach(likes) {
-                   if let url = URL(string: $0.avatar?.large ?? "") {
-                       AsyncCacheImage(url: url, placeholder: { ActivityIndicator() }) { image in
-                           Image(uiImage: image)
-                               .resizable()
-                       }
-                       .frame(width: 21.5, height: 21.5)
-                       .clipShape(Circle())
-                       .offset(x: -10.75)
+                ForEach(likes.prefix(3).indices, id: \.self) { i in
+                    if let url = URL(string: likes[i].avatar?.medium ?? "") {
+                        KFImage.url(url)
+                            .cacheMemoryOnly()
+                            .fromMemoryCacheOrRefresh()
+                            .memoryCacheExpiration(.seconds(10))
+                            .fade(duration: 0.375)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 17.5, height: 17.5)
+                            .background(Color(UIColor.systemGray4))
+                            .clipShape(Circle())
+                            .offset(x: -8.75 * CGFloat(i + 1))
                     }
+                }.offset(x: 8.75 * CGFloat(likes.prefix(3).count))
+                if likes.count > 3 {
+                    Text("\(likes.count - 3)+")
+                        .font(.caption2)
+                        .fontWeight(.semibold)
+                        .foregroundColor(Color(UIColor.systemGray))
+                        .padding(.leading, 3.5)
                 }
             }
         }

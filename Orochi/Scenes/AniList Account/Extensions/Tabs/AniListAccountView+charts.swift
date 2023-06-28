@@ -63,12 +63,13 @@ extension AniListAccountView {
                         .foregroundStyle(by: .value("Year", "\(vm.startYearsStat[i].startYear ?? 0)"))
                         .annotation {
                             Text("\(vm.startYearsStat[i].chaptersRead ?? 0)")
-                                .font(.caption2)
+                                .font(.system(size: 8.5, weight: .semibold, design: .rounded))
                                 .fontWeight(.semibold)
                         }
                     }
                 }
                 .chartYAxis(.hidden)
+                .chartXAxis(.hidden)
                 .chartXAxisLabel("Year", position: .bottom)
                 .chartYAxisLabel("Chapters read", position: .leading)
             } else { noDataToShow() }
