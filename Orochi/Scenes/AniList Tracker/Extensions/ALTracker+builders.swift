@@ -11,16 +11,36 @@ extension ALTracker {
     /// All view content
     @ViewBuilder
     func content() -> some View {
-        VStack(spacing: 22) {
-            // UPDATE BUTTON
-            self.updateTrackingButton()
-            // MANGA INFORMATION
-            self.mangaSection()
-            // ANILIST ACTIONS
-            self.pickers()
+        if isTracking {
+            trackerInfo()
+        } else {
+            trackerSearch()
         }
-        .padding()
-        .background(BlurBackground(with: manga.cover))
+    }
+    
+    /// Tracking manga view
+    @ViewBuilder
+    func trackerInfo() -> some View {
+        List {
+            // MANGA INFORMATION
+            mangaSection()
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+            // ANILIST ACTIONS
+            pickers()
+                .listRowBackground(Color.clear)
+                .listRowSeparator(.hidden)
+        }
+        .listStyle(.inset)
+        .scrollContentBackground(.hidden)
+        .scrollIndicators(.hidden)
+        .background(BlurBackground(with: .view_background))
+    }
+    
+    /// Tracker search view
+    @ViewBuilder
+    func trackerSearch() -> some View {
+        
     }
     
     /// Update anilist button
@@ -36,7 +56,6 @@ extension ALTracker {
                 Haptics.shared.notify(.success)
                 isPresented = false
             } label: { Text("Update").fontWeight(.semibold) }
-            .tint(.indigo)
             .buttonStyle(.borderless)
         }
     }
@@ -44,7 +63,7 @@ extension ALTracker {
     /// Current manga context
     @ViewBuilder
     func pickers() -> some View {
-        self.statesSection()
-        self.dateSection()
+        statesSection()
+        dateSection()
     }
 }

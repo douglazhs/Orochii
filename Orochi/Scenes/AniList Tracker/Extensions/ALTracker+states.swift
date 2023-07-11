@@ -19,7 +19,7 @@ extension ALTracker {
             // MANGA SCORE
             self.scoreSection()
         }
-        .fullScreenCover(isPresented: $showPopUp) {
+        .popover(isPresented: $showPopUp) {
            popUpType()
         }
     }
@@ -31,20 +31,17 @@ extension ALTracker {
         switch vm.currentPicker {
         case .score:
             TrackerPopUp(
-                backgroundCover: manga.cover,
                 context: .score,
                 selection: $vm.score
             )
         case .volume:
             TrackerPopUp(
-                backgroundCover: manga.cover,
                 context: .volume,
                 total: 100,
                 selection: $vm.volume
             )
         case.chapter:
             TrackerPopUp(
-                backgroundCover: manga.cover,
                 context: .chapter,
                 total: 298,
                 selection: $vm.chapter

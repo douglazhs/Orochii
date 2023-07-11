@@ -25,10 +25,7 @@ extension MangaHistoryView {
         }
         .listStyle(.grouped)
         .scrollContentBackground(.hidden)
-        .background(
-            BlurBackground(with: manga.cover)
-                .opacity(0.75)
-        )
+        .background(BlurBackground(with: .view_background))
     }
     
     /// Date with all read chapters

@@ -13,16 +13,21 @@ extension MangaStandardCell {
     /// - Returns: Custom manga cell
     @ViewBuilder
     func cell() -> some View {
-        HStack(alignment: .top) {
+        HStack(alignment: .center) {
             MangaStandardImage(
                 cover: manga.cover,
                 size: CGSize(
-                    width: CGSize.standardImageCell.width,
-                    height: CGSize.standardImageCell.height
+                    width: CGSize.standardImageCell.width * 0.775,
+                    height: CGSize.standardImageCell.height * 0.775
                 )
             )
-            self.info().padding(.leading, 5)
-        }.frame(maxHeight: CGSize.standardImageCell.height)
+            info().padding(.leading, 5)
+            Spacer()
+        }
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: CGSize.standardImageCell.height
+        )
     }
 
     /// Organize all retrieved manga infos
@@ -37,55 +42,33 @@ extension MangaStandardCell {
                     .font(.subheadline)
                     .fontWeight(.medium)
                     .lineLimit(1)
-                Spacer()
-                // YEAR
-                Text("• \(manga.year)")
-                    .font(.caption2)
-                    .fontWeight(.medium)
-                    .foregroundColor(Color(uiColor: .systemGray))
             }
-            // AUTHOR
-            Text("\(manga.author)")
-                .font(.caption)
-                .foregroundColor(Color(uiColor: .systemGray))
-            // GENRES
-            self.allGenres()
             //STATUS
-            self.status()
+            status()
         }
     }
     
-    /// All manga genres
-    @ViewBuilder
-    func allGenres() -> some View {
-        HStack(alignment: .top) {
-            if Constants.device == .pad {
-                ForEach(manga.genres, id: \.self) { genre in
-                    Text(genre)
-                        .padding(3.5)
-                        .background {
-                            Color.primary.opacity(0.1)
-                                .cornerRadius(4.5)
-                        }
-                }
-            } else {
-                Text(manga.genres.joined(separator: ", "))
-            }
-        }
-        .font(.caption)
-        .lineLimit(1)
-        .foregroundColor(.secondary)
-    }
-    
-    /// Main manga information
+    /// User status information
     @ViewBuilder
     func status() -> some View {
-        HStack(spacing: 5.5) {
-            Text("CH. 1 / 154")
-            Divider().frame(maxHeight: 15).foregroundColor(.primary)
-            Text("VOL. 2")
+        VStack(alignment: .leading, spacing: 5.5) {
+            Text("Ch. 1 ~ 154")
+                .foregroundColor(.primary)
+                .font(.caption2)
+                .fontWeight(.light)
+            
+            HStack(alignment: .center, spacing: 4.5) {
+                Image(systemName: "star.fill")
+                    .foregroundColor(.primary)
+                    .font(.caption2)
+                    .fontWeight(.light)
+                    .foregroundColor(Color(.systemGray))
+                
+                Text("8,0")
+                    .font(.caption2)
+                    .fontWeight(.light)
+                    .foregroundColor(.primary)
+            }
         }
-        .foregroundColor(Color(uiColor: .systemGray))
-        .font(.caption2)
     }
 }

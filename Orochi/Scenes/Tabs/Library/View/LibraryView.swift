@@ -14,7 +14,7 @@ struct LibraryView: View {
     
     var body: some View {
         NavigationStack {
-            self.content()
+            content()
                 .onChange(of: isSearching) { newValue in
                     if !newValue {
                         // TODO: - Clear search
@@ -24,7 +24,7 @@ struct LibraryView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        self.filterButton()
+                        filterButton()
                     }
                 }
         }

@@ -12,30 +12,18 @@ extension ALTracker {
     @ViewBuilder
     func mangaSection() -> some View {
         VStack {
-            // TITLE
-            self.title()
-            HStack(alignment: .top, spacing: 5) {
+            HStack(alignment: .center, spacing: 5.0) {
                 // MANGA COVER
-                Image(manga.cover)
+                Image(manga?.cover ?? "")
                     .resizable()
                     .cornerRadius(2.5)
-                    .frame(width: 77.5, height: 110)
+                    .frame(
+                        width: CGSize.standardImageCell.width,
+                        height: CGSize.standardImageCell.height
+                    )
                 // MANGA STATUS
-                self.status()
-            }.frame(maxHeight: 110)
-        }
-    }
-    
-    /// Manga title and release year
-    @ViewBuilder
-    func title() -> some View {
-        HStack {
-            // MANGA TITLE
-            Text(manga.title)
-                .font(.callout)
-                .fontWeight(.semibold)
-                .foregroundColor(.primary)
-            Spacer()
+                status()
+            }.frame(maxHeight: CGSize.standardImageCell.height + 35.0)
         }
     }
     

@@ -29,7 +29,6 @@ struct InitialStyleView: View {
                 }
             }.padding(.vertical)
         }
-        .background(BlurBackground(with: .view_background))
         .scrollContentBackground(.hidden)
     }
 }

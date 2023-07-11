@@ -16,10 +16,11 @@ struct BlurBackground: View {
     
     var body: some View {
         Image(image)
-            .resizable(resizingMode: .stretch)
+            .resizable()
+            .scaledToFill()
             .edgesIgnoringSafeArea(.all)
-            .blur(radius: 65)
-            .opacity(0.425)
+            .blur(radius: 75)
+            .opacity(Constants.device == .pad ? 0.225 : 0.3)
     }
 }
 

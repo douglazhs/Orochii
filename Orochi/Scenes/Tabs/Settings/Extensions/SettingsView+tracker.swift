@@ -14,10 +14,6 @@ extension SettingsView {
     func trackerCell() -> some View {
         if vm.logged {
             loggedInfo()
-                .redacted(reason: vm.isLoading
-                          ? .placeholder
-                          : []
-                )
         } else {
             WebsiteStandardCell(
                 title: String.Name.aniList,
@@ -31,13 +27,15 @@ extension SettingsView {
     @ViewBuilder
     func loggedInfo() -> some View {
         if vm.requestError == nil {
-            HStack(alignment: .top) {
-                // USER AVATAR
-                profileNavigation()
-                // USER STATS AND INFORMATION
-                userInfo()
-                Spacer()
-            }
+            if vm.user != nil {
+                HStack(alignment: .top) {
+                    // USER AVATAR
+                    profileAvatar()
+                    // USER STATS AND INFORMATION
+                    userInfo()
+                    Spacer()
+                }
+            } else { ActivityIndicator() }
         } else {
             HStack {
                 Text("Unable to load :(")
@@ -59,7 +57,7 @@ extension SettingsView {
                     .fromMemoryCacheOrRefresh()
                     .cacheMemoryOnly()
                     .memoryCacheExpiration(.seconds(10))
-                    .fade(duration: 0.375)
+                    .fade(duration: 0.475)
                     .lowDataModeSource(.network(mediumUrl))
                     .resizable()
             }
@@ -68,22 +66,23 @@ extension SettingsView {
     
     /// Custom navigation link to user profile screen
     @ViewBuilder
-    func profileNavigation() -> some View {
-        ZStack {
+    func profileAvatar() -> some View {
+        /*ZStack {
             NavigationLink { AniListAccountView(vm.user?.id ?? 0) } label: {
                 EmptyView()
             }
             .frame(width: 0)
             .opacity(0)
             avatar()
-        }
-        .cornerRadius(4.5)
-        .frame(
-            width: CGSize.standardImageCell.width,
-            height: CGSize.standardImageCell.width
-        )
-        .scaledToFill()
-        .clipped()
+        }*/
+        avatar()
+            .cornerRadius(4.5)
+            .frame(
+                width: CGSize.standardImageCell.width,
+                height: CGSize.standardImageCell.width
+            )
+            .scaledToFill()
+            .clipped()
     }
     
     /// User stats

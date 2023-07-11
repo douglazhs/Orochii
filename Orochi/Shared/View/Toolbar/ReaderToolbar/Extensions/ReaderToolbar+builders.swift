@@ -19,7 +19,8 @@ extension ReaderToolbar {
                     }
                 } label: {
                     HStack {
-                        Text(manga.title).font(.subheadline)
+                        Text("\(ChapterDomain.samples.count) CHAPTERS")
+                            .font(.subheadline)
                             .foregroundColor(.primary)
                             .fontWeight(.regular)
                         Spacer()
@@ -32,8 +33,6 @@ extension ReaderToolbar {
                 }
             } header: {
                 HStack {
-                    Text("\(ChapterDomain.samples.count) "
-                         + "\(String.Chapter.chaptersOf.uppercased()):")
                     Spacer()
                     Text("**UPDATED**: \(manga.lastUpdated)")
                         .font(.caption2)

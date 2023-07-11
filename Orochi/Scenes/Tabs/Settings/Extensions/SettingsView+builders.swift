@@ -32,8 +32,8 @@ extension SettingsView {
             .easeInOut(duration: 0.125),
             value: vm.biometryPreference
         )
-        .background(BlurBackground(with: .view_background))
         .scrollContentBackground(.hidden)
+        .background(BlurBackground(with: .view_background))
     }
     
     /// App tracker section

@@ -19,6 +19,7 @@ struct SettingsView: View {
         NavigationStack {
             content()
                 .navigationBarTitleDisplayMode(.inline)
+                .animation(.spring(), value: [vm.isLoading, vm.user != nil])
                 .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
                     Button(String.Common.ok) { }
                 } message: { Text(vm.alertInfo.message) }
@@ -28,7 +29,6 @@ struct SettingsView: View {
                         vm.logOutAL()
                     }
                 } message: { Text(String.Anilist.logOutMessage) }
-                
         }
     }
 }

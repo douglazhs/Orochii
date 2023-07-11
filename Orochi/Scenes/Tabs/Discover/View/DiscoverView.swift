@@ -20,6 +20,7 @@ struct DiscoverView: View {
     var body: some View {
         NavigationStack {
             self.content()
+                .background(BlurBackground(with: .view_background))
                 .navigationTitle(String.Discovery.title)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {

@@ -13,7 +13,6 @@ class LibraryViewModel: ObservableObject {
     @Published var objectFilter: ObjectFilter = .name
     @Published var filterOrder: OrderFilter = .ascending
     @Published var languageSelection: Language = .enUS
-    @Published var statusSelection: MangaStatus = .ongoing
     @Published var yearSelection: Int = 2000
     @Published var demoPublicSelection: DemoPublic = .shounen
 }

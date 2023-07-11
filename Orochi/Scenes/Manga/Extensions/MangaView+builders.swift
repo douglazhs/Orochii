@@ -14,16 +14,16 @@ extension MangaView {
         List(selection: $vm.selection) {
             Group {
                 // ALL MANGA INFORMATION
-                self.mangaInfoArea()
+                mangaInfoArea()
                 if !vm.search {
                     // MANGA ACTIONS
-                    self.actions()
+                    actions()
                     // MANGA DESCRIPTION
-                    self.description()
+                    description()
                         .listSectionSeparator(.visible)
                 }
                 // MANGA CHAPTERS
-                self.chapters()
+                chapters()
                     .listSectionSeparator(!vm.search ? .visible : .hidden)
             }
             .listSectionSeparator(.hidden)
@@ -36,10 +36,7 @@ extension MangaView {
         .refreshable { }
         .listStyle(.inset)
         .scrollContentBackground(.hidden)
-        .background(
-            BlurBackground(with: manga.cover)
-                .opacity(0.75)
-        )
+        .background(BlurBackground(with: .view_background))
     }
     
     /// Manga information area, contatining all main details
@@ -55,10 +52,15 @@ extension MangaView {
                             height: CGSize.dynamicImage.height
                         )
                     )
-                    self.mangaTexts()
+                    mangaTexts()
                 }.frame(maxHeight: CGSize.dynamicImage.height)
             }
-        }.listRowBackground(DarkOverlay(image: manga.cover))
+        }.listRowBackground(
+            ZStack {
+                DarkOverlay(image: manga.cover)
+                Color.black.opacity(0.75)
+            }
+        )
     }
     
     /// All grouped manga informations
@@ -66,18 +68,18 @@ extension MangaView {
     func mangaTexts() -> some View {
         VStack(alignment: .leading, spacing: 10) {
             // AUTHOR & YEAR
-            self.infoLine(
+            infoLine(
                 leading: (String.Manga.author.uppercased() , manga.author),
                 trailing: (String.Manga.year.uppercased(), manga.year)
             )
             // AUTHOR & UPDADATED
-            self.infoLine(
+            infoLine(
                 leading: (String.Manga.status.uppercased(), manga.status.description.uppercased()),
                 trailing: (String.Manga.updated.uppercased(), manga.lastUpdated)
             )
             Divider()
             // GENRES
-            self.item(
+            item(
                 title: String.Manga.genres.uppercased(),
                 manga.genres.joined(separator: ", "),
                 .leading
@@ -127,13 +129,13 @@ extension MangaView {
                     ChapterMenu() { _ in
                         // TODO: - Handle context menu actions
                     }
-                } preview: { ChapterView(chapter, of: manga) }
+                }
                 .fullScreenCover(isPresented: $showChapterReader) {
                     ChapterView(chapter, of: manga)
                 }
             }
         } header: {
-            self.chaptersHeader()
+            chaptersHeader()
         }.listRowBackground(Color.clear)
     }
 }

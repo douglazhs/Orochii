@@ -29,13 +29,11 @@ extension ChapterStandardCell {
         VStack(alignment: .leading, spacing: 5) {
             HStack(alignment: .center) {
                 // MAIN INFO
-                self.mainInfo()
+                mainInfo()
                 Spacer()
-                // DOWNLOADED
-                self.downloadInfo()
             }
             // SCAN UPDATE INFO
-            self.scanInfo()
+            scanInfo()
         }
     }
     
@@ -70,9 +68,8 @@ extension ChapterStandardCell {
             Text(chapter.updated)
                 .font(.footnote)
                 .foregroundColor(Color(uiColor: .systemGray))
-            Spacer()
             // SCAN GROUP
-            Text(chapter.scanGroup)
+            Text("~ " + chapter.scanGroup)
                 .font(.footnote)
                 .foregroundColor(Color(uiColor: .systemGray))
         }

@@ -12,29 +12,29 @@ extension LibraryView {
     /// - Returns: Filtered manga list
     @ViewBuilder
     func content() -> some View {
-        List {
-            ForEach(MangaDomain.samples) { manga in
-                self.cell(of: manga)
-                    .listRowInsets(.init(top: 11, leading: 16, bottom: 0, trailing: 16))
-                    .listRowBackground(Color.clear)
-                    .listRowSeparator(.hidden)
-                    .listSectionSeparator(.hidden)
-                    .contextMenu {
-                        // TODO: - Implement context menu features
-                        Button(role: .destructive) { } label: {
-                            Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
-                        }
-                    } preview: { MangaView(manga) }
+        List(MangaStatus.allCases) { status in
+            Section(status.description.uppercased()) {
+                ForEach(MangaDomain.samples) {
+                    if $0.status == status {
+                        cell(of: $0)
+                            .listRowInsets(.init(top: 5.5, leading: 0, bottom: 5.5, trailing: 8.5))
+                            .listRowSeparator(.hidden)
+                            .listSectionSeparator(.hidden)
+                            .listRowBackground(Color.clear)
+                            .contextMenu {
+                                // TODO: - Context menu features
+                                Button(role: .destructive) { } label: {
+                                    Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
+                                }
+                            }
+                    }
+                }
             }
-            /*.onDelete(perform: { _ in })*/
+            .listRowInsets(.init(top: 11.0, leading: 0, bottom: 4.5, trailing: 0))
         }
-        .environment(\.defaultMinListHeaderHeight, 12)
-        .environment(\.defaultMinListRowHeight, 12)
         .scrollIndicators(.hidden)
-        .refreshable {
-            // TODO: Refresh library mangas
-        }
-        .listStyle(.plain)
+        .refreshable { }
+        .listStyle(.sidebar)
         .scrollContentBackground(.hidden)
         .background(BlurBackground(with: .view_background))
         .animation(.spring(), value: [isSearching])

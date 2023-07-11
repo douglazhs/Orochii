@@ -11,14 +11,16 @@ import Foundation
 enum ALStatus: Pickable {
     var id:  Self { self}
     
-    case completed, reading, wantTo, dropped
+    case reading, completed, wantTo, rereading, paused, dropped
     
     /// Status description
     var description: String {
         switch self {
-        case .completed: return "Completed"
-        case .reading:   return "Reading"
         case .wantTo:    return "Want to read"
+        case .reading:   return "Reading"
+        case .completed: return "Completed"
+        case .rereading: return "Rereading"
+        case .paused:    return "Paused"
         case .dropped:   return "Dropped"
         }
     }

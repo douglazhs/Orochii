@@ -12,7 +12,7 @@ extension TrackerPopUp {
     @ViewBuilder
     func content() -> some View {
         ZStack {
-            Color.black.opacity(0.65)
+            Color.black.opacity(0.55)
                 .background(BackgroundClearView())
                 .edgesIgnoringSafeArea(.all)
             popUp()
@@ -25,35 +25,22 @@ extension TrackerPopUp {
         VStack(alignment: .leading) {
             HStack {
                 // BUTTON TO CHOOSE ENTRY TYPE
-                if context == .score { self.entryTypeButton() }
-                // TOTAL OF CHAPTERS OR VOLUMES
-                if context != .score { self.totalNumber() }
+                if context == .score { entryTypeButton() }
                 Spacer()
                 // DONE ACTION
-                self.doneAction()
+                doneAction()
             }
             Divider()
             // ENTRY FIELD
-            self.entryField()
+            entryField()
         }
         .padding(.horizontal)
-        .background { BlurBackground(with: backgroundCover) }
         .background { Color(uiColor: .systemGray6)}
-        .cornerRadius(9)
+        .cornerRadius(9.0)
         .frame(
             maxWidth: UIScreen.main.bounds.width * 0.85,
             maxHeight: .infinity
         )
-    }
-    
-    /// Total number of chapters or volumes
-    @ViewBuilder
-    func totalNumber() -> some View {
-        Text("Total: _\(numbers.count - 1)_")
-            .foregroundColor(.white.opacity(0.65))
-            .fontWeight(.regular)
-            .font(.headline)
-            .padding(.top, 24)
     }
     
     /// Entry type field, that can be: `Wheel picker` or `Keyboard`
@@ -61,9 +48,9 @@ extension TrackerPopUp {
     func entryField() -> some View {
         HStack(alignment: .center) {
             // MANGA TITLE
-            self.title()
+            title()
             // CHOOSEN FIELD(KEYBOARD OR WHEEL PICKER)
-            self.choosenField()
+            choosenField()
         }
         .padding(
             [.top, .bottom],
@@ -87,7 +74,6 @@ extension TrackerPopUp {
             dismiss()
         }
         .buttonStyle(.borderless)
-        .tint(Color(uiColor: .systemIndigo))
         .padding(.top, 24)
         .font(.headline)
         .fontWeight(.semibold)
@@ -122,40 +108,30 @@ extension TrackerPopUp {
     func choosenField() -> some View {
         switch vm.entryType {
         case .picker:
-            self.pickerField()
+            pickerField()
         case .keyboard:
-            self.textField()
+            textField()
         }
     }
     
     /// Keyboard entry type
     @ViewBuilder
     func textField() -> some View {
-        HStack {
-            TextField("", value: $selection, formatter: vm.textFieldformatter())
-                .focused($isFocused)
-                .textFieldStyle(RoundedTextFieldStyle())
-                .keyboardType(.decimalPad)
-                .font(.system(
-                    size: 19,
-                    weight: .regular,
-                    design: .default)
+        TextField("", value: $selection, formatter: vm.textFieldformatter())
+            .textFieldStyle(RoundedTextFieldStyle())
+            .keyboardType(.decimalPad)
+            .font(.system(
+                size: 19,
+                weight: .regular,
+                design: .default)
+            )
+            .foregroundColor(.white.opacity(0.65))
+            .onChange(of: selection) { newValue in
+                vm.validateFieldInput(
+                    of: newValue,
+                    to: $selection
                 )
-                .foregroundColor(.white.opacity(0.65))
-                .onChange(of: selection) { newValue in
-                    vm.validateFieldInput(
-                        of: newValue,
-                        to: $selection
-                    )
-                }
-            Button("Ok") {
-                isFocused = false
             }
-            .buttonStyle(.borderedProminent)
-            .tint(Color(uiColor: .systemIndigo))
-            .fontWeight(.semibold)
-            .font(.headline)
-        }
     }
 
     /// Wheel picker entry type

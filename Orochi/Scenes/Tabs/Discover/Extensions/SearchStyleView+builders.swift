@@ -25,7 +25,6 @@ extension SearchStyleView {
                     } preview: { MangaView(manga) }
             }
             .listStyle(.plain)
-            .background(BlurBackground(with: .view_background))
             .scrollContentBackground(.hidden)
             .animation(.spring(), value: [isSearching])
         } else {

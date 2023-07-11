@@ -15,7 +15,7 @@ struct OrochiiApp: App {
                 DiscoverView()
                     .tabItem { Label(
                         String.Discovery.title,
-                        systemImage: "globe.americas.fill"
+                        systemImage: "globe.americas"
                     ) }
                 LibraryView()
                     .tabItem { Label(
@@ -33,7 +33,7 @@ struct OrochiiApp: App {
                         systemImage: "gear"
                     ) }
             }
-            .tint(Color.indigo)
+            .tint(Color(.systemBlue))
             .preferredColorScheme(.dark)
         }
     }

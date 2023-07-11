@@ -18,7 +18,6 @@ struct HistoryView: View {
                 .navigationTitle("History")
                 .navigationBarTitleDisplayMode(.inline)
                 .scrollContentBackground(.hidden)
-                .background(BlurBackground(with: .view_background))
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         self.clearHistoryButton()

@@ -15,20 +15,16 @@ enum EntryType {
 struct TrackerPopUp: View {
     @Environment(\.dismiss) var dismiss
     @StateObject var vm = TrackerPopUpObserver()
-    var backgroundCover: String
     var context: ALPicker
     var total: Double
     var numbers: Array<Double> = Array()
-    @FocusState var isFocused: Bool
     @Binding var selection: Double
     
     init(
-        backgroundCover: String,
         context: ALPicker,
         total: Double = 10,
         selection: Binding<Double>
     ) {
-        self.backgroundCover = backgroundCover
         self.context = context
         self.numbers = Array(stride(from: 0, to: (total + 1), by: 1))
         self.total = total
@@ -36,14 +32,13 @@ struct TrackerPopUp: View {
     }
     
     var body: some View {
-        self.content()
+        content()
     }
 }
 
 struct TrackerPopUp_Previews: PreviewProvider {
     static var previews: some View {
         TrackerPopUp(
-            backgroundCover: "chainsaw",
             context: .chapter,
             total: 10,
             selection: .constant(0)

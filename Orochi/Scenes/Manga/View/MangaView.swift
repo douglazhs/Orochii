@@ -27,20 +27,19 @@ struct MangaView: View {
     }
     
     var body: some View {
-        self.content()
+        content()
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(vm.showBottomBar ? .visible : .hidden, for: .bottomBar)
-            .toolbar(vm.isEditingMode ? .hidden : .visible, for: .tabBar)
             .navigationBarBackButtonHidden(vm.isEditingMode)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    self.selectChaptersButton()
+                    selectChaptersButton()
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    self.editButton()
+                    editButton()
                 }
                 ToolbarItemGroup(placement: .bottomBar) {
-                    self.chapterActions()
+                    chapterActions()
                 }
                 ToolbarItem(placement: .principal) {
                     ActionPopUp(
@@ -50,10 +49,6 @@ struct MangaView: View {
                     )
                 }
             }
-            .animation(
-                .easeInOut,
-                value: [vm.isEditingMode, vm.showBottomBar]
-            )
     }
 }
 

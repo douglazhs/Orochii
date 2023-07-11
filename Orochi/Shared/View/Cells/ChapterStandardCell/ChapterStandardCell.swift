@@ -16,14 +16,21 @@ struct ChapterStandardCell: View {
         self.editingMode = editingMode
     }
     var body: some View {
-        HStack (alignment: .center, spacing: 10.0) {
-            self.leftInfo()
-            Text(".")
+        HStack (alignment: .center, spacing: 7.5) {
+            leftInfo()
+            Text("•")
                 .foregroundColor(.secondary)
                 .font(.caption)
                 .fontWeight(.heavy)
-            self.rightInfo()
+            rightInfo()
         }
+        .badge(
+            Text(Image(systemName: "arrow.down"))
+                .foregroundColor(
+                    Color.accentColor.opacity(0.85)
+                )
+                .font(.caption)
+        )
     }
 }
 

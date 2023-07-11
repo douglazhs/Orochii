@@ -14,8 +14,7 @@ struct DarkOverlay: View {
         Image(image)
             .resizable(resizingMode: .tile)
             .aspectRatio(CGSize(width: 9, height: 1), contentMode: .fill)
-            .blur(radius: 4.5, opaque: true)
-            .blendMode(.overlay)
+//            .blur(radius: 4.5, opaque: true)
     }
 }
 

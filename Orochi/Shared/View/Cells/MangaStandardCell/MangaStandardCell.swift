@@ -17,7 +17,7 @@ struct MangaStandardCell: View {
         self.isSearch = isSearch
     }
     var body: some View {
-        self.cell()
+        cell()
     }
 }
 
