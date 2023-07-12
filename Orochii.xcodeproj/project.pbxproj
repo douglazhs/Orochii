@@ -52,7 +52,6 @@
 		5092DF612929831D0094DC18 /* SourcePreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF602929831D0094DC18 /* SourcePreferencesView.swift */; };
 		5092DF6329298B9A0094DC18 /* SourcePreferencesView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5092DF6229298B9A0094DC18 /* SourcePreferencesView+builders.swift */; };
 		50BC960F292C674500DF13A5 /* SettingsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC960E292C674500DF13A5 /* SettingsViewModel.swift */; };
-		50BC9611292C739E00DF13A5 /* SecurityLevel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50BC9610292C739E00DF13A5 /* SecurityLevel.swift */; };
 		50CAD2E829383887000C1C0E /* MangaView+actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAD2E729383887000C1C0E /* MangaView+actions.swift */; };
 		50CAD2EA29383969000C1C0E /* MangaView+commons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAD2E929383969000C1C0E /* MangaView+commons.swift */; };
 		50CAD2EC29383B04000C1C0E /* ALTracker+dates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAD2EB29383B04000C1C0E /* ALTracker+dates.swift */; };
@@ -216,7 +215,6 @@
 		5092DF602929831D0094DC18 /* SourcePreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcePreferencesView.swift; sourceTree = "<group>"; };
 		5092DF6229298B9A0094DC18 /* SourcePreferencesView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SourcePreferencesView+builders.swift"; sourceTree = "<group>"; };
 		50BC960E292C674500DF13A5 /* SettingsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewModel.swift; sourceTree = "<group>"; };
-		50BC9610292C739E00DF13A5 /* SecurityLevel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecurityLevel.swift; sourceTree = "<group>"; };
 		50CAD2E729383887000C1C0E /* MangaView+actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaView+actions.swift"; sourceTree = "<group>"; };
 		50CAD2E929383969000C1C0E /* MangaView+commons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaView+commons.swift"; sourceTree = "<group>"; };
 		50CAD2EB29383B04000C1C0E /* ALTracker+dates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALTracker+dates.swift"; sourceTree = "<group>"; };
@@ -996,14 +994,6 @@
 			path = "Reader Preferences";
 			sourceTree = "<group>";
 		};
-		50F6F682293C2D1800142816 /* Settings */ = {
-			isa = PBXGroup;
-			children = (
-				50BC9610292C739E00DF13A5 /* SecurityLevel.swift */,
-			);
-			path = Settings;
-			sourceTree = "<group>";
-		};
 		50F6F683293C2D4300142816 /* Source Preferences */ = {
 			isa = PBXGroup;
 			children = (
@@ -1095,7 +1085,6 @@
 				50F6F680293C2BCE00142816 /* Filter */,
 				50F6F684293C2D9400142816 /* Manga */,
 				50F6F681293C2CFF00142816 /* Reader Preferences */,
-				50F6F682293C2D1800142816 /* Settings */,
 				50F6F683293C2D4300142816 /* Source Preferences */,
 			);
 			path = Enums;
@@ -1796,7 +1785,6 @@
 				50639B57293A4CE200D8E3CB /* HistoryView+builders.swift in Sources */,
 				7731F0772A2A0DE700A5747E /* AniListAccountView+navBar.swift in Sources */,
 				77DE0EEB2A2D2E1F00BF882D /* SettingsView+about.swift in Sources */,
-				50BC9611292C739E00DF13A5 /* SecurityLevel.swift in Sources */,
 				50FFAFDF292A6A8F00B87E0E /* Language.swift in Sources */,
 				50CAD2EC29383B04000C1C0E /* ALTracker+dates.swift in Sources */,
 				7731F0892A2A285A00A5747E /* MangaActivityView+replies.swift in Sources */,

@@ -138,8 +138,8 @@
 "adjusts_icloud_footer" = "Your manga library will be saved in the **Cloud** to be accessed from other devices";
 "adjusts_icloud_sync" = "Sync";
 "adjusts_security_header" = "Security";
-"adjusts_security_footer" = "Here you have some options to make your app and your manga more secure";
-"adjusts_security_biometry" = "Biometry";
+"adjusts_security_footer" = "Make your library and your mangas more secure";
+"adjusts_security_biometry" = "Lock library";
 "adjusts_security_level" = "Security Level";
 "adjusts_security_library" = "Library";
 "adjusts_security_library_footer" = "Lock only your personal library";

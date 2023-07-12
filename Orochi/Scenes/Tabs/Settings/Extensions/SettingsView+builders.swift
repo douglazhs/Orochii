@@ -32,6 +32,7 @@ extension SettingsView {
             .easeInOut(duration: 0.125),
             value: vm.biometryPreference
         )
+        .scrollIndicators(.hidden)
         .scrollContentBackground(.hidden)
         .background(BlurBackground(with: .view_background))
     }
@@ -93,29 +94,6 @@ extension SettingsView {
                     key: DefaultsKeys.Settings.biometry.rawValue
                 )
             }
-            if vm.biometricState == .active {
-                Picker(Localized.securityLevel, selection: $vm.securityLevel) {
-                    ForEach(SecurityLevel.allCases) { level in
-                        VStack(alignment: .leading, spacing: 5) {
-                            Label {
-                                Text(level.description)
-                            } icon: {
-                                Image(systemName: level.info.0)
-                            }
-                            Text(level.info.1)
-                                .foregroundColor(Color(uiColor: .systemGray))
-                                .font(.caption2)
-                        }
-                    }
-                }.onChange(of: vm.securityLevel) {
-                    Defaults.standard.saveInt(
-                        $0.rawValue,
-                        key: DefaultsKeys.Settings.secLevel.rawValue
-                    )
-                }
-                .pickerStyle(.inline)
-                .disabled(!vm.biometryPreference)
-            }
         } header: {
             Text(Localized.securityHeader)
         } footer: {
@@ -126,7 +104,7 @@ extension SettingsView {
                     .bold()
             }
         }
-        .disabled(!vm.biometrics)
+        .disabled(!vm.biometricsAvailable)
         .onChange(of: vm.biometryPreference) { _ in
             vm.changeLocalAuth()
         }

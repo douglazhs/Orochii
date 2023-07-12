@@ -17,13 +17,12 @@ class SettingsViewModel: ObservableObject {
     private (set) var requestError: Error? = nil
     private (set) var anilist: AniList = AniList()
     private var token: String = ""
-    @Published var biometrics: Bool = false
+    @Published var biometricsAvailable: Bool = false
     @Published var biometricState: LockState = .inactive
     @Published var iCloud: Bool = false
     @Published var logged: Bool = false
     @Published var biometryPreference: Bool = false
     @Published var notifications: Bool = false
-    @Published var securityLevel: SecurityLevel = .library
     @Published var user: User?
     @Published var isLoading: Bool = false
     @Published var showDialog: Bool = false
@@ -45,14 +44,11 @@ class SettingsViewModel: ObservableObject {
         biometricState = LockState(
             rawValue: Defaults.standard.getInt(of: DefaultsKeys.Settings.lockState.rawValue)
         ) ?? .inactive
-        securityLevel = SecurityLevel(
-            rawValue: Defaults.standard.getInt(of: DefaultsKeys.Settings.secLevel.rawValue)
-        ) ?? .library
     }
     
     /// Check the avaibility of the `local authentication`
     private func checkLocalAuth() {
-        self.biometrics = Biometry.shared.availableBiometry { error in
+        biometricsAvailable = Biometry.shared.availableBiometry { error in
             self.biometricsError = error
         }
     }
@@ -106,15 +102,19 @@ class SettingsViewModel: ObservableObject {
             Biometry.shared.changeBiometryState { error in
                 self.biometricsError = error
                 Task { @MainActor in
-                    if error == nil {
-                        self.biometricState = (self.biometricState == .active)
-                        ? .inactive
-                        : .active
-                        Defaults.standard.saveInt(
-                            self.biometricState.rawValue,
-                            key: DefaultsKeys.Settings.lockState.rawValue
-                        )
+                    if error != nil {
+                        self.biometryPreference = self.biometryPreference
+                        ? false
+                        : true
+                        return
                     }
+                    self.biometricState = (self.biometricState == .active)
+                    ? .inactive
+                    : .active
+                    Defaults.standard.saveInt(
+                        self.biometricState.rawValue,
+                        key: DefaultsKeys.Settings.lockState.rawValue
+                    )
                 }
             }
         }

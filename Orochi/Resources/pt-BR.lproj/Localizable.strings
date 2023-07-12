@@ -138,8 +138,8 @@
 "adjusts_icloud_footer" = "Sua biblioteca de manga será salva na **Nuvem** para ser acessada de outros dispositivos";
 "adjusts_icloud_sync" = "Sincronizar";
 "adjusts_security_header" = "Segurança";
-"adjusts_security_footer" = "Aqui você tem algumas opções para tornar seu aplicativo e mangas mais seguros";
-"adjusts_security_biometry" = "Biometria";
+"adjusts_security_footer" = "Torne sua biblioteca e seus mangás mais seguros";
+"adjusts_security_biometry" = "Bloquear biblioteca";
 "adjusts_security_level" = "Nível de Segurança";
 "adjusts_security_library" = "Biblioteca";
 "adjusts_security_library_footer" = "Bloqueie apenas sua biblioteca pessoal";
