@@ -36,11 +36,11 @@ extension MangaView {
                 .lineLimit(1)
             Spacer()
             // HISTORY BUTTON
-            self.historyButton()
+            /*historyButton()*/
             // ORDER MENU
-            self.order()
+            order()
             // SEARCH BUTTON
-            self.searchChap()
+            searchChap()
         }
         .disabled(vm.occurredAct)
     }
@@ -104,18 +104,11 @@ extension MangaView {
     func searchChap() -> some View {
         Button {
             Haptics.shared.play(.medium)
-            withAnimation(.interpolatingSpring(
-                mass: 2.0,
-                stiffness: 5,
-                damping: 5,
-                initialVelocity: 0).speed(9.5)
-            ) {
-                searchOffset = 0
-                headerOffset = UIScreen.width
-                vm.search = true
-                field = .search
-                UIApplication.shared.becomeFirstResponder()
-            }
+            searchOffset = 0
+            headerOffset = UIScreen.width
+            vm.search = true
+            field = .search
+            UIApplication.shared.becomeFirstResponder()
         } label: {
             Image(systemName: "magnifyingglass")
                 .font(.footnote)
@@ -133,7 +126,14 @@ extension MangaView {
                     EnumPicker(
                         vm.chaptersOrder.description,
                         selection: $vm.chaptersOrder
-                    ).pickerStyle(.menu)
+                    )
+                    .pickerStyle(.menu)
+                    .onChange(of: vm.chaptersOrder) {
+                        Defaults.standard.saveInt(
+                            $0.rawValue,
+                            key: DefaultsKeys.Chapters.order.rawValue
+                        )
+                    }
                 } icon: {
                     Label(
                         vm.chaptersOrder.description,
@@ -151,6 +151,12 @@ extension MangaView {
                                 .foregroundColor(.accentColor)
                         }
                     }
+                }
+                .onChange(of: vm.downloaded) {
+                    Defaults.standard.saveBool(
+                        $0,
+                        key: DefaultsKeys.Chapters.downloaded.rawValue
+                    )
                 }
             }
         } label: {

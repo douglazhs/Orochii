@@ -20,12 +20,12 @@ struct MangaHistoryView: View {
     
     var body: some View {
         NavigationStack {
-            self.content()
+            content()
                 .navigationTitle("History")
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        self.clearHistoryButton()
+                        clearHistoryButton()
                     }
                 }
         }

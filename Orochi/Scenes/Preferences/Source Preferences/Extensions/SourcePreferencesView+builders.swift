@@ -30,7 +30,7 @@ extension SourcePreferencesView {
     @ViewBuilder
     func languageSection() -> some View {
         Section {
-            NavigationLink(destination: LanguagesView(languages: $languages)) {
+            NavigationLink(destination: LanguagesView(languages: $vm.languages)) {
                 Text(String.MangaSource.languageHeader)
             }
         } header: {
@@ -43,7 +43,13 @@ extension SourcePreferencesView {
     @ViewBuilder
     func qualitySection() -> some View {
         Section {
-            EnumPicker(String.MangaSource.mangaQuality, selection: $selectedQuality)
+            EnumPicker(String.MangaSource.mangaQuality, selection: $vm.selectedQuality)
+                .onChange(of: vm.selectedQuality) {
+                    Defaults.standard.saveInt(
+                        $0.rawValue,
+                        key: DefaultsKeys.SrcPreferences.quality.rawValue
+                    )
+                }
         } header: {
             Text(String.MangaSource.qualityHeader)
         } footer: {
@@ -55,13 +61,18 @@ extension SourcePreferencesView {
     @ViewBuilder
     func ageRatingSection() -> some View {
         Section {
-            Toggle(isOn: $nsfw) {
+            Toggle(isOn: $vm.nsfw) {
                 Label {
                     Text("NSFW")
                 } icon: {
                     Image(systemName: "eyes.inverse")
                         .foregroundColor(.orange)
                 }
+            }.onChange(of: vm.nsfw) {
+                Defaults.standard.saveBool(
+                    $0,
+                    key: DefaultsKeys.SrcPreferences.nsfw.rawValue
+                )
             }
         } header: {
             Text(String.Adjusts.ageRatingHeader)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Manga search languages
-enum Language: Pickable {
+enum Language: Int, Pickable {
     var id: Self { self }
     
     case ptBr, enUS, esES

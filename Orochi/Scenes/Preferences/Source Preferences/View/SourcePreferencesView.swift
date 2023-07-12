@@ -9,10 +9,9 @@ import SwiftUI
 
 struct SourcePreferencesView: View {
     @Environment(\.dismiss) var dismiss
-    @State var selectedQuality: MangaQuality = .medium
-    @State var nsfw: Bool = false
+    @StateObject var vm = SourcePreferencesViewModel()
     @State var showActions: Bool = false
-    @State var languages: [Language] = []
+    
     var body: some View {
         NavigationStack {
             List {

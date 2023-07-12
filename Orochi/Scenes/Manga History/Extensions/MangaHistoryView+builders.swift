@@ -13,15 +13,17 @@ extension MangaHistoryView {
     func content() -> some View {
         List {
             // TODO: - Make a ForEach to see all read dates
-            self.dateSection("10/12/2021", readChapters: [
+            dateSection("10/12/2021", readChapters: [
                 ChapterDomain.samples[0],
                 ChapterDomain.samples[5]
             ])
-            self.dateSection("11/03/2022", readChapters: [
+            .listRowBackground(Color.clear)
+            dateSection("11/03/2022", readChapters: [
                 ChapterDomain.samples[2],
                 ChapterDomain.samples[8],
                 ChapterDomain.samples[3]
             ])
+            .listRowBackground(Color.clear)
         }
         .listStyle(.grouped)
         .scrollContentBackground(.hidden)

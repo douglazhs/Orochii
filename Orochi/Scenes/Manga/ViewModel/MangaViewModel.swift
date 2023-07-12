@@ -21,6 +21,18 @@ class MangaViewModel: ObservableObject {
     @Published var search: Bool = false
     @Published var actionMessage: String = ""
     
+    init() {
+        loadDefaults()
+    }
+    
+    /// Load user defaults
+    func loadDefaults() {
+        downloaded = Defaults.standard.getBool(of: DefaultsKeys.Chapters.downloaded.rawValue)
+        chaptersOrder = OrderFilter(
+            rawValue: Defaults.standard.getInt(of: DefaultsKeys.Chapters.order.rawValue)
+        ) ?? .ascending
+    }
+    
     /// Start action when a button is pressed
     /// - Parameter action: Actual action
     func startAction(for action: MangaActions) {

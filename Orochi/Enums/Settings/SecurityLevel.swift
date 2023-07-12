@@ -8,7 +8,7 @@
 import Foundation
 
 /// Face ID level protection
-enum SecurityLevel: Pickable {
+enum SecurityLevel: Int, Pickable {
     var id: Self { self }
     
     case library, app

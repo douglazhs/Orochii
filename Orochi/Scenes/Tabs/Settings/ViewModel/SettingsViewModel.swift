@@ -9,7 +9,7 @@ import SwiftUI
 import AniListService
 
 class SettingsViewModel: ObservableObject {
-    enum LockState {
+    enum LockState: Int {
         case active, inactive, unavailable
     }
     
@@ -31,9 +31,23 @@ class SettingsViewModel: ObservableObject {
     @Published var alertInfo: AlertInfo = .init()
     
     init() {
+        loadDefaults()
         checkLocalAuth()
         checkALToken()
         fetchUser()
+    }
+    
+    /// Load user defaults
+    private func loadDefaults() {
+        iCloud = Defaults.standard.getBool(of: DefaultsKeys.Settings.sync.rawValue)
+        biometryPreference = Defaults.standard.getBool(of: DefaultsKeys.Settings.biometry.rawValue)
+        notifications = Defaults.standard.getBool(of: DefaultsKeys.Settings.chUpdate.rawValue)
+        biometricState = LockState(
+            rawValue: Defaults.standard.getInt(of: DefaultsKeys.Settings.lockState.rawValue)
+        ) ?? .inactive
+        securityLevel = SecurityLevel(
+            rawValue: Defaults.standard.getInt(of: DefaultsKeys.Settings.secLevel.rawValue)
+        ) ?? .library
     }
     
     /// Check the avaibility of the `local authentication`
@@ -92,15 +106,15 @@ class SettingsViewModel: ObservableObject {
             Biometry.shared.changeBiometryState { error in
                 self.biometricsError = error
                 Task { @MainActor in
-                    if error != nil {
-                        self.biometryPreference = self.biometryPreference
-                        ? false
-                        : true
-                        return
+                    if error == nil {
+                        self.biometricState = (self.biometricState == .active)
+                        ? .inactive
+                        : .active
+                        Defaults.standard.saveInt(
+                            self.biometricState.rawValue,
+                            key: DefaultsKeys.Settings.lockState.rawValue
+                        )
                     }
-                    self.biometricState = (self.biometricState == .active)
-                    ? .inactive
-                    : .active
                 }
             }
         }

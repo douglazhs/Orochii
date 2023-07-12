@@ -15,6 +15,17 @@ class ChapterViewModel: ObservableObject {
     
     init(actualChapter: ChapterDomain) {
         self.actualChapter = actualChapter
+        loadDefaults()
+    }
+    
+    /// Load user defaults
+    func loadDefaults() {
+        pageLayout = PageLayout(
+            rawValue: Defaults.standard.getInt(of: DefaultsKeys.ReaderPreferences.pageLayout.rawValue)
+        ) ?? .automatic
+        readingMode = ReadingMode(
+            rawValue: Defaults.standard.getInt(of: DefaultsKeys.ReaderPreferences.mode.rawValue)
+        ) ?? .defaultMode
     }
     
     /// Put manga on this initial state

@@ -8,7 +8,7 @@
 import SwiftUI
 
 /// Manga image quality
-enum MangaQuality: Pickable {
+enum MangaQuality: Int, Pickable {
     var id: Self { self }
     
     case low, medium, high

@@ -11,7 +11,7 @@ struct LanguagesView: View {
     @Binding var languages: [Language]
     var body: some View {
         List {
-            self.languagesSection().listRowBackground(Color.clear)
+            languagesSection().listRowBackground(Color.clear)
         }
         .navigationTitle(String.MangaSource.languageHeader)
         .navigationBarTitleDisplayMode(.inline)

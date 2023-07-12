@@ -63,6 +63,11 @@ extension SettingsView {
                     Image(systemName: "link.icloud.fill")
                         .foregroundColor(.primary)
                 }
+            }.onChange(of: vm.iCloud) {
+                Defaults.standard.saveBool(
+                    $0,
+                    key: DefaultsKeys.Settings.sync.rawValue
+                )
             }
         } header: {
             Text(Localized.icloudHeader)
@@ -82,6 +87,11 @@ extension SettingsView {
                     Image(systemName: "lock.fill")
                         .foregroundColor(.primary)
                 }
+            }.onChange(of: vm.biometryPreference) {
+                Defaults.standard.saveBool(
+                    $0,
+                    key: DefaultsKeys.Settings.biometry.rawValue
+                )
             }
             if vm.biometricState == .active {
                 Picker(Localized.securityLevel, selection: $vm.securityLevel) {
@@ -97,6 +107,11 @@ extension SettingsView {
                                 .font(.caption2)
                         }
                     }
+                }.onChange(of: vm.securityLevel) {
+                    Defaults.standard.saveInt(
+                        $0.rawValue,
+                        key: DefaultsKeys.Settings.secLevel.rawValue
+                    )
                 }
                 .pickerStyle(.inline)
                 .disabled(!vm.biometryPreference)
@@ -128,6 +143,11 @@ extension SettingsView {
                     Image(systemName: "bell.badge")
                         .foregroundColor(.red)
                 }
+            }.onChange(of: vm.notifications) {
+                Defaults.standard.saveBool(
+                    $0,
+                    key: DefaultsKeys.Settings.chUpdate.rawValue
+                )
             }
         } header: {
             Text(Localized.notificationHeader)

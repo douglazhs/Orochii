@@ -10,7 +10,7 @@ import Foundation
 /// Order possibilities:
 /// - *Ascending*
 /// - *Descending*
-enum OrderFilter: Pickable {
+enum OrderFilter: Int, Pickable {
     var id: Self { self }
     
     case ascending, descending

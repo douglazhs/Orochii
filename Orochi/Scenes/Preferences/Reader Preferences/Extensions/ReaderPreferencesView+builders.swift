@@ -13,6 +13,12 @@ extension ReaderPreferencesView {
     func pageLayoutSection() -> some View {
         Section {
             EnumPicker("Layout", selection: $vm.pageLayout)
+                .onChange(of: vm.pageLayout) {
+                    Defaults.standard.saveInt(
+                        $0.rawValue,
+                        key: DefaultsKeys.ReaderPreferences.pageLayout.rawValue
+                    )
+                }
         } header: {
             Text("Page Layout")
         } footer: {
@@ -25,6 +31,12 @@ extension ReaderPreferencesView {
     func readingModeSection() -> some View {
         Section {
             EnumPicker("Mode", selection: $vm.readingMode)
+                .onChange(of: vm.readingMode) {
+                    Defaults.standard.saveInt(
+                        $0.rawValue,
+                        key: DefaultsKeys.ReaderPreferences.mode.rawValue
+                    )
+                }
         } header: {
             Text("Reading Mode")
         } footer: {
