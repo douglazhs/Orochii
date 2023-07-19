@@ -19,13 +19,13 @@ struct DiscoverView: View {
     
     var body: some View {
         NavigationStack {
-            self.content()
+            content()
                 .background(BlurBackground(with: .view_background))
                 .navigationTitle(String.Discovery.title)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        self.mangaSourceButton()
+                        mangaSourceButton()
                     }
                 }
         }
@@ -33,9 +33,12 @@ struct DiscoverView: View {
             text: $vm.searchText,
             placement: .navigationBarDrawer(
                 displayMode: .always
-            )
+            ),prompt: "Search for title"
         )
-        .onSubmit(of: .search) { viewStyle = .search }
+        .onSubmit(of: .search) {
+            viewStyle = .search
+            vm.search()
+        }
     }
 }
 

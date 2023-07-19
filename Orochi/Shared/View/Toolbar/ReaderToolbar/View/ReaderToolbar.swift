@@ -6,10 +6,10 @@
 //
 
 import SwiftUI
+import struct MangaDex.Manga
 
 struct ReaderToolbar: ViewModifier {
     @EnvironmentObject var vm: ChapterViewModel
-    var manga: MangaDomain
     @Binding var showChaptersList: Bool
     @Binding var showReaderPreferences: Bool
     

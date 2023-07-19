@@ -14,7 +14,7 @@ extension ALTracker {
         VStack {
             HStack(alignment: .center, spacing: 5.0) {
                 // MANGA COVER
-                Image(manga?.cover ?? "")
+                Image(MangaDomain.samples[0].cover)
                     .resizable()
                     .cornerRadius(2.5)
                     .frame(

@@ -8,23 +8,23 @@
 import SwiftUI
 
 struct UISliderView: UIViewRepresentable {
-    @Binding var value: Double
+    @Binding var value: Int
     
-    var minValue = 1.0
-    var maxValue = 100.0
+    var minValue = 1
+    var maxValue = 100
     var thumbColor: UIColor = .white
     var minTrackColor: UIColor = .systemIndigo
     var maxTrackColor: UIColor = .lightGray
     
     class Coordinator: NSObject {
-        var value: Binding<Double>
+        var value: Binding<Int>
         
-        init(value: Binding<Double>) {
+        init(value: Binding<Int>) {
             self.value = value
         }
         
         @objc func valueChanged(_ sender: UISlider) {
-            self.value.wrappedValue = Double(sender.value)
+            self.value.wrappedValue = Int(sender.value)
         }
     }
     

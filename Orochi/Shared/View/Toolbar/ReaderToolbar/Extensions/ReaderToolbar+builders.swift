@@ -13,30 +13,26 @@ extension ReaderToolbar {
     func chaptersMenu() -> some View {
         List {
             Section {
-                Picker(selection: $vm.actualChapter) {
-                    ForEach(ChapterDomain.samples, id: \.self) { chapter in
+//                Picker(selection: $vm.current) {
+                    ForEach(vm.feed) { chapter in
                         ChapterListStandardCell(chapter)
                     }
-                } label: {
-                    HStack {
-                        Text("\(ChapterDomain.samples.count) CHAPTERS")
-                            .font(.subheadline)
-                            .foregroundColor(.primary)
-                            .fontWeight(.regular)
-                        Spacer()
-                    }
-                }
-                .pickerStyle(.inline)
-                .tint(.indigo)
-                .onChange(of: vm.actualChapter) { _ in
-                    vm.loadChapter()
-                }
+//                } label: {
+//                    HStack {
+//                        Text("\(vm.feed.count) CHAPTERS")
+//                            .font(.subheadline)
+//                            .foregroundColor(.primary)
+//                            .fontWeight(.regular)
+//                        Spacer()
+//                    }
+//                }
+//                .pickerStyle(.inline)
             } header: {
                 HStack {
                     Spacer()
-                    Text("**UPDATED**: \(manga.lastUpdated)")
+                    /*Text("**UPDATED**: \(Date.stringFrom(c))")
                         .font(.caption2)
-                        .foregroundColor(.secondary)
+                        .foregroundColor(.secondary)*/ 
                 }
             }
             .listRowBackground(Color.clear)
@@ -50,15 +46,24 @@ extension ReaderToolbar {
     @ViewBuilder
     func principalItem() -> some View {
         VStack {
-            Text(vm.actualChapter.title)
-                .font(.caption)
-                .lineLimit(2)
-                .multilineTextAlignment(.center)
-                .fontWeight(.semibold)
-                .foregroundColor(.primary)
-            Text("**\(vm.actualChapter.volume)**")
-                .foregroundColor(Color(uiColor: .systemGray))
-                .font(.caption2)
+            Text((vm.current.attributes?.title != nil && vm.current.attributes?.title != "")
+                 ? vm.current.attributes?.title ?? "No title"
+                 : "No title"
+            )
+            .font(.caption)
+            .lineLimit(2)
+            .multilineTextAlignment(.center)
+            .fontWeight(.semibold)
+            .foregroundColor(.primary)
+            HStack(spacing: 2.5) {
+                if vm.current.attributes?.volume != nil &&
+                    !(vm.current.attributes?.volume?.isEmpty ?? false) {
+                    Text("[Vol.\(vm.current.attributes?.volume ?? "")]")
+                }
+                Text("Ch.\(vm.current.attributes?.chapter ?? "")")
+            }
+            .foregroundColor(Color(uiColor: .systemGray))
+            .font(.caption2)
         }
     }
     
@@ -84,13 +89,13 @@ extension ReaderToolbar {
             UISliderView(
                 value: $vm.actualPage,
                 minValue: 0,
-                maxValue: Double(vm.actualChapter.pagesImages.count - 1)
+                maxValue: (vm.choosenQuality().count) - 1
             )
-            Text("\(String(format: "%.0f", vm.actualPage + 1)) "
+            Text("\(vm.actualPage + 1) "
                  + "\(String.Common.of.uppercased()) "
-                 + "\(vm.actualChapter.pagesImages.count)")
-                .font(.caption2)
-                .foregroundColor(Color(uiColor: .systemGray))
+                 + "\(vm.choosenQuality().count)")
+            .font(.caption2)
+            .foregroundColor(Color(uiColor: .systemGray))
         }
     }
 }

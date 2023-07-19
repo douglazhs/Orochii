@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import Kingfisher
 
 extension SettingsView {
     /// AniList tracker information cell
@@ -50,16 +49,8 @@ extension SettingsView {
     @ViewBuilder
     func avatar() -> some View {
         if !vm.isLoading {
-            if let url = URL(string: vm.user?.avatar?.large ?? ""),
-               let mediumUrl = URL(string: vm.user?.avatar?.medium ?? "") {
-                KFImage.url(url)
-                    .placeholder({ ActivityIndicator() })
-                    .fromMemoryCacheOrRefresh()
-                    .cacheMemoryOnly()
-                    .memoryCacheExpiration(.seconds(10))
-                    .fade(duration: 0.475)
-                    .lowDataModeSource(.network(mediumUrl))
-                    .resizable()
+            if let url = URL(string: vm.user?.avatar?.large ?? "") {
+                AsyncImage(url: url, placeholder: { ActivityIndicator() })
             }
         } else { ActivityIndicator() }
     }

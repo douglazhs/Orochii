@@ -39,7 +39,7 @@ class ImageLoader: ObservableObject {
         }
         
         cancellable = URLSession.shared.dataTaskPublisher(for: url)
-            .map { UIImage(data: $0.data) }
+            .map { UIImage(data: $0.data)?.scalePreservingAspectRatio(targetSize: CGSize.dynamicImage) }
             .replaceError(with: nil)
             .handleEvents(receiveSubscription: { [weak self] _ in self?.onStart() },
                           receiveOutput: { [weak self] in self?.cache($0) },

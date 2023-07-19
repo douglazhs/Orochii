@@ -12,10 +12,10 @@ struct InitialStyleView: View {
 
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .center) {
+            LazyVStack(alignment: .center) {
                 ForEach(Carousel.allCases, id: \.self) { type in
                     Section {
-                        self.carousel(of: vm.section[type] ?? [])
+                        carousel(of: vm.sections[type] ?? [])
                     } header: {
                         HStack(alignment: .center) {
                             Text(type.header.uppercased())

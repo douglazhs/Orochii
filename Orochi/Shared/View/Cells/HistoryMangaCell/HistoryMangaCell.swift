@@ -6,11 +6,12 @@
 //
 
 import SwiftUI
+import struct MangaDex.Manga
 
 struct HistoryMangaCell: View {
-    var manga: MangaDomain
+    var manga: Manga
     
-    init(of manga: MangaDomain) {
+    init(of manga: Manga) {
         self.manga = manga
     }
     
@@ -21,6 +22,7 @@ struct HistoryMangaCell: View {
 
 struct HistoryMangaCell_Previews: PreviewProvider {
     static var previews: some View {
-        HistoryMangaCell(of: MangaDomain.samples[0])
+        EmptyView()
+        /*HistoryMangaCell(of: MangaDomain.samples[0])*/
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MangaDex
 
 struct ChapterView: View {
     @Environment(\.dismiss) var dismiss
@@ -13,27 +14,22 @@ struct ChapterView: View {
     @State var showReadBars: Visibility = .visible
     @State var showChaptersList: Bool = false
     @State var showReaderPreferences: Bool = false
-    var manga: MangaDomain
-    var chapter: ChapterDomain
     
-    init(_ chapter: ChapterDomain, of manga: MangaDomain) {
-        self.chapter = chapter
-        self.manga = manga
+    init(_ current: Chapter, _ feed: [Chapter], of manga: Manga) {
         self._vm = StateObject(
-            wrappedValue: ChapterViewModel(actualChapter: chapter)
+            wrappedValue: ChapterViewModel(current, feed, manga)
         )
     }
     
     var body: some View {
         NavigationStack {
-            self.content()
+            content()
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarRole(.editor)
                 .toolbar(showReadBars, for: .bottomBar, .navigationBar)
                 .toolbarBackground(.visible, for: .navigationBar, .bottomBar)
                 .statusBarHidden(showReadBars == .hidden)
                 .readerToolbar(
-                    manga: manga,
                     showChaptersList: $showChaptersList,
                     showReaderPreferences: $showReaderPreferences
                 )
@@ -45,9 +41,10 @@ struct ChapterView: View {
 
 struct ChapterView_Previews: PreviewProvider {
     static var previews: some View {
-        ChapterView(
+        EmptyView()
+        /*ChapterView(
             ChapterDomain.samples[0],
             of: MangaDomain.samples[0]
-        )
+        )*/
     }
 }

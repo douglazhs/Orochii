@@ -11,14 +11,13 @@ import SwiftUI
 enum MangaQuality: Int, Pickable {
     var id: Self { self }
     
-    case low, medium, high
+    case original, dataSaver
     
     /// Manga quality ID
     var description: String {
         switch self {
-        case .low:    return String.MangaSource.lowQuality
-        case .medium: return String.MangaSource.mediumQuality
-        case .high:   return String.MangaSource.highQuality
+        case .original:  return "Original"
+        case .dataSaver: return "Data Saver"
         }
     }
 }

@@ -6,16 +6,51 @@
 //
 
 import SwiftUI
+import MangaDex
 
 class ChapterViewModel: ObservableObject {
-    @Published var actualPage: Double = 0
+    private (set) var manga: Manga
+    private (set) var feed: [Chapter]
+    @Published var api: MangaDexAPI = MangaDexAPI()
+    @Published var actualPage: Int = 0
     @Published var readingMode: ReadingMode = .defaultMode
     @Published var pageLayout: PageLayout = .automatic
-    @Published var actualChapter: ChapterDomain
+    @Published var pageQuality: MangaQuality = .original
+    @Published var current: Chapter
+    @Published var pages: ChapterResource?
     
-    init(actualChapter: ChapterDomain) {
-        self.actualChapter = actualChapter
+    init(_ current: Chapter, _ feed: [Chapter], _ manga: Manga) {
+        self.current = current
+        self.feed = feed
+        self.manga = manga
+        fetchChapter()
         loadDefaults()
+    }
+    
+    /// Fetch current chapter
+    func fetchChapter() {
+        guard let id = current.id else { return }
+        api.getChapter(id: id) { result in
+            switch result {
+            case .success(let data):
+                self.pages = data.chapter
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
+    
+    /// Choose array based on user quality preference
+    /// - Returns: Array of images
+    func choosenQuality() -> [String] {
+        if let data = pages?.data, let dataSaver = pages?.dataSaver {
+            switch pageQuality {
+            case .original: return data
+            case .dataSaver: return dataSaver
+            }
+        }
+        return[]
     }
     
     /// Load user defaults
@@ -26,10 +61,8 @@ class ChapterViewModel: ObservableObject {
         readingMode = ReadingMode(
             rawValue: Defaults.standard.getInt(of: DefaultsKeys.ReaderPreferences.mode.rawValue)
         ) ?? .defaultMode
-    }
-    
-    /// Put manga on this initial state
-    func loadChapter() {
-        self.actualPage = 0
+        pageQuality = MangaQuality(
+            rawValue: Defaults.standard.getInt(of: DefaultsKeys.SrcPreferences.quality.rawValue)
+        ) ?? .original
     }
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import struct MangaDex.Manga
 
 extension LibraryView {
     /// Manga list
@@ -46,12 +47,12 @@ extension LibraryView {
     @ViewBuilder
     func cell(of manga: MangaDomain) -> some View {
         ZStack {
-            NavigationLink { MangaView(manga) } label: {
+            NavigationLink { /*MangaView(manga)*/ } label: {
                 EmptyView()
             }
             .frame(width: 0)
             .opacity(0)
-            MangaStandardCell(manga)
+            /*MangaStandardCell(manga)*/
         }
     }
     

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import struct MangaDex.Manga
 
 extension HistoryView {
     /// All main content
@@ -13,15 +14,8 @@ extension HistoryView {
     func content() -> some View {
         List {
             // TODO: Make a ForEach to show all dates sections
-            self.dateSection("27/12/2022", readMangas: [
-                MangaDomain.samples[1],
-                MangaDomain.samples[11]
-            ])
-            self.dateSection("10/11/2019", readMangas: [
-                MangaDomain.samples[2],
-                MangaDomain.samples[4],
-                MangaDomain.samples[12]
-            ])
+            self.dateSection("27/12/2022", readMangas: [])
+            self.dateSection("10/11/2019", readMangas: [])
         }
         .listStyle(.grouped)
     }
@@ -54,7 +48,7 @@ extension HistoryView {
     @ViewBuilder
     func dateSection(
         _ date: String,
-        readMangas: [MangaDomain]
+        readMangas: [Manga]
     ) -> some View {
         Section {
             ForEach(readMangas) { manga in

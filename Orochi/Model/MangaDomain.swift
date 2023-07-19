@@ -12,7 +12,6 @@ let testDescription = "Hardship, regret, shame: the negative feelings that human
 let mockLanguages: [Int : String] = [
     0: "en-US",
     1: "pt-BR",
-    2: "es-SP"
 ]
 
 struct MangaDomain: Identifiable, Hashable {

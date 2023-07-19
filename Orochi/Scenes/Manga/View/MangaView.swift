@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import struct MangaDex.Manga
 
 /// Focused TextField
 enum Field: Int, Hashable {
@@ -13,8 +14,7 @@ enum Field: Int, Hashable {
 }
 
 struct MangaView: View {
-    var manga: MangaDomain
-    @StateObject var vm: MangaViewModel = MangaViewModel()
+    @StateObject var vm: MangaViewModel
     @State var showAniList: Bool = false
     @State var showHistory: Bool = false
     @State var showChapterReader: Bool = false
@@ -22,8 +22,8 @@ struct MangaView: View {
     @State var headerOffset: CGFloat = 0
     @FocusState var field: Field?
     
-    init(_ manga: MangaDomain) {
-        self.manga = manga
+    init(_ manga: Manga) {
+        _vm = StateObject(wrappedValue: MangaViewModel(manga: manga))
     }
     
     var body: some View {
@@ -31,6 +31,10 @@ struct MangaView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(vm.showBottomBar ? .visible : .hidden, for: .bottomBar)
             .navigationBarBackButtonHidden(vm.isEditingMode)
+            .animation(.spring())
+            /*.animation(.spring(), value: [vm.chapters != nil])
+            .animation(.default, value: vm.descLang)
+            .animation(.default, value: vm.truncation)*/
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     selectChaptersButton()
@@ -43,7 +47,7 @@ struct MangaView: View {
                 }
                 ToolbarItem(placement: .principal) {
                     ActionPopUp(
-                        title: manga.title,
+                        title: vm.manga.attributes?.title?.en ?? "",
                         message: vm.actionMessage,
                         action: $vm.occurredAct
                     )
@@ -54,6 +58,7 @@ struct MangaView: View {
 
 struct MangaView_Previews: PreviewProvider {
     static var previews: some View {
-        MangaView(MangaDomain.samples[10])
+        EmptyView()
+        /*MangaView()*/
     }
 }

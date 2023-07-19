@@ -6,13 +6,14 @@
 //
 
 import SwiftUI
+import struct MangaDex.Manga
 
 struct MangaStandardCell: View {
-    var manga: MangaDomain
+    var manga: Manga
     var isSearch: Bool
     @State var anilist: Bool = false
     
-    init(_ manga: MangaDomain, isSearch: Bool = false) {
+    init(_ manga: Manga, isSearch: Bool = false) {
         self.manga = manga
         self.isSearch = isSearch
     }
@@ -23,6 +24,7 @@ struct MangaStandardCell: View {
 
 struct MangaStandardCell_Previews: PreviewProvider {
     static var previews: some View {
-        MangaStandardCell(MangaDomain.samples[0])
+        EmptyView()
+        /*MangaStandardCell(MangaDomain.samples[0])*/
     }
 }

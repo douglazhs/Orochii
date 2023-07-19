@@ -40,7 +40,7 @@ extension MangaHistoryView {
                 HistoryChapterCell(of: chapter)
             }
         } header: {
-            Text(manga.lastUpdated)
+            Text(manga.attributes?.updatedAt ?? "")
                 .font(.footnote)
                 .foregroundColor(.secondary)
                 .fontWeight(.semibold)
@@ -67,7 +67,7 @@ extension MangaHistoryView {
                 dismiss()
             }
         } message: {
-            Text("Are you sure you want to clear your \"\(manga.title)\" chapters history?")
+            Text("Are you sure you want to clear your \"\(manga.attributes?.title?.en ?? "")\" chapters history?")
         }
     }
 }

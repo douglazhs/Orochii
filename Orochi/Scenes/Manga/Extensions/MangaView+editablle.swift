@@ -47,7 +47,7 @@ extension MangaView {
                     Button { } label: {
                         Label("View on MangaDex.co", systemImage: "safari.fill")
                     }
-                } header: { Text(manga.title) }
+                } header: { Text(vm.manga.attributes?.title?.en ?? "") }
                 Button(role: .destructive) {
                     
                 } label: {

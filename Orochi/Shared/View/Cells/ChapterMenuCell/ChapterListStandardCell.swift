@@ -6,25 +6,26 @@
 //
 
 import SwiftUI
+import struct MangaDex.Chapter
 
 struct ChapterListStandardCell: View {
-    var chapter: ChapterDomain
+    var chapter: Chapter
     
-    init(_ chapter: ChapterDomain) {
+    init(_ chapter: Chapter) {
         self.chapter = chapter
     }
     var body: some View {
         HStack(alignment: .center, spacing: 12.5) {
             // INFORMATIONS, AS CHAPTER NUMBER, VOLUME AND PAGES
             VStack {
-                Text("**CH. \(chapter.number)**")
-                Text("**\(chapter.volume)**")
-                Text("**\(chapter.pages)** pages")
+                Text("**Ch.\(chapter.attributes?.chapter ?? "")**")
+                Text("**\(chapter.attributes?.volume ?? "")**")
+                Text("**\(chapter.attributes?.pages ?? 0)** pages")
             }
             .font(.caption2)
             .foregroundColor(Color(uiColor: .systemGray))
             // TITLE
-            Text(chapter.title)
+            Text(chapter.attributes?.title ?? "")
                 .font(.subheadline)
                 .fontWeight(.medium)
         }
@@ -33,6 +34,7 @@ struct ChapterListStandardCell: View {
 
 struct ChapterListStandardCell_Previews: PreviewProvider {
     static var previews: some View {
-        ChapterListStandardCell(ChapterDomain.samples[0])
+        EmptyView()
+        /*ChapterListStandardCell(ChapterDomain.samples[0])*/
     }
 }

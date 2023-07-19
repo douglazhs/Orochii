@@ -6,14 +6,15 @@
 //
 
 import SwiftUI
+import struct MangaDex.Manga
 
 struct MangaHistoryView: View {
     @Environment(\.dismiss) var dismiss
-    var manga: MangaDomain
+    var manga: Manga
     var action: Binding<Bool>
     @State var showConfirmAction: Bool = false
     
-    init(of manga: MangaDomain, action: Binding<Bool>) {
+    init(of manga: Manga, action: Binding<Bool>) {
         self.manga = manga
         self.action = action
     }
@@ -34,9 +35,10 @@ struct MangaHistoryView: View {
 
 struct MangaHistoryView_Previews: PreviewProvider {
     static var previews: some View {
-        MangaHistoryView(
+        EmptyView()
+        /*MangaHistoryView(
             of: MangaDomain.samples[0],
             action: .constant(true)
-        )
+        )*/
     }
 }

@@ -17,7 +17,7 @@ enum MangaActions: CaseIterable, CustomStringConvertible {
     var description: String {
         switch self {
         case .lib:     return "Library"
-        case .aniList: return "ANILIST"
+        case .aniList: return "Anilist"
         case .history: return "Clear"
         }
     }

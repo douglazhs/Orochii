@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct DarkOverlay: View {
-    var image: String
+    var url: URL?
     
     var body: some View {
-        Image(image)
-            .resizable(resizingMode: .tile)
-            .aspectRatio(CGSize(width: 9, height: 1), contentMode: .fill)
-//            .blur(radius: 4.5, opaque: true)
+        if let url {
+            AsyncImage(url: url, placeholder: { ActivityIndicator() })
+                .aspectRatio(contentMode: .fill)
+        }
     }
 }
 
 struct DarkOverlay_Previews: PreviewProvider {
     static var previews: some View {
-        DarkOverlay(image: "jujutsu")
+        DarkOverlay(url: nil)
     }
 }

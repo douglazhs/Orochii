@@ -14,7 +14,7 @@ extension HistoryMangaCell {
         HStack(alignment: .top, spacing: 7.5) {
             self.cover()
             VStack(alignment: .leading, spacing: 7.5) {
-                Text(manga.title)
+                Text(manga.attributes?.title?.en ?? "")
                     .font(.callout)
                     .fontWeight(.semibold)
                     .foregroundColor(.primary)
@@ -35,7 +35,7 @@ extension HistoryMangaCell {
     /// Manga cover
     @ViewBuilder
     func cover() -> some View {
-        Image(manga.cover)
+        Image(MangaDomain.samples[0].cover)
             .resizable()
             .cornerRadius(4.5)
             .frame(

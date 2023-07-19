@@ -61,11 +61,11 @@ extension MangaView {
             content: {
                 ALTracker(
                     isPresented: $showAniList,
-                    of: manga,
-                    action: $vm.occurredAct,
-                    isTracking: true
+                    of: vm.manga,
+                    action: $vm.occurredAct
                 )
                 .presentationDetents([.medium, .large])
+                .presentationDragIndicator(.hidden)
             }
         )
     }
@@ -113,7 +113,7 @@ extension MangaView {
         .disabled(vm.occurredAct)
         .sheet(isPresented: $showHistory) {
             MangaHistoryView(
-                of: manga,
+                of: vm.manga,
                 action: $vm.occurredAct
             )
             .presentationDetents([.medium, .large])

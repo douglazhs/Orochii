@@ -28,7 +28,7 @@ extension MangaView {
     func standardBar() -> some View {
         HStack {
             // CHAPTERS COUNT
-            Text("\(ChapterDomain.samples.count) "
+            Text("\(vm.chapters?.count ?? 0) "
                  + String.Manga.chapHeader.uppercased())
                 .foregroundColor(.primary)
                 .fontWeight(.regular)
@@ -39,10 +39,11 @@ extension MangaView {
             /*historyButton()*/
             // ORDER MENU
             order()
+                .disabled(vm.occurredAct || vm.chapters == nil)
             // SEARCH BUTTON
             searchChap()
+                .disabled(vm.occurredAct || vm.chapters == nil)
         }
-        .disabled(vm.occurredAct)
     }
     
     /// Search chapters bar

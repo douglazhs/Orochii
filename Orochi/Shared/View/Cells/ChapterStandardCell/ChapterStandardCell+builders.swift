@@ -8,70 +8,89 @@
 import SwiftUI
 
 extension ChapterStandardCell {
-    /// Left manga cell information
     @ViewBuilder
-    func leftInfo() -> some View {
-        VStack(alignment: .center, spacing: 5) {
-            // CHAPTER NUMBER
-            Text("CH.\(chapter.number)")
-                .font(.subheadline)
-                .fontWeight(.semibold)
-            // VOLUME
-            Text(chapter.volume)
-                .font(.caption2)
-                .foregroundColor(Color(uiColor: .systemGray))
-        }
+    func content() -> some View {
+        VStack(alignment: .leading, spacing: 5.0) {
+            chapterInfo()
+            scanlationGroupInfo()
+        }.padding(.vertical, 3.5)
     }
     
-    /// Right manga cell information
+    /// Chapter info
     @ViewBuilder
-    func rightInfo() -> some View {
-        VStack(alignment: .leading, spacing: 5) {
-            HStack(alignment: .center) {
-                // MAIN INFO
-                mainInfo()
-                Spacer()
+    func chapterInfo() -> some View {
+        HStack(alignment: .top, spacing: 5.0) {
+            HStack(spacing: chapter.attributes?.volume != nil ? 2.5 : .zero) {
+                // VOLUME
+                Text(chapter.attributes?.volume != nil ? "[Vol.\(chapter.attributes?.volume ?? "")]" : "")
+                    .font(.footnote)
+                    .foregroundColor(Color(uiColor: .systemGray))
+                // CHAPTER NUMBER
+                Text("Ch.\(chapter.attributes?.chapter ?? "")")
+                    .font(.footnote)
+                    .fontWeight(.semibold)
             }
-            // SCAN UPDATE INFO
-            scanInfo()
+            // CHAPTER TITLE
+            title()
         }
     }
     
-    /// Main chapter infors, as *title*
+    /// Main chapter infos, as *title*
     @ViewBuilder
-    func mainInfo() ->  some View {
-        // TITLE
-        Text(chapter.title)
-            .font(.subheadline)
-            .lineLimit(2)
-            .multilineTextAlignment(.leading)
-            .fontWeight(.semibold)
+    func title() ->  some View {
+        if !(chapter.attributes?.title?.isEmpty ?? false) &&
+            chapter.attributes?.title != nil
+        {
+            HStack(spacing: 5.0) {
+                Text("•")
+                    .foregroundColor(.secondary)
+                    .font(.caption)
+                    .fontWeight(.heavy)
+                Text(chapter.attributes?.title ?? "")
+                    .font(.footnote)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                    .fontWeight(.semibold)
+            }
+        } else { EmptyView() }
     }
     
     /// Download chapter informations
     @ViewBuilder
     func downloadInfo() -> some View {
-        if chapter.downloaded && !editingMode {
+        /*if chapter.downloaded && !editingMode {
             Image(systemName: "arrow.down")
                 .foregroundColor(
                     Color.accentColor.opacity(0.85)
                 )
                 .font(.caption)
-        }
+        }*/
     }
     
     /// Chapter scan informations
     @ViewBuilder
-    func scanInfo() -> some View {
+    func scanlationGroupInfo() -> some View {
         HStack(alignment: .bottom) {
             // UPDATED
-            Text(chapter.updated)
+            if let group = chapter.relationships?.first(where: { $0.type == "scanlation_group" }),
+               let updatedAt = group.attributes?.updatedAt
+            {
+                // UPDATED AT
+                Text(
+                    Date.fromString(updatedAt) +
+                    " (\(Date.relativeDate(of: Int(Date.convert(updatedAt).timeIntervalSince1970))))"
+                )
                 .font(.footnote)
                 .foregroundColor(Color(uiColor: .systemGray))
-            // SCAN GROUP
-            Text("~ " + chapter.scanGroup)
-                .font(.footnote)
-                .foregroundColor(Color(uiColor: .systemGray))
+                // SCAN GROUP
+                Text("~ " + (scanlationGroup ?? ""))
+                    .font(.footnote)
+                    .foregroundColor(Color(uiColor: .systemGray))
+            } else {
+                Text("Unknown scanlation group")
+                    .font(.footnote)
+                    .foregroundColor(Color(uiColor: .systemGray))
+            }
         }
     }
 }

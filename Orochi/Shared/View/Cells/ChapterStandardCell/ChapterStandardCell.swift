@@ -6,38 +6,39 @@
 //
 
 import SwiftUI
+import struct MangaDex.Chapter
 
 struct ChapterStandardCell: View {
-    var chapter: ChapterDomain
+    var chapter: Chapter
+    var scanlationGroup: String?
     var editingMode: Bool
     
-    init(_ chapter: ChapterDomain, editingMode: Bool = false) {
+    init(
+        _ chapter: Chapter,
+        scanlationGroup: String? = nil,
+        editingMode: Bool = false
+    ) {
         self.chapter = chapter
+        self.scanlationGroup = scanlationGroup
         self.editingMode = editingMode
     }
     var body: some View {
-        HStack (alignment: .center, spacing: 7.5) {
-            leftInfo()
-            Text("•")
-                .foregroundColor(.secondary)
-                .font(.caption)
-                .fontWeight(.heavy)
-            rightInfo()
-        }
-        .badge(
-            chapter.downloaded
-            ? Text(Image(systemName: "arrow.down"))
-                    .foregroundColor(
-                        Color.accentColor.opacity(0.85)
-                    )
-                    .font(.caption)
-            : Text("")
-        )
+        content()
+            /*.badge(
+                chapter.downloaded
+                ? Text(Image(systemName: "arrow.down"))
+                        .foregroundColor(
+                            Color.accentColor.opacity(0.85)
+                        )
+                        .font(.caption)
+                : Text("")
+            )*/
     }
 }
 
 struct ChapterStandardCell_Previews: PreviewProvider {
     static var previews: some View {
-        ChapterStandardCell(ChapterDomain.samples[0])
+        EmptyView()
+        /*ChapterStandardCell(ChapterDomain.samples[0])*/
     }
 }

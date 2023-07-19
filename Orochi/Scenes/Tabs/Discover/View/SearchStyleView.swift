@@ -6,14 +6,20 @@
 //
 
 import SwiftUI
+import struct MangaDex.Manga
 
 struct SearchStyleView: View {
     @Environment(\.isSearching) var isSearching
-    var mangas: [MangaDomain]
+    @EnvironmentObject var vm: DiscoverViewModel
+    var mangas: [Manga]?
     @Binding var viewStyle: ViewStyle
+    let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+    ]
     
     init(
-        mangas: [MangaDomain],
+        mangas: [Manga]?,
         _ viewStyle: Binding<ViewStyle>
     ) {
         self.mangas = mangas
@@ -21,14 +27,19 @@ struct SearchStyleView: View {
     }
     var body: some View {
         self.content()
+            .animation(.spring())
             .onChange(of: isSearching) { newValue in
-                if !newValue { viewStyle = .initial }
+                if !newValue {
+                    viewStyle = .initial
+                    vm.searchResult = nil
+                }
             }
     }
 }
 
 struct SearchStyleView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchStyleView(mangas: MangaDomain.samples, .constant(.search))
+        EmptyView()
+        /*SearchStyleView(mangas: MangaDomain.samples, .constant(.search))*/
     }
 }

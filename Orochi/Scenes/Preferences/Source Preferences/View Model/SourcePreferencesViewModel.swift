@@ -8,7 +8,7 @@
 import Foundation
 
 class SourcePreferencesViewModel: ObservableObject {
-    @Published var selectedQuality: MangaQuality = .medium
+    @Published var selectedQuality: MangaQuality = .original
     @Published var nsfw: Bool = false
     @Published var languages: [Language] = []
     
@@ -22,7 +22,7 @@ class SourcePreferencesViewModel: ObservableObject {
         languages = rawValues.map { Language(rawValue: $0) ?? .enUS }
         selectedQuality = MangaQuality(
             rawValue: Defaults.standard.getInt(of: DefaultsKeys.SrcPreferences.quality.rawValue)
-        ) ?? .medium
+        ) ?? .original
         nsfw = Defaults.standard.getBool(of: DefaultsKeys.SrcPreferences.nsfw.rawValue)
     }
 }

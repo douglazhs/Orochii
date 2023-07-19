@@ -34,4 +34,29 @@ extension Date {
             relativeTo: Date()
         )
     }
+    
+    /// Get date from string
+    /// - Parameter string: Date in string format
+    /// - Returns: Converted date
+    static func convert(_ string: String) -> Date {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        if let date = formatter.date(from: string) {
+            return date
+        }
+        return .now
+    }
+    
+    /// Get date from string
+    /// - Parameter string: Date in string format
+    /// - Returns: Converted date string
+    static func fromString(_ string: String) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        if let date = formatter.date(from: string) {
+            formatter.dateFormat = "dd-MM-yyyy"
+            return formatter.string(from: date)
+        }
+        return ""
+    }
 }

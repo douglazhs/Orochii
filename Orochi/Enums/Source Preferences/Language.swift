@@ -11,13 +11,19 @@ import SwiftUI
 enum Language: Int, Pickable {
     var id: Self { self }
     
-    case ptBr, enUS, esES
+    case ptBr, enUS
     
     var description: String {
         switch self {
         case .ptBr: return "Portuguese (Brazil)"
         case .enUS: return "English (U.S.)"
-        case .esES: return "Spanish (Spain)"
+        }
+    }
+    
+    var apiId: String {
+        switch self {
+        case .ptBr: return "pt-br"
+        case .enUS: return "en"
         }
     }
 }

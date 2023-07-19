@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Reading mode
 enum ReadingMode: Int, Pickable {
     var id: Self { self }
     

@@ -14,13 +14,13 @@ extension MangaStandardCell {
     @ViewBuilder
     func cell() -> some View {
         HStack(alignment: .center) {
-            MangaStandardImage(
+            /*MangaStandardImage(
                 cover: manga.cover,
                 size: CGSize(
                     width: CGSize.standardImageCell.width * 0.775,
                     height: CGSize.standardImageCell.height * 0.775
                 )
-            )
+            )*/
             info().padding(.leading, 5)
             Spacer()
         }
@@ -38,7 +38,7 @@ extension MangaStandardCell {
         VStack(alignment: .leading, spacing: 5.5) {
             HStack {
                 // TITLE
-                Text(manga.title)
+                Text(manga.attributes?.title?.en ?? "")
                     .font(.subheadline)
                     .fontWeight(.medium)
                     .lineLimit(1)
