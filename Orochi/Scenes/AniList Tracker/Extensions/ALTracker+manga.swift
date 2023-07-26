@@ -14,13 +14,10 @@ extension ALTracker {
         VStack {
             HStack(alignment: .center, spacing: 5.0) {
                 // MANGA COVER
-                Image(MangaDomain.samples[0].cover)
-                    .resizable()
-                    .cornerRadius(2.5)
-                    .frame(
-                        width: CGSize.standardImageCell.width,
-                        height: CGSize.standardImageCell.height
-                    )
+                MangaStandardImage(
+                    url: URL(string:vm.alManga?.coverImage?.large ?? ""),
+                    size: .standardImageCell
+                )
                 // MANGA STATUS
                 status()
             }.frame(maxHeight: CGSize.standardImageCell.height + 35.0)

@@ -28,7 +28,7 @@ extension InitialStyleView {
                                 Button(role: .destructive) { } label: {
                                     Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
                                 }
-                            }
+                            } preview: { MangaView(manga) }
                     }
                 }
             }
@@ -43,13 +43,16 @@ extension InitialStyleView {
     func cell(of manga: Manga) -> some View {
         VStack(alignment: .leading, spacing: 2.5) {
             MangaStandardImage(
-                url: vm.api.buildURL(for: .cover(id: manga.id, fileName: vm.fileName(of: manga))),
+                url: vm.api.buildURL(for: .cover(
+                    id: manga.id,
+                    fileName: vm.imgFileName(of: manga)
+                )),
                 size: CGSize(
                     width: CGSize.standardImageCell.width,
                     height: CGSize.standardImageCell.height
                 )
             )
-            Text(manga.attributes?.title?.en ?? "")
+            Text(vm.unwrapTitle(of: manga))
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
                 .font(.system(.footnote, design: .none, weight: .regular))

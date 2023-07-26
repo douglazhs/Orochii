@@ -7,41 +7,7 @@
 
 import SwiftUI
 
-extension ReaderToolbar {
-    /// Chapters list
-    @ViewBuilder
-    func chaptersMenu() -> some View {
-        List {
-            Section {
-//                Picker(selection: $vm.current) {
-                    ForEach(vm.feed) { chapter in
-                        ChapterListStandardCell(chapter)
-                    }
-//                } label: {
-//                    HStack {
-//                        Text("\(vm.feed.count) CHAPTERS")
-//                            .font(.subheadline)
-//                            .foregroundColor(.primary)
-//                            .fontWeight(.regular)
-//                        Spacer()
-//                    }
-//                }
-//                .pickerStyle(.inline)
-            } header: {
-                HStack {
-                    Spacer()
-                    /*Text("**UPDATED**: \(Date.stringFrom(c))")
-                        .font(.caption2)
-                        .foregroundColor(.secondary)*/ 
-                }
-            }
-            .listRowBackground(Color.clear)
-        }
-        .listStyle(.grouped)
-        .scrollContentBackground(.hidden)
-        .background(BlurBackground(with: .view_background))
-    }
-    
+extension ReaderToolbar {    
     /// Principal toolbar item
     @ViewBuilder
     func principalItem() -> some View {
@@ -78,24 +44,26 @@ extension ReaderToolbar {
         .sheet(isPresented: $showReaderPreferences) {
             ReaderPreferencesView()
                 .environmentObject(vm)
-                .presentationDetents([.medium, .large])
         }
     }
     
     /// Manga page slider
     @ViewBuilder
     func pageSlider() -> some View {
-        VStack(spacing: 2.5) {
+        VStack(spacing: 2.0) {
             UISliderView(
                 value: $vm.actualPage,
                 minValue: 0,
-                maxValue: (vm.choosenQuality().count) - 1
+                maxValue: Double((vm.pagesCount()) - 1)
             )
-            Text("\(vm.actualPage + 1) "
-                 + "\(String.Common.of.uppercased()) "
-                 + "\(vm.choosenQuality().count)")
+            
+            Text(String(format: "%.0f", (vm.actualPage + 1))
+                 + " \(String.Common.of.uppercased()) "
+                 + "\(vm.pagesCount())")
             .font(.caption2)
-            .foregroundColor(Color(uiColor: .systemGray))
+            
+            Text("\(vm.pagesCount() - Int(vm.actualPage + 1)) pages left")
+                .font(.caption2)
         }
     }
 }

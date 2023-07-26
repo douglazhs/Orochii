@@ -8,16 +8,21 @@
 import SwiftUI
 import MangaDex
 
-class ChapterViewModel: ObservableObject {
+final class ChapterViewModel: ObservableObject, MangaHelpers {
+    enum Format {
+        case webtoon, normal
+    }
     private (set) var manga: Manga
     private (set) var feed: [Chapter]
     @Published var api: MangaDexAPI = MangaDexAPI()
-    @Published var actualPage: Int = 0
+    @Published var actualPage: Double = 0
+    @Published var format: Format = .normal
     @Published var readingMode: ReadingMode = .defaultMode
     @Published var pageLayout: PageLayout = .automatic
     @Published var pageQuality: MangaQuality = .original
     @Published var current: Chapter
     @Published var pages: ChapterResource?
+    @Published var currentPage: UIImage?
     
     init(_ current: Chapter, _ feed: [Chapter], _ manga: Manga) {
         self.current = current
@@ -25,6 +30,7 @@ class ChapterViewModel: ObservableObject {
         self.manga = manga
         fetchChapter()
         loadDefaults()
+        defineReadingMode()
     }
     
     /// Fetch current chapter
@@ -40,6 +46,20 @@ class ChapterViewModel: ObservableObject {
         }
     }
     
+    /// Save current page on gallery
+    func savePage(_ page: String) {
+        let imageSaver = ImageSaver()
+        imageSaver.writeToPhotoAlbum(page)
+    }
+    
+    /// Define manga reading mode
+    func defineReadingMode() {
+        guard getTag("Web Comic", of: manga) != nil else {
+            format = .normal
+            return
+        }
+        format = .webtoon
+    }
     
     /// Choose array based on user quality preference
     /// - Returns: Array of images
@@ -51,6 +71,14 @@ class ChapterViewModel: ObservableObject {
             }
         }
         return[]
+    }
+    
+    /// Chapter pages count
+    func pagesCount() -> Int {
+        switch pageQuality {
+        case .original: return pages?.data?.count ?? 0
+        case .dataSaver: return pages?.dataSaver?.count ?? 0
+        }
     }
     
     /// Load user defaults

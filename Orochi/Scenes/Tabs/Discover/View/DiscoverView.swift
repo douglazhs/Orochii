@@ -23,21 +23,26 @@ struct DiscoverView: View {
                 .background(BlurBackground(with: .view_background))
                 .navigationTitle(String.Discovery.title)
                 .navigationBarTitleDisplayMode(.inline)
+                .toolbarBackground(.visible, for: .tabBar)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         mangaSourceButton()
                     }
+                    ToolbarItemGroup(placement: .keyboard) {
+                        Button(action: {
+                            UIApplication.shared.becomeFirstResponder()
+                        }, label: { Image(systemName: "chevron.down") })
+                    }
                 }
         }
         .searchable(
-            text: $vm.searchText,
+            text: $vm.nameQuery,
             placement: .navigationBarDrawer(
                 displayMode: .always
             ),prompt: "Search for title"
         )
         .onSubmit(of: .search) {
-            viewStyle = .search
-            vm.search()
+            UIApplication.shared.becomeFirstResponder()
         }
     }
 }

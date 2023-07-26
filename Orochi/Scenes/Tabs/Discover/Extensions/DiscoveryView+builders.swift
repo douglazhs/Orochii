@@ -12,8 +12,24 @@ extension DiscoverView {
     /// - Returns: Screen variations
     @ViewBuilder func content() -> some View {
         switch viewStyle {
-        case .search:  SearchStyleView(mangas: vm.searchResult, $viewStyle).environmentObject(vm)
-        case .initial: InitialStyleView().environmentObject(vm)
+        case .search:  SearchStyleView($viewStyle).environmentObject(vm)
+                .onChange(of: vm.nameQuery) { newValue in
+                    if newValue.isEmpty {
+                        withTransaction(.init(animation: .easeInOut(duration: 0.185))) {
+                            viewStyle = .initial
+                        }
+                    }
+                }
+        case .initial:
+            InitialStyleView()
+                .environmentObject(vm)
+                .onChange(of: vm.nameQuery) { newValue in
+                    if !newValue.isEmpty {
+                        withTransaction(.init(animation: .easeInOut(duration: 0.185).delay(0.5))) {
+                            viewStyle = .search
+                        }
+                    }
+                }
         }
     }
     

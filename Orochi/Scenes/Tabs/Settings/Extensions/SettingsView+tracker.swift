@@ -48,11 +48,15 @@ extension SettingsView {
     /// User Avatar
     @ViewBuilder
     func avatar() -> some View {
-        if !vm.isLoading {
-            if let url = URL(string: vm.user?.avatar?.large ?? "") {
-                AsyncImage(url: url, placeholder: { ActivityIndicator() })
-            }
-        } else { ActivityIndicator() }
+        if let url = URL(string: vm.user?.avatar?.large ?? "") {
+            MangaStandardImage(
+                url: url,
+                size: CGSize(
+                    width: CGSize.standardImageCell.width,
+                    height: CGSize.standardImageCell.width
+                )
+            )
+        }
     }
     
     /// Custom navigation link to user profile screen

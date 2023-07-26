@@ -10,10 +10,15 @@ import SwiftUI
 extension ChapterStandardCell {
     @ViewBuilder
     func content() -> some View {
-        VStack(alignment: .leading, spacing: 5.0) {
-            chapterInfo()
-            scanlationGroupInfo()
-        }.padding(.vertical, 3.5)
+        HStack {
+            VStack(alignment: .leading, spacing: 5.0) {
+                chapterInfo()
+                scanlationGroupInfo()
+            }
+            Spacer()
+        }
+        .padding(.vertical, 3.5)
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
     
     /// Chapter info
@@ -39,8 +44,7 @@ extension ChapterStandardCell {
     @ViewBuilder
     func title() ->  some View {
         if !(chapter.attributes?.title?.isEmpty ?? false) &&
-            chapter.attributes?.title != nil
-        {
+            chapter.attributes?.title != nil {
             HStack(spacing: 5.0) {
                 Text("•")
                     .foregroundColor(.secondary)
@@ -50,6 +54,7 @@ extension ChapterStandardCell {
                     .font(.footnote)
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
+                    .truncationMode(.tail)
                     .fontWeight(.semibold)
             }
         } else { EmptyView() }
@@ -72,13 +77,11 @@ extension ChapterStandardCell {
     func scanlationGroupInfo() -> some View {
         HStack(alignment: .bottom) {
             // UPDATED
-            if let group = chapter.relationships?.first(where: { $0.type == "scanlation_group" }),
-               let updatedAt = group.attributes?.updatedAt
-            {
+            if let createdAt = chapter.attributes?.createdAt {
                 // UPDATED AT
                 Text(
-                    Date.fromString(updatedAt) +
-                    " (\(Date.relativeDate(of: Int(Date.convert(updatedAt).timeIntervalSince1970))))"
+                    Date.fromString(createdAt) +
+                    " • \(Date.relativeDate(of: Int(Date.convert(createdAt).timeIntervalSince1970)))"
                 )
                 .font(.footnote)
                 .foregroundColor(Color(uiColor: .systemGray))

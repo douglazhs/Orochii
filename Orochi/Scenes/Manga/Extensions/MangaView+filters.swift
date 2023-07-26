@@ -11,16 +11,9 @@ extension MangaView {
     /// Chapter list header
     @ViewBuilder
     func chaptersHeader() -> some View {
-        ZStack {
-            // STANDARD BAR WITH SOME INFORMATIONS
-            self.standardBar()
-                .offset(x: headerOffset)
-                .frame(maxWidth: .infinity)
-            // SEARCH BAR TO SEARCH A SPECIFIC CHAPTER
-            self.searchBar()
-                .offset(x: searchOffset)
-                .frame(maxWidth: .infinity)
-        }.frame(maxWidth: .infinity)
+        // STANDARD BAR WITH SOME INFORMATIONS
+        self.standardBar()
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
     
     /// Header chaptes bar
@@ -30,19 +23,17 @@ extension MangaView {
             // CHAPTERS COUNT
             Text("\(vm.chapters?.count ?? 0) "
                  + String.Manga.chapHeader.uppercased())
-                .foregroundColor(.primary)
-                .fontWeight(.regular)
-                .font(.callout)
-                .lineLimit(1)
+            .lineLimit(1)
             Spacer()
-            // HISTORY BUTTON
-            /*historyButton()*/
             // ORDER MENU
             order()
-                .disabled(vm.occurredAct || vm.chapters == nil)
-            // SEARCH BUTTON
-            searchChap()
-                .disabled(vm.occurredAct || vm.chapters == nil)
+                .disabled(vm.occurredAct)
+            // HISTORY BUTTON
+            /*historyButton()
+                .disabled(vm.occurredAct)
+             // SEARCH BUTTON
+             searchChap()
+                .disabled(vm.occurredAct)*/
         }
     }
     
@@ -62,17 +53,8 @@ extension MangaView {
     func cancelSearch() -> some View {
         Button {
             Haptics.shared.play(.medium)
-            withAnimation(.interpolatingSpring(
-                mass: 2.0,
-                stiffness: 5,
-                damping: 5,
-                initialVelocity: 0).speed(10)
-            ) {
-                searchOffset = -UIScreen.width
-                headerOffset = 0
-                vm.search = false
-                UIApplication.shared.endEditing()
-            }
+            vm.search = false
+            UIApplication.shared.endEditing()
         } label: { Text(String.Common.cancel) }
     }
     
@@ -83,11 +65,15 @@ extension MangaView {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.secondary)
             TextField(text: $vm.queryFilter, axis: .horizontal) {
-                Text("Search chapter")
+                Text("Chapter name or number")
                     .font(.body)
                     .fontWeight(.regular)
                     .foregroundColor(.secondary)
-            }.ignoresSafeArea(.keyboard, edges: .bottom)
+            }
+            .onChange(of: vm.queryFilter) { newValue in
+                vm.filterChapters()
+            }
+            .ignoresSafeArea(.keyboard, edges: .bottom)
         }
         .foregroundColor(.primary)
         .padding(.horizontal, 7.5)
@@ -105,16 +91,13 @@ extension MangaView {
     func searchChap() -> some View {
         Button {
             Haptics.shared.play(.medium)
-            searchOffset = 0
-            headerOffset = UIScreen.width
             vm.search = true
             field = .search
             UIApplication.shared.becomeFirstResponder()
         } label: {
             Image(systemName: "magnifyingglass")
-                .font(.footnote)
                 .foregroundColor(.primary)
-        }.buttonStyle(.borderedProminent)
+        }
         .tint(.accentColor)
     }
     
@@ -134,6 +117,7 @@ extension MangaView {
                             $0.rawValue,
                             key: DefaultsKeys.Chapters.order.rawValue
                         )
+                        vm.sortChapters()
                     }
                 } icon: {
                     Label(
@@ -161,11 +145,10 @@ extension MangaView {
                 }
             }
         } label: {
-            Image(systemName: "arrow.up.arrow.down")
-                .font(.footnote)
-                .foregroundColor(.primary)
+            Image(systemName: "line.3.horizontal.decrease")
+                .foregroundColor(.accentColor)
+                .font(.title3)
+                .fontWeight(.bold)
         }
-        .tint(.accentColor)
-        .buttonStyle(.borderedProminent)
     }
 }

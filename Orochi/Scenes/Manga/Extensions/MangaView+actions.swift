@@ -49,19 +49,24 @@ extension MangaView {
             showAniList = true
             vm.startAction(for: .aniList)
         } label: {
-            Image(systemName: "externaldrive.fill")
-                .foregroundColor(.primary)
+            Image(systemName: "cloud.fill")
+                .foregroundColor(.accentColor)
                 .font(.footnote)
                 .fontWeight(.semibold)
         }
         .disabled(vm.occurredAct)
         .buttonStyle(.borderedProminent)
+        .tint(.white)
         .sheet(
             isPresented: $showAniList,
             content: {
                 ALTracker(
                     isPresented: $showAniList,
                     of: vm.manga,
+                    cover: vm.api.buildURL(for: .cover(
+                        id: vm.manga.id,
+                        fileName: vm.imgFileName(of: vm.manga)
+                    )),
                     action: $vm.occurredAct
                 )
                 .presentationDetents([.medium, .large])

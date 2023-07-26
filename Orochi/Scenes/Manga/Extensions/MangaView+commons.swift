@@ -19,8 +19,9 @@ extension MangaView {
     ) -> some View {
         HStack {
             self.item(title: leading.0, leading.1, .leading)
-            Spacer()
+                .frame(maxWidth: .infinity, alignment: .leading)
             self.item(title: trailing.0, trailing.1, .trailing)
+                .frame(maxWidth: .infinity, alignment: .trailing)
         }
     }
     

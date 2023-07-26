@@ -15,7 +15,11 @@ struct InitialStyleView: View {
             LazyVStack(alignment: .center) {
                 ForEach(Carousel.allCases, id: \.self) { type in
                     Section {
-                        carousel(of: vm.sections[type] ?? [])
+                        if let section = vm.sections[type] {
+                            carousel(of: section)
+                        } else {
+                            ActivityIndicator()
+                        }
                     } header: {
                         HStack(alignment: .center) {
                             Text(type.header.uppercased())
@@ -28,8 +32,7 @@ struct InitialStyleView: View {
                     }
                 }
             }.padding(.vertical)
-        }
-        .scrollContentBackground(.hidden)
+        }.scrollContentBackground(.hidden)
     }
 }
 

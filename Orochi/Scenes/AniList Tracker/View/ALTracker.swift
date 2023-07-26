@@ -13,15 +13,18 @@ struct ALTracker: View {
     @StateObject var vm: ALTrackerViewModel
     @Binding var isPresented: Bool
     @State var showPopUp: Bool = false
+    var cover: URL?
     var action: Binding<Bool>
     
     init(
         isPresented: Binding<Bool>,
         of manga: Manga,
+        cover: URL? = nil,
         action: Binding<Bool>
     ) {
         _vm = StateObject(wrappedValue: ALTrackerViewModel(manga)) 
         self._isPresented = isPresented
+        self.cover = cover
         self.action = action
     }
     
@@ -29,11 +32,16 @@ struct ALTracker: View {
         NavigationStack {
             content()
                 .navigationBarTitleDisplayMode(.inline)
+                .animation(.easeIn, value: [vm.mangas != nil])
+                .background(BlurBackground(with: cover))
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        if vm.tracking() {
+                        if vm.isTracking {
                             updateTrackingButton()
                         } else { trackButton() }
+                    }
+                    ToolbarItem(placement: .navigationBarLeading) {
+                        closeButton()
                     }
                 }
         }

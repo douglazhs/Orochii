@@ -6,21 +6,45 @@
 //
 
 import SwiftUI
+import NukeUI
 
 struct BlurBackground: View {
-    var image: String
+    var url: URL?
+    var image: AppImages = .view_background
     
-    init(with image: String) { self.image = image }
+    init(with url: URL? = nil) { self.url = url }
     
-    init(with image: AppImages) { self.image = image.rawValue }
+    init(with image: AppImages = .view_background) { self.image = image }
     
     var body: some View {
-        Image(image)
-            .resizable()
-            .scaledToFill()
-            .edgesIgnoringSafeArea(.all)
-            .blur(radius: 75)
-            .opacity(Constants.device == .pad ? 0.225 : 0.3)
+        if let url {
+            ZStack {
+                LazyImage(
+                    request: ImageRequest(
+                        url: url,
+                        processors: [.resize(width: 350, unit: .pixels, upscale: true)]
+                    ),
+                    transaction: .init(animation: .easeIn)
+                ) { state in
+                    if let image = state.image {
+                        image
+                            .resizable()
+                            .scaledToFill()
+                            .edgesIgnoringSafeArea(.all)
+                            .blur(radius: 35.0, opaque: true)
+                    }
+                }
+                
+                Color.black.opacity(0.85).edgesIgnoringSafeArea(.all)
+            }
+        } else {
+            Image(image.rawValue)
+                .resizable()
+                .scaledToFill()
+                .edgesIgnoringSafeArea(.all)
+                .blur(radius: 75)
+                .opacity(Constants.device == .pad ? 0.225 : 0.3)
+        }
     }
 }
 

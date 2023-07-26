@@ -9,19 +9,15 @@ import SwiftUI
 
 struct Placeholder: View {
     var body: some View {
-        RoundedRectangle(cornerRadius: 4.5)
-            .fill(Color(.systemGray))
-            .frame(
-                maxWidth: CGSize.standardImageCell.width,
-                maxHeight: CGSize.standardImageCell.height
-            )
-            .overlay(
-                RoundedRectangle(cornerRadius: 4.5)
-                    .stroke(
-                        Color(uiColor: .systemGray),
-                        lineWidth: 1.05
-                    )
-            )
+            RoundedRectangle(cornerRadius: 4.5)
+                .fill(Color(.systemGray5))
+                .overlay(
+                    RoundedRectangle(cornerRadius: 4.5)
+                        .stroke(
+                            Color(uiColor: .systemGray4),
+                            lineWidth: 0.75
+                        )
+                )
     }
 }
 

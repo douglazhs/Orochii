@@ -6,34 +6,39 @@
 //
 
 import SwiftUI
+import Combine
 import struct MangaDex.Manga
 
 struct SearchStyleView: View {
     @Environment(\.isSearching) var isSearching
     @EnvironmentObject var vm: DiscoverViewModel
-    var mangas: [Manga]?
     @Binding var viewStyle: ViewStyle
     let columns = [
-        GridItem(.flexible()),
-        GridItem(.flexible()),
+        GridItem(.adaptive(minimum: CGSize.dynamicImage.width), spacing: 5),
+        GridItem(.adaptive(minimum: CGSize.dynamicImage.width), spacing: 5)
     ]
     
-    init(
-        mangas: [Manga]?,
-        _ viewStyle: Binding<ViewStyle>
-    ) {
-        self.mangas = mangas
+    init(_ viewStyle: Binding<ViewStyle>) {
         self._viewStyle = viewStyle
     }
+    
     var body: some View {
         self.content()
-            .animation(.spring())
+            .onReceive(
+                vm.$nameQuery
+                    .debounce(for: .seconds(0.65), scheduler: DispatchQueue.main)
+            ) { _ in
+                vm.search()
+            }
             .onChange(of: isSearching) { newValue in
                 if !newValue {
-                    viewStyle = .initial
-                    vm.searchResult = nil
+                    withAnimation(.easeInOut(duration: 0.175)) {
+                        viewStyle = .initial
+                        vm.searchResult = nil
+                    }
                 }
             }
+            .toolbarBackground(.visible, for: .navigationBar)
     }
 }
 

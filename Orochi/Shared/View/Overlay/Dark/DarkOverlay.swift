@@ -6,14 +6,28 @@
 //
 
 import SwiftUI
+import NukeUI
 
 struct DarkOverlay: View {
     var url: URL?
     
     var body: some View {
-        if let url {
-            AsyncImage(url: url, placeholder: { ActivityIndicator() })
-                .aspectRatio(contentMode: .fill)
+        ZStack {
+            LazyImage(
+                request: ImageRequest(
+                    url: url,
+                    processors: [.resize(width: 500, unit: .pixels, upscale: true)]
+                ),
+                transaction: .init(animation: .easeIn)
+            ) { state in
+                if let image = state.image {
+                    image
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                }
+            }
+            
+            Color.black.opacity(0.8)
         }
     }
 }

@@ -26,15 +26,15 @@ struct ChapterView: View {
             content()
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarRole(.editor)
-                .toolbar(showReadBars, for: .bottomBar, .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar, .bottomBar)
+                .toolbar(showReadBars, for: .navigationBar, .bottomBar)
+                .toolbarBackground(.visible, for: .navigationBar)
                 .statusBarHidden(showReadBars == .hidden)
                 .readerToolbar(
                     showChaptersList: $showChaptersList,
                     showReaderPreferences: $showReaderPreferences
                 )
                 .environmentObject(vm)
-                .animation(.spring(), value: [showReadBars])
+                .animation(.default, value: [showReadBars])
         }
     }
 }

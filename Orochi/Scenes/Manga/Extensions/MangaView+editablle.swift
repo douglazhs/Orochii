@@ -47,7 +47,7 @@ extension MangaView {
                     Button { } label: {
                         Label("View on MangaDex.co", systemImage: "safari.fill")
                     }
-                } header: { Text(vm.manga.attributes?.title?.en ?? "") }
+                } header: { Text(vm.unwrapTitle(of: vm.manga)) }
                 Button(role: .destructive) {
                     
                 } label: {
@@ -63,7 +63,7 @@ extension MangaView {
     func chapterActions() -> some View {
         Button { } label:
         { Text(String.ContextMenu.download) }
-        .disabled(vm.selection.isEmpty)
+        .disabled(vm.chSelection.isEmpty)
         Menu {
             Section {
                 Button { } label:
@@ -71,10 +71,10 @@ extension MangaView {
                 Button { } label:
                 { Label(String.ContextMenu.asUnread, systemImage: "eye.slash.fill") }
             } header: {
-                Text("\(vm.selection.count) "
+                Text("\(vm.chSelection.count) "
                      + String.Manga.selectedChapters.uppercased())
             }
         } label: { Text(String.Manga.mark) }
-        .disabled(vm.selection.isEmpty)
+        .disabled(vm.chSelection.isEmpty)
     }
 }

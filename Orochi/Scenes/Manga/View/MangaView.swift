@@ -18,8 +18,8 @@ struct MangaView: View {
     @State var showAniList: Bool = false
     @State var showHistory: Bool = false
     @State var showChapterReader: Bool = false
-    @State var searchOffset: CGFloat = -UIScreen.width
-    @State var headerOffset: CGFloat = 0
+    @State var isTruncated: Bool = false
+    @State var descSize: CGSize = .zero
     @FocusState var field: Field?
     
     init(_ manga: Manga) {
@@ -31,10 +31,6 @@ struct MangaView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar(vm.showBottomBar ? .visible : .hidden, for: .bottomBar)
             .navigationBarBackButtonHidden(vm.isEditingMode)
-            .animation(.spring())
-            /*.animation(.spring(), value: [vm.chapters != nil])
-            .animation(.default, value: vm.descLang)
-            .animation(.default, value: vm.truncation)*/
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     selectChaptersButton()
@@ -47,7 +43,7 @@ struct MangaView: View {
                 }
                 ToolbarItem(placement: .principal) {
                     ActionPopUp(
-                        title: vm.manga.attributes?.title?.en ?? "",
+                        title: vm.unwrapTitle(of: vm.manga),
                         message: vm.actionMessage,
                         action: $vm.occurredAct
                     )

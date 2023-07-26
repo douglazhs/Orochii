@@ -53,8 +53,9 @@ extension Date {
     static func fromString(_ string: String) -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        
         if let date = formatter.date(from: string) {
-            formatter.dateFormat = "dd-MM-yyyy"
+            formatter.dateFormat = "dd MMM yyyy"
             return formatter.string(from: date)
         }
         return ""

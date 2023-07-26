@@ -10,7 +10,7 @@ import SwiftUI
 struct ActionPopUp: View {
     var title: String
     var message: String
-    var action: Binding<Bool>
+    @Binding var action: Bool
     
     var body: some View {
         VStack(alignment: .center, spacing: 2.5) {
@@ -18,7 +18,7 @@ struct ActionPopUp: View {
                 .font(.headline)
                 .fontWeight(.semibold)
                 .lineLimit(1)
-            if action.wrappedValue {
+            if action {
                 Text(message)
                     .lineLimit(1)
                     .multilineTextAlignment(.center)
@@ -29,7 +29,7 @@ struct ActionPopUp: View {
             }
         }
         .frame(maxWidth: frame(of: title, and: message))
-        .onChange(of: action.wrappedValue) { _ in
+        .onChange(of: action) { _ in
             Task {
                 try await Task.sleep(
                     until: .now + .seconds(1.0),
@@ -37,7 +37,7 @@ struct ActionPopUp: View {
                     clock: .suspending
                 )
                 withAnimation(.linear(duration: 0.175)) {
-                    self.action.wrappedValue = false
+                    action = false
                 }
             }
         }

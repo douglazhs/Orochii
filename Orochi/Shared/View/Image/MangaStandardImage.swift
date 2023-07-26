@@ -6,27 +6,44 @@
 //
 
 import SwiftUI
+import NukeUI
+import Nuke
 
 struct MangaStandardImage: View {
     var url: URL?
     var size: CGSize
     
+    init(url: URL? = nil, size: CGSize) {
+        self.url = url
+        self.size = size
+    }
+    
     var body: some View {
-        if let url {
-            AsyncImage(url: url, placeholder: { Placeholder() })
-                .scaledToFill()
-                .frame(
-                    width: size.width,
-                    height: size.height
-                )
-                .overlay(
-                    RoundedRectangle(cornerRadius: 4.5)
-                        .stroke(
-                            Color(uiColor: .systemGray3),
-                            lineWidth: 1.05
-                        )
-                )
-                .cornerRadius(4.5)
+        LazyImage(
+            request: ImageRequest(
+                url: url,
+                processors: [.resize(width: 350, unit: .pixels, upscale: true)],
+                priority: .veryHigh
+            ),
+            transaction: .init(animation: .easeIn)
+        ) { state in
+            if let image = state.image {
+                image
+                    .resizable()
+                    .scaledToFill()
+                    .frame(
+                        width: size.width,
+                        height: size.height
+                    )
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 4.5)
+                            .stroke(
+                                Color(uiColor: .systemGray4),
+                                lineWidth: 1.0
+                            )
+                    )
+                    .cornerRadius(4.5)
+            } else { Placeholder().frame(width: size.width, height: size.height) }
         }
     }
 }

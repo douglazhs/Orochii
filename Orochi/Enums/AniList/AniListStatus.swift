@@ -8,15 +8,20 @@
 import Foundation
 
 /// Manga AniList status
-enum ALStatus: Pickable {
+enum ALStatus: String, Pickable {
     var id:  Self { self}
     
-    case reading, completed, wantTo, rereading, paused, dropped
+    case reading = "CURRENT",
+         completed = "COMPLETED",
+         planning = "PLANNING",
+         rereading = "REPEATING",
+         paused = "PAUSED",
+         dropped = "DROPPED"
     
     /// Status description
     var description: String {
         switch self {
-        case .wantTo:    return "Want to read"
+        case .planning:    return "Planning"
         case .reading:   return "Reading"
         case .completed: return "Completed"
         case .rereading: return "Rereading"

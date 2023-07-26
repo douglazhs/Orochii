@@ -17,26 +17,16 @@ struct ReaderToolbar: ViewModifier {
         content
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button { showChaptersList = true } label:
-                    { Image(systemName: "list.triangle") }
-                    .popover(isPresented: $showChaptersList) {
-                        switch Constants.device {
-                        case .pad:
-                            self.chaptersMenu()
-                                .frame(
-                                    width:  UIScreen.width  * 0.5,
-                                    height: UIScreen.height * 0.5
-                                )
-                        default:
-                            self.chaptersMenu()
-                                .presentationDetents([.medium, .large])
-                                .presentationDragIndicator(.visible)
-                        }
+                    Button { showChaptersList = true } label: {
+                        Image(systemName: "list.triangle")
+                    }
+                    .sheet(isPresented: $showChaptersList) {
+                        ChaptersListView().environmentObject(vm)
                     }
                 }
-                ToolbarItem(placement: .navigationBarTrailing) { self.readerPreferences() }
-                ToolbarItem(placement: .principal) { self.principalItem() }
-                ToolbarItem(placement: .bottomBar) { self.pageSlider() }
+                ToolbarItem(placement: .navigationBarTrailing) { readerPreferences() }
+                ToolbarItem(placement: .principal) { principalItem() }
+                ToolbarItem(placement: .bottomBar) { pageSlider() }
             }
     }
 }
