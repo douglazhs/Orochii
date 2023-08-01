@@ -22,8 +22,10 @@ extension MangaView {
     func editButton() ->  some View {
         if vm.isEditingMode {
             Button {
-                vm.isEditingMode.toggle()
-                vm.showBottomBar.toggle()
+                withTransaction(.init(animation: .easeInOut)) {
+                    vm.isEditingMode = false
+                    vm.showBottomBar = false
+                }
             } label: {
                 Text(String.Common.done)
                     .fontWeight(.semibold)
@@ -32,19 +34,20 @@ extension MangaView {
             Menu {
                 Section {
                     Button {
-                        vm.isEditingMode.toggle()
-                        if !vm.showBottomBar {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.275) {
-                                vm.showBottomBar = true
-                            }
-                        } else { vm.showBottomBar = false }
+                        withTransaction(.init(animation: .easeInOut)) {
+                            vm.isEditingMode = true
+                            vm.showBottomBar = true
+                        }
                     } label: {
                         Label (
                             String.Manga.selectChapters,
                             systemImage: "checklist"
                         )
                     }
-                    Button { } label: {
+                    Button {
+                        UIApplication.shared
+                            .safariVC(url: "\(AppURLs.MDSite.description)/manga/\(vm.manga.id)")
+                    } label: {
                         Label("View on MangaDex.co", systemImage: "safari.fill")
                     }
                 } header: { Text(vm.unwrapTitle(of: vm.manga)) }

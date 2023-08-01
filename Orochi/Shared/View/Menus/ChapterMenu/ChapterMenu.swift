@@ -16,7 +16,7 @@ struct ChapterMenu: View {
     
     var body: some View {
         Section {
-            Button {action(.markAsRead) } label:
+            Button { action(.markAsRead) } label:
             { Label(String.ContextMenu.markAsRead, systemImage: "eye.fill") }
             Menu(String.ContextMenu.markPrevious) {
                 Button { action(.previousAsRead) } label:

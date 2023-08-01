@@ -29,12 +29,6 @@ extension LanguagesView {
                     }
                 }
                 .foregroundColor(.primary)
-                .onChange(of: languages) {
-                    Defaults.standard.saveObj(
-                        $0.map { $0.rawValue },
-                        key: DefaultsKeys.SrcPreferences.languages.rawValue
-                    )
-                }
             }
         } header: {
             Text("Manga Source Languages")

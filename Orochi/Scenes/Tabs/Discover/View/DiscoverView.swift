@@ -24,6 +24,11 @@ struct DiscoverView: View {
                 .navigationTitle(String.Discovery.title)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarBackground(.visible, for: .tabBar)
+                .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
+                    Button(String.Common.ok, role: .cancel) { }
+                } message: {
+                    Text(vm.alertInfo.message)
+                }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         mangaSourceButton()
@@ -39,7 +44,7 @@ struct DiscoverView: View {
             text: $vm.nameQuery,
             placement: .navigationBarDrawer(
                 displayMode: .always
-            ),prompt: "Search for title"
+            ),prompt: "Search for manga title"
         )
         .onSubmit(of: .search) {
             UIApplication.shared.becomeFirstResponder()

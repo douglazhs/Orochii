@@ -30,7 +30,7 @@ extension ReaderToolbar {
             }
             .foregroundColor(Color(uiColor: .systemGray))
             .font(.caption2)
-        }
+        }.frame(maxWidth: .infinity, alignment: .center)
     }
     
     /// Reader preferences trailing button

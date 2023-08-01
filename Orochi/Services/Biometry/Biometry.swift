@@ -7,6 +7,7 @@
 
 import LocalAuthentication
 
+/// Biometry service handler
 final class Biometry {
     static var shared = Biometry()
     

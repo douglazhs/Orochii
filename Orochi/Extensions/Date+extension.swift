@@ -38,9 +38,9 @@ extension Date {
     /// Get date from string
     /// - Parameter string: Date in string format
     /// - Returns: Converted date
-    static func convert(_ string: String) -> Date {
+    static func convert(_ string: String, format: String = "yyyy-MM-dd'T'HH:mm:ssZ") -> Date {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        formatter.dateFormat = format
         if let date = formatter.date(from: string) {
             return date
         }

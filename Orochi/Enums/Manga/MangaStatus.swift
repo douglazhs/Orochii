@@ -2,26 +2,46 @@
 //  MangaStatus.swift
 //  Orochii
 //
-//  Created by Douglas Henrique de Souza Pereira on 20/11/22.
+//  Created by Douglas Henrique de Souza Pereira on 28/11/22.
 //
 
-import SwiftUI
+import Foundation
 
-/// Actual manga status
+/// Local and AniList manga status
 enum MangaStatus: String, Pickable {
-    var id: Self { self }
+    var id:  Self { self}
     
-    case current, planning, completed, dropped, paused, repeating
+    case reading = "CURRENT",
+         completed = "COMPLETED",
+         planning = "PLANNING",
+         rereading = "REPEATING",
+         paused = "PAUSED",
+         dropped = "DROPPED",
+         none = "NONE"
     
-    /// Manga status description
+    /// Status description
     var description: String {
         switch self {
-        case .current:   return "READING"
-        case .planning:  return "PLANNING"
-        case .completed: return "COMPLETED"
-        case .dropped:   return "DROPPED"
-        case .paused:    return "PAUSED"
-        case .repeating: return "REPEATING"
+        case .planning:  return "Planning"
+        case .reading:   return "Reading"
+        case .completed: return "Completed"
+        case .rereading: return "Rereading"
+        case .paused:    return "Paused"
+        case .dropped:   return "Dropped"
+        case .none :     return "None"
+        }
+    }
+    
+    /// Status related icon
+    var icon: String {
+        switch self {
+        case .reading:   return "popcorn.fill"
+        case .completed: return "balloon.fill"
+        case .planning:  return "clock"
+        case .rereading: return "goforward"
+        case .paused:    return "pause.fill"
+        case .dropped:   return "stop.fill"
+        case .none:      return "minus"
         }
     }
 }

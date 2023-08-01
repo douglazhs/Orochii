@@ -37,10 +37,8 @@ struct AlwaysPopoverModifier<PopoverContent>: ViewModifier where PopoverContent:
         popover.delegate = contentController
         
         guard let sourceVC = view.closestVC() else { return }
-        if let presentedVC = sourceVC.presentedViewController {
-            presentedVC.dismiss(animated: true) {
-                sourceVC.present(contentController, animated: true)
-            }
+        if let _ = sourceVC.presentedViewController {
+            
         } else {
             sourceVC.present(contentController, animated: true)
         }

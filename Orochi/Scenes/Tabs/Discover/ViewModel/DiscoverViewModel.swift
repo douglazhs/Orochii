@@ -7,79 +7,164 @@
 
 import SwiftUI
 import MangaDex
-import Combine
 
-/// Carousel Dictionary Configuration
-typealias CarouselDict = [Carousel : [Manga]]
+// DiscoverViewModel+MangaHelpers
+extension DiscoverViewModel: MangaHelpers { }
 
-final class DiscoverViewModel: ObservableObject, MangaHelpers {
+// DiscoverViewModel+SourcePreferences
+extension DiscoverViewModel: SourcePreferences { }
+
+final class DiscoverViewModel: ObservableObject {
+    /// MangaDex api object
+    let api: MangaDexAPIProtocol = MangaDexAPI()
+    /// Carousel sections
+    @Published var sections: [Carousel] = Array<Carousel>()
+    // MARK: - Searching stuffs
     @Published var nameQuery: String = ""
-    @Published var sections: CarouselDict = [:]
-    @Published var api: MangaDexAPIProtocol = MangaDexAPI()
     @Published var searchResult: [Manga]?
     @Published var isSearching: Bool = false
+    // MARK: - MangaDex request handling
+    @Published var nsfw: Bool = false
+    @Published var languages: [Language] = Array<Language>()
+    @Published var shouldReload: Bool = false
+    // MARK: - Error alert
+    @Published var showAlert: Bool = false
+    var alertInfo: AlertInfo = .init()
     
-    init() { generateSections() }
+    init() {
+        loadPreferences()
+        generateSections()
+    }
+    
+    /// Load user defaults
+    private func loadPreferences() {
+        let rawValues = Defaults.standard.getObj(
+            of: DefaultsKeys.SrcPreferences.languages.rawValue
+        ) as? [Int] ?? []
+        languages = rawValues.map { Language(rawValue: $0) ?? .enUS }
+        nsfw = Defaults.standard.getBool(
+            of: DefaultsKeys.SrcPreferences.nsfw.rawValue
+        )
+    }
+    
+    /// Generate Main screen carousel dictionary
+    /// - Returns: All main view carousel
+    private func generateSections() {
+        sections = CarouselSection.allCases.compactMap { Carousel($0) }
+        Task { @MainActor in
+            sections.indices.forEach { [weak self] index in
+                if let section = self?.sections[index] {
+                    self?.fetch(section.config) { [weak self] in
+                        self?.sections[index].mangas = $0
+                    }
+                }
+            }
+        }
+    }
     
     /// Fetch mangas
     /// - Parameters:
     ///   - carousel: Current carousel
-    ///   - completion: Manga Array
-    func fetch(_ carousel: Carousel, completion: @escaping([Manga]) -> Void) {
-        api.getRandomManga(params: carousel.params) { result in
+    ///   - offset: Current request offset
+    ///   - completion: Manga request result
+    private func fetch(_ section: CarouselSection, offset: Int = 0, completion: @escaping([Manga]) -> Void) {
+        api.getRandomManga(
+            params: merge(section.params, into: defaults()),
+            offset: offset
+        ) { [weak self] result in
             switch result {
             case .success(let array):
                 completion(array.data)
-            case .failure(let error): print("Fetch discovery error: \(error.localizedDescription)")
+            case .failure(let error):
+                self?.showAlert(error)
             }
         }
     }
     
     /// Search manga by name
     func search() {
+        var params: [String : Any] = [
+            "limit" : 30,
+            "order[rating]" : "desc"
+        ]
+        params = merge(params, into: defaults())
         if !nameQuery.isEmpty {
-            withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
-                isSearching = true
-            }
             api.getByName(
                 nameQuery,
-                params: ["limit" : 20]
-            ) { result in
+                params: params
+            ) { [weak self] result in
                 switch result {
                 case .success(let array): 
-                    self.searchResult = array.data
-                    withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
-                        self.isSearching = false
+                    self?.searchResult = array.data
+                    withTransaction(.init(animation: .easeInOut(duration: 0.225))) {
+                        self?.isSearching = false
                     }
                 case .failure(let error):
-                    self.searchResult = nil
-                    self.isSearching = false
-                    print("User search manga error: \(error.localizedDescription)")
+                    withTransaction(.init(animation: .easeInOut(duration: 0.225))) {
+                        self?.searchResult = nil
+                        self?.isSearching = false
+                    }
+                    self?.showAlert(error)
                 }
             }
         }
     }
     
-    /// Generate Main screen carousel dictionary
-    /// - Returns: All main view carousel
-    func generateSections() {
-        Task { @MainActor in
-            Carousel.allCases.forEach { type in
-                switch type {
-                case .latestUploaded:
-                    fetch(.latestUploaded) { self.sections[type] = $0 }
-                case .mostRelevants:
-                    fetch(.mostRelevants) { self.sections[type] = $0 }
-                case .ongoingStatus:
-                    fetch(.ongoingStatus) { self.sections[type] = $0 }
-                case .thisYear:
-                    fetch(.thisYear) { self.sections[type] = $0 }
-                case .seinen:
-                    fetch(.seinen) { self.sections[type] = $0 }
-                case .shounen:
-                    fetch(.shounen) { self.sections[type] = $0 }
+    /// Verify if the user scrolled to the end of the carousel
+    /// - Parameters:
+    ///   - manga: last manga of carousel
+    ///   - index: current carousel index
+    /// - Returns: Boolean
+    func hasReachedEnd(of manga: Manga, on index: Int) -> Bool {
+        sections[index].mangas?.last?.id == manga.id
+    }
+    
+    /// Fetch more mangas
+    /// - Parameter index: carousel index
+    func fetchMore(on index: Int) {
+        guard sections[index].offset <= 150 else { return }
+        sections[index].offset += 30
+        
+        fetch(
+            sections[index].config,
+            offset: sections[index].offset
+        ) { [weak self] mangas in
+            withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
+                self?.sections[index].mangas?.append(contentsOf: mangas)
+            }
+        }
+    }
+    
+    /// Reload discover content
+    func reload() {
+        if shouldReload {
+            Task { @MainActor in
+                sections.indices.forEach { index in
+                    fetch(sections[index].config) { [weak self] in
+                        self?.sections[index].mangas = $0
+                    }
                 }
             }
         }
+        withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
+            shouldReload = false
+        }
+    }
+    
+    /// Show alert
+    /// - Parameters:
+    ///   - error: Threw error
+    private func showAlert(_ error: Error) {
+        showAlert = true
+        guard let AFError = error.asAFError?.underlyingError else {
+            alertInfo = .init(
+                title: error.localizedDescription
+            )
+            return
+        }
+        
+        alertInfo = .init(
+            title: AFError.localizedDescription
+        )
     }
 }

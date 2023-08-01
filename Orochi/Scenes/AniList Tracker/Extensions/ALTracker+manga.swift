@@ -11,23 +11,44 @@ extension ALTracker {
     /// Manga information
     @ViewBuilder
     func mangaSection() -> some View {
-        VStack {
-            HStack(alignment: .center, spacing: 5.0) {
-                // MANGA COVER
-                MangaStandardImage(
-                    url: URL(string:vm.alManga?.coverImage?.large ?? ""),
-                    size: .standardImageCell
+        HStack(alignment: .top, spacing: 12.5) {
+            // MANGA COVER
+            MangaStandardImage(
+                url: URL(
+                    string: vm.alManga?.coverImage?.extraLarge ??
+                    vm.alManga?.coverImage?.large ??
+                    ""
+                ),
+                size: CGSize(
+                    width: CGSize.standardImageCell.width * 1.5,
+                    height: CGSize.standardImageCell.height * 1.5
                 )
-                // MANGA STATUS
-                status()
-            }.frame(maxHeight: CGSize.standardImageCell.height + 35.0)
-        }
-    }
-    
-    /// Manga tracking status
-    @ViewBuilder
-    func status() -> some View {
-        EnumPicker("", selection: $vm.status)
-            .pickerStyle(.wheel)
+            )
+            
+            VStack(alignment: .leading, spacing: 10.0) {
+                MediaAttributes(
+                    leading: (title: "FORMAT", value: vm.alManga?.format ?? "-"),
+                    trailing: (title: "STATUS", value: vm.alManga?.status ?? "-")
+                )
+                
+                MediaAttributes(
+                    leading: (
+                        title: "AVERAGE SCORE",
+                        value: String(format: "%.1f", Double(vm.alManga?.averageScore ?? 0) / 10.0)
+                    ),
+                    trailing: (title: "COUNTRY", value: vm.alManga?.countryOfOrigin ?? "-")
+                )
+                
+                MediaAttributes(
+                    leading: (title: "SOURCE", value: vm.alManga?.source?.replacingOccurrences(of: "_", with: " ") ?? "-"),
+                    trailing: (title: "YEAR", value: vm.alManga?.startDate?.year?.unwrapNil() ?? "-")
+                )
+                
+                MediaAttributes(
+                    leading: (title: "PUPULAR", value: "#\(vm.getRank(.popular)?.unwrapNil() ?? "-")"),
+                    trailing: (title: "RATED", value: "#\(vm.getRank(.rated)?.unwrapNil() ?? "-")")
+                )
+            }
+        }.lineLimit(1)
     }
 }

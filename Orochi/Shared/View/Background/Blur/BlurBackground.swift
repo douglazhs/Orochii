@@ -11,10 +11,17 @@ import NukeUI
 struct BlurBackground: View {
     var url: URL?
     var image: AppImages = .view_background
+    var radius: Double
     
-    init(with url: URL? = nil) { self.url = url }
+    init(with url: URL? = nil, radius: Double = 55.0) {
+        self.url = url
+        self.radius = radius
+    }
     
-    init(with image: AppImages = .view_background) { self.image = image }
+    init(with image: AppImages = .view_background, radius: Double = 55.0) {
+        self.image = image
+        self.radius = radius
+    }
     
     var body: some View {
         if let url {
@@ -22,7 +29,7 @@ struct BlurBackground: View {
                 LazyImage(
                     request: ImageRequest(
                         url: url,
-                        processors: [.resize(width: 350, unit: .pixels, upscale: true)]
+                        processors: [.resize(width: 295, unit: .points, upscale: true)]
                     ),
                     transaction: .init(animation: .easeIn)
                 ) { state in
@@ -31,11 +38,11 @@ struct BlurBackground: View {
                             .resizable()
                             .scaledToFill()
                             .edgesIgnoringSafeArea(.all)
-                            .blur(radius: 35.0, opaque: true)
+                            .blur(radius: radius, opaque: true)
                     }
                 }
                 
-                Color.black.opacity(0.85).edgesIgnoringSafeArea(.all)
+                Color.black.opacity(0.9).edgesIgnoringSafeArea(.all)
             }
         } else {
             Image(image.rawValue)

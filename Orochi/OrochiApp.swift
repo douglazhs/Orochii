@@ -22,11 +22,6 @@ struct OrochiiApp: App {
                         String.Library.title,
                         systemImage: "books.vertical"
                     ) }
-                /*HistoryView()
-                    .tabItem { Label(
-                        "History",
-                        systemImage: "clock"
-                    ) }*/
                 SettingsView()
                     .tabItem { Label(
                         String.Settings.title,

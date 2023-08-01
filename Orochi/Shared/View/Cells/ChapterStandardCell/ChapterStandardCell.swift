@@ -39,6 +39,5 @@ struct ChapterStandardCell: View {
 struct ChapterStandardCell_Previews: PreviewProvider {
     static var previews: some View {
         EmptyView()
-        /*ChapterStandardCell(ChapterDomain.samples[0])*/
     }
 }

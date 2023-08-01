@@ -14,8 +14,9 @@ struct ReaderPreferencesView: View {
     var body: some View {
         NavigationStack {
             List {
-                self.pageLayoutSection().listRowBackground(Color.clear)
-                self.readingModeSection().listRowBackground(Color.clear)
+                pageLayoutSection().listRowBackground(Color.clear)
+                readingModeSection().listRowBackground(Color.clear)
+                pageQualitySection().listRowBackground(Color.clear)
             }
             .listStyle(.grouped)
             .scrollContentBackground(.hidden)

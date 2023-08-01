@@ -9,8 +9,7 @@ import SwiftUI
 
 struct SourcePreferencesView: View {
     @Environment(\.dismiss) var dismiss
-    @StateObject var vm = SourcePreferencesViewModel()
-    @State var showActions: Bool = false
+    @EnvironmentObject var vm: DiscoverViewModel
     
     var body: some View {
         NavigationStack {
@@ -19,8 +18,6 @@ struct SourcePreferencesView: View {
                     .listRowSeparator(.hidden)
                     .listRowBackground(Color.clear)
                 self.languageSection()
-                    .listRowBackground(Color.clear)
-                self.qualitySection()
                     .listRowBackground(Color.clear)
                 self.ageRatingSection()
                     .listRowBackground(Color.clear)

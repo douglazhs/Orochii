@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import NukeUI
 import struct MangaDex.Manga
 
 extension SearchStyleView {
@@ -13,21 +14,12 @@ extension SearchStyleView {
     func content() -> some View {
         ScrollView {
             if let mangas = vm.searchResult, !vm.isSearching, !mangas.isEmpty {
-                LazyVGrid(columns: columns, spacing: 5) {
+                LazyVGrid(columns: columns, spacing: 10) {
                     ForEach(mangas) { manga in
                         NavigationLink {
                             MangaView(manga)
                         } label: {
-                            MangaStandardImage(
-                                url: vm.api.buildURL(for: .cover(
-                                    id: manga.id,
-                                    fileName: vm.imgFileName(of: manga)
-                                )),
-                                size: CGSize(
-                                    width: CGSize.dynamicImage.width * 1.35,
-                                    height: CGSize.dynamicImage.height * 1.35
-                                )
-                            )
+                            cell(of: manga)
                         }
                         .contextMenu {
                             // TODO: - Implement context menu features
@@ -39,18 +31,49 @@ extension SearchStyleView {
                             }
                         } preview: { MangaView(manga) }
                     }
-                }
-                .padding()
+                }.padding()
             } else {
-                if vm.isSearching { ActivityIndicator().padding(.vertical) } else {
-                    Text("NO RESULTS FOUND :(")
+                if vm.isSearching {
+                    ActivityIndicator().padding(.vertical)
+                } else if !vm.isSearching {
+                    Text("No results found for: *\(vm.nameQuery)*")
                         .lineLimit(1)
                         .font(.subheadline)
-                        .fontWeight(.regular)
+                        .fontWeight(.medium)
                         .foregroundColor(Color(.systemGray))
                         .padding(.vertical)
                 }
             }
+        }
+    }
+    
+    /// Cell of grid
+    @ViewBuilder
+    func cell(of manga: Manga) -> some View {
+        MangaStandardImage(
+            url: vm.api.buildURL(for: .cover(
+                id: manga.id,
+                fileName: vm.imgFileName(of: manga)
+            )),
+            size: CGSize(
+                width: CGSize.dynamicImage.width * 1.25,
+                height: CGSize.dynamicImage.height * 1.25
+            )
+        )
+        .overlay(alignment: .bottom) {
+            ZStack(alignment: .bottom) {
+                LinearGradient(colors: [.clear, .black], startPoint: .center, endPoint: .bottom)
+                Text(vm.unwrapTitle(of: manga))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.leading)
+                    .lineSpacing(1)
+                    .padding(7.5)
+                    .font(.footnote)
+                    .fontWeight(.semibold)
+                    .foregroundColor(.primary.opacity(0.85))
+            }
+            .clipShape(RoundedRectangle(cornerRadius: 4.5))
         }
     }
 }

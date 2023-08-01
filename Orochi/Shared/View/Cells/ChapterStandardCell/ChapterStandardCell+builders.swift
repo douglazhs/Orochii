@@ -52,7 +52,7 @@ extension ChapterStandardCell {
                     .fontWeight(.heavy)
                 Text(chapter.attributes?.title ?? "")
                     .font(.footnote)
-                    .lineLimit(2)
+                    .lineLimit(1)
                     .multilineTextAlignment(.leading)
                     .truncationMode(.tail)
                     .fontWeight(.semibold)
@@ -75,9 +75,10 @@ extension ChapterStandardCell {
     /// Chapter scan informations
     @ViewBuilder
     func scanlationGroupInfo() -> some View {
-        HStack(alignment: .bottom) {
+        HStack(alignment: .bottom, spacing: 5.0) {
             // UPDATED
-            if let createdAt = chapter.attributes?.createdAt {
+            if let scanlationGroup,
+               let createdAt = chapter.attributes?.createdAt {
                 // UPDATED AT
                 Text(
                     Date.fromString(createdAt) +
@@ -86,7 +87,7 @@ extension ChapterStandardCell {
                 .font(.footnote)
                 .foregroundColor(Color(uiColor: .systemGray))
                 // SCAN GROUP
-                Text("~ " + (scanlationGroup ?? ""))
+                Text("~ " + scanlationGroup)
                     .font(.footnote)
                     .foregroundColor(Color(uiColor: .systemGray))
             } else {
@@ -95,5 +96,6 @@ extension ChapterStandardCell {
                     .foregroundColor(Color(uiColor: .systemGray))
             }
         }
+        .lineLimit(1)
     }
 }

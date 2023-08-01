@@ -26,6 +26,24 @@ extension ReaderPreferencesView {
         }
     }
     
+    /// Manga quality
+    @ViewBuilder
+    func pageQualitySection() -> some View {
+        Section {
+            EnumPicker("Manga quality", selection: $vm.pageQuality)
+                .onChange(of: vm.pageQuality) {
+                    Defaults.standard.saveInt(
+                        $0.rawValue,
+                        key: DefaultsKeys.ReaderPreferences.pageQuality.rawValue
+                    )
+                }
+        } header: {
+            Text("Page quality")
+        } footer: {
+            Text("Choose the quality of your preference")
+        }
+    }
+    
     /// Reading mode chooser
     @ViewBuilder
     func readingModeSection() -> some View {

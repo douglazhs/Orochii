@@ -42,9 +42,5 @@ struct ChapterView: View {
 struct ChapterView_Previews: PreviewProvider {
     static var previews: some View {
         EmptyView()
-        /*ChapterView(
-            ChapterDomain.samples[0],
-            of: MangaDomain.samples[0]
-        )*/
     }
 }

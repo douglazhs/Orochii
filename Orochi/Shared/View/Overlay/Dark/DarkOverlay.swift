@@ -16,7 +16,7 @@ struct DarkOverlay: View {
             LazyImage(
                 request: ImageRequest(
                     url: url,
-                    processors: [.resize(width: 500, unit: .pixels, upscale: true)]
+                    processors: [.resize(width: 295, unit: .points, upscale: true)]
                 ),
                 transaction: .init(animation: .easeIn)
             ) { state in

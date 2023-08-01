@@ -12,29 +12,31 @@ extension InitialStyleView {
     /// Carousel
     /// - Parameter mangas: Retrieved mangas
     @ViewBuilder
-    func carousel(of mangas: [Manga]) -> some View {
+    func carousel(_ carousel: Int, with mangas: [Manga]) -> some View {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(alignment: .top) {
                 ForEach(mangas) { manga in
-                    NavigationLink {
-                        MangaView(manga)
-                    } label: {
+                    NavigationLink(value: manga) {
                         cell(of: manga)
+                            .task { [weak vm] in
+                                if (vm?.hasReachedEnd(of: manga, on: carousel) ?? false) {
+                                    vm?.fetchMore(on: carousel)
+                                }
+                            }
                             .contextMenu {
-                                // TODO: - Implement context menu features
                                 Button { } label: {
                                     Label(String.ContextMenu.addToLib, systemImage: "plus.rectangle.on.folder")
                                 }
                                 Button(role: .destructive) { } label: {
                                     Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
                                 }
-                            } preview: { MangaView(manga) }
+                            } 
                     }
                 }
             }
             .padding(.horizontal)
-            .padding(.vertical, 3.5)
         }
+        .scrollBounceBehavior(.basedOnSize)
     }
     
     /// Manga carousel cell
@@ -55,10 +57,12 @@ extension InitialStyleView {
             Text(vm.unwrapTitle(of: manga))
                 .lineLimit(2)
                 .multilineTextAlignment(.leading)
-                .font(.system(.footnote, design: .none, weight: .regular))
-                .foregroundColor(.primary.opacity(0.75))
+                .font(.footnote)
+                .fontWeight(.regular)
+                .foregroundColor(.primary.opacity(0.85))
                 .frame(
-                    width: CGSize.standardImageCell.width,
+                    maxWidth: CGSize.standardImageCell.width,
+                    idealHeight: 35,
                     alignment: .leading
                 )
         }

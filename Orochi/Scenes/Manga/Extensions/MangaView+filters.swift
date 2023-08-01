@@ -21,19 +21,14 @@ extension MangaView {
     func standardBar() -> some View {
         HStack {
             // CHAPTERS COUNT
-            Text("\(vm.chapters?.count ?? 0) "
-                 + String.Manga.chapHeader.uppercased())
+            Text("\(vm.totalOnFeed) " +
+                 String.Manga.chapHeader.uppercased())
             .lineLimit(1)
             Spacer()
             // ORDER MENU
             order()
-                .disabled(vm.occurredAct)
-            // HISTORY BUTTON
-            /*historyButton()
-                .disabled(vm.occurredAct)
              // SEARCH BUTTON
-             searchChap()
-                .disabled(vm.occurredAct)*/
+             /*searchChap()*/
         }
     }
     
@@ -64,14 +59,14 @@ extension MangaView {
         HStack {
             Image(systemName: "magnifyingglass")
                 .foregroundColor(.secondary)
-            TextField(text: $vm.queryFilter, axis: .horizontal) {
+            TextField(text: $vm.filterQuery, axis: .horizontal) {
                 Text("Chapter name or number")
                     .font(.body)
                     .fontWeight(.regular)
                     .foregroundColor(.secondary)
             }
-            .onChange(of: vm.queryFilter) { newValue in
-                vm.filterChapters()
+            .onChange(of: vm.filterQuery) { newValue in
+                vm.filter()
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
         }
@@ -108,20 +103,14 @@ extension MangaView {
             Section {
                 Label {
                     EnumPicker(
-                        vm.chaptersOrder.description,
-                        selection: $vm.chaptersOrder
+                        vm.feedOrder.description,
+                        selection: $vm.feedOrder
                     )
                     .pickerStyle(.menu)
-                    .onChange(of: vm.chaptersOrder) {
-                        Defaults.standard.saveInt(
-                            $0.rawValue,
-                            key: DefaultsKeys.Chapters.order.rawValue
-                        )
-                        vm.sortChapters()
-                    }
+                    .onChange(of: vm.feedOrder) { [weak vm] in vm?.order(by: $0) }
                 } icon: {
                     Label(
-                        vm.chaptersOrder.description,
+                        vm.feedOrder.description,
                         systemImage: "arrow.up.arrow.down"
                     )
                 }
@@ -137,7 +126,8 @@ extension MangaView {
                         }
                     }
                 }
-                .onChange(of: vm.downloaded) {
+                .onChange(of: vm.downloaded) { [weak vm] in
+                    vm?.filter()
                     Defaults.standard.saveBool(
                         $0,
                         key: DefaultsKeys.Chapters.downloaded.rawValue

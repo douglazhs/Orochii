@@ -54,7 +54,9 @@ final class ChapterViewModel: ObservableObject, MangaHelpers {
     
     /// Define manga reading mode
     func defineReadingMode() {
-        guard getTag("Web Comic", of: manga) != nil else {
+        guard getTag("Web Comic", of: manga) != nil,
+              getTag("Full Color", of: manga) != nil
+        else {
             format = .normal
             return
         }
@@ -90,7 +92,7 @@ final class ChapterViewModel: ObservableObject, MangaHelpers {
             rawValue: Defaults.standard.getInt(of: DefaultsKeys.ReaderPreferences.mode.rawValue)
         ) ?? .defaultMode
         pageQuality = MangaQuality(
-            rawValue: Defaults.standard.getInt(of: DefaultsKeys.SrcPreferences.quality.rawValue)
+            rawValue: Defaults.standard.getInt(of: DefaultsKeys.ReaderPreferences.pageQuality.rawValue)
         ) ?? .original
     }
 }

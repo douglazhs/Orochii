@@ -56,7 +56,9 @@ struct ChaptersListView: View {
                                 .font(.footnote)
                                 .fontWeight(.heavy)
                         }
-                        .tint(.white)
+                        .tint(.white.opacity(0.75))
+                        .clipShape(Circle())
+                        .buttonStyle(.bordered)
                     }
                 }
             }

@@ -11,16 +11,9 @@ extension WebsiteStandardCell {
     /// View content
     @ViewBuilder
     func content() -> some View {
-        VStack(alignment: .leading) {
-            HStack(alignment: .top) {
-                self.link()
-                Spacer()
-                Text(customInfo)
-                    .font(.caption)
-            }
+        link()
             .padding(10)
             .background(PrimaryGradient())
-        }
     }
     
     /// Link to URL
@@ -29,14 +22,21 @@ extension WebsiteStandardCell {
         Button {
             showWebView = true
         } label: {
-            Image(appImage: image)
-                .resizable()
-                .cornerRadius(4.5)
-                .frame(
-                    width: 45.0,
-                    height: 45.0
-                )
+            HStack(spacing: 15.0) {
+                Image(appImage: image)
+                    .resizable()
+                    .cornerRadius(4.5)
+                    .frame(
+                        width: 45.0,
+                        height: 45.0
+                    )
+                Text(title)
+                    .font(.footnote)
+                    .fontWeight(.medium)
+            }
         }
+        .tint(.accentColor.opacity(0.9))
+        .frame(maxWidth: .infinity, alignment: .leading)
         .fullScreenCover(isPresented: $showWebView) {
             SafariWebView(url: URL(string: urlString)!)
                 .ignoresSafeArea()

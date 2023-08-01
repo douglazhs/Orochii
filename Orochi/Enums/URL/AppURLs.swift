@@ -14,7 +14,7 @@ enum AppURLs: CustomStringConvertible {
     /// URL
     var description: String {
         switch self {
-        case .ALSite: return "https://anilist.co/home"
+        case .ALSite: return "https://anilist.co"
         case .MDSite: return "https://mangadex.org"
         case .GitHub: return "https://github.com/douglazhs/Orochii"
         }

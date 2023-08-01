@@ -6,33 +6,35 @@
 //
 
 import SwiftUI
+import struct MangaDex.Manga
 
 struct InitialStyleView: View {
     @EnvironmentObject var vm: DiscoverViewModel
 
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            LazyVStack(alignment: .center) {
-                ForEach(Carousel.allCases, id: \.self) { type in
+        ScrollView(.vertical, showsIndicators: false) {
+            LazyVStack(alignment: .leading) {
+                ForEach(vm.sections.indices, id: \.self) { index in
                     Section {
-                        if let section = vm.sections[type] {
-                            carousel(of: section)
+                        if let mangas = vm.sections[index].mangas {
+                            carousel(index, with: mangas)
+                                .padding(.bottom, 15)
                         } else {
-                            ActivityIndicator()
+                            // TODO: - Placeholder to loading carousel
                         }
                     } header: {
-                        HStack(alignment: .center) {
-                            Text(type.header.uppercased())
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                                .fontWeight(.regular)
-                                .padding(.trailing, 7.5)
-                            VStack { Divider() }
-                        }.padding(.leading)
+                        Text(vm.sections[index].config.header.uppercased())
+                            .font(.subheadline)
+                            .foregroundColor(.secondary)
+                            .fontWeight(.regular)
+                            .padding(.leading)
                     }
                 }
             }.padding(.vertical)
-        }.scrollContentBackground(.hidden)
+        }
+        .navigationDestination(for: Manga.self) { manga in
+            MangaView(manga)
+        }
     }
 }
 

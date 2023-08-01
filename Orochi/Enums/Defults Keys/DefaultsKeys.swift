@@ -20,12 +20,12 @@ public struct DefaultsKeys {
     
     public enum SrcPreferences: String {
         case languages = "srcPreferences.languages"
-        case quality = "srcPreferences.quality"
         case nsfw = "srcPreferences.nsfw"
     }
     
     public enum ReaderPreferences: String {
         case pageLayout = "readerPreferences.pageLayout"
+        case pageQuality = "readerPreferences.pageQuality"
         case mode = "readerPreferences.mode"
     }
     

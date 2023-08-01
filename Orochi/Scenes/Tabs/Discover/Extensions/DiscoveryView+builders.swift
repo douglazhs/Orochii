@@ -41,8 +41,11 @@ extension DiscoverView {
             Image(systemName: "antenna.radiowaves.left.and.right")
                 .foregroundColor(.accentColor)
         }
-        .sheet(isPresented: $mangaSourcePref) {
+        .sheet(isPresented: $mangaSourcePref, onDismiss: {
+            vm.reload()
+        }) {
             SourcePreferencesView()
+                .environmentObject(vm)
         }
     }
 }

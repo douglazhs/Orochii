@@ -10,11 +10,12 @@ import SwiftUI
 extension SourcePreferencesView {
     /// MangaDex source site
     /// - Returns: MangaDex site section
+    // - MARK: 
     @ViewBuilder
     func siteSection() -> some View {
         Section {
             WebsiteStandardCell(
-                title: String.Name.mangaDex,
+                title: "mangadex.org",
                 urlString: AppURLs.MDSite.description,
                 image: .manga_dex_icon
             )
@@ -30,31 +31,23 @@ extension SourcePreferencesView {
     @ViewBuilder
     func languageSection() -> some View {
         Section {
-            NavigationLink(destination: LanguagesView(languages: $vm.languages)) {
+            NavigationLink {
+                LanguagesView(languages: $vm.languages)
+                    .onChange(of: vm.languages) {
+                        Defaults.standard.saveObj(
+                            $0.map { $0.rawValue },
+                            key: DefaultsKeys.SrcPreferences.languages.rawValue
+                        )
+                        withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
+                            vm.shouldReload = true
+                        }
+                    }
+            } label: {
                 Text(String.MangaSource.languageHeader)
             }
         } header: {
             Text(String.MangaSource.languageHeader)
         } footer: { Text(String.MangaSource.languageFooter) }
-    }
-    
-    /// MangaDex quality of mangas
-    /// - Returns: Manga's quality chooser
-    @ViewBuilder
-    func qualitySection() -> some View {
-        Section {
-            EnumPicker(String.MangaSource.mangaQuality, selection: $vm.selectedQuality)
-                .onChange(of: vm.selectedQuality) {
-                    Defaults.standard.saveInt(
-                        $0.rawValue,
-                        key: DefaultsKeys.SrcPreferences.quality.rawValue
-                    )
-                }
-        } header: {
-            Text(String.MangaSource.qualityHeader)
-        } footer: {
-            Text(String.MangaSource.qualityFooter)
-        }
     }
     
     /// App Age Rating section
@@ -73,6 +66,7 @@ extension SourcePreferencesView {
                     $0,
                     key: DefaultsKeys.SrcPreferences.nsfw.rawValue
                 )
+                vm.shouldReload = true
             }
         } header: {
             Text(String.Adjusts.ageRatingHeader)

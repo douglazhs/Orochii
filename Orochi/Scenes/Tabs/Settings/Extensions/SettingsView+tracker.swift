@@ -33,7 +33,7 @@ extension SettingsView {
                     // USER STATS AND INFORMATION
                     userInfo()
                     Spacer()
-                }
+                }.frame(alignment: .top)
             } else { ActivityIndicator() }
         } else {
             HStack {
@@ -62,14 +62,6 @@ extension SettingsView {
     /// Custom navigation link to user profile screen
     @ViewBuilder
     func profileAvatar() -> some View {
-        /*ZStack {
-            NavigationLink { AniListAccountView(vm.user?.id ?? 0) } label: {
-                EmptyView()
-            }
-            .frame(width: 0)
-            .opacity(0)
-            avatar()
-        }*/
         avatar()
             .cornerRadius(4.5)
             .frame(

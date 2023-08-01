@@ -8,105 +8,165 @@
 import SwiftUI
 import MangaDex
 
-final class MangaViewModel: ObservableObject, MangaHelpers {    
-    @Published var api: MangaDexAPIProtocol = MangaDexAPI()
+// MangViewModel+MangaHelpers
+extension MangaViewModel: MangaHelpers {  }
+
+final class MangaViewModel: ObservableObject {
+    /// MangaDex Api service
+    let api: MangaDexAPIProtocol = MangaDexAPI()
+    /// Current manga
     @Published var manga: Manga
-    @Published var chapters: [Chapter]?
-    @Published var filtered: [Chapter] = []
+    /// Chapter list selection
+    @Published var chSelection = Set<String?>()
+    /// Selected chapter to reads
     @Published var selectedChapter: Chapter?
+    // MARK: - Arrays
+    @Published var chapters: [Chapter] = Array<Chapter>()
+    @Published var filtered: [Chapter] = Array<Chapter>()
+    @Published var languagePreferences: [Language] = Array<Language>()
+    @Published var tags: [MangaTag] = Array<MangaTag>()
+    // MARK: - View states - Booleans & Strings
     @Published var loadingFeed: Bool = false
-    @Published var descLang: Language = .enUS
-    @Published var languagePreferences: [Language] = []
-    @Published var mangaOnLib: Bool = false
     @Published var selectAll: Bool = false
     @Published var occurredAct: Bool = false
-    @Published var chSelection = Set<Chapter>()
     @Published var isEditingMode: Bool = false
     @Published var showBottomBar: Bool = false
-    @Published var downloaded: Bool = false
-    @Published var chaptersOrder: OrderFilter = .ascending
-    @Published var queryFilter: String = ""
-    @Published var search: Bool = false
     @Published var actionMessage: String = ""
+    // MARK: - Core Data
+    @Published var libStatus: MangaStatus = .none
+    @Published var mangaOnLib: Bool = false
+    // MARK: - Filtering
+    @Published var downloaded: Bool = false
+    @Published var search: Bool = false
+    @Published var filterQuery: String = ""
+    @Published var feedOrder: OrderFilter = .asc
+    @Published var descLang: Language = .enUS
+    // MARK: - Networking
+    @Published var totalOnFeed: Int = 0
+    @Published var offset: Int = 0
+    @Published var increaseOffset: Bool = true
+    
     
     init(manga: Manga) {
         self.manga = manga
-        loadDefaults()
-        chaptersFeed()
+        initialBuild()
+        print("Criada MangaViewModel de \(String(describing: manga.attributes?.title?.en ?? ""))")
+    }
+    
+    deinit {
+        print("Deinited MangaViewModel de \(String(describing: manga.attributes?.title?.en ?? ""))")
+    }
+    
+    /// Make initial view build
+    func initialBuild() {
+        loadUserDefaults()
+        buildTags()
+        buildFeed()
     }
     
     /// Load user defaults
-    private func loadDefaults() {
+    private func loadUserDefaults() {
         downloaded = Defaults.standard.getBool(of: DefaultsKeys.Chapters.downloaded.rawValue)
-        chaptersOrder = OrderFilter(
+        feedOrder = OrderFilter(
             rawValue: Defaults.standard.getInt(of: DefaultsKeys.Chapters.order.rawValue)
-        ) ?? .ascending
+        ) ?? .asc
         if let langs = Defaults.standard.getObj(of: DefaultsKeys.SrcPreferences.languages.rawValue) as? [Int] {
             languagePreferences = langs.map { Language(rawValue: $0) ?? .enUS }
+        }
+    }
+    /// Format carousel containing format and content information
+    private func buildTags() {
+        if let cr = manga.attributes?.contentRating,
+           let formats = getTags(with: "format", of: manga),
+           let content = getTags(with: "content", of: manga) {
+            tags.append(
+                MangaTag(
+                    title: cr.capitalized,
+                    .contentRating(.init(rawValue: cr) ?? .safe)
+                )
+            )
+            tags.append(contentsOf: content.map { MangaTag(title: $0, .content) })
+            tags.append(contentsOf: formats.map { MangaTag(title: $0, .format) })
+        }
+    }
+    
+    /// Load initial feed
+    private func buildFeed() {
+        withAnimation(.easeInOut(duration: 0.225)) {
+            loadingFeed = true
+        }
+        fetchFeed()
+    }
+    
+    /// Fetch manga chapters
+    private func fetchFeed() {
+        Task { @MainActor in
+            api.getMangaFeed(
+                id: manga.id,
+                params: [
+                    "translatedLanguage[]" : languagePreferences.compactMap { $0.apiId },
+                    "limit" : 500,
+                    "offset" : offset,
+                    "order[chapter]" : "desc"
+                ]
+            ) { [weak self] result in
+                switch result {
+                case .success(let response):
+                    if let chapters = response.data,
+                       let total = response.total {
+                        withAnimation(.easeInOut(duration: 0.225)) {
+                            self?.chapters.append(contentsOf: chapters)
+                            self?.totalOnFeed = total
+                            self?.loadingFeed = false
+                        }
+                    }
+                case .failure(_):
+                    withAnimation(.easeInOut(duration: 0.225)) {
+                        self?.loadingFeed = false
+                    }
+                }
+            }
+        }
+    }
+    
+    /// Verify if the user scrolled to the end of the carousel
+    /// - Parameter manga: last manga on carousel
+    /// - Returns: Boolean
+    func hasReachedEnd(of manga: Chapter) -> Bool {
+        chapters.last?.id == manga.id
+    }
+    
+    /// Fetch more chapters when reached the end of scroll
+    func fetchMore() {
+        if totalOnFeed > 500 && offset <= totalOnFeed {
+            offset += 500
+            fetchFeed()
         }
     }
     
     /// Refresh manga
     func refresh() {
-        api.getById(manga.id) { result in
-            switch result {
-            case .success(let manga):
-                Task { @MainActor in
-                    self.manga = manga.data
+        Task { @MainActor in
+            api.getById(manga.id) { [weak self] result in
+                switch result {
+                case .success(let manga): self?.manga = manga.data
+                case .failure(let error): print(error.localizedDescription)
                 }
-            case .failure(let error): print(error.localizedDescription)
             }
         }
     }
     
-    /// Fetch manga chapters
-    func chaptersFeed() {
-        withAnimation(.easeInOut(duration: 0.225)) {
-            loadingFeed = true
-        }
-        api.getMangaFeed(
-            id: manga.id,
-            params: [
-                "translatedLanguage[]" : languagePreferences.compactMap { $0.apiId },
-                "limit" : 500,
-                "order[chapter]" : "desc"
-            ]
-        ) { result in
-            switch result {
-            case .success(let array):
-                Task { @MainActor in
-                    withAnimation(.easeInOut(duration: 0.225)) {
-                        self.chapters = array.data
-                        self.loadingFeed = false
-                        if self.chaptersOrder != .descending {
-                            self.sortChapters()
-                        }
-                    }
-                }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
-    
-    /// Sort chapters by asc. and desc.
-    func sortChapters() {
-        chapters?.reverse()
+    /// Order chapters using user preference
+    func order(by option: OrderFilter) {
+        chapters.reverse()
+        Defaults.standard.saveInt(
+            option.rawValue,
+            key: DefaultsKeys.Chapters.order.rawValue
+        )
     }
     
     /// Filter manga chapters
-    func filterChapters() {
-        if let chapters {
-            if queryFilter.isEmpty {
-                filtered = chapters
-            } else {
-                filtered = chapters.filter{
-                    ($0.attributes?.title ?? "").contains(queryFilter) ||
-                    ($0.attributes?.chapter ?? "").contains(queryFilter)
-                }
-            }
-        }
-    }
+    func filter() { }
     
     /// Manga description according with the selected language
     /// - Returns: Description in selected language
@@ -134,61 +194,39 @@ final class MangaViewModel: ObservableObject, MangaHelpers {
     
     /// Start action when a button is pressed
     /// - Parameter action: Actual action
-    func startAction(for action: MangaActions) {
+    func startAction(for action: MangaAction) {
         switch action {
-        case .aniList:            anilistHandler()
-        case .history(let clear): historyHandler(clear)
-        case .lib:                libraryHandler()
+        case .aniList: break
+        case .lib(let subAction):
+            withAnimation(.linear(duration: 0.175)) {
+                occurredAct = true
+            }
+            switch subAction {
+            case .changeFolder:
+                mangaOnLib = true
+            case .remove:
+                mangaOnLib = false
+                libStatus = .none
+            }
         }
         buildPopUp(for: action)
     }
     
-    /// Add manga to library
-    private func addToLib() throws {
-        withAnimation(.linear(duration: 0.175)) { occurredAct = true }
-        mangaOnLib = true
-        Haptics.shared.notify(.success)
-    }
-    
-    /// Remove manga from library
-    private func removeFromLib() throws {
-        withAnimation(.linear(duration: 0.175)) { occurredAct = true }
-        mangaOnLib = false
-        Haptics.shared.notify(.error)
-    }
-    
-    /// Handle manga actions
-    private func libraryHandler() {
-        do {
-            mangaOnLib ? try removeFromLib() :  try addToLib()
-        } catch {
-            print(error.localizedDescription)
-        }
-    }
-    
-    /// History actions
-    private func historyHandler(_ clear: Bool) {
-        if clear { clearHistory() }
-    }
-    
-    /// Clear manga history
-    private func clearHistory() {
-        withAnimation(.linear(duration: 0.175)) { occurredAct = true }
-        Haptics.shared.notify(.error)
-    }
-    
-    /// Anilist update action
-    private func anilistHandler() { }
-    
     /// Build pop up message
-    private func buildPopUp(for action: MangaActions) {
+    /// - Parameter action: occurred action
+    private func buildPopUp(for action: MangaAction) {
         switch action {
-        case .lib:
-            actionMessage = mangaOnLib ? "Successfully Added" : "Successfully Removed"
+        case .lib(let subAction):
+            switch subAction {
+            case .changeFolder:
+                Haptics.shared.play(.light)
+                actionMessage = "\(subAction.description.capitalized) to \(libStatus.description)"
+            case .remove:
+                Haptics.shared.play(.heavy)
+                actionMessage = subAction.description
+            }
         case .aniList:
             actionMessage = "Successfully Updated"
-        case .history:
-            actionMessage = "Successfully Cleared"
         }
     }
 }

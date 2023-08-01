@@ -22,7 +22,7 @@ struct MangaStandardImage: View {
         LazyImage(
             request: ImageRequest(
                 url: url,
-                processors: [.resize(width: 350, unit: .pixels, upscale: true)],
+                processors: [.resize(width: 295, unit: .points, upscale: true)],
                 priority: .veryHigh
             ),
             transaction: .init(animation: .easeIn)
@@ -35,14 +35,14 @@ struct MangaStandardImage: View {
                         width: size.width,
                         height: size.height
                     )
+                    .clipShape(RoundedRectangle(cornerRadius: 4.5))
                     .overlay(
                         RoundedRectangle(cornerRadius: 4.5)
                             .stroke(
-                                Color(uiColor: .systemGray4),
-                                lineWidth: 1.0
+                                Color(uiColor: .systemGray),
+                                lineWidth: 0.4
                             )
                     )
-                    .cornerRadius(4.5)
             } else { Placeholder().frame(width: size.width, height: size.height) }
         }
     }

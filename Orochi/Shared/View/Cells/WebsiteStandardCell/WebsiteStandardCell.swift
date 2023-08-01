@@ -13,10 +13,9 @@ struct WebsiteStandardCell: View {
     var urlString: String
     var image: AppImages
     var avatarURL: URL? = nil
-    var customInfo: String = ""
     
     var body: some View {
-        self.content()
+        content()
     }
 }
 

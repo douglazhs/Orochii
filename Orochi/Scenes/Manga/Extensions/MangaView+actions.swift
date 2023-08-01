@@ -12,17 +12,11 @@ extension MangaView {
     @ViewBuilder
     func actions() -> some View {
         HStack {
-            // START READING BUTTON
-            self.startReadingButton()
-            Spacer()
             // ANILIST BUTTON
-            self.aniListButton()
+            aniListButton()
             // ADD/REMOVE BUTTON
-            self.libraryButton()
+            libraryButton()
         }
-        .lineLimit(1)
-        .fontWeight(.regular)
-        .listRowBackground(Color.clear)
     }
     
     /// Start reading button
@@ -31,15 +25,18 @@ extension MangaView {
         Button {
             // TODO: Start to read the manga
         } label: {
-            Label("START", systemImage: "play.fill")
+            Image(systemName: "play.fill")
                 .lineLimit(1)
-                .foregroundColor(.accentColor)
                 .font(.footnote)
-                .frame(maxWidth: CGSize.dynamicImage.width - 22)
+                .foregroundColor(.accentColor)
+                .frame(maxWidth: .infinity)
                 .fontWeight(.heavy)
+                .padding(8.5)
         }
-        .tint(.primary)
-        .buttonStyle(.borderedProminent)
+        .foregroundColor(.accentColor)
+        .background(Color.white)
+        .clipShape(RoundedRectangle(cornerRadius: 7.25))
+        .listRowBackground(Color.clear)
     }
     
     /// AniList tracking button
@@ -49,19 +46,17 @@ extension MangaView {
             showAniList = true
             vm.startAction(for: .aniList)
         } label: {
-            Image(systemName: "cloud.fill")
+            Image(systemName: "antenna.radiowaves.left.and.right")
                 .foregroundColor(.accentColor)
                 .font(.footnote)
-                .fontWeight(.semibold)
+                .fontWeight(.heavy)
         }
-        .disabled(vm.occurredAct)
+        .tint(.primary)
         .buttonStyle(.borderedProminent)
-        .tint(.white)
         .sheet(
             isPresented: $showAniList,
             content: {
                 ALTracker(
-                    isPresented: $showAniList,
                     of: vm.manga,
                     cover: vm.api.buildURL(for: .cover(
                         id: vm.manga.id,
@@ -78,50 +73,46 @@ extension MangaView {
     /// Add/Remove from library button
     @ViewBuilder
     func libraryButton() -> some View {
-        Button(role: vm.mangaOnLib ? .destructive : .none) {
-            vm.startAction(for: .lib)
+        Menu {
+            Section {
+                Picker(selection: $vm.libStatus) {
+                    ForEach(MangaStatus.allCases) {
+                        if $0 != .none { Label($0.description, systemImage: $0.icon) }
+                    }
+                } label: {
+                    Label(
+                        vm.libStatus.description,
+                        systemImage: vm.libStatus.icon
+                    )
+                }
+                .pickerStyle(.menu)
+                .onChange(of: vm.libStatus) {
+                    if $0 != .none {
+                        vm.startAction(for: .lib(.changeFolder))
+                    }
+                }
+            } header: {
+                Text("Current manga state on library")
+            }
+            Button(role: .destructive, action: {
+                vm.startAction(for: .lib(.remove))
+            }) {
+                Label(
+                    "Remove from library",
+                    systemImage: "trash.fill"
+                )
+            }
+            .disabled(!vm.mangaOnLib)
         } label: {
             Image(systemName: vm.mangaOnLib
-                  ? "trash.fill"
-                  : "plus"
+                  ? "folder.fill.badge.gearshape"
+                  : "folder.fill.badge.plus"
             )
+            .foregroundColor(vm.mangaOnLib ? .red : Color(.systemBlue))
+            .fontWeight(.heavy)
+            .font(.footnote)
         }
-        .font(.footnote)
-        .fontWeight(.heavy)
         .tint(.primary)
-        .foregroundColor(vm.mangaOnLib ? .red : .accentColor)
         .buttonStyle(.borderedProminent)
-        .disabled(vm.occurredAct)
-    }
-    
-    /// Chapters history button
-    @ViewBuilder
-    func historyButton() -> some View {
-        Menu {
-            Button {
-                showHistory = true
-                vm.startAction(for: .history(clear: false))
-            } label: {
-                Label("View", systemImage: "eye.fill")
-            }
-            Button(role: .destructive) {
-                vm.startAction(for: .history(clear: true))
-            } label: {
-                Label("Clear", systemImage: "trash")
-            }
-        } label: {
-           Image(systemName: "clock.arrow.circlepath")
-                .foregroundColor(.primary)
-                .font(.footnote)
-        }
-        .buttonStyle(.borderedProminent)
-        .disabled(vm.occurredAct)
-        .sheet(isPresented: $showHistory) {
-            MangaHistoryView(
-                of: vm.manga,
-                action: $vm.occurredAct
-            )
-            .presentationDetents([.medium, .large])
-        }
     }
 }

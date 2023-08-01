@@ -25,6 +25,5 @@ struct MangaStandardCell: View {
 struct MangaStandardCell_Previews: PreviewProvider {
     static var previews: some View {
         EmptyView()
-        /*MangaStandardCell(MangaDomain.samples[0])*/
     }
 }

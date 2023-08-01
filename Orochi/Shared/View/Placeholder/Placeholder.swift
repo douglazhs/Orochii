@@ -10,12 +10,12 @@ import SwiftUI
 struct Placeholder: View {
     var body: some View {
             RoundedRectangle(cornerRadius: 4.5)
-                .fill(Color(.systemGray5))
+                .fill(Color(.systemGray4))
                 .overlay(
                     RoundedRectangle(cornerRadius: 4.5)
                         .stroke(
-                            Color(uiColor: .systemGray4),
-                            lineWidth: 0.75
+                            Color(uiColor: .systemGray),
+                            lineWidth: 0.35
                         )
                 )
     }

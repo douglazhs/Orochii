@@ -7,7 +7,7 @@
 
 import AuthenticationServices
 
-/// Keychain handler
+/// Keychain service hanlder
 final class Keychain {
     static var standard = Keychain()
     
