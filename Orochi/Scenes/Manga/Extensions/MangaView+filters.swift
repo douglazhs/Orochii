@@ -11,9 +11,18 @@ extension MangaView {
     /// Chapter list header
     @ViewBuilder
     func chaptersHeader() -> some View {
-        // STANDARD BAR WITH SOME INFORMATIONS
-        self.standardBar()
-            .frame(maxWidth: .infinity, maxHeight: .infinity)
+        Group {
+            if !vm.search {
+                standardBar()
+            } else {
+                searchBar()
+            }
+        }
+        .disabled(vm.occurredAct)
+        .frame(
+            maxWidth: .infinity,
+            maxHeight: .infinity
+        )
     }
     
     /// Header chaptes bar
@@ -27,8 +36,8 @@ extension MangaView {
             Spacer()
             // ORDER MENU
             order()
-             // SEARCH BUTTON
-             /*searchChap()*/
+            // SEARCH BUTTON
+            searchChap()
         }
     }
     
@@ -37,19 +46,19 @@ extension MangaView {
     func searchBar() -> some View {
         HStack(alignment: .center) {
             // TEXTFIELD BAR
-            self.textField()
+            textField()
             // CANCEL BUTTON
-            self.cancelSearch()
+            cancelSearch()
         }
     }
     
     /// Cancel search button
     @ViewBuilder
     func cancelSearch() -> some View {
-        Button {
+        Button { [weak vm] in
             Haptics.shared.play(.medium)
-            vm.search = false
             UIApplication.shared.endEditing()
+            vm?.cancelFilter()
         } label: { Text(String.Common.cancel) }
     }
     
@@ -61,39 +70,34 @@ extension MangaView {
                 .foregroundColor(.secondary)
             TextField(text: $vm.filterQuery, axis: .horizontal) {
                 Text("Chapter name or number")
-                    .font(.body)
-                    .fontWeight(.regular)
-                    .foregroundColor(.secondary)
             }
-            .onChange(of: vm.filterQuery) { newValue in
-                vm.filter()
+            .textInputAutocapitalization(.never)
+            .autocorrectionDisabled(true)
+            .fontWeight(.regular)
+            .font(.subheadline)
+            .onChange(of: vm.filterQuery) { [weak vm] _ in
+                vm?.filter()
             }
             .ignoresSafeArea(.keyboard, edges: .bottom)
         }
-        .foregroundColor(.primary)
-        .padding(.horizontal, 7.5)
-        .padding(.vertical, 5.5)
-        .frame(maxWidth: .infinity, maxHeight: 35)
-        .background(
-            Color.primary.opacity(0.1),
-            in: RoundedRectangle(cornerRadius: 6.5)
-        )
         .focused($field, equals: .search)
+        .frame(maxWidth: .infinity)
     }
     
     /// Search chapter button
     @ViewBuilder
     func searchChap() -> some View {
-        Button {
+        Button { [weak vm] in
             Haptics.shared.play(.medium)
-            vm.search = true
+            vm?.search = true
             field = .search
             UIApplication.shared.becomeFirstResponder()
         } label: {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(.primary)
+                .foregroundColor(.accentColor)
+                .font(.headline)
+                .fontWeight(.bold)
         }
-        .tint(.accentColor)
     }
     
     /// Manga order
@@ -101,18 +105,13 @@ extension MangaView {
     func order() -> some View {
         Menu {
             Section {
-                Label {
-                    EnumPicker(
-                        vm.feedOrder.description,
-                        selection: $vm.feedOrder
-                    )
-                    .pickerStyle(.menu)
-                    .onChange(of: vm.feedOrder) { [weak vm] in vm?.order(by: $0) }
-                } icon: {
-                    Label(
-                        vm.feedOrder.description,
-                        systemImage: "arrow.up.arrow.down"
-                    )
+                EnumPicker(
+                    vm.feedOrder.description,
+                    selection: $vm.feedOrder
+                )
+                .pickerStyle(.menu)
+                .onChange(of: vm.feedOrder) { [weak vm] in
+                    vm?.order(by: $0)
                 }
             } header: { Text(String.Filter.orderByHeader.uppercased()) }
             Section {

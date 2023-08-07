@@ -13,7 +13,13 @@ extension ChapterView {
     func content() -> some View {
         ZStack(alignment: .center) {
             Color.black
-            pagesCollection()
+            if vm.error == nil {
+                pagesCollection()
+            } else {
+                Text(vm.error?.localizedDescription ?? "error")
+                    .font(.footnote)
+                    .fontWeight(.medium)
+            }
         }
         .edgesIgnoringSafeArea(.all)
         .onTapGesture {
@@ -40,30 +46,23 @@ extension ChapterView {
     /// Horizontal reading mode
     @ViewBuilder
     func horizontalMode() -> some View {
-        TabView {
-            ForEach(
-                (vm.readingMode == .leftToRight || vm.format == .normal)
-                ? vm.choosenQuality()
-                : vm.choosenQuality().reversed(),
-                id: \.self
-            ) { page in
-                ZStack {
-                    Color.black.edgesIgnoringSafeArea(.all)
-                    ChapterPageView(
-                        url: vm.api.buildURL(for: .chapterImage(
-                            quality: vm.pageQuality  == .original ? .data : .dataSaver,
-                            hash: vm.pages?.hash ?? "",
-                            fileName: page
-                        )),
-                        cacheKey: page
-                    )
-                    .contextMenu {
-                        Button { vm.savePage(page) } label: {
-                            Label(
-                                String.ContextMenu.savePage,
-                                systemImage: "icloud.and.arrow.down.fill"
-                            )
-                        }
+        TabView(selection: $vm.actualPage) {
+            ForEach(vm.pages.indices, id: \.self) { index in
+                ChapterPageView(
+                    url: vm.api.buildURL(for: .chapterImage(
+                        quality: vm.pageQuality  == .original ? .data : .dataSaver,
+                        hash: vm.content?.hash ?? "",
+                        fileName: vm.pages[index]
+                    )),
+                    cacheKey: vm.pages[index]
+                )
+                .tag(Double(index))
+                .contextMenu {
+                    Button { vm.savePage(of: index) } label: {
+                        Label(
+                            String.ContextMenu.savePage,
+                            systemImage: "icloud.and.arrow.down.fill"
+                        )
                     }
                 }
             }
@@ -74,23 +73,22 @@ extension ChapterView {
     /// Scrollable reading mode
     @ViewBuilder
     func webtoonMode() -> some View {
-        ScrollViewReader { _ in
+        ScrollViewReader { proxy in
             ScrollView(showsIndicators: false) {
                 VStack(spacing: .zero) {
-                    ForEach(vm.choosenQuality(), id: \.self) { page in
+                    ForEach(vm.pages.indices, id: \.self) { index in
                         ChapterPageView(
                             url: vm.api.buildURL(for: .chapterImage(
                                 quality: vm.pageQuality  == .original ? .data : .dataSaver,
-                                hash: vm.pages?.hash ?? "",
-                                fileName: page
+                                hash: vm.content?.hash ?? "",
+                                fileName: vm.pages[index]
                             )),
-                            cacheKey: page
+                            cacheKey: vm.pages[index]
                         )
-                        .id(page)
+                        .id(Int(index))
                         .contextMenu {
                             Button {
-                                let imageSaver = ImageSaver()
-                                imageSaver.writeToPhotoAlbum(page)
+                                vm.savePage(of: index)
                             } label: {
                                 Label(
                                     String.ContextMenu.savePage,
@@ -101,6 +99,11 @@ extension ChapterView {
                     }
                 }
             }
+            /*.onChange(of: vm.actualPage) { index in
+                withAnimation(.easeInOut(duration: 0.125)) {
+                    proxy.scrollTo(Int(index))
+                }
+            }*/
         }
     }
 }

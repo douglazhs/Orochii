@@ -12,22 +12,26 @@ extension ALTracker {
     @ViewBuilder
     func anilistMangaOptions() -> some View {
         Menu {
-            if vm.trackingLocally {
-                Button {
-                    showConfirmation = true
+            Section {
+                if vm.trackingLocally {
+                    Button {
+                        showConfirmation = true
+                    } label: {
+                        Label("Stop tracking", systemImage: "stop.fill")
+                    }
+                }
+                
+                Button { [weak vm] in
+                    if let siteUrl = vm?.alManga?.siteUrl,
+                       let url = URL(string: siteUrl) {
+                        vm?.alUrl = url
+                        showWebView = true
+                    }
                 } label: {
-                    Label("Stop tracking", systemImage: "stop.fill")
+                    Label("See on AniList", systemImage: "safari")
                 }
-            }
-            
-            Button { [weak vm] in
-                if let alId =  vm?.mDexManga.attributes?.links?.al,
-                   let url = URL(string: "\(AppURLs.ALSite)/manga/\(alId)") {
-                    vm?.alUrl = url
-                    showWebView = true
-                }
-            } label: {
-                Label("See on AniList", systemImage: "safari")
+            } header: {
+                Text(vm.alManga?.title?.romaji ?? vm.alManga?.title?.english ?? "")
             }
         } label: {
             Image(systemName: "ellipsis")
@@ -56,7 +60,11 @@ extension ALTracker {
         Button { [weak vm] in
             vm?.trackingLocally = true
             vm?.handleTracking()
-        } label: { Text("Track").fontWeight(.semibold) }
+        } label: {
+            Text("TRACK")
+                .font(.subheadline)
+                .fontWeight(.black)
+        }
         .buttonStyle(.borderless)
         .disabled(vm.alManga == nil)
     }

@@ -12,9 +12,6 @@ struct UISliderView: UIViewRepresentable {
     
     var minValue = 1.0
     var maxValue = 100.0
-    var thumbColor: UIColor = .white
-    var minTrackColor: UIColor = .systemIndigo
-    var maxTrackColor: UIColor = .lightGray
     
     class Coordinator: NSObject {
         var value: Binding<Double>
@@ -33,13 +30,14 @@ struct UISliderView: UIViewRepresentable {
     }
     
     func makeUIView(context: Context) -> UISlider {
-        let normalImage = UIImage(systemName: "circle.fill", withConfiguration: UIImage.SymbolConfiguration(scale: .small))
+        let normalImage = UIImage(
+            systemName: "circle.fill",
+            withConfiguration: UIImage.SymbolConfiguration(scale: .small)
+        )
         let slider = UISlider(frame: .zero)
         slider.setThumbImage(normalImage, for: .normal)
         slider.setThumbImage(normalImage, for: .highlighted)
         slider.tintColor = UIColor.white
-        slider.minimumTrackTintColor = minTrackColor
-        /*slider.maximumTrackTintColor = maxTrackColor*/
         slider.minimumValue = Float(minValue)
         slider.maximumValue = Float(maxValue)
         slider.value = Float(value)

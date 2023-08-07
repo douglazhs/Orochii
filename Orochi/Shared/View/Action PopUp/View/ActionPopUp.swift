@@ -24,12 +24,7 @@ struct ActionPopUp: View {
                 .clipShape(RoundedRectangle(cornerRadius: 7.25))
                 .padding(.top, 5.0)
                 .onAppear {
-                    Task {
-                        try await Task.sleep(
-                            until: .now + .seconds(1.0),
-                            tolerance: .seconds(1.45),
-                            clock: .suspending
-                        )
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
                         withAnimation(.linear(duration: 0.175)) {
                             action = false
                         }

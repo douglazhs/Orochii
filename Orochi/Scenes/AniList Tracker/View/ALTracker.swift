@@ -42,7 +42,16 @@ struct ALTracker: View {
                     ToolbarItem(placement: .navigationBarLeading) {
                         closeButton()
                     }
+                    ToolbarItem(placement: .principal) { alTitleView() }
+                    ToolbarItem(placement: .status) {
+                        if vm.trackingLocally {
+                            Button("SAVE", action: { dismiss() })
+                                .font(.subheadline)
+                                .fontWeight(.black)
+                        }
+                    }
                 }
+                .fontDesign(.rounded)
         }
     }
 }

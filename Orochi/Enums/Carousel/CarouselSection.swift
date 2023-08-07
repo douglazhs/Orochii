@@ -9,14 +9,13 @@ import Foundation
 
 /// Carousel type
 enum CarouselSection: Int, CaseIterable {
-    case mostRelevants, awardWinning, ongoing, thisYear, shounen, seinen, webComic
+    case mostRelevants, awardWinning, thisYear, shounen, seinen, webComic
     
     /// Carousel header
     var header: String {
         switch self {
         case .mostRelevants:  return "Most Relevants"
         case .awardWinning:   return "Award Winning"
-        case .ongoing:        return "Ongoing Now"
         case .thisYear:       return "This Year - \(Date.now.formatted(.dateTime.year()))"
         case .shounen:        return "Shounen Public"
         case .seinen:         return "Seinen Public"
@@ -42,7 +41,6 @@ extension CarouselSection {
         switch self {
         case .mostRelevants: params["order[followedCount]"] = "desc"
         case .awardWinning:  params["includedTags[]"] = ["0a39b5a1-b235-4886-a747-1d05d216532d"]
-        case .ongoing: params["status[]"] = "ongoing"
         case .thisYear: params["year"] = Date.now.formatted(.dateTime.year())
         case .shounen: params["publicationDemographic[]"] = "shounen"
         case .seinen: params["publicationDemographic[]"] = "seinen"

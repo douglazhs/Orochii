@@ -17,6 +17,7 @@ extension MangaView {
             // ADD/REMOVE BUTTON
             libraryButton()
         }
+        .disabled(vm.occurredAct)
     }
     
     /// Start reading button
@@ -33,6 +34,7 @@ extension MangaView {
                 .fontWeight(.heavy)
                 .padding(8.5)
         }
+        .disabled(vm.occurredAct)
         .foregroundColor(.accentColor)
         .background(Color.white)
         .clipShape(RoundedRectangle(cornerRadius: 7.25))
@@ -42,9 +44,9 @@ extension MangaView {
     /// AniList tracking button
     @ViewBuilder
     func aniListButton() -> some View {
-        Button {
+        Button { [weak vm] in
             showAniList = true
-            vm.startAction(for: .aniList)
+            vm?.startAction(for: .aniList)
         } label: {
             Image(systemName: "antenna.radiowaves.left.and.right")
                 .foregroundColor(.accentColor)
@@ -53,21 +55,19 @@ extension MangaView {
         }
         .tint(.primary)
         .buttonStyle(.borderedProminent)
-        .sheet(
-            isPresented: $showAniList,
-            content: {
-                ALTracker(
-                    of: vm.manga,
-                    cover: vm.api.buildURL(for: .cover(
-                        id: vm.manga.id,
-                        fileName: vm.imgFileName(of: vm.manga)
-                    )),
-                    action: $vm.occurredAct
-                )
-                .presentationDetents([.medium, .large])
-                .presentationDragIndicator(.hidden)
-            }
-        )
+        .sheet(isPresented: $showAniList) {
+            ALTracker(
+                of: vm.manga,
+                cover: vm.api.buildURL(for: .cover(
+                    id: vm.manga.id,
+                    fileName: vm.imgFileName(of: vm.manga)
+                )),
+                action: $vm.occurredAct
+            )
+            .presentationDetents([.medium, .large])
+            .interactiveDismissDisabled()
+            .presentationDragIndicator(.hidden)
+        }
     }
     
     /// Add/Remove from library button
@@ -80,10 +80,12 @@ extension MangaView {
                         if $0 != .none { Label($0.description, systemImage: $0.icon) }
                     }
                 } label: {
-                    Label(
-                        vm.libStatus.description,
-                        systemImage: vm.libStatus.icon
-                    )
+                    if vm.libStatus != .none {
+                        Label(
+                            vm.libStatus.description,
+                            systemImage: vm.libStatus.icon
+                        )
+                    } else { Text(vm.libStatus.description) }
                 }
                 .pickerStyle(.menu)
                 .onChange(of: vm.libStatus) {

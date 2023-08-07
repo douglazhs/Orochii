@@ -53,17 +53,15 @@ extension ALTracker {
                             .font(.caption2)
                             .fontWeight(.regular)
                             .foregroundColor(.secondary)
-                        if vm.alManga?.mediaListEntry != nil {
-                            Text(vm.alManga?.status ?? "")
-                        } else { Text("-") }
+                        Text(vm.alManga?.mediaListEntry?.status ?? "-")
                     }
                     VStack(alignment: .center, spacing: 5.0) {
                         Text("PROGRESS")
                             .font(.caption2)
                             .fontWeight(.regular)
                             .foregroundColor(.secondary)
-                        Text("CH. \(vm.alManga?.mediaListEntry?.progress?.unwrapNil() ?? "-")" +
-                             "/\(vm.alManga?.chapters?.unwrapNil() ?? "-")")
+                        Text("CH. \(vm.alManga?.mediaListEntry?.progress.nilToStr ?? "-")" +
+                             "/\(vm.alManga?.chapters.nilToStr ?? "-")")
                     }
                     VStack(alignment: .trailing, spacing: 5.0) {
                         Text("UPDATED")

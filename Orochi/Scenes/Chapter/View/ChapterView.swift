@@ -29,6 +29,7 @@ struct ChapterView: View {
                 .toolbar(showReadBars, for: .navigationBar, .bottomBar)
                 .toolbarBackground(.visible, for: .navigationBar)
                 .statusBarHidden(showReadBars == .hidden)
+                .fontDesign(.rounded)
                 .readerToolbar(
                     showChaptersList: $showChaptersList,
                     showReaderPreferences: $showReaderPreferences

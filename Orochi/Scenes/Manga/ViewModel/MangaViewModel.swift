@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MangaDex
+import Combine
 
 // MangViewModel+MangaHelpers
 extension MangaViewModel: MangaHelpers {  }
@@ -16,8 +17,6 @@ final class MangaViewModel: ObservableObject {
     let api: MangaDexAPIProtocol = MangaDexAPI()
     /// Current manga
     @Published var manga: Manga
-    /// Chapter list selection
-    @Published var chSelection = Set<String?>()
     /// Selected chapter to reads
     @Published var selectedChapter: Chapter?
     // MARK: - Arrays
@@ -44,19 +43,17 @@ final class MangaViewModel: ObservableObject {
     // MARK: - Networking
     @Published var totalOnFeed: Int = 0
     @Published var offset: Int = 0
-    @Published var increaseOffset: Bool = true
     
-    
-    init(manga: Manga) {
+    init(_ manga: Manga) {
         self.manga = manga
         initialBuild()
-        print("Criada MangaViewModel de \(String(describing: manga.attributes?.title?.en ?? ""))")
+        print("Created \(manga.attributes?.title?.en ?? "") ViewModel")
     }
     
     deinit {
-        print("Deinited MangaViewModel de \(String(describing: manga.attributes?.title?.en ?? ""))")
+        print("Deinit \(manga.attributes?.title?.en ?? "") ViewModel")
     }
-    
+
     /// Make initial view build
     func initialBuild() {
         loadUserDefaults()
@@ -92,7 +89,7 @@ final class MangaViewModel: ObservableObject {
     
     /// Load initial feed
     private func buildFeed() {
-        withAnimation(.easeInOut(duration: 0.225)) {
+        withAnimation(.spring()) {
             loadingFeed = true
         }
         fetchFeed()
@@ -107,17 +104,17 @@ final class MangaViewModel: ObservableObject {
                     "translatedLanguage[]" : languagePreferences.compactMap { $0.apiId },
                     "limit" : 500,
                     "offset" : offset,
-                    "order[chapter]" : "desc"
+                    "order[chapter]" : feedOrder.key
                 ]
             ) { [weak self] result in
                 switch result {
                 case .success(let response):
                     if let chapters = response.data,
                        let total = response.total {
-                        withAnimation(.easeInOut(duration: 0.225)) {
+                        withAnimation(.spring()) {
                             self?.chapters.append(contentsOf: chapters)
                             self?.totalOnFeed = total
-                            self?.loadingFeed = false
+                            self?.fetchMore()
                         }
                     }
                 case .failure(_):
@@ -141,7 +138,14 @@ final class MangaViewModel: ObservableObject {
         if totalOnFeed > 500 && offset <= totalOnFeed {
             offset += 500
             fetchFeed()
+            return
         }
+        
+        withAnimation(.spring()) {
+            loadingFeed = false
+        }
+        // End the fetch of the chapters
+        filtered = chapters
     }
     
     /// Refresh manga
@@ -156,6 +160,17 @@ final class MangaViewModel: ObservableObject {
         }
     }
     
+    /// Manage chapter selction
+    func manageSelection(_ selection: Binding<Set<String?>>) {
+        if selectAll {
+            chapters.forEach {
+                selection.wrappedValue.insert($0.id)
+            }
+        } else {
+            selection.wrappedValue.removeAll()
+        }
+    }
+    
     /// Order chapters using user preference
     func order(by option: OrderFilter) {
         chapters.reverse()
@@ -166,7 +181,21 @@ final class MangaViewModel: ObservableObject {
     }
     
     /// Filter manga chapters
-    func filter() { }
+    func filter() {
+        if !filterQuery.isEmpty {
+            filtered = chapters.filter {
+                filterQuery == $0.attributes?.chapter ||
+                $0.attributes?.title?.localizedCaseInsensitiveContains(filterQuery) ?? false
+            }
+        } else { filtered = chapters }
+    }
+    
+    /// Cancel filter
+    func cancelFilter() {
+        search = false
+        filterQuery = ""
+        filtered = chapters
+    }
     
     /// Manga description according with the selected language
     /// - Returns: Description in selected language

@@ -36,20 +36,7 @@ extension ALTracker {
                     radius: Constants.device == .phone ? 8.5 : 15
                 )
             )
-            .fontDesign(.rounded)
-            .navigationTitle(
-                vm.alManga?.title?.romaji ??
-                vm.alManga?.title?.english ??
-                ""
-            )
             .toolbarBackground(.visible, for: .navigationBar)
-            .alert("Chapter", isPresented: $showTextField) {
-                TextField("", value: $vm.chapter, formatter: vm.textFieldformatter())
-                    .keyboardType(.numberPad)
-                Text("Total")
-            } message: {
-                Text("Total: \(vm.alManga?.chapters != nil ? "\(vm.alManga?.chapters ?? 0)" : "-")")
-            }
             .fullScreenCover(isPresented: $showWebView) {
                 SafariWebView(url: vm.alUrl!)
                     .ignoresSafeArea()
@@ -66,27 +53,39 @@ extension ALTracker {
             .overlay { trackLocallyOverlay() }
     }
     
+    /// AniList title view
+    @ViewBuilder
+    func alTitleView() -> some View {
+        Group {
+            if vm.availableInAL {
+                VStack(spacing: .zero) {
+                    Text(
+                        vm.alManga?.title?.romaji ??
+                        vm.alManga?.title?.english ??
+                        (vm.loadingById ? "" : "Unknown")
+                    )
+                    
+                    if let english = vm.alManga?.title?.english,
+                       (english != vm.alManga?.title?.romaji ?? "") {
+                        Text(english)
+                            .foregroundColor(.secondary)
+                            .font(.caption2)
+                            .fontWeight(.medium)
+                    }
+                }
+            } else { Text("Search").font(.headline) }
+        }
+        .font(.subheadline)
+        .fontWeight(.semibold)
+        .lineLimit(1)
+    }
+    
     /// Search screen
     @ViewBuilder
     func search() -> some View {
         trackerSearchList()
             .background(BlurBackground(with: cover))
             .navigationTitle("Search")
-            .searchable(text: $vm.text, placement: .automatic, prompt: "Search for title in AniList")
-            .toolbarBackground(.visible, for: .navigationBar)
-            .onSubmit { UIApplication.shared.becomeFirstResponder() }
-            .onTapGesture { UIApplication.shared.becomeFirstResponder() }
-            .onReceive(
-                vm.$text
-                    .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
-            ) { value in
-                if !value.isEmpty {
-                    vm.searchManga()
-                } else {
-                    vm.mangas = nil
-                    vm.alManga = nil
-                }
-            }
     }
     
     /// Tracking manga view
@@ -111,6 +110,7 @@ extension ALTracker {
     @ViewBuilder
     func trackerSearchList() -> some View {
         List {
+            textField()
             if !vm.loadingByText {
                 if let mangas = vm.mangas, !mangas.isEmpty {
                     ForEach(mangas) { manga in
@@ -139,18 +139,60 @@ extension ALTracker {
                 }
             }
         }
-        .overlay(alignment: .top) {
-            if vm.loadingByText { ActivityIndicator().padding(.vertical) }
-        }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .scrollIndicators(.hidden)
+    }
+    
+    /// Search text field
+    @ViewBuilder
+    func textField() -> some View {
+        TextField("", text: $vm.text, prompt: Text("Search for title in **AniList**"))
+            .onReceive(
+                vm.$text
+                    .debounce(
+                        for: .seconds(1.0),
+                        scheduler: DispatchQueue.main
+                    )
+            ) { value in
+                if !value.isEmpty {
+                    vm.searchManga()
+                } else {
+                    vm.clearSearch()
+                }
+            }
+            .padding(.bottom, 5.0)
+            .overlay(alignment: .bottom) {
+                Divider()
+            }
+            .overlay(alignment: .trailing) {
+                if !vm.text.isEmpty {
+                    Button {
+                        vm.clearSearch()
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.headline)
+                            .foregroundColor(.secondary)
+                    }
+                }
+            }
+            .font(.headline)
+            .fontWeight(.medium)
+            .foregroundColor(.primary)
+            .listSectionSeparator(.hidden)
+            .listRowSeparator(.hidden)
+            .listRowBackground(Color.clear)
+            /*.overlay(alignment: .bottom) {
+                if vm.loadingByText {
+                    ActivityIndicator()
+                }
+            }*/
     }
     
     /// Current manga context
     @ViewBuilder
     func pickers() -> some View {
         mainStates()
-        secondaryAttributes()
+        secondaryStates()
     }
 }

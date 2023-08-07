@@ -10,7 +10,7 @@ import SwiftUI
 extension ALTracker {
     /// Manga secondary states
     @ViewBuilder
-    func secondaryAttributes() -> some View {
+    func secondaryStates() -> some View {
         HStack {
             score()
             started()
@@ -25,25 +25,25 @@ extension ALTracker {
             Text("STARTED")
                 .font(.footnote)
                 .foregroundColor(.secondary)
-            Button { } label: {
-                Text(vm.startDate.formatted(date: .numeric, time: .omitted))
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(.primary)
-                    .font(.footnote)
-                    .fontWeight(.medium)
-                    .overlay {
-                        DatePicker(
-                            "",
-                            selection: $vm.startDate,
-                            displayedComponents: [.date]
-                        )
-                        .tint(.accentColor)
-                        .blendMode(.destinationOver)
-                        .labelsHidden()
-                    }
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(.primary.opacity(0.15))
+            Text(vm.startDate.formatted(date: .numeric, time: .omitted))
+                .frame(maxWidth: .infinity)
+                .foregroundColor(.primary)
+                .font(.footnote)
+                .fontWeight(.medium)
+                .overlay {
+                    DatePicker(
+                        "",
+                        selection: $vm.startDate,
+                        displayedComponents: [.date]
+                    )
+                    .tint(.accentColor)
+                    .blendMode(.destinationOver)
+                    .labelsHidden()
+                }
+                .frame(height: 30.5, alignment: .center)
+                .background(Color.primary.opacity(0.125))
+                .clipShape(RoundedRectangle(cornerRadius: 4.25))
+                .overlay { RoundedRectangle(cornerRadius: 4.25).stroke(Color(.systemGray), lineWidth: 0.175) }
         }
     }
     
@@ -54,25 +54,25 @@ extension ALTracker {
             Text("ENDED")
                 .font(.footnote)
                 .foregroundColor(.secondary)
-            Button { } label: {
-                Text(vm.endDate.formatted(date: .numeric, time: .omitted))
-                    .frame(maxWidth: .infinity)
-                    .foregroundColor(.primary)
-                    .fontWeight(.medium)
-                    .font(.footnote)
-                    .overlay {
-                        DatePicker(
-                            "",
-                            selection: $vm.endDate,
-                            displayedComponents: [.date]
-                        )
-                        .tint(.accentColor)
-                        .blendMode(.destinationOver)
-                        .labelsHidden()
-                    }
-            }
-            .buttonStyle(.borderedProminent)
-            .tint(.primary.opacity(0.15))
+            Text(vm.endDate.formatted(date: .numeric, time: .omitted))
+                .frame(maxWidth: .infinity)
+                .foregroundColor(.primary)
+                .fontWeight(.medium)
+                .font(.footnote)
+                .overlay {
+                    DatePicker(
+                        "",
+                        selection: $vm.endDate,
+                        displayedComponents: [.date]
+                    )
+                    .tint(.accentColor)
+                    .blendMode(.destinationOver)
+                    .labelsHidden()
+                }
+                .frame(height: 30.5, alignment: .center)
+                .background(Color.primary.opacity(0.125))
+                .clipShape(RoundedRectangle(cornerRadius: 4.25))
+                .overlay { RoundedRectangle(cornerRadius: 4.25).stroke(Color(.systemGray), lineWidth: 0.175) }
         }
     }
     
@@ -85,18 +85,20 @@ extension ALTracker {
                     .font(.footnote)
                     .foregroundColor(.secondary)
             }
-            Button {
-                vm.currentPicker = .score
-                showNumberPicker = true
-            } label: {
-                Text("\(String(format: "%.1f", vm.score)) / 10.0")
-                    .frame(maxWidth: .infinity)
+            PickerTextField(
+                data: Array(stride(from: 0.0, through: 10.0, by: 0.1)),
+                dataFormat: "%.1f",
+                placeholder: "",
+                field: .score,
+                selection: $vm.score
+            )
+            .frame(height: 30.5, alignment: .center)
+            .background {
+                Text("\(String(format: "%.1f", vm.score ?? 0)) / 10")
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .foregroundColor(.primary)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(.primary.opacity(0.15))
+            .overlay { RoundedRectangle(cornerRadius: 4.25).stroke(Color(.systemGray), lineWidth: 0.175) }
         }
     }
 }

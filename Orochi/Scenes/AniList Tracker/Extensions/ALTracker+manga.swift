@@ -25,7 +25,7 @@ extension ALTracker {
                 )
             )
             
-            VStack(alignment: .leading, spacing: 10.0) {
+            VStack(alignment: .leading, spacing: 8.5) {
                 MediaAttributes(
                     leading: (title: "FORMAT", value: vm.alManga?.format ?? "-"),
                     trailing: (title: "STATUS", value: vm.alManga?.status ?? "-")
@@ -34,19 +34,19 @@ extension ALTracker {
                 MediaAttributes(
                     leading: (
                         title: "AVERAGE SCORE",
-                        value: String(format: "%.1f", Double(vm.alManga?.averageScore ?? 0) / 10.0)
+                        value: "\(vm.alManga?.averageScore.nilToStr ?? "-")%"
                     ),
                     trailing: (title: "COUNTRY", value: vm.alManga?.countryOfOrigin ?? "-")
                 )
                 
                 MediaAttributes(
                     leading: (title: "SOURCE", value: vm.alManga?.source?.replacingOccurrences(of: "_", with: " ") ?? "-"),
-                    trailing: (title: "YEAR", value: vm.alManga?.startDate?.year?.unwrapNil() ?? "-")
+                    trailing: (title: "YEAR", value: vm.alManga?.startDate?.year.nilToStr ?? "-")
                 )
                 
                 MediaAttributes(
-                    leading: (title: "PUPULAR", value: "#\(vm.getRank(.popular)?.unwrapNil() ?? "-")"),
-                    trailing: (title: "RATED", value: "#\(vm.getRank(.rated)?.unwrapNil() ?? "-")")
+                    leading: (title: "PUPULAR RANK", value: "# \(vm.getRank(.popular).nilToStr)"),
+                    trailing: (title: "RATED RANK", value: "# \(vm.getRank(.rated).nilToStr)")
                 )
             }
         }.lineLimit(1)

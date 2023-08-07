@@ -13,9 +13,15 @@ enum ViewStyle {
 }
 
 struct DiscoverView: View {
-    @StateObject var vm = DiscoverViewModel()
+    @StateObject var vm: DiscoverViewModel
     @State var viewStyle: ViewStyle = .initial
     @State var mangaSourcePref: Bool = false
+    
+    init() {
+        _vm = StateObject(
+            wrappedValue: DiscoverViewModel()
+        )
+    }
     
     var body: some View {
         NavigationStack {
@@ -24,6 +30,7 @@ struct DiscoverView: View {
                 .navigationTitle(String.Discovery.title)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarBackground(.visible, for: .tabBar)
+                .fontDesign(.rounded)
                 .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
                     Button(String.Common.ok, role: .cancel) { }
                 } message: {

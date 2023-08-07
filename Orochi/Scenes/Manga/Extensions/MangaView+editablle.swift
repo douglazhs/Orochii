@@ -12,8 +12,12 @@ extension MangaView {
     @ViewBuilder
     func selectChaptersButton() -> some View {
         if vm.isEditingMode {
-            Button { vm.selectAll.toggle() } label:
-            { Text(vm.selectAll ? String.Common.none : String.Common.all) }
+            Button { [weak vm] in
+                vm?.selectAll.toggle()
+                vm?.manageSelection($chSelection)
+            } label: {
+                Text(vm.selectAll ? String.Common.none : String.Common.all)
+            }
         }
     }
     
@@ -66,7 +70,7 @@ extension MangaView {
     func chapterActions() -> some View {
         Button { } label:
         { Text(String.ContextMenu.download) }
-        .disabled(vm.chSelection.isEmpty)
+        .disabled(chSelection.isEmpty)
         Menu {
             Section {
                 Button { } label:
@@ -74,10 +78,10 @@ extension MangaView {
                 Button { } label:
                 { Label(String.ContextMenu.asUnread, systemImage: "eye.slash.fill") }
             } header: {
-                Text("\(vm.chSelection.count) "
+                Text("\(chSelection.count) "
                      + String.Manga.selectedChapters.uppercased())
             }
         } label: { Text(String.Manga.mark) }
-        .disabled(vm.chSelection.isEmpty)
+        .disabled(chSelection.isEmpty)
     }
 }

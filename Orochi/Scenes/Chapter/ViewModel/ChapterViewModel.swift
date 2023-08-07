@@ -8,52 +8,71 @@
 import SwiftUI
 import MangaDex
 
-final class ChapterViewModel: ObservableObject, MangaHelpers {
-    enum Format {
-        case webtoon, normal
-    }
+extension ChapterViewModel: MangaHelpers { }
+
+final class ChapterViewModel: ObservableObject{
+ 
+    /// Actual reading **Manga**
     private (set) var manga: Manga
+    /// Current **Manga** feed
     private (set) var feed: [Chapter]
-    @Published var api: MangaDexAPI = MangaDexAPI()
-    @Published var actualPage: Double = 0
+    /// MangaDex Api object
+    let api: MangaDexAPI = MangaDexAPI()
+    // MARK: - Chapter configuration
     @Published var format: Format = .normal
     @Published var readingMode: ReadingMode = .defaultMode
     @Published var pageLayout: PageLayout = .automatic
     @Published var pageQuality: MangaQuality = .original
+    // MARK: - Chapter handler
+    /// Current selected  **Manga**
     @Published var current: Chapter
-    @Published var pages: ChapterResource?
-    @Published var currentPage: UIImage?
+    @Published var content: ChapterResource?
+    @Published var pages: [String] = []
+    @Published var actualPage: Double = 0
+    // MARK: - Possible errors
+    @Published var error: Error? = nil
     
+    /// Chaper View Model
+    /// - Parameters:
+    ///   - current: reading chapter
+    ///   - feed: current manga chapter collection
+    ///   - manga: reading manga
     init(_ current: Chapter, _ feed: [Chapter], _ manga: Manga) {
         self.current = current
         self.feed = feed
         self.manga = manga
-        fetchChapter()
-        loadDefaults()
-        defineReadingMode()
+        initalBuild()
     }
     
-    /// Fetch current chapter
+    /// Make initial **chapter** build
+    private func initalBuild() {
+        loadDefaults()
+        defineReadingMode()
+        fetchChapter()
+    }
+    
+    /// Fetch current ``MangaDex/Chapter``
     func fetchChapter() {
         guard let id = current.id else { return }
-        api.getChapter(id: id) { result in
+        api.getChapter(id: id) { [weak self] result in
             switch result {
             case .success(let data):
-                self.pages = data.chapter
+                self?.content = data.chapter
+                self?.buildPages()
             case .failure(let error):
-                print(error.localizedDescription)
+                self?.error = error.asAFError?.underlyingError
             }
         }
     }
     
-    /// Save current page on gallery
-    func savePage(_ page: String) {
+    /// Save current reading page on gallery
+    func savePage(of index: Int) {
         let imageSaver = ImageSaver()
-        imageSaver.writeToPhotoAlbum(page)
+        imageSaver.writeToPhotoAlbum(pages[index])
     }
     
-    /// Define manga reading mode
-    func defineReadingMode() {
+    /// Define manga reading mode based on ``Format``
+    private func defineReadingMode() {
         guard getTag("Web Comic", of: manga) != nil,
               getTag("Full Color", of: manga) != nil
         else {
@@ -63,28 +82,27 @@ final class ChapterViewModel: ObservableObject, MangaHelpers {
         format = .webtoon
     }
     
-    /// Choose array based on user quality preference
-    /// - Returns: Array of images
-    func choosenQuality() -> [String] {
-        if let data = pages?.data, let dataSaver = pages?.dataSaver {
-            switch pageQuality {
-            case .original: return data
-            case .dataSaver: return dataSaver
-            }
-        }
-        return[]
-    }
-    
-    /// Chapter pages count
-    func pagesCount() -> Int {
+    /// Choose array based on user ``MangaQuality`` preference
+    private func buildPages() {
         switch pageQuality {
-        case .original: return pages?.data?.count ?? 0
-        case .dataSaver: return pages?.dataSaver?.count ?? 0
+        case .original:
+            guard let data = content?.data else {
+                pages = []
+                return
+            }
+            pages = data
+            return
+        case .dataSaver:
+            guard let dataSaver = content?.dataSaver else {
+                pages = []
+                return
+            }
+            pages = dataSaver
         }
     }
     
     /// Load user defaults
-    func loadDefaults() {
+    private func loadDefaults() {
         pageLayout = PageLayout(
             rawValue: Defaults.standard.getInt(of: DefaultsKeys.ReaderPreferences.pageLayout.rawValue)
         ) ?? .automatic

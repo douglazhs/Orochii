@@ -16,22 +16,23 @@ extension SearchStyleView {
             if let mangas = vm.searchResult, !vm.isSearching, !mangas.isEmpty {
                 LazyVGrid(columns: columns, spacing: 10) {
                     ForEach(mangas) { manga in
-                        NavigationLink {
-                            MangaView(manga)
-                        } label: {
+                        NavigationLink(value: manga) {
                             cell(of: manga)
                         }
                         .contextMenu {
-                            // TODO: - Implement context menu features
                             Button { } label: {
                                 Label(
                                     String.ContextMenu.addToLib,
                                     systemImage: "plus.rectangle.on.folder"
                                 )
                             }
-                        } preview: { MangaView(manga) }
+                        }
                     }
-                }.padding()
+                }
+                .padding()
+                .navigationDestination(for: Manga.self) {
+                    MangaView($0)
+                }
             } else {
                 if vm.isSearching {
                     ActivityIndicator().padding(.vertical)

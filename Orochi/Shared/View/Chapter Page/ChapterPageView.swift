@@ -41,7 +41,10 @@ struct ChapterPageView: View {
                 .aspectRatio(contentMode: .fit)
                 .edgesIgnoringSafeArea(.vertical)
         } else {
-            Text("Error")
+            Text("error")
+                .font(.footnote)
+                .fontWeight(.medium)
+                .fontDesign(.rounded)
         }
     }
 }

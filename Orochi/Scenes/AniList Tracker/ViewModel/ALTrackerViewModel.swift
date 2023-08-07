@@ -14,19 +14,20 @@ extension ALTrackerViewModel: MangaHelpers { }
 
 extension ALTrackerViewModel: ALServices { }
 
-final class ALTrackerViewModel: ObservableObject {
-    /// AniList button field
-    enum ALPicker {
-        case score, chapter, volume
-        
-        var description: String {
-            switch self {
-            case .score:   return "Score"
-            case .chapter: return "Ch."
-            case .volume:  return "Vol."
-            }
+/// AniList button field
+enum ALPicker {
+    case score, chapter, volume
+    
+    var description: String {
+        switch self {
+        case .score:   return "Score"
+        case .chapter: return "Ch."
+        case .volume:  return "Vol."
         }
     }
+}
+
+final class ALTrackerViewModel: ObservableObject {
     /// Manga rankings
     enum Rank {
         case rated, popular
@@ -39,9 +40,9 @@ final class ALTrackerViewModel: ObservableObject {
     @Published var status: MangaStatus = .planning
     @Published var startDate: Date = .now
     @Published var endDate: Date = .now
-    @Published var chapter: Double = 0
-    @Published var volume: Double = 0
-    @Published var score: Double = 0
+    @Published var chapter: Double? = 0
+    @Published var volume: Double? = 0
+    @Published var score: Double? = 0
     @Published var alUrl: URL?
     // MARK: - View states
     @Published var currentPicker: ALPicker = .chapter
@@ -55,9 +56,8 @@ final class ALTrackerViewModel: ObservableObject {
     // - MARK: Search query
     @Published var text: String = ""
     
-    init(_ mDexManga: Manga) {
-        self.mDexManga = mDexManga
-        self.alManga = alManga
+    init(_ manga: Manga) {
+        mDexManga = manga
         checkALToken()
         checkALId()
     }
@@ -67,28 +67,9 @@ final class ALTrackerViewModel: ObservableObject {
         if let tokenData = Keychain.standard.read(
             service: "access-token",
             account: "anilist"
-        ), let token =  String(data: tokenData, encoding: .utf8) {
-            self.token = token
+        ), let userToken =  String(data: tokenData, encoding: .utf8) {
+            token = userToken
         }
-    }
-    
-    /// TextField formatter
-    /// - Returns: Formatter instance
-    func textFieldformatter() -> Formatter {
-        let formatter: NumberFormatter = {
-            let formatter = NumberFormatter()
-            formatter.numberStyle = .none
-            if let chCount =  alManga?.chapters {
-                formatter.maximum = NSNumber(value: chCount)
-            } else {
-                formatter.maximum = nil
-            }
-            formatter.maximumSignificantDigits = 4
-            formatter.maximumIntegerDigits = 4
-            formatter.generatesDecimalNumbers = false
-            return formatter
-        }()
-        return formatter
     }
     
     /// Search for manga
@@ -108,15 +89,22 @@ final class ALTrackerViewModel: ObservableObject {
         }
     }
     
+    /// Clear actual search
+    func clearSearch() {
+        text = ""
+        mangas = nil
+        alManga = nil
+    }
+    
     /// Get manga ranks
     /// - Parameter type: Rank type
     /// - Returns: Rank integer
     func getRank(_ type: Rank) -> Int? {
         switch type {
         case .popular :
-            return alManga?.rankings?.first(where: { ($0.type ?? "") == "POPULAR" && $0.allTime })?.rank
+            return alManga?.rankings?.first(where: { ($0.type.unwrapped) == "POPULAR" && $0.allTime })?.rank
         case .rated:
-            return alManga?.rankings?.first(where: { ($0.type ?? "") == "RATED" && $0.allTime })?.rank
+            return alManga?.rankings?.first(where: { ($0.type.unwrapped) == "RATED" && $0.allTime })?.rank
         }
     }
     

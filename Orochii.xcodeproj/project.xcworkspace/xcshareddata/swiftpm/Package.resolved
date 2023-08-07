@@ -19,30 +19,12 @@
       }
     },
     {
-      "identity" : "mangadex",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/douglazhs/MangaDex",
-      "state" : {
-        "branch" : "main",
-        "revision" : "52c46bb007736d54ec24bc446680a8c79b865a60"
-      }
-    },
-    {
       "identity" : "nuke",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke",
       "state" : {
         "revision" : "c3864b8882bc69f5edfe5c70e18786c91d228b28",
         "version" : "12.1.3"
-      }
-    },
-    {
-      "identity" : "orochii-anilistservice",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/douglazhs/Orochii-AniListService.git",
-      "state" : {
-        "revision" : "065f321677d21787156c7981731ec3b8975108ae",
-        "version" : "0.0.5"
       }
     }
   ],

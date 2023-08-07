@@ -29,23 +29,24 @@ extension ALTracker {
             Text("CH.")
                 .font(.footnote)
                 .foregroundColor(.secondary)
-            Button {
-                if let chCount = vm.alManga?.chapters, chCount <= 500 {
-                    vm.currentPicker = .chapter
-                    showNumberPicker = true
-                } else {
-                    showTextField = true
-                }
-            } label: {
-                Text("\(String(format: "%.0f", vm.chapter)) / \(vm.alManga?.chapters?.unwrapNil() ?? "-")")
-                    .frame(maxWidth: .infinity)
-                    .lineLimit(1)
+            PickerTextField(
+                data: Array(stride(
+                    from: 0,
+                    through: Double(vm.alManga?.chapters ?? 2000),
+                    by: 1
+                )),
+                dataFormat: "%.0f",
+                placeholder: "",
+                field: .chapter,
+                selection: $vm.chapter
+            )
+            .frame(height: 30.5, alignment: .center)
+            .background {
+                Text("\(String(format: "%.0f", vm.chapter ?? 0)) / \(vm.alManga?.chapters.nilToStr ?? "-")")
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .foregroundColor(.primary)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(.primary.opacity(0.15))
+            .overlay { RoundedRectangle(cornerRadius: 4.25).stroke(Color(.systemGray),lineWidth: 0.175) }
         }
     }
     
@@ -56,19 +57,24 @@ extension ALTracker {
             Text("VOL.")
                 .font(.footnote)
                 .foregroundColor(.secondary)
-            Button {
-                vm.currentPicker = .volume
-                showNumberPicker = true
-            } label: {
-                Text("\(String(format: "%.0f", vm.volume)) / \(vm.alManga?.volumes?.unwrapNil() ?? "-")")
-                    .frame(maxWidth: .infinity)
-                    .lineLimit(1)
+            PickerTextField(
+                data: Array(stride(
+                    from: 0,
+                    through: Double(vm.alManga?.volumes ?? 500),
+                    by: 1
+                )),
+                dataFormat: "%.0f",
+                placeholder: "",
+                field: .volume,
+                selection: $vm.volume
+            )
+            .frame(height: 30.5, alignment: .center)
+            .background {
+                Text("\(String(format: "%.0f", vm.volume ?? 0)) / \(vm.alManga?.volumes.nilToStr ?? "-")")
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .foregroundColor(.primary)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(.primary.opacity(0.15))
+            .overlay { RoundedRectangle(cornerRadius: 4.25).stroke(Color(.systemGray),lineWidth: 0.175) }
         }
     }
     
@@ -97,8 +103,10 @@ extension ALTracker {
                     .fontWeight(.medium)
                     .foregroundColor(.primary)
             }
-            .buttonStyle(.borderedProminent)
-            .tint(Color.primary.opacity(0.15))
+            .frame(height: 30.5, alignment: .center)
+            .background(Color.primary.opacity(0.125))
+            .clipShape(RoundedRectangle(cornerRadius: 4.25))
+            .overlay { RoundedRectangle(cornerRadius: 4.25).stroke(Color(.systemGray),lineWidth: 0.175) }
         }
     }
 }

@@ -8,12 +8,10 @@
 import Foundation
 
 // Int+extension
-extension Int {
-    /// Unwrap integer value to a valid string
-    /// - Returns: Unwrapped value
-    func unwrapNil() -> String {
-        let formatter = NumberFormatter()
-        formatter.nilSymbol = "-"
-        return formatter.string(from: NSNumber(value: self)) ?? "-"
+extension Int? {
+    /// Unwrap integer value to a valid string. Returns **self** or *- placeholder*
+    var nilToStr: String {
+        if let value = self { return "\(value)" }
+        return "-"
     }
 }

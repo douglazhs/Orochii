@@ -15,6 +15,14 @@ enum OrderFilter: Int, Pickable {
     
     case asc, desc
     
+    /// Order key
+    var key: String {
+        switch self {
+        case .asc: return "asc"
+        case .desc: return "desc"
+        }
+    }
+    
     /// Order description
     var description: String {
         switch self {

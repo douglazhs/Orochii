@@ -75,23 +75,26 @@ extension ChapterStandardCell {
     /// Chapter scan informations
     @ViewBuilder
     func scanlationGroupInfo() -> some View {
-        HStack(alignment: .bottom, spacing: 5.0) {
+        HStack(alignment: .bottom, spacing: .zero) {
             // UPDATED
-            if let scanlationGroup,
-               let createdAt = chapter.attributes?.createdAt {
+            if let createdAt = chapter.attributes?.createdAt {
                 // UPDATED AT
                 Text(
                     Date.fromString(createdAt) +
-                    " • \(Date.relativeDate(of: Int(Date.convert(createdAt).timeIntervalSince1970)))"
+                    " [\(Date.relativeDate(of: Int(Date.convert(createdAt).timeIntervalSince1970)))] "
                 )
                 .font(.footnote)
                 .foregroundColor(Color(uiColor: .systemGray))
+                
+            }
+            if let scanlationGroup,
+               !scanlationGroup.isEmpty {
                 // SCAN GROUP
-                Text("~ " + scanlationGroup)
+                Text("• " + scanlationGroup)
                     .font(.footnote)
                     .foregroundColor(Color(uiColor: .systemGray))
             } else {
-                Text("Unknown scanlation group")
+                Text("• Missing scan group")
                     .font(.footnote)
                     .foregroundColor(Color(uiColor: .systemGray))
             }

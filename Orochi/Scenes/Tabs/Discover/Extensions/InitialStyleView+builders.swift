@@ -16,7 +16,9 @@ extension InitialStyleView {
         ScrollView(.horizontal, showsIndicators: false) {
             LazyHStack(alignment: .top) {
                 ForEach(mangas) { manga in
-                    NavigationLink(value: manga) {
+                    NavigationLink {
+                        MangaView(manga)
+                    } label: {
                         cell(of: manga)
                             .task { [weak vm] in
                                 if (vm?.hasReachedEnd(of: manga, on: carousel) ?? false) {
@@ -30,7 +32,7 @@ extension InitialStyleView {
                                 Button(role: .destructive) { } label: {
                                     Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
                                 }
-                            } 
+                            }
                     }
                 }
             }

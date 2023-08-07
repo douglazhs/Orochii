@@ -7,13 +7,12 @@
 
 import SwiftUI
 import NukeUI
-import Combine
 
 extension MangaView {
     /// All manga information, including  chapters
     @ViewBuilder
     func content() -> some View {
-        List(selection: $vm.chSelection) {
+        List(selection: $chSelection) {
             Group {
                 // ALL INFORMATION
                 mangaInfoArea()
@@ -28,7 +27,6 @@ extension MangaView {
             }
             .listSectionSeparator(.hidden)
             .listRowSeparator(.hidden)
-            .fontDesign(.rounded)
         }
         .overlay(alignment: .top) {
             ActionPopUp(
@@ -82,10 +80,10 @@ extension MangaView {
         }
         .listRowBackground(Color.clear)
         .background(alignment: .center) {
-            DarkOverlay(url: vm.api.buildURL(for: .cover(
-                id: vm.manga.id,
-                fileName: vm.imgFileName(of: vm.manga))
-            ))
+             DarkOverlay(url: vm.api.buildURL(for: .cover(
+                 id: vm.manga.id,
+                 fileName: vm.imgFileName(of: vm.manga))
+             ))
         }
         .clipShape(Rectangle())
         .listRowInsets(.init(
@@ -141,13 +139,13 @@ extension MangaView {
         VStack(alignment: .leading, spacing: 10) {
             // AUTHOR & ARTIST
             MediaAttributes(
-                leading: (String.Manga.author.uppercased(), vm.relationship("author", with: vm.manga)),
-                trailing: (String.Manga.year.uppercased(), vm.manga.attributes?.year?.unwrapNil() ?? "-")
+                leading: (String.Manga.author.uppercased(), vm.relationship("author", with: vm.manga).notEmpty),
+                trailing: (String.Manga.year.uppercased(), vm.manga.attributes?.year.nilToStr ?? "-")
             )
             
             // STATUS & UPDADATED
             MediaAttributes(
-                leading: ("ARTIST", vm.relationship("artist", with: vm.manga)),
+                leading: ("ARTIST", vm.relationship("artist", with: vm.manga).notEmpty),
                 trailing: ("COUNTRY", vm.manga.attributes?.originalLanguage?.uppercased() ?? "-")
             )
             // COUNTRY OF ORIGIN & YEAR
@@ -168,27 +166,15 @@ extension MangaView {
     @ViewBuilder
     func description() -> some View {
         Section {
-            descriptionText()
+            Text(vm.switchDescLang())
+                .foregroundColor(.primary.opacity(0.825))
+                .font(.subheadline)
+                .fontWeight(.regular)
         } header: {
-            HStack {
-                Text(String.Manga.descHeader.uppercased())
-                Spacer()
-                // MANGA DESCRIPTION LANGUAGE PICKER
-                EnumPicker("", selection: $vm.descLang)
-                    .pickerStyle(.menu)
-                    
-            }.lineLimit(1)
+            Text(String.Manga.descHeader.uppercased())
+                .lineLimit(1)
         }
         .listRowBackground(Color.clear)
-    }
-    
-    /// Description attributed text
-    @ViewBuilder
-    func descriptionText() -> some View {
-        Text(vm.switchDescLang())
-            .foregroundColor(.primary.opacity(0.825))
-            .font(.subheadline)
-            .fontWeight(.regular)
     }
     
     /// Manga chapters list
@@ -197,10 +183,9 @@ extension MangaView {
     func chapters() -> some View {
         if !vm.loadingFeed, !vm.chapters.isEmpty {
             Section {
-                ForEach(vm.chapters, id: \.id) { ch in
-                    Button {
-                        vm.selectedChapter = ch
-                        showChapterReader = true
+                ForEach(vm.filtered, id: \.id) { ch in
+                    Button { [weak vm] in
+                        vm?.selectedChapter = ch
                     } label: {
                         ChapterStandardCell(
                             ch,
@@ -208,36 +193,31 @@ extension MangaView {
                             editingMode: vm.isEditingMode
                         )
                     }
-                    .task { [weak vm] in
-                        if (vm?.hasReachedEnd(of: ch) ?? false) {
-                            vm?.fetchMore()
-                        }
-                    }
                     .contextMenu {
                         ChapterMenu() { _ in
                             // TODO: - Handle context menu actions
                         }
                     }
-                    .fullScreenCover(isPresented: $showChapterReader) {
-                        ChapterView(
-                            vm.selectedChapter!,
-                            vm.chapters,
-                            of: vm.manga
-                        )
-                    }
                 }
             } header: { chaptersHeader() }
             .listRowBackground(Color.clear)
+            .fullScreenCover(item: $vm.selectedChapter) {
+                ChapterView(
+                    $0,
+                    vm.chapters,
+                    of: vm.manga
+                )
+            }
         } else {
-            loadHandling()
+            loadHandler()
                 .listRowBackground(Color.clear)
                 .listSectionSeparator(.hidden)
         }
     }
     
-    /// Load chapters handling
+    /// Load chapters handler
     @ViewBuilder
-    func loadHandling() -> some View {
+    func loadHandler() -> some View {
         if vm.loadingFeed {
             HStack {
                 Spacer()
