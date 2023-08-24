@@ -13,13 +13,10 @@ extension ALTracker {
     /// All view content
     @ViewBuilder
     func content() -> some View {
-        if !vm.loadingById {
-            if vm.availableInAL {
-                aniList()
-            } else {
-                search()
-            }
-        } else { ActivityIndicator() }
+        switch vm.context {
+        case .tracker: aniList()
+        case .search: search()
+        }
     }
     
     /// AniList screen
@@ -41,28 +38,50 @@ extension ALTracker {
                 SafariWebView(url: vm.alUrl!)
                     .ignoresSafeArea()
             }
-            .confirmationDialog(
-                "Stop tracking locally",
-                isPresented: $showConfirmation,
-                titleVisibility: .visible
-            ) {
-                Button("Stop", role: .destructive) { dismiss() }
-            } message : {
-                Text("You will not lose your AniList progress, just remove the track information locally.")
-            }
             .overlay { trackLocallyOverlay() }
+    }
+    
+    /// Search screen
+    @ViewBuilder
+    func search() -> some View {
+        trackerSearchList()
+            .background {
+                BlurBackground(
+                    with: cover,
+                    radius: Constants.device == .phone ? 30 : 50
+                )
+            }
+            .searchable(
+                text: $vm.text,
+                prompt: "Search for title in AniList"
+            )
+            .toolbarBackground(.visible, for: .navigationBar)
+            .onReceive(
+                vm.$text
+                    .debounce(
+                        for: .seconds(0.75),
+                        scheduler: DispatchQueue.main
+                    )
+            ) { [weak vm] in
+                if !$0.isEmpty {
+                    vm?.searchManga()
+                } else {
+                    vm?.clearSearch()
+                }
+            }
     }
     
     /// AniList title view
     @ViewBuilder
     func alTitleView() -> some View {
         Group {
-            if vm.availableInAL {
+            switch vm.context {
+            case .tracker:
                 VStack(spacing: .zero) {
                     Text(
                         vm.alManga?.title?.romaji ??
                         vm.alManga?.title?.english ??
-                        (vm.loadingById ? "" : "Unknown")
+                        (vm.isLoading ? "" : "Unknown")
                     )
                     
                     if let english = vm.alManga?.title?.english,
@@ -73,19 +92,12 @@ extension ALTracker {
                             .fontWeight(.medium)
                     }
                 }
-            } else { Text("Search").font(.headline) }
+            case .search: Text("Search").font(.headline)
+            }
         }
         .font(.subheadline)
         .fontWeight(.semibold)
         .lineLimit(1)
-    }
-    
-    /// Search screen
-    @ViewBuilder
-    func search() -> some View {
-        trackerSearchList()
-            .background(BlurBackground(with: cover))
-            .navigationTitle("Search")
     }
     
     /// Tracking manga view
@@ -110,26 +122,25 @@ extension ALTracker {
     @ViewBuilder
     func trackerSearchList() -> some View {
         List {
-            textField()
-            if !vm.loadingByText {
-                if let mangas = vm.mangas, !mangas.isEmpty {
-                    ForEach(mangas) { manga in
-                        mangaCell(manga)
-                            .listRowBackground(Color.clear)
-                            .onTapGesture {
-                                vm.alManga = vm.alManga == manga ? nil : manga
+            if let mangas = vm.mangas, !mangas.isEmpty, !vm.isSearching {
+                ForEach(mangas) { manga in
+                    mangaCell(manga)
+                        .listRowBackground(Color.clear)
+                        .onTapGesture {
+                            vm.alManga = vm.alManga == manga ? nil : manga
+                        }
+                        .overlay(alignment: .trailing) {
+                            if vm.alManga == manga {
+                                Image(systemName: "checkmark")
+                                    .font(.caption2)
+                                    .fontWeight(.heavy)
+                                    .foregroundColor(.accentColor)
                             }
-                            .overlay(alignment: .trailing) {
-                                if vm.alManga == manga {
-                                    Image(systemName: "checkmark")
-                                        .font(.caption2)
-                                        .fontWeight(.heavy)
-                                        .foregroundColor(.accentColor)
-                                }
-                            }
-                    }
-                    .listSectionSeparator(.hidden)
-                } else {
+                        }
+                }
+                .listSectionSeparator(.hidden)
+            } else {
+                if !vm.isSearching {
                     Text("No results found on **AniList**")
                         .foregroundColor(Color(.systemGray))
                         .font(.subheadline)
@@ -139,54 +150,14 @@ extension ALTracker {
                 }
             }
         }
-        .listStyle(.plain)
+        .listStyle(.grouped)
         .scrollContentBackground(.hidden)
         .scrollIndicators(.hidden)
-    }
-    
-    /// Search text field
-    @ViewBuilder
-    func textField() -> some View {
-        TextField("", text: $vm.text, prompt: Text("Search for title in **AniList**"))
-            .onReceive(
-                vm.$text
-                    .debounce(
-                        for: .seconds(1.0),
-                        scheduler: DispatchQueue.main
-                    )
-            ) { value in
-                if !value.isEmpty {
-                    vm.searchManga()
-                } else {
-                    vm.clearSearch()
-                }
+        .overlay(alignment: .top) {
+            if vm.isSearching {
+                ActivityIndicator().padding(.vertical)
             }
-            .padding(.bottom, 5.0)
-            .overlay(alignment: .bottom) {
-                Divider()
-            }
-            .overlay(alignment: .trailing) {
-                if !vm.text.isEmpty {
-                    Button {
-                        vm.clearSearch()
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.headline)
-                            .foregroundColor(.secondary)
-                    }
-                }
-            }
-            .font(.headline)
-            .fontWeight(.medium)
-            .foregroundColor(.primary)
-            .listSectionSeparator(.hidden)
-            .listRowSeparator(.hidden)
-            .listRowBackground(Color.clear)
-            /*.overlay(alignment: .bottom) {
-                if vm.loadingByText {
-                    ActivityIndicator()
-                }
-            }*/
+        }
     }
     
     /// Current manga context

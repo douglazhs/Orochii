@@ -9,6 +9,8 @@ import SwiftUI
 import struct MangaDex.Manga
 
 struct ALTracker: View {
+    @Environment(\.isSearching) var isSearching
+    @Environment(\.dismissSearch) var dismissSearch
     @Environment(\.dismiss) var dismiss
     @StateObject var vm: ALTrackerViewModel
     @State var showNumberPicker: Bool = false
@@ -31,27 +33,30 @@ struct ALTracker: View {
     var body: some View {
         NavigationStack {
             content()
+                .onSubmit(of: .search, { dismissSearch() })
                 .navigationBarTitleDisplayMode(.inline)
                 .animation(.easeIn, value: [vm.mangas != nil])
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         if vm.availableInAL {
                             anilistMangaOptions()
-                        } else { trackButton() }
+                        }
                     }
                     ToolbarItem(placement: .navigationBarLeading) {
                         closeButton()
                     }
                     ToolbarItem(placement: .principal) { alTitleView() }
                     ToolbarItem(placement: .status) {
-                        if vm.trackingLocally {
-                            Button("SAVE", action: { dismiss() })
-                                .font(.subheadline)
-                                .fontWeight(.black)
+                        switch vm.context {
+                        case .tracker:
+                            if vm.trackingLocally {
+                                saveButton()
+                            }
+                        case .search:
+                            trackButton()
                         }
                     }
                 }
-                .fontDesign(.rounded)
         }
     }
 }

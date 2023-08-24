@@ -37,6 +37,15 @@ extension ALTracker {
             Image(systemName: "ellipsis")
         }
         .tint(.white.opacity(0.75))
+        .confirmationDialog(
+            "Stop tracking locally",
+            isPresented: $showConfirmation,
+            titleVisibility: .visible
+        ) {
+            Button("Stop", role: .destructive) { dismiss() }
+        } message : {
+            Text("You will not lose your AniList progress, just remove the track information locally.")
+        }
     }
     
     /// Close screen button
@@ -67,5 +76,13 @@ extension ALTracker {
         }
         .buttonStyle(.borderless)
         .disabled(vm.alManga == nil)
+    }
+    
+    /// Save progress button
+    @ViewBuilder
+    func saveButton() -> some View {
+        Button("SAVE", action: { dismiss() })
+            .font(.subheadline)
+            .fontWeight(.black)
     }
 }

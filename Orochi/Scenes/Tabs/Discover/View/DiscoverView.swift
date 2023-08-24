@@ -26,11 +26,10 @@ struct DiscoverView: View {
     var body: some View {
         NavigationStack {
             content()
-                .background(BlurBackground(with: .view_background))
                 .navigationTitle(String.Discovery.title)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbarBackground(.visible, for: .tabBar)
-                .fontDesign(.rounded)
+                .background(BlurBackground(with: .view_background))
                 .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
                     Button(String.Common.ok, role: .cancel) { }
                 } message: {
@@ -49,9 +48,7 @@ struct DiscoverView: View {
         }
         .searchable(
             text: $vm.nameQuery,
-            placement: .navigationBarDrawer(
-                displayMode: .always
-            ),prompt: "Search for manga title"
+            prompt: "Search for manga title"
         )
         .onSubmit(of: .search) {
             UIApplication.shared.becomeFirstResponder()

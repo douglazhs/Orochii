@@ -106,5 +106,11 @@ extension SettingsView {
         }
         .buttonStyle(.borderedProminent)
         .tint(.white)
+        .confirmationDialog(String.Common.attention, isPresented: $vm.showDialog) {
+            Button(String.Common.cancel, role: .cancel, action: {})
+            Button(String.Adjusts.logOut, role: .destructive) {
+                vm.logOutAL()
+            }
+        } message: { Text(String.Anilist.logOutMessage) }
     }
 }

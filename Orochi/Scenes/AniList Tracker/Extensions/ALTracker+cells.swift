@@ -17,33 +17,48 @@ extension ALTracker {
                 url: URL(string: manga.coverImage?.large ?? ""),
                 size: CGSize.standardImageCell
             )
+            .overlay {
+                ZStack(alignment: .top) {
+                    LinearGradient(colors: [.black, .clear], startPoint: .top, endPoint: .center)
+                    Text(
+                        manga.averageScore != nil
+                        ? String(format: "%.1f", Double(manga.averageScore ?? 0) / 10.0)
+                        : manga.averageScore.nilToStr
+                    )
+                    .font(.system(size: 9.5, weight: .semibold))
+                    .frame(maxWidth: .infinity, alignment: .topLeading)
+                    .padding(3.25)
+                    .foregroundColor(.primary.opacity(0.85))
+                }
+                .clipShape(RoundedRectangle(cornerRadius: 4.5))
+            }
             
             VStack(alignment: .leading, spacing: 3.5) {
                 Text(manga.title?.romaji ?? "Unknown")
                     .lineLimit(2)
                     .font(.subheadline)
                     .fontWeight(.medium)
-                Text("\(manga.title?.english ?? "No english title")")
+                if let english = manga.title?.english {
+                    Text(english)
+                        .lineLimit(1)
+                        .font(.footnote)
+                        .fontWeight(.regular)
+                        .foregroundColor(Color(.systemGray))
+                }
+                Text(manga.format.notEmpty)
                     .lineLimit(1)
                     .font(.footnote)
                     .fontWeight(.regular)
                     .foregroundColor(Color(.systemGray))
-                HStack(alignment: .center) {
-                    Image(systemName: "star.fill")
-                        .resizable()
-                        .frame(width: 10.0, height: 10.0)
-                    Text("\((manga.averageScore ?? 0) / 10)")
-                        .font(.caption2)
-                }
-                if manga.mediaListEntry != nil {
-                    Text("~ **\(manga.mediaListEntry?.status ?? "")** ~ ON YOUR LIST")
-                        .font(.caption2)
-                        .foregroundColor(Color(.systemGray))
-                        .fontWeight(.regular)
-                }
-                Text(manga.status ?? "")
+                Text(manga.status.notEmpty)
                     .font(.caption2)
                     .foregroundColor(Color(.systemGray))
+                if let status = manga.mediaListEntry?.status {
+                    Text("**\((MangaStatus(rawValue: status) ?? .planning).description.uppercased())**")
+                        .font(.caption2)
+                        .foregroundColor(.accentColor)
+                        .fontWeight(.regular)
+                }
             }
         }
         .frame(maxWidth: .infinity, alignment: .leading)

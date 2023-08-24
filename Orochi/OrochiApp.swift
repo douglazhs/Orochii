@@ -28,6 +28,7 @@ struct OrochiiApp: App {
                         systemImage: "gear"
                     ) }
             }
+            .fontDesign(.rounded)
             .tint(Color(.systemBlue))
             .preferredColorScheme(.dark)
         }

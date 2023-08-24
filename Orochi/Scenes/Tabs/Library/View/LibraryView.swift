@@ -15,11 +15,6 @@ struct LibraryView: View {
     var body: some View {
         NavigationStack {
             content()
-                .onChange(of: isSearching) { newValue in
-                    if !newValue {
-                        // TODO: - Clear search
-                    }
-                }
                 .navigationTitle(String.Library.title)
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
@@ -30,11 +25,8 @@ struct LibraryView: View {
         }
         .searchable(
             text: $vm.query,
-            placement: .navigationBarDrawer(
-                displayMode: .always
-            )
+            prompt: "Search on your list"
         )
-        .onSubmit(of: .search) { }
     }
 }
 

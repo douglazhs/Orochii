@@ -34,7 +34,9 @@ extension ALTracker {
                 MediaAttributes(
                     leading: (
                         title: "AVERAGE SCORE",
-                        value: "\(vm.alManga?.averageScore.nilToStr ?? "-")%"
+                        value: vm.alManga?.averageScore != nil ?
+                        "\(vm.alManga?.averageScore ?? 0)%" :
+                        vm.alManga?.averageScore.nilToStr ?? "-"
                     ),
                     trailing: (title: "COUNTRY", value: vm.alManga?.countryOfOrigin ?? "-")
                 )
@@ -45,8 +47,8 @@ extension ALTracker {
                 )
                 
                 MediaAttributes(
-                    leading: (title: "PUPULAR RANK", value: "# \(vm.getRank(.popular).nilToStr)"),
-                    trailing: (title: "RATED RANK", value: "# \(vm.getRank(.rated).nilToStr)")
+                    leading: (title: "PUPULAR RANK", value: vm.getRank(.popular)),
+                    trailing: (title: "RATED RANK", value: vm.getRank(.rated))
                 )
             }
         }.lineLimit(1)

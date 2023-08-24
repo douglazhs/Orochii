@@ -15,7 +15,7 @@ struct ReaderToolbar: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .fontDesign(.rounded)
+            .navigationTitle("Ch.\(vm.current.attributes?.chapter ?? "")")
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button { showChaptersList = true } label: {
@@ -26,7 +26,6 @@ struct ReaderToolbar: ViewModifier {
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) { readerPreferences() }
-                ToolbarItem(placement: .principal) { principalItem() }
                 ToolbarItem(placement: .bottomBar) { pageSlider() }
             }
             .onAppear {

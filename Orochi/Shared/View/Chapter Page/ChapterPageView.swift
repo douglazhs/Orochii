@@ -44,7 +44,6 @@ struct ChapterPageView: View {
             Text("error")
                 .font(.footnote)
                 .fontWeight(.medium)
-                .fontDesign(.rounded)
         }
     }
 }

@@ -32,7 +32,6 @@ struct MangaView: View {
             .toolbar(vm.showBottomBar ? .visible : .hidden, for: .bottomBar)
             .navigationBarBackButtonHidden(vm.isEditingMode)
             .toolbarBackground(.visible, for: .bottomBar)
-            .fontDesign(.rounded)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     selectChaptersButton()

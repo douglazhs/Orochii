@@ -23,12 +23,6 @@ struct SettingsView: View {
                 .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
                     Button(String.Common.ok) { }
                 } message: { Text(vm.alertInfo.message) }
-                .confirmationDialog(String.Common.attention, isPresented: $vm.showDialog) {
-                    Button(String.Common.cancel, role: .cancel, action: {})
-                    Button(String.Adjusts.logOut, role: .destructive) {
-                        vm.logOutAL()
-                    }
-                } message: { Text(String.Anilist.logOutMessage) }
         }
     }
 }

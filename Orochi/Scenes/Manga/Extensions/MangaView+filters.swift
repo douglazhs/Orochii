@@ -36,6 +36,7 @@ extension MangaView {
             Spacer()
             // ORDER MENU
             order()
+            Divider()
             // SEARCH BUTTON
             searchChap()
         }
@@ -94,9 +95,8 @@ extension MangaView {
             UIApplication.shared.becomeFirstResponder()
         } label: {
             Image(systemName: "magnifyingglass")
-                .foregroundColor(.accentColor)
+                .foregroundColor(.accentColor.opacity(0.85))
                 .font(.headline)
-                .fontWeight(.bold)
         }
     }
     
@@ -135,9 +135,8 @@ extension MangaView {
             }
         } label: {
             Image(systemName: "line.3.horizontal.decrease")
-                .foregroundColor(.accentColor)
+                .foregroundColor(.accentColor.opacity(0.85))
                 .font(.title3)
-                .fontWeight(.bold)
         }
     }
 }

@@ -32,6 +32,10 @@ final class ALTrackerViewModel: ObservableObject {
     enum Rank {
         case rated, popular
     }
+    /// Current view context
+    enum Context {
+        case search, tracker
+    }
     /// Current authenticated AniList user token
     private var token: String = ""
     // MARK: - AniList stuffs
@@ -47,10 +51,11 @@ final class ALTrackerViewModel: ObservableObject {
     // MARK: - View states
     @Published var currentPicker: ALPicker = .chapter
     @Published var showAlert: Bool = false
-    @Published var loadingById: Bool = false
-    @Published var loadingByText: Bool = false
+    @Published var isLoading: Bool = false
+    @Published var isSearching: Bool = false
     @Published var availableInAL: Bool = false
     @Published var trackingLocally: Bool = false
+    @Published var context: Context = .search
     // - MARK: - MangaDex stuffs
     @Published var mDexManga: Manga
     // - MARK: Search query
@@ -58,6 +63,12 @@ final class ALTrackerViewModel: ObservableObject {
     
     init(_ manga: Manga) {
         mDexManga = manga
+        initialBuild()
+    }
+    
+    /// Make tracker initial build
+    private func initialBuild() {
+        isSearching = true
         checkALToken()
         checkALId()
     }
@@ -74,16 +85,16 @@ final class ALTrackerViewModel: ObservableObject {
     
     /// Search for manga
     func searchManga() {
-        withAnimation(.easeIn) { loadingByText = true }
+        withAnimation(.spring()) { isSearching = true }
         Task { @MainActor in
             do {
                 mangas = try await search(
                     manga: text,
                     token: token
                 )
-                withAnimation(.easeIn) { loadingByText = false }
+                withAnimation(.easeIn) { isSearching = false }
             } catch {
-                withAnimation(.easeIn) { loadingByText = false }
+                withAnimation(.easeIn) { isSearching = false }
                 print(error.localizedDescription)
             }
         }
@@ -99,12 +110,16 @@ final class ALTrackerViewModel: ObservableObject {
     /// Get manga ranks
     /// - Parameter type: Rank type
     /// - Returns: Rank integer
-    func getRank(_ type: Rank) -> Int? {
+    func getRank(_ type: Rank) -> String {
         switch type {
         case .popular :
-            return alManga?.rankings?.first(where: { ($0.type.unwrapped) == "POPULAR" && $0.allTime })?.rank
+            let popular = alManga?.rankings?.first(where: { $0.type.unwrapped == "POPULAR" && $0.allTime })?.rank
+            guard let popular else { return "-" }
+            return "#\(popular)"
         case .rated:
-            return alManga?.rankings?.first(where: { ($0.type.unwrapped) == "RATED" && $0.allTime })?.rank
+            let rated = alManga?.rankings?.first(where: { $0.type.unwrapped == "RATED" && $0.allTime })?.rank
+            guard let rated else { return "-" }
+            return "#\(rated)"
         }
     }
     
@@ -138,14 +153,20 @@ final class ALTrackerViewModel: ObservableObject {
     private func checkALId() {
         if let anilistId = mDexManga.attributes?.links?.al,
            let integerId = Int(anilistId) {
-            withAnimation(.spring()) { loadingById = true }
+            withAnimation(.spring()) {
+                isLoading = true
+                context = .tracker
+            }
             Task { @MainActor in
                 do {
                     alManga = try await get(media: integerId, token: token)
                     handleTracking()
-                    withAnimation(.spring()) { loadingById = false }
+                    withAnimation(.spring()) { isLoading = false }
                 } catch {
-                    withAnimation(.spring()) { loadingById = false }
+                    withAnimation(.spring()) {
+                        isLoading = false
+                        context = .search
+                    }
                     print(error.localizedDescription)
                 }
                 handleTracking()
@@ -156,12 +177,18 @@ final class ALTrackerViewModel: ObservableObject {
     /// Verify if the manga is already tracking
     func handleTracking() {
         guard alManga != nil else {
-            withAnimation(.spring()) { availableInAL = false }
+            withAnimation(.spring()) {
+                availableInAL = false
+                context = .search
+            }
             // Activate the search
             text = unwrapTitle(of: mDexManga)
             return
         }
-        withAnimation(.spring()) { availableInAL = true }
+        withAnimation(.spring()) {
+            availableInAL = true
+            context = .tracker
+        }
         fillInfo()
     }
 }

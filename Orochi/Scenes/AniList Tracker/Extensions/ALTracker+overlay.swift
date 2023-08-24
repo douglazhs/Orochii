@@ -16,27 +16,11 @@ extension ALTracker {
                 Color.black.opacity(0.9)
                     .edgesIgnoringSafeArea(.all)
                 VStack(spacing: 20.0) {
-                    trackingInfo()
-                    
-                    Divider()
-                    
-                    Button {
-                        withAnimation(.spring()) {
-                            vm.trackingLocally = true
-                        }
-                    } label: {
-                        Label(
-                            vm.alManga?.mediaListEntry != nil
-                            ? "Track locally"
-                            : "Start tracking",
-                            systemImage: vm.alManga?.mediaListEntry != nil
-                            ? "icloud.and.arrow.down"
-                            : "play.fill"
-                        )
-                        .font(.subheadline)
-                        .fontWeight(.black)
-                    }
-                    .buttonStyle(.borderless)
+                    if !vm.isLoading {
+                        trackingInfo()
+                        Divider()
+                        trackAction()
+                    } else { ActivityIndicator() }
                 }.padding()
             }
         }
@@ -82,5 +66,27 @@ extension ALTracker {
         .multilineTextAlignment(.center)
         .fontWeight(.semibold)
         .foregroundColor(.primary.opacity(0.85))
+    }
+    
+    /// Start tracking or track locally action
+    @ViewBuilder
+    func trackAction() -> some View {
+        Button {
+            withAnimation(.spring()) {
+                vm.trackingLocally = true
+            }
+        } label: {
+            Label(
+                vm.alManga?.mediaListEntry != nil
+                ? "Track locally"
+                : "Start tracking",
+                systemImage: vm.alManga?.mediaListEntry != nil
+                ? "icloud.and.arrow.down"
+                : "play.fill"
+            )
+            .font(.subheadline)
+            .fontWeight(.black)
+        }
+        .buttonStyle(.borderless)
     }
 }

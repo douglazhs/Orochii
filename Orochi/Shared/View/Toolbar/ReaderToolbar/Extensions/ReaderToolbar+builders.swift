@@ -8,14 +8,6 @@
 import SwiftUI
 
 extension ReaderToolbar {    
-    /// Principal toolbar item
-    @ViewBuilder
-    func principalItem() -> some View {
-        Text("Ch.\(vm.current.attributes?.chapter ?? "")")
-            .font(.subheadline)
-            .fontWeight(.semibold)
-    }
-    
     /// Reader preferences trailing button
     @ViewBuilder
     func readerPreferences() -> some View {

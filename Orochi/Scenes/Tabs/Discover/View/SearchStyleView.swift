@@ -26,12 +26,14 @@ struct SearchStyleView: View {
     
     var body: some View {
         content()
+            .toolbarBackground(.visible, for: .navigationBar)
             .onReceive(
                 vm.$nameQuery
-                    .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
-            ) { _ in
-                vm.search()
-            }
+                    .debounce(
+                        for: .seconds(0.75),
+                        scheduler: DispatchQueue.main
+                    )
+            ) { [weak vm] _ in vm?.search() }
             .onChange(of: vm.nameQuery) { newValue in
                 if !newValue.isEmpty {
                     withTransaction(.init(animation: .easeInOut(duration: 0.225))) {
@@ -47,7 +49,7 @@ struct SearchStyleView: View {
                     }
                 }
             }
-            .toolbarBackground(.visible, for: .navigationBar)
+            
     }
 }
 

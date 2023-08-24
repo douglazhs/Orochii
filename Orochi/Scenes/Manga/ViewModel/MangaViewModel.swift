@@ -173,7 +173,7 @@ final class MangaViewModel: ObservableObject {
     
     /// Order chapters using user preference
     func order(by option: OrderFilter) {
-        chapters.reverse()
+        filtered.reverse()
         Defaults.standard.saveInt(
             option.rawValue,
             key: DefaultsKeys.Chapters.order.rawValue
