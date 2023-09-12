@@ -5,8 +5,17 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Alamofire/Alamofire.git",
       "state" : {
-        "revision" : "bc268c28fb170f494de9e9927c371b8342979ece",
-        "version" : "5.7.1"
+        "revision" : "b2fa556e4e48cbf06cf8c63def138c98f4b811fa",
+        "version" : "5.8.0"
+      }
+    },
+    {
+      "identity" : "anilisttracker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/douglazhs/AniListTracker.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "2160120aaeb1ab107ecac17f06f062bdd7eb1d99"
       }
     },
     {
@@ -16,6 +25,15 @@
       "state" : {
         "revision" : "c1f60c63f356d364f4284ba82961acbe7de79bcc",
         "version" : "7.8.1"
+      }
+    },
+    {
+      "identity" : "mangadex",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/douglazhs/MangaDex",
+      "state" : {
+        "branch" : "main",
+        "revision" : "3ef7d56d85564970f768e22ded133fd5a9328fda"
       }
     },
     {

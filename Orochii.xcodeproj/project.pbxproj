@@ -236,8 +236,6 @@
 		771B766029DC788700F7CCB6 /* anilist_api.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = anilist_api.json; sourceTree = "<group>"; };
 		772ED9E52A76017800D3960D /* Int+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Int+extension.swift"; sourceTree = "<group>"; };
 		7737B8BA2A7AE1D600D74C8F /* String+defaultValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+defaultValue.swift"; sourceTree = "<group>"; };
-		7737B8BC2A7AE56700D74C8F /* MangaDex */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = MangaDex; path = ../Packages/MangaDex; sourceTree = "<group>"; };
-		7737B8BD2A7BEF1500D74C8F /* AniListTracker */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AniListTracker; path = ../Packages/AniListTracker; sourceTree = "<group>"; };
 		7737B8BE2A7C5FE000D74C8F /* Format.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Format.swift; sourceTree = "<group>"; };
 		7738459B2A25AF48007F1014 /* SafariWebView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariWebView.swift; sourceTree = "<group>"; };
 		773A71FB2A68169A00D7333E /* ChapterPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterPageView.swift; sourceTree = "<group>"; };
@@ -401,8 +399,6 @@
 		5092DF1829292C590094DC18 = {
 			isa = PBXGroup;
 			children = (
-				7737B8BD2A7BEF1500D74C8F /* AniListTracker */,
-				7737B8BC2A7AE56700D74C8F /* MangaDex */,
 				508C2DCC2950AB4800355F13 /* Orochii-Info.plist */,
 				5092DF2329292C590094DC18 /* Orochi */,
 				5092DF2229292C590094DC18 /* Products */,
