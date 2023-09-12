@@ -47,7 +47,7 @@ extension MangaView {
                 id: vm.manga.id,
                 fileName: vm.imgFileName(of: vm.manga)
             )) {
-                BlurBackground(with: url)
+                BlurBackground(with: url, radius: 30)
             }
         }
     }
@@ -79,12 +79,12 @@ extension MangaView {
             }
         }
         .listRowBackground(Color.clear)
-        .background(alignment: .center) {
+        /*.background(alignment: .center) {
              DarkOverlay(url: vm.api.buildURL(for: .cover(
                  id: vm.manga.id,
                  fileName: vm.imgFileName(of: vm.manga))
              ))
-        }
+        }*/
         .clipShape(Rectangle())
         .listRowInsets(.init(
             top: 0,
