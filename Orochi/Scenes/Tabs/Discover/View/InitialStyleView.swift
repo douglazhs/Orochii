@@ -32,10 +32,6 @@ struct InitialStyleView: View {
                 }
             }.padding(.vertical)
         }
-        /*.navigationDestination(for: Manga.self) {
-            MangaView($0)
-            TestView($0)
-        }*/
     }
 }
 
