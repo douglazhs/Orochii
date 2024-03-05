@@ -48,7 +48,7 @@ struct DiscoverView: View {
         }
         .searchable(
             text: $vm.nameQuery,
-            prompt: "Search for manga title"
+            prompt: String.Discovery.searchPlaceholder
         )
         .onSubmit(of: .search) {
             UIApplication.shared.becomeFirstResponder()

@@ -36,8 +36,7 @@ struct SourcePreferencesView: View {
     }
 }
 
-struct SourcePreferencesView_Previews: PreviewProvider {
-    static var previews: some View {
-        SourcePreferencesView()
-    }
+#Preview {
+    SourcePreferencesView()
+        .environmentObject(DiscoverViewModel())
 }

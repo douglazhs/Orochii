@@ -7,6 +7,7 @@
 
 import SwiftUI
 import struct MangaDex.Manga
+import class MangaDex.MangaMock
 
 struct ALTracker: View {
     @Environment(\.isSearching) var isSearching
@@ -61,8 +62,10 @@ struct ALTracker: View {
     }
 }
 
-struct ALTracker_Previews: PreviewProvider {
-    static var previews: some View {
-        EmptyView()
-    }
+#Preview {
+    ALTracker(
+        of: MangaMock.manga(),
+        cover: MangaMock.coverUrl,
+        action: .constant(false)
+    )
 }

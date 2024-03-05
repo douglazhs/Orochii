@@ -6,6 +6,8 @@
 //
 
 import SwiftUI
+import class MangaDex.MangaMock
+import class MangaDex.ChapterMock
 
 struct ReaderPreferencesView: View {
     @Environment(\.dismiss) var dismiss
@@ -36,8 +38,11 @@ struct ReaderPreferencesView: View {
     }
 }
 
-struct ReaderPreferencesView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReaderPreferencesView()
-    }
+#Preview {
+    ReaderPreferencesView()
+        .environmentObject(ChapterViewModel(
+            ChapterMock.chapter(),
+            [ChapterMock.chapter()],
+            MangaMock.manga())
+        )
 }

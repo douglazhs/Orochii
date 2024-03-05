@@ -53,8 +53,7 @@ struct SearchStyleView: View {
     }
 }
 
-struct SearchStyleView_Previews: PreviewProvider {
-    static var previews: some View {
-        EmptyView()
-    }
+#Preview {
+    SearchStyleView(.constant(.search))
+        .environmentObject(DiscoverViewModel())
 }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import struct MangaDex.Manga
+import class MangaDex.MangaMock
 
 struct MangaView: View {
     enum Field: Int, Hashable {
@@ -46,8 +47,6 @@ struct MangaView: View {
     }
 }
 
-struct MangaView_Previews: PreviewProvider {
-    static var previews: some View {
-        EmptyView()
-    }
+#Preview {
+    MangaView(MangaMock.manga())
 }

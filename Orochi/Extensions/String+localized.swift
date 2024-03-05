@@ -53,10 +53,12 @@ extension String {
         public static var ongoing: String = NSLocalizedString("discovery_status_ongoing", comment: "Ongoing manga")
         public static var hiatus: String = NSLocalizedString("discovery_status_hiatus", comment: "Hiatus manga")
         public static var completed: String = NSLocalizedString("discovery_status_completed", comment: "Completed manga")
+        public static var searchPlaceholder: String = NSLocalizedString("discovery_search_placeholder", comment: "Search for manga title")
     }
     
     public enum Library {
         public static var title: String = NSLocalizedString("library_title", comment: "User library")
+        public static var searchPlaceholder: String = NSLocalizedString("library_search_placeholder", comment: "Search on your list")
     }
     
     public enum Settings {

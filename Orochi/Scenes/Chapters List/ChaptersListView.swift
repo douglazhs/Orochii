@@ -6,7 +6,9 @@
 //
 
 import SwiftUI
-import struct MangaDex.Chapter
+import struct MangaDex.Manga
+import class MangaDex.MangaMock
+import class MangaDex.ChapterMock
 
 struct ChaptersListView: View {
     @Environment(\.dismiss) var dismiss
@@ -66,8 +68,11 @@ struct ChaptersListView: View {
     }
 }
 
-struct ChaptersListView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChaptersListView()
-    }
+#Preview {
+    ChaptersListView()
+        .environmentObject(ChapterViewModel(
+            ChapterMock.chapter(),
+            [ChapterMock.chapter()],
+            MangaMock.manga())
+        )
 }

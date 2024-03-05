@@ -10,7 +10,7 @@ import MangaDex
 
 extension ChapterViewModel: MangaHelpers { }
 
-final class ChapterViewModel: ObservableObject{
+final class ChapterViewModel: ObservableObject {
  
     /// Actual reading **Manga**
     private (set) var manga: Manga

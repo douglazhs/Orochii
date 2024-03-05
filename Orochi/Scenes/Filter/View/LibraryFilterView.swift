@@ -17,8 +17,8 @@ struct LibraryFilterView: View {
     }
 }
 
-struct LibraryFilterView_Previews: PreviewProvider {
-    static var previews: some View {
-        LibraryFilterView()
-    }
+
+#Preview {
+    LibraryFilterView()
+        .environmentObject(LibraryViewModel())
 }

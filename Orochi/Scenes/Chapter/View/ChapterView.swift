@@ -39,8 +39,11 @@ struct ChapterView: View {
     }
 }
 
-struct ChapterView_Previews: PreviewProvider {
-    static var previews: some View {
-        EmptyView()
-    }
+#Preview {
+    ChapterView(
+        ChapterMock.chapter(),
+        [ChapterMock.chapter()],
+        of: MangaMock.manga()
+    )
 }
+

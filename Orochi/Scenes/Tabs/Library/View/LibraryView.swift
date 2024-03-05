@@ -25,7 +25,7 @@ struct LibraryView: View {
         }
         .searchable(
             text: $vm.query,
-            prompt: "Search on your list"
+            prompt: String.Library.searchPlaceholder
         )
     }
 }

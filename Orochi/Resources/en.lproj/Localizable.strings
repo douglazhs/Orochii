@@ -37,6 +37,7 @@
 // MARK: - DISCOVERY SCREEN
 
 "discovery_title" = "Discover";
+"discovery_search_placeholder" = "Search for manga title";
 
 // MANGA CELL
 
@@ -78,6 +79,7 @@
 // MARK: - LIBRARY SCREEN
 
 "library_title" = "Library";
+"library_search_placeholder" = "Search on your list";
 
 /* ------------------------------------------------------------ */
 
