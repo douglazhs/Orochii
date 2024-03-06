@@ -41,9 +41,9 @@ struct ChapterView: View {
 
 #Preview {
     ChapterView(
-        ChapterMock.chapter(),
-        [ChapterMock.chapter()],
-        of: MangaMock.manga()
+        ChapterMock.chapter,
+        [ChapterMock.chapter],
+        of: MangaMock.manga
     )
 }
 

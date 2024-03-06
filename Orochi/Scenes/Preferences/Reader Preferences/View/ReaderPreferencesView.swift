@@ -41,8 +41,8 @@ struct ReaderPreferencesView: View {
 #Preview {
     ReaderPreferencesView()
         .environmentObject(ChapterViewModel(
-            ChapterMock.chapter(),
-            [ChapterMock.chapter()],
-            MangaMock.manga())
+            ChapterMock.chapter,
+            [ChapterMock.chapter],
+            MangaMock.manga)
         )
 }

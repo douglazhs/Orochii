@@ -64,7 +64,7 @@ struct ALTracker: View {
 
 #Preview {
     ALTracker(
-        of: MangaMock.manga(),
+        of: MangaMock.manga,
         cover: MangaMock.coverUrl,
         action: .constant(false)
     )

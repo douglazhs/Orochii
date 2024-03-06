@@ -48,5 +48,5 @@ struct MangaView: View {
 }
 
 #Preview {
-    MangaView(MangaMock.manga())
+    MangaView(MangaMock.manga)
 }

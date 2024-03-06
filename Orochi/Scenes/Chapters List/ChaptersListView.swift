@@ -71,8 +71,8 @@ struct ChaptersListView: View {
 #Preview {
     ChaptersListView()
         .environmentObject(ChapterViewModel(
-            ChapterMock.chapter(),
-            [ChapterMock.chapter()],
-            MangaMock.manga())
+            ChapterMock.chapter,
+            [ChapterMock.chapter],
+            MangaMock.manga)
         )
 }
