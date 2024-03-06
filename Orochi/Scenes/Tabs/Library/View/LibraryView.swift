@@ -9,24 +9,18 @@ import SwiftUI
 
 struct LibraryView: View {
     @Environment(\.isSearching) var isSearching
-    @StateObject var vm: LibraryViewModel = LibraryViewModel()
+    @StateObject var vm: LibraryViewModel
     @State var showFilters: Bool = false
+    
+    init() {
+        _vm = StateObject(wrappedValue: LibraryViewModel())
+    }
     
     var body: some View {
         NavigationStack {
             content()
-                .navigationTitle(String.Library.title)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        filterButton()
-                    }
-                }
+                .onAppear { vm.loadDefaults() }
         }
-        .searchable(
-            text: $vm.query,
-            prompt: String.Library.searchPlaceholder
-        )
     }
 }
 

@@ -80,6 +80,10 @@
 
 "library_title" = "Biblioteca";
 "library_search_placeholder" = "Busque em sua lista";
+"library_auth_message" = "Você bloqueou sua biblioteca.\nClique em desbloquear para ver seus mangas :)";
+"library_auth_error_message" = "Sua biblioteca está bloqueada :(\n Desbloqueie para ver seus mangas :)";
+"library_auth_retry" = "TENTAR NOVAMENTE";
+"library_auth_unlock" = "DESBLOQUEAR";
 
 /* ------------------------------------------------------------ */
 

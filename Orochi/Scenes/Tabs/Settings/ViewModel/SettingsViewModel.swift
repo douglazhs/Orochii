@@ -108,9 +108,9 @@ class SettingsViewModel: ObservableObject {
                         : true
                         return
                     }
-                    self.biometricState = (self.biometricState == .active)
-                    ? .inactive
-                    : .active
+                    self.biometricState = self.biometryPreference
+                    ? .active
+                    : .inactive
                     Defaults.standard.saveInt(
                         self.biometricState.rawValue,
                         key: DefaultsKeys.Settings.lockState.rawValue

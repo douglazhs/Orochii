@@ -80,6 +80,10 @@
 
 "library_title" = "Library";
 "library_search_placeholder" = "Search on your list";
+"library_auth_message" = "You locked your library.\n Click on unlock button to see your mangas :)";
+"library_auth_error_message" = "Your library is locked :(\n Unlock It to see your mangas :)";
+"library_auth_retry" = "TRY AGAIN";
+"library_auth_unlock" = "UNLOCK";
 
 /* ------------------------------------------------------------ */
 

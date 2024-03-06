@@ -9,10 +9,124 @@ import SwiftUI
 import struct MangaDex.Manga
 
 extension LibraryView {
+    @ViewBuilder 
+    func content() -> some View {
+        if vm.unlocked {
+            unlockedContent()
+        } else {
+            lockedContent()
+        }
+    }
+    
+    /// Unlocked content
+    @ViewBuilder
+    func unlockedContent() -> some View {
+        list()
+            .navigationTitle(String.Library.title)
+            .navigationBarTitleDisplayMode(.inline)
+            .onChange(of: vm.biometricsState) {
+                if $0 == .active { vm.lock() }
+            }
+            .toolbar {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    lockButton()
+                    filterButton()
+                }
+            }
+            .searchable(
+                text: $vm.query,
+                prompt: String.Library.searchPlaceholder
+            )
+    }
+    
+    /// Locked content
+    @ViewBuilder
+    func lockedContent() -> some View {
+        VStack(spacing: 15.0) {
+            localAuthHandler()
+                .onAppear {
+                    guard vm.lockClick != nil else {
+                        vm.localAuth()
+                        return
+                    }
+                }
+        }
+        .onChange(of: vm.biometricsState) {
+            if $0 == .inactive { vm.unlock() }
+        }
+        .fontDesign(.rounded)
+        .background(BlurBackground(with: .view_background))
+    }
+    
+    /// Local Auth handler
+    @ViewBuilder
+    func localAuthHandler() -> some View {
+        if let error = vm.biometricsError {
+            errorHandler(error)
+        } else {
+            unlockHandler()
+        }
+    }
+    
+    /// Local Auth error handler
+    @ViewBuilder
+    func errorHandler(_ error: Error) -> some View {
+        VStack(spacing: 15.0) {
+            Spacer()
+            
+            Text(String.Library.authErrorMessage)
+                .font(.callout)
+                .fontWeight(.semibold)
+                .multilineTextAlignment(.center)
+            
+            Text(error.localizedDescription)
+                .font(.caption)
+                .fontWeight(.semibold)
+                .foregroundStyle(Color(uiColor: .systemRed).opacity(0.75))
+            
+            Button(String.Library.authRetry) { vm.localAuth() }
+                .font(.callout)
+                .fontWeight(.heavy)
+            
+            Spacer()
+            
+            Image(systemName: vm.unlocked ? "lock.open" : "lock")
+                .font(.title2)
+                .padding(.bottom)
+        }.padding()
+    }
+    
+    /// Unlock button
+    @ViewBuilder
+    func unlockHandler() -> some View {
+        VStack(spacing: 15.0) {
+            Spacer()
+            
+            if let _ = vm.lockClick {
+                VStack(spacing: 15.0) {
+                    Text(String.Library.authMessage)
+                        .font(.callout)
+                        .fontWeight(.semibold)
+                        .multilineTextAlignment(.center)
+                    
+                    Button(String.Library.authUnlock) { vm.localAuth() }
+                        .font(.callout)
+                        .fontWeight(.heavy)
+                }
+            }
+            
+            Spacer()
+            
+            Image(systemName: vm.unlocked ? "lock.open" : "lock")
+                .font(.title2)
+                .padding(.bottom)
+        }.padding()
+    }
+    
     /// Manga list
     /// - Returns: Filtered manga list
     @ViewBuilder
-    func content() -> some View {
+    func list() -> some View {
         List(MangaStatus.allCases) { status in
             Section(status.description.uppercased()) {
                 ForEach(MangaDomain.samples) {
@@ -66,5 +180,18 @@ extension LibraryView {
             Image(systemName: "line.3.horizontal.decrease")
         }
         .menuStyle(.borderlessButton)
+    }
+    
+    @ViewBuilder
+    /// Lock library button
+    /// - Returns: Lock button
+    func lockButton() -> some View {
+        if vm.biometricsState == .active {
+            Button {
+                vm.lock()
+            } label: {
+                Image(systemName: "lock")
+            }
+        }
     }
 }

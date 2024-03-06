@@ -59,6 +59,10 @@ extension String {
     public enum Library {
         public static var title: String = NSLocalizedString("library_title", comment: "User library")
         public static var searchPlaceholder: String = NSLocalizedString("library_search_placeholder", comment: "Search on your list")
+        public static var authMessage: String = NSLocalizedString("library_auth_message", comment: "Your library is locked :( Unlock It to see your mangas :)")
+        public static var authErrorMessage: String = NSLocalizedString("library_auth_error_message", comment: "Your library is locked :( Unlock It to see your mangas :)")
+        public static var authRetry: String = NSLocalizedString("library_auth_retry", comment: "TRY AGAIN")
+        public static var authUnlock: String = NSLocalizedString("library_auth_unlock", comment: "DESBLOQUEAR")
     }
     
     public enum Settings {
