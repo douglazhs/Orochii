@@ -24,7 +24,7 @@ struct OrochiiApp: App {
                     ) }
                 SettingsView()
                     .tabItem { Label(
-                        String.Settings.title,
+                        String.Adjusts.title,
                         systemImage: "gear"
                     ) }
             }

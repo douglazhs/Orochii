@@ -33,7 +33,6 @@ class SettingsViewModel: ObservableObject {
         loadDefaults()
         checkLocalAuth()
         checkALToken()
-        fetchUser()
     }
     
     /// Load user defaults
@@ -123,7 +122,7 @@ class SettingsViewModel: ObservableObject {
     
     /// LogIn on AniList account
     func logInAL() {
-        self.anilist.logIn() { response in
+        anilist.logIn() { response in
             switch response {
             case .success(let token):
                 do {

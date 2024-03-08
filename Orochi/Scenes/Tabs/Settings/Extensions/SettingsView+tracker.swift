@@ -70,6 +70,7 @@ extension SettingsView {
             )
             .scaledToFill()
             .clipped()
+            .onTapGesture { showALAccount = true }
     }
     
     /// User stats

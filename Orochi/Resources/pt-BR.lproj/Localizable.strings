@@ -31,6 +31,7 @@
 "common_ok" = "OK";
 "common_attention" = "Atenção";
 "common_error" = "Erro";
+"common_unknown" = "Desconhecido";
 
 /* ------------------------------------------------------------ */
 
@@ -168,3 +169,22 @@
 // MARK: - ANILIST
 
 "anilist_logout" = "Tem certeza de que deseja sair da sua conta AniList?";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - ACCOUNT DETAILS
+
+"account_noActivities" = "You have no activities :(";
+"account_nofavorites" = "You have no favorites :(";
+"account_section_totalMangas" = "Total de Mangas";
+"account_section_meanScore" = "Nota Média";
+"account_section_chaptersRead" = "Capítulos Lidos";
+"account_section_volumesRead" = "Volumes Lidos";
+"account_section_statuses" = "Status";
+"account_section_genres" = "Distribuição de Gêneros";
+"account_section_tags" = "Distribuição de Tags";
+"account_section_chaptersPerYear" = "Capítulos Lidos Por Ano";
+"account_section_country" = "Mangas Por País";
+"account_tab_stats" = "ESTATÍSTICAS";
+"account_tab_activity" = "ATIVIDADE";
+"account_tab_favorites" = "FAVORITOS";

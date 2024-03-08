@@ -27,7 +27,7 @@ extension SettingsView {
         }
         .refreshable { vm.fetchUser() }
         .listStyle(.grouped)
-        .navigationTitle(String.Settings.title)
+        .navigationTitle(String.Adjusts.title)
         .animation(
             .easeInOut(duration: 0.125),
             value: vm.biometryPreference
@@ -35,6 +35,10 @@ extension SettingsView {
         .scrollIndicators(.hidden)
         .scrollContentBackground(.hidden)
         .background(BlurBackground(with: .view_background))
+        .sheet(isPresented: $showALAccount) {
+            ALAccountView(user: vm.user!)
+                .interactiveDismissDisabled()
+        }
     }
     
     /// App tracker section

@@ -34,6 +34,6 @@ struct DarkOverlay: View {
 
 struct DarkOverlay_Previews: PreviewProvider {
     static var previews: some View {
-        DarkOverlay(url: nil)
+        DarkOverlay(url: URL(string: "https://s4.anilist.co/file/anilistcdn/user/banner/b242286-TwkkglJDOtEY.jpg"))
     }
 }
