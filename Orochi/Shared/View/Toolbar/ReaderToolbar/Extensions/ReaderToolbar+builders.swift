@@ -16,7 +16,7 @@ extension ReaderToolbar {
         } label: {
             Image(systemName: "book")
         }
-        .sheet(isPresented: $showReaderPreferences) {
+        .fullScreenCover(isPresented: $showReaderPreferences) {
             ReaderPreferencesView()
                 .environmentObject(vm)
         }

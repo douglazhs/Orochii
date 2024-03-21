@@ -53,21 +53,20 @@ extension MangaStandardCell {
     func status() -> some View {
         VStack(alignment: .leading, spacing: 5.5) {
             Text("Ch. 1 ~ 154")
-                .foregroundColor(.primary)
+                .foregroundColor(Color("bodyText"))
                 .font(.caption2)
                 .fontWeight(.light)
             
             HStack(alignment: .center, spacing: 4.5) {
                 Image(systemName: "star.fill")
-                    .foregroundColor(.primary)
                     .font(.caption2)
                     .fontWeight(.light)
-                    .foregroundColor(Color(.systemGray))
+                    .foregroundColor(Color("bodyText"))
                 
                 Text("8,0")
                     .font(.caption2)
                     .fontWeight(.light)
-                    .foregroundColor(.primary)
+                    .foregroundColor(Color("bodyText"))
             }
         }
     }

@@ -19,10 +19,9 @@ extension SourcePreferencesView {
                 urlString: AppURLs.MDSite.description,
                 image: .manga_dex_icon
             )
-        } header: {
-            Text(String.MangaSource.title)
         } footer: {
             Text(String.MangaSource.siteFooter)
+                .foregroundStyle(Color("secondaryText"))
         }
     }
     
@@ -44,10 +43,15 @@ extension SourcePreferencesView {
                     }
             } label: {
                 Text(String.MangaSource.languageHeader)
+                    .foregroundStyle(Color("bodyText"))
             }
         } header: {
             Text(String.MangaSource.languageHeader)
-        } footer: { Text(String.MangaSource.languageFooter) }
+                .foregroundStyle(Color("title"))
+        } footer: {
+            Text(String.MangaSource.languageFooter)
+                .foregroundStyle(Color("secondaryText"))
+        }
     }
     
     /// App Age Rating section
@@ -57,9 +61,10 @@ extension SourcePreferencesView {
             Toggle(isOn: $vm.nsfw) {
                 Label {
                     Text("NSFW")
+                        .foregroundStyle(Color("bodyText"))
                 } icon: {
                     Image(systemName: "eyes.inverse")
-                        .foregroundColor(.orange)
+                        .foregroundColor(Color("attention"))
                 }
             }.onChange(of: vm.nsfw) {
                 Defaults.standard.saveBool(
@@ -70,8 +75,10 @@ extension SourcePreferencesView {
             }
         } header: {
             Text(String.Adjusts.ageRatingHeader)
+                .foregroundStyle(Color("title"))
         } footer: {
             Text(String.Adjusts.ageRatingFooter)
+                .foregroundStyle(Color("secondaryText"))
         }
     }
     
@@ -80,6 +87,7 @@ extension SourcePreferencesView {
     @ViewBuilder func doneButton() -> some View {
         Button { dismiss() } label: {
             Text(String.Common.done)
+                .fontWeight(.semibold)
         }
     }
 }

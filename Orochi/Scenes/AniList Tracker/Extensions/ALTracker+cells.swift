@@ -28,7 +28,7 @@ extension ALTracker {
                     .font(.system(size: 9.5, weight: .semibold))
                     .frame(maxWidth: .infinity, alignment: .topLeading)
                     .padding(3.25)
-                    .foregroundColor(.primary.opacity(0.85))
+                    .foregroundColor(Color("bodyText"))
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 4.5))
             }
@@ -43,16 +43,16 @@ extension ALTracker {
                         .lineLimit(1)
                         .font(.footnote)
                         .fontWeight(.regular)
-                        .foregroundColor(Color(.systemGray))
+                        .foregroundColor(Color("secondaryText"))
                 }
                 Text(manga.format.notEmpty)
                     .lineLimit(1)
                     .font(.footnote)
                     .fontWeight(.regular)
-                    .foregroundColor(Color(.systemGray))
+                    .foregroundColor(Color("bodyText"))
                 Text(manga.status.notEmpty)
                     .font(.caption2)
-                    .foregroundColor(Color(.systemGray))
+                    .foregroundColor(Color("bodyText"))
                 if let status = manga.mediaListEntry?.status {
                     Text("**\((MangaStatus(rawValue: status) ?? .planning).description.uppercased())**")
                         .font(.caption2)

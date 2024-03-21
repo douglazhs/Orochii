@@ -34,17 +34,16 @@ struct ALTracker: View {
     var body: some View {
         NavigationStack {
             content()
+                .standardBars()
                 .onSubmit(of: .search, { dismissSearch() })
                 .navigationBarTitleDisplayMode(.inline)
                 .animation(.easeIn, value: [vm.mangas != nil])
+                .toolbarRole(.editor)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         if vm.availableInAL {
                             anilistMangaOptions()
                         }
-                    }
-                    ToolbarItem(placement: .navigationBarLeading) {
-                        closeButton()
                     }
                     ToolbarItem(placement: .principal) { alTitleView() }
                     ToolbarItem(placement: .status) {

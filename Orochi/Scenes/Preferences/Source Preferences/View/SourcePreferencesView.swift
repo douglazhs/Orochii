@@ -14,24 +14,29 @@ struct SourcePreferencesView: View {
     var body: some View {
         NavigationStack {
             List {
-                self.siteSection()
+                siteSection()
                     .listRowSeparator(.hidden)
                     .listRowBackground(Color.clear)
-                self.languageSection()
+                languageSection()
                     .listRowBackground(Color.clear)
-                self.ageRatingSection()
+                ageRatingSection()
                     .listRowBackground(Color.clear)
             }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
-                    self.doneButton()
+                    doneButton()
+                }
+                
+                ToolbarItem(placement: .principal) {
+                    Text(String.MangaSource.title)
+                        .font(.title2)
+                        .fontWeight(.heavy)
                 }
             }
             .listStyle(.grouped)
-            .navigationTitle(String.MangaSource.title)
-            .navigationBarTitleDisplayMode(.inline)
             .scrollContentBackground(.hidden)
-            .background(BlurBackground(with: .view_background))
+            .background(Color("background"))
+            .standardBars()
         }
     }
 }

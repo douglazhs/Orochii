@@ -56,7 +56,7 @@
 
 // MARK: - SOURCE PREFERENCES
 
-"manga_source_title" = "Fonte MangaDex";
+"manga_source_title" = "Fonte";
 "manga_source_site_footer" = "Você será redirecionado para o site do _MangaDex_";
 "manga_source_language_footer" = "Idiomas que serão utilizados para pesquisar seus mangas";
 "manga_source_language_header" = "Linguagens";
@@ -185,6 +185,6 @@
 "account_section_tags" = "Distribuição de Tags";
 "account_section_chaptersPerYear" = "Capítulos Lidos Por Ano";
 "account_section_country" = "Mangas Por País";
-"account_tab_stats" = "ESTATÍSTICAS";
-"account_tab_activity" = "ATIVIDADE";
-"account_tab_favorites" = "FAVORITOS";
+"account_tab_stats" = "Estatísticas";
+"account_tab_activity" = "Atividade";
+"account_tab_favorites" = "Favoritos";

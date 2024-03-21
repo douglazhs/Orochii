@@ -20,12 +20,15 @@ struct ChaptersListView: View {
                 List {
                     ForEach(vm.feed) { ch in
                         ChapterStandardCell(
-                             ch,
-                             scanlationGroup: vm.relationship(
+                            ch,
+                            scanlationGroup: vm.relationship(
                                 "scanlation_group",
                                 with: ch
-                             )
-                         )
+                            )
+                        )
+                        .listRowBackground(Color.clear)
+                        .listRowSeparator(.visible, edges: .bottom)
+                        .listSectionSeparator(.hidden)
                         .id(ch.id)
                         .onTapGesture {
                             if vm.current != ch {
@@ -38,29 +41,22 @@ struct ChaptersListView: View {
                                 Image(systemName: "checkmark")
                                     .font(.caption2)
                                     .fontWeight(.heavy)
-                                    .foregroundColor(.accentColor)
+                                    .foregroundColor(Color("button"))
                             }
                         }
                     }
                 }
                 .onAppear { reader.scrollTo(vm.current.id) }
+                .toolbarRole(.editor)
                 .listStyle(.plain)
-                .scrollContentBackground(.visible)
-                .navigationTitle("\(vm.feed.count) Chapters")
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(.visible, for: .navigationBar)
+                .scrollContentBackground(.hidden)
+                .background(Color("background"))
+                .standardBars()
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                            dismiss()
-                        } label: {
-                            Image(systemName: "xmark")
-                                .font(.footnote)
-                                .fontWeight(.heavy)
-                        }
-                        .tint(.white.opacity(0.75))
-                        .clipShape(Circle())
-                        .buttonStyle(.bordered)
+                    ToolbarItem(placement: .principal) {
+                        Text("\(vm.feed.count) Chapters")
+                            .font(.headline)
+                            .fontWeight(.bold)
                     }
                 }
             }

@@ -12,6 +12,8 @@ extension MangaView {
     @ViewBuilder
     func actions() -> some View {
         HStack {
+            //START READING BUTTON
+            startReadingButton()
             // ANILIST BUTTON
             aniListButton()
             // ADD/REMOVE BUTTON
@@ -26,19 +28,21 @@ extension MangaView {
         Button {
             // TODO: Start to read the manga
         } label: {
-            Image(systemName: "play.fill")
-                .lineLimit(1)
-                .font(.footnote)
-                .foregroundColor(.accentColor)
-                .frame(maxWidth: .infinity)
-                .fontWeight(.heavy)
-                .padding(8.5)
+            HStack {
+                Image(systemName: "play")
+                    .foregroundColor(Color("button"))
+                // TODO: Change to current manga reading status
+                Text("CH. 1")
+                    .foregroundStyle(.white)
+            }
+            .frame(maxWidth: .infinity)
+            .fontWeight(.heavy)
+            .font(.footnote)
+            .lineLimit(1)
         }
         .disabled(vm.occurredAct)
-        .foregroundColor(.accentColor)
-        .background(Color.white)
-        .clipShape(RoundedRectangle(cornerRadius: 7.25))
-        .listRowBackground(Color.clear)
+        .tint(Color("tabBar"))
+        .buttonStyle(.borderedProminent)
     }
     
     /// AniList tracking button
@@ -49,11 +53,11 @@ extension MangaView {
             vm?.startAction(for: .aniList)
         } label: {
             Image(systemName: "antenna.radiowaves.left.and.right")
-                .foregroundColor(.accentColor)
+                .foregroundColor(Color("button"))
                 .font(.footnote)
                 .fontWeight(.heavy)
         }
-        .tint(.primary)
+        .tint(Color("tabBar"))
         .buttonStyle(.borderedProminent)
         .sheet(isPresented: $showAniList) {
             ALTracker(
@@ -110,11 +114,11 @@ extension MangaView {
                   ? "folder.fill.badge.gearshape"
                   : "folder.fill.badge.plus"
             )
-            .foregroundColor(vm.mangaOnLib ? .red : Color(.systemBlue))
+            .foregroundColor(vm.mangaOnLib ? Color("attention") : Color("AccentColor"))
             .fontWeight(.heavy)
             .font(.footnote)
         }
-        .tint(.primary)
+        .tint(Color("tabBar"))
         .buttonStyle(.borderedProminent)
     }
 }

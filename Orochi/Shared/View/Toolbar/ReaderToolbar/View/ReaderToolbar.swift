@@ -15,18 +15,23 @@ struct ReaderToolbar: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .navigationTitle("Ch.\(vm.current.attributes?.chapter ?? "")")
+            .standardBars()
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button { showChaptersList = true } label: {
                         Image(systemName: "list.triangle")
                     }
-                    .sheet(isPresented: $showChaptersList) {
+                    .fullScreenCover(isPresented: $showChaptersList) {
                         ChaptersListView().environmentObject(vm)
                     }
                 }
                 ToolbarItem(placement: .navigationBarTrailing) { readerPreferences() }
                 ToolbarItem(placement: .bottomBar) { pageSlider() }
+                ToolbarItem(placement: .principal) {
+                    Text("Ch. \(vm.current.attributes?.chapter ?? "-")")
+                        .font(.headline)
+                        .fontWeight(.bold)
+                }
             }
             .onAppear {
                 let thumbImage = UIImage(

@@ -34,7 +34,7 @@ struct MangaTag: Identifiable {
         switch tag {
         case .contentRating(let rating): return rating.color
         case .content: return Color(.systemRed)
-        case .format: return .accentColor
+        case .format: return Color(.systemBlue)
         }
     }
     

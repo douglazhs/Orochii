@@ -39,7 +39,7 @@ extension MediaAttributes {
         VStack(alignment: alignment, spacing: 2.5) {
             Text(title)
                 .font(.caption2)
-                .foregroundColor(Color(uiColor: .systemGray))
+                .foregroundColor(Color("secondaryText"))
                 .shadow(
                     color: .black.opacity(0.5),
                     radius: 2.25,
@@ -49,6 +49,7 @@ extension MediaAttributes {
             Text(description)
                 .font(.caption)
                 .fontWeight(.semibold)
+                .foregroundColor(Color("bodyText"))
         }
     }
 }

@@ -41,8 +41,9 @@ extension DiscoverView {
         Button { mangaSourcePref = true } label: {
             Image(systemName: "antenna.radiowaves.left.and.right")
                 .foregroundColor(.accentColor)
+                .fontWeight(.semibold)
         }
-        .sheet(isPresented: $mangaSourcePref, onDismiss: {
+        .fullScreenCover(isPresented: $mangaSourcePref, onDismiss: {
             vm.reload()
         }) {
             SourcePreferencesView()

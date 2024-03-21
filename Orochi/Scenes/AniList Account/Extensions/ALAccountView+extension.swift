@@ -12,22 +12,12 @@ extension ALAccountView {
     @ViewBuilder
     func content() -> some View {
         List {
-            userDetails().listRowBackground(banner())
-            picker().listRowBackground(Color.clear)
-            tabs()
-                .listRowBackground(Color.clear)
+            tabs().listRowBackground(Color.clear)
         }
         .listStyle(.inset)
         .scrollContentBackground(.hidden)
         .scrollIndicators(.hidden)
-        .background(
-            BlurBackground(
-                with: URL(
-                    string: vm.user.bannerImage ?? ""
-                ),
-                radius: Constants.device == .phone ? 8.5 : 15
-            )
-        )
+        .background(Color("background"))
         .fullScreenCover(isPresented: $showWebView) {
             SafariWebView(url: vm.buildWebViewUrl())
                 .ignoresSafeArea()
@@ -69,22 +59,7 @@ extension ALAccountView {
             showWebView = true
         } label: {
             Image(systemName: "safari.fill")
-                .font(.footnote)
-                .fontWeight(.heavy)
+                .fontWeight(.semibold)
         }
-        .tint(.white.opacity(0.75))
-        .clipShape(Circle())
-        .buttonStyle(.bordered)
-        
-        Button {
-            dismiss()
-        } label: {
-            Image(systemName: "xmark")
-                .font(.footnote)
-                .fontWeight(.heavy)
-        }
-        .tint(.white.opacity(0.75))
-        .clipShape(Circle())
-        .buttonStyle(.bordered)
     }
 }

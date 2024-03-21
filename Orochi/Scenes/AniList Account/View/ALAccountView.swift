@@ -37,19 +37,30 @@ struct ALAccountView: View {
     
     init(user: User) {
         _vm = StateObject(wrappedValue: ALAccountViewModel(user: user))
+        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color("tabBar"))
+        UISegmentedControl.appearance().setTitleTextAttributes([
+            NSAttributedString.Key.foregroundColor:UIColor.white,
+            NSAttributedString.Key.font:UIFont.systemFont(ofSize: 16, weight: .heavy)
+        ], for: .selected)
+        UISegmentedControl.appearance().setTitleTextAttributes([
+            NSAttributedString.Key.foregroundColor:UIColor.secondaryLabel,
+            NSAttributedString.Key.font:UIFont.systemFont(ofSize: 16, weight: .heavy)
+        ], for: .normal)
     }
     
     var body: some View {
         NavigationStack {
             content()
-                .navigationTitle(String.Name.aniList)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(.visible, for: .navigationBar)
+                .standardBars()
                 .animation(.easeIn(duration: 0.5), value: !vm.favorites.isEmpty)
-                .fontDesign(.rounded)
+                .toolbarRole(.editor)
                 .toolbar {
-                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                    ToolbarItem(placement: .navigationBarTrailing) {
                         navBarButtons()
+                    }
+                    
+                    ToolbarItem(placement: .principal) {
+                        VStack { picker() }
                     }
                 }
         }

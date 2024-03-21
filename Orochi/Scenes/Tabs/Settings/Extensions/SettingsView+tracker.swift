@@ -85,7 +85,7 @@ extension SettingsView {
             Text("\(vm.user?.statistics?.manga?.count ?? 0) MANGAS")
                 .font(.caption)
                 .fontWeight(.regular)
-                .foregroundColor(Color(uiColor: .systemGray))
+                .foregroundColor(Color("bodyText"))
         }
     }
     

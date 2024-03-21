@@ -92,10 +92,10 @@
 		50FFB011292ACE6200B87E0E /* DemoPublic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB010292ACE6200B87E0E /* DemoPublic.swift */; };
 		50FFB013292AD35000B87E0E /* OrderFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB012292AD35000B87E0E /* OrderFilter.swift */; };
 		50FFB016292AE7B800B87E0E /* MangaView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB015292AE7B800B87E0E /* MangaView+builders.swift */; };
+		5227C7D72BAB715E00BC6501 /* StandardBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227C7D62BAB715E00BC6501 /* StandardBars.swift */; };
 		522EFC6A2B9AB35B00F0B071 /* ALAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522EFC692B9AB35B00F0B071 /* ALAccountViewModel.swift */; };
 		522EFC6C2B9B307500F0B071 /* ALAccountView+stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522EFC6B2B9B307500F0B071 /* ALAccountView+stats.swift */; };
 		522EFC6E2B9B309A00F0B071 /* ALAccountView+favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522EFC6D2B9B309A00F0B071 /* ALAccountView+favorites.swift */; };
-		522EFC702B9B311E00F0B071 /* ALAccountView+userDetails.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522EFC6F2B9B311E00F0B071 /* ALAccountView+userDetails.swift */; };
 		522EFC722B9B4D6E00F0B071 /* ALAccountView+activities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522EFC712B9B4D6E00F0B071 /* ALAccountView+activities.swift */; };
 		5278E3B92B9A81270036CCB8 /* ALAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5278E3B82B9A81270036CCB8 /* ALAccountView.swift */; };
 		5278E3BE2B9A92E60036CCB8 /* ALAccountView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5278E3BD2B9A92E60036CCB8 /* ALAccountView+extension.swift */; };
@@ -236,10 +236,10 @@
 		50FFB010292ACE6200B87E0E /* DemoPublic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DemoPublic.swift; sourceTree = "<group>"; };
 		50FFB012292AD35000B87E0E /* OrderFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderFilter.swift; sourceTree = "<group>"; };
 		50FFB015292AE7B800B87E0E /* MangaView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaView+builders.swift"; sourceTree = "<group>"; };
+		5227C7D62BAB715E00BC6501 /* StandardBars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardBars.swift; sourceTree = "<group>"; };
 		522EFC692B9AB35B00F0B071 /* ALAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALAccountViewModel.swift; sourceTree = "<group>"; };
 		522EFC6B2B9B307500F0B071 /* ALAccountView+stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALAccountView+stats.swift"; sourceTree = "<group>"; };
 		522EFC6D2B9B309A00F0B071 /* ALAccountView+favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALAccountView+favorites.swift"; sourceTree = "<group>"; };
-		522EFC6F2B9B311E00F0B071 /* ALAccountView+userDetails.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALAccountView+userDetails.swift"; sourceTree = "<group>"; };
 		522EFC712B9B4D6E00F0B071 /* ALAccountView+activities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALAccountView+activities.swift"; sourceTree = "<group>"; };
 		5278E3B82B9A81270036CCB8 /* ALAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALAccountView.swift; sourceTree = "<group>"; };
 		5278E3BD2B9A92E60036CCB8 /* ALAccountView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALAccountView+extension.swift"; sourceTree = "<group>"; };
@@ -723,6 +723,7 @@
 		50F4443F292E9293001B3CF4 /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
+				5227C7D52BAB70F000BC6501 /* Standard Bars */,
 				77FACA4D29D1EB7E00A5744A /* TextFieldStyle */,
 				50CE85C42948C59200169922 /* Measure Size */,
 				50CE85BD2948C4CC00169922 /* Representable Sheet */,
@@ -1038,6 +1039,14 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		5227C7D52BAB70F000BC6501 /* Standard Bars */ = {
+			isa = PBXGroup;
+			children = (
+				5227C7D62BAB715E00BC6501 /* StandardBars.swift */,
+			);
+			path = "Standard Bars";
+			sourceTree = "<group>";
+		};
 		522EFC672B9AB32D00F0B071 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -1070,7 +1079,6 @@
 				5278E3BD2B9A92E60036CCB8 /* ALAccountView+extension.swift */,
 				522EFC6B2B9B307500F0B071 /* ALAccountView+stats.swift */,
 				522EFC6D2B9B309A00F0B071 /* ALAccountView+favorites.swift */,
-				522EFC6F2B9B311E00F0B071 /* ALAccountView+userDetails.swift */,
 				522EFC712B9B4D6E00F0B071 /* ALAccountView+activities.swift */,
 			);
 			path = Extensions;
@@ -1409,6 +1417,7 @@
 				5092DF4A2929465B0094DC18 /* SettingsView.swift in Sources */,
 				77B1BD632A697AC2003146B9 /* ImageSaver.swift in Sources */,
 				50FFAFFA292A8FDF00B87E0E /* LibraryView+builders.swift in Sources */,
+				5227C7D72BAB715E00BC6501 /* StandardBars.swift in Sources */,
 				502E8E072935511900881F40 /* MangaStatus.swift in Sources */,
 				50FFB016292AE7B800B87E0E /* MangaView+builders.swift in Sources */,
 				50FFAFEC292A836300B87E0E /* MangaStandardCell.swift in Sources */,
@@ -1508,7 +1517,6 @@
 				50F44446292E93F8001B3CF4 /* AlwaysPopover+modifier.swift in Sources */,
 				50FE08D5292D609700432F21 /* String+default.swift in Sources */,
 				50F44441292E9341001B3CF4 /* AlwaysPopover.swift in Sources */,
-				522EFC702B9B311E00F0B071 /* ALAccountView+userDetails.swift in Sources */,
 				5092DF4E29294C3A0094DC18 /* DiscoveryView+builders.swift in Sources */,
 				50FE08D3292D05DC00432F21 /* LanguagesView+builders.swift in Sources */,
 				779E14632A79895F00F0FF48 /* MangaTag.swift in Sources */,
@@ -1674,6 +1682,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Orochii;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow to use your device biometrics";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need you accept us to access your library to save this image";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1709,6 +1718,7 @@
 				INFOPLIST_KEY_CFBundleDisplayName = Orochii;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.books";
 				INFOPLIST_KEY_NSFaceIDUsageDescription = "Allow to use your device biometrics";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "We need you accept us to access your library to save this image";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

@@ -24,10 +24,8 @@ struct ChapterView: View {
     var body: some View {
         NavigationStack {
             content()
-                .navigationBarTitleDisplayMode(.inline)
                 .toolbarRole(.editor)
                 .toolbar(showReadBars, for: .navigationBar, .bottomBar)
-                .toolbarBackground(.visible, for: .navigationBar)
                 .statusBarHidden(showReadBars == .hidden)
                 .readerToolbar(
                     showChaptersList: $showChaptersList,

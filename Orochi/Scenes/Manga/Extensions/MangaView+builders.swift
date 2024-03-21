@@ -16,16 +16,21 @@ extension MangaView {
             Group {
                 // ALL INFORMATION
                 mangaInfoArea()
+                    .listSectionSeparator(.visible, edges: .bottom)
+                // GENRES
+                genres()
+                    .listSectionSeparator(.visible, edges: .bottom)
                 // CONTENT AND FORMAT
                 tags()
+                    .listSectionSeparator(.visible, edges: .bottom)
                 // DESCRIPTION
                 description()
-                    .listSectionSeparator(.visible)
+                    .listSectionSeparator(.visible, edges: .bottom)
                 // CHAPTERS
                 chapters()
-                    .listSectionSeparator(.visible)
+                    .listRowSeparator(.visible)
+                    .listSectionSeparator(.hidden)
             }
-            .listSectionSeparator(.hidden)
             .listRowSeparator(.hidden)
         }
         .overlay(alignment: .top) {
@@ -42,95 +47,78 @@ extension MangaView {
         .refreshable { vm.refresh() }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background {
-            if let url = vm.api.buildURL(for: .cover(
-                id: vm.manga.id,
-                fileName: vm.imgFileName(of: vm.manga)
-            )) {
-                BlurBackground(with: url, radius: 30)
-            }
-        }
+        .background(Color("background"))
     }
     
     /// Manga information area, contatining all main details
     @ViewBuilder
     func mangaInfoArea() -> some View {
         Section {
-            VStack(alignment: .leading, spacing: .zero) {
-                // MAIN INFORMATION
-                HStack {
-                    MangaStandardImage(
-                        url: vm.api.buildURL(for: .cover(
-                            id: vm.manga.id,
-                            fileName: vm.imgFileName(of: vm.manga)
-                        )),
-                        size: CGSize(
-                            width: CGSize.dynamicImage.width,
-                            height: CGSize.dynamicImage.height
-                        )
+            HStack(alignment: .top) {
+                MangaStandardImage(
+                    url: vm.api.buildURL(for: .cover(
+                        id: vm.manga.id,
+                        fileName: vm.imgFileName(of: vm.manga)
+                    )),
+                    size: CGSize(
+                        width: CGSize.dynamicImage.width,
+                        height: CGSize.dynamicImage.height
                     )
-                    mangaTexts().frame(maxHeight: .infinity, alignment: .top)
-                }.padding([.horizontal, .top])
-                startReadingButton()
-                    .frame(maxWidth: CGSize.dynamicImage.width)
-                    .padding([.leading, .top])
-                // GENRES
-                genres()
-            }
-        }
-        .listRowBackground(Color.clear)
-        /*.background(alignment: .center) {
-             DarkOverlay(url: vm.api.buildURL(for: .cover(
-                 id: vm.manga.id,
-                 fileName: vm.imgFileName(of: vm.manga))
-             ))
-        }*/
-        .clipShape(Rectangle())
-        .listRowInsets(.init(
-            top: 0,
-            leading: 0,
-            bottom: 0,
-            trailing: 0
-        ))
+                )
+                mangaTexts().frame(maxHeight: .infinity, alignment: .top)
+            }.padding(.top)
+        }.listRowBackground(Color.clear)
     }
     
     /// Age content and manga formats
     @ViewBuilder
     func tags() -> some View {
-        if !vm.tags.isEmpty {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(vm.tags) { value in
-                        Text(value.title)
-                            .font(.footnote)
-                            .fontWeight(.medium)
-                            .padding(7.5)
-                            .background(.tint.opacity(0.185), in: RoundedRectangle(cornerRadius: 7.25))
-                            .tint(value.color)
-                            .foregroundColor(value.color)
-                    }
-                }.padding(.horizontal)
+        Section {
+            if !vm.tags.isEmpty {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack {
+                        ForEach(vm.tags) { value in
+                            Text(value.title)
+                                .font(.footnote)
+                                .fontWeight(.medium)
+                                .padding(7.5)
+                                .background(.tint.opacity(0.185), in: RoundedRectangle(cornerRadius: 7.25))
+                                .tint(value.color)
+                                .foregroundColor(value.color)
+                        }
+                    }.padding(.horizontal)
+                }.listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
             }
-            .padding(.vertical)
-            .listRowBackground(Color.clear)
-            .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+        } header: {
+            Text("TAGS")
+                .foregroundStyle(Color("title"))
+                .font(.footnote)
+                .fontWeight(.regular)
         }
+        .listRowBackground(Color.clear)
     }
     
     /// Genres and themes
     @ViewBuilder
     func genres() -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack {
-                ForEach(vm.getGenres(of: vm.manga), id: \.self) { genre in
-                    Text(genre)
-                        .font(.caption)
-                        .fontWeight(.medium)
-                        .padding(6.5)
-                        .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 7.25))
-                }
-            }.padding(.horizontal)
-        }.padding(.vertical)
+        Section {
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack {
+                    ForEach(vm.getGenres(of: vm.manga), id: \.self) { genre in
+                        Text(genre)
+                            .font(.footnote)
+                            .fontWeight(.medium)
+                            .padding(7.5)
+                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 7.25))
+                    }
+                }.padding(.horizontal)
+            }.listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
+        } header: {
+            Text("GENRES")
+                .foregroundStyle(Color("title"))
+                .font(.footnote)
+                .fontWeight(.regular)
+        }.listRowBackground(Color.clear)
     }
     
     /// All grouped manga informations
@@ -167,12 +155,14 @@ extension MangaView {
     func description() -> some View {
         Section {
             Text(vm.switchDescLang())
-                .foregroundColor(.primary.opacity(0.825))
+                .foregroundStyle(Color("bodyText"))
                 .font(.subheadline)
                 .fontWeight(.regular)
         } header: {
             Text(String.Manga.descHeader.uppercased())
-                .lineLimit(1)
+                .foregroundStyle(Color("title"))
+                .font(.footnote)
+                .fontWeight(.regular)
         }
         .listRowBackground(Color.clear)
     }
@@ -199,7 +189,9 @@ extension MangaView {
                         }
                     }
                 }
-            } header: { chaptersHeader() }
+            } header: {
+                chaptersHeader()
+            }
             .listRowBackground(Color.clear)
             .fullScreenCover(item: $vm.selectedChapter) {
                 ChapterView(
@@ -230,21 +222,9 @@ extension MangaView {
                 Text("No chapters found :(")
                     .font(.subheadline)
                     .fontWeight(.medium)
-                    .foregroundColor(Color(uiColor: .systemGray))
+                    .foregroundColor(Color("bodyText"))
                 Spacer()
             }
         }
-    }
-    
-    /// Action message
-    @ViewBuilder
-    func headerPopUp() -> some View {
-        Text(vm.actionMessage)
-            .font(.caption)
-            .fontWeight(.medium)
-            .frame(maxWidth: .infinity)
-            .listRowBackground(Color.clear)
-            .padding(2.5)
-            .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
     }
 }

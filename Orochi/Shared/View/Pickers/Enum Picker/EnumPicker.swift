@@ -23,6 +23,7 @@ struct EnumPicker<Enum: Pickable, Label: View>: View {
                     .font(.headline)
             }
         } label: { self.label }
+        .tint(Color("title"))
     }
     
     init(selection: Binding<Enum>, label: Label) {

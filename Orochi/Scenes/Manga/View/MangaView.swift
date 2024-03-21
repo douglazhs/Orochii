@@ -28,11 +28,10 @@ struct MangaView: View {
     
     var body: some View {
         content()
-            .navigationBarTitleDisplayMode(.inline)
-            .navigationTitle(vm.unwrapTitle(of: vm.manga))
+            .standardBars()
+            .toolbarRole(.editor)
             .toolbar(vm.showBottomBar ? .visible : .hidden, for: .bottomBar)
             .navigationBarBackButtonHidden(vm.isEditingMode)
-            .toolbarBackground(.visible, for: .bottomBar)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     selectChaptersButton()
@@ -42,6 +41,13 @@ struct MangaView: View {
                 }
                 ToolbarItemGroup(placement: .bottomBar) {
                     chapterActions()
+                }
+                ToolbarItem(placement: .principal) {
+                    Text(vm.unwrapTitle(of: vm.manga))
+                        .font(.headline)
+                        .lineLimit(1)
+                        .multilineTextAlignment(.leading)
+                        .fontWeight(.heavy)
                 }
             }
     }

@@ -63,7 +63,7 @@ final class ALAccountViewModel: ObservableObject {
             }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
             withTransaction(.init(animation: .easeIn)) { self.favoritesState = .loaded }
         }
     }
@@ -79,7 +79,7 @@ final class ALAccountViewModel: ObservableObject {
             activities = response
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
             withTransaction(.init(animation: .easeIn)) { self.activitiesState = .loaded }
         }
     }

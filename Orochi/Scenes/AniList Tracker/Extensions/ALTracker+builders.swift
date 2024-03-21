@@ -23,17 +23,7 @@ extension ALTracker {
     @ViewBuilder
     func aniList() -> some View {
         trackerInfoList()
-            .background(
-                BlurBackground(
-                    with: URL(
-                        string: vm.alManga?.bannerImage ??
-                        vm.alManga?.coverImage?.large ??
-                        ""
-                    ),
-                    radius: Constants.device == .phone ? 8.5 : 15
-                )
-            )
-            .toolbarBackground(.visible, for: .navigationBar)
+            .background(Color("background"))
             .fullScreenCover(isPresented: $showWebView) {
                 SafariWebView(url: vm.alUrl!)
                     .ignoresSafeArea()
@@ -45,17 +35,11 @@ extension ALTracker {
     @ViewBuilder
     func search() -> some View {
         trackerSearchList()
-            .background {
-                BlurBackground(
-                    with: cover,
-                    radius: Constants.device == .phone ? 30 : 50
-                )
-            }
+            .background(Color("background"))
             .searchable(
                 text: $vm.text,
                 prompt: "Search for title in AniList"
             )
-            .toolbarBackground(.visible, for: .navigationBar)
             .onReceive(
                 vm.$text
                     .debounce(
@@ -83,16 +67,22 @@ extension ALTracker {
                         vm.alManga?.title?.english ??
                         (vm.isLoading ? "" : "Unknown")
                     )
+                    .font(.headline)
+                    .lineLimit(1)
+                    .multilineTextAlignment(.leading)
+                    .fontWeight(.heavy)
                     
                     if let english = vm.alManga?.title?.english,
                        (english != vm.alManga?.title?.romaji ?? "") {
                         Text(english)
-                            .foregroundColor(.secondary)
                             .font(.caption2)
                             .fontWeight(.medium)
                     }
                 }
-            case .search: Text("Search").font(.headline)
+            case .search: 
+                Text("Search")
+                    .font(.title2)
+                    .fontWeight(.heavy)
             }
         }
         .font(.subheadline)
@@ -142,7 +132,7 @@ extension ALTracker {
             } else {
                 if !vm.isSearching {
                     Text("No results found on **AniList**")
-                        .foregroundColor(Color(.systemGray))
+                        .foregroundColor(Color("bodyText"))
                         .font(.subheadline)
                         .fontWeight(.regular)
                         .listRowBackground(Color.clear)

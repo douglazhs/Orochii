@@ -11,6 +11,7 @@ struct ActivityIndicator: View {
     var body: some View {
         ProgressView()
             .progressViewStyle(.circular)
+            .foregroundColor(.accentColor)
     }
 }
 

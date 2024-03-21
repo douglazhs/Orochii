@@ -31,7 +31,7 @@ struct PickerTextField: UIViewRepresentable {
         textField.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
         textField.inputView = pickerView
         textField.textAlignment = .center
-        textField.backgroundColor = .white.withAlphaComponent(0.115)
+        textField.backgroundColor = UIColor(named: "tabBar")
         textField.textColor = .clear
         textField.tintColor = .clear
         textField.layer.cornerRadius = 4.25

@@ -20,7 +20,7 @@ struct ActionPopUp: View {
                 .foregroundColor(.accentColor)
                 .fontWeight(.bold)
                 .padding(7.5)
-                .background(Color.white)
+                .background(Color("tabBar"))
                 .clipShape(RoundedRectangle(cornerRadius: 7.25))
                 .padding(.top, 5.0)
                 .onAppear {

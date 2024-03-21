@@ -22,8 +22,7 @@ extension LibraryView {
     @ViewBuilder
     func unlockedContent() -> some View {
         list()
-            .navigationTitle(String.Library.title)
-            .navigationBarTitleDisplayMode(.inline)
+            .standardBars()
             .onChange(of: vm.biometricsState) {
                 if $0 == .active { vm.lock() }
             }
@@ -31,6 +30,12 @@ extension LibraryView {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     lockButton()
                     filterButton()
+                }
+                
+                ToolbarItem(placement: .principal) {
+                    Text(String.Library.title)
+                        .font(.title2)
+                        .fontWeight(.heavy)
                 }
             }
             .searchable(
@@ -151,7 +156,7 @@ extension LibraryView {
         .refreshable { }
         .listStyle(.sidebar)
         .scrollContentBackground(.hidden)
-        .background(BlurBackground(with: .view_background))
+        .background(Color("background"))
         .animation(.spring(), value: [isSearching])
     }
     
@@ -178,6 +183,7 @@ extension LibraryView {
             LibraryFilterView().environmentObject(vm)
         } label: {
             Image(systemName: "line.3.horizontal.decrease")
+                .fontWeight(.semibold)
         }
         .menuStyle(.borderlessButton)
     }
@@ -191,6 +197,7 @@ extension LibraryView {
                 vm.lock()
             } label: {
                 Image(systemName: "lock")
+                    .fontWeight(.semibold)
             }
         }
     }

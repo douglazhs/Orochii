@@ -18,11 +18,18 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             content()
-                .navigationBarTitleDisplayMode(.inline)
+                .standardBars()
                 .animation(.spring(), value: [vm.isLoading, vm.user != nil])
                 .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
                     Button(String.Common.ok) { }
                 } message: { Text(vm.alertInfo.message) }
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text(String.Adjusts.title)
+                            .font(.title2)
+                            .fontWeight(.heavy)
+                    }
+                }
         }
     }
 }

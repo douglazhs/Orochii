@@ -22,9 +22,8 @@ struct ReaderPreferencesView: View {
             }
             .listStyle(.grouped)
             .scrollContentBackground(.hidden)
-            .background(BlurBackground(with: .view_background))
-            .navigationTitle("Reader Preferences")
-            .navigationBarTitleDisplayMode(.inline)
+            .standardBars()
+            .background(Color("background"))
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
@@ -32,6 +31,12 @@ struct ReaderPreferencesView: View {
                     } label: {
                         Text(String.Common.done)
                     }
+                }
+                
+                ToolbarItem(placement: .principal) {
+                    Text("Reader Preferences")
+                        .font(.title2)
+                        .fontWeight(.heavy)
                 }
             }
         }

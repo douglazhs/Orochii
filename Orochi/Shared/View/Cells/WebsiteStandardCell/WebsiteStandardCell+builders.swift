@@ -33,6 +33,7 @@ extension WebsiteStandardCell {
                 Text(title)
                     .font(.footnote)
                     .fontWeight(.medium)
+                    .foregroundStyle(Color("button"))
             }
         }
         .tint(.accentColor.opacity(0.9))

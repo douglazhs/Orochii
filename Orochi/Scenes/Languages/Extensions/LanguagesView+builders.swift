@@ -23,15 +23,15 @@ extension LanguagesView {
                         Spacer()
                         if languages.contains(lang) {
                             Image(systemName: "checkmark")
-                                .font(.system(size: 12, weight: .semibold))
-                                .foregroundColor(.accentColor)
+                                .foregroundColor(Color("button"))
+                                .font(.caption2)
+                                .fontWeight(.heavy)
                         } else { EmptyView() }
                     }
                 }
-                .foregroundColor(.primary)
+                .listSectionSeparator(.hidden)
+                .foregroundColor(Color("bodyText"))
             }
-        } header: {
-            Text("Manga Source Languages")
         }
     }
 }

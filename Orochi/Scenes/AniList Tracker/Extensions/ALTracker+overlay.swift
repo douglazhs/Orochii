@@ -36,14 +36,14 @@ extension ALTracker {
                         Text("STATUS")
                             .font(.caption2)
                             .fontWeight(.regular)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(Color("secondaryText"))
                         Text(vm.alManga?.mediaListEntry?.status ?? "-")
                     }
                     VStack(alignment: .center, spacing: 5.0) {
                         Text("PROGRESS")
                             .font(.caption2)
                             .fontWeight(.regular)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(Color("secondaryText"))
                         Text("CH. \(vm.alManga?.mediaListEntry?.progress.nilToStr ?? "-")" +
                              "/\(vm.alManga?.chapters.nilToStr ?? "-")")
                     }
@@ -51,7 +51,7 @@ extension ALTracker {
                         Text("UPDATED")
                             .font(.caption2)
                             .fontWeight(.regular)
-                            .foregroundColor(.secondary)
+                            .foregroundColor(Color("secondaryText"))
                         if vm.alManga?.mediaListEntry != nil {
                             Text(Date.getDate(
                                 of: vm.alManga?.mediaListEntry?.updatedAt ?? 0,
@@ -78,14 +78,15 @@ extension ALTracker {
         } label: {
             Label(
                 vm.alManga?.mediaListEntry != nil
-                ? "Track locally"
-                : "Start tracking",
+                ? "TRACK LOCALLY"
+                : "START TRACKING",
                 systemImage: vm.alManga?.mediaListEntry != nil
                 ? "icloud.and.arrow.down"
-                : "play.fill"
+                : "play"
             )
             .font(.subheadline)
-            .fontWeight(.black)
+            .fontWeight(.heavy)
+            .foregroundStyle(Color("button"))
         }
         .buttonStyle(.borderless)
     }

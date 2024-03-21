@@ -56,7 +56,7 @@
 
 // MARK: - SOURCE PREFERENCES
 
-"manga_source_title" = "MangaDex Source";
+"manga_source_title" = "Source";
 "manga_source_site_footer" = "You will be redirected to _MangaDex_ website";
 "manga_source_language_footer" = "Languages that will be used to search your mangas";
 "manga_source_language_header" = "Languages";
@@ -185,6 +185,6 @@
 "account_section_tags" = "Tags Distribution";
 "account_section_chaptersPerYear" = "Chapters Read Per Year";
 "account_section_country" = "Manga Per Country";
-"account_tab_stats" = "STATS";
-"account_tab_activity" = "ACTIVITY";
-"account_tab_favorites" = "FAVORITES";
+"account_tab_stats" = "Stats";
+"account_tab_activity" = "Activity";
+"account_tab_favorites" = "Favorites";

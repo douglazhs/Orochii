@@ -61,7 +61,7 @@ extension InitialStyleView {
                 .multilineTextAlignment(.leading)
                 .font(.footnote)
                 .fontWeight(.regular)
-                .foregroundColor(.primary.opacity(0.85))
+                .foregroundStyle(Color("bodyText"))
                 .frame(
                     maxWidth: CGSize.standardImageCell.width,
                     idealHeight: 35,

@@ -13,11 +13,19 @@ struct LanguagesView: View {
         List {
             languagesSection().listRowBackground(Color.clear)
         }
-        .navigationTitle(String.MangaSource.languageHeader)
         .navigationBarTitleDisplayMode(.inline)
-        .listStyle(.grouped)
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text(String.MangaSource.languageHeader)
+                    .font(.title2)
+                    .fontWeight(.heavy)
+            }
+        }
+        .toolbarRole(.editor)
+        .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(BlurBackground(with: .view_background))
+        .background(Color("background"))
+        .standardBars()
     }
 }
 

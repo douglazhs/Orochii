@@ -26,14 +26,11 @@ extension ChapterStandardCell {
     func chapterInfo() -> some View {
         HStack(alignment: .top, spacing: 5.0) {
             HStack(spacing: chapter.attributes?.volume != nil ? 2.5 : .zero) {
-                // VOLUME
-                Text(chapter.attributes?.volume != nil ? "[Vol.\(chapter.attributes?.volume ?? "")]" : "")
-                    .font(.footnote)
-                    .foregroundColor(Color(uiColor: .systemGray))
                 // CHAPTER NUMBER
-                Text("Ch.\(chapter.attributes?.chapter ?? "")")
+                Text("CH. \(chapter.attributes?.chapter ?? "-")")
                     .font(.footnote)
-                    .fontWeight(.semibold)
+                    .fontWeight(.bold)
+                    .foregroundStyle(Color("title"))
             }
             // CHAPTER TITLE
             title()
@@ -47,7 +44,7 @@ extension ChapterStandardCell {
             chapter.attributes?.title != nil {
             HStack(spacing: 5.0) {
                 Text("•")
-                    .foregroundColor(.secondary)
+                    .foregroundColor(Color("secondaryText"))
                     .font(.caption)
                     .fontWeight(.heavy)
                 Text(chapter.attributes?.title ?? "")
@@ -55,7 +52,8 @@ extension ChapterStandardCell {
                     .lineLimit(1)
                     .multilineTextAlignment(.leading)
                     .truncationMode(.tail)
-                    .fontWeight(.semibold)
+                    .fontWeight(.heavy)
+                    .foregroundStyle(Color("title"))
             }
         } else { EmptyView() }
     }
@@ -79,26 +77,18 @@ extension ChapterStandardCell {
             // UPDATED
             if let createdAt = chapter.attributes?.createdAt {
                 // UPDATED AT
-                Text(
-                    Date.fromString(createdAt) +
-                    " [\(Date.relativeDate(of: Int(Date.convert(createdAt).timeIntervalSince1970)))] "
-                )
-                .font(.footnote)
-                .foregroundColor(Color(uiColor: .systemGray))
-                
+                Text(Date.fromString(createdAt).uppercased())
             }
             if let scanlationGroup,
                !scanlationGroup.isEmpty {
                 // SCAN GROUP
-                Text("• " + scanlationGroup)
-                    .font(.footnote)
-                    .foregroundColor(Color(uiColor: .systemGray))
+                Text(" • " + scanlationGroup.uppercased())
             } else {
-                Text("• Missing scan group")
-                    .font(.footnote)
-                    .foregroundColor(Color(uiColor: .systemGray))
+                Text("• MISSING SCAN GROUP")
             }
         }
+        .foregroundStyle(Color("bodyText"))
+        .font(.footnote)
         .lineLimit(1)
     }
 }

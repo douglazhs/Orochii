@@ -18,9 +18,13 @@ extension SettingsView {
                 Text("Version")
             }
             gitHub()
-        } header: { Text("About") } footer: {
+        } header: {
+            Text("About")
+        } footer: {
             Text("Some informations about the app")
+                .foregroundStyle(Color("secondaryText"))
         }
+        .foregroundColor(Color("bodyText"))
     }
     
     /// App version and build
@@ -31,17 +35,36 @@ extension SettingsView {
                 Text("Version")
                 Spacer()
                 Text(UIApplication.appVersion ?? "Unknown")
-            }.listRowBackground(Color.clear)
+            }
+            .listRowBackground(Color.clear)
+            .listSectionSeparator(.hidden)
+            .font(.body)
+            .fontWeight(.regular)
+            .foregroundStyle(Color("bodyText"))
+            
             HStack {
                 Text("Build")
                 Spacer()
                 Text(UIApplication.appBuild ?? "Unknown")
-            }.listRowBackground(Color.clear)
+            }
+            .listRowBackground(Color.clear)
+            .listSectionSeparator(.hidden)
+            .font(.body)
+            .fontWeight(.regular)
+            .foregroundStyle(Color("bodyText"))
         }
-        .navigationTitle("Version")
-        .listStyle(.grouped)
+        .standardBars()
+        .toolbarRole(.editor)
+        .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(BlurBackground(with: .view_background))
+        .background(Color("background"))
+        .toolbar {
+            ToolbarItem(placement: .principal) {
+                Text("Version")
+                    .font(.title2)
+                    .fontWeight(.heavy)
+            }
+        }
     }
     
     /// GitHub repository
@@ -51,5 +74,6 @@ extension SettingsView {
             UIApplication.shared
                 .safariVC(url: AppURLs.GitHub.description)
         })
+        .foregroundStyle(Color("button"))
     }
 }

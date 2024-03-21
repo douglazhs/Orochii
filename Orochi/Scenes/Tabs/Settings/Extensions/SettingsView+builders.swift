@@ -27,15 +27,14 @@ extension SettingsView {
         }
         .refreshable { vm.fetchUser() }
         .listStyle(.grouped)
-        .navigationTitle(String.Adjusts.title)
         .animation(
             .easeInOut(duration: 0.125),
             value: vm.biometryPreference
         )
         .scrollIndicators(.hidden)
         .scrollContentBackground(.hidden)
-        .background(BlurBackground(with: .view_background))
-        .sheet(isPresented: $showALAccount) {
+        .background(Color("background"))
+        .fullScreenCover(isPresented: $showALAccount) {
             ALAccountView(user: vm.user!)
                 .interactiveDismissDisabled()
         }
@@ -51,10 +50,12 @@ extension SettingsView {
                     accButtonHandler()
                 }
         } header: {
-            Text(Localized.trackerHeader)
+            Text(Localized.trackerHeader.capitalized)
         } footer: {
             Text(Localized.trackerFooter)
+                .foregroundColor(Color("secondaryText"))
         }
+        .foregroundColor(Color("bodyText"))
     }
     
     /// App iCloud section
@@ -66,7 +67,6 @@ extension SettingsView {
                     Text(Localized.icloudSync)
                 } icon: {
                     Image(systemName: "link.icloud.fill")
-                        .foregroundColor(.primary)
                 }
             }.onChange(of: vm.iCloud) {
                 Defaults.standard.saveBool(
@@ -78,7 +78,9 @@ extension SettingsView {
             Text(Localized.icloudHeader)
         } footer: {
             Text(Localized.icloudFooter)
+                .foregroundColor(Color("secondaryText"))
         }
+        .foregroundColor(Color("bodyText"))
     }
     
     /// App security section
@@ -90,7 +92,7 @@ extension SettingsView {
                     Text(Localized.securityBiometry)
                 } icon: {
                     Image(systemName: "lock.fill")
-                        .foregroundColor(.primary)
+                        
                 }
             }.onChange(of: vm.biometryPreference) {
                 Defaults.standard.saveBool(
@@ -107,7 +109,9 @@ extension SettingsView {
                     .foregroundColor(.accentColor)
                     .bold()
             }
+            .foregroundColor(Color("secondaryText"))
         }
+        .foregroundColor(Color("bodyText"))
         .disabled(!vm.biometricsAvailable)
         .onChange(of: vm.biometryPreference) { _ in
             vm.changeLocalAuth()
@@ -123,7 +127,7 @@ extension SettingsView {
                     Text(Localized.notificationUpdate)
                 } icon: {
                     Image(systemName: "bell.badge")
-                        .foregroundColor(.red)
+                        .foregroundColor(Color("attention"))
                 }
             }.onChange(of: vm.notifications) {
                 Defaults.standard.saveBool(
@@ -135,6 +139,8 @@ extension SettingsView {
             Text(Localized.notificationHeader)
         } footer: {
             Text(Localized.notificationFooter)
+                .foregroundColor(Color("secondaryText"))
         }
+        .foregroundColor(Color("bodyText"))
     }
 }

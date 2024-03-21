@@ -41,7 +41,7 @@ extension SearchStyleView {
                         .lineLimit(1)
                         .font(.subheadline)
                         .fontWeight(.medium)
-                        .foregroundColor(Color(.systemGray))
+                        .foregroundColor(Color("bodyText"))
                         .padding(.vertical)
                 }
             }
@@ -72,7 +72,7 @@ extension SearchStyleView {
                     .padding(7.5)
                     .font(.footnote)
                     .fontWeight(.semibold)
-                    .foregroundColor(.primary.opacity(0.85))
+                    .foregroundColor(Color("bodyText"))
             }
             .clipShape(RoundedRectangle(cornerRadius: 4.5))
         }

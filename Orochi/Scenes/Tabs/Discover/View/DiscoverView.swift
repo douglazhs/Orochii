@@ -26,10 +26,8 @@ struct DiscoverView: View {
     var body: some View {
         NavigationStack {
             content()
-                .navigationTitle(String.Discovery.title)
-                .navigationBarTitleDisplayMode(.inline)
-                .toolbarBackground(.visible, for: .tabBar)
-                .background(BlurBackground(with: .view_background))
+                .standardBars()
+                .background(Color("background"))
                 .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
                     Button(String.Common.ok, role: .cancel) { }
                 } message: {
@@ -39,10 +37,11 @@ struct DiscoverView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         mangaSourceButton()
                     }
-                    ToolbarItemGroup(placement: .keyboard) {
-                        Button(action: {
-                            UIApplication.shared.becomeFirstResponder()
-                        }, label: { Image(systemName: "chevron.down") })
+                    
+                    ToolbarItem(placement: .principal) {
+                        Text(String.Discovery.title)
+                            .font(.title2)
+                            .fontWeight(.heavy)
                     }
                 }
         }

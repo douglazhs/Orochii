@@ -36,7 +36,6 @@ extension ALTracker {
         } label: {
             Image(systemName: "ellipsis")
         }
-        .tint(.white.opacity(0.75))
         .confirmationDialog(
             "Stop tracking locally",
             isPresented: $showConfirmation,
@@ -48,21 +47,6 @@ extension ALTracker {
         }
     }
     
-    /// Close screen button
-    @ViewBuilder
-    func closeButton() -> some View {
-        Button {
-            dismiss()
-        } label: {
-            Image(systemName: "xmark")
-                .font(.footnote)
-                .fontWeight(.heavy)
-        }
-        .tint(.white.opacity(0.75))
-        .clipShape(Circle())
-        .buttonStyle(.bordered)
-    }
-    
     /// Track manga button
     @ViewBuilder
     func trackButton() -> some View {
@@ -72,7 +56,8 @@ extension ALTracker {
         } label: {
             Text("TRACK")
                 .font(.subheadline)
-                .fontWeight(.black)
+                .fontWeight(.heavy)
+                .foregroundStyle(vm.alManga == nil ? Color("secondaryText") : Color("button"))
         }
         .buttonStyle(.borderless)
         .disabled(vm.alManga == nil)
@@ -83,6 +68,7 @@ extension ALTracker {
     func saveButton() -> some View {
         Button("SAVE", action: { dismiss() })
             .font(.subheadline)
-            .fontWeight(.black)
+            .fontWeight(.heavy)
+            .foregroundStyle(Color("button"))
     }
 }

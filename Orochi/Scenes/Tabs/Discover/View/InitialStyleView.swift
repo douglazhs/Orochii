@@ -18,15 +18,14 @@ struct InitialStyleView: View {
                     Section {
                         if let mangas = vm.sections[index].mangas {
                             carousel(index, with: mangas)
-                                .padding(.bottom, 15)
+                                .padding(.bottom, 25)
                         } else {
                             // TODO: - Placeholder to loading carousel
                         }
                     } header: {
-                        Text(vm.sections[index].config.header.uppercased())
-                            .font(.subheadline)
-                            .foregroundColor(.secondary)
-                            .fontWeight(.regular)
+                        Text(vm.sections[index].config.header)
+                            .font(.headline)
+                            .fontWeight(.bold)
                             .padding(.leading)
                     }
                 }
