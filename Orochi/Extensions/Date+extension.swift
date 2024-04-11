@@ -23,15 +23,16 @@ extension Date {
         return formatter.string(from: myNsDate)
     }
     
-    /// Relative date
+    /// Relative date. Ex: 1 day ago
     /// - Parameter time: Time interval
     /// - Returns: Localized date
     static func relativeDate(of time: Int) -> String {
         let formatter = RelativeDateTimeFormatter()
-        formatter.unitsStyle = .full
+        formatter.dateTimeStyle = .named
+        formatter.unitsStyle = .short
         return formatter.localizedString(
             for: Date(timeIntervalSince1970: TimeInterval(time)),
-            relativeTo: Date()
+            relativeTo: .now
         )
     }
     

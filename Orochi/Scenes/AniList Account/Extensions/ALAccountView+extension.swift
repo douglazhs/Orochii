@@ -32,13 +32,23 @@ extension ALAccountView {
     /// User informations separated by tabs
     @ViewBuilder
     func tabs() -> some View {
-        Section {
-            switch tab {
-            case .stats: stats()
-            case .activity: activities().onAppear { vm.getActivities() }
-            case .favorites: favorites().onAppear { vm.getMediListEntry() }
-            }
-        }.listSectionSeparator(.hidden)
+        switch tab {
+        case .stats: 
+            stats()
+                .listSectionSeparator(.hidden)
+        case .activity:
+            activities()
+                .listSectionSeparator(.hidden)
+                .onAppear {
+                    vm.loadFeed()
+                }
+        case .favorites:
+            favorites()
+                .listSectionSeparator(.hidden)
+                .onAppear {
+                    vm.getMediListEntry()
+                }
+        }
     }
     
     /// Segmented control

@@ -9,6 +9,19 @@ import Foundation
 import SwiftUI
 import AniListService
 
+enum Feed: Pickable {
+    var id: Self { self }
+    
+    case mine, following
+    
+    var description: String {
+        switch self {
+        case .mine: return "Your Feed"
+        case .following: return "Following Feed"
+        }
+    }
+}
+
 final class ALAccountViewModel: ObservableObject {
     enum ViewState {
         case loading, loaded
@@ -20,8 +33,9 @@ final class ALAccountViewModel: ObservableObject {
     
     var user: User
     let api: ALServices = AniList()
-    @Published var favorites: [Media] = []
-    @Published var activities: [ActivityUnion] = []
+    
+    @Published var favorites: [Media] = [Media]()
+    @Published var activities: [ActivityUnion] = [ActivityUnion]()
     @Published var activitiesState: ViewState = .loading
     @Published var favoritesState: ViewState = .loading
     @Published var webView: WebView = .profile
@@ -29,6 +43,9 @@ final class ALAccountViewModel: ObservableObject {
     @Published var selectedActivity: Int?
     @Published var errorMessage: String?
     @Published var validURL: URL?
+    @Published var feed: Feed = .mine
+    @Published var loadedFeed: Bool = false
+    @Published var page: Int = 1
     
     init(user: User) {
         self.user = user
@@ -42,6 +59,7 @@ final class ALAccountViewModel: ObservableObject {
         ), let token =  String(data: tokenData, encoding: .utf8) {
             return token
         }
+        
         return nil
     }
     
@@ -57,11 +75,15 @@ final class ALAccountViewModel: ObservableObject {
         
         mangas.forEach { manga in
             Task { @MainActor in
-                guard let favorite = try await api.get(
-                    media: manga.id,
-                    token: loadToken()
-                ) else { return }
-                favorites.append(favorite)
+                do {
+                    guard let favorite = try await api.get(
+                        media: manga.id,
+                        token: loadToken()
+                    ) else { return }
+                    favorites.append(favorite)
+                } catch {
+                    // TODO: - Threat error
+                }
             }
         }
         
@@ -70,31 +92,103 @@ final class ALAccountViewModel: ObservableObject {
         }
     }
     
+    /// Verify if the user scrolled to the end of the list
+    /// - Parameters:
+    ///   - activity: last activity of list
+    /// - Returns: Boolean
+    func hasReachedEnd(of activity: ActivityUnion) -> Bool {
+        activities.last?.id == activity.id
+    }
+    
+    /// Change between feeds
+    func changeFeed() {
+        loadedFeed = false
+        page = 1
+        activities.removeAll()
+        loadFeed()
+    }
+    
     /// Get Authemticated User activities
-    func getActivities() {
-        guard activities.isEmpty else { return }
-        
-        withTransaction(.init(animation: .easeIn)) { activitiesState = .loading }
-        
-        Task { @MainActor in
-            guard let response = try await api.getActivities(of: user.id, token: loadToken()) else { return }
-            activities = response
+    func loadFeed() {
+        guard !loadedFeed else { return }
+        defer {
+            loadedFeed = true
+            if page == 1 {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                    withTransaction(.init(animation: .easeIn)) {
+                        self.activitiesState = .loaded
+                    }
+                }
+            }
         }
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-            withTransaction(.init(animation: .easeIn)) { self.activitiesState = .loaded }
+        if page == 1 {
+            withTransaction(.init(animation: .easeIn)) {
+                activitiesState = .loading
+            }
+        }
+        getActivities()
+    }
+    
+    /// Get activities based on choosen feed
+    private func getActivities() {
+        switch feed {
+        case .mine:
+            Task { @MainActor in
+                do {
+                    guard let response = try await api.getActivities(
+                        of: user.id,
+                        token: loadToken(),
+                        page: page
+                    ) else { return }
+                    activities.append(contentsOf: response)
+                } catch {
+                    // TODO: - Threat error
+                    activitiesState = .loaded
+                }
+            }
+        case .following:
+            Task { @MainActor in
+                do {
+                    guard let response = try await api.getActivities(
+                        token: loadToken(),
+                        page: page
+                    ) else { return }
+                    activities.append(contentsOf: response)
+                } catch {
+                    // TODO: - Threat error
+                    activitiesState = .loaded
+                }
+            }
         }
     }
     
-    /// Build text of user activity
+    /// Build stauts of user activity
     /// - Parameter activity: User activity
     /// - Returns: Built text
-    func buildActivity(_ activity: ActivityUnion) -> String {
+    func buildActivity(_ activity: ActivityUnion) -> AttributedString {
+        let user = "**\(activity.user?.name ?? String.Common.unknown)**"
         let status = activity.status?.capitalized ?? ""
-        let progress = activity.progress ?? ""
+        var progress = "\(activity.progress ?? "")"
+        if !progress.isEmpty { progress += " of" }
+        let title = "**\(unwrappedTitle(of: activity.media))**"
+        let phrase = [
+            user,
+            status,
+            progress,
+            title
+        ]
+        .filter { !$0.isEmpty }
+        .joined(separator: " ")
         
-        return (status + " " + progress).uppercased()
+        do {
+            let string = try AttributedString(markdown: phrase)
+            return string
+        } catch {
+            return AttributedString(phrase)
+        }
     }
+        
     
     /// Build WebView URL for .profile and .manga
     /// - Returns: Built URL
@@ -135,7 +229,8 @@ final class ALAccountViewModel: ObservableObject {
     
     /// Unwrap the possible media titles
     /// - Returns: Media unwrapped title
-    func unwrappedTitle() -> String {
-        return selectedManga?.title?.english ?? selectedManga?.title?.romaji ?? "-"
+    /// - Parameter manga: Current manga
+    func unwrappedTitle(of manga: ShortMedia?) -> String {
+        return manga?.title?.english ?? manga?.title?.romaji ?? String.Common.unknown
     }
 }

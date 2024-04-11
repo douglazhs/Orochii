@@ -25,12 +25,6 @@ extension ALAccountView {
                             .onTapGesture { [weak vm] in
                                 vm?.selectedManga = manga
                                 vm?.webView = .manga
-                                /*vm?.validateURL { result in
-                                    switch result {
-                                    case .success(_): showConfirmation = true
-                                    case .failure: showError = true
-                                    }
-                                }*/
                             }
                     }
                 }
