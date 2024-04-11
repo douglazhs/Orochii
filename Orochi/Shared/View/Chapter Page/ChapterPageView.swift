@@ -13,7 +13,7 @@ struct ChapterPageView: View {
     private let cacheKey: String?
     @State private var total: Double = 0
     @State private var progress: Double = 0
-    @State var error: Error? = nil
+    @State var error: Error?
     
     init(url: URL?, cacheKey: String?) {
         self.url = url

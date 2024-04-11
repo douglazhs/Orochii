@@ -12,7 +12,7 @@ extension MangaView {
     @ViewBuilder
     func actions() -> some View {
         HStack {
-            //START READING BUTTON
+            // START READING BUTTON
             startReadingButton()
             // ANILIST BUTTON
             aniListButton()
@@ -30,7 +30,7 @@ extension MangaView {
         } label: {
             HStack {
                 Image(systemName: "play")
-                    .foregroundColor(Color("button"))
+                    .foregroundColor(Color.ORCH.button)
                 // TODO: Change to current manga reading status
                 Text("CH. 1")
                     .foregroundStyle(.white)
@@ -41,7 +41,7 @@ extension MangaView {
             .lineLimit(1)
         }
         .disabled(vm.occurredAct)
-        .tint(Color("tabBar"))
+        .tint(Color.ORCH.actionBackground)
         .buttonStyle(.borderedProminent)
     }
     
@@ -53,11 +53,11 @@ extension MangaView {
             vm?.startAction(for: .aniList)
         } label: {
             Image(systemName: "antenna.radiowaves.left.and.right")
-                .foregroundColor(Color("button"))
+                .foregroundColor(Color.ORCH.button)
                 .font(.footnote)
                 .fontWeight(.heavy)
         }
-        .tint(Color("tabBar"))
+        .tint(Color.ORCH.actionBackground)
         .buttonStyle(.borderedProminent)
         .sheet(isPresented: $showAniList) {
             ALTracker(
@@ -79,46 +79,58 @@ extension MangaView {
     func libraryButton() -> some View {
         Menu {
             Section {
-                Picker(selection: $vm.libStatus) {
-                    ForEach(MangaStatus.allCases) {
-                        if $0 != .none { Label($0.description, systemImage: $0.icon) }
-                    }
-                } label: {
-                    if vm.libStatus != .none {
-                        Label(
-                            vm.libStatus.description,
-                            systemImage: vm.libStatus.icon
-                        )
-                    } else { Text(vm.libStatus.description) }
-                }
-                .pickerStyle(.menu)
-                .onChange(of: vm.libStatus) {
-                    if $0 != .none {
-                        vm.startAction(for: .lib(.changeFolder))
-                    }
-                }
+                statusPicker()
             } header: {
                 Text("Current manga state on library")
             }
-            Button(role: .destructive, action: {
-                vm.startAction(for: .lib(.remove))
-            }) {
-                Label(
-                    "Remove from library",
-                    systemImage: "trash.fill"
-                )
-            }
-            .disabled(!vm.mangaOnLib)
+            
+            rmvFromLibBtn().disabled(!vm.mangaOnLib)
         } label: {
             Image(systemName: vm.mangaOnLib
-                  ? "folder.fill.badge.gearshape"
-                  : "folder.fill.badge.plus"
+                ? "folder.fill.badge.gearshape"
+                : "folder.fill.badge.plus"
             )
-            .foregroundColor(vm.mangaOnLib ? Color("attention") : Color("AccentColor"))
+            .foregroundColor(vm.mangaOnLib ? Color.ORCH.attention : Color.ORCH.accentColor)
             .fontWeight(.heavy)
             .font(.footnote)
         }
-        .tint(Color("tabBar"))
+        .tint(Color.ORCH.actionBackground)
         .buttonStyle(.borderedProminent)
+    }
+    
+    /// Manga status picker
+    @ViewBuilder
+    func statusPicker() -> some View {
+        Picker(selection: $vm.libStatus) {
+            ForEach(MangaStatus.allCases) {
+                if $0 != .none { Label($0.description, systemImage: $0.icon) }
+            }
+        } label: {
+            if vm.libStatus != .none {
+                Label(
+                    vm.libStatus.description,
+                    systemImage: vm.libStatus.icon
+                )
+            } else { Text(vm.libStatus.description) }
+        }
+        .pickerStyle(.menu)
+        .onChange(of: vm.libStatus) {
+            if $0 != .none {
+                vm.startAction(for: .lib(.changeFolder))
+            }
+        }
+    }
+    
+    /// Remove from library button
+    @ViewBuilder
+    func rmvFromLibBtn() -> some View {
+        Button(role: .destructive) {
+            vm.startAction(for: .lib(.remove))
+        } label: {
+            Label(
+                "Remove from library",
+                systemImage: "trash.fill"
+            )
+        }
     }
 }

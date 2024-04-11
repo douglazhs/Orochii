@@ -10,7 +10,8 @@ import class MangaDex.MangaMock
 import class MangaDex.ChapterMock
 
 struct ReaderPreferencesView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) 
+    var dismiss
     @EnvironmentObject var vm: ChapterViewModel
     
     var body: some View {
@@ -23,7 +24,7 @@ struct ReaderPreferencesView: View {
             .listStyle(.grouped)
             .scrollContentBackground(.hidden)
             .standardBars()
-            .background(Color("background"))
+            .background(Color.ORCH.background)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button {

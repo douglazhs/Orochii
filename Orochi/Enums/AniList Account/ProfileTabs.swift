@@ -9,7 +9,7 @@ import Foundation
 
 /// Profile tabs
 enum ProfileTabs: Pickable {
-    var id:  Self { self}
+    var id: Self { self}
     
     case activity, stats, following, followers
     

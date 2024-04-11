@@ -12,15 +12,20 @@ extension ALAccountView {
     @ViewBuilder
     func content() -> some View {
         List {
-            tabs().listRowBackground(Color.clear)
+            tabs()
+                .foregroundStyle(Color.ORCH.primaryText)
+                .listRowBackground(Color.clear)
         }
         .listStyle(.inset)
         .scrollContentBackground(.hidden)
         .scrollIndicators(.hidden)
-        .background(Color("background"))
+        .background(Color.ORCH.background)
         .fullScreenCover(isPresented: $showWebView) {
-            SafariWebView(url: vm.buildWebViewUrl())
-                .ignoresSafeArea()
+            if let url = vm.validURL {
+                SafariWebView(
+                    url: url
+                ).ignoresSafeArea()
+            }
         }
     }
     
@@ -30,10 +35,8 @@ extension ALAccountView {
         Section {
             switch tab {
             case .stats: stats()
-            case .activity: activities()
-                    .onAppear { vm.getActivities() }
-            case .favorites: favorites()
-                    .onAppear { vm.getMediListEntry() }
+            case .activity: activities().onAppear { vm.getActivities() }
+            case .favorites: favorites().onAppear { vm.getMediListEntry() }
             }
         }.listSectionSeparator(.hidden)
     }
@@ -55,8 +58,15 @@ extension ALAccountView {
     @ViewBuilder
     func navBarButtons() -> some View {
         Button {
-            vm.webView = .profile
-            showWebView = true
+            vm.validateURL { result in
+                switch result {
+                case .success(_):
+                    vm.webView = .profile
+                    showWebView = true
+                case .failure:
+                    showError = true
+                }
+            }
         } label: {
             Image(systemName: "safari.fill")
                 .fontWeight(.semibold)

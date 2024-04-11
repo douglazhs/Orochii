@@ -27,7 +27,7 @@ struct DiscoverView: View {
         NavigationStack {
             content()
                 .standardBars()
-                .background(Color("background"))
+                .background(Color.ORCH.background)
                 .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
                     Button(String.Common.ok, role: .cancel) { }
                 } message: {
@@ -60,5 +60,3 @@ struct DiscoverView_Previews: PreviewProvider {
         DiscoverView()
     }
 }
-
-

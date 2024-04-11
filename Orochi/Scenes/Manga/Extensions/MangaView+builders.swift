@@ -47,7 +47,7 @@ extension MangaView {
         .refreshable { vm.refresh() }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(Color("background"))
+        .background(Color.ORCH.background)
     }
     
     /// Manga information area, contatining all main details
@@ -91,7 +91,7 @@ extension MangaView {
             }
         } header: {
             Text("TAGS")
-                .foregroundStyle(Color("title"))
+                .foregroundStyle(Color.ORCH.secondaryTitle)
                 .font(.footnote)
                 .fontWeight(.regular)
         }
@@ -115,7 +115,7 @@ extension MangaView {
             }.listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
         } header: {
             Text("GENRES")
-                .foregroundStyle(Color("title"))
+                .foregroundStyle(Color.ORCH.secondaryTitle)
                 .font(.footnote)
                 .fontWeight(.regular)
         }.listRowBackground(Color.clear)
@@ -155,12 +155,12 @@ extension MangaView {
     func description() -> some View {
         Section {
             Text(vm.switchDescLang())
-                .foregroundStyle(Color("bodyText"))
+                .foregroundStyle(Color.ORCH.primaryText)
                 .font(.subheadline)
                 .fontWeight(.regular)
         } header: {
             Text(String.Manga.descHeader.uppercased())
-                .foregroundStyle(Color("title"))
+                .foregroundStyle(Color.ORCH.secondaryTitle)
                 .font(.footnote)
                 .fontWeight(.regular)
         }
@@ -184,7 +184,7 @@ extension MangaView {
                         )
                     }
                     .contextMenu {
-                        ChapterMenu() { _ in
+                        ChapterMenu { _ in
                             // TODO: - Handle context menu actions
                         }
                     }
@@ -222,7 +222,7 @@ extension MangaView {
                 Text("No chapters found :(")
                     .font(.subheadline)
                     .fontWeight(.medium)
-                    .foregroundColor(Color("bodyText"))
+                    .foregroundColor(Color.ORCH.primaryText)
                 Spacer()
             }
         }

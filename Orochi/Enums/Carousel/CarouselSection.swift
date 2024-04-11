@@ -33,10 +33,10 @@ enum CarouselSection: Int, CaseIterable {
 extension CarouselSection {
     /// Carousel parameters for request
     /// - Returns: Section parameters
-    func sectionParams() -> [String : Any] {
-        var params: [String : Any] = [
-            "limit" : 30,
-            "order[rating]" : "desc"
+    func sectionParams() -> [String: Any] {
+        var params: [String: Any] = [
+            "limit": 30,
+            "order[rating]": "desc"
         ]
         switch self {
         case .mostRelevants: params["order[followedCount]"] = "desc"

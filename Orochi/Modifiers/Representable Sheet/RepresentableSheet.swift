@@ -35,9 +35,9 @@ struct RepresentableSheet<Content>: UIViewRepresentable where Content: View {
         guard let sheetController = viewController.presentationController as? UISheetPresentationController else {
             return
         }
-        let hostingController = UIHostingController(rootView: content.measureSize(perform: { height in
+        let hostingController = UIHostingController(rootView: content.measureSize { height in
             sheetController.detents = [.custom { _ in return height }]
-        }))
+        })
         viewController.addChild(hostingController)
         viewController.view.addSubview(hostingController.view)
         configureConstraints(view: hostingController.view, controller: viewController)

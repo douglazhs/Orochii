@@ -28,7 +28,7 @@ extension ALTracker {
         VStack(alignment: .leading, spacing: 5.0) {
             Text("CH.")
                 .font(.footnote)
-                .foregroundColor(Color("bodyText"))
+                .foregroundColor(Color.ORCH.primaryText)
             PickerTextField(
                 data: Array(stride(
                     from: 0,
@@ -45,9 +45,8 @@ extension ALTracker {
                 Text("\(String(format: "%.0f", vm.chapter ?? 0)) / \(vm.alManga?.chapters.nilToStr ?? "-")")
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .foregroundStyle(Color("title"))
+                    .foregroundStyle(Color.ORCH.secondaryTitle)
             }
-            .overlay { RoundedRectangle(cornerRadius: 4.25).stroke(Color("secondaryText"), lineWidth: 0.175) }
         }
     }
     
@@ -57,7 +56,7 @@ extension ALTracker {
         VStack(alignment: .leading, spacing: 5.0) {
             Text("VOL.")
                 .font(.footnote)
-                .foregroundColor(Color("bodyText"))
+                .foregroundColor(Color.ORCH.primaryText)
             PickerTextField(
                 data: Array(stride(
                     from: 0,
@@ -74,9 +73,8 @@ extension ALTracker {
                 Text("\(String(format: "%.0f", vm.volume ?? 0)) / \(vm.alManga?.volumes.nilToStr ?? "-")")
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .foregroundStyle(Color("title"))
+                    .foregroundStyle(Color.ORCH.secondaryTitle)
             }
-            .overlay { RoundedRectangle(cornerRadius: 4.25).stroke(Color("secondaryText"),lineWidth: 0.175) }
         }
     }
     
@@ -86,7 +84,7 @@ extension ALTracker {
         VStack(alignment: .leading, spacing: 5) {
             Text("STATUS")
                 .font(.footnote)
-                .foregroundColor(Color("bodyText"))
+                .foregroundColor(Color.ORCH.primaryText)
             Menu {
                 Picker("", selection: $vm.status) {
                     ForEach(MangaStatus.allCases) {
@@ -100,12 +98,11 @@ extension ALTracker {
                     .frame(maxWidth: .infinity)
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .foregroundColor(Color("title"))
+                    .foregroundColor(Color.ORCH.secondaryTitle)
             }
             .frame(height: 30.5, alignment: .center)
-            .background(Color("tabBar"))
+            .background(Color.ORCH.actionBackground)
             .clipShape(RoundedRectangle(cornerRadius: 4.25))
-            .overlay { RoundedRectangle(cornerRadius: 4.25).stroke(Color("secondaryText"), lineWidth: 0.175) }
         }
     }
 }

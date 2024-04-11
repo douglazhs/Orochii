@@ -20,10 +20,10 @@ final class MangaViewModel: ObservableObject {
     /// Selected chapter to reads
     @Published var selectedChapter: Chapter?
     // MARK: - Arrays
-    @Published var chapters: [Chapter] = Array<Chapter>()
-    @Published var filtered: [Chapter] = Array<Chapter>()
-    @Published var languagePreferences: [Language] = Array<Language>()
-    @Published var tags: [MangaTag] = Array<MangaTag>()
+    @Published var chapters: [Chapter] = [Chapter]()
+    @Published var filtered: [Chapter] = [Chapter]()
+    @Published var languagePreferences: [Language] = [Language]()
+    @Published var tags: [MangaTag] = [MangaTag]()
     // MARK: - View states - Booleans & Strings
     @Published var loadingFeed: Bool = false
     @Published var selectAll: Bool = false
@@ -74,8 +74,8 @@ final class MangaViewModel: ObservableObject {
     /// Format carousel containing format and content information
     private func buildTags() {
         if let cr = manga.attributes?.contentRating,
-           let formats = getTags(with: "format", of: manga),
-           let content = getTags(with: "content", of: manga) {
+            let formats = getTags(with: "format", of: manga),
+            let content = getTags(with: "content", of: manga) {
             tags.append(
                 MangaTag(
                     title: cr.capitalized,
@@ -101,16 +101,16 @@ final class MangaViewModel: ObservableObject {
             api.getMangaFeed(
                 id: manga.id,
                 params: [
-                    "translatedLanguage[]" : languagePreferences.compactMap { $0.apiId },
-                    "limit" : 500,
-                    "offset" : offset,
-                    "order[chapter]" : feedOrder.key
+                    "translatedLanguage[]": languagePreferences.compactMap { $0.apiId },
+                    "limit": 500,
+                    "offset": offset,
+                    "order[chapter]": feedOrder.key
                 ]
             ) { [weak self] result in
                 switch result {
                 case .success(let response):
                     if let chapters = response.data,
-                       let total = response.total {
+                        let total = response.total {
                         withAnimation(.spring()) {
                             self?.chapters.append(contentsOf: chapters)
                             self?.totalOnFeed = total
@@ -215,8 +215,12 @@ final class MangaViewModel: ObservableObject {
             }
         } catch {
             switch descLang {
-            case .ptBr: return AttributedString(NSAttributedString(string: manga.attributes?.description?.ptBr ?? "No description."))
-            case .enUS: return AttributedString(NSAttributedString(string: manga.attributes?.description?.en ?? "No description."))
+            case .ptBr: return AttributedString(
+                NSAttributedString(string: manga.attributes?.description?.ptBr ?? "No description.")
+            )
+            case .enUS: return AttributedString(
+                NSAttributedString(string: manga.attributes?.description?.en ?? "No description.")
+            )
             }
         }
     }

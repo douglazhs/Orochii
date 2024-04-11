@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct LibraryFilterView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) 
+    var dismiss
     @EnvironmentObject var vm: LibraryViewModel
     
     var body: some View {

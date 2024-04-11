@@ -27,10 +27,10 @@ struct ChapterStandardCell: View {
             /*.badge(
                 chapter.downloaded
                 ? Text(Image(systemName: "arrow.down"))
-                        .foregroundColor(
-                            Color.accentColor.opacity(0.85)
-                        )
-                        .font(.caption)
+                    .foregroundColor(
+                        Color.accentColor.opacity(0.85)
+                    )
+                    .font(.caption)
                 : Text("")
             )*/
     }

@@ -39,7 +39,7 @@ final class Biometry {
         scanner.evaluatePolicy(
             .deviceOwnerAuthenticationWithBiometrics,
             localizedReason: "Use biometrics in your app!"
-        ) { status, error in
+        ) { _, error in
             completion(error)
             return
         }

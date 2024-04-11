@@ -112,7 +112,7 @@ final class ALTrackerViewModel: ObservableObject {
     /// - Returns: Rank integer
     func getRank(_ type: Rank) -> String {
         switch type {
-        case .popular :
+        case .popular:
             let popular = alManga?.rankings?.first(where: { $0.type.unwrapped == "POPULAR" && $0.allTime })?.rank
             guard let popular else { return "-" }
             return "#\(popular)"
@@ -127,32 +127,32 @@ final class ALTrackerViewModel: ObservableObject {
     func fillInfo() {
         // Started date
         if let year = alManga?.mediaListEntry?.startedAt?.year,
-           let month = alManga?.mediaListEntry?.startedAt?.month,
-           let day = alManga?.mediaListEntry?.startedAt?.day {
+            let month = alManga?.mediaListEntry?.startedAt?.month,
+            let day = alManga?.mediaListEntry?.startedAt?.day {
             startDate = Date.convert("\(day)-\(month)-\(year)", format: "dd-MM-YYYY")
         } else { startDate = .now }
         
         // Ended date
         if let year = alManga?.mediaListEntry?.completedAt?.year,
-           let month = alManga?.mediaListEntry?.completedAt?.month,
-           let day = alManga?.mediaListEntry?.completedAt?.day {
+            let month = alManga?.mediaListEntry?.completedAt?.month,
+            let day = alManga?.mediaListEntry?.completedAt?.day {
             endDate = Date.convert("\(day)-\(month)-\(year)", format: "dd-MM-YYYY")
         } else { endDate = .now }
         
-        //Chapter
+        // Chapter
         chapter = Double(alManga?.mediaListEntry?.progress ?? 0)
         // Volume
         volume = Double(alManga?.mediaListEntry?.progressVolumes ?? 0)
         // Score
         score = Double(alManga?.mediaListEntry?.score ?? 0)
-        //Status
+        // Status
         status = MangaStatus(rawValue: alManga?.mediaListEntry?.status ?? "") ?? .planning
     }
     
     /// Get manga on AniList
     private func checkALId() {
         if let anilistId = mDexManga.attributes?.links?.al,
-           let integerId = Int(anilistId) {
+            let integerId = Int(anilistId) {
             withAnimation(.spring()) {
                 isLoading = true
                 context = .tracker

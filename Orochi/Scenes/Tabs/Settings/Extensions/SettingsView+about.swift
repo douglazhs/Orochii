@@ -20,11 +20,12 @@ extension SettingsView {
             gitHub()
         } header: {
             Text("About")
+                .foregroundStyle(Color.ORCH.secondaryTitle)
         } footer: {
             Text("Some informations about the app")
-                .foregroundStyle(Color("secondaryText"))
+                .foregroundStyle(Color.ORCH.secondaryText)
         }
-        .foregroundColor(Color("bodyText"))
+        .foregroundColor(Color.ORCH.primaryText)
     }
     
     /// App version and build
@@ -40,7 +41,7 @@ extension SettingsView {
             .listSectionSeparator(.hidden)
             .font(.body)
             .fontWeight(.regular)
-            .foregroundStyle(Color("bodyText"))
+            .foregroundStyle(Color.ORCH.primaryText)
             
             HStack {
                 Text("Build")
@@ -51,13 +52,13 @@ extension SettingsView {
             .listSectionSeparator(.hidden)
             .font(.body)
             .fontWeight(.regular)
-            .foregroundStyle(Color("bodyText"))
+            .foregroundStyle(Color.ORCH.primaryText)
         }
         .standardBars()
         .toolbarRole(.editor)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(Color("background"))
+        .background(Color.ORCH.background)
         .toolbar {
             ToolbarItem(placement: .principal) {
                 Text("Version")
@@ -70,10 +71,19 @@ extension SettingsView {
     /// GitHub repository
     @ViewBuilder
     func gitHub() -> some View {
-        Button("GitHub", action: {
-            UIApplication.shared
-                .safariVC(url: AppURLs.GitHub.description)
-        })
-        .foregroundStyle(Color("button"))
+        Button("GitHub") {
+            do {
+                try UIApplication
+                    .shared
+                    .safariVC(url: AppURLs.gitHub.description)
+            } catch let error {
+                vm.showAlert = true
+                vm.alertInfo = .init(
+                    title: String.Common.error,
+                    message: error.localizedDescription
+                )
+            }
+        }
+        .foregroundStyle(Color.ORCH.button)
     }
 }

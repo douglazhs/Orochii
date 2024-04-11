@@ -14,7 +14,7 @@ extension SearchStyleView {
     func content() -> some View {
         ScrollView {
             if let mangas = vm.searchResult, !vm.isSearching, !mangas.isEmpty {
-                LazyVGrid(columns: columns, spacing: 10) {
+                LazyVGrid(columns: columns, spacing: 20.0) {
                     ForEach(mangas) { manga in
                         NavigationLink(value: manga) {
                             cell(of: manga)
@@ -41,7 +41,7 @@ extension SearchStyleView {
                         .lineLimit(1)
                         .font(.subheadline)
                         .fontWeight(.medium)
-                        .foregroundColor(Color("bodyText"))
+                        .foregroundColor(Color.ORCH.primaryText)
                         .padding(.vertical)
                 }
             }
@@ -57,8 +57,8 @@ extension SearchStyleView {
                 fileName: vm.imgFileName(of: manga)
             )),
             size: CGSize(
-                width: CGSize.dynamicImage.width * 1.25,
-                height: CGSize.dynamicImage.height * 1.25
+                width: CGSize.dynamicImage.width,
+                height: CGSize.dynamicImage.height
             )
         )
         .overlay(alignment: .bottom) {
@@ -72,7 +72,7 @@ extension SearchStyleView {
                     .padding(7.5)
                     .font(.footnote)
                     .fontWeight(.semibold)
-                    .foregroundColor(Color("bodyText"))
+                    .foregroundColor(Color.ORCH.primaryText)
             }
             .clipShape(RoundedRectangle(cornerRadius: 4.5))
         }

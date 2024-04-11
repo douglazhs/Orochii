@@ -16,12 +16,15 @@ extension SourcePreferencesView {
         Section {
             WebsiteStandardCell(
                 title: "mangadex.org",
-                urlString: AppURLs.MDSite.description,
-                image: .manga_dex_icon
+                urlString: AppURLs.mdSite.description,
+                image: .mangaDexIcon
             )
+        } header: {
+            Text("Main Orochii Source")
+                .foregroundStyle(Color.ORCH.secondaryTitle)
         } footer: {
             Text(String.MangaSource.siteFooter)
-                .foregroundStyle(Color("secondaryText"))
+                .foregroundStyle(Color.ORCH.secondaryText)
         }
     }
     
@@ -42,18 +45,18 @@ extension SourcePreferencesView {
                         }
                     }
             } label: {
-                Text(String.MangaSource.languageHeader)
-                    .foregroundStyle(Color("bodyText"))
+                Text(vm.languages.map { $0.description }.joined(separator: ", ") )
+                    .foregroundStyle(Color.ORCH.primaryText)
             }
         } header: {
             Text(String.MangaSource.languageHeader)
-                .foregroundStyle(Color("title"))
+                .foregroundStyle(Color.ORCH.secondaryTitle)
         } footer: {
             Text(String.MangaSource.languageFooter)
-                .foregroundStyle(Color("secondaryText"))
+                .foregroundStyle(Color.ORCH.secondaryText)
         }
     }
-    
+
     /// App Age Rating section
     @ViewBuilder
     func ageRatingSection() -> some View {
@@ -61,10 +64,10 @@ extension SourcePreferencesView {
             Toggle(isOn: $vm.nsfw) {
                 Label {
                     Text("NSFW")
-                        .foregroundStyle(Color("bodyText"))
+                        .foregroundStyle(Color.ORCH.primaryText)
                 } icon: {
                     Image(systemName: "eyes.inverse")
-                        .foregroundColor(Color("attention"))
+                        .foregroundColor(Color.ORCH.attention)
                 }
             }.onChange(of: vm.nsfw) {
                 Defaults.standard.saveBool(
@@ -75,16 +78,17 @@ extension SourcePreferencesView {
             }
         } header: {
             Text(String.Adjusts.ageRatingHeader)
-                .foregroundStyle(Color("title"))
+                .foregroundStyle(Color.ORCH.secondaryTitle)
         } footer: {
             Text(String.Adjusts.ageRatingFooter)
-                .foregroundStyle(Color("secondaryText"))
+                .foregroundStyle(Color.ORCH.secondaryText)
         }
     }
-    
+
     /// Done button
     /// - Returns: Toolbar done button
-    @ViewBuilder func doneButton() -> some View {
+    @ViewBuilder 
+    func doneButton() -> some View {
         Button { dismiss() } label: {
             Text(String.Common.done)
                 .fontWeight(.semibold)

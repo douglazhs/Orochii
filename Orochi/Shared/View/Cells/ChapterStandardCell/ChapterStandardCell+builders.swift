@@ -30,7 +30,7 @@ extension ChapterStandardCell {
                 Text("CH. \(chapter.attributes?.chapter ?? "-")")
                     .font(.footnote)
                     .fontWeight(.bold)
-                    .foregroundStyle(Color("title"))
+                    .foregroundStyle(Color.ORCH.secondaryTitle)
             }
             // CHAPTER TITLE
             title()
@@ -39,12 +39,12 @@ extension ChapterStandardCell {
     
     /// Main chapter infos, as *title*
     @ViewBuilder
-    func title() ->  some View {
+    func title() -> some View {
         if !(chapter.attributes?.title?.isEmpty ?? false) &&
             chapter.attributes?.title != nil {
             HStack(spacing: 5.0) {
                 Text("•")
-                    .foregroundColor(Color("secondaryText"))
+                    .foregroundColor(Color.ORCH.secondaryText)
                     .font(.caption)
                     .fontWeight(.heavy)
                 Text(chapter.attributes?.title ?? "")
@@ -53,7 +53,7 @@ extension ChapterStandardCell {
                     .multilineTextAlignment(.leading)
                     .truncationMode(.tail)
                     .fontWeight(.heavy)
-                    .foregroundStyle(Color("title"))
+                    .foregroundStyle(Color.ORCH.secondaryTitle)
             }
         } else { EmptyView() }
     }
@@ -80,14 +80,14 @@ extension ChapterStandardCell {
                 Text(Date.fromString(createdAt).uppercased())
             }
             if let scanlationGroup,
-               !scanlationGroup.isEmpty {
+                !scanlationGroup.isEmpty {
                 // SCAN GROUP
                 Text(" • " + scanlationGroup.uppercased())
             } else {
                 Text("• MISSING SCAN GROUP")
             }
         }
-        .foregroundStyle(Color("bodyText"))
+        .foregroundStyle(Color.ORCH.primaryText)
         .font(.footnote)
         .lineLimit(1)
     }

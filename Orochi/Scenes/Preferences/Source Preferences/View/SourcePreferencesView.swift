@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct SourcePreferencesView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) 
+    var dismiss
     @EnvironmentObject var vm: DiscoverViewModel
     
     var body: some View {
@@ -35,7 +36,7 @@ struct SourcePreferencesView: View {
             }
             .listStyle(.grouped)
             .scrollContentBackground(.hidden)
-            .background(Color("background"))
+            .background(Color.ORCH.background)
             .standardBars()
         }
     }

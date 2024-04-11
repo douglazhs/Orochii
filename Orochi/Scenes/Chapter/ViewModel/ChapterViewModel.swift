@@ -30,7 +30,7 @@ final class ChapterViewModel: ObservableObject {
     @Published var pages: [String] = []
     @Published var actualPage: Double = 0
     // MARK: - Possible errors
-    @Published var error: Error? = nil
+    @Published var error: Error?
     
     /// Chaper View Model
     /// - Parameters:
@@ -74,7 +74,7 @@ final class ChapterViewModel: ObservableObject {
     /// Define manga reading mode based on ``Format``
     private func defineReadingMode() {
         guard getTag("Web Comic", of: manga) != nil,
-              getTag("Full Color", of: manga) != nil
+            getTag("Full Color", of: manga) != nil
         else {
             format = .normal
             return

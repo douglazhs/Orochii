@@ -37,7 +37,7 @@ struct AlwaysPopoverModifier<PopoverContent>: ViewModifier where PopoverContent:
         popover.delegate = contentController
         
         guard let sourceVC = view.closestVC() else { return }
-        if let _ = sourceVC.presentedViewController {
+        if sourceVC.presentedViewController != nil {
             
         } else {
             sourceVC.present(contentController, animated: true)
@@ -55,4 +55,3 @@ struct AlwaysPopoverModifier<PopoverContent>: ViewModifier where PopoverContent:
         func updateUIView(_ uiView: Self.UIViewType, context: Self.Context) { }
     }
 }
-

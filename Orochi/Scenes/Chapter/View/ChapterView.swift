@@ -9,7 +9,8 @@ import SwiftUI
 import MangaDex
 
 struct ChapterView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) 
+    var dismiss
     @StateObject var vm: ChapterViewModel
     @State var showReadBars: Visibility = .visible
     @State var showChaptersList: Bool = false
@@ -44,4 +45,3 @@ struct ChapterView: View {
         of: MangaMock.manga
     )
 }
-

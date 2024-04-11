@@ -8,8 +8,8 @@
 import SwiftUI
 
 extension ChapterView {
-    @ViewBuilder
     /// Main view content
+    @ViewBuilder
     func content() -> some View {
         ZStack(alignment: .center) {
             Color.black
@@ -73,7 +73,7 @@ extension ChapterView {
     /// Scrollable reading mode
     @ViewBuilder
     func webtoonMode() -> some View {
-        ScrollViewReader { proxy in
+        ScrollViewReader { _ in
             ScrollView(showsIndicators: false) {
                 VStack(spacing: .zero) {
                     ForEach(vm.pages.indices, id: \.self) { index in

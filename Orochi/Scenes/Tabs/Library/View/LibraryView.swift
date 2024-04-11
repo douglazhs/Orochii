@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct LibraryView: View {
-    @Environment(\.isSearching) var isSearching
+    @Environment(\.isSearching) 
+    var isSearching
     @StateObject var vm: LibraryViewModel
     @State var showFilters: Bool = false
     

@@ -9,13 +9,13 @@ import Foundation
 import SwiftUI
 
 /// Standard navigation and tab bars
-fileprivate struct StandardBars: ViewModifier {
+private struct StandardBars: ViewModifier {
     func body (content: Content) -> some View {
         content
             .navigationBarTitleDisplayMode(.inline)
             .toolbarBackground(.visible, for: .tabBar, .navigationBar, .bottomBar)
             .toolbarBackground(Color.black, for: .navigationBar)
-            .toolbarBackground(Color("background"), for: .tabBar, .bottomBar)
+            .toolbarBackground(Color.ORCH.background, for: .tabBar, .bottomBar)
     }
 }
 

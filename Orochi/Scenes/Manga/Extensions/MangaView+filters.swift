@@ -25,7 +25,7 @@ extension MangaView {
         HStack {
             // CHAPTERS COUNT
             Text("\(vm.totalOnFeed) " + String.Manga.chapHeader.uppercased())
-                .foregroundStyle(Color("title"))
+                .foregroundStyle(Color.ORCH.secondaryTitle)
                 .font(.footnote)
                 .fontWeight(.regular)
             Spacer()
@@ -47,7 +47,9 @@ extension MangaView {
                 .onChange(of: vm.feedOrder) { [weak vm] in
                     vm?.order(by: $0)
                 }
-            } header: { Text(String.Filter.orderByHeader.uppercased()) }
+            } header: {
+                Text(String.Filter.orderByHeader.uppercased())
+            }
             Section {
                 Button { vm.downloaded.toggle() } label: {
                     HStack {
@@ -69,7 +71,7 @@ extension MangaView {
             }
         } label: {
             Image(systemName: "line.3.horizontal.decrease")
-                .foregroundStyle(Color("button"))
+                .foregroundStyle(Color.ORCH.button)
                 .font(.headline)
                 .fontWeight(.bold)
         }

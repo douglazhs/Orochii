@@ -8,7 +8,7 @@
 import SwiftUI
 
 class LibraryViewModel: ObservableObject {
-    let years = Array<Int>(stride(from: 2000, through: 2022, by: 1))
+    let years = [Int](stride(from: 2000, through: 2022, by: 1))
     @Published var query: String = ""
     @Published var objectFilter: ObjectFilter = .name
     @Published var filterOrder: OrderFilter = .asc
@@ -21,12 +21,12 @@ class LibraryViewModel: ObservableObject {
         case active, inactive, unavailable
     }
     
-    @Published var biometricsError: Error? = nil
-    @Published var availableBiometricsError: Error? = nil
+    @Published var biometricsError: Error?
+    @Published var availableBiometricsError: Error?
     @Published var biometricsAvailable: Bool = false
     @Published var biometricsState: LockState = .inactive
     @Published var unlocked: Bool = true
-    @Published var lockClick: Bool? = nil
+    @Published var lockClick: Bool?
     
     init() {
         loadDefaults()

@@ -12,7 +12,7 @@ struct WebsiteStandardCell: View {
     var title: String
     var urlString: String
     var image: AppImages
-    var avatarURL: URL? = nil
+    var avatarURL: URL?
     
     var body: some View {
         content()
@@ -22,9 +22,9 @@ struct WebsiteStandardCell: View {
 struct WebsiteStandardCell_Previews: PreviewProvider {
     static var previews: some View {
         WebsiteStandardCell(
-            title: "Title",
+            title: "Orochii",
             urlString: "https://mangadex.org",
-            image: .manga_dex_icon
+            image: .mangaDexIcon
         )
     }
 }

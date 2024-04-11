@@ -11,17 +11,17 @@ import Foundation
 protocol SourcePreferences {
     /// Default params based on user source preferences
     /// - Returns: Params dictionary
-    func defaults() -> [String : Any]
+    func defaults() -> [String: Any]
     
     /// Merge two dictionaries
     /// - Parameters:
     ///   - dictOne: Base dictionary
     ///   - dictTwo: Dictionary to be merged into dictOne
-    func merge(_ dictOne : [String : Any], into dictTwo: [String : Any]) -> [String : Any]
+    func merge(_ dictOne: [String: Any], into dictTwo: [String: Any]) -> [String: Any]
 }
 
 extension SourcePreferences {
-    func defaults() -> [String : Any] {
+    func defaults() -> [String: Any] {
         guard let langs = Defaults.standard.getObj(
             of: DefaultsKeys.SrcPreferences.languages.rawValue
         ) as? [Int] else { return [:] }
@@ -33,10 +33,10 @@ extension SourcePreferences {
             of: DefaultsKeys.SrcPreferences.nsfw.rawValue
         )
         
-        var translatedLangs: [String : Any] = [:]
+        var translatedLangs: [String: Any] = [:]
         translatedLangs["availableTranslatedLanguage[]"] = defaultLangs
         
-        var contentRating: [String : Any] = [:]
+        var contentRating: [String: Any] = [:]
         if nsfw {
             contentRating["contentRating[]"] = [
                 "safe",
@@ -57,9 +57,9 @@ extension SourcePreferences {
     }
     
     func merge(
-        _ dictOne: [String : Any],
-        into dictTwo: [String : Any]
-    ) -> [String : Any] {
+        _ dictOne: [String: Any],
+        into dictTwo: [String: Any]
+    ) -> [String: Any] {
         dictOne.merging(dictTwo) { first, _ in first }
     }
 }

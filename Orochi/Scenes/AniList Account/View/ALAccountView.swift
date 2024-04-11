@@ -12,8 +12,8 @@ import struct AniListService.User
 import class AniListService.UserMock
 
 enum ALTab: Int, CaseIterable {
-    case stats, activity,favorites
-    
+    case stats, activity, favorites
+
     var title: String {
         switch self {
         case .stats: return String.Account.stats
@@ -24,7 +24,8 @@ enum ALTab: Int, CaseIterable {
 }
 
 struct ALAccountView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) 
+    var dismiss
     @State var tab: ALTab = .stats
     @State var expandGenre: Bool = false
     @State var expandStartYears: Bool = false
@@ -33,19 +34,31 @@ struct ALAccountView: View {
     @State var expandTag: Bool = false
     @State var showWebView: Bool = false
     @State var showMangaView: Bool = false
+    @State var showError: Bool = false
+    @State var showConfirmation: Bool = false
     @StateObject var vm: ALAccountViewModel
+    
+    let columns = [
+        GridItem(.adaptive(minimum: CGSize.standardImageCell.width))
+    ]
     
     init(user: User) {
         _vm = StateObject(wrappedValue: ALAccountViewModel(user: user))
-        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color("tabBar"))
-        UISegmentedControl.appearance().setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor:UIColor.white,
-            NSAttributedString.Key.font:UIFont.systemFont(ofSize: 16, weight: .heavy)
-        ], for: .selected)
-        UISegmentedControl.appearance().setTitleTextAttributes([
-            NSAttributedString.Key.foregroundColor:UIColor.secondaryLabel,
-            NSAttributedString.Key.font:UIFont.systemFont(ofSize: 16, weight: .heavy)
-        ], for: .normal)
+        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.ORCH.actionBackground)
+        UISegmentedControl.appearance().setTitleTextAttributes(
+            [
+                NSAttributedString.Key.foregroundColor: UIColor.white,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .heavy)
+            ],
+            for: .selected
+        )
+        UISegmentedControl.appearance().setTitleTextAttributes(
+            [
+                NSAttributedString.Key.foregroundColor: UIColor.secondaryLabel,
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .heavy)
+            ],
+            for: .normal
+        )
     }
     
     var body: some View {
@@ -54,6 +67,13 @@ struct ALAccountView: View {
                 .standardBars()
                 .animation(.easeIn(duration: 0.5), value: !vm.favorites.isEmpty)
                 .toolbarRole(.editor)
+                .alert(String.Common.error, isPresented: $showError) {
+                    Button(role: .none) { } label: {
+                        Text(String.Common.ok)
+                    }
+                } message: {
+                    Text(vm.errorMessage ?? "")
+                }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         navBarButtons()
@@ -70,4 +90,3 @@ struct ALAccountView: View {
 #Preview {
     ALAccountView(user: UserMock.user)
 }
-

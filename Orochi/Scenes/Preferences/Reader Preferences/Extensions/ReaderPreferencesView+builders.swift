@@ -21,12 +21,12 @@ extension ReaderPreferencesView {
                 }
         } header: {
             Text("Page Layout")
-                .foregroundStyle(Color("title"))
+                .foregroundStyle(Color.ORCH.secondaryTitle)
         } footer: {
             Text("Choose a page layout of your preference")
-                .foregroundStyle(Color("secondaryText"))
+                .foregroundStyle(Color.ORCH.secondaryText)
         }
-        .foregroundStyle(Color("bodyText"))
+        .foregroundStyle(Color.ORCH.primaryText)
     }
     
     /// Manga quality
@@ -42,12 +42,12 @@ extension ReaderPreferencesView {
                 }
         } header: {
             Text("Page quality")
-                .foregroundStyle(Color("title"))
+                .foregroundStyle(Color.ORCH.secondaryTitle)
         } footer: {
             Text("Choose the quality of your preference")
-                .foregroundStyle(Color("secondaryText"))
+                .foregroundStyle(Color.ORCH.secondaryText)
         }
-        .foregroundStyle(Color("bodyText"))
+        .foregroundStyle(Color.ORCH.primaryText)
     }
     
     /// Reading mode chooser
@@ -63,11 +63,11 @@ extension ReaderPreferencesView {
                 }
         } header: {
             Text("Reading Mode")
-                .foregroundStyle(Color("title"))
+                .foregroundStyle(Color.ORCH.secondaryTitle)
         } footer: {
             Text("Choose the better reading mode for you")
-                .foregroundStyle(Color("secondaryText"))
+                .foregroundStyle(Color.ORCH.secondaryText)
         }
-        .foregroundStyle(Color("bodyText"))
+        .foregroundStyle(Color.ORCH.primaryText)
     }
 }

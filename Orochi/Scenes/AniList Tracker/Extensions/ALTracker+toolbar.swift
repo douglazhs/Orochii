@@ -23,7 +23,7 @@ extension ALTracker {
                 
                 Button { [weak vm] in
                     if let siteUrl = vm?.alManga?.siteUrl,
-                       let url = URL(string: siteUrl) {
+                        let url = URL(string: siteUrl) {
                         vm?.alUrl = url
                         showWebView = true
                     }
@@ -42,7 +42,7 @@ extension ALTracker {
             titleVisibility: .visible
         ) {
             Button("Stop", role: .destructive) { dismiss() }
-        } message : {
+        } message: {
             Text("You will not lose your AniList progress, just remove the track information locally.")
         }
     }
@@ -57,7 +57,7 @@ extension ALTracker {
             Text("TRACK")
                 .font(.subheadline)
                 .fontWeight(.heavy)
-                .foregroundStyle(vm.alManga == nil ? Color("secondaryText") : Color("button"))
+                .foregroundStyle(vm.alManga == nil ? Color.ORCH.secondaryText : Color.ORCH.button)
         }
         .buttonStyle(.borderless)
         .disabled(vm.alManga == nil)
@@ -66,9 +66,9 @@ extension ALTracker {
     /// Save progress button
     @ViewBuilder
     func saveButton() -> some View {
-        Button("SAVE", action: { dismiss() })
+        Button("SAVE") { dismiss() }
             .font(.subheadline)
             .fontWeight(.heavy)
-            .foregroundStyle(Color("button"))
+            .foregroundStyle(Color.ORCH.button)
     }
 }

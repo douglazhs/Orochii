@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ActionPopUp: View {
-    var title: String? = nil
+    var title: String?
     var message: String
     @Binding var action: Bool
     
@@ -20,7 +20,7 @@ struct ActionPopUp: View {
                 .foregroundColor(.accentColor)
                 .fontWeight(.bold)
                 .padding(7.5)
-                .background(Color("tabBar"))
+                .background(Color.ORCH.actionBackground)
                 .clipShape(RoundedRectangle(cornerRadius: 7.25))
                 .padding(.top, 5.0)
                 .onAppear {

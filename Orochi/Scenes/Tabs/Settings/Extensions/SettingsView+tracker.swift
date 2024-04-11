@@ -16,8 +16,8 @@ extension SettingsView {
         } else {
             WebsiteStandardCell(
                 title: String.Name.aniList,
-                urlString: AppURLs.ALSite.description,
-                image: .ani_list_logo
+                urlString: AppURLs.alSite.description,
+                image: .aniListLogo
             )
         }
     }
@@ -85,7 +85,7 @@ extension SettingsView {
             Text("\(vm.user?.statistics?.manga?.count ?? 0) MANGAS")
                 .font(.caption)
                 .fontWeight(.regular)
-                .foregroundColor(Color("bodyText"))
+                .foregroundColor(Color.ORCH.primaryText)
         }
     }
     
@@ -98,20 +98,22 @@ extension SettingsView {
             : vm.logInAL()
         } label: {
             Text(vm.logged
-                 ? Localized.logOut.uppercased()
-                 : Localized.logIn.uppercased()
+                ? Localized.logOut.uppercased()
+                : Localized.logIn.uppercased()
             )
             .font(.caption)
             .fontWeight(.heavy)
-            .foregroundColor(vm.logged ? .red : .accentColor)
+            .foregroundColor(vm.logged ? Color.ORCH.attention : Color.ORCH.button)
         }
         .buttonStyle(.borderedProminent)
-        .tint(.white)
+        .tint(Color.ORCH.secondaryBackground)
         .confirmationDialog(String.Common.attention, isPresented: $vm.showDialog) {
-            Button(String.Common.cancel, role: .cancel, action: {})
+            Button(String.Common.cancel, role: .cancel) { }
             Button(String.Adjusts.logOut, role: .destructive) {
                 vm.logOutAL()
             }
-        } message: { Text(String.Anilist.logOutMessage) }
+        } message: {
+            Text(String.Anilist.logOutMessage)
+        }
     }
 }

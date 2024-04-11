@@ -24,10 +24,10 @@ extension ALTracker {
         VStack(alignment: .leading, spacing: 5.0) {
             Text("STARTED")
                 .font(.footnote)
-                .foregroundColor(Color("bodyText"))
+                .foregroundColor(Color.ORCH.primaryText)
             Text(vm.startDate.formatted(date: .numeric, time: .omitted))
                 .frame(maxWidth: .infinity)
-                .foregroundColor(Color("title"))
+                .foregroundColor(Color.ORCH.secondaryTitle)
                 .font(.footnote)
                 .fontWeight(.medium)
                 .overlay {
@@ -41,9 +41,8 @@ extension ALTracker {
                     .labelsHidden()
                 }
                 .frame(height: 30.5, alignment: .center)
-                .background(Color("tabBar"))
+                .background(Color.ORCH.actionBackground)
                 .clipShape(RoundedRectangle(cornerRadius: 4.25))
-                .overlay { RoundedRectangle(cornerRadius: 4.25).stroke(Color("secondaryText"), lineWidth: 0.175) }
         }
     }
     
@@ -53,10 +52,10 @@ extension ALTracker {
         VStack(alignment: .leading, spacing: 5.0) {
             Text("ENDED")
                 .font(.footnote)
-                .foregroundColor(Color("bodyText"))
+                .foregroundColor(Color.ORCH.primaryText)
             Text(vm.endDate.formatted(date: .numeric, time: .omitted))
                 .frame(maxWidth: .infinity)
-                .foregroundColor(Color("title"))
+                .foregroundColor(Color.ORCH.secondaryTitle)
                 .font(.footnote)
                 .fontWeight(.medium)
                 .overlay {
@@ -70,9 +69,8 @@ extension ALTracker {
                     .labelsHidden()
                 }
                 .frame(height: 30.5, alignment: .center)
-                .background(Color("tabBar"))
+                .background(Color.ORCH.actionBackground)
                 .clipShape(RoundedRectangle(cornerRadius: 4.25))
-                .overlay { RoundedRectangle(cornerRadius: 4.25).stroke(Color("secondaryText"), lineWidth: 0.175) }
         }
     }
     
@@ -83,7 +81,7 @@ extension ALTracker {
             HStack {
                 Text("SCORE")
                     .font(.footnote)
-                    .foregroundStyle(Color("bodyText"))
+                    .foregroundStyle(Color.ORCH.primaryText)
             }
             PickerTextField(
                 data: Array(stride(from: 0.0, through: 10.0, by: 0.1)),
@@ -97,9 +95,8 @@ extension ALTracker {
                 Text("\(String(format: "%.1f", vm.score ?? 0)) / 10")
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .foregroundStyle(Color("title"))
+                    .foregroundStyle(Color.ORCH.secondaryTitle)
             }
-            .overlay { RoundedRectangle(cornerRadius: 4.25).stroke(Color("secondaryText"), lineWidth: 0.175) }
         }
     }
 }

@@ -58,8 +58,8 @@
 
 "manga_source_title" = "Fonte";
 "manga_source_site_footer" = "Você será redirecionado para o site do _MangaDex_";
-"manga_source_language_footer" = "Idiomas que serão utilizados para pesquisar seus mangas";
-"manga_source_language_header" = "Linguagens";
+"manga_source_language_footer" = "Idiomas utilizados para pesquisar seus mangas";
+"manga_source_language_header" = "Linguagens Preferidas";
 "manga_source_quality_header" = "Qualidade";
 "manga_source_quality_footer" = "Algumas prefernências do manga, como a **qualidade**";
 "manga_source_quality" = "Qualidade do Manga";

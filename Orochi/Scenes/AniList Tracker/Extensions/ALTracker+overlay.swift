@@ -36,22 +36,22 @@ extension ALTracker {
                         Text("STATUS")
                             .font(.caption2)
                             .fontWeight(.regular)
-                            .foregroundColor(Color("secondaryText"))
+                            .foregroundColor(Color.ORCH.secondaryText)
                         Text(vm.alManga?.mediaListEntry?.status ?? "-")
                     }
                     VStack(alignment: .center, spacing: 5.0) {
                         Text("PROGRESS")
                             .font(.caption2)
                             .fontWeight(.regular)
-                            .foregroundColor(Color("secondaryText"))
+                            .foregroundColor(Color.ORCH.secondaryText)
                         Text("CH. \(vm.alManga?.mediaListEntry?.progress.nilToStr ?? "-")" +
-                             "/\(vm.alManga?.chapters.nilToStr ?? "-")")
+                            "/\(vm.alManga?.chapters.nilToStr ?? "-")")
                     }
                     VStack(alignment: .trailing, spacing: 5.0) {
                         Text("UPDATED")
                             .font(.caption2)
                             .fontWeight(.regular)
-                            .foregroundColor(Color("secondaryText"))
+                            .foregroundColor(Color.ORCH.secondaryText)
                         if vm.alManga?.mediaListEntry != nil {
                             Text(Date.getDate(
                                 of: vm.alManga?.mediaListEntry?.updatedAt ?? 0,
@@ -86,7 +86,11 @@ extension ALTracker {
             )
             .font(.subheadline)
             .fontWeight(.heavy)
-            .foregroundStyle(Color("button"))
+            .foregroundStyle(
+                vm.alManga?.mediaListEntry != nil
+                ? .accentColor
+                : Color.ORCH.button
+            )
         }
         .buttonStyle(.borderless)
     }

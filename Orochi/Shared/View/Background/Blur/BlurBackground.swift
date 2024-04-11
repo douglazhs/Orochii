@@ -10,7 +10,7 @@ import NukeUI
 
 struct BlurBackground: View {
     var url: URL?
-    var image: AppImages = .view_background
+    var image: AppImages = .viewBackground
     var radius: Double
     
     init(with url: URL? = nil, radius: Double = 55.0) {
@@ -18,7 +18,7 @@ struct BlurBackground: View {
         self.radius = radius
     }
     
-    init(with image: AppImages = .view_background, radius: Double = 55.0) {
+    init(with image: AppImages = .viewBackground, radius: Double = 55.0) {
         self.image = image
         self.radius = radius
     }
@@ -57,6 +57,6 @@ struct BlurBackground: View {
 
 struct BlurBackground_Previews: PreviewProvider {
     static var previews: some View {
-        BlurBackground(with: .view_background)
+        BlurBackground(with: .viewBackground)
     }
 }

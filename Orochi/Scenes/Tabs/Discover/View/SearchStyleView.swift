@@ -10,15 +10,13 @@ import Combine
 import struct MangaDex.Manga
 
 struct SearchStyleView: View {
-    @Environment(\.isSearching) var isSearching
+    @Environment(\.isSearching) 
+    var isSearching
     @EnvironmentObject var vm: DiscoverViewModel
     @Binding var viewStyle: ViewStyle
-    var columns: [GridItem] {
-        Array(
-            repeating: .init(.adaptive(minimum: 225)),
-            count: 2
-        )
-    }
+    var columns = [
+        GridItem(.adaptive(minimum: CGSize.dynamicImage.width))
+    ]
     
     init(_ viewStyle: Binding<ViewStyle>) {
         _viewStyle = viewStyle
@@ -26,7 +24,6 @@ struct SearchStyleView: View {
     
     var body: some View {
         content()
-            .toolbarBackground(.visible, for: .navigationBar)
             .onReceive(
                 vm.$nameQuery
                     .debounce(

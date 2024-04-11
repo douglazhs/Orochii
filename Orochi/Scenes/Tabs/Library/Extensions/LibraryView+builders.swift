@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import struct MangaDex.Manga
+import MangaDex
 
 extension LibraryView {
     @ViewBuilder 
@@ -60,7 +60,7 @@ extension LibraryView {
             if $0 == .inactive { vm.unlock() }
         }
         .fontDesign(.rounded)
-        .background(BlurBackground(with: .view_background))
+        .background(BlurBackground(with: .viewBackground))
     }
     
     /// Local Auth handler
@@ -107,7 +107,7 @@ extension LibraryView {
         VStack(spacing: 15.0) {
             Spacer()
             
-            if let _ = vm.lockClick {
+            if vm.lockClick != nil {
                 VStack(spacing: 15.0) {
                     Text(String.Library.authMessage)
                         .font(.callout)
@@ -134,9 +134,9 @@ extension LibraryView {
     func list() -> some View {
         List(MangaStatus.allCases) { status in
             Section(status.description.uppercased()) {
-                ForEach(MangaDomain.samples) {
-                    if $0.status == status {
-                        cell(of: $0)
+                ForEach([MangaMock.manga]) { manga in
+                    if (MangaStatus(rawValue: manga.attributes?.status ?? "") ?? MangaStatus.none) == status {
+                        cell(of: manga)
                             .listRowInsets(.init(top: 5.5, leading: 0, bottom: 5.5, trailing: 8.5))
                             .listRowSeparator(.hidden)
                             .listSectionSeparator(.hidden)
@@ -156,7 +156,7 @@ extension LibraryView {
         .refreshable { }
         .listStyle(.sidebar)
         .scrollContentBackground(.hidden)
-        .background(Color("background"))
+        .background(Color.ORCH.background)
         .animation(.spring(), value: [isSearching])
     }
     
@@ -164,9 +164,11 @@ extension LibraryView {
     /// - Parameter manga: Current manga
     /// - Returns: Custom list cell of current manga
     @ViewBuilder
-    func cell(of manga: MangaDomain) -> some View {
+    func cell(of manga: Manga) -> some View {
         ZStack {
-            NavigationLink { /*MangaView(manga)*/ } label: {
+            NavigationLink {
+                MangaView(manga)
+            } label: {
                 EmptyView()
             }
             .frame(width: 0)
@@ -188,9 +190,10 @@ extension LibraryView {
         .menuStyle(.borderlessButton)
     }
     
-    @ViewBuilder
+    
     /// Lock library button
     /// - Returns: Lock button
+    @ViewBuilder
     func lockButton() -> some View {
         if vm.biometricsState == .active {
             Button {

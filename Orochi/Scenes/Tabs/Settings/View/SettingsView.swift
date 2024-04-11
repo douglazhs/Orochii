@@ -22,7 +22,9 @@ struct SettingsView: View {
                 .animation(.spring(), value: [vm.isLoading, vm.user != nil])
                 .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
                     Button(String.Common.ok) { }
-                } message: { Text(vm.alertInfo.message) }
+                } message: {
+                    Text(vm.alertInfo.message)
+                }
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         Text(String.Adjusts.title)

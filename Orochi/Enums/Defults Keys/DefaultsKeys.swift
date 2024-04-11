@@ -8,7 +8,7 @@
 import Foundation
 
 /// Default app User Defaults keys
-public struct DefaultsKeys {
+public enum DefaultsKeys {
     public enum Settings: String {
         case sync = "settings.icloud.sync"
         case biometry = "settings.biometry"

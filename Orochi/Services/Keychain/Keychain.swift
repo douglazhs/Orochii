@@ -22,7 +22,7 @@ final class Keychain {
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: service,
             kSecAttrAccount: account
-        ] as [CFString : Any] as CFDictionary
+        ] as [CFString: Any] as CFDictionary
         
         let status = SecItemAdd(query, nil)
         
@@ -42,10 +42,10 @@ final class Keychain {
     ///   - account: Data related account
     func update(_ data: Data, service: String, account: String) {
         let query = [
-                kSecClass: kSecClassGenericPassword,
-                kSecAttrService: service,
-                kSecAttrAccount: account
-        ] as [CFString : Any] as CFDictionary
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrService: service,
+            kSecAttrAccount: account
+        ] as [CFString: Any] as CFDictionary
                 
             let updatedData = [kSecValueData: data] as CFDictionary
             SecItemUpdate(query, updatedData)
@@ -58,11 +58,11 @@ final class Keychain {
     /// - Returns: Read data
     func read(service: String, account: String) -> Data? {
         let query = [
-                kSecClass: kSecClassGenericPassword,
-                kSecAttrService: service,
-                kSecAttrAccount: account,
-                kSecReturnData: true
-        ] as [CFString : Any] as CFDictionary
+            kSecClass: kSecClassGenericPassword,
+            kSecAttrService: service,
+            kSecAttrAccount: account,
+            kSecReturnData: true
+        ] as [CFString: Any] as CFDictionary
                 
             var result: AnyObject?
             SecItemCopyMatching(query, &result)
@@ -78,7 +78,7 @@ final class Keychain {
             kSecClass: kSecClassGenericPassword,
             kSecAttrService: service,
             kSecAttrAccount: account
-        ] as [CFString : Any] as CFDictionary
+        ] as [CFString: Any] as CFDictionary
         let status = SecItemDelete(query)
         print(SecCopyErrorMessageString(status, nil).debugDescription)
     }

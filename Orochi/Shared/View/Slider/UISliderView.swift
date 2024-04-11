@@ -20,7 +20,8 @@ struct UISliderView: UIViewRepresentable {
             self.value = value
         }
         
-        @objc func valueChanged(_ sender: UISlider) {
+        @objc 
+        func valueChanged(_ sender: UISlider) {
             self.value.wrappedValue = Double(sender.value)
         }
     }

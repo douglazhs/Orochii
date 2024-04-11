@@ -33,14 +33,16 @@ extension WebsiteStandardCell {
                 Text(title)
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .foregroundStyle(Color("button"))
+                    .foregroundStyle(Color.ORCH.button)
             }
         }
         .tint(.accentColor.opacity(0.9))
         .frame(maxWidth: .infinity, alignment: .leading)
         .fullScreenCover(isPresented: $showWebView) {
-            SafariWebView(url: URL(string: urlString)!)
-                .ignoresSafeArea()
+            if let url = URL(string: urlString) {
+                SafariWebView(url: url)
+                    .ignoresSafeArea()
+            }
         }
     }
 }

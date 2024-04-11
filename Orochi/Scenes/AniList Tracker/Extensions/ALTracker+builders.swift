@@ -23,10 +23,12 @@ extension ALTracker {
     @ViewBuilder
     func aniList() -> some View {
         trackerInfoList()
-            .background(Color("background"))
+            .background(Color.ORCH.background)
             .fullScreenCover(isPresented: $showWebView) {
-                SafariWebView(url: vm.alUrl!)
-                    .ignoresSafeArea()
+                if let url = vm.alUrl {
+                    SafariWebView(url: url)
+                        .ignoresSafeArea()
+                }
             }
             .overlay { trackLocallyOverlay() }
     }
@@ -35,7 +37,7 @@ extension ALTracker {
     @ViewBuilder
     func search() -> some View {
         trackerSearchList()
-            .background(Color("background"))
+            .background(Color.ORCH.background)
             .searchable(
                 text: $vm.text,
                 prompt: "Search for title in AniList"
@@ -73,10 +75,11 @@ extension ALTracker {
                     .fontWeight(.heavy)
                     
                     if let english = vm.alManga?.title?.english,
-                       (english != vm.alManga?.title?.romaji ?? "") {
+                        english != vm.alManga?.title?.romaji ?? "" {
                         Text(english)
                             .font(.caption2)
                             .fontWeight(.medium)
+                            .foregroundStyle(Color.ORCH.primaryText)
                     }
                 }
             case .search: 
@@ -132,7 +135,7 @@ extension ALTracker {
             } else {
                 if !vm.isSearching {
                     Text("No results found on **AniList**")
-                        .foregroundColor(Color("bodyText"))
+                        .foregroundColor(Color.ORCH.primaryText)
                         .font(.subheadline)
                         .fontWeight(.regular)
                         .listRowBackground(Color.clear)

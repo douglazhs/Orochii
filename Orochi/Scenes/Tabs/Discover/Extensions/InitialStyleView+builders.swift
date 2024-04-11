@@ -21,7 +21,7 @@ extension InitialStyleView {
                     } label: {
                         cell(of: manga)
                             .task { [weak vm] in
-                                if (vm?.hasReachedEnd(of: manga, on: carousel) ?? false) {
+                                if vm?.hasReachedEnd(of: manga, on: carousel) ?? false {
                                     vm?.fetchMore(on: carousel)
                                 }
                             }
@@ -61,7 +61,7 @@ extension InitialStyleView {
                 .multilineTextAlignment(.leading)
                 .font(.footnote)
                 .fontWeight(.regular)
-                .foregroundStyle(Color("bodyText"))
+                .foregroundStyle(Color.ORCH.primaryText)
                 .frame(
                     maxWidth: CGSize.standardImageCell.width,
                     idealHeight: 35,

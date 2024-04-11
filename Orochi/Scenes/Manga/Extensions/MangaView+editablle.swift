@@ -23,7 +23,7 @@ extension MangaView {
     
     /// Editable view actions
     @ViewBuilder
-    func editButton() ->  some View {
+    func editButton() -> some View {
         if vm.isEditingMode {
             Button {
                 withTransaction(.init(animation: .easeInOut)) {
@@ -35,53 +35,78 @@ extension MangaView {
                     .fontWeight(.semibold)
             }
         } else {
-            Menu {
-                Section {
-                    Button {
-                        withTransaction(.init(animation: .easeInOut)) {
-                            vm.isEditingMode = true
-                            vm.showBottomBar = true
-                        }
-                    } label: {
-                        Label (
-                            String.Manga.selectChapters,
-                            systemImage: "checklist"
-                        )
+            actionsMenu()
+        }
+    }
+    
+    /// Manga actions
+    @ViewBuilder
+    func actionsMenu() -> some View {
+        Menu {
+            Section {
+                Button {
+                    withTransaction(.init(animation: .easeInOut)) {
+                        vm.isEditingMode = true
+                        vm.showBottomBar = true
                     }
-                    Button {
-                        UIApplication.shared
-                            .safariVC(url: "\(AppURLs.MDSite.description)/manga/\(vm.manga.id)")
-                    } label: {
-                        Label("View on MangaDex.co", systemImage: "safari.fill")
-                    }
-                } header: { Text(vm.unwrapTitle(of: vm.manga)) }
-                Button(role: .destructive) {
-                    
                 } label: {
-                    Label("Remove all Downloads", systemImage: "trash")
+                    Label(
+                        String.Manga.selectChapters,
+                        systemImage: "checklist"
+                    )
                 }
-               
-            } label: { Image(systemName: "ellipsis") }
+                Button {
+                    do {
+                        try UIApplication
+                            .shared
+                            .safariVC(url: "\(AppURLs.mdSite.description)/manga/\(vm.manga.id)")
+                    } catch {
+                        
+                    }
+                } label: {
+                    Label("View on MangaDex.co", systemImage: "safari.fill")
+                }
+            } header: {
+                Text(vm.unwrapTitle(of: vm.manga))
+            }
+            Button(role: .destructive) {
+                
+            } label: {
+                Label("Remove all Downloads", systemImage: "trash")
+            }
+           
+        } label: {
+            Image(systemName: "ellipsis")
         }
     }
     
     /// Chapter actions
     @ViewBuilder
     func chapterActions() -> some View {
-        Button { } label:
-        { Text(String.ContextMenu.download) }
+        Button { 
+            
+        } label: {
+            Text(String.ContextMenu.download)
+        }
         .disabled(chSelection.isEmpty)
         Menu {
             Section {
-                Button { } label:
-                { Label(String.ContextMenu.asRead, systemImage: "eye.fill") }
-                Button { } label:
-                { Label(String.ContextMenu.asUnread, systemImage: "eye.slash.fill") }
+                Button {
+                    
+                } label: {
+                    Label(String.ContextMenu.asRead, systemImage: "eye.fill")
+                }
+                Button { 
+                    
+                } label: {
+                    Label(String.ContextMenu.asUnread, systemImage: "eye.slash.fill")
+                }
             } header: {
-                Text("\(chSelection.count) "
-                     + String.Manga.selectedChapters.uppercased())
+                Text("\(chSelection.count) " + String.Manga.selectedChapters.uppercased())
             }
-        } label: { Text(String.Manga.mark) }
+        } label: {
+            Text(String.Manga.mark)
+        }
         .disabled(chSelection.isEmpty)
     }
 }

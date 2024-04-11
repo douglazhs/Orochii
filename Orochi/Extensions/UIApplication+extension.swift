@@ -30,13 +30,13 @@ extension UIApplication {
     
     /// Present SFSafariViewController like in UIKit
     /// - Parameter url: Site URL
-    func safariVC(url: String) {
-        let vc = SFSafariViewController(url: URL(string: url)!)
+    func safariVC(url: String) throws {
+        guard let url = URL(string: url) else { throw URLError.empty }
+        let vc = SFSafariViewController(url: url)
         UIApplication.shared.firstKeyWindow?
             .rootViewController?
             .present(vc, animated: true)
     }
-    
     
     /// Called when uder end editing
     func endEditing() {

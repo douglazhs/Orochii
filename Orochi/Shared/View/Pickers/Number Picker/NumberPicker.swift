@@ -8,7 +8,8 @@
 import SwiftUI
 
 struct NumberPicker: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) 
+    var dismiss
     var values: [Double]
     var selection: Binding<Double>
     var format: String = "%.1f"

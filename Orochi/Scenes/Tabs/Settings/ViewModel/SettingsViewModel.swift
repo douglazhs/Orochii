@@ -13,8 +13,8 @@ class SettingsViewModel: ObservableObject {
         case active, inactive, unavailable
     }
     
-    private (set) var biometricsError: Error? = nil
-    private (set) var requestError: Error? = nil
+    private (set) var biometricsError: Error?
+    private (set) var requestError: Error?
     private (set) var anilist: AniList = AniList()
     private var token: String = ""
     @Published var biometricsAvailable: Bool = false
@@ -71,7 +71,7 @@ class SettingsViewModel: ObservableObject {
         if let userIdData = Keychain.standard.read(
             service: "user-id",
             account: "anilist"
-        ), let _ = Int(data: userIdData)  {
+        ), Int(data: userIdData) != nil {
             return true
         }
         return false
@@ -122,7 +122,7 @@ class SettingsViewModel: ObservableObject {
     
     /// LogIn on AniList account
     func logInAL() {
-        anilist.logIn() { response in
+        anilist.logIn { response in
             switch response {
             case .success(let token):
                 do {
@@ -159,9 +159,9 @@ class SettingsViewModel: ObservableObject {
     
     /// Store Bearer token on Keychain
     /// - Parameter token: Bearer token
-    private func storeToken(_ token: [String:String]) throws {
+    private func storeToken(_ token: [String: String]) throws {
         guard let bearer = token["access_token"],
-              let bearerData = bearer.data(using: .utf8)
+            let bearerData = bearer.data(using: .utf8)
         else { return }
         try Keychain.standard.save(
             bearerData,
@@ -193,4 +193,3 @@ class SettingsViewModel: ObservableObject {
         )
     }
 }
-

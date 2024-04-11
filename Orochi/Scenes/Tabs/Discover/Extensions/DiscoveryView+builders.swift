@@ -10,7 +10,8 @@ import SwiftUI
 extension DiscoverView {
     /// Main content
     /// - Returns: Screen variations
-    @ViewBuilder func content() -> some View {
+    @ViewBuilder 
+    func content() -> some View {
         switch viewStyle {
         case .search:
             SearchStyleView($viewStyle).environmentObject(vm)
@@ -43,9 +44,9 @@ extension DiscoverView {
                 .foregroundColor(.accentColor)
                 .fontWeight(.semibold)
         }
-        .fullScreenCover(isPresented: $mangaSourcePref, onDismiss: {
+        .fullScreenCover(isPresented: $mangaSourcePref) {
             vm.reload()
-        }) {
+        } content: {
             SourcePreferencesView()
                 .environmentObject(vm)
         }

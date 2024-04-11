@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct sheetWithDetentsViewModifier<SwiftUIContent>: ViewModifier where SwiftUIContent: View {
+struct SheetWithDetentsViewModifier<SwiftUIContent>: ViewModifier where SwiftUIContent: View {
     @Binding var isPresented: Bool
     let onDismiss: (() -> Void)?
     let detents: [UISheetPresentationController.Detent]
@@ -44,9 +44,9 @@ extension View {
         onDismiss: (() -> Void)? = nil,
         content: @escaping () -> Content,
         detents: [UISheetPresentationController.Detent]
-    ) -> some View where Content : View {
+    ) -> some View where Content: View {
         modifier(
-            sheetWithDetentsViewModifier(
+            SheetWithDetentsViewModifier(
                 isPresented: isPresented,
                 onDismiss: onDismiss,
                 content: content,
@@ -55,4 +55,3 @@ extension View {
         )
     }
 }
-

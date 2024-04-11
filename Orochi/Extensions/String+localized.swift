@@ -54,21 +54,33 @@ extension String {
         public static var ongoing: String = NSLocalizedString("discovery_status_ongoing", comment: "Ongoing manga")
         public static var hiatus: String = NSLocalizedString("discovery_status_hiatus", comment: "Hiatus manga")
         public static var completed: String = NSLocalizedString("discovery_status_completed", comment: "Completed manga")
-        public static var searchPlaceholder: String = NSLocalizedString("discovery_search_placeholder", comment: "Search for manga title")
+        public static var searchPlaceholder: String = NSLocalizedString(
+            "discovery_search_placeholder",
+            comment: "Search for manga title"
+        )
     }
     
     public enum Library {
         public static var title: String = NSLocalizedString("library_title", comment: "User library")
-        public static var searchPlaceholder: String = NSLocalizedString("library_search_placeholder", comment: "Search on your list")
-        public static var authMessage: String = NSLocalizedString("library_auth_message", comment: "Your library is locked :( Unlock It to see your mangas :)")
-        public static var authErrorMessage: String = NSLocalizedString("library_auth_error_message", comment: "Your library is locked :( Unlock It to see your mangas :)")
+        public static var searchPlaceholder: String = NSLocalizedString(
+            "library_search_placeholder",
+            comment: "Search on your list"
+        )
+        public static var authMessage: String = NSLocalizedString(
+            "library_auth_message",
+            comment: "Your library is locked :( Unlock It to see your mangas :)"
+        )
+        public static var authErrorMessage: String = NSLocalizedString(
+            "library_auth_error_message",
+            comment: "Your library is locked :( Unlock It to see your mangas :)"
+        )
         public static var authRetry: String = NSLocalizedString("library_auth_retry", comment: "TRY AGAIN")
         public static var authUnlock: String = NSLocalizedString("library_auth_unlock", comment: "DESBLOQUEAR")
     }
     
     public enum MangaSource {
         public static var title: String = NSLocalizedString("manga_source_title", comment: "MangaDex Source")
-        public static var siteFooter: AttributedString  {
+        public static var siteFooter: AttributedString {
             let string = NSLocalizedString("manga_source_site_footer", comment: "MangaDex website")
             do {
                 return try AttributedString(markdown: string)
@@ -76,8 +88,14 @@ extension String {
             return AttributedString(string)
         }
         public static var languageHeader: String = NSLocalizedString("manga_source_language_header", comment: "Language options")
-        public static var languageFooter: String = NSLocalizedString("manga_source_language_footer", comment: "Language description")
-        public static var qualityHeader: String = NSLocalizedString("manga_source_quality_header", comment: "Manga quality options")
+        public static var languageFooter: String = NSLocalizedString(
+            "manga_source_language_footer",
+            comment: "Language description"
+        )
+        public static var qualityHeader: String = NSLocalizedString(
+            "manga_source_quality_header",
+            comment: "Manga quality options"
+        )
         public static var qualityFooter: AttributedString {
             let string = NSLocalizedString("manga_source_quality_footer", comment: "Manga quality description")
             do {
@@ -86,7 +104,10 @@ extension String {
             return AttributedString(string)
         }
         public static var lowQuality: String  = NSLocalizedString("manga_source_low_quality", comment: "Low manga quality")
-        public static var mediumQuality: String = NSLocalizedString("manga_source_medium_quality", comment: "Medium manga quality")
+        public static var mediumQuality: String = NSLocalizedString(
+            "manga_source_medium_quality",
+            comment: "Medium manga quality"
+        )
         public static var highQuality: String = NSLocalizedString("manga_source_high_quality", comment: "High manga quality")
         public static var mangaQuality: String = NSLocalizedString("manga_source_quality", comment: "Manga Quality")
     }
@@ -140,7 +161,10 @@ extension String {
         static let statuses: String = NSLocalizedString("account_section_statuses", comment: "Statuses")
         static let genres: String = NSLocalizedString("account_section_genres", comment: "Genres Distribution")
         static let tags: String = NSLocalizedString("account_section_tags", comment: "Tags Distribution")
-        static let chaptersPerYear: String = NSLocalizedString("account_section_chaptersPerYear", comment: "Chapters Read Per Year")
+        static let chaptersPerYear: String = NSLocalizedString(
+            "account_section_chaptersPerYear",
+            comment: "Chapters Read Per Year"
+        )
         static let country: String = NSLocalizedString("account_section_country", comment: "Manga Per Country")
         static let stats: String = NSLocalizedString("account_tab_stats", comment: "STATS")
         static let activity: String = NSLocalizedString("account_tab_activity", comment: "ACTIVITY")

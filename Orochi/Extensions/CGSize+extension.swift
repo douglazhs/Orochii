@@ -29,7 +29,7 @@ extension CGSize {
         var proportion: Double {
             switch Constants.device {
             case .pad: return 0.2
-            default:   return 0.335
+            default:   return 0.425
             }
         }
         let width = (portrait ? UIScreen.width : UIScreen.height) * proportion

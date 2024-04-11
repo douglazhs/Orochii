@@ -10,9 +10,12 @@ import struct MangaDex.Manga
 import class MangaDex.MangaMock
 
 struct ALTracker: View {
-    @Environment(\.isSearching) var isSearching
-    @Environment(\.dismissSearch) var dismissSearch
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.isSearching)
+    var isSearching
+    @Environment(\.dismissSearch) 
+    var dismissSearch
+    @Environment(\.dismiss) 
+    var dismiss
     @StateObject var vm: ALTrackerViewModel
     @State var showNumberPicker: Bool = false
     @State var showTextField: Bool = false
@@ -35,7 +38,7 @@ struct ALTracker: View {
         NavigationStack {
             content()
                 .standardBars()
-                .onSubmit(of: .search, { dismissSearch() })
+                .onSubmit(of: .search) { dismissSearch() }
                 .navigationBarTitleDisplayMode(.inline)
                 .animation(.easeIn, value: [vm.mangas != nil])
                 .toolbarRole(.editor)

@@ -43,7 +43,7 @@ extension MangaStandardCell {
                     .fontWeight(.medium)
                     .lineLimit(1)
             }
-            //STATUS
+            // STATUS
             status()
         }
     }
@@ -53,7 +53,7 @@ extension MangaStandardCell {
     func status() -> some View {
         VStack(alignment: .leading, spacing: 5.5) {
             Text("Ch. 1 ~ 154")
-                .foregroundColor(Color("bodyText"))
+                .foregroundColor(Color.ORCH.primaryText)
                 .font(.caption2)
                 .fontWeight(.light)
             
@@ -61,12 +61,12 @@ extension MangaStandardCell {
                 Image(systemName: "star.fill")
                     .font(.caption2)
                     .fontWeight(.light)
-                    .foregroundColor(Color("bodyText"))
+                    .foregroundColor(Color.ORCH.primaryText)
                 
                 Text("8,0")
                     .font(.caption2)
                     .fontWeight(.light)
-                    .foregroundColor(Color("bodyText"))
+                    .foregroundColor(Color.ORCH.primaryText)
             }
         }
     }

@@ -18,11 +18,16 @@ extension ALAccountView {
                 .frame(maxWidth: .infinity)
         case .loaded:
             if !vm.activities.isEmpty {
-                ForEach(vm.activities, id: \.id) { activity in
+                ForEach(vm.activities) { activity in
                     Button {
                         vm.selectedActivity = activity.id
                         vm.webView = .activity
-                        showWebView = true
+                        /*vm.validateURL { result in
+                            switch result {
+                            case .success(_): showConfirmation = true
+                            case .failure: showError = true
+                            }
+                        }*/
                     } label: {
                         activityCard(activity)
                     }
@@ -31,7 +36,7 @@ extension ALAccountView {
                 Text(String.Account.noActivities)
                     .font(.callout)
                     .fontWeight(.medium)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.ORCH.primaryText)
                     .frame(maxWidth: .infinity)
             }
         }
@@ -55,14 +60,14 @@ extension ALAccountView {
                 Text(vm.buildActivity(activity))
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.ORCH.secondaryText)
                 
                 Spacer()
                 
                 Text(Date.getDate(of: activity.createdAt ?? 0, format: "dd-MM-YYYY"))
                     .font(.footnote)
                     .fontWeight(.regular)
-                    .foregroundStyle(.secondary)
+                    .foregroundStyle(Color.ORCH.secondaryText)
             }
         }.frame(maxHeight: CGSize.standardImageCell.height * 0.7)
     }

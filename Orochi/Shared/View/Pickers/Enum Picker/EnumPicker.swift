@@ -8,9 +8,9 @@
 import SwiftUI
 
 typealias Pickable = CaseIterable
-                     & Identifiable
-                     & Hashable
-                     & CustomStringConvertible
+    & Identifiable
+    & Hashable
+    & CustomStringConvertible
 
 struct EnumPicker<Enum: Pickable, Label: View>: View {
     private let label: Label
@@ -22,8 +22,10 @@ struct EnumPicker<Enum: Pickable, Label: View>: View {
                 Text(value.description).tag(value)
                     .font(.headline)
             }
-        } label: { self.label }
-        .tint(Color("title"))
+        } label: {
+            self.label
+        }
+        .tint(Color.ORCH.secondaryTitle)
     }
     
     init(selection: Binding<Enum>, label: Label) {

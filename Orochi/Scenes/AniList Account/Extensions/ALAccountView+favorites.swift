@@ -19,13 +19,19 @@ extension ALAccountView {
                 .frame(maxWidth: .infinity)
         case .loaded:
             if !vm.favorites.isEmpty {
-                ForEach(vm.favorites, id: \.id) { manga in
-                    Button {
-                        vm.selectedManga = manga.id
-                        vm.webView = .manga
-                        showWebView = true
-                    } label: {
+                LazyVGrid(columns: columns, spacing: 20.0) {
+                    ForEach(vm.favorites, id: \.id) { manga in
                         favoriteManga(manga)
+                            .onTapGesture { [weak vm] in
+                                vm?.selectedManga = manga
+                                vm?.webView = .manga
+                                /*vm?.validateURL { result in
+                                    switch result {
+                                    case .success(_): showConfirmation = true
+                                    case .failure: showError = true
+                                    }
+                                }*/
+                            }
                     }
                 }
             } else {
@@ -41,22 +47,27 @@ extension ALAccountView {
     /// Favorite manga card
     @ViewBuilder
     func favoriteManga(_ manga: Media) -> some View {
-        HStack(alignment: .top) {
+        VStack(alignment: .leading) {
             MangaStandardImage(
                 url: URL(string: manga.coverImage?.medium ?? ""),
                 size: CGSize(
-                    width: CGSize.standardImageCell.width * 0.7,
-                    height: CGSize.standardImageCell.height * 0.7
+                    width: CGSize.standardImageCell.width,
+                    height: CGSize.standardImageCell.height
                 )
             )
             
-            VStack(alignment: .leading) {
-                Text(manga.title?.english ?? manga.title?.romaji ?? "")
-                
-                Text(MangaStatus(rawValue: manga.mediaListEntry?.status ?? "")?.description.uppercased() ?? "")
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
-            }.badge(manga.mediaListEntry?.progress ?? 0)
-        }
+            Text(manga.title?.english ?? manga.title?.romaji ?? String.Common.unknown)
+                .font(.footnote)
+                .fontWeight(.semibold)
+                .foregroundStyle(Color.ORCH.primaryText)
+                .lineLimit(3)
+                .multilineTextAlignment(.leading)
+            
+            Text(MangaStatus(rawValue: manga.mediaListEntry?.status ?? "")?.description.uppercased() ?? "")
+                .font(.caption)
+                .fontWeight(.regular)
+                .foregroundStyle(Color.ORCH.secondaryText)
+            Spacer()
+        }.frame(maxWidth: CGSize.standardImageCell.width, alignment: .top)
     }
 }

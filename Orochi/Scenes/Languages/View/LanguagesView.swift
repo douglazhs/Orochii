@@ -24,7 +24,7 @@ struct LanguagesView: View {
         .toolbarRole(.editor)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(Color("background"))
+        .background(Color.ORCH.background)
         .standardBars()
     }
 }

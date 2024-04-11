@@ -16,26 +16,8 @@ struct PickerTextField: UIViewRepresentable {
     @Binding var selection: Double?
     
     func makeUIView(context: Context) -> UITextField {
-        let pickerView = UIPickerView()
-        let textField = UITextField()
-        
-        pickerView.delegate = context.coordinator
-        pickerView.dataSource = context.coordinator
-        pickerView.selectRow(
-            field == .score ? Int(selection ?? 0) * 10 : Int(selection ?? 0),
-            inComponent: 0,
-            animated: true
-        )
-        
-        textField.translatesAutoresizingMaskIntoConstraints = false
-        textField.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
-        textField.inputView = pickerView
-        textField.textAlignment = .center
-        textField.backgroundColor = UIColor(named: "tabBar")
-        textField.textColor = .clear
-        textField.tintColor = .clear
-        textField.layer.cornerRadius = 4.25
-        textField.borderStyle = .none
+        let pickerView = buildPicker(in: context)
+        let textField = buildTextField()
         
         let toolbar = UIToolbar(frame: CGRect(
             x: 0.0,
@@ -57,11 +39,43 @@ struct PickerTextField: UIViewRepresentable {
             action: #selector(helper.doneButtonAction)
         )
         toolbar.setItems([flexible, doneButton], animated: true)
+        
         textField.inputAccessoryView = toolbar
+        textField.inputView = pickerView
         
         helper.doneButtonTapped = { textField.resignFirstResponder() }
         
         return textField
+    }
+    
+    func buildTextField() -> UITextField {
+        let textField = UITextField()
+        
+        textField.translatesAutoresizingMaskIntoConstraints = false
+        textField.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
+        
+        textField.textAlignment = .center
+        textField.backgroundColor = UIColor(named: "tabBar")
+        textField.textColor = .clear
+        textField.tintColor = .clear
+        textField.layer.cornerRadius = 4.25
+        textField.borderStyle = .none
+        
+        return textField
+    }
+    
+    func buildPicker(in context: Context) -> UIPickerView {
+        let pickerView = UIPickerView()
+        
+        pickerView.delegate = context.coordinator
+        pickerView.dataSource = context.coordinator
+        pickerView.selectRow(
+            field == .score ? Int(selection ?? 0) * 10 : Int(selection ?? 0),
+            inComponent: 0,
+            animated: true
+        )
+        
+        return pickerView
     }
     
     func updateUIView(_ uiView: UITextField, context: Context) {
@@ -69,7 +83,7 @@ struct PickerTextField: UIViewRepresentable {
     }
     
     func makeCoordinator() -> Coordinator {
-        return Coordinator(data: self.data, dataFormat: self.dataFormat) { (index) in
+        return Coordinator(data: self.data, dataFormat: self.dataFormat) { index in
             self.selection = self.data[index]
         }
     }
@@ -77,7 +91,8 @@ struct PickerTextField: UIViewRepresentable {
     class Helper {
         public var doneButtonTapped: (() -> Void)?
         
-        @objc func doneButtonAction() {
+        @objc 
+        func doneButtonAction() {
             doneButtonTapped?()
         }
     }

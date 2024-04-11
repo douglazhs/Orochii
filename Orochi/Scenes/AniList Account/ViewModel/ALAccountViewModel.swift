@@ -25,8 +25,10 @@ final class ALAccountViewModel: ObservableObject {
     @Published var activitiesState: ViewState = .loading
     @Published var favoritesState: ViewState = .loading
     @Published var webView: WebView = .profile
-    @Published var selectedManga: Int? = nil
-    @Published var selectedActivity: Int? = nil
+    @Published var selectedManga: Media?
+    @Published var selectedActivity: Int?
+    @Published var errorMessage: String?
+    @Published var validURL: URL?
     
     init(user: User) {
         self.user = user
@@ -48,8 +50,8 @@ final class ALAccountViewModel: ObservableObject {
         guard favorites.isEmpty else { return }
         
         guard let userFavs = user.favourites,
-              let collection = userFavs.manga,
-              let mangas = collection.nodes else { return }
+            let collection = userFavs.manga,
+            let mangas = collection.nodes else { return }
         
         withTransaction(.init(animation: .easeIn)) { favoritesState = .loading }
         
@@ -96,15 +98,44 @@ final class ALAccountViewModel: ObservableObject {
     
     /// Build WebView URL for .profile and .manga
     /// - Returns: Built URL
-    func buildWebViewUrl() -> URL {
+    private func buildWebViewUrl() throws -> URL {
         switch webView {
-        case .profile: return URL(string: user.siteUrl ?? "")!
+        case .profile:
+            guard let url = URL(
+                string: user.siteUrl ?? ""
+            ) else { throw URLError.empty }
+            return url
         case .manga:
-            guard let manga = selectedManga else { return URL(string: user.siteUrl ?? "")! }
-            return URL(string: AppURLs.ALSite.description + "/manga/\(manga)")!
+            guard let manga = selectedManga?.id else { throw ObjectError.empty }
+            guard let url = URL(
+                string: AppURLs.alSite.description + "/manga/\(manga)"
+            ) else { throw URLError.empty }
+            return url
         case .activity:
-            guard let activity = selectedActivity else { return URL(string: user.siteUrl ?? "")! }
-            return URL(string: AppURLs.ALSite.description + "/activity/\(activity)")!
+            guard let activity = selectedActivity else { throw ObjectError.empty }
+            guard let url = URL(
+                string: AppURLs.alSite.description + "/activity/\(activity)"
+            ) else { throw URLError.empty }
+            return url
         }
+    }
+    
+    /// Validate current URL
+    /// - Parameter completion: URL validation
+    func validateURL(completion: @escaping (Result<URL?, Error>) -> Void) {
+        do {
+            validURL = try buildWebViewUrl()
+            errorMessage = nil
+            completion(.success(validURL))
+        } catch let error {
+            errorMessage = error.localizedDescription
+            completion(.failure(error))
+        }
+    }
+    
+    /// Unwrap the possible media titles
+    /// - Returns: Media unwrapped title
+    func unwrappedTitle() -> String {
+        return selectedManga?.title?.english ?? selectedManga?.title?.romaji ?? "-"
     }
 }

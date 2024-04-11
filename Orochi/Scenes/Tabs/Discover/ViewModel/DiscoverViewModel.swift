@@ -18,14 +18,14 @@ final class DiscoverViewModel: ObservableObject {
     /// MangaDex api object
     let api: MangaDexAPIProtocol = MangaDexAPI()
     /// Carousel sections
-    @Published var sections: [Carousel] = Array<Carousel>()
+    @Published var sections: [Carousel] = [Carousel]()
     // MARK: - Searching stuffs
     @Published var nameQuery: String = ""
     @Published var searchResult: [Manga]?
     @Published var isSearching: Bool = false
     // MARK: - MangaDex request handling
     @Published var nsfw: Bool = false
-    @Published var languages: [Language] = Array<Language>()
+    @Published var languages: [Language] = [Language]()
     @Published var shouldReload: Bool = false
     // MARK: - Error alert
     @Published var showAlert: Bool = false
@@ -83,9 +83,9 @@ final class DiscoverViewModel: ObservableObject {
     
     /// Search manga by name
     func search() {
-        var params: [String : Any] = [
-            "limit" : 30,
-            "order[rating]" : "desc"
+        var params: [String: Any] = [
+            "limit": 30,
+            "order[rating]": "desc"
         ]
         params = merge(params, into: defaults())
         if !nameQuery.isEmpty {

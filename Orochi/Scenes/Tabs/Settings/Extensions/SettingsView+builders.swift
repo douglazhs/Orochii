@@ -33,10 +33,12 @@ extension SettingsView {
         )
         .scrollIndicators(.hidden)
         .scrollContentBackground(.hidden)
-        .background(Color("background"))
+        .background(Color.ORCH.background)
         .fullScreenCover(isPresented: $showALAccount) {
-            ALAccountView(user: vm.user!)
-                .interactiveDismissDisabled()
+            if let user = vm.user {
+                ALAccountView(user: user)
+                    .interactiveDismissDisabled()
+            }
         }
     }
     
@@ -45,7 +47,7 @@ extension SettingsView {
     func anilistSection() -> some View {
         Section {
             trackerCell()
-                .frame(maxWidth: UIScreen.width)
+                .frame(maxWidth: .infinity)
                 .overlay(alignment: .trailing) {
                     accButtonHandler()
                 }
@@ -53,9 +55,9 @@ extension SettingsView {
             Text(Localized.trackerHeader.capitalized)
         } footer: {
             Text(Localized.trackerFooter)
-                .foregroundColor(Color("secondaryText"))
+                .foregroundColor(Color.ORCH.secondaryText)
         }
-        .foregroundColor(Color("bodyText"))
+        .foregroundColor(Color.ORCH.primaryText)
     }
     
     /// App iCloud section
@@ -78,9 +80,9 @@ extension SettingsView {
             Text(Localized.icloudHeader)
         } footer: {
             Text(Localized.icloudFooter)
-                .foregroundColor(Color("secondaryText"))
+                .foregroundColor(Color.ORCH.secondaryText)
         }
-        .foregroundColor(Color("bodyText"))
+        .foregroundColor(Color.ORCH.primaryText)
     }
     
     /// App security section
@@ -109,9 +111,9 @@ extension SettingsView {
                     .foregroundColor(.accentColor)
                     .bold()
             }
-            .foregroundColor(Color("secondaryText"))
+            .foregroundColor(Color.ORCH.secondaryText)
         }
-        .foregroundColor(Color("bodyText"))
+        .foregroundColor(Color.ORCH.primaryText)
         .disabled(!vm.biometricsAvailable)
         .onChange(of: vm.biometryPreference) { _ in
             vm.changeLocalAuth()
@@ -127,7 +129,7 @@ extension SettingsView {
                     Text(Localized.notificationUpdate)
                 } icon: {
                     Image(systemName: "bell.badge")
-                        .foregroundColor(Color("attention"))
+                        .foregroundColor(Color.ORCH.attention)
                 }
             }.onChange(of: vm.notifications) {
                 Defaults.standard.saveBool(
@@ -139,8 +141,8 @@ extension SettingsView {
             Text(Localized.notificationHeader)
         } footer: {
             Text(Localized.notificationFooter)
-                .foregroundColor(Color("secondaryText"))
+                .foregroundColor(Color.ORCH.secondaryText)
         }
-        .foregroundColor(Color("bodyText"))
+        .foregroundColor(Color.ORCH.primaryText)
     }
 }

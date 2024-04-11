@@ -11,7 +11,8 @@ import class MangaDex.MangaMock
 import class MangaDex.ChapterMock
 
 struct ChaptersListView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss)
+    var dismiss
     @EnvironmentObject var vm: ChapterViewModel
     
     var body: some View {
@@ -41,7 +42,7 @@ struct ChaptersListView: View {
                                 Image(systemName: "checkmark")
                                     .font(.caption2)
                                     .fontWeight(.heavy)
-                                    .foregroundColor(Color("button"))
+                                    .foregroundColor(Color.ORCH.button)
                             }
                         }
                     }
@@ -50,7 +51,7 @@ struct ChaptersListView: View {
                 .toolbarRole(.editor)
                 .listStyle(.plain)
                 .scrollContentBackground(.hidden)
-                .background(Color("background"))
+                .background(Color.ORCH.background)
                 .standardBars()
                 .toolbar {
                     ToolbarItem(placement: .principal) {
