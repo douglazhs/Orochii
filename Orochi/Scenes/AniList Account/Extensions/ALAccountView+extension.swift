@@ -20,6 +20,7 @@ extension ALAccountView {
         .scrollContentBackground(.hidden)
         .scrollIndicators(.hidden)
         .background(Color.ORCH.background)
+        .refreshable { [weak vm] in vm?.refreshTab() }
         .fullScreenCover(isPresented: $showWebView) {
             if let url = vm.validURL {
                 SafariWebView(
@@ -32,22 +33,18 @@ extension ALAccountView {
     /// User informations separated by tabs
     @ViewBuilder
     func tabs() -> some View {
-        switch tab {
-        case .stats: 
+        switch vm.tab {
+        case .stats:
             stats()
                 .listSectionSeparator(.hidden)
         case .activity:
             activities()
                 .listSectionSeparator(.hidden)
-                .onAppear {
-                    vm.loadFeed()
-                }
+                .onAppear { [weak vm] in vm?.loadFeed() }
         case .favorites:
             favorites()
                 .listSectionSeparator(.hidden)
-                .onAppear {
-                    vm.getMediListEntry()
-                }
+                .onAppear { [weak vm] in vm?.getMediListEntry() }
         }
     }
     
@@ -55,7 +52,7 @@ extension ALAccountView {
     @ViewBuilder
     func picker() -> some View {
         Section {
-            Picker("", selection: $tab) {
+            Picker("", selection: $vm.tab) {
                 ForEach(ALTab.allCases, id: \.self) { tab in
                     Text("\(tab.title)")
                 }
@@ -81,5 +78,15 @@ extension ALAccountView {
             Image(systemName: "safari.fill")
                 .fontWeight(.semibold)
         }
+    }
+    
+    /// No content View, when request failed or **favorites** and **activities** is empty
+    @ViewBuilder
+    func noContent(message: String) -> some View {
+        Text(message)
+            .font(.callout)
+            .fontWeight(.medium)
+            .foregroundStyle(Color.ORCH.primaryText)
+            .frame(maxWidth: .infinity)
     }
 }

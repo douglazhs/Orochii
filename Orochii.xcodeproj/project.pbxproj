@@ -92,6 +92,7 @@
 		50FFB016292AE7B800B87E0E /* MangaView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50FFB015292AE7B800B87E0E /* MangaView+builders.swift */; };
 		5213738C2BC6FDD7008B41C3 /* URLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5213738B2BC6FDD7008B41C3 /* URLError.swift */; };
 		5213738E2BC6FF27008B41C3 /* ObjectError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5213738D2BC6FF27008B41C3 /* ObjectError.swift */; };
+		522256E92BD15EF4001EC6FC /* Feed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522256E82BD15EF4001EC6FC /* Feed.swift */; };
 		5227C7D72BAB715E00BC6501 /* StandardBars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227C7D62BAB715E00BC6501 /* StandardBars.swift */; };
 		5227C7D92BADED7100BC6501 /* Color+tokens.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5227C7D82BADED7100BC6501 /* Color+tokens.swift */; };
 		522EFC6A2B9AB35B00F0B071 /* ALAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522EFC692B9AB35B00F0B071 /* ALAccountViewModel.swift */; };
@@ -121,7 +122,7 @@
 		77553AC52A799C24004B7F72 /* LibraryFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77553AC42A799C24004B7F72 /* LibraryFilterView.swift */; };
 		77553AC72A799C2C004B7F72 /* LibraryFilterView+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77553AC62A799C2C004B7F72 /* LibraryFilterView+builders.swift */; };
 		77612A992A2B96DC002137FC /* UIImage+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77612A982A2B96DC002137FC /* UIImage+extension.swift */; };
-		776220622A26D40A004E93AF /* ProfileTabs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776220612A26D40A004E93AF /* ProfileTabs.swift */; };
+		776220622A26D40A004E93AF /* ALTab.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776220612A26D40A004E93AF /* ALTab.swift */; };
 		776220642A26D429004E93AF /* SocialAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 776220632A26D429004E93AF /* SocialAction.swift */; };
 		777549202A3F281C0023F0E1 /* DataConvertible.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7775491F2A3F281C0023F0E1 /* DataConvertible.swift */; };
 		779074152A729F3900031E30 /* SourcePreferences.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779074142A729F3900031E30 /* SourcePreferences.swift */; };
@@ -237,6 +238,7 @@
 		50FFB015292AE7B800B87E0E /* MangaView+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaView+builders.swift"; sourceTree = "<group>"; };
 		5213738B2BC6FDD7008B41C3 /* URLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLError.swift; sourceTree = "<group>"; };
 		5213738D2BC6FF27008B41C3 /* ObjectError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectError.swift; sourceTree = "<group>"; };
+		522256E82BD15EF4001EC6FC /* Feed.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feed.swift; sourceTree = "<group>"; };
 		5227C7D62BAB715E00BC6501 /* StandardBars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardBars.swift; sourceTree = "<group>"; };
 		5227C7D82BADED7100BC6501 /* Color+tokens.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+tokens.swift"; sourceTree = "<group>"; };
 		522EFC692B9AB35B00F0B071 /* ALAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALAccountViewModel.swift; sourceTree = "<group>"; };
@@ -264,7 +266,7 @@
 		77553AC42A799C24004B7F72 /* LibraryFilterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LibraryFilterView.swift; sourceTree = "<group>"; };
 		77553AC62A799C2C004B7F72 /* LibraryFilterView+builders.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "LibraryFilterView+builders.swift"; sourceTree = "<group>"; };
 		77612A982A2B96DC002137FC /* UIImage+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extension.swift"; sourceTree = "<group>"; };
-		776220612A26D40A004E93AF /* ProfileTabs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTabs.swift; sourceTree = "<group>"; };
+		776220612A26D40A004E93AF /* ALTab.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALTab.swift; sourceTree = "<group>"; };
 		776220632A26D429004E93AF /* SocialAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialAction.swift; sourceTree = "<group>"; };
 		7775491F2A3F281C0023F0E1 /* DataConvertible.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataConvertible.swift; sourceTree = "<group>"; };
 		779074142A729F3900031E30 /* SourcePreferences.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourcePreferences.swift; sourceTree = "<group>"; };
@@ -1180,8 +1182,9 @@
 		776220602A26D3F2004E93AF /* AniList Account */ = {
 			isa = PBXGroup;
 			children = (
-				776220612A26D40A004E93AF /* ProfileTabs.swift */,
+				776220612A26D40A004E93AF /* ALTab.swift */,
 				776220632A26D429004E93AF /* SocialAction.swift */,
+				522256E82BD15EF4001EC6FC /* Feed.swift */,
 			);
 			path = "AniList Account";
 			sourceTree = "<group>";
@@ -1463,6 +1466,7 @@
 				773A71FC2A68169A00D7333E /* ChapterPageView.swift in Sources */,
 				50FFAFF2292A84DB00B87E0E /* SearchStyleView.swift in Sources */,
 				502E8E022935440D00881F40 /* NumberPicker.swift in Sources */,
+				522256E92BD15EF4001EC6FC /* Feed.swift in Sources */,
 				773F06E72A7716B400341E0F /* ALTracker+toolbar.swift in Sources */,
 				507803DC292DC0530041D5BD /* ActivityIndicator.swift in Sources */,
 				772ED9E62A76017800D3960D /* Int+extension.swift in Sources */,
@@ -1485,7 +1489,7 @@
 				508D1B912937055A0069012C /* Haptics+extension.swift in Sources */,
 				522EFC722B9B4D6E00F0B071 /* ALAccountView+activities.swift in Sources */,
 				50FFB013292AD35000B87E0E /* OrderFilter.swift in Sources */,
-				776220622A26D40A004E93AF /* ProfileTabs.swift in Sources */,
+				776220622A26D40A004E93AF /* ALTab.swift in Sources */,
 				50FFAFFF292A98C000B87E0E /* MangaStandardImage.swift in Sources */,
 				50CE85BF2948C4EB00169922 /* RepresentableSheet+modifier.swift in Sources */,
 				77EAE9F52A1EE1F800205562 /* SettingsView+tracker.swift in Sources */,

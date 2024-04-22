@@ -47,9 +47,11 @@ class SettingsViewModel: ObservableObject {
     
     /// Check the avaibility of the `local authentication`
     private func checkLocalAuth() {
-        biometricsAvailable = Biometry.shared.availableBiometry { error in
-            self.biometricsError = error
-        }
+        biometricsAvailable = Biometry
+            .shared
+            .availableBiometry {
+                self.biometricsError = $0
+            }
     }
     
     /// Check if the user is logged on AniList account
@@ -57,7 +59,12 @@ class SettingsViewModel: ObservableObject {
         if let tokenData = Keychain.standard.read(
             service: "access-token",
             account: "anilist"
-        ), let token =  String(data: tokenData, encoding: .utf8) {
+        ), let expiresData = Keychain.standard.read(
+            service: "expires-in",
+            account: "anilist"
+        ), 
+        let token =  String(data: tokenData, encoding: .utf8),
+        let expiresIn = String(data: expiresData, encoding: .utf8) {
             self.token = token
             logged = true
             fetchUser()
@@ -161,15 +168,22 @@ class SettingsViewModel: ObservableObject {
     /// - Parameter token: Bearer token
     private func storeToken(_ token: [String: String]) throws {
         guard let bearer = token["access_token"],
-            let bearerData = bearer.data(using: .utf8)
+            let expiresDate = token["expires_in"],
+            let bearerData = bearer.data(using: .utf8),
+            let expiresData = expiresDate.data(using: .utf8)
         else { return }
+        
         try Keychain.standard.save(
             bearerData,
             service: "access-token",
             account: "anilist"
         )
+        try Keychain.standard.save(
+            expiresData,
+            service: "expires-in",
+            account: "anilist"
+        )
     }
-    
     
     /// Store authenticated User on Keychain
     /// - Parameter user: User to be stored

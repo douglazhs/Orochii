@@ -22,19 +22,13 @@ extension ALAccountView {
                 LazyVGrid(columns: columns, spacing: 20.0) {
                     ForEach(vm.favorites, id: \.id) { manga in
                         favoriteManga(manga)
-                            .onTapGesture { [weak vm] in
-                                vm?.selectedManga = manga
-                                vm?.webView = .manga
-                            }
                     }
                 }
             } else {
-                Text(String.Account.noFavorites)
-                    .font(.callout)
-                    .fontWeight(.medium)
-                    .foregroundStyle(.secondary)
-                    .frame(maxWidth: .infinity)
+                noContent(message: String.Account.noFavorites)
             }
+        case .failed:
+            noContent(message: String.Account.noFavorites)
         }
     }
     

@@ -175,7 +175,7 @@
 // MARK: - ACCOUNT DETAILS
 
 "account_noActivities" = "You have no activities :(";
-"account_nofavorites" = "You have no favorites :(";
+"account_noFavorites" = "You have no favorites :(";
 "account_section_totalMangas" = "Total Mangas";
 "account_section_meanScore" = "Mean Score";
 "account_section_chaptersRead" = "Chapters Read";

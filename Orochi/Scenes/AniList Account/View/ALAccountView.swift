@@ -11,22 +11,11 @@ import NukeUI
 import struct AniListService.User
 import class AniListService.UserMock
 
-enum ALTab: Int, CaseIterable {
-    case stats, activity, favorites
 
-    var title: String {
-        switch self {
-        case .stats: return String.Account.stats
-        case .activity: return String.Account.activity
-        case .favorites: return String.Account.favorites
-        }
-    }
-}
 
 struct ALAccountView: View {
     @Environment(\.dismiss) 
     var dismiss
-    @State var tab: ALTab = .stats
     @State var expandGenre: Bool = false
     @State var expandStartYears: Bool = false
     @State var expandCountry: Bool = false
@@ -67,7 +56,7 @@ struct ALAccountView: View {
                 .standardBars()
                 .animation(.easeIn(duration: 0.5), value: !vm.favorites.isEmpty)
                 .toolbarRole(.editor)
-                .alert(String.Common.error, isPresented: $showError) {
+                .alert(String.Common.error, isPresented: $vm.showAlert) {
                     Button(role: .none) { } label: {
                         Text(String.Common.ok)
                     }

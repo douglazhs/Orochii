@@ -8,23 +8,11 @@
 import Foundation
 import SwiftUI
 import AniListService
-
-enum Feed: Pickable {
-    var id: Self { self }
-    
-    case mine, following
-    
-    var description: String {
-        switch self {
-        case .mine: return "Your Feed"
-        case .following: return "Following Feed"
-        }
-    }
-}
+import Alamofire
 
 final class ALAccountViewModel: ObservableObject {
     enum ViewState {
-        case loading, loaded
+        case loading, loaded, failed
     }
     
     enum WebView {
@@ -34,6 +22,7 @@ final class ALAccountViewModel: ObservableObject {
     var user: User
     let api: ALServices = AniList()
     
+    @Published var tab: ALTab = .stats
     @Published var favorites: [Media] = [Media]()
     @Published var activities: [ActivityUnion] = [ActivityUnion]()
     @Published var activitiesState: ViewState = .loading
@@ -46,6 +35,7 @@ final class ALAccountViewModel: ObservableObject {
     @Published var feed: Feed = .mine
     @Published var loadedFeed: Bool = false
     @Published var page: Int = 1
+    @Published var showAlert: Bool = false
     
     init(user: User) {
         self.user = user
@@ -65,13 +55,15 @@ final class ALAccountViewModel: ObservableObject {
     
     /// Get Media List Entry for the current Authenticated User
     func getMediListEntry() {
-        guard favorites.isEmpty else { return }
+        guard favoritesState != .loaded else { return }
         
         guard let userFavs = user.favourites,
             let collection = userFavs.manga,
             let mangas = collection.nodes else { return }
         
-        withTransaction(.init(animation: .easeIn)) { favoritesState = .loading }
+        withTransaction(.init(animation: .easeIn)) {
+            favoritesState = .loading
+        }
         
         mangas.forEach { manga in
             Task { @MainActor in
@@ -82,21 +74,24 @@ final class ALAccountViewModel: ObservableObject {
                     ) else { return }
                     favorites.append(favorite)
                 } catch {
-                    // TODO: - Threat error
+                    showAlert(error)
+                    favoritesState = .failed
                 }
             }
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-            withTransaction(.init(animation: .easeIn)) { self.favoritesState = .loaded }
+            withTransaction(.init(animation: .easeIn)) {
+                self.favoritesState = .loaded
+            }
         }
     }
     
     /// Verify if the user scrolled to the end of the list
     /// - Parameters:
-    ///   - activity: last activity of list
+    ///   - activity: Last activity of list
     /// - Returns: Boolean
-    func hasReachedEnd(of activity: ActivityUnion) -> Bool {
+    func hasReachedEnd(in activity: ActivityUnion) -> Bool {
         activities.last?.id == activity.id
     }
     
@@ -111,55 +106,71 @@ final class ALAccountViewModel: ObservableObject {
     /// Get Authemticated User activities
     func loadFeed() {
         guard !loadedFeed else { return }
-        defer {
-            loadedFeed = true
-            if page == 1 {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-                    withTransaction(.init(animation: .easeIn)) {
-                        self.activitiesState = .loaded
-                    }
-                }
-            }
-        }
-        
-        if page == 1 {
-            withTransaction(.init(animation: .easeIn)) {
-                activitiesState = .loading
-            }
-        }
+        if page == 1 { handleLoading() }
         getActivities()
     }
     
-    /// Get activities based on choosen feed
+    /// Get current feed API response
     private func getActivities() {
-        switch feed {
-        case .mine:
-            Task { @MainActor in
-                do {
+        errorMessage = nil
+        Task { @MainActor in
+            do {
+                switch feed {
+                case .mine:
                     guard let response = try await api.getActivities(
                         of: user.id,
                         token: loadToken(),
                         page: page
                     ) else { return }
                     activities.append(contentsOf: response)
-                } catch {
-                    // TODO: - Threat error
-                    activitiesState = .loaded
-                }
-            }
-        case .following:
-            Task { @MainActor in
-                do {
+                    loadedFeed = true
+                    if page == 1 { handleLoading() }
+                case .following:
                     guard let response = try await api.getActivities(
                         token: loadToken(),
                         page: page
                     ) else { return }
                     activities.append(contentsOf: response)
-                } catch {
-                    // TODO: - Threat error
-                    activitiesState = .loaded
+                    loadedFeed = true
+                    if page == 1 { handleLoading() }
+                }
+            } catch {
+                showAlert(error)
+                activitiesState = .failed
+            }
+        }
+    }
+    
+    /// Handle loading depending of the actual view state
+    private func handleLoading() {
+        switch activitiesState {
+        case .loading:
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+                withTransaction(.init(animation: .easeIn)) {
+                    self.activitiesState = .loaded
                 }
             }
+        case .loaded:
+            withTransaction(.init(animation: .easeIn)) {
+                activitiesState = .loading
+            }
+        case .failed: return
+        }
+    }
+    
+    /// Get more activities if scroll reached the end
+    func paginateActivities() {
+        loadedFeed = false
+        page += 1
+        loadFeed()
+    }
+    
+    /// Refresh current tab
+    func refreshTab() {
+        switch tab {
+        case .stats: break
+        case .activity: loadFeed()
+        case .favorites: getMediListEntry()
         }
     }
     
@@ -219,10 +230,8 @@ final class ALAccountViewModel: ObservableObject {
     func validateURL(completion: @escaping (Result<URL?, Error>) -> Void) {
         do {
             validURL = try buildWebViewUrl()
-            errorMessage = nil
             completion(.success(validURL))
         } catch let error {
-            errorMessage = error.localizedDescription
             completion(.failure(error))
         }
     }
@@ -232,5 +241,16 @@ final class ALAccountViewModel: ObservableObject {
     /// - Parameter manga: Current manga
     func unwrappedTitle(of manga: ShortMedia?) -> String {
         return manga?.title?.english ?? manga?.title?.romaji ?? String.Common.unknown
+    }
+    
+    /// Handle api error
+    /// - Parameter error: Catched error
+    private func showAlert(_ error: Error) {
+        showAlert = true
+        guard let afError = error.asAFError else {
+            errorMessage = error.localizedDescription
+            return
+        }
+        errorMessage = afError.localizedDescription
     }
 }

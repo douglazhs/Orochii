@@ -22,28 +22,19 @@ extension ALAccountView {
         case .loaded:
             if !vm.activities.isEmpty {
                 ForEach(vm.activities) { activity in
-                    Button {
-                        vm.selectedActivity = activity.id
-                        vm.webView = .activity
-                    } label: {
-                        activityCard(activity)
-                    }
-                    .listRowBackground(Color.ORCH.secondaryBackground)
-                    .task { [weak vm] in
-                        if vm?.hasReachedEnd(of: activity) ?? false {
-                            vm?.loadedFeed = false
-                            vm?.page += 1
-                            vm?.loadFeed()
+                    activityCard(activity)
+                        .listRowBackground(Color.ORCH.secondaryBackground)
+                        .task { [weak vm] in
+                            if vm?.hasReachedEnd(in: activity) ?? false {
+                                vm?.paginateActivities()
+                            }
                         }
-                    }
                 }
             } else {
-                Text(String.Account.noActivities)
-                    .font(.callout)
-                    .fontWeight(.medium)
-                    .foregroundStyle(Color.ORCH.primaryText)
-                    .frame(maxWidth: .infinity)
+                noContent(message: String.Account.noActivities)
             }
+        case .failed:
+            noContent(message: String.Account.noActivities)
         }
     }
     
@@ -51,7 +42,14 @@ extension ALAccountView {
     @ViewBuilder
     func feedMenu() -> some View {
         Menu {
-            EnumPicker("", selection: $vm.feed)
+            Picker("", selection: $vm.feed) {
+                ForEach(Feed.allCases) {
+                    Label(
+                        $0.description,
+                        systemImage: $0.icon
+                    )
+                }
+            }
         } label: {
             HStack {
                 Text(vm.feed.description)
@@ -62,7 +60,8 @@ extension ALAccountView {
             .foregroundStyle(Color.ORCH.primaryText)
             .fontWeight(.medium)
         }
-        .frame(maxWidth: .infinity, alignment: .center)
+        .menuOrder(.priority)
+        .menuStyle(.button)
         .onChange(of: vm.feed) { [weak vm] _ in
             vm?.changeFeed()
         }
