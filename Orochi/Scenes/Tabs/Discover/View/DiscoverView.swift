@@ -27,7 +27,10 @@ struct DiscoverView: View {
         NavigationStack {
             content()
                 .standardBars()
-                .background(Color.ORCH.background)
+                .background {
+                    Color.ORCH.background
+                        .ignoresSafeArea(.all)
+                }
                 .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
                     Button(String.Common.ok, role: .cancel) { }
                 } message: {

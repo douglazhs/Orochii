@@ -33,7 +33,7 @@ struct SearchStyleView: View {
             ) { [weak vm] _ in vm?.search() }
             .onChange(of: vm.nameQuery) { newValue in
                 if !newValue.isEmpty {
-                    withTransaction(.init(animation: .easeInOut(duration: 0.225))) {
+                    withTransaction(.init(animation: .easeInOut(duration: 0.5))) {
                         vm.isSearching = true
                     }
                 }

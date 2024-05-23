@@ -11,8 +11,6 @@ import NukeUI
 import struct AniListService.User
 import class AniListService.UserMock
 
-
-
 struct ALAccountView: View {
     @Environment(\.dismiss) 
     var dismiss

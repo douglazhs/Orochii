@@ -20,11 +20,15 @@ extension SearchStyleView {
                             cell(of: manga)
                         }
                         .contextMenu {
-                            Button { } label: {
-                                Label(
-                                    String.ContextMenu.addToLib,
-                                    systemImage: "plus.rectangle.on.folder"
-                                )
+                            Section {
+                                Button { } label: {
+                                    Label(
+                                        String.ContextMenu.addToLib,
+                                        systemImage: "plus.rectangle.on.folder"
+                                    )
+                                }
+                            } header: {
+                                Text(vm.unwrapTitle(of: manga))
                             }
                         }
                     }
@@ -35,7 +39,9 @@ extension SearchStyleView {
                 }
             } else {
                 if vm.isSearching {
-                    ActivityIndicator().padding(.vertical)
+                    ActivityIndicator()
+                        .padding(.vertical)
+                        .frame(maxWidth: .infinity)
                 } else if !vm.isSearching {
                     Text("No results found for: *\(vm.nameQuery)*")
                         .lineLimit(1)
@@ -43,6 +49,7 @@ extension SearchStyleView {
                         .fontWeight(.medium)
                         .foregroundColor(Color.ORCH.primaryText)
                         .padding(.vertical)
+                        .frame(maxWidth: .infinity)
                 }
             }
         }
@@ -71,8 +78,8 @@ extension SearchStyleView {
                     .lineSpacing(1)
                     .padding(7.5)
                     .font(.footnote)
-                    .fontWeight(.semibold)
-                    .foregroundColor(Color.ORCH.primaryText)
+                    .fontWeight(.medium)
+                    .foregroundColor(.white)
             }
             .clipShape(RoundedRectangle(cornerRadius: 4.5))
         }
