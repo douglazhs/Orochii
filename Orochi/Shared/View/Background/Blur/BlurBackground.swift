@@ -12,15 +12,26 @@ struct BlurBackground: View {
     var url: URL?
     var image: AppImages = .viewBackground
     var radius: Double
+    var opacity: Double
     
-    init(with url: URL? = nil, radius: Double = 55.0) {
+    init(
+        with url: URL? = nil,
+        radius: Double = 55.0,
+        opacity: Double = 0.8
+    ) {
         self.url = url
         self.radius = radius
+        self.opacity = opacity
     }
     
-    init(with image: AppImages = .viewBackground, radius: Double = 55.0) {
+    init(
+        with image: AppImages = .viewBackground,
+        radius: Double = 55.0,
+        opacity: Double =  0.9
+    ) {
         self.image = image
         self.radius = radius
+        self.opacity = opacity
     }
     
     var body: some View {
@@ -42,7 +53,7 @@ struct BlurBackground: View {
                     }
                 }
                 
-                Color.black.opacity(0.9).edgesIgnoringSafeArea(.all)
+                Color.black.opacity(opacity).edgesIgnoringSafeArea(.all)
             }
         } else {
             Image(image.rawValue)

@@ -28,7 +28,6 @@ struct MangaView: View {
     
     var body: some View {
         content()
-            .standardBars()
             .toolbarRole(.editor)
             .toolbar(vm.showBottomBar ? .visible : .hidden, for: .bottomBar)
             .navigationBarBackButtonHidden(vm.isEditingMode)

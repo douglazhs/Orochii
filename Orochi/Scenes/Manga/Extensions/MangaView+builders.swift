@@ -14,25 +14,11 @@ extension MangaView {
     func content() -> some View {
         List(selection: $chSelection) {
             Group {
-                // ALL INFORMATION
-                mangaInfoArea()
-                    .listSectionSeparator(.visible, edges: .bottom)
-                // GENRES
-                genres()
-                    .listSectionSeparator(.visible, edges: .bottom)
-                // CONTENT AND FORMAT
-                tags()
-                    .listSectionSeparator(.visible, edges: .bottom)
-                // DESCRIPTION
-                description()
-                    .listSectionSeparator(.visible, edges: .bottom)
-                // CHAPTERS
-                chapters()
-                    .listRowSeparator(.visible)
-                    .listSectionSeparator(.hidden)
+                sections()
             }
             .listRowSeparator(.hidden)
         }
+        .coordinateSpace(name: "MANGALIST")
         .overlay(alignment: .top) {
             ActionPopUp(
                 message: vm.actionMessage,
@@ -47,27 +33,144 @@ extension MangaView {
         .refreshable { vm.refresh() }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .background(Color.ORCH.background)
+        .background {
+            BlurBackground(
+                with: vm.api.buildURL(
+                    for: .cover(
+                        id: vm.manga.id,
+                        fileName: vm.imgFileName(of: vm.manga)
+                    )
+                ),
+                radius: 100,
+                opacity: 0.875
+            )
+        }
+    }
+    
+    /// All List Sections
+    @ViewBuilder
+    func sections() -> some View {
+        // BANNER
+        banner()
+        // ALL INFORMATION
+        mangaInfoArea()
+            .listSectionSeparator(.hidden, edges: .bottom)
+        // DESCRIPTION
+        description()
+            .listSectionSeparator(.visible, edges: .bottom)
+        // GENRES
+        genres()
+            .listSectionSeparator(.visible, edges: .bottom)
+        // CONTENT AND FORMAT
+        tags()
+            .listSectionSeparator(.visible, edges: .bottom)
+        // CHAPTERS
+        chapters()
+            .listRowSeparator(.visible)
+            .listSectionSeparator(.hidden)
+    }
+    
+    @ViewBuilder
+    func banner() -> some View {
+        Section {
+            HStack(spacing: 5.0) {
+                Label(vm.relationship("author", with: vm.manga).notEmpty, systemImage: "person")
+                .padding(5.0)
+                .background {
+                    RoundedRectangle(cornerRadius: 5.5)
+                        .foregroundStyle(Color.ORCH.primaryText.opacity(0.25))
+                }
+                .overlay(
+                    RoundedRectangle(cornerRadius: 5.5)
+                        .stroke(
+                            Color.ORCH.primaryText,
+                            lineWidth: 0.3
+                        )
+                )
+                Label(vm.relationship("artist", with: vm.manga).notEmpty, systemImage: "paintpalette")
+                    .padding(5.0)
+                    .background {
+                        RoundedRectangle(cornerRadius: 5.5)
+                            .foregroundStyle(Color.ORCH.primaryText.opacity(0.25))
+                    }
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5.5)
+                            .stroke(
+                                Color.ORCH.primaryText,
+                                lineWidth: 0.3
+                            )
+                    )
+            }
+            .font(.caption)
+            .fontWeight(.semibold)
+            .foregroundColor(Color.ORCH.primaryText)
+        }
+        .listSectionSeparator(.hidden)
+        .listRowBackground(bannerBackground())
+        .frame(maxHeight: UIScreen.height * 0.375)
+    }
+    
+    /// Manga cover art as a banner
+    @ViewBuilder
+    func bannerBackground() -> some View {
+        GeometryReader { geometry in
+            let minY = geometry.frame(in: .named("MANGALIST")).minY
+            let size = geometry.size
+            let height = size.height + max(0, minY)
+            
+            BlurBackground(
+                with: vm.api.buildURL(
+                    for: .cover(
+                        id: vm.manga.id,
+                        fileName: vm.imgFileName(of: vm.manga)
+                    )
+                ),
+                radius: 0.0
+            )
+            .padding(.horizontal, min(0, -minY))
+            .frame(width: size.width, height: height)
+            .clipped()
+            .mask {
+                LinearGradient(
+                    colors: [
+                        Color.ORCH.background,
+                        Color.ORCH.background,
+                        Color.ORCH.background,
+                        .clear
+                    ],
+                    startPoint: .top,
+                    endPoint: .bottom
+                )
+            }
+            .offset(CGSize(width: 0, height: min(0, -minY)))
+        }
+        .frame(height: UIScreen.height * 0.375)
     }
     
     /// Manga information area, contatining all main details
     @ViewBuilder
     func mangaInfoArea() -> some View {
         Section {
-            HStack(alignment: .top) {
-                MangaStandardImage(
-                    url: vm.api.buildURL(for: .cover(
-                        id: vm.manga.id,
-                        fileName: vm.imgFileName(of: vm.manga)
-                    )),
-                    size: CGSize(
-                        width: CGSize.dynamicImage.width,
-                        height: CGSize.dynamicImage.height
+            HStack(alignment: .bottom) {
+                VStack(spacing: 15.0) {
+                    MangaStandardImage(
+                        url: vm.api.buildURL(for: .cover(
+                            id: vm.manga.id,
+                            fileName: vm.imgFileName(of: vm.manga)
+                        )),
+                        size: CGSize(
+                            width: CGSize.dynamicImage.width,
+                            height: CGSize.dynamicImage.height
+                        )
                     )
-                )
-                mangaTexts().frame(maxHeight: .infinity, alignment: .top)
-            }.padding(.top)
-        }.listRowBackground(Color.clear)
+                    // START READING BUTTON
+                    startReadingButton()
+                }
+                mangaTexts().frame(maxHeight: .infinity, alignment: .bottom)
+            }
+        }
+        .listRowBackground(Color.clear)
+        .zIndex(1)
     }
     
     /// Age content and manga formats
@@ -127,13 +230,13 @@ extension MangaView {
         VStack(alignment: .leading, spacing: 10) {
             // AUTHOR & ARTIST
             MediaAttributes(
-                leading: (String.Manga.author.uppercased(), vm.relationship("author", with: vm.manga).notEmpty),
+                leading: ("STATE", vm.manga.attributes?.state?.uppercased() ?? "-"),
                 trailing: (String.Manga.year.uppercased(), vm.manga.attributes?.year.nilToStr ?? "-")
             )
             
             // STATUS & UPDADATED
             MediaAttributes(
-                leading: ("ARTIST", vm.relationship("artist", with: vm.manga).notEmpty),
+                leading: ("DEMOGRAPHIC", vm.manga.attributes?.publicationDemographic?.uppercased() ?? "-"),
                 trailing: ("COUNTRY", vm.manga.attributes?.originalLanguage?.uppercased() ?? "-")
             )
             // COUNTRY OF ORIGIN & YEAR

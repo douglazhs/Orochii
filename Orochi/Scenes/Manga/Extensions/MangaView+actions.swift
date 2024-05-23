@@ -12,12 +12,11 @@ extension MangaView {
     @ViewBuilder
     func actions() -> some View {
         HStack {
-            // START READING BUTTON
-            startReadingButton()
             // ANILIST BUTTON
             aniListButton()
             // ADD/REMOVE BUTTON
             libraryButton()
+            Spacer()
         }
         .disabled(vm.occurredAct)
     }
@@ -34,8 +33,9 @@ extension MangaView {
                 // TODO: Change to current manga reading status
                 Text("CH. 1")
                     .foregroundStyle(.white)
+                    .fontWeight(.bold)
             }
-            .frame(maxWidth: .infinity)
+            .frame(maxWidth: CGSize.dynamicImage.width)
             .fontWeight(.heavy)
             .font(.footnote)
             .lineLimit(1)

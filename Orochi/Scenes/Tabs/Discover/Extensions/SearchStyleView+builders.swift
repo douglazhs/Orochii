@@ -14,44 +14,54 @@ extension SearchStyleView {
     func content() -> some View {
         ScrollView {
             if let mangas = vm.searchResult, !vm.isSearching, !mangas.isEmpty {
-                LazyVGrid(columns: columns, spacing: 20.0) {
-                    ForEach(mangas) { manga in
-                        NavigationLink(value: manga) {
-                            cell(of: manga)
+                loadedContent(with: mangas)
+            } else {
+                loadingContent()
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func loadedContent(with mangas: [Manga]) -> some View {
+        LazyVGrid(columns: columns, spacing: 20.0) {
+            ForEach(mangas) { manga in
+                NavigationLink(value: manga) {
+                    cell(of: manga)
+                }
+                .contextMenu {
+                    Section {
+                        Button { } label: {
+                            Label(
+                                String.ContextMenu.addToLib,
+                                systemImage: "plus.rectangle.on.folder"
+                            )
                         }
-                        .contextMenu {
-                            Section {
-                                Button { } label: {
-                                    Label(
-                                        String.ContextMenu.addToLib,
-                                        systemImage: "plus.rectangle.on.folder"
-                                    )
-                                }
-                            } header: {
-                                Text(vm.unwrapTitle(of: manga))
-                            }
-                        }
+                    } header: {
+                        Text(vm.unwrapTitle(of: manga))
                     }
                 }
-                .padding()
-                .navigationDestination(for: Manga.self) {
-                    MangaView($0)
-                }
-            } else {
-                if vm.isSearching {
-                    ActivityIndicator()
-                        .padding(.vertical)
-                        .frame(maxWidth: .infinity)
-                } else if !vm.isSearching {
-                    Text("No results found for: *\(vm.nameQuery)*")
-                        .lineLimit(1)
-                        .font(.subheadline)
-                        .fontWeight(.medium)
-                        .foregroundColor(Color.ORCH.primaryText)
-                        .padding(.vertical)
-                        .frame(maxWidth: .infinity)
-                }
             }
+        }
+        .padding()
+        .navigationDestination(for: Manga.self) {
+            MangaView($0)
+        }
+    }
+    
+    @ViewBuilder
+    func loadingContent() -> some View {
+        if vm.isSearching {
+            ActivityIndicator()
+                .padding(.vertical)
+                .frame(maxWidth: .infinity)
+        } else if !vm.isSearching {
+            Text("No results found for: *\(vm.nameQuery)*")
+                .lineLimit(1)
+                .font(.subheadline)
+                .fontWeight(.medium)
+                .foregroundColor(Color.ORCH.primaryText)
+                .padding(.vertical)
+                .frame(maxWidth: .infinity)
         }
     }
     
