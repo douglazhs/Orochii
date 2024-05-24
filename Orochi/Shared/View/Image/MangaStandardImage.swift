@@ -35,12 +35,12 @@ struct MangaStandardImage: View {
                         width: size.width,
                         height: size.height
                     )
-                    .clipShape(RoundedRectangle(cornerRadius: 4.5))
+                    .clipShape(RoundedRectangle(cornerRadius: 6.5))
                     .overlay(
-                        RoundedRectangle(cornerRadius: 4.5)
+                        RoundedRectangle(cornerRadius: 6.5)
                             .stroke(
-                                Color(uiColor: .systemGray),
-                                lineWidth: 0.4
+                                Color(uiColor: .systemGray2),
+                                lineWidth: 0.5
                             )
                     )
             } else { Placeholder().frame(width: size.width, height: size.height) }

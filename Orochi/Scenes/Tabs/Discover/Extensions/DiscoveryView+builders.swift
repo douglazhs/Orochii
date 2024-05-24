@@ -17,7 +17,8 @@ extension DiscoverView {
             SearchStyleView($viewStyle).environmentObject(vm)
                 .onChange(of: vm.nameQuery) { newValue in
                     if newValue.isEmpty {
-                        withTransaction(.init(animation: .easeInOut(duration: 0.185))) {
+                        withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
+                            vm.searchResult?.removeAll()
                             viewStyle = .initial
                         }
                     }
@@ -27,7 +28,7 @@ extension DiscoverView {
                 .environmentObject(vm)
                 .onChange(of: vm.nameQuery) { newValue in
                     if !newValue.isEmpty {
-                        withTransaction(.init(animation: .easeInOut(duration: 0.185).delay(0.5))) {
+                        withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
                             viewStyle = .search
                         }
                     }

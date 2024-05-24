@@ -64,7 +64,7 @@ class SettingsViewModel: ObservableObject {
             account: "anilist"
         ), 
         let token =  String(data: tokenData, encoding: .utf8),
-        let expiresIn = String(data: expiresData, encoding: .utf8) {
+        String(data: expiresData, encoding: .utf8) != nil {
             self.token = token
             logged = true
             fetchUser()

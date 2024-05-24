@@ -40,9 +40,10 @@ struct SearchStyleView: View {
             }
             .onChange(of: isSearching) { newValue in
                 if !newValue {
-                    withAnimation(.easeInOut(duration: 0.175)) {
+                    vm.isSearching = false
+                    vm.searchResult?.removeAll()
+                    withAnimation(.easeInOut(duration: 0.25)) {
                         viewStyle = .initial
-                        vm.searchResult = nil
                     }
                 }
             }

@@ -17,8 +17,10 @@ extension DiscoverViewModel: SourcePreferences { }
 final class DiscoverViewModel: ObservableObject {
     /// MangaDex api object
     let api: MangaDexAPIProtocol = MangaDexAPI()
-    /// Carousel sections
-    @Published var sections: [Carousel] = [Carousel]()
+    // MARK: - Manga filter/fetch
+    @Published var mangas: [Manga] = [Manga]()
+    @Published var selectedMainFilter: MainFilter = .mostRelevants
+    @Published var offset: Int = 0
     // MARK: - Searching stuffs
     @Published var nameQuery: String = ""
     @Published var searchResult: [Manga]?
@@ -27,13 +29,14 @@ final class DiscoverViewModel: ObservableObject {
     @Published var nsfw: Bool = false
     @Published var languages: [Language] = [Language]()
     @Published var shouldReload: Bool = false
+    @Published var loading: Bool = false
     // MARK: - Error alert
     @Published var showAlert: Bool = false
     var alertInfo: AlertInfo = .init()
     
     init() {
         loadPreferences()
-        generateSections()
+        fetchMangas()
     }
     
     /// Load user defaults
@@ -47,35 +50,46 @@ final class DiscoverViewModel: ObservableObject {
         )
     }
     
-    /// Generate Main screen carousel dictionary
-    /// - Returns: All main view carousel
-    private func generateSections() {
-        sections = CarouselSection.allCases.compactMap { Carousel($0) }
-        Task { @MainActor in
-            sections.indices.forEach { [weak self] index in
-                if let section = self?.sections[index] {
-                    self?.fetch(section.config) { [weak self] in
-                        self?.sections[index].mangas = $0
+    /// Fetch initial mangas
+    private func fetchMangas() {
+        Task { @MainActor [weak self] in
+            withTransaction(.init(animation: .smooth(duration: 0.25))) {
+                self?.loading = true
+            }
+            self?.fetch { mangas in
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                    withTransaction(.init(animation: .smooth(duration: 0.25))) {
+                        self?.loading = false
+                    }
+                    withTransaction(.init(animation: .linear(duration: 0.25))) {
+                        self?.mangas = mangas
                     }
                 }
             }
         }
     }
     
+    /// Fetch selected filter
+    func fetchSelectedFilter() {
+        offset = 0
+        mangas.removeAll()
+        fetchMangas()
+    }
+    
     /// Fetch mangas
     /// - Parameters:
-    ///   - carousel: Current carousel
     ///   - offset: Current request offset
     ///   - completion: Manga request result
-    private func fetch(_ section: CarouselSection, offset: Int = 0, completion: @escaping([Manga]) -> Void) {
+    private func fetch(completion: @escaping([Manga]) -> Void) {
         api.getRandomManga(
-            params: merge(section.params, into: defaults()),
+            params: merge(selectedMainFilter.params, into: defaults()),
             offset: offset
         ) { [weak self] result in
             switch result {
             case .success(let array):
                 completion(array.data)
             case .failure(let error):
+                self?.loading = false
                 self?.showAlert(error)
             }
         }
@@ -115,22 +129,20 @@ final class DiscoverViewModel: ObservableObject {
     ///   - manga: last manga of carousel
     ///   - index: current carousel index
     /// - Returns: Boolean
-    func hasReachedEnd(of manga: Manga, on index: Int) -> Bool {
-        sections[index].mangas?.last?.id == manga.id
+    func hasReachedEnd(of manga: Manga) -> Bool {
+        mangas.last?.id == manga.id
     }
     
     /// Fetch more mangas
-    /// - Parameter index: carousel index
-    func fetchMore(on index: Int) {
-        guard sections[index].offset <= 150 else { return }
-        sections[index].offset += 30
+    func fetchMore() {
+        guard offset <= 150 else { return }
+        offset += 30
         
-        fetch(
-            sections[index].config,
-            offset: sections[index].offset
-        ) { [weak self] mangas in
-            withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
-                self?.sections[index].mangas?.append(contentsOf: mangas)
+        fetch { [weak self] result in
+            withTransaction(
+                .init(animation: .easeInOut(duration: 0.25))
+            ) {
+                self?.mangas.append(contentsOf: result)
             }
         }
     }
@@ -139,14 +151,14 @@ final class DiscoverViewModel: ObservableObject {
     func reload() {
         if shouldReload {
             Task { @MainActor in
-                sections.indices.forEach { index in
-                    fetch(sections[index].config) { [weak self] in
-                        self?.sections[index].mangas = $0
-                    }
+                fetch { [weak self] in
+                    self?.mangas = $0
                 }
             }
         }
-        withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
+        withTransaction(
+            .init(animation: .easeInOut(duration: 0.25))
+        ) {
             shouldReload = false
         }
     }

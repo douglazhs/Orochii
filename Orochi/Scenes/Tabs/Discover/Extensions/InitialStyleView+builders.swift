@@ -9,64 +9,87 @@ import SwiftUI
 import MangaDex
 
 extension InitialStyleView {
-    /// Carousel
-    /// - Parameter mangas: Retrieved mangas
+
+    /// Discover manga grid
     @ViewBuilder
-    func carousel(_ carousel: Int, with mangas: [Manga]) -> some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            LazyHStack(alignment: .top) {
-                ForEach(mangas) { manga in
-                    NavigationLink {
-                        MangaView(manga)
-                    } label: {
-                        cell(of: manga)
-                            .task { [weak vm] in
-                                if vm?.hasReachedEnd(of: manga, on: carousel) ?? false {
-                                    vm?.fetchMore(on: carousel)
-                                }
-                            }
-                            .contextMenu {
-                                Button { } label: {
-                                    Label(String.ContextMenu.addToLib, systemImage: "plus.rectangle.on.folder")
-                                }
-                                Button(role: .destructive) { } label: {
-                                    Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
-                                }
-                            }
+    func discoverGrid() -> some View {
+        LazyVGrid(columns: columns, spacing: 20.0) {
+            ForEach(vm.mangas, id: \.id) { manga in
+                NavigationLink(value: manga) {
+                    GridCell(
+                        of: manga,
+                        coverURL: vm.api.buildURL(for: .cover(
+                            id: manga.id,
+                            fileName: vm.imgFileName(of: manga)
+                        )),
+                        title: vm.unwrapTitle(of: manga)
+                    ) {
+                        // TODO: ADD/REMOVE from library
+                        print("Context menu action")
+                    }
+                    .task { [weak vm] in
+                        if vm?.hasReachedEnd(
+                            of: manga
+                        ) ?? false {  vm?.fetchMore() }
                     }
                 }
             }
-            .padding(.horizontal)
-        }
-        .scrollBounceBehavior(.basedOnSize)
+        }.padding()
     }
     
-    /// Manga carousel cell
-    /// - Parameter manga: Current manga
+    /// Main filrer carousel
     @ViewBuilder
-    func cell(of manga: Manga) -> some View {
-        VStack(alignment: .leading, spacing: 2.5) {
-            MangaStandardImage(
-                url: vm.api.buildURL(for: .cover(
-                    id: manga.id,
-                    fileName: vm.imgFileName(of: manga)
-                )),
-                size: CGSize(
-                    width: CGSize.standardImageCell.width,
-                    height: CGSize.standardImageCell.height
-                )
-            )
-            Text(vm.unwrapTitle(of: manga))
-                .lineLimit(2)
-                .multilineTextAlignment(.leading)
-                .font(.footnote)
-                .fontWeight(.regular)
-                .foregroundStyle(Color.ORCH.primaryText)
-                .frame(
-                    maxWidth: CGSize.standardImageCell.width,
-                    idealHeight: 35,
-                    alignment: .leading
-                )
+    func filterCarousel() -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8.5) {
+                ForEach(MainFilter.allCases, id: \.self) {
+                    mainFilterCell(filter: $0)
+                }
+            }
+            .padding([.horizontal, .top])
+            .padding(.bottom, 0.5)
         }
+    }
+    
+    /// Main filter cell
+    @ViewBuilder
+    func mainFilterCell(filter: MainFilter) -> some View {
+        Button {
+            vm.selectedMainFilter = filter
+        } label: {
+            cellBuild(of: filter)
+        }
+        .onChange(of: vm.selectedMainFilter) { [weak vm] _ in
+            vm?.fetchSelectedFilter()
+        }
+    }
+    
+    ///  Filter cell build
+    @ViewBuilder
+    func cellBuild(of filter: MainFilter) -> some View {
+        Text(filter.header)
+            .font(.subheadline)
+            .fontWeight(.semibold)
+            .foregroundStyle(
+                vm.selectedMainFilter == filter
+                ? Color.ORCH.button
+                : Color.ORCH.primaryText
+            )
+            .padding(8.5)
+            .background(
+                vm.selectedMainFilter == filter
+                ? Color.ORCH.button.opacity(0.25)
+                : Color.ORCH.primaryText.opacity(0.25)
+            )
+            .clipShape(RoundedRectangle(cornerRadius: 8.5))
+            .overlay(
+                RoundedRectangle(cornerRadius: 8.5)
+                    .stroke(
+                        vm.selectedMainFilter == filter
+                        ? Color.ORCH.button
+                        : Color.ORCH.primaryText,
+                        lineWidth: 0.5
+                    )
+            )
     }
 }

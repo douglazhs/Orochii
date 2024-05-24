@@ -10,26 +10,23 @@ import struct MangaDex.Manga
 
 struct InitialStyleView: View {
     @EnvironmentObject var vm: DiscoverViewModel
+    var columns = [
+        GridItem(.adaptive(minimum: CGSize.dynamicImage.width))
+    ]
 
     var body: some View {
         ScrollView(.vertical, showsIndicators: false) {
-            LazyVStack(alignment: .leading) {
-                ForEach(vm.sections.indices, id: \.self) { index in
-                    Section {
-                        if let mangas = vm.sections[index].mangas {
-                            carousel(index, with: mangas)
-                                .padding(.bottom, 25)
-                        } else {
-                            // TODO: - Placeholder to loading carousel
-                        }
-                    } header: {
-                        Text(vm.sections[index].config.header)
-                            .font(.headline)
-                            .fontWeight(.bold)
-                            .padding(.leading)
-                    }
-                }
-            }.padding(.vertical)
+            filterCarousel()
+            
+            discoverGrid()
+        }
+        .overlay(alignment: .top) {
+            if vm.loading {
+                IndeterminateProgressView()
+            }
+        }
+        .navigationDestination(for: Manga.self) {
+            MangaView($0)
         }
     }
 }

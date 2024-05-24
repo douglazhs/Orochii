@@ -1,5 +1,5 @@
 //
-//  CarouselSection.swift
+//  MainFilter.swift
 //  Orochii
 //
 //  Created by Douglas Henrique de Souza Pereira on 22/11/22.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// Carousel type
-enum CarouselSection: Int, CaseIterable {
+enum MainFilter: Int, CaseIterable {
     case mostRelevants, awardWinning, thisYear, shounen, seinen, webComic
     
     /// Carousel header
@@ -30,7 +30,7 @@ enum CarouselSection: Int, CaseIterable {
 }
 
 // Carousel parameters
-extension CarouselSection {
+extension MainFilter {
     /// Carousel parameters for request
     /// - Returns: Section parameters
     func sectionParams() -> [String: Any] {

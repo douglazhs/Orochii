@@ -21,7 +21,7 @@
 		503019AB2934D85F00F5645F /* ALTracker+builders.swift in Sources */ = {isa = PBXBuildFile; fileRef = 503019AA2934D85F00F5645F /* ALTracker+builders.swift */; };
 		505656392932580F0061FD15 /* ChapterMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 505656382932580F0061FD15 /* ChapterMenu.swift */; };
 		506EEBF829364D3300D89777 /* MangaView+filters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 506EEBF729364D3300D89777 /* MangaView+filters.swift */; };
-		507803D2292DB5F40041D5BD /* CarouselSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507803D1292DB5F40041D5BD /* CarouselSection.swift */; };
+		507803D2292DB5F40041D5BD /* MainFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507803D1292DB5F40041D5BD /* MainFilter.swift */; };
 		507803DC292DC0530041D5BD /* ActivityIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 507803DB292DC0530041D5BD /* ActivityIndicator.swift */; };
 		508D1B8F2936FE900069012C /* ActionPopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508D1B8E2936FE900069012C /* ActionPopUp.swift */; };
 		508D1B912937055A0069012C /* Haptics+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 508D1B902937055A0069012C /* Haptics+extension.swift */; };
@@ -101,6 +101,9 @@
 		522EFC722B9B4D6E00F0B071 /* ALAccountView+activities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522EFC712B9B4D6E00F0B071 /* ALAccountView+activities.swift */; };
 		5278E3B92B9A81270036CCB8 /* ALAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5278E3B82B9A81270036CCB8 /* ALAccountView.swift */; };
 		5278E3BE2B9A92E60036CCB8 /* ALAccountView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5278E3BD2B9A92E60036CCB8 /* ALAccountView+extension.swift */; };
+		52D0E2DE2C001C4E009374C5 /* IndeterminateProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D0E2DD2C001C4E009374C5 /* IndeterminateProgressView.swift */; };
+		52D0E2E12C001CB1009374C5 /* ReadWdithModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D0E2E02C001CB1009374C5 /* ReadWdithModifier.swift */; };
+		52D0E2E42C00D373009374C5 /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D0E2E32C00D373009374C5 /* GridCell.swift */; };
 		770611AB2A5EDA2C00A2CD0A /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770611AA2A5EDA2C00A2CD0A /* Defaults.swift */; };
 		770611AD2A5EDC6100A2CD0A /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770611AC2A5EDC6100A2CD0A /* DefaultsKeys.swift */; };
 		770611B82A5F252800A2CD0A /* MangaDex in Frameworks */ = {isa = PBXBuildFile; productRef = 770611B72A5F252800A2CD0A /* MangaDex */; };
@@ -130,7 +133,6 @@
 		7796C8CC2A282ACF00E26066 /* Date+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7796C8CB2A282ACF00E26066 /* Date+extension.swift */; };
 		7797B37B2A4334FA00DBD8C4 /* UIColor+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7797B37A2A4334FA00DBD8C4 /* UIColor+extension.swift */; };
 		779E14632A79895F00F0FF48 /* MangaTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779E14622A79895F00F0FF48 /* MangaTag.swift */; };
-		779E14652A79925A00F0FF48 /* Carousel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 779E14642A79925A00F0FF48 /* Carousel.swift */; };
 		77B188E42A1CE75B00B11378 /* Biometry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188E32A1CE75B00B11378 /* Biometry.swift */; };
 		77B188E62A1CFC3900B11378 /* Keychain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188E52A1CFC3900B11378 /* Keychain.swift */; };
 		77B188EE2A1E5B4300B11378 /* URLSession+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */; };
@@ -164,7 +166,7 @@
 		503019AA2934D85F00F5645F /* ALTracker+builders.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALTracker+builders.swift"; sourceTree = "<group>"; };
 		505656382932580F0061FD15 /* ChapterMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChapterMenu.swift; sourceTree = "<group>"; };
 		506EEBF729364D3300D89777 /* MangaView+filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaView+filters.swift"; sourceTree = "<group>"; };
-		507803D1292DB5F40041D5BD /* CarouselSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselSection.swift; sourceTree = "<group>"; };
+		507803D1292DB5F40041D5BD /* MainFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFilter.swift; sourceTree = "<group>"; };
 		507803DB292DC0530041D5BD /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
 		508C2DCC2950AB4800355F13 /* Orochii-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Orochii-Info.plist"; sourceTree = "<group>"; };
 		508D1B8E2936FE900069012C /* ActionPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPopUp.swift; sourceTree = "<group>"; };
@@ -247,6 +249,9 @@
 		522EFC712B9B4D6E00F0B071 /* ALAccountView+activities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALAccountView+activities.swift"; sourceTree = "<group>"; };
 		5278E3B82B9A81270036CCB8 /* ALAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALAccountView.swift; sourceTree = "<group>"; };
 		5278E3BD2B9A92E60036CCB8 /* ALAccountView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALAccountView+extension.swift"; sourceTree = "<group>"; };
+		52D0E2DD2C001C4E009374C5 /* IndeterminateProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndeterminateProgressView.swift; sourceTree = "<group>"; };
+		52D0E2E02C001CB1009374C5 /* ReadWdithModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWdithModifier.swift; sourceTree = "<group>"; };
+		52D0E2E32C00D373009374C5 /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		770611AA2A5EDA2C00A2CD0A /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		770611AC2A5EDC6100A2CD0A /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		770611BF2A61EF5C00A2CD0A /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
@@ -273,7 +278,6 @@
 		7796C8CB2A282ACF00E26066 /* Date+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+extension.swift"; sourceTree = "<group>"; };
 		7797B37A2A4334FA00DBD8C4 /* UIColor+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+extension.swift"; sourceTree = "<group>"; };
 		779E14622A79895F00F0FF48 /* MangaTag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MangaTag.swift; sourceTree = "<group>"; };
-		779E14642A79925A00F0FF48 /* Carousel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Carousel.swift; sourceTree = "<group>"; };
 		77B188E32A1CE75B00B11378 /* Biometry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Biometry.swift; sourceTree = "<group>"; };
 		77B188E52A1CFC3900B11378 /* Keychain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Keychain.swift; sourceTree = "<group>"; };
 		77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLSession+extension.swift"; sourceTree = "<group>"; };
@@ -402,6 +406,7 @@
 			children = (
 				507803DB292DC0530041D5BD /* ActivityIndicator.swift */,
 				77B1BD642A6986DA003146B9 /* ProgressIndicator.swift */,
+				52D0E2DD2C001C4E009374C5 /* IndeterminateProgressView.swift */,
 			);
 			path = Loading;
 			sourceTree = "<group>";
@@ -726,6 +731,7 @@
 		50F4443F292E9293001B3CF4 /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
+				52D0E2DF2C001C71009374C5 /* Read Width */,
 				5227C7D52BAB70F000BC6501 /* Standard Bars */,
 				77FACA4D29D1EB7E00A5744A /* TextFieldStyle */,
 				50CE85C42948C59200169922 /* Measure Size */,
@@ -880,7 +886,7 @@
 		50F6F686293C2DD000142816 /* Carousel */ = {
 			isa = PBXGroup;
 			children = (
-				507803D1292DB5F40041D5BD /* CarouselSection.swift */,
+				507803D1292DB5F40041D5BD /* MainFilter.swift */,
 			);
 			path = Carousel;
 			sourceTree = "<group>";
@@ -1089,6 +1095,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		52D0E2DF2C001C71009374C5 /* Read Width */ = {
+			isa = PBXGroup;
+			children = (
+				52D0E2E02C001CB1009374C5 /* ReadWdithModifier.swift */,
+			);
+			path = "Read Width";
+			sourceTree = "<group>";
+		};
+		52D0E2E22C00D362009374C5 /* Grid Cell */ = {
+			isa = PBXGroup;
+			children = (
+				52D0E2E32C00D373009374C5 /* GridCell.swift */,
+			);
+			path = "Grid Cell";
+			sourceTree = "<group>";
+		};
 		770611A92A5EDA1E00A2CD0A /* User Defaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -1275,6 +1297,7 @@
 		77ECB1BE2A2ECA4000C13619 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				52D0E2E22C00D362009374C5 /* Grid Cell */,
 				77BB21C52A79C06D00ED998E /* Picker TextField */,
 				773F06EA2A7717CB00341E0F /* Media Attributes */,
 				773A71FA2A68167000D7333E /* Chapter Page */,
@@ -1300,7 +1323,6 @@
 			children = (
 				77ECB1C02A2ECA6300C13619 /* AlertInfo.swift */,
 				779E14622A79895F00F0FF48 /* MangaTag.swift */,
-				779E14642A79925A00F0FF48 /* Carousel.swift */,
 			);
 			path = Objects;
 			sourceTree = "<group>";
@@ -1439,12 +1461,12 @@
 				50CE85C32948C56800169922 /* RepresentableSheet+configutation.swift in Sources */,
 				77612A992A2B96DC002137FC /* UIImage+extension.swift in Sources */,
 				50FE08DD292D9D0200432F21 /* WebsiteStandardCell.swift in Sources */,
-				779E14652A79925A00F0FF48 /* Carousel.swift in Sources */,
 				5092DF612929831D0094DC18 /* SourcePreferencesView.swift in Sources */,
 				5213738C2BC6FDD7008B41C3 /* URLError.swift in Sources */,
 				7738459C2A25AF48007F1014 /* SafariWebView.swift in Sources */,
 				5227C7D92BADED7100BC6501 /* Color+tokens.swift in Sources */,
 				5092DF4A2929465B0094DC18 /* SettingsView.swift in Sources */,
+				52D0E2E12C001CB1009374C5 /* ReadWdithModifier.swift in Sources */,
 				77B1BD632A697AC2003146B9 /* ImageSaver.swift in Sources */,
 				50FFAFFA292A8FDF00B87E0E /* LibraryView+builders.swift in Sources */,
 				5227C7D72BAB715E00BC6501 /* StandardBars.swift in Sources */,
@@ -1461,7 +1483,7 @@
 				50FE08D0292D035600432F21 /* PrimaryGradient.swift in Sources */,
 				50E02110293D276F001C85B5 /* DarkOverlay.swift in Sources */,
 				77B188EE2A1E5B4300B11378 /* URLSession+extension.swift in Sources */,
-				507803D2292DB5F40041D5BD /* CarouselSection.swift in Sources */,
+				507803D2292DB5F40041D5BD /* MainFilter.swift in Sources */,
 				50F4442D292E43F9001B3CF4 /* ChapterView+builders.swift in Sources */,
 				773A71FC2A68169A00D7333E /* ChapterPageView.swift in Sources */,
 				50FFAFF2292A84DB00B87E0E /* SearchStyleView.swift in Sources */,
@@ -1492,6 +1514,7 @@
 				776220622A26D40A004E93AF /* ALTab.swift in Sources */,
 				50FFAFFF292A98C000B87E0E /* MangaStandardImage.swift in Sources */,
 				50CE85BF2948C4EB00169922 /* RepresentableSheet+modifier.swift in Sources */,
+				52D0E2E42C00D373009374C5 /* GridCell.swift in Sources */,
 				77EAE9F52A1EE1F800205562 /* SettingsView+tracker.swift in Sources */,
 				50F44434292E5844001B3CF4 /* ReaderPreferencesView.swift in Sources */,
 				50F4444A292F02CC001B3CF4 /* CGSize+extension.swift in Sources */,
@@ -1537,6 +1560,7 @@
 				5092DF35292942A30094DC18 /* DiscoverView.swift in Sources */,
 				5007A5022933AE3300EAAB84 /* MangaView+editablle.swift in Sources */,
 				50CE85C12948C54900169922 /* RepresentableSheet.swift in Sources */,
+				52D0E2DE2C001C4E009374C5 /* IndeterminateProgressView.swift in Sources */,
 				777549202A3F281C0023F0E1 /* DataConvertible.swift in Sources */,
 				774895BA2A6EF1BE00CD8F50 /* View+extension.swift in Sources */,
 				503019A42934212700F5645F /* UIApplication+extension.swift in Sources */,
