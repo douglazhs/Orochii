@@ -54,6 +54,7 @@ struct DiscoverView: View {
         )
         .onSubmit(of: .search) {
             UIApplication.shared.becomeFirstResponder()
+            vm.submitSearch()
         }
     }
 }

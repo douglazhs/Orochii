@@ -23,6 +23,10 @@ class Defaults {
         defaults.setValue(value, forKey: key)
     }
     
+    func saveArray<Value>(of values: Value, key: String) {
+        defaults.setValue(values, forKey: key)
+    }
+    
     func getObj(of key: String) -> Any? {
         defaults.object(forKey: key)
     }
@@ -34,4 +38,9 @@ class Defaults {
     func getBool(of key: String) -> Bool {
         defaults.bool(forKey: key)
     }
+    
+    func getArray(of key: String) -> [Any]? {
+        defaults.array(forKey: key)
+    }
+    
 }

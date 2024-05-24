@@ -31,18 +31,16 @@ struct SearchStyleView: View {
                         scheduler: DispatchQueue.main
                     )
             ) { [weak vm] _ in vm?.search() }
-            .onChange(of: vm.nameQuery) { newValue in
-                if !newValue.isEmpty {
-                    withTransaction(.init(animation: .easeInOut(duration: 0.5))) {
-                        vm.isSearching = true
-                    }
+            .onChange(of: vm.nameQuery) { _ in
+                withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
+                    vm.isSearching = true
                 }
             }
             .onChange(of: isSearching) { newValue in
                 if !newValue {
                     vm.isSearching = false
                     vm.searchResult?.removeAll()
-                    withAnimation(.easeInOut(duration: 0.25)) {
+                    withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
                         viewStyle = .initial
                     }
                 }

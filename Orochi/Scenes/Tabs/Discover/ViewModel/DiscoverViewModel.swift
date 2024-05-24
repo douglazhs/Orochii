@@ -30,12 +30,15 @@ final class DiscoverViewModel: ObservableObject {
     @Published var languages: [Language] = [Language]()
     @Published var shouldReload: Bool = false
     @Published var loading: Bool = false
+    // MARK: - Search History
+    @Published var history: [String] = [String]()
     // MARK: - Error alert
     @Published var showAlert: Bool = false
     var alertInfo: AlertInfo = .init()
     
     init() {
         loadPreferences()
+        loadHistory()
         fetchMangas()
     }
     
@@ -108,9 +111,12 @@ final class DiscoverViewModel: ObservableObject {
                 params: params
             ) { [weak self] result in
                 switch result {
-                case .success(let array): 
-                    self?.searchResult = array.data
-                    withTransaction(.init(animation: .easeInOut(duration: 0.225))) {
+                case .success(let array):
+                    withTransaction(.init(animation: .easeIn(duration: 0.225))) {
+                        self?.searchResult?.removeAll()
+                        self?.searchResult = array.data
+                    }
+                    withTransaction(.init(animation: .easeIn(duration: 0.225))) {
                         self?.isSearching = false
                     }
                 case .failure(let error):
@@ -160,6 +166,48 @@ final class DiscoverViewModel: ObservableObject {
             .init(animation: .easeInOut(duration: 0.25))
         ) {
             shouldReload = false
+        }
+    }
+    
+    /// Load Search History
+    func loadHistory() {
+        history = Defaults
+            .standard
+            .getArray(
+                of: DefaultsKeys.History.search.rawValue
+            ) as? [String] ?? []
+    }
+    
+    /// Save query in Search History
+    func saveHistory() {
+        Defaults.standard.saveArray(
+            of: history,
+            key: DefaultsKeys.History.search.rawValue
+        )
+    }
+    
+    /// Save history on UserDefaults when user submit the search
+    func submitSearch() {
+        withTransaction(.init(animation: .bouncy(duration: 0.25))) {
+            if !history.contains(nameQuery) {
+                history.append(nameQuery)
+                saveHistory()
+            }
+        }
+    }
+    
+    /// Remove query from history on UserDefaults
+    func removeQuery(on index: Int) {
+        withTransaction(.init(animation: .bouncy(duration: 0.25))) {
+            history.remove(at: index)
+            saveHistory()
+        }
+    }
+    
+    /// Fill query with clicked history 
+    func fillWithHistory(on index: Int) {
+        withTransaction(.init(animation: .bouncy(duration: 0.25))) {
+            nameQuery = history[index]
         }
     }
     

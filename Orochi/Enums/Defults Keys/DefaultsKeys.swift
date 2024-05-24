@@ -33,4 +33,8 @@ public enum DefaultsKeys {
         case order = "chapters.order"
         case downloaded = "chapters.downloaded"
     }
+    
+    public enum History: String {
+        case search = "history.search"
+    }
 }

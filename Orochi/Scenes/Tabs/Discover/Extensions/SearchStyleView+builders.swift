@@ -13,11 +13,45 @@ extension SearchStyleView {
     @ViewBuilder
     func content() -> some View {
         ScrollView {
-            if let mangas = vm.searchResult, !vm.isSearching, !mangas.isEmpty {
+            if !vm.history.isEmpty { searchHistory() }
+            if let mangas = vm.searchResult {
                 loadedContent(with: mangas)
-            } else {
-                searchHandler()
             }
+        }
+        .overlay(alignment: .top) {
+            if vm.isSearching {
+                IndeterminateProgressView()
+            }
+        }
+    }
+    
+    /// Search history carousel
+    @ViewBuilder
+    func searchHistory() -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 7.5) {
+                ForEach(vm.history.indices, id: \.self) { index in
+                    Button {
+                        vm.fillWithHistory(on: index)
+                    } label: {
+                        HStack {
+                            Text(vm.history[index])
+                                .font(.subheadline)
+                                .fontWeight(.semibold)
+                            Button {
+                                vm.removeQuery(on: index)
+                            } label: {
+                                Image(systemName: "x.circle.fill")
+                                    .font(.footnote)
+                            }
+                        }
+                    }
+                    .tint(Color.ORCH.primaryText)
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    
+                }
+            }.padding([.horizontal, .top])
         }
     }
     
@@ -56,8 +90,6 @@ extension SearchStyleView {
                 .foregroundColor(Color.ORCH.primaryText)
                 .padding(.vertical)
                 .frame(maxWidth: .infinity)
-        } else if vm.isSearching {
-            IndeterminateProgressView()
         }
     }
 }
