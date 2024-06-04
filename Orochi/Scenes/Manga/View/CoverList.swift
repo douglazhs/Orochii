@@ -66,8 +66,8 @@ struct CoverList: View {
                             )
                         )
                     ),
-                    radius: 50,
-                    opacity: 0.75
+                    radius: 100,
+                    opacity: 0.825
                 )
             }
             .navigationDestination(for: Cover.self) {

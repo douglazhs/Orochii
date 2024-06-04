@@ -36,6 +36,7 @@ struct CoverFullScreen: View {
             }
             .padding()
             .navigationTitle("VOL. \(cover.attributes.volume)")
+            .toolbarRole(.editor)
         }
         .background {
             BlurBackground(

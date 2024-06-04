@@ -16,7 +16,7 @@ public enum CoverQuality: Int, Pickable {
     public var description: String {
         switch self {
         case .low: return "Low"
-        case .medium : return "Medium"
+        case .medium: return "Medium"
         case .original: return "Original"
         }
     }

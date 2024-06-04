@@ -45,7 +45,7 @@ extension MangaView {
                     )
                 ),
                 radius: 100,
-                opacity: 0.875
+                opacity: 0.825
             )
         }
     }
@@ -93,17 +93,18 @@ extension MangaView {
         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
         .listSectionSeparator(.hidden)
         .listRowBackground(bannerBackground())
-        .frame(maxHeight: UIScreen.height * 0.375)
+        .frame(maxHeight: UIScreen.height * 0.425)
     }
     
     /// Manga relationship label
     @ViewBuilder
     func relationship(_ relation: String, img: String) -> some View {
         Label(vm.relationship(relation, with: vm.manga).notEmpty, systemImage: img)
+            .foregroundStyle(.white)
             .padding(5.0)
             .background {
                 RoundedRectangle(cornerRadius: 5.5)
-                    .foregroundStyle(Color.ORCH.primaryText.opacity(0.25))
+                    .foregroundStyle(Color.ORCH.primaryText.opacity(0.385))
             }
             .overlay(
                 RoundedRectangle(cornerRadius: 5.5)
@@ -133,7 +134,8 @@ extension MangaView {
                         )
                     )
                 ),
-                radius: 0.0
+                radius: 0.0,
+                opacity: 0.695
             )
             .padding(.horizontal, min(0, -minY))
             .frame(width: size.width, height: height)
@@ -141,9 +143,8 @@ extension MangaView {
             .mask {
                 LinearGradient(
                     colors: [
-                        Color.ORCH.background,
-                        Color.ORCH.background,
-                        Color.ORCH.background,
+                        Color.black,
+                        Color.black,
                         .clear
                     ],
                     startPoint: .top,
@@ -198,7 +199,7 @@ extension MangaView {
                     .padding(5.0)
                     .background {
                         RoundedRectangle(cornerRadius: 5.5)
-                            .foregroundStyle(value.color.opacity(0.185))
+                            .foregroundStyle(value.color.opacity(0.225))
                     }
                     .overlay(
                         RoundedRectangle(cornerRadius: 5.5)
