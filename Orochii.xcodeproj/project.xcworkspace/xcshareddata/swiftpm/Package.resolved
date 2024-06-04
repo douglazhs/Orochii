@@ -33,7 +33,7 @@
       "location" : "https://github.com/douglazhs/MangaDex",
       "state" : {
         "branch" : "main",
-        "revision" : "4a7bb0faf9d92dcba16d32d15f374cdc76640e88"
+        "revision" : "2104efd7aad11e56dab4dce24d842d4e736c6634"
       }
     },
     {
@@ -41,8 +41,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kean/Nuke",
       "state" : {
-        "revision" : "7395c7a9dcd390bbcfad17a731d8d529602702c6",
-        "version" : "12.7.0"
+        "revision" : "2efd206503e99dd3a88a4dc433a76f98ce8cc198",
+        "version" : "12.7.1"
       }
     }
   ],
