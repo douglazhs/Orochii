@@ -11,11 +11,13 @@ import Nuke
 
 struct MangaStandardImage: View {
     var url: URL?
-    var size: CGSize
+    var size: CGSize?
+    var roundCorner: Bool
     
-    init(url: URL? = nil, size: CGSize) {
+    init(url: URL? = nil, size: CGSize? = nil, roundCorner: Bool = true) {
         self.url = url
         self.size = size
+        self.roundCorner = roundCorner
     }
     
     var body: some View {
@@ -28,22 +30,43 @@ struct MangaStandardImage: View {
             transaction: .init(animation: .easeIn)
         ) { state in
             if let image = state.image {
-                image
-                    .resizable()
-                    .scaledToFill()
-                    .frame(
-                        width: size.width,
-                        height: size.height
-                    )
-                    .clipShape(RoundedRectangle(cornerRadius: 6.5))
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 6.5)
+                sizeVariation(of: image)
+            } else {
+                if let size {
+                    Placeholder().frame(width: size.width, height: size.height)
+                } else {
+                    Placeholder()
+                }
+            }
+        }
+    }
+    
+    /// Handling image size variation
+    @ViewBuilder
+    func sizeVariation(of image: Image) -> some View {
+        if let size {
+            image
+                .resizable()
+                .scaledToFill()
+                .frame(
+                    width: size.width,
+                    height: size.height
+                )
+                .clipShape(RoundedRectangle(cornerRadius: roundCorner ? 4.5 : 0.0))
+                .overlay {
+                    if roundCorner {
+                        RoundedRectangle(cornerRadius: 4.5)
                             .stroke(
                                 Color(uiColor: .systemGray2),
-                                lineWidth: 0.5
+                                lineWidth: 0.55
                             )
-                    )
-            } else { Placeholder().frame(width: size.width, height: size.height) }
+                            .zIndex(1)
+                    }
+                }
+        } else {
+            image
+                .resizable()
+                .scaledToFit()
         }
     }
 }

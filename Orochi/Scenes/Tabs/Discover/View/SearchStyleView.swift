@@ -15,7 +15,7 @@ struct SearchStyleView: View {
     @EnvironmentObject var vm: DiscoverViewModel
     @Binding var viewStyle: ViewStyle
     var columns = [
-        GridItem(.adaptive(minimum: CGSize.dynamicImage.width))
+        GridItem(.adaptive(minimum: CGSize.standardImageCell.width))
     ]
     
     init(_ viewStyle: Binding<ViewStyle>) {

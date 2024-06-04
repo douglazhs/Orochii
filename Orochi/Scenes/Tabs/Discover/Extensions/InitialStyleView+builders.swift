@@ -13,7 +13,7 @@ extension InitialStyleView {
     /// Discover manga grid
     @ViewBuilder
     func discoverGrid() -> some View {
-        LazyVGrid(columns: columns, spacing: 20.0) {
+        LazyVGrid(columns: columns, spacing: 10.0) {
             ForEach(vm.mangas, id: \.id) { manga in
                 NavigationLink(value: manga) {
                     GridCell(

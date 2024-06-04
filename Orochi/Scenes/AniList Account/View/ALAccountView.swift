@@ -25,7 +25,7 @@ struct ALAccountView: View {
     @State var showConfirmation: Bool = false
     @StateObject var vm: ALAccountViewModel
     
-    let columns = [
+    var columns = [
         GridItem(.adaptive(minimum: CGSize.standardImageCell.width))
     ]
     

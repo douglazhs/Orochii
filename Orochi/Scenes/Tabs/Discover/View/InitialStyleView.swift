@@ -11,7 +11,7 @@ import struct MangaDex.Manga
 struct InitialStyleView: View {
     @EnvironmentObject var vm: DiscoverViewModel
     var columns = [
-        GridItem(.adaptive(minimum: CGSize.dynamicImage.width))
+        GridItem(.adaptive(minimum: CGSize.standardImageCell.width))
     ]
 
     var body: some View {

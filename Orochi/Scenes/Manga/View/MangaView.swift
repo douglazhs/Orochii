@@ -17,6 +17,8 @@ struct MangaView: View {
     @StateObject var vm: MangaViewModel
     @State var showAniList: Bool = false
     @State var showChapterReader: Bool = false
+    @State var showFullName: Bool = false
+    @State var showCover: Bool = false
     @FocusState var field: Field?
     @State var chSelection = Set<String?>()
     
@@ -31,6 +33,9 @@ struct MangaView: View {
             .toolbarRole(.editor)
             .toolbar(vm.showBottomBar ? .visible : .hidden, for: .bottomBar)
             .navigationBarBackButtonHidden(vm.isEditingMode)
+            .sheet(isPresented: $showCover) {
+                coverFullScreen()
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     selectChaptersButton()
@@ -45,8 +50,15 @@ struct MangaView: View {
                     Text(vm.unwrapTitle(of: vm.manga))
                         .font(.headline)
                         .lineLimit(1)
-                        .multilineTextAlignment(.leading)
+                        .multilineTextAlignment(.center)
                         .fontWeight(.heavy)
+                        .onTapGesture {
+                            showFullName = true
+                        }
+                        .alwaysPopover(isPresented: $showFullName) {
+                            altTitles()
+                                .background(BackgroundClearView())
+                        }
                 }
             }
     }

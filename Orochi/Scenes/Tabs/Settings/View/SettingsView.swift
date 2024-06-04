@@ -7,10 +7,6 @@
 
 import SwiftUI
 
-enum SettingsSelection {
-    
-}
-
 struct SettingsView: View {
     @StateObject var vm: SettingsViewModel = SettingsViewModel()
     @State var showALAccount: Bool = false

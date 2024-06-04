@@ -30,7 +30,6 @@ extension MangaView {
             ? EditMode.active
             : EditMode.inactive
         ))
-        .refreshable { vm.refresh() }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background {
@@ -58,56 +57,58 @@ extension MangaView {
         // DESCRIPTION
         description()
             .listSectionSeparator(.visible, edges: .bottom)
-        // GENRES
-        genres()
-            .listSectionSeparator(.visible, edges: .bottom)
-        // CONTENT AND FORMAT
-        tags()
-            .listSectionSeparator(.visible, edges: .bottom)
         // CHAPTERS
         chapters()
             .listRowSeparator(.visible)
             .listSectionSeparator(.hidden)
     }
     
+    /// Manga banner with some information, such as *genres*, *author* and *artirsr*
     @ViewBuilder
     func banner() -> some View {
         Section {
-            HStack(spacing: 5.0) {
-                Label(vm.relationship("author", with: vm.manga).notEmpty, systemImage: "person")
-                .padding(5.0)
-                .background {
-                    RoundedRectangle(cornerRadius: 5.5)
-                        .foregroundStyle(Color.ORCH.primaryText.opacity(0.25))
-                }
-                .overlay(
-                    RoundedRectangle(cornerRadius: 5.5)
-                        .stroke(
-                            Color.ORCH.primaryText,
-                            lineWidth: 0.3
-                        )
-                )
-                Label(vm.relationship("artist", with: vm.manga).notEmpty, systemImage: "paintpalette")
-                    .padding(5.0)
-                    .background {
-                        RoundedRectangle(cornerRadius: 5.5)
-                            .foregroundStyle(Color.ORCH.primaryText.opacity(0.25))
+            VStack(alignment: .leading, spacing: 10.0) {
+                ScrollView(.horizontal, showsIndicators: false) {
+                    HStack(spacing: 5.0) {
+                        relationship("author", img: "person")
+                        relationship("artist", img: "paintpalette")
+                        tags()
                     }
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 5.5)
-                            .stroke(
-                                Color.ORCH.primaryText,
-                                lineWidth: 0.3
-                            )
-                    )
+                    .padding(.horizontal, 22.0)
+                    .padding(.top, 10.0)
+                }
+                
+                Text(vm.getGenres(of: vm.manga).joined(separator: ", "))
+                    .padding(.horizontal, 22.0)
             }
+            .padding(.vertical, 10.0)
             .font(.caption)
             .fontWeight(.semibold)
             .foregroundColor(Color.ORCH.primaryText)
         }
+        .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
         .listSectionSeparator(.hidden)
         .listRowBackground(bannerBackground())
         .frame(maxHeight: UIScreen.height * 0.375)
+    }
+    
+    /// Manga relationship label
+    @ViewBuilder
+    func relationship(_ relation: String, img: String) -> some View {
+        Label(vm.relationship(relation, with: vm.manga).notEmpty, systemImage: img)
+            .padding(5.0)
+            .background {
+                RoundedRectangle(cornerRadius: 5.5)
+                    .foregroundStyle(Color.ORCH.primaryText.opacity(0.25))
+            }
+            .overlay(
+                RoundedRectangle(cornerRadius: 5.5)
+                    .stroke(
+                        Color.ORCH.primaryText,
+                        lineWidth: 0.3
+                    )
+            )
+            .padding(0.25)
     }
     
     /// Manga cover art as a banner
@@ -144,7 +145,7 @@ extension MangaView {
             }
             .offset(CGSize(width: 0, height: min(0, -minY)))
         }
-        .frame(height: UIScreen.height * 0.375)
+        .frame(height: UIScreen.height * 0.425)
     }
     
     /// Manga information area, contatining all main details
@@ -163,6 +164,7 @@ extension MangaView {
                             height: CGSize.dynamicImage.height
                         )
                     )
+                    .onTapGesture { showCover = true }
                     // START READING BUTTON
                     startReadingButton()
                 }
@@ -176,52 +178,27 @@ extension MangaView {
     /// Age content and manga formats
     @ViewBuilder
     func tags() -> some View {
-        Section {
-            if !vm.tags.isEmpty {
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack {
-                        ForEach(vm.tags) { value in
-                            Text(value.title)
-                                .font(.footnote)
-                                .fontWeight(.medium)
-                                .padding(7.5)
-                                .background(.tint.opacity(0.185), in: RoundedRectangle(cornerRadius: 7.25))
-                                .tint(value.color)
-                                .foregroundColor(value.color)
-                        }
-                    }.padding(.horizontal)
-                }.listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-            }
-        } header: {
-            Text("TAGS")
-                .foregroundStyle(Color.ORCH.secondaryTitle)
-                .font(.footnote)
-                .fontWeight(.regular)
-        }
-        .listRowBackground(Color.clear)
-    }
-    
-    /// Genres and themes
-    @ViewBuilder
-    func genres() -> some View {
-        Section {
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    ForEach(vm.getGenres(of: vm.manga), id: \.self) { genre in
-                        Text(genre)
-                            .font(.footnote)
-                            .fontWeight(.medium)
-                            .padding(7.5)
-                            .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 7.25))
+        HStack(spacing: 5.0) {
+            ForEach(vm.tags) { value in
+                Text(value.title)
+                    .tint(value.color)
+                    .padding(5.0)
+                    .background {
+                        RoundedRectangle(cornerRadius: 5.5)
+                            .foregroundStyle(value.color.opacity(0.185))
                     }
-                }.padding(.horizontal)
-            }.listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-        } header: {
-            Text("GENRES")
-                .foregroundStyle(Color.ORCH.secondaryTitle)
-                .font(.footnote)
-                .fontWeight(.regular)
-        }.listRowBackground(Color.clear)
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 5.5)
+                            .stroke(
+                                value.color,
+                                lineWidth: 0.3
+                            )
+                    )
+                    .padding(0.25)
+                    .font(.caption)
+                    .foregroundStyle(value.color)
+            }
+        }
     }
     
     /// All grouped manga informations
@@ -262,10 +239,22 @@ extension MangaView {
                 .font(.subheadline)
                 .fontWeight(.regular)
         } header: {
-            Text(String.Manga.descHeader.uppercased())
-                .foregroundStyle(Color.ORCH.secondaryTitle)
-                .font(.footnote)
-                .fontWeight(.regular)
+            HStack {
+                Text(String.Manga.descHeader.uppercased())
+                    .foregroundStyle(Color.ORCH.secondaryTitle)
+                    .font(.footnote)
+                    .fontWeight(.regular)
+                Spacer()
+                Picker("", selection: $vm.descLang) {
+                    ForEach((vm.manga.attributes?.description ?? [:]).sorted(by: >), id: \.key) { key, _ in
+                        Text((Locale.current.localizedString(
+                            forLanguageCode: key
+                        ) ?? key) + " - " + key.uppercased())
+                    }
+                }
+                .pickerStyle(.menu)
+                .tint(Color.ORCH.button)
+            }
         }
         .listRowBackground(Color.clear)
     }
@@ -328,6 +317,58 @@ extension MangaView {
                     .foregroundColor(Color.ORCH.primaryText)
                 Spacer()
             }
+        }
+    }
+    
+    /// Manga alternative titles
+    @ViewBuilder
+    func altTitles() -> some View {
+        ScrollView(showsIndicators: false) {
+            VStack(alignment: .leading, spacing: 17.5) {
+                Text(vm.unwrapTitle(of: vm.manga))
+                    .font(.headline)
+                    .fontWeight(.heavy)
+                    .frame(alignment: .center)
+                ForEach(vm.convertedAltTitles().sorted(by: >), id: \.key) { country, title in
+                    VStack(alignment: .leading) {
+                        Text((Locale.current as NSLocale).localizedString(forLanguageCode: country)?.uppercased() ?? country)
+                            .font(.caption)
+                            .foregroundStyle(Color.ORCH.secondaryTitle)
+                        Text(title)
+                            .font(.subheadline)
+                            .fontWeight(.heavy)
+                            .foregroundStyle(Color.ORCH.primaryText)
+                    }
+                }
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .padding()
+        }
+    }
+    
+    /// Cover in full screen when clicked
+    @ViewBuilder
+    func coverFullScreen() -> some View {
+        MangaStandardImage(
+            url: vm.api.buildURL(
+                for: .cover(
+                    id: vm.manga.id,
+                    fileName: vm.imgFileName(of: vm.manga)
+                )
+            ),
+            roundCorner: false
+        )
+        .presentationBackground {
+            BlurBackground(
+                with: vm.api.buildURL(
+                    for: .cover(
+                        id: vm.manga.id,
+                        fileName: vm.imgFileName(of: vm.manga)
+                    )
+                ),
+                radius: 50,
+                opacity: 0.5
+            )
         }
     }
 }

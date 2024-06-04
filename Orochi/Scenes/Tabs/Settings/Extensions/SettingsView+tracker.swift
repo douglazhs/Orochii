@@ -52,8 +52,8 @@ extension SettingsView {
             MangaStandardImage(
                 url: url,
                 size: CGSize(
-                    width: CGSize.standardImageCell.width,
-                    height: CGSize.standardImageCell.width
+                    width: CGSize.standardImageCell.width * 0.75,
+                    height: CGSize.standardImageCell.width * 0.75
                 )
             )
         }
@@ -63,13 +63,6 @@ extension SettingsView {
     @ViewBuilder
     func profileAvatar() -> some View {
         avatar()
-            .cornerRadius(4.5)
-            .frame(
-                width: CGSize.standardImageCell.width,
-                height: CGSize.standardImageCell.width
-            )
-            .scaledToFill()
-            .clipped()
             .onTapGesture { showALAccount = true }
     }
     

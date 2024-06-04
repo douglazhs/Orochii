@@ -39,7 +39,7 @@ final class MangaViewModel: ObservableObject {
     @Published var search: Bool = false
     @Published var filterQuery: String = ""
     @Published var feedOrder: OrderFilter = .asc
-    @Published var descLang: Language = .enUS
+    @Published var descLang: String = "en"
     // MARK: - Networking
     @Published var totalOnFeed: Int = 0
     @Published var offset: Int = 0
@@ -201,28 +201,24 @@ final class MangaViewModel: ObservableObject {
     /// - Returns: Description in selected language
     func switchDescLang() -> AttributedString {
         do {
-            switch descLang {
-            case .ptBr:
-                return try AttributedString(
-                    markdown: manga.attributes?.description?.ptBr ?? "No description.",
-                    options: AttributedString.MarkdownParsingOptions(interpretedSyntax: .inlineOnlyPreservingWhitespace)
-                )
-            case .enUS:
-                return try AttributedString(
-                    markdown: manga.attributes?.description?.en ?? "No description.",
-                    options: AttributedString.MarkdownParsingOptions(interpretedSyntax: .inlineOnlyPreservingWhitespace)
-                )
-            }
+            return try AttributedString(
+                markdown: manga.attributes?.description?[descLang] ?? "No description.",
+                options: AttributedString.MarkdownParsingOptions(interpretedSyntax: .inlineOnlyPreservingWhitespace)
+            )
         } catch {
-            switch descLang {
-            case .ptBr: return AttributedString(
-                NSAttributedString(string: manga.attributes?.description?.ptBr ?? "No description.")
-            )
-            case .enUS: return AttributedString(
-                NSAttributedString(string: manga.attributes?.description?.en ?? "No description.")
-            )
+            return "No description."
+        }
+    }
+    
+    /// Convert alt titles in only on dictionary
+    func convertedAltTitles() -> [String: String] {
+        var converted: [String: String] = [:]
+        manga.attributes?.altTitles?.forEach { dict in
+            for (key, title) in dict {
+                converted[key] = title
             }
         }
+        return converted
     }
     
     /// Start action when a button is pressed

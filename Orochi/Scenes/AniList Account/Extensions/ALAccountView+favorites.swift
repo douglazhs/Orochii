@@ -19,10 +19,12 @@ extension ALAccountView {
                 .frame(maxWidth: .infinity)
         case .loaded:
             if !vm.favorites.isEmpty {
-                LazyVGrid(columns: columns, spacing: 20.0) {
-                    ForEach(vm.favorites, id: \.id) { manga in
-                        favoriteManga(manga)
-                    }
+                ScrollView {
+                    LazyVGrid(columns: columns, spacing: 10.0) {
+                        ForEach(vm.favorites, id: \.id) { manga in
+                            favoriteManga(manga).frame(alignment: .top)
+                        }
+                    }.padding(.top)
                 }
             } else {
                 noContent(message: String.Account.noFavorites)

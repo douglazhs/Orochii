@@ -33,10 +33,7 @@ struct GridCell: View {
     var body: some View {
         MangaStandardImage(
             url: coverURL,
-            size: CGSize(
-                width: CGSize.dynamicImage.width,
-                height: CGSize.dynamicImage.height
-            )
+            size: CGSize.standardImageCell
         )
         .overlay(alignment: .bottom) {
             ZStack(alignment: .bottom) {
@@ -45,13 +42,13 @@ struct GridCell: View {
                     .frame(maxWidth: .infinity, alignment: .leading)
                     .lineLimit(2)
                     .multilineTextAlignment(.leading)
-                    .lineSpacing(1)
+                    .fontDesign(.rounded)
                     .padding(7.5)
-                    .font(.footnote)
+                    .font(.caption)
                     .fontWeight(.medium)
                     .foregroundColor(.white)
             }
-            .clipShape(RoundedRectangle(cornerRadius: 6.5))
+            .clipShape(RoundedRectangle(cornerRadius: 4.5))
             .zIndex(1)
         }
         .contextMenu {
