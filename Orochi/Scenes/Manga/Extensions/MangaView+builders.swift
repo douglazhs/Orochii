@@ -7,6 +7,7 @@
 
 import SwiftUI
 import NukeUI
+import struct MangaDex.Cover
 
 extension MangaView {
     /// All manga information, including  chapters
@@ -37,7 +38,10 @@ extension MangaView {
                 with: vm.api.buildURL(
                     for: .cover(
                         id: vm.manga.id,
-                        fileName: vm.imgFileName(of: vm.manga)
+                        fileName: vm.imgFileName(
+                            of: vm.manga,
+                            quality: vm.coverQuality.key
+                        )
                     )
                 ),
                 radius: 100,
@@ -123,7 +127,10 @@ extension MangaView {
                 with: vm.api.buildURL(
                     for: .cover(
                         id: vm.manga.id,
-                        fileName: vm.imgFileName(of: vm.manga)
+                        fileName: vm.imgFileName(
+                            of: vm.manga,
+                            quality: vm.coverQuality.key
+                        )
                     )
                 ),
                 radius: 0.0
@@ -157,14 +164,20 @@ extension MangaView {
                     MangaStandardImage(
                         url: vm.api.buildURL(for: .cover(
                             id: vm.manga.id,
-                            fileName: vm.imgFileName(of: vm.manga)
+                            fileName: vm.imgFileName(
+                                of: vm.manga,
+                                quality: vm.coverQuality.key
+                            )
                         )),
                         size: CGSize(
                             width: CGSize.dynamicImage.width,
                             height: CGSize.dynamicImage.height
                         )
                     )
-                    .onTapGesture { showCover = true }
+                    .onTapGesture { [weak vm] in
+                        showCover = true
+                        vm?.getCovers()
+                    }
                     // START READING BUTTON
                     startReadingButton()
                 }
@@ -245,18 +258,37 @@ extension MangaView {
                     .font(.footnote)
                     .fontWeight(.regular)
                 Spacer()
-                Picker("", selection: $vm.descLang) {
-                    ForEach((vm.manga.attributes?.description ?? [:]).sorted(by: >), id: \.key) { key, _ in
-                        Text((Locale.current.localizedString(
-                            forLanguageCode: key
-                        ) ?? key) + " - " + key.uppercased())
-                    }
-                }
-                .pickerStyle(.menu)
-                .tint(Color.ORCH.button)
+                
+                languageMenu()
             }
         }
         .listRowBackground(Color.clear)
+    }
+    
+    /// Language choose menu
+    @ViewBuilder
+    func languageMenu() -> some View {
+        Menu {
+            Picker("", selection: $vm.descLang) {
+                ForEach((vm.manga.attributes?.description ?? [:]).sorted(by: >), id: \.key) { key, _ in
+                    Text((Locale.current.localizedString(
+                        forLanguageCode: key
+                    ) ?? key) + " - " + key.uppercased())
+                }
+            }
+        } label: {
+            Label(
+                (((Locale.current.localizedString(
+                    forLanguageCode: vm.descLang
+                ) ?? vm.descLang) + " - " + vm.descLang)).uppercased(),
+                systemImage: "chevron.up.chevron.down"
+            )
+            .font(.footnote)
+            .fontWeight(.regular)
+        }
+        .menuOrder(.priority)
+        .menuStyle(.button)
+        .tint(Color.ORCH.button)
     }
     
     /// Manga chapters list
@@ -343,32 +375,6 @@ extension MangaView {
             }
             .frame(maxWidth: .infinity, alignment: .leading)
             .padding()
-        }
-    }
-    
-    /// Cover in full screen when clicked
-    @ViewBuilder
-    func coverFullScreen() -> some View {
-        MangaStandardImage(
-            url: vm.api.buildURL(
-                for: .cover(
-                    id: vm.manga.id,
-                    fileName: vm.imgFileName(of: vm.manga)
-                )
-            ),
-            roundCorner: false
-        )
-        .presentationBackground {
-            BlurBackground(
-                with: vm.api.buildURL(
-                    for: .cover(
-                        id: vm.manga.id,
-                        fileName: vm.imgFileName(of: vm.manga)
-                    )
-                ),
-                radius: 50,
-                opacity: 0.5
-            )
         }
     }
 }

@@ -84,6 +84,28 @@ extension SourcePreferencesView {
                 .foregroundStyle(Color.ORCH.secondaryText)
         }
     }
+    
+    /// MangaDex source cover quality
+    @ViewBuilder
+    func coverQualitySection() -> some View {
+        Section {
+            EnumPicker("Variant", selection: $vm.coverQuality)
+                .onChange(of: vm.coverQuality) {
+                    Defaults.standard.saveInt(
+                        $0.rawValue,
+                        key: DefaultsKeys.SrcPreferences.coverQuality.rawValue
+                    )
+                    vm.shouldReload = true
+                }
+                .foregroundStyle(Color.ORCH.primaryText)
+        } header: {
+            Text("Cover Quality")
+                .foregroundStyle(Color.ORCH.secondaryTitle)
+        } footer: {
+            Text("MangaDex source cover quality")
+                .foregroundStyle(Color.ORCH.secondaryText)
+        }
+    }
 
     /// Done button
     /// - Returns: Toolbar done button

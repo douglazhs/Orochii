@@ -21,6 +21,7 @@ public enum DefaultsKeys {
     public enum SrcPreferences: String {
         case languages = "srcPreferences.languages"
         case nsfw = "srcPreferences.nsfw"
+        case coverQuality = "srcPreferences.coverQuality"
     }
     
     public enum ReaderPreferences: String {

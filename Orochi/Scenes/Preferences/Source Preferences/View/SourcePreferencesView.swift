@@ -22,6 +22,8 @@ struct SourcePreferencesView: View {
                     .listRowBackground(Color.clear)
                 ageRatingSection()
                     .listRowBackground(Color.clear)
+                coverQualitySection()
+                    .listRowBackground(Color.clear)
             }
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {

@@ -64,7 +64,10 @@ extension MangaView {
                 of: vm.manga,
                 cover: vm.api.buildURL(for: .cover(
                     id: vm.manga.id,
-                    fileName: vm.imgFileName(of: vm.manga)
+                    fileName: vm.imgFileName(
+                        of: vm.manga,
+                        quality: vm.coverQuality.key
+                    )
                 )),
                 action: $vm.occurredAct
             )

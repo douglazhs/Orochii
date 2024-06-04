@@ -19,13 +19,17 @@ final class MangaViewModel: ObservableObject {
     @Published var manga: Manga
     /// Selected chapter to reads
     @Published var selectedChapter: Chapter?
+    // MARK: - User Defaults
+    @Published var coverQuality: CoverQuality = .original
     // MARK: - Arrays
     @Published var chapters: [Chapter] = [Chapter]()
     @Published var filtered: [Chapter] = [Chapter]()
+    @Published var covers: [Cover] = [Cover]()
     @Published var languagePreferences: [Language] = [Language]()
     @Published var tags: [MangaTag] = [MangaTag]()
     // MARK: - View states - Booleans & Strings
     @Published var loadingFeed: Bool = false
+    @Published var loadingCovers: Bool = false
     @Published var selectAll: Bool = false
     @Published var occurredAct: Bool = false
     @Published var isEditingMode: Bool = false
@@ -70,6 +74,9 @@ final class MangaViewModel: ObservableObject {
         if let langs = Defaults.standard.getObj(of: DefaultsKeys.SrcPreferences.languages.rawValue) as? [Int] {
             languagePreferences = langs.map { Language(rawValue: $0) ?? .enUS }
         }
+        coverQuality = CoverQuality(
+            rawValue: Defaults.standard.getInt(of: DefaultsKeys.SrcPreferences.coverQuality.rawValue)
+        ) ?? .original
     }
     /// Format carousel containing format and content information
     private func buildTags() {
@@ -219,6 +226,38 @@ final class MangaViewModel: ObservableObject {
             }
         }
         return converted
+    }
+    
+    /// Get manga cover list
+    func getCovers() {
+        guard covers.isEmpty else { return }
+        loadingCovers = true
+        Task { @MainActor in
+            api.getCoverList(manga.id) { [weak self] in
+                switch $0 {
+                case .success(let response):
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        withTransaction(.init(animation: .easeIn(duration: 0.25))) {
+                            self?.loadingCovers = false
+                            self?.covers = response.data/*.filter { $0.attributes.locale == "ja" }*/
+                        }
+                    }
+                case .failure(let error): print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    /// Transform text to an AttributedString
+    /// - Parameter text: Text to be converted
+    /// - Returns: Converted text 
+    func attributedString(_ text: String) -> AttributedString {
+        do {
+            return try AttributedString(markdown: text)
+        } catch {
+            print(error.localizedDescription)
+        }
+        return ""
     }
     
     /// Start action when a button is pressed

@@ -20,7 +20,10 @@ extension InitialStyleView {
                         of: manga,
                         coverURL: vm.api.buildURL(for: .cover(
                             id: manga.id,
-                            fileName: vm.imgFileName(of: manga)
+                            fileName: vm.imgFileName(
+                                of: manga,
+                                quality: vm.coverQuality.key
+                            )
                         )),
                         title: vm.unwrapTitle(of: manga)
                     ) {

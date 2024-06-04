@@ -8,6 +8,7 @@
 import SwiftUI
 import struct MangaDex.Manga
 import class MangaDex.MangaMock
+import struct MangaDex.Cover
 
 struct MangaView: View {
     enum Field: Int, Hashable {
@@ -34,7 +35,9 @@ struct MangaView: View {
             .toolbar(vm.showBottomBar ? .visible : .hidden, for: .bottomBar)
             .navigationBarBackButtonHidden(vm.isEditingMode)
             .sheet(isPresented: $showCover) {
-                coverFullScreen()
+                CoverList()
+                    .environmentObject(vm)
+                    .interactiveDismissDisabled()
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
