@@ -43,7 +43,7 @@ extension View {
         isPresented: Binding<Bool>,
         onDismiss: (() -> Void)? = nil,
         content: @escaping () -> Content,
-        detents: [UISheetPresentationController.Detent]
+        detents: [UISheetPresentationController.Detent] = [.medium()]
     ) -> some View where Content: View {
         modifier(
             SheetWithDetentsViewModifier(

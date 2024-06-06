@@ -12,6 +12,8 @@ struct CoverList: View {
     @Environment(\.dismiss)
     var dismiss
     @EnvironmentObject var vm: MangaViewModel
+    @State var showFilter: Bool = false
+    @State var viewSize: CGFloat = 0
     let columns = [
         GridItem(.adaptive(minimum: CGSize.dynamicImage.width))
     ]
@@ -19,8 +21,10 @@ struct CoverList: View {
     var body: some View {
         NavigationStack {
             ScrollView(showsIndicators: false) {
+                filterButton()
+                
                 LazyVGrid(columns: columns, spacing: 12.5) {
-                    ForEach(vm.covers, id: \.id) { cover in
+                    ForEach(vm.filteredCovers, id: \.id) { cover in
                         NavigationLink(value: cover) {
                             coverGridCell(cover)
                         }
@@ -28,6 +32,16 @@ struct CoverList: View {
                 }
                 .padding()
             }
+            .sheet(isPresented: $showFilter, onDismiss: {
+                vm.filterCovers()
+            }, content: {
+                filterBottomView()
+                    .presentationDetents([.height(viewSize)])
+                    .presentationCornerRadius(.zero)
+                    .presentationDragIndicator(.visible)
+                    .presentationBackgroundInteraction(.disabled)
+                    .presentationContentInteraction(.resizes)
+            })
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
@@ -55,21 +69,7 @@ struct CoverList: View {
                         .padding()
                 }
             }
-            .background {
-                BlurBackground(
-                    with: vm.api.buildURL(
-                        for: .cover(
-                            id: vm.manga.id,
-                            fileName: vm.imgFileName(
-                                of: vm.manga,
-                                quality: vm.coverQuality.key
-                            )
-                        )
-                    ),
-                    radius: 100,
-                    opacity: 0.825
-                )
-            }
+            .background(blurBackground())
             .navigationDestination(for: Cover.self) {
                 CoverFullScreen($0)
                     .environmentObject(vm)

@@ -45,7 +45,7 @@ extension MangaView {
                 )
                 .pickerStyle(.menu)
                 .onChange(of: vm.feedOrder) { [weak vm] in
-                    vm?.order(by: $0)
+                    vm?.orderFeed(by: $0)
                 }
             } header: {
                 Text(String.Filter.orderByHeader.uppercased())
@@ -62,7 +62,7 @@ extension MangaView {
                     }
                 }
                 .onChange(of: vm.downloaded) { [weak vm] in
-                    vm?.filter()
+                    vm?.filterFeed()
                     Defaults.standard.saveBool(
                         $0,
                         key: DefaultsKeys.Chapters.downloaded.rawValue
@@ -72,8 +72,6 @@ extension MangaView {
         } label: {
             Image(systemName: "line.3.horizontal.decrease")
                 .foregroundStyle(Color.ORCH.button)
-                .font(.headline)
-                .fontWeight(.bold)
         }
     }
 }

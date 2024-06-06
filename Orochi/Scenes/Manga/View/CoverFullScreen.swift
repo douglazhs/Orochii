@@ -68,7 +68,7 @@ struct CoverFullScreen: View {
                 Text("Created at: \(Date.fromString(cover.attributes.updatedAt ?? ""))")
                 Text("Version: \(cover.attributes.version.nilToStr)")
                 if let description = cover.attributes.description, !description.isEmpty {
-                    Text("Description: \(vm.attributedString(description))")
+                    Text("Description: \(description.attributedString)")
                 }
             }
             .font(.footnote)

@@ -105,6 +105,10 @@
 		52AF1AD22C0F5D1800BC1EFC /* CoverFullScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1AD12C0F5D1800BC1EFC /* CoverFullScreen.swift */; };
 		52AF1AD42C0F5EC300BC1EFC /* CoverList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1AD32C0F5EC300BC1EFC /* CoverList.swift */; };
 		52AF1AD72C0F62B600BC1EFC /* CoverQuality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1AD62C0F62B600BC1EFC /* CoverQuality.swift */; };
+		52AF1ADB2C0FEC5E00BC1EFC /* CoverList+filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1ADA2C0FEC5E00BC1EFC /* CoverList+filter.swift */; };
+		52AF1ADE2C0FEE2A00BC1EFC /* CheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1ADD2C0FEE2A00BC1EFC /* CheckboxToggleStyle.swift */; };
+		52AF1AE12C0FF40E00BC1EFC /* CheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1AE02C0FF40E00BC1EFC /* CheckboxView.swift */; };
+		52AF1AE32C108DDD00BC1EFC /* CoverList+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1AE22C108DDD00BC1EFC /* CoverList+extension.swift */; };
 		52D0E2DE2C001C4E009374C5 /* IndeterminateProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D0E2DD2C001C4E009374C5 /* IndeterminateProgressView.swift */; };
 		52D0E2E12C001CB1009374C5 /* ReadWdithModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D0E2E02C001CB1009374C5 /* ReadWdithModifier.swift */; };
 		52D0E2E42C00D373009374C5 /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D0E2E32C00D373009374C5 /* GridCell.swift */; };
@@ -257,6 +261,10 @@
 		52AF1AD12C0F5D1800BC1EFC /* CoverFullScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverFullScreen.swift; sourceTree = "<group>"; };
 		52AF1AD32C0F5EC300BC1EFC /* CoverList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverList.swift; sourceTree = "<group>"; };
 		52AF1AD62C0F62B600BC1EFC /* CoverQuality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoverQuality.swift; sourceTree = "<group>"; };
+		52AF1ADA2C0FEC5E00BC1EFC /* CoverList+filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoverList+filter.swift"; sourceTree = "<group>"; };
+		52AF1ADD2C0FEE2A00BC1EFC /* CheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggleStyle.swift; sourceTree = "<group>"; };
+		52AF1AE02C0FF40E00BC1EFC /* CheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxView.swift; sourceTree = "<group>"; };
+		52AF1AE22C108DDD00BC1EFC /* CoverList+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoverList+extension.swift"; sourceTree = "<group>"; };
 		52D0E2DD2C001C4E009374C5 /* IndeterminateProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndeterminateProgressView.swift; sourceTree = "<group>"; };
 		52D0E2E02C001CB1009374C5 /* ReadWdithModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWdithModifier.swift; sourceTree = "<group>"; };
 		52D0E2E32C00D373009374C5 /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
@@ -564,24 +572,24 @@
 		5092DF4F292957770094DC18 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				772ED9E52A76017800D3960D /* Int+extension.swift */,
-				5092DF50292957980094DC18 /* UIScreen+extension.swift */,
-				5092DF5D292972F80094DC18 /* String+localized.swift */,
-				50FE08D4292D609700432F21 /* String+default.swift */,
-				50FE08D6292D826100432F21 /* Image+appImages.swift */,
-				50F44447292E9442001B3CF4 /* UIView+extension.swift */,
 				50F44449292F02CC001B3CF4 /* CGSize+extension.swift */,
-				503019A32934212700F5645F /* UIApplication+extension.swift */,
-				508D1B902937055A0069012C /* Haptics+extension.swift */,
-				77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */,
-				7796C8CB2A282ACF00E26066 /* Date+extension.swift */,
-				77612A982A2B96DC002137FC /* UIImage+extension.swift */,
-				771590412A41D78A00E36CD6 /* String+attributedString.swift */,
-				7797B37A2A4334FA00DBD8C4 /* UIColor+extension.swift */,
-				774895B92A6EF1BE00CD8F50 /* View+extension.swift */,
-				7737B8BA2A7AE1D600D74C8F /* String+defaultValue.swift */,
 				5227C7D82BADED7100BC6501 /* Color+tokens.swift */,
+				7796C8CB2A282ACF00E26066 /* Date+extension.swift */,
+				508D1B902937055A0069012C /* Haptics+extension.swift */,
+				50FE08D6292D826100432F21 /* Image+appImages.swift */,
+				772ED9E52A76017800D3960D /* Int+extension.swift */,
 				52AF1ACF2C0F4AE300BC1EFC /* Sequence+extension.swift */,
+				771590412A41D78A00E36CD6 /* String+attributedString.swift */,
+				50FE08D4292D609700432F21 /* String+default.swift */,
+				7737B8BA2A7AE1D600D74C8F /* String+defaultValue.swift */,
+				5092DF5D292972F80094DC18 /* String+localized.swift */,
+				503019A32934212700F5645F /* UIApplication+extension.swift */,
+				7797B37A2A4334FA00DBD8C4 /* UIColor+extension.swift */,
+				77612A982A2B96DC002137FC /* UIImage+extension.swift */,
+				5092DF50292957980094DC18 /* UIScreen+extension.swift */,
+				50F44447292E9442001B3CF4 /* UIView+extension.swift */,
+				77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */,
+				774895B92A6EF1BE00CD8F50 /* View+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -739,6 +747,7 @@
 		50F4443F292E9293001B3CF4 /* Modifiers */ = {
 			isa = PBXGroup;
 			children = (
+				52AF1ADC2C0FEE0F00BC1EFC /* Checkbox Toggle Style */,
 				52D0E2DF2C001C71009374C5 /* Read Width */,
 				5227C7D52BAB70F000BC6501 /* Standard Bars */,
 				77FACA4D29D1EB7E00A5744A /* TextFieldStyle */,
@@ -1049,6 +1058,8 @@
 				5007A5012933AE3300EAAB84 /* MangaView+editablle.swift */,
 				506EEBF729364D3300D89777 /* MangaView+filters.swift */,
 				50CAD2E729383887000C1C0E /* MangaView+actions.swift */,
+				52AF1ADA2C0FEC5E00BC1EFC /* CoverList+filter.swift */,
+				52AF1AE22C108DDD00BC1EFC /* CoverList+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1113,6 +1124,22 @@
 				52AF1AD62C0F62B600BC1EFC /* CoverQuality.swift */,
 			);
 			path = "Cover Quality";
+			sourceTree = "<group>";
+		};
+		52AF1ADC2C0FEE0F00BC1EFC /* Checkbox Toggle Style */ = {
+			isa = PBXGroup;
+			children = (
+				52AF1ADD2C0FEE2A00BC1EFC /* CheckboxToggleStyle.swift */,
+			);
+			path = "Checkbox Toggle Style";
+			sourceTree = "<group>";
+		};
+		52AF1ADF2C0FF3F600BC1EFC /* Checkbox */ = {
+			isa = PBXGroup;
+			children = (
+				52AF1AE02C0FF40E00BC1EFC /* CheckboxView.swift */,
+			);
+			path = Checkbox;
 			sourceTree = "<group>";
 		};
 		52D0E2DF2C001C71009374C5 /* Read Width */ = {
@@ -1317,6 +1344,7 @@
 		77ECB1BE2A2ECA4000C13619 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				52AF1ADF2C0FF3F600BC1EFC /* Checkbox */,
 				52D0E2E22C00D362009374C5 /* Grid Cell */,
 				77BB21C52A79C06D00ED998E /* Picker TextField */,
 				773F06EA2A7717CB00341E0F /* Media Attributes */,
@@ -1477,6 +1505,7 @@
 				50FFAFDC292A668000B87E0E /* LanguagesView.swift in Sources */,
 				77B188E62A1CFC3900B11378 /* Keychain.swift in Sources */,
 				50F44448292E9442001B3CF4 /* UIView+extension.swift in Sources */,
+				52AF1ADE2C0FEE2A00BC1EFC /* CheckboxToggleStyle.swift in Sources */,
 				50FFAFF4292A84EE00B87E0E /* InitialStyleView.swift in Sources */,
 				50CE85C32948C56800169922 /* RepresentableSheet+configutation.swift in Sources */,
 				77612A992A2B96DC002137FC /* UIImage+extension.swift in Sources */,
@@ -1545,11 +1574,13 @@
 				50F44444292E93D4001B3CF4 /* ContentViewController.swift in Sources */,
 				7796C8CC2A282ACF00E26066 /* Date+extension.swift in Sources */,
 				50FFB001292AA5CD00B87E0E /* SearchStyleView+builders.swift in Sources */,
+				52AF1ADB2C0FEC5E00BC1EFC /* CoverList+filter.swift in Sources */,
 				50F4443C292E6638001B3CF4 /* PageLayout.swift in Sources */,
 				52AF1AD02C0F4AE300BC1EFC /* Sequence+extension.swift in Sources */,
 				508D1B8F2936FE900069012C /* ActionPopUp.swift in Sources */,
 				5092DF482929464F0094DC18 /* LibraryView.swift in Sources */,
 				50FFB011292ACE6200B87E0E /* DemoPublic.swift in Sources */,
+				52AF1AE12C0FF40E00BC1EFC /* CheckboxView.swift in Sources */,
 				5213738E2BC6FF27008B41C3 /* ObjectError.swift in Sources */,
 				5278E3BE2B9A92E60036CCB8 /* ALAccountView+extension.swift in Sources */,
 				50F4443E292E6645001B3CF4 /* ReadingMode.swift in Sources */,
@@ -1569,6 +1600,7 @@
 				50F44429292E4244001B3CF4 /* ChapterView.swift in Sources */,
 				500183CB292C0CCA0094B223 /* ChapterStandardCell.swift in Sources */,
 				50FFAFE9292A81B100B87E0E /* MangaView.swift in Sources */,
+				52AF1AE32C108DDD00BC1EFC /* CoverList+extension.swift in Sources */,
 				77B1BD652A6986DA003146B9 /* ProgressIndicator.swift in Sources */,
 				5092DF2529292C590094DC18 /* OrochiApp.swift in Sources */,
 				779074152A729F3900031E30 /* SourcePreferences.swift in Sources */,

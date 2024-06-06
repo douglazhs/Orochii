@@ -24,4 +24,13 @@ extension String {
         }
         return attributedText
     }
+    
+    var attributedString: AttributedString {
+        do {
+            return try AttributedString(markdown: self)
+        } catch {
+            print(error.localizedDescription)
+        }
+        return AttributedString(self)
+    }
 }

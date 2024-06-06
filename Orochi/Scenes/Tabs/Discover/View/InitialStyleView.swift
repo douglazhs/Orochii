@@ -25,9 +25,6 @@ struct InitialStyleView: View {
                 IndeterminateProgressView()
             }
         }
-        .navigationDestination(for: Manga.self) {
-            MangaView($0)
-        }
     }
 }
 

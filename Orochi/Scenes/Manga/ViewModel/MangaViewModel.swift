@@ -9,6 +9,15 @@ import SwiftUI
 import MangaDex
 import Combine
 
+struct CoverFilter: Equatable {
+    var locales: [String] = [String]()
+    var volOrder: OrderFilter = .desc
+    
+    static func == (lhs: CoverFilter, rhs: CoverFilter) -> Bool {
+        return lhs.locales == rhs.locales && lhs.volOrder == rhs.volOrder
+    }
+}
+
 // MangViewModel+MangaHelpers
 extension MangaViewModel: MangaHelpers {  }
 
@@ -25,6 +34,8 @@ final class MangaViewModel: ObservableObject {
     @Published var chapters: [Chapter] = [Chapter]()
     @Published var filtered: [Chapter] = [Chapter]()
     @Published var covers: [Cover] = [Cover]()
+    @Published var filteredCovers: [Cover] = [Cover]()
+    @Published var locales: [String] = [String]()
     @Published var languagePreferences: [Language] = [Language]()
     @Published var tags: [MangaTag] = [MangaTag]()
     // MARK: - View states - Booleans & Strings
@@ -39,6 +50,9 @@ final class MangaViewModel: ObservableObject {
     @Published var libStatus: MangaStatus = .none
     @Published var mangaOnLib: Bool = false
     // MARK: - Filtering
+    @Published var markAll: Bool = true
+    @Published var coverFilter = CoverFilter()
+    @Published var oldCoverFilter = CoverFilter()
     @Published var downloaded: Bool = false
     @Published var search: Bool = false
     @Published var filterQuery: String = ""
@@ -102,69 +116,11 @@ final class MangaViewModel: ObservableObject {
         fetchFeed()
     }
     
-    /// Fetch manga chapters
-    private func fetchFeed() {
-        Task { @MainActor in
-            api.getMangaFeed(
-                id: manga.id,
-                params: [
-                    "translatedLanguage[]": languagePreferences.compactMap { $0.apiId },
-                    "limit": 500,
-                    "offset": offset,
-                    "order[chapter]": feedOrder.key
-                ]
-            ) { [weak self] result in
-                switch result {
-                case .success(let response):
-                    if let chapters = response.data,
-                        let total = response.total {
-                        withAnimation(.spring()) {
-                            self?.chapters.append(contentsOf: chapters)
-                            self?.totalOnFeed = total
-                            self?.fetchMore()
-                        }
-                    }
-                case .failure(_):
-                    withAnimation(.easeInOut(duration: 0.225)) {
-                        self?.loadingFeed = false
-                    }
-                }
-            }
-        }
-    }
-    
     /// Verify if the user scrolled to the end of the carousel
     /// - Parameter manga: last manga on carousel
     /// - Returns: Boolean
     func hasReachedEnd(of manga: Chapter) -> Bool {
         chapters.last?.id == manga.id
-    }
-    
-    /// Fetch more chapters when reached the end of scroll
-    func fetchMore() {
-        if totalOnFeed > 500 && offset <= totalOnFeed {
-            offset += 500
-            fetchFeed()
-            return
-        }
-        
-        withAnimation(.spring()) {
-            loadingFeed = false
-        }
-        // End the fetch of the chapters
-        filtered = chapters
-    }
-    
-    /// Refresh manga
-    func refresh() {
-        Task { @MainActor in
-            api.getById(manga.id) { [weak self] result in
-                switch result {
-                case .success(let manga): self?.manga = manga.data
-                case .failure(let error): print(error.localizedDescription)
-                }
-            }
-        }
     }
     
     /// Manage chapter selction
@@ -176,32 +132,6 @@ final class MangaViewModel: ObservableObject {
         } else {
             selection.wrappedValue.removeAll()
         }
-    }
-    
-    /// Order chapters using user preference
-    func order(by option: OrderFilter) {
-        filtered.reverse()
-        Defaults.standard.saveInt(
-            option.rawValue,
-            key: DefaultsKeys.Chapters.order.rawValue
-        )
-    }
-    
-    /// Filter manga chapters
-    func filter() {
-        if !filterQuery.isEmpty {
-            filtered = chapters.filter {
-                filterQuery == $0.attributes?.chapter ||
-                $0.attributes?.title?.localizedCaseInsensitiveContains(filterQuery) ?? false
-            }
-        } else { filtered = chapters }
-    }
-    
-    /// Cancel filter
-    func cancelFilter() {
-        search = false
-        filterQuery = ""
-        filtered = chapters
     }
     
     /// Manga description according with the selected language
@@ -226,38 +156,6 @@ final class MangaViewModel: ObservableObject {
             }
         }
         return converted
-    }
-    
-    /// Get manga cover list
-    func getCovers() {
-        guard covers.isEmpty else { return }
-        loadingCovers = true
-        Task { @MainActor in
-            api.getCoverList(manga.id) { [weak self] in
-                switch $0 {
-                case .success(let response):
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                        withTransaction(.init(animation: .easeIn(duration: 0.25))) {
-                            self?.loadingCovers = false
-                            self?.covers = response.data/*.filter { $0.attributes.locale == "ja" }*/
-                        }
-                    }
-                case .failure(let error): print(error.localizedDescription)
-                }
-            }
-        }
-    }
-    
-    /// Transform text to an AttributedString
-    /// - Parameter text: Text to be converted
-    /// - Returns: Converted text 
-    func attributedString(_ text: String) -> AttributedString {
-        do {
-            return try AttributedString(markdown: text)
-        } catch {
-            print(error.localizedDescription)
-        }
-        return ""
     }
     
     /// Start action when a button is pressed
@@ -295,6 +193,155 @@ final class MangaViewModel: ObservableObject {
             }
         case .aniList:
             actionMessage = "Successfully Updated"
+        }
+    }
+}
+
+// MARK: MangaViewModel+Filter --------------------------------------------------------------------------------------
+
+extension MangaViewModel {
+    /// Order chapters using user preference
+    func orderFeed(by option: OrderFilter) {
+        filtered.reverse()
+        Defaults.standard.saveInt(
+            option.rawValue,
+            key: DefaultsKeys.Chapters.order.rawValue
+        )
+    }
+    
+    /// Filter manga chapters
+    func filterFeed() {
+        if !filterQuery.isEmpty {
+            filtered = chapters.filter {
+                filterQuery == $0.attributes?.chapter ||
+                $0.attributes?.title?.localizedCaseInsensitiveContains(filterQuery) ?? false
+            }
+        } else { filtered = chapters }
+    }
+    
+    /// Cancel filter
+    func cancelFeedFilter() {
+        search = false
+        filterQuery = ""
+        filtered = chapters
+    }
+    
+    /// Filter covers by user filter preferences
+    func filterCovers() {
+        if coverFilter != oldCoverFilter {
+            withTransaction(.init(animation: .snappy(duration: 0.5))) {
+                filteredCovers = covers.filter { coverFilter.locales.contains($0.attributes.locale ?? "") }
+                
+                switch coverFilter.volOrder {
+                case .asc:
+                    covers.sort(by: { $0.attributes.volume < $1.attributes.volume })
+                    filteredCovers.sort(by: { $0.attributes.volume < $1.attributes.volume })
+                case .desc:
+                    covers.sort(by: { $0.attributes.volume > $1.attributes.volume })
+                    filteredCovers.sort(by: { $0.attributes.volume > $1.attributes.volume })
+                }
+            }
+        }
+    }
+    
+    /// Mark or remove all locale selection
+    func toggleLocaleSelection() {
+        withTransaction(.init(animation: .smooth(duration: 0.25))) {
+            markAll.toggle()
+            if markAll {
+                coverFilter.locales = locales
+            } else { coverFilter.locales.removeAll() }
+        }
+    }
+}
+
+// MARK: MangaViewModel+Network -------------------------------------------------------------------------------------
+
+extension MangaViewModel {
+    /// Fetch manga chapters
+    private func fetchFeed() {
+        Task { @MainActor in
+            api.getMangaFeed(
+                id: manga.id,
+                params: [
+                    "translatedLanguage[]": languagePreferences.compactMap { $0.apiId },
+                    "limit": 500,
+                    "offset": offset,
+                    "order[chapter]": feedOrder.key
+                ]
+            ) { [weak self] result in
+                switch result {
+                case .success(let response):
+                    if let chapters = response.data,
+                        let total = response.total {
+                        withAnimation(.spring()) {
+                            self?.chapters.append(contentsOf: chapters)
+                            self?.totalOnFeed = total
+                            self?.fetchMore()
+                        }
+                    }
+                case .failure(_):
+                    withAnimation(.easeInOut(duration: 0.225)) {
+                        self?.loadingFeed = false
+                    }
+                }
+            }
+        }
+    }
+    
+    /// Get manga cover list
+    func getCovers() {
+        guard covers.isEmpty else { return }
+        loadingCovers = true
+        Task { @MainActor in
+            api.getCoverList(manga.id) { [weak self] in
+                switch $0 {
+                case .success(let response):
+                    self?.locales = response.data
+                        .removingDuplicates(withSame: \.attributes.locale)
+                        .compactMap { $0.attributes.locale }
+                    self?.coverFilter.locales = self?.locales ?? []
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                        withTransaction(.init(animation: .snappy(duration: 0.25))) {
+                            self?.loadingCovers = false
+                            self?.covers = response.data
+                            self?.filteredCovers = response.data
+                        }
+                    }
+                case .failure(let error):
+                    withTransaction(.init(animation: .snappy(duration: 0.25))) {
+                        self?.loadingCovers = false
+                    }
+                    print(error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    /// Fetch more chapters when reached the end of scroll
+    func fetchMore() {
+        if totalOnFeed > 500 && offset <= totalOnFeed {
+            offset += 500
+            fetchFeed()
+            return
+        }
+        
+        withAnimation(.spring()) {
+            loadingFeed = false
+        }
+        // End the fetch of the chapters
+        filtered = chapters
+    }
+    
+    /// Refresh manga
+    func refresh() {
+        Task { @MainActor in
+            api.getById(manga.id) { [weak self] result in
+                switch result {
+                case .success(let manga): self?.manga = manga.data
+                case .failure(let error): print(error.localizedDescription)
+                }
+            }
         }
     }
 }

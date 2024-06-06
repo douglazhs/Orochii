@@ -7,9 +7,11 @@
 
 import Foundation
 
+protocol UserDefaultsKeys: CaseIterable { }
+
 /// Default app User Defaults keys
 public enum DefaultsKeys {
-    public enum Settings: String {
+    public enum Settings: String, UserDefaultsKeys{
         case sync = "settings.icloud.sync"
         case biometry = "settings.biometry"
         case library = "settings.biometry.library"
@@ -18,24 +20,24 @@ public enum DefaultsKeys {
         case chUpdate = "settings.chUpdate"
     }
     
-    public enum SrcPreferences: String {
+    public enum SrcPreferences: String, UserDefaultsKeys {
         case languages = "srcPreferences.languages"
         case nsfw = "srcPreferences.nsfw"
         case coverQuality = "srcPreferences.coverQuality"
     }
     
-    public enum ReaderPreferences: String {
+    public enum ReaderPreferences: String, UserDefaultsKeys {
         case pageLayout = "readerPreferences.pageLayout"
         case pageQuality = "readerPreferences.pageQuality"
         case mode = "readerPreferences.mode"
     }
     
-    public enum Chapters: String {
+    public enum Chapters: String, UserDefaultsKeys {
         case order = "chapters.order"
         case downloaded = "chapters.downloaded"
     }
     
-    public enum History: String {
+    public enum History: String, UserDefaultsKeys {
         case search = "history.search"
     }
 }

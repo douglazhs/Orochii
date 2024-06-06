@@ -60,15 +60,15 @@ final class DiscoverViewModel: ObservableObject {
     /// Fetch initial mangas
     private func fetchMangas() {
         Task { @MainActor [weak self] in
-            withTransaction(.init(animation: .smooth(duration: 0.25))) {
+            withTransaction(.init(animation: .smooth(duration: 0.5))) {
                 self?.loading = true
             }
             self?.fetch { mangas in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
-                    withTransaction(.init(animation: .smooth(duration: 0.25))) {
+                    withTransaction(.init(animation: .smooth(duration: 0.75))) {
                         self?.loading = false
                     }
-                    withTransaction(.init(animation: .linear(duration: 0.25))) {
+                    withTransaction(.init(animation: .smooth(duration: 0.5))) {
                         self?.mangas = mangas
                     }
                 }
@@ -116,15 +116,15 @@ final class DiscoverViewModel: ObservableObject {
             ) { [weak self] result in
                 switch result {
                 case .success(let array):
-                    withTransaction(.init(animation: .easeIn(duration: 0.225))) {
+                    withTransaction(.init(animation: .snappy(duration: 0.5))) {
                         self?.searchResult?.removeAll()
                         self?.searchResult = array.data
                     }
-                    withTransaction(.init(animation: .easeIn(duration: 0.225))) {
+                    withTransaction(.init(animation: .snappy(duration: 0.5))) {
                         self?.isSearching = false
                     }
                 case .failure(let error):
-                    withTransaction(.init(animation: .easeInOut(duration: 0.225))) {
+                    withTransaction(.init(animation: .snappy(duration: 0.5))) {
                         self?.searchResult = nil
                         self?.isSearching = false
                     }
@@ -149,9 +149,7 @@ final class DiscoverViewModel: ObservableObject {
         offset += 30
         
         fetch { [weak self] result in
-            withTransaction(
-                .init(animation: .easeInOut(duration: 0.25))
-            ) {
+            withTransaction(.init(animation: .smooth(duration: 0.5))) {
                 self?.mangas.append(contentsOf: result)
             }
         }
@@ -166,9 +164,7 @@ final class DiscoverViewModel: ObservableObject {
                 }
             }
         }
-        withTransaction(
-            .init(animation: .easeInOut(duration: 0.25))
-        ) {
+        withTransaction(.init(animation: .snappy(duration: 0.5))) {
             shouldReload = false
         }
     }
@@ -192,7 +188,7 @@ final class DiscoverViewModel: ObservableObject {
     
     /// Save history on UserDefaults when user submit the search
     func submitSearch() {
-        withTransaction(.init(animation: .bouncy(duration: 0.25))) {
+        withTransaction(.init(animation: .snappy(duration: 0.5))) {
             if !history.contains(nameQuery) {
                 history.append(nameQuery)
                 saveHistory()

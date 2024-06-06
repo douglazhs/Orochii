@@ -42,5 +42,4 @@ class Defaults {
     func getArray(of key: String) -> [Any]? {
         defaults.array(forKey: key)
     }
-    
 }

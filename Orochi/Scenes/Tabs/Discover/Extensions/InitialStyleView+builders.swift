@@ -15,7 +15,9 @@ extension InitialStyleView {
     func discoverGrid() -> some View {
         LazyVGrid(columns: columns, spacing: 10.0) {
             ForEach(vm.mangas, id: \.id) { manga in
-                NavigationLink(value: manga) {
+                NavigationLink {
+                    MangaView(manga)
+                } label: {
                     GridCell(
                         of: manga,
                         coverURL: vm.api.buildURL(for: .cover(

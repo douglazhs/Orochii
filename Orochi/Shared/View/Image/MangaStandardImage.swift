@@ -27,7 +27,7 @@ struct MangaStandardImage: View {
                 processors: [.resize(width: 295, unit: .points, upscale: true)],
                 priority: .veryHigh
             ),
-            transaction: .init(animation: .easeIn)
+            transaction: .init(animation: .interactiveSpring(duration: 1.0))
         ) { state in
             if let image = state.image {
                 sizeVariation(of: image)
