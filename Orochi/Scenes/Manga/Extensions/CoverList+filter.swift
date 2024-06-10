@@ -12,20 +12,20 @@ extension CoverList {
     @ViewBuilder
     func filterBottomView() -> some View {
         NavigationStack {
-            VStack(alignment: .leading, spacing: 10.0) {
+            List {
                 localesSection()
-                Divider()
                 orderSection()
+                    .listSectionSeparator(.hidden, edges: .bottom)
             }
-            .padding(32)
-            .measureSize { size in
-                viewSize = size
-            }
+            .listStyle(.grouped)
+            .scrollContentBackground(.hidden)
+            .scrollIndicators(.never)
+            .scrollBounceBehavior(.basedOnSize)
             .background(blurBackground())
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button("Filter") {
+                ToolbarItemGroup(placement: .bottomBar) {
+                    Button("Go!") {
                         showFilter = false
                     }
                     .fontWeight(.semibold)
@@ -43,7 +43,8 @@ extension CoverList {
                 showFilter = true
                 vm.oldCoverFilter = vm.coverFilter
             }
-            .tint(Color.ORCH.button)
+            .disabled(vm.covers.isEmpty)
+            .tint(!vm.covers.isEmpty ? Color.ORCH.button : Color.ORCH.secondaryText)
         }
         .padding(.horizontal)
         .padding(.vertical, 5.5)
@@ -51,19 +52,8 @@ extension CoverList {
     
     @ViewBuilder
     func localesSection() -> some View {
-        VStack(alignment: .leading, spacing: 15.0) {
-            Button {
-                vm.toggleLocaleSelection()
-                Haptics.shared.play(.medium)
-            } label: {
-                Text(vm.markAll ? "NONE" :  "ALL")
-                    .font(.footnote)
-                    .underline(color: Color.ORCH.button)
-                    .foregroundStyle(Color.ORCH.button)
-            }
-            .buttonStyle(.borderless)
-            
-            ForEach(vm.locales, id: \.self) { locale in
+        Section {
+            ForEach(vm.locales.filter { !$0.isEmpty }, id: \.self) { locale in
                 CheckboxView(isOn: vm.coverFilter.locales.contains(locale)) {
                     if !vm.coverFilter.locales.contains(locale) {
                         vm.coverFilter.locales.append(locale)
@@ -76,32 +66,69 @@ extension CoverList {
                         .font(.callout)
                 }
             }
+        } header: {
+            languageSelectionHeader()
         }
-        .font(.subheadline)
+        .listRowBackground(Color.clear)
         .foregroundStyle(Color.ORCH.primaryText)
         .listRowBackground(Color.clear)
+        .onChange(of: vm.coverFilter.locales) { locales in
+            if locales.count == vm.locales.count {
+                vm.markAll = true
+            } else { vm.markAll = false }
+        }
+    }
+    
+    @ViewBuilder
+    func languageSelectionHeader() -> some View {
+        HStack {
+            Text("Language Selection")
+            Spacer()
+            Button {
+                vm.toggleLocaleSelection()
+                Haptics.shared.play(.medium)
+            } label: {
+                Image(
+                    systemName: vm.markAll
+                    ? "checkmark.square.fill"
+                    : "square"
+                )
+                .imageScale(.large)
+            }
+            .buttonStyle(.borderless)
+            .disabled(vm.locales.isEmpty)
+            .foregroundStyle(
+                !vm.locales.isEmpty
+                ? Color.ORCH.button
+                : Color.ORCH.secondaryText
+            )
+        }
     }
     
     @ViewBuilder
     func orderSection() -> some View {
-        HStack {
-            Text("Volume Order")
-                .foregroundStyle(Color.ORCH.primaryText)
-            Spacer()
-            Button {
-                vm.coverFilter.volOrder = (vm.coverFilter.volOrder == .asc) ? .desc : .asc
-            } label: {
-                HStack {
-                    Text("\(vm.coverFilter.volOrder.description)")
-                        .foregroundStyle(Color.ORCH.secondaryText)
-                    Image(systemName: vm.coverFilter.volOrder == .desc ? "chevron.up" : "chevron.down")
-                        .fontWeight(.semibold)
-                        .font(.caption)
+        Section {
+            HStack {
+                Text("Volume Order")
+                    .foregroundStyle(Color.ORCH.primaryText)
+                Spacer()
+                Button {
+                    vm.coverFilter.volOrder = (vm.coverFilter.volOrder == .asc) ? .desc : .asc
+                } label: {
+                    HStack {
+                        Text("\(vm.coverFilter.volOrder.description)")
+                            .foregroundStyle(Color.ORCH.secondaryText)
+                        Image(systemName: vm.coverFilter.volOrder == .desc ? "chevron.up" : "chevron.down")
+                            .fontWeight(.semibold)
+                            .font(.caption)
+                    }
                 }
+                .buttonStyle(.borderless)
             }
-            .buttonStyle(.borderless)
+            .font(.subheadline)
+        } header: {
+            Text("Order")
         }
-        .font(.subheadline)
         .listRowBackground(Color.clear)
     }
 }

@@ -28,9 +28,17 @@ struct ReaderToolbar: ViewModifier {
                 ToolbarItem(placement: .navigationBarTrailing) { readerPreferences() }
                 ToolbarItem(placement: .bottomBar) { pageSlider() }
                 ToolbarItem(placement: .principal) {
-                    Text("Ch. \(vm.current.attributes?.chapter ?? "-")")
-                        .font(.headline)
-                        .fontWeight(.bold)
+                    Group {
+                        if vm.getTag("Oneshot", of: vm.manga) != nil, let title = vm.current.attributes?.title {
+                            Text(title)
+                        } else if vm.getTag("Oneshot", of: vm.manga) != nil, vm.current.attributes?.title == nil {
+                            Text("Oneshot")
+                        } else {
+                            Text("Ch. \(vm.current.attributes?.chapter ?? "-")")
+                        }
+                    }
+                    .font(.headline)
+                    .fontWeight(.bold)
                 }
             }
             .onAppear {

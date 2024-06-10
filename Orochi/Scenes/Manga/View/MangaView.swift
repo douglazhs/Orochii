@@ -38,6 +38,9 @@ struct MangaView: View {
                 CoverList()
                     .environmentObject(vm)
                     .interactiveDismissDisabled()
+                    .presentationContentInteraction(.resizes)
+                    .presentationBackgroundInteraction(.disabled)
+                    .presentationCornerRadius(.zero)
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
@@ -55,6 +58,7 @@ struct MangaView: View {
                         .lineLimit(1)
                         .multilineTextAlignment(.center)
                         .fontWeight(.heavy)
+                        .textSelection(.enabled)
                         .onTapGesture {
                             showFullName = true
                         }

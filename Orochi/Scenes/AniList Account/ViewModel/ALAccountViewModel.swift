@@ -25,8 +25,8 @@ final class ALAccountViewModel: ObservableObject {
     @Published var tab: ALTab = .stats
     @Published var favorites: [Media] = [Media]()
     @Published var activities: [ActivityUnion] = [ActivityUnion]()
-    @Published var activitiesState: ViewState = .loading
-    @Published var favoritesState: ViewState = .loading
+    @Published var activitiesState: ViewState = .loaded
+    @Published var favoritesState: ViewState = .loaded
     @Published var webView: WebView = .profile
     @Published var selectedManga: Media?
     @Published var selectedActivity: Int?
@@ -39,6 +39,7 @@ final class ALAccountViewModel: ObservableObject {
     
     init(user: User) {
         self.user = user
+        getMediListEntry()
     }
     
     /// Load Bearer token for the current authenticated user
@@ -55,36 +56,11 @@ final class ALAccountViewModel: ObservableObject {
     
     /// Get Media List Entry for the current Authenticated User
     func getMediListEntry() {
-        guard favoritesState != .loaded else { return }
-        
         guard let userFavs = user.favourites,
             let collection = userFavs.manga,
             let mangas = collection.nodes else { return }
         
-        withTransaction(.init(animation: .easeIn)) {
-            favoritesState = .loading
-        }
-        
-        mangas.forEach { manga in
-            Task { @MainActor in
-                do {
-                    guard let favorite = try await api.get(
-                        media: manga.id,
-                        token: loadToken()
-                    ) else { return }
-                    favorites.append(favorite)
-                } catch {
-                    showAlert(error)
-                    favoritesState = .failed
-                }
-            }
-        }
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-            withTransaction(.init(animation: .easeIn)) {
-                self.favoritesState = .loaded
-            }
-        }
+        favorites = mangas
     }
     
     /// Verify if the user scrolled to the end of the list
@@ -103,11 +79,26 @@ final class ALAccountViewModel: ObservableObject {
         loadFeed()
     }
     
+    /// Get more activities if scroll reached the end
+    func paginateFeed() {
+        loadedFeed = false
+        page += 1
+        loadFeed()
+    }
+    
     /// Get Authemticated User activities
     func loadFeed() {
         guard !loadedFeed else { return }
-        if page == 1 { handleLoading() }
-        getActivities()
+        // Show activity indicator just in first request. When `page` number is > 1, that's a pagination
+        if page == 1 {
+            withTransaction(.init(animation: .snappy(duration: 0.5))) {
+                self.activitiesState = .loading
+            }
+        }
+        // The request is very fast and you can't see the loading view, so... :)
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
+            self.getActivities()
+        }
     }
     
     /// Get current feed API response
@@ -122,17 +113,13 @@ final class ALAccountViewModel: ObservableObject {
                         token: loadToken(),
                         page: page
                     ) else { return }
-                    activities.append(contentsOf: response)
-                    loadedFeed = true
-                    if page == 1 { handleLoading() }
+                    handle(response)
                 case .following:
                     guard let response = try await api.getActivities(
                         token: loadToken(),
                         page: page
                     ) else { return }
-                    activities.append(contentsOf: response)
-                    loadedFeed = true
-                    if page == 1 { handleLoading() }
+                    handle(response)
                 }
             } catch {
                 showAlert(error)
@@ -141,28 +128,15 @@ final class ALAccountViewModel: ObservableObject {
         }
     }
     
-    /// Handle loading depending of the actual view state
-    private func handleLoading() {
-        switch activitiesState {
-        case .loading:
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.75) {
-                withTransaction(.init(animation: .easeIn)) {
-                    self.activitiesState = .loaded
-                }
-            }
-        case .loaded:
-            withTransaction(.init(animation: .easeIn)) {
-                activitiesState = .loading
-            }
-        case .failed: return
-        }
-    }
     
-    /// Get more activities if scroll reached the end
-    func paginateActivities() {
-        loadedFeed = false
-        page += 1
-        loadFeed()
+    /// Handle activity response
+    /// - Parameter response: Activity response
+    func handle(_ response: [ActivityUnion]) {
+        withTransaction(.init(animation: .snappy(duration: 0.5))) {
+            activities.append(contentsOf: response)
+            loadedFeed = true
+            activitiesState = .loaded
+        }
     }
     
     /// Refresh current tab
@@ -170,7 +144,7 @@ final class ALAccountViewModel: ObservableObject {
         switch tab {
         case .stats: break
         case .activity: loadFeed()
-        case .favorites: getMediListEntry()
+        case .favorites: break
         }
     }
     

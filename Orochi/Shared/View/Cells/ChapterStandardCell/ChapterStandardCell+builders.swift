@@ -27,10 +27,16 @@ extension ChapterStandardCell {
         HStack(alignment: .top, spacing: 5.0) {
             HStack(spacing: chapter.attributes?.volume != nil ? 2.5 : .zero) {
                 // CHAPTER NUMBER
-                Text("CH. \(chapter.attributes?.chapter ?? "-")")
-                    .font(.footnote)
-                    .fontWeight(.bold)
-                    .foregroundStyle(Color.ORCH.secondaryTitle)
+                Group {
+                    if !isOneshot {
+                        Text("CH. \(chapter.attributes?.chapter ?? "-")")
+                    } else {
+                        Text("Oneshot")
+                    }
+                }
+                .font(.footnote)
+                .fontWeight(.bold)
+                .foregroundStyle(Color.ORCH.secondaryTitle)
             }
             // CHAPTER TITLE
             title()

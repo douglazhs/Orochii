@@ -9,17 +9,15 @@ import SwiftUI
 import MangaDex
 
 extension InitialStyleView {
-
     /// Discover manga grid
     @ViewBuilder
     func discoverGrid() -> some View {
-        LazyVGrid(columns: columns, spacing: 10.0) {
+        LazyVGrid(columns: columns, spacing: Constants.device == .pad ? 15.0 : 12.0) {
             ForEach(vm.mangas, id: \.id) { manga in
                 NavigationLink {
                     MangaView(manga)
                 } label: {
                     GridCell(
-                        of: manga,
                         coverURL: vm.api.buildURL(for: .cover(
                             id: manga.id,
                             fileName: vm.imgFileName(
@@ -53,6 +51,20 @@ extension InitialStyleView {
             }
             .padding([.horizontal, .top])
             .padding(.bottom, 0.5)
+        }
+    }
+    
+    /// Discover filter button
+    @ViewBuilder
+    func filterButton() -> some View {
+        HStack {
+            Spacer()
+            Button("", systemImage: "line.3.horizontal.decrease") {
+                showFilter = true
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 5.0)
+            .tint(Color.ORCH.button)
         }
     }
     

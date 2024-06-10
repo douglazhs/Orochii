@@ -6,24 +6,20 @@
 //
 
 import SwiftUI
-import struct MangaDex.Manga
 import class MangaDex.MangaMock
 
 struct GridCell: View {
-    var manga: Manga
     var coverURL: URL?
     var title: String
     var mangaOnLibrary: Bool
     var action: () -> Void
     
     init(
-        of manga: Manga,
         coverURL: URL?,
         title: String,
         mangaOnLibrary: Bool = false,
         action: @escaping () -> Void
     ) {
-        self.manga = manga
         self.coverURL = coverURL
         self.title = title
         self.mangaOnLibrary = mangaOnLibrary
@@ -73,7 +69,6 @@ struct GridCell: View {
 
 #Preview {
     GridCell(
-        of: MangaMock.manga,
         coverURL: MangaMock.coverUrl,
         title: MangaMock.manga.attributes?.title?.en 
         ?? MangaMock.manga.attributes?.title?.jaRo

@@ -13,7 +13,6 @@ struct CoverList: View {
     var dismiss
     @EnvironmentObject var vm: MangaViewModel
     @State var showFilter: Bool = false
-    @State var viewSize: CGFloat = 0
     let columns = [
         GridItem(.adaptive(minimum: CGSize.dynamicImage.width))
     ]
@@ -36,7 +35,7 @@ struct CoverList: View {
                 vm.filterCovers()
             }, content: {
                 filterBottomView()
-                    .presentationDetents([.height(viewSize)])
+                    .presentationDetents([.medium, .large])
                     .presentationCornerRadius(.zero)
                     .presentationDragIndicator(.visible)
                     .presentationBackgroundInteraction(.disabled)

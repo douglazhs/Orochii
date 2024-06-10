@@ -164,9 +164,7 @@ final class DiscoverViewModel: ObservableObject {
                 }
             }
         }
-        withTransaction(.init(animation: .snappy(duration: 0.5))) {
-            shouldReload = false
-        }
+        shouldReload = false
     }
     
     /// Load Search History

@@ -15,8 +15,18 @@ extension ALAccountView {
     /// Authenticated user stats
     @ViewBuilder
     func stats() -> some View {
-        staticRows()
-        disclosureGroups()
+        List {
+            Group {
+                staticRows()
+                disclosureGroups()
+            }
+            .listRowBackground(Color.clear)
+            .listSectionSeparator(.hidden)
+        }
+        .listStyle(.inset)
+        .scrollIndicators(.hidden)
+        .scrollContentBackground(.hidden)
+        .background(Color.ORCH.background)
     }
     
     @ViewBuilder 

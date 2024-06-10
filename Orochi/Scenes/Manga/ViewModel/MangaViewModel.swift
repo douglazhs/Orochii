@@ -8,6 +8,7 @@
 import SwiftUI
 import MangaDex
 import Combine
+import MarkdownUI
 
 struct CoverFilter: Equatable {
     var locales: [String] = [String]()
@@ -136,15 +137,8 @@ final class MangaViewModel: ObservableObject {
     
     /// Manga description according with the selected language
     /// - Returns: Description in selected language
-    func switchDescLang() -> AttributedString {
-        do {
-            return try AttributedString(
-                markdown: manga.attributes?.description?[descLang] ?? "No description.",
-                options: AttributedString.MarkdownParsingOptions(interpretedSyntax: .inlineOnlyPreservingWhitespace)
-            )
-        } catch {
-            return "No description."
-        }
+    func switchDescLang() -> MarkdownContent {
+        return MarkdownContent(manga.attributes?.description?[descLang] ?? "No description.")
     }
     
     /// Convert alt titles in only on dictionary

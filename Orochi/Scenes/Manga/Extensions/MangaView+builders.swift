@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import NukeUI
+import MarkdownUI
 import struct MangaDex.Cover
 
 extension MangaView {
@@ -137,21 +137,21 @@ extension MangaView {
                 radius: 0.0,
                 opacity: 0.695
             )
-            .padding(.horizontal, min(0, -minY))
-            .frame(width: size.width, height: height)
+            .padding(.horizontal, -minY)
+            .frame(width: size.width, height: size.height)
             .clipped()
             .mask {
                 LinearGradient(
                     colors: [
-                        Color.black,
-                        Color.black,
+                        .black,
+                        .black,
                         .clear
                     ],
                     startPoint: .top,
                     endPoint: .bottom
                 )
             }
-            .offset(CGSize(width: 0, height: min(0, -minY)))
+            .offset(CGSize(width: 0, height: -minY))
         }
         .frame(height: UIScreen.height * 0.425)
     }
@@ -227,7 +227,7 @@ extension MangaView {
             
             // STATUS & UPDADATED
             MediaAttributes(
-                leading: ("DEMOGRAPHIC", vm.manga.attributes?.publicationDemographic?.uppercased() ?? "-"),
+                leading: ("DEMOGRAPHIC", vm.manga.attributes?.publicationDemographic?.uppercased() ?? "NONE"),
                 trailing: ("COUNTRY", vm.manga.attributes?.originalLanguage?.uppercased() ?? "-")
             )
             // COUNTRY OF ORIGIN & YEAR
@@ -248,10 +248,23 @@ extension MangaView {
     @ViewBuilder
     func description() -> some View {
         Section {
-            Text(vm.switchDescLang())
-                .foregroundStyle(Color.ORCH.primaryText)
-                .font(.subheadline)
-                .fontWeight(.regular)
+            Markdown(vm.switchDescLang())
+                .markdownTextStyle(\.text) {
+                    FontSize(15)
+                    FontWeight(.regular)
+                    ForegroundColor(Color.ORCH.primaryText)
+                }
+                .markdownTextStyle(\.link) {
+                    ForegroundColor(Color.ORCH.accentColor)
+                }
+                .markdownTextStyle(\.strong) {
+                    FontWeight(.semibold)
+                }
+                .markdownBlockStyle(\.listItem) { configuration in
+                    configuration.label.markdownMargin(top: .em(0.5))
+                }
+                .animation(.bouncy(duration: 0.35), value: vm.descLang)
+                .textSelection(.enabled)
         } header: {
             HStack {
                 Text(String.Manga.descHeader.uppercased())
@@ -289,7 +302,12 @@ extension MangaView {
         }
         .menuOrder(.priority)
         .menuStyle(.button)
-        .tint(Color.ORCH.button)
+        .foregroundStyle(
+            !(vm.manga.attributes?.description?.isEmpty ?? false)
+            ? Color.ORCH.button
+            : Color.ORCH.secondaryText
+        )
+        .disabled((vm.manga.attributes?.description) == nil)
     }
     
     /// Manga chapters list
@@ -305,6 +323,7 @@ extension MangaView {
                         ChapterStandardCell(
                             ch,
                             scanlationGroup: vm.relationship("scanlation_group", with: ch),
+                            isOneshot: vm.getTag("Oneshot", of: vm.manga) != nil,
                             editingMode: vm.isEditingMode
                         )
                     }
@@ -318,6 +337,11 @@ extension MangaView {
                 chaptersHeader()
             }
             .listRowBackground(Color.clear)
+            .onChange(of: chSelection) { _ in
+                if chSelection.count == vm.filtered.count {
+                    vm.selectAll = true
+                } else { vm.selectAll = false }
+            }
             .fullScreenCover(item: $vm.selectedChapter) {
                 ChapterView(
                     $0,
@@ -362,6 +386,7 @@ extension MangaView {
                     .font(.headline)
                     .fontWeight(.heavy)
                     .frame(alignment: .center)
+                    .textSelection(.enabled)
                 ForEach(vm.convertedAltTitles().sorted(by: >), id: \.key) { country, title in
                     VStack(alignment: .leading) {
                         Text((Locale.current as NSLocale).localizedString(forLanguageCode: country)?.uppercased() ?? country)
@@ -371,6 +396,7 @@ extension MangaView {
                             .font(.subheadline)
                             .fontWeight(.heavy)
                             .foregroundStyle(Color.ORCH.primaryText)
+                            .textSelection(.enabled)
                     }
                 }
             }

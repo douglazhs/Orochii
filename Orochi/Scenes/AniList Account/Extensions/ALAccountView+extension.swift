@@ -11,22 +11,9 @@ import SwiftUI
 extension ALAccountView {
     @ViewBuilder
     func content() -> some View {
-        List {
-            tabs()
-                .foregroundStyle(Color.ORCH.primaryText)
-                .listRowBackground(Color.clear)
-        }
-        .listStyle(.inset)
-        .scrollContentBackground(.hidden)
-        .scrollIndicators(.hidden)
-        .background(Color.ORCH.background)
-        .refreshable { [weak vm] in vm?.refreshTab() }
-        .fullScreenCover(isPresented: $showWebView) {
-            if let url = vm.validURL {
-                SafariWebView(
-                    url: url
-                ).ignoresSafeArea()
-            }
+        VStack {
+            picker()
+            tabs().foregroundStyle(Color.ORCH.primaryText)
         }
     }
     
@@ -36,29 +23,23 @@ extension ALAccountView {
         switch vm.tab {
         case .stats:
             stats()
-                .listSectionSeparator(.hidden)
         case .activity:
-            activities()
-                .listSectionSeparator(.hidden)
-                .onAppear { [weak vm] in vm?.loadFeed() }
+            activities().onAppear { [weak vm] in vm?.loadFeed() }
         case .favorites:
             favorites()
-                .listSectionSeparator(.hidden)
-                .onAppear { [weak vm] in vm?.getMediListEntry() }
         }
     }
     
     /// Segmented control
     @ViewBuilder
     func picker() -> some View {
-        Section {
-            Picker("", selection: $vm.tab) {
-                ForEach(ALTab.allCases, id: \.self) { tab in
-                    Text("\(tab.title)")
-                }
+        Picker("", selection: $vm.tab) {
+            ForEach(ALTab.allCases, id: \.self) { tab in
+                Text("\(tab.title)")
             }
-            .pickerStyle(.segmented)
-        }.listSectionSeparator(.hidden)
+        }
+        .padding(.vertical, 5)
+        .pickerStyle(.segmented)
     }
     
     /// NavBar trailing buttons

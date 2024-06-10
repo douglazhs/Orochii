@@ -12,29 +12,39 @@ import struct AniListService.ActivityUnion
 extension ALAccountView {
     @ViewBuilder
     func activities() -> some View {
-        feedMenu()
-            .listSectionSeparator(.hidden)
-        
-        switch vm.activitiesState {
-        case .loading:
-            ActivityIndicator()
-                .frame(maxWidth: .infinity)
-        case .loaded:
-            if !vm.activities.isEmpty {
-                ForEach(vm.activities) { activity in
-                    activityCard(activity)
-                        .listRowBackground(Color.ORCH.secondaryBackground)
-                        .task { [weak vm] in
-                            if vm?.hasReachedEnd(in: activity) ?? false {
-                                vm?.paginateActivities()
+        List {
+            feedMenu()
+                .listRowBackground(Color.clear)
+                .listSectionSeparator(.hidden)
+            
+            switch vm.activitiesState {
+            case .loading: EmptyView()
+            case .loaded:
+                if !vm.activities.isEmpty {
+                    ForEach(vm.activities) { activity in
+                        activityCard(activity)
+                            .listRowBackground(Color.ORCH.secondaryBackground)
+                            .task { [weak vm] in
+                                if vm?.hasReachedEnd(in: activity) ?? false {
+                                    vm?.paginateFeed()
+                                }
                             }
-                        }
+                    }
+                } else if vm.activities.isEmpty && !(vm.activitiesState == .loading) {
+                    noContent(message: String.Account.noActivities)
                 }
-            } else {
+            case .failed:
                 noContent(message: String.Account.noActivities)
             }
-        case .failed:
-            noContent(message: String.Account.noActivities)
+        }
+        .listStyle(.inset)
+        .scrollContentBackground(.hidden)
+        .background(Color.ORCH.background)
+        .overlay(alignment: .top) {
+            // Loading de primeira request/refresh
+            if vm.activitiesState == .loading  || vm.favoritesState == .loading {
+                IndeterminateProgressView()
+            }
         }
     }
     
@@ -72,11 +82,17 @@ extension ALAccountView {
     func activityCard(_ activity: ActivityUnion) -> some View {
         HStack(alignment: .top) {
             MangaStandardImage(
-                url: URL(string: activity.media?.coverImage?.medium ?? ""),
+                url: URL(
+                    string: activity.media?.coverImage?.extraLarge 
+                    ?? activity.media?.coverImage?.large
+                    ?? activity.media?.coverImage?.medium
+                    ?? ""
+                ),
                 size: CGSize(
-                    width: CGSize.standardImageCell.width * 0.65,
-                    height: CGSize.standardImageCell.height * 0.65
-                )
+                    width: CGSize.standardImageCell.width * 0.45,
+                    height: CGSize.standardImageCell.height * 0.45
+                ),
+                roundCorner: false
             )
             
             HStack(alignment: .top) {
@@ -91,6 +107,6 @@ extension ALAccountView {
                     .foregroundStyle(Color.ORCH.primaryText)
             }
         }
-        .frame(maxHeight: CGSize.standardImageCell.height * 0.7)
+        .frame(maxHeight: CGSize.standardImageCell.height * 0.45)
     }
 }

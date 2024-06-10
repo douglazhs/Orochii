@@ -14,7 +14,7 @@ extension CGSize {
         let aspectRatio = 92.5 / 62.5
         var proportion: Double {
             switch Constants.device {
-            case .pad: return 0.120
+            case .pad: return 0.215
             default:   return 0.285
             }
         }
@@ -28,7 +28,7 @@ extension CGSize {
         let aspectRatio = 97.5 / 67.5
         var proportion: Double {
             switch Constants.device {
-            case .pad: return 0.2
+            case .pad: return 0.250
             default:   return 0.425
             }
         }

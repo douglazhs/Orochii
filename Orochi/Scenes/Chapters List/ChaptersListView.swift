@@ -25,7 +25,8 @@ struct ChaptersListView: View {
                             scanlationGroup: vm.relationship(
                                 "scanlation_group",
                                 with: ch
-                            )
+                            ),
+                            isOneshot: vm.getTag("Oneshot", of: vm.manga) != nil
                         )
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.visible, edges: .bottom)
@@ -55,7 +56,7 @@ struct ChaptersListView: View {
                 .standardBars()
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        Text("\(vm.feed.count) Chapters")
+                        Text("\(vm.feed.count) chapter(s)")
                             .font(.headline)
                             .fontWeight(.bold)
                     }

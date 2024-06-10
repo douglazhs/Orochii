@@ -18,6 +18,8 @@ extension MangaView {
             } label: {
                 Text(vm.selectAll ? String.Common.none : String.Common.all)
             }
+            .disabled(vm.chapters.isEmpty)
+            .tint(!vm.chapters.isEmpty ? Color.ORCH.accentColor : Color.ORCH.secondaryText)
         }
     }
     

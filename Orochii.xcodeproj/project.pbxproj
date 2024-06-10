@@ -109,6 +109,9 @@
 		52AF1ADE2C0FEE2A00BC1EFC /* CheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1ADD2C0FEE2A00BC1EFC /* CheckboxToggleStyle.swift */; };
 		52AF1AE12C0FF40E00BC1EFC /* CheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1AE02C0FF40E00BC1EFC /* CheckboxView.swift */; };
 		52AF1AE32C108DDD00BC1EFC /* CoverList+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1AE22C108DDD00BC1EFC /* CoverList+extension.swift */; };
+		52AF1AEE2C12371200BC1EFC /* DiscoverFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1AED2C12371200BC1EFC /* DiscoverFilterView.swift */; };
+		52AF1AF02C12371D00BC1EFC /* DiscoverFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1AEF2C12371D00BC1EFC /* DiscoverFilterViewModel.swift */; };
+		52AF1AF32C14C9BE00BC1EFC /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 52AF1AF22C14C9BE00BC1EFC /* MarkdownUI */; };
 		52D0E2DE2C001C4E009374C5 /* IndeterminateProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D0E2DD2C001C4E009374C5 /* IndeterminateProgressView.swift */; };
 		52D0E2E12C001CB1009374C5 /* ReadWdithModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D0E2E02C001CB1009374C5 /* ReadWdithModifier.swift */; };
 		52D0E2E42C00D373009374C5 /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D0E2E32C00D373009374C5 /* GridCell.swift */; };
@@ -265,6 +268,8 @@
 		52AF1ADD2C0FEE2A00BC1EFC /* CheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggleStyle.swift; sourceTree = "<group>"; };
 		52AF1AE02C0FF40E00BC1EFC /* CheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxView.swift; sourceTree = "<group>"; };
 		52AF1AE22C108DDD00BC1EFC /* CoverList+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoverList+extension.swift"; sourceTree = "<group>"; };
+		52AF1AED2C12371200BC1EFC /* DiscoverFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverFilterView.swift; sourceTree = "<group>"; };
+		52AF1AEF2C12371D00BC1EFC /* DiscoverFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverFilterViewModel.swift; sourceTree = "<group>"; };
 		52D0E2DD2C001C4E009374C5 /* IndeterminateProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndeterminateProgressView.swift; sourceTree = "<group>"; };
 		52D0E2E02C001CB1009374C5 /* ReadWdithModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWdithModifier.swift; sourceTree = "<group>"; };
 		52D0E2E32C00D373009374C5 /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
@@ -320,6 +325,7 @@
 				7715904D2A4329CA00E36CD6 /* Kingfisher in Frameworks */,
 				779697522A6ACEBD008D55BB /* NukeUI in Frameworks */,
 				77BB21C42A79A44400ED998E /* AniListService in Frameworks */,
+				52AF1AF32C14C9BE00BC1EFC /* MarkdownUI in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -482,6 +488,7 @@
 		5092DF322929427C0094DC18 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				52AF1AEA2C1236F100BC1EFC /* Discover Filter */,
 				5278E3B72B9A7AFC0036CCB8 /* AniList Account */,
 				77553AC12A799BFB004B7F72 /* Filter */,
 				77B1BD662A69BD4B003146B9 /* Chapters List */,
@@ -1142,6 +1149,31 @@
 			path = Checkbox;
 			sourceTree = "<group>";
 		};
+		52AF1AEA2C1236F100BC1EFC /* Discover Filter */ = {
+			isa = PBXGroup;
+			children = (
+				52AF1AEC2C12370000BC1EFC /* View Model */,
+				52AF1AEB2C1236FC00BC1EFC /* View */,
+			);
+			path = "Discover Filter";
+			sourceTree = "<group>";
+		};
+		52AF1AEB2C1236FC00BC1EFC /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52AF1AED2C12371200BC1EFC /* DiscoverFilterView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		52AF1AEC2C12370000BC1EFC /* View Model */ = {
+			isa = PBXGroup;
+			children = (
+				52AF1AEF2C12371D00BC1EFC /* DiscoverFilterViewModel.swift */,
+			);
+			path = "View Model";
+			sourceTree = "<group>";
+		};
 		52D0E2DF2C001C71009374C5 /* Read Width */ = {
 			isa = PBXGroup;
 			children = (
@@ -1414,6 +1446,7 @@
 				770611B72A5F252800A2CD0A /* MangaDex */,
 				779697512A6ACEBD008D55BB /* NukeUI */,
 				77BB21C32A79A44400ED998E /* AniListService */,
+				52AF1AF22C14C9BE00BC1EFC /* MarkdownUI */,
 			);
 			productName = Orochi;
 			productReference = 5092DF2129292C590094DC18 /* Orochii.app */;
@@ -1449,6 +1482,7 @@
 				770611B62A5F252800A2CD0A /* XCRemoteSwiftPackageReference "MangaDex" */,
 				7796974E2A6ACDD2008D55BB /* XCRemoteSwiftPackageReference "Nuke" */,
 				77BB21C22A79A44400ED998E /* XCRemoteSwiftPackageReference "AniListTracker" */,
+				52AF1AF12C14C9BE00BC1EFC /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 			);
 			productRefGroup = 5092DF2229292C590094DC18 /* Products */;
 			projectDirPath = "";
@@ -1540,6 +1574,7 @@
 				502E8E022935440D00881F40 /* NumberPicker.swift in Sources */,
 				522256E92BD15EF4001EC6FC /* Feed.swift in Sources */,
 				773F06E72A7716B400341E0F /* ALTracker+toolbar.swift in Sources */,
+				52AF1AF02C12371D00BC1EFC /* DiscoverFilterViewModel.swift in Sources */,
 				507803DC292DC0530041D5BD /* ActivityIndicator.swift in Sources */,
 				772ED9E62A76017800D3960D /* Int+extension.swift in Sources */,
 				50F44430292E4496001B3CF4 /* ChapterViewModel.swift in Sources */,
@@ -1612,6 +1647,7 @@
 				50F4444F292F08B9001B3CF4 /* ReaderToolbar+builders.swift in Sources */,
 				50CAD2F029383BE9000C1C0E /* ALTracker+manga.swift in Sources */,
 				50F44437292E58A4001B3CF4 /* ReaderPreferencesView+builders.swift in Sources */,
+				52AF1AEE2C12371200BC1EFC /* DiscoverFilterView.swift in Sources */,
 				773F06E52A77167300341E0F /* ALTracker+overlay.swift in Sources */,
 				5092DF35292942A30094DC18 /* DiscoverView.swift in Sources */,
 				5007A5022933AE3300EAAB84 /* MangaView+editablle.swift in Sources */,
@@ -1877,6 +1913,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		52AF1AF12C14C9BE00BC1EFC /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.3.0;
+			};
+		};
 		770611B62A5F252800A2CD0A /* XCRemoteSwiftPackageReference "MangaDex" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/douglazhs/MangaDex";
@@ -1912,6 +1956,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		52AF1AF22C14C9BE00BC1EFC /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 52AF1AF12C14C9BE00BC1EFC /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
+		};
 		770611B72A5F252800A2CD0A /* MangaDex */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 770611B62A5F252800A2CD0A /* XCRemoteSwiftPackageReference "MangaDex" */;

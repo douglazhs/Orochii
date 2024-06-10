@@ -57,11 +57,10 @@ extension SearchStyleView {
     
     @ViewBuilder
     func loadedContent(with mangas: [Manga]) -> some View {
-        LazyVGrid(columns: columns, spacing: 10.0) {
+        LazyVGrid(columns: columns, spacing: Constants.device == .pad ? 15.0 : 12.0) {
             ForEach(mangas) { manga in
                 NavigationLink(value: manga) {
                     GridCell(
-                        of: manga,
                         coverURL: vm.api.buildURL(for: .cover(
                             id: manga.id,
                             fileName: vm.imgFileName(

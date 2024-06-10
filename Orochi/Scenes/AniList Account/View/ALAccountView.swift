@@ -67,9 +67,23 @@ struct ALAccountView: View {
                     }
                     
                     ToolbarItem(placement: .principal) {
-                        VStack { picker() }
+                        VStack {
+                            Text(vm.user.name)
+                                .font(.headline)
+                                .lineLimit(1)
+                                .multilineTextAlignment(.leading)
+                                .fontWeight(.heavy)
+                        }
                     }
                 }
+                .fullScreenCover(isPresented: $showWebView) {
+                    if let url = vm.validURL {
+                        SafariWebView(
+                            url: url
+                        ).ignoresSafeArea()
+                    }
+                }
+                .onAppear(perform: { UITableView.appearance().separatorStyle = .none })
         }
     }
 }

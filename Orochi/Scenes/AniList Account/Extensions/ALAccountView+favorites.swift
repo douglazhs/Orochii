@@ -13,51 +13,36 @@ extension ALAccountView {
     /// Authenticated user favorites mangas
     @ViewBuilder
     func favorites() -> some View {
-        switch vm.favoritesState {
-        case .loading:
-            ActivityIndicator()
-                .frame(maxWidth: .infinity)
-        case .loaded:
-            if !vm.favorites.isEmpty {
-                ScrollView {
-                    LazyVGrid(columns: columns, spacing: 10.0) {
-                        ForEach(vm.favorites, id: \.id) { manga in
-                            favoriteManga(manga).frame(alignment: .top)
-                        }
-                    }.padding(.top)
+        Group {
+            switch vm.favoritesState {
+            case .loading:
+                ActivityIndicator()
+                    .frame(maxWidth: .infinity)
+            case .loaded:
+                if !vm.favorites.isEmpty {
+                    ScrollView {
+                        LazyVGrid(columns: columns, spacing: 10.0) {
+                            ForEach(vm.favorites, id: \.id) {
+                                GridCell(
+                                    coverURL: URL(
+                                        string: $0.coverImage?.extraLarge
+                                        ?? $0.coverImage?.large
+                                        ?? $0.coverImage?.medium
+                                        ?? ""
+                                    ),
+                                    title: $0.title?.english
+                                    ?? $0.title?.romaji
+                                    ?? String.Common.unknown
+                                ) { print("Favorite context menu action") }
+                            }
+                        }.padding()
+                    }
+                } else {
+                    noContent(message: String.Account.noFavorites)
                 }
-            } else {
+            case .failed:
                 noContent(message: String.Account.noFavorites)
             }
-        case .failed:
-            noContent(message: String.Account.noFavorites)
-        }
-    }
-    
-    /// Favorite manga card
-    @ViewBuilder
-    func favoriteManga(_ manga: Media) -> some View {
-        VStack(alignment: .leading) {
-            MangaStandardImage(
-                url: URL(string: manga.coverImage?.medium ?? ""),
-                size: CGSize(
-                    width: CGSize.standardImageCell.width,
-                    height: CGSize.standardImageCell.height
-                )
-            )
-            
-            Text(manga.title?.english ?? manga.title?.romaji ?? String.Common.unknown)
-                .font(.footnote)
-                .fontWeight(.semibold)
-                .foregroundStyle(Color.ORCH.primaryText)
-                .lineLimit(3)
-                .multilineTextAlignment(.leading)
-            
-            Text(MangaStatus(rawValue: manga.mediaListEntry?.status ?? "")?.description.uppercased() ?? "")
-                .font(.caption)
-                .fontWeight(.regular)
-                .foregroundStyle(Color.ORCH.secondaryText)
-            Spacer()
-        }.frame(maxWidth: CGSize.standardImageCell.width, alignment: .top)
+        }.background(Color.ORCH.background)
     }
 }

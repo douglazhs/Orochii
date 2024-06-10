@@ -40,13 +40,17 @@ extension SourcePreferencesView {
                             $0.map { $0.rawValue },
                             key: DefaultsKeys.SrcPreferences.languages.rawValue
                         )
-                        withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
+                        withTransaction(.init(animation: .snappy(duration: 0.5))) {
                             vm.shouldReload = true
                         }
                     }
             } label: {
-                Text(vm.languages.map { $0.description }.joined(separator: ", ") )
-                    .foregroundStyle(Color.ORCH.primaryText)
+                Text(
+                    !vm.languages.isEmpty
+                    ? vm.languages.map { $0.description }.joined(separator: ", ")
+                    : String.Common.none
+                )
+                .foregroundStyle(Color.ORCH.primaryText)
             }
         } header: {
             Text(String.MangaSource.languageHeader)
@@ -74,7 +78,9 @@ extension SourcePreferencesView {
                     $0,
                     key: DefaultsKeys.SrcPreferences.nsfw.rawValue
                 )
-                vm.shouldReload = true
+                withTransaction(.init(animation: .snappy(duration: 0.5))) {
+                    vm.shouldReload = true
+                }
             }
         } header: {
             Text(String.Adjusts.ageRatingHeader)
@@ -95,7 +101,6 @@ extension SourcePreferencesView {
                         $0.rawValue,
                         key: DefaultsKeys.SrcPreferences.coverQuality.rawValue
                     )
-                    vm.shouldReload = true
                 }
                 .foregroundStyle(Color.ORCH.primaryText)
         } header: {
