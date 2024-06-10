@@ -15,15 +15,21 @@ extension DiscoverViewModel: MangaHelpers { }
 extension DiscoverViewModel: SourcePreferences { }
 
 final class DiscoverViewModel: ObservableObject {
+    enum SearchOrder {
+        case title, lastUpdated, none
+    }
     /// MangaDex api object
     let api: MangaDexAPIProtocol = MangaDexAPI()
     // MARK: - Manga filter/fetch
     @Published var mangas: [Manga] = [Manga]()
     @Published var selectedMainFilter: MainFilter = .mostRelevants
     @Published var offset: Int = 0
+    @Published var searchOrder: SearchOrder = .none
+    @Published var ascendingOrder: Bool = true
     // MARK: - Searching stuffs
     @Published var nameQuery: String = ""
     @Published var searchResult: [Manga]?
+    @Published var orderedSearchResult: [Manga] = [Manga]()
     @Published var isSearching: Bool = false
     // MARK: - MangaDex request handling
     @Published var nsfw: Bool = false
@@ -32,7 +38,7 @@ final class DiscoverViewModel: ObservableObject {
     @Published var shouldReload: Bool = false
     @Published var loading: Bool = false
     // MARK: - Search History
-    @Published var history: [String] = [String]()
+    @Published var suggestions: [String] = [String]()
     // MARK: - Error alert
     @Published var showAlert: Bool = false
     var alertInfo: AlertInfo = .init()
@@ -119,8 +125,7 @@ final class DiscoverViewModel: ObservableObject {
                     withTransaction(.init(animation: .snappy(duration: 0.5))) {
                         self?.searchResult?.removeAll()
                         self?.searchResult = array.data
-                    }
-                    withTransaction(.init(animation: .snappy(duration: 0.5))) {
+                        self?.orderSearchResult()
                         self?.isSearching = false
                     }
                 case .failure(let error):
@@ -164,12 +169,14 @@ final class DiscoverViewModel: ObservableObject {
                 }
             }
         }
-        shouldReload = false
+        withTransaction(.init(animation: .snappy(duration: 0.5))) {
+            shouldReload = false
+        }
     }
     
     /// Load Search History
     func loadHistory() {
-        history = Defaults
+        suggestions = Defaults
             .standard
             .getArray(
                 of: DefaultsKeys.History.search.rawValue
@@ -179,7 +186,7 @@ final class DiscoverViewModel: ObservableObject {
     /// Save query in Search History
     func saveHistory() {
         Defaults.standard.saveArray(
-            of: history,
+            of: suggestions,
             key: DefaultsKeys.History.search.rawValue
         )
     }
@@ -187,9 +194,32 @@ final class DiscoverViewModel: ObservableObject {
     /// Save history on UserDefaults when user submit the search
     func submitSearch() {
         withTransaction(.init(animation: .snappy(duration: 0.5))) {
-            if !history.contains(nameQuery) {
-                history.append(nameQuery)
+            if !suggestions.contains(nameQuery) {
+                suggestions.append(nameQuery)
                 saveHistory()
+            }
+        }
+    }
+    
+    /// Filter search result
+    func orderSearchResult() {
+        withTransaction(.init(animation: .snappy(duration: 0.5))) {
+            switch searchOrder {
+            case .title:
+                if ascendingOrder {
+                    orderedSearchResult = searchResult?.sorted { unwrapTitle(of: $0) < unwrapTitle(of: $1) } ?? []
+                } else {
+                    orderedSearchResult = searchResult?.sorted { unwrapTitle(of: $0) > unwrapTitle(of: $1) } ?? []
+                }
+            case .lastUpdated:
+                if ascendingOrder {
+                    orderedSearchResult = searchResult?
+                        .sorted { $0.attributes?.updatedAt ?? "" > $1.attributes?.updatedAt ?? "" } ?? []
+                } else {
+                    orderedSearchResult = searchResult?
+                        .sorted { $0.attributes?.updatedAt ?? "" < $1.attributes?.updatedAt ?? "" } ?? []
+                }
+            case .none: orderedSearchResult = searchResult ?? []
             }
         }
     }
@@ -197,16 +227,14 @@ final class DiscoverViewModel: ObservableObject {
     /// Remove query from history on UserDefaults
     func removeQuery(on index: Int) {
         withTransaction(.init(animation: .bouncy(duration: 0.25))) {
-            history.remove(at: index)
+            suggestions.remove(at: index)
             saveHistory()
         }
     }
     
     /// Fill query with clicked history 
     func fillWithHistory(on index: Int) {
-        withTransaction(.init(animation: .bouncy(duration: 0.25))) {
-            nameQuery = history[index]
-        }
+        nameQuery = suggestions[index]
     }
     
     /// Show alert

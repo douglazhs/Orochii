@@ -14,25 +14,34 @@ extension DiscoverView {
     func content() -> some View {
         switch viewStyle {
         case .search:
-            SearchStyleView($viewStyle).environmentObject(vm)
-                .onChange(of: vm.nameQuery) { newValue in
-                    if newValue.isEmpty {
-                        withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
-                            vm.searchResult?.removeAll()
-                            viewStyle = .initial
-                        }
-                    }
-                }
-        case .initial:
-            InitialStyleView()
+            SearchStyleView($viewStyle)
                 .environmentObject(vm)
-                .onChange(of: vm.nameQuery) { newValue in
-                    if !newValue.isEmpty {
-                        withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
-                            viewStyle = .search
+        case .initial:
+            InitialStyleView($viewStyle)
+                .environmentObject(vm)
+        }
+    }
+    
+    /// Search history from user
+    @ViewBuilder
+    func searchSuggestions() -> some View {
+        if vm.nameQuery.isEmpty && !vm.suggestions.isEmpty {
+            Group {
+                ForEach(vm.suggestions.indices, id: \.self) { index in
+                    Button {
+                        vm.fillWithHistory(on: index)
+                    } label: {
+                        Text(vm.suggestions[index])
+                    }
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            vm.removeQuery(on: index)
+                        } label: {
+                            Text(String.Common.remove)
                         }
                     }
                 }
+            }.listSectionSeparator(.hidden)
         }
     }
     

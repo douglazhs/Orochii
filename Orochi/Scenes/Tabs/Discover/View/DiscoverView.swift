@@ -48,10 +48,9 @@ struct DiscoverView: View {
                     }
                 }
         }
-        .searchable(
-            text: $vm.nameQuery,
-            prompt: String.Discovery.searchPlaceholder
-        )
+        .searchable(text: $vm.nameQuery, prompt: String.Discovery.searchPlaceholder) {
+            searchSuggestions()
+        }
         .onSubmit(of: .search) {
             UIApplication.shared.becomeFirstResponder()
             vm.submitSearch()

@@ -37,7 +37,7 @@ extension InitialStyleView {
                     }
                 }
             }
-        }.padding()
+        }.padding([.horizontal, .bottom])
     }
     
     /// Main filrer carousel
@@ -63,7 +63,7 @@ extension InitialStyleView {
                 showFilter = true
             }
             .padding(.horizontal)
-            .padding(.vertical, 5.0)
+            .padding(.vertical, 10.0)
             .tint(Color.ORCH.button)
         }
     }

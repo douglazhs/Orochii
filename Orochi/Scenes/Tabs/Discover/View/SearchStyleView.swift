@@ -14,6 +14,7 @@ struct SearchStyleView: View {
     var isSearching
     @EnvironmentObject var vm: DiscoverViewModel
     @Binding var viewStyle: ViewStyle
+    @State var showFilter: Bool = false
     var columns = [
         GridItem(.adaptive(minimum: CGSize.standardImageCell.width))
     ]
@@ -31,21 +32,20 @@ struct SearchStyleView: View {
                         scheduler: DispatchQueue.main
                     )
             ) { [weak vm] _ in vm?.search() }
-            .onChange(of: vm.nameQuery) { _ in
-                withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
-                    vm.isSearching = true
-                }
-            }
-            .onChange(of: isSearching) { newValue in
-                if !newValue {
-                    vm.isSearching = false
-                    vm.searchResult?.removeAll()
-                    withTransaction(.init(animation: .easeInOut(duration: 0.25))) {
-                        viewStyle = .initial
+            .onChange(of: vm.nameQuery) { query in
+                if !query.isEmpty {
+                    withTransaction(.init(animation: .easeIn(duration: 0.25))) {
+                        vm.isSearching = true
                     }
                 }
             }
-            
+            .onChange(of: isSearching) { searching in
+                if !searching {
+                    vm.isSearching = false
+                    vm.searchResult?.removeAll()
+                    viewStyle = .initial
+                }
+            }
     }
 }
 

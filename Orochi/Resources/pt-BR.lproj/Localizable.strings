@@ -38,7 +38,7 @@
 // MARK: - DISCOVERY SCREEN
 
 "discovery_title" = "Descubra";
-"discovery_search_placeholder" = "Busque por um título de manga";
+"discovery_search_placeholder" = "Título do manga";
 
 // MANGA CELL
 
