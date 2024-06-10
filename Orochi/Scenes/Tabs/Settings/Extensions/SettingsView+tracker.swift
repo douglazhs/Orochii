@@ -27,7 +27,7 @@ extension SettingsView {
     func loggedInfo() -> some View {
         if vm.requestError == nil {
             if vm.user != nil {
-                HStack(alignment: .top) {
+                HStack(alignment: .center) {
                     // USER AVATAR
                     profileAvatar()
                     // USER STATS AND INFORMATION
@@ -49,13 +49,13 @@ extension SettingsView {
     @ViewBuilder
     func avatar() -> some View {
         if let url = URL(string: vm.user?.avatar?.large ?? "") {
-            MangaStandardImage(
+            AsyncImageView(
                 url: url,
                 size: CGSize(
-                    width: CGSize.standardImageCell.width * 0.75,
-                    height: CGSize.standardImageCell.width * 0.75
+                    width: CGSize.standardImageCell.width * 0.65,
+                    height: CGSize.standardImageCell.width * 0.65
                 )
-            )
+            ).clipShape(Circle())
         }
     }
     

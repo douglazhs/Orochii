@@ -35,14 +35,14 @@ struct ALAccountView: View {
         UISegmentedControl.appearance().setTitleTextAttributes(
             [
                 NSAttributedString.Key.foregroundColor: UIColor.white,
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .heavy)
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .bold)
             ],
             for: .selected
         )
         UISegmentedControl.appearance().setTitleTextAttributes(
             [
                 NSAttributedString.Key.foregroundColor: UIColor.secondaryLabel,
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16, weight: .heavy)
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .bold)
             ],
             for: .normal
         )
@@ -52,6 +52,7 @@ struct ALAccountView: View {
         NavigationStack {
             content()
                 .standardBars()
+                .toolbarBackground(.hidden, for: .navigationBar)
                 .animation(.easeIn(duration: 0.5), value: !vm.favorites.isEmpty)
                 .toolbarRole(.editor)
                 .alert(String.Common.error, isPresented: $vm.showAlert) {
@@ -83,7 +84,6 @@ struct ALAccountView: View {
                         ).ignoresSafeArea()
                     }
                 }
-                .onAppear(perform: { UITableView.appearance().separatorStyle = .none })
         }
     }
 }

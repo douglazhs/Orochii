@@ -8,16 +8,20 @@
 import SwiftUI
 
 struct Placeholder: View {
+    var overlay: Bool = true
+    
     var body: some View {
-        RoundedRectangle(cornerRadius: 4.5)
+        RoundedRectangle(cornerRadius: overlay ? 4.5 : 0.0)
             .fill(Color(.systemGray4))
-            .overlay(
-                RoundedRectangle(cornerRadius: 4.5)
-                    .stroke(
-                        Color(uiColor: .systemGray),
-                        lineWidth: 0.35
-                    )
-            )
+            .overlay {
+                if overlay {
+                    RoundedRectangle(cornerRadius: 4.5)
+                        .stroke(
+                            Color(uiColor: .systemGray),
+                            lineWidth: 0.35
+                        )
+                }
+            }
     }
 }
 

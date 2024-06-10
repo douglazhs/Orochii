@@ -38,8 +38,8 @@ extension ALAccountView {
                 Text("\(tab.title)")
             }
         }
-        .padding(.vertical, 5)
         .pickerStyle(.segmented)
+        .padding(.horizontal, 5.0)
     }
     
     /// NavBar trailing buttons

@@ -35,7 +35,11 @@ struct MangaStandardImage: View {
                 if let size {
                     Placeholder().frame(width: size.width, height: size.height)
                 } else {
-                    Placeholder()
+                    Placeholder(overlay: false)
+                        .frame(
+                            width: CGSize.dynamicImage.width,
+                            height: CGSize.dynamicImage.height
+                        )
                 }
             }
         }
@@ -78,10 +82,7 @@ struct MangaStandardImage_Previews: PreviewProvider {
             url: URL(
                 string: "https://uploads.mangadex.org/covers/c52b2ce3-7f95-469c-96b0-479524fb7a1a/4789ab75-cbce-439d-8344-bd64e80a8e6a.png"
             ),
-            size: CGSize(
-                width: CGSize.standardImageCell.width,
-                height: CGSize.standardImageCell.height
-            )
+            size: .standardImageCell
         )
     }
 }

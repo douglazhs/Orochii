@@ -25,6 +25,7 @@ extension CoverList {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItemGroup(placement: .bottomBar) {
+                    Spacer()
                     Button("Go!") {
                         showFilter = false
                     }

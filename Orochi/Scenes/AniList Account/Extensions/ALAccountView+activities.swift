@@ -17,25 +17,28 @@ extension ALAccountView {
                 .listRowBackground(Color.clear)
                 .listSectionSeparator(.hidden)
             
-            switch vm.activitiesState {
-            case .loading: EmptyView()
-            case .loaded:
-                if !vm.activities.isEmpty {
-                    ForEach(vm.activities) { activity in
-                        activityCard(activity)
-                            .listRowBackground(Color.ORCH.secondaryBackground)
-                            .task { [weak vm] in
-                                if vm?.hasReachedEnd(in: activity) ?? false {
-                                    vm?.paginateFeed()
+            Section {
+                switch vm.activitiesState {
+                case .loading: EmptyView()
+                case .loaded:
+                    if !vm.activities.isEmpty {
+                        ForEach(vm.activities) { activity in
+                            activityCard(activity)
+                                .listRowBackground(Color.ORCH.secondaryBackground)
+                                .task { [weak vm] in
+                                    if vm?.hasReachedEnd(in: activity) ?? false {
+                                        vm?.paginateFeed()
+                                    }
                                 }
-                            }
+                        }
+                    } else if vm.activities.isEmpty && !(vm.activitiesState == .loading) {
+                        noContent(message: String.Account.noActivities)
                     }
-                } else if vm.activities.isEmpty && !(vm.activitiesState == .loading) {
+                case .failed:
                     noContent(message: String.Account.noActivities)
                 }
-            case .failed:
-                noContent(message: String.Account.noActivities)
             }
+            .listSectionSeparator(.hidden)
         }
         .listStyle(.inset)
         .scrollContentBackground(.hidden)
@@ -81,32 +84,59 @@ extension ALAccountView {
     @ViewBuilder
     func activityCard(_ activity: ActivityUnion) -> some View {
         HStack(alignment: .top) {
-            MangaStandardImage(
-                url: URL(
-                    string: activity.media?.coverImage?.extraLarge 
-                    ?? activity.media?.coverImage?.large
-                    ?? activity.media?.coverImage?.medium
-                    ?? ""
-                ),
-                size: CGSize(
-                    width: CGSize.standardImageCell.width * 0.45,
-                    height: CGSize.standardImageCell.height * 0.45
-                ),
-                roundCorner: false
-            )
+            userCover(of: activity)
             
-            HStack(alignment: .top) {
+            VStack(alignment: .leading, spacing: 10) {
                 Text(vm.buildActivity(activity))
                     .font(.caption)
                     .foregroundStyle(Color.ORCH.primaryText)
                 
-                Spacer()
-                
-                Text(Date.relativeDate(of: activity.createdAt ?? 0))
-                    .font(.system(size: 10))
-                    .foregroundStyle(Color.ORCH.primaryText)
+                HStack(alignment: .center) {
+                    Image(systemName: "clock")
+                    Text(Date.relativeDate(of: activity.createdAt ?? 0))
+                }
+                .font(.system(size: 10))
+                .fontWeight(.semibold)
+                .foregroundStyle(Color.ORCH.secondaryText)
             }
+            
+            Spacer()
+            
+            mangaCover(of: activity)
         }
         .frame(maxHeight: CGSize.standardImageCell.height * 0.45)
+    }
+    
+    @ViewBuilder
+    func userCover(of activity: ActivityUnion) -> some View {
+        AsyncImageView(
+            url: URL(
+                string: activity.user?.avatar?.large
+                ?? activity.user?.avatar?.medium
+                ?? ""
+            ),
+            size: CGSize(
+                width: CGSize.standardImageCell.width * 0.35,
+                height: CGSize.standardImageCell.width * 0.35
+            )
+        )
+        .clipShape(Circle())
+    }
+    
+    @ViewBuilder
+    func mangaCover(of activity: ActivityUnion) -> some View {
+        MangaStandardImage(
+            url: URL(
+                string: activity.media?.coverImage?.extraLarge
+                ?? activity.media?.coverImage?.large
+                ?? activity.media?.coverImage?.medium
+                ?? ""
+            ),
+            size: CGSize(
+                width: CGSize.standardImageCell.width * 0.45,
+                height: CGSize.standardImageCell.height * 0.45
+            ),
+            roundCorner: true
+        )
     }
 }

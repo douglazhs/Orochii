@@ -29,7 +29,7 @@ struct GridCell: View {
     var body: some View {
         MangaStandardImage(
             url: coverURL,
-            size: CGSize.standardImageCell
+            size: .standardImageCell
         )
         .overlay(alignment: .bottom) {
             ZStack(alignment: .bottom) {

@@ -90,7 +90,7 @@ struct CoverList: View {
                         )
                     )
                 ),
-                size: CGSize.dynamicImage,
+                size: .dynamicImage,
                 roundCorner: true
             )
             

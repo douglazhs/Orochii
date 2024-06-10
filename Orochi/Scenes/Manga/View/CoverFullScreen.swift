@@ -19,9 +19,9 @@ struct CoverFullScreen: View {
     
     var body: some View {
         ScrollView(showsIndicators: false) {
-            VStack(alignment: .leading) {
+            VStack(alignment: .center, spacing: 15.0) {
                 coverInfo()
-                MangaStandardImage(
+                AsyncImageView(
                     url: vm.api.buildURL(
                         for: .cover(
                             id: vm.manga.id,
@@ -30,8 +30,7 @@ struct CoverFullScreen: View {
                                 quality: vm.coverQuality.key
                             )
                         )
-                    ),
-                    roundCorner: false
+                    )
                 )
             }
             .padding()
@@ -58,23 +57,27 @@ struct CoverFullScreen: View {
     /// Cover main information
     @ViewBuilder
     func coverInfo() -> some View {
-        VStack(alignment: .leading, spacing: 7.5) {
-            Text("\(Locale.current.localizedString(forLanguageCode: cover.attributes.locale ?? "") ?? "?")")
-                .font(.headline)
-                .multilineTextAlignment(.center)
-                .fontWeight(.heavy)
-            VStack(alignment: .leading) {
-                Text("Updated at: \(Date.fromString(cover.attributes.updatedAt ?? ""))")
-                Text("Created at: \(Date.fromString(cover.attributes.updatedAt ?? ""))")
-                Text("Version: \(cover.attributes.version.nilToStr)")
-                if let description = cover.attributes.description, !description.isEmpty {
-                    Text("Description: \(description.attributedString)")
+        HStack {
+            VStack(alignment: .leading, spacing: 7.5) {
+                Text("\(Locale.current.localizedString(forLanguageCode: cover.attributes.locale ?? "") ?? "?")")
+                    .font(.headline)
+                    .multilineTextAlignment(.center)
+                    .fontWeight(.heavy)
+                VStack(alignment: .leading) {
+                    Text("Updated at: \(Date.fromString(cover.attributes.updatedAt ?? ""))")
+                    Text("Created at: \(Date.fromString(cover.attributes.updatedAt ?? ""))")
+                    Text("Version: \(cover.attributes.version.nilToStr)")
+                    if let description = cover.attributes.description, !description.isEmpty {
+                        Text("Description: \(description.attributedString)")
+                    }
                 }
+                .font(.footnote)
+                .multilineTextAlignment(.leading)
+                .fontWeight(.medium)
+                .foregroundStyle(Color.ORCH.primaryText)
+                
             }
-            .font(.footnote)
-            .multilineTextAlignment(.leading)
-            .fontWeight(.medium)
-            .foregroundStyle(Color.ORCH.primaryText)
+            Spacer()
         }
     }
 }

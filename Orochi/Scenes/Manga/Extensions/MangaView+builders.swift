@@ -170,10 +170,7 @@ extension MangaView {
                                 quality: vm.coverQuality.key
                             )
                         )),
-                        size: CGSize(
-                            width: CGSize.dynamicImage.width,
-                            height: CGSize.dynamicImage.height
-                        )
+                        size: .dynamicImage
                     )
                     .onTapGesture { [weak vm] in
                         showCover = true
