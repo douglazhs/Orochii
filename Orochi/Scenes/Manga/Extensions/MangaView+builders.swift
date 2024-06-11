@@ -67,7 +67,7 @@ extension MangaView {
             .listSectionSeparator(.hidden)
     }
     
-    /// Manga banner with some information, such as *genres*, *author* and *artirsr*
+    /// Manga banner with some information, such as *genres*, *author* and *artirst*
     @ViewBuilder
     func banner() -> some View {
         Section {
@@ -92,8 +92,9 @@ extension MangaView {
         }
         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
         .listSectionSeparator(.hidden)
-        .listRowBackground(bannerBackground())
-        .frame(maxHeight: UIScreen.height * 0.425)
+        .listRowBackground(Color.clear)
+        /*.listRowBackground(bannerBackground())
+        .frame(maxHeight: UIScreen.height * 0.425)*/
     }
     
     /// Manga relationship label
@@ -137,8 +138,8 @@ extension MangaView {
                 radius: 0.0,
                 opacity: 0.695
             )
-            .padding(.horizontal, -minY)
-            .frame(width: size.width, height: size.height)
+            .padding(.horizontal, min(0, -minY))
+            .frame(width: size.width, height: height)
             .clipped()
             .mask {
                 LinearGradient(
@@ -260,7 +261,7 @@ extension MangaView {
                 .markdownBlockStyle(\.listItem) { configuration in
                     configuration.label.markdownMargin(top: .em(0.5))
                 }
-                .animation(.bouncy(duration: 0.35), value: vm.descLang)
+                .animation(.bouncy(duration: 0.25).speed(1.5), value: vm.descLang)
                 .textSelection(.enabled)
         } header: {
             HStack {

@@ -9,7 +9,7 @@ import Foundation
 
 /// MangaDex cover quality. `.low`= 256px `.medium` = 512px
 public enum CoverQuality: Int, Pickable {
-    case original, low, medium
+    case original, medium, low
     
     public var id: Self { self }
     
