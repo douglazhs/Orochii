@@ -27,7 +27,7 @@ struct CoverFullScreen: View {
                             id: vm.manga.id,
                             fileName: vm.imgFileName(
                                 of: cover,
-                                quality: vm.coverQuality.key
+                                quality: vm.mDexCoverQuality.key
                             )
                         )
                     )
@@ -44,7 +44,7 @@ struct CoverFullScreen: View {
                         id: vm.manga.id,
                         fileName: vm.imgFileName(
                             of: cover,
-                            quality: vm.coverQuality.key
+                            quality: vm.mDexCoverQuality.key
                         )
                     )
                 ),

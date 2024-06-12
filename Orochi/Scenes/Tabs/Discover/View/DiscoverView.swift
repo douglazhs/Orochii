@@ -48,7 +48,11 @@ struct DiscoverView: View {
                     }
                 }
         }
-        .searchable(text: $vm.nameQuery, prompt: String.Discovery.searchPlaceholder) {
+        .searchable(
+            text: $vm.nameQuery,
+            placement: .navigationBarDrawer(displayMode: .always),
+            prompt: String.Discovery.searchPlaceholder
+        ) {
             searchSuggestions()
         }
         .onSubmit(of: .search) {

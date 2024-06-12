@@ -33,7 +33,7 @@ extension SearchStyleView {
                             id: manga.id,
                             fileName: vm.imgFileName(
                                 of: manga,
-                                quality: vm.coverQuality.key
+                                quality: vm.mDexCoverQuality.key
                             )
                         )),
                         title: vm.unwrapTitle(of: manga)

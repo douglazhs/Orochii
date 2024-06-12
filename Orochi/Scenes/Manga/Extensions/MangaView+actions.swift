@@ -66,7 +66,7 @@ extension MangaView {
                     id: vm.manga.id,
                     fileName: vm.imgFileName(
                         of: vm.manga,
-                        quality: vm.coverQuality.key
+                        quality: vm.mDexCoverQuality.key
                     )
                 )),
                 action: $vm.occurredAct

@@ -30,7 +30,8 @@ final class MangaViewModel: ObservableObject {
     /// Selected chapter to reads
     @Published var selectedChapter: Chapter?
     // MARK: - User Defaults
-    @Published var coverQuality: CoverQuality = .original
+    @Published var mDexCoverQuality: MangaDexCoverQuality = .original
+    @Published var aniLCoverQuality: AniListCoverQuality = .large
     // MARK: - Arrays
     @Published var chapters: [Chapter] = [Chapter]()
     @Published var filtered: [Chapter] = [Chapter]()
@@ -89,9 +90,12 @@ final class MangaViewModel: ObservableObject {
         if let langs = Defaults.standard.getObj(of: DefaultsKeys.SrcPreferences.languages.rawValue) as? [Int] {
             languagePreferences = langs.map { Language(rawValue: $0) ?? .enUS }
         }
-        coverQuality = CoverQuality(
-            rawValue: Defaults.standard.getInt(of: DefaultsKeys.SrcPreferences.coverQuality.rawValue)
+        mDexCoverQuality = MangaDexCoverQuality(
+            rawValue: Defaults.standard.getInt(of: DefaultsKeys.SrcPreferences.CoverQuality.mDex.rawValue)
         ) ?? .original
+        aniLCoverQuality = AniListCoverQuality(
+            rawValue: Defaults.standard.getInt(of: DefaultsKeys.SrcPreferences.CoverQuality.aniL.rawValue)
+        ) ?? .large
     }
     /// Format carousel containing format and content information
     private func buildTags() {

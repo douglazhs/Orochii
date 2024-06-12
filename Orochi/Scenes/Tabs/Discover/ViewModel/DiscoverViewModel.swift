@@ -33,7 +33,8 @@ final class DiscoverViewModel: ObservableObject {
     @Published var isSearching: Bool = false
     // MARK: - MangaDex request handling
     @Published var nsfw: Bool = false
-    @Published var coverQuality: CoverQuality = .original
+    @Published var mDexCoverQuality: MangaDexCoverQuality = .original
+    @Published var aniLCoverQuality: AniListCoverQuality = .large
     @Published var languages: [Language] = [Language]()
     @Published var shouldReload: Bool = false
     @Published var loading: Bool = false
@@ -58,9 +59,12 @@ final class DiscoverViewModel: ObservableObject {
         nsfw = Defaults.standard.getBool(
             of: DefaultsKeys.SrcPreferences.nsfw.rawValue
         )
-        coverQuality = CoverQuality(
-            rawValue: Defaults.standard.getInt(of: DefaultsKeys.SrcPreferences.coverQuality.rawValue)
+        mDexCoverQuality = MangaDexCoverQuality(
+            rawValue: Defaults.standard.getInt(of: DefaultsKeys.SrcPreferences.CoverQuality.mDex.rawValue)
         ) ?? .original
+        aniLCoverQuality = AniListCoverQuality(
+            rawValue: Defaults.standard.getInt(of: DefaultsKeys.SrcPreferences.CoverQuality.aniL.rawValue)
+        ) ?? .large
     }
     
     /// Fetch initial mangas

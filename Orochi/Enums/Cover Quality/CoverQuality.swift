@@ -7,8 +7,23 @@
 
 import Foundation
 
+/// AniList cover quality.
+public enum AniListCoverQuality: Int, Pickable {
+    case large, extraLarge, medium
+    
+    public var id: Self { self }
+    
+    public var description: String {
+        switch self {
+        case .large: return "Large"
+        case .medium: return "Medium"
+        case .extraLarge: return "Extra Large"
+        }
+    }
+}
+
 /// MangaDex cover quality. `.low`= 256px `.medium` = 512px
-public enum CoverQuality: Int, Pickable {
+public enum MangaDexCoverQuality: Int, Pickable {
     case original, medium, low
     
     public var id: Self { self }

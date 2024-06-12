@@ -95,19 +95,29 @@ extension SourcePreferencesView {
     @ViewBuilder
     func coverQualitySection() -> some View {
         Section {
-            EnumPicker("Variant", selection: $vm.coverQuality)
-                .onChange(of: vm.coverQuality) {
+            EnumPicker(String.Name.mangaDex, selection: $vm.mDexCoverQuality)
+                .onChange(of: vm.mDexCoverQuality) {
                     Defaults.standard.saveInt(
                         $0.rawValue,
-                        key: DefaultsKeys.SrcPreferences.coverQuality.rawValue
+                        key: DefaultsKeys.SrcPreferences.CoverQuality.mDex.rawValue
                     )
                 }
+                .pickerStyle(.menu)
+                .foregroundStyle(Color.ORCH.primaryText)
+            EnumPicker(String.Name.aniList, selection: $vm.aniLCoverQuality)
+                .onChange(of: vm.aniLCoverQuality) {
+                    Defaults.standard.saveInt(
+                        $0.rawValue,
+                        key: DefaultsKeys.SrcPreferences.CoverQuality.aniL.rawValue
+                    )
+                }
+                .pickerStyle(.menu)
                 .foregroundStyle(Color.ORCH.primaryText)
         } header: {
-            Text("Cover Quality")
+            Text("Source Cover")
                 .foregroundStyle(Color.ORCH.secondaryTitle)
         } footer: {
-            Text("MangaDex source cover quality")
+            Text("Sources cover quality")
                 .foregroundStyle(Color.ORCH.secondaryText)
         }
     }
