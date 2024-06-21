@@ -33,9 +33,11 @@ extension ALAccountView {
                         }
                     } else if vm.activities.isEmpty && !(vm.activitiesState == .loading) {
                         noContent(message: String.Account.noActivities)
+                            .listRowBackground(Color.clear)
                     }
                 case .failed:
                     noContent(message: String.Account.noActivities)
+                        .listRowBackground(Color.clear)
                 }
             }
             .listSectionSeparator(.hidden)

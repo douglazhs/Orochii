@@ -99,6 +99,9 @@
 		522EFC6C2B9B307500F0B071 /* ALAccountView+stats.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522EFC6B2B9B307500F0B071 /* ALAccountView+stats.swift */; };
 		522EFC6E2B9B309A00F0B071 /* ALAccountView+favorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522EFC6D2B9B309A00F0B071 /* ALAccountView+favorites.swift */; };
 		522EFC722B9B4D6E00F0B071 /* ALAccountView+activities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 522EFC712B9B4D6E00F0B071 /* ALAccountView+activities.swift */; };
+		52588B612C231BFE006B94FD /* CharacterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52588B602C231BFE006B94FD /* CharacterView.swift */; };
+		52588B642C233F49006B94FD /* CharacterView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52588B632C233F49006B94FD /* CharacterView+extension.swift */; };
+		52588B662C234F67006B94FD /* String+replacing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52588B652C234F67006B94FD /* String+replacing.swift */; };
 		5278E3B92B9A81270036CCB8 /* ALAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5278E3B82B9A81270036CCB8 /* ALAccountView.swift */; };
 		5278E3BE2B9A92E60036CCB8 /* ALAccountView+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5278E3BD2B9A92E60036CCB8 /* ALAccountView+extension.swift */; };
 		52A81DD02C172BCD008786D8 /* AsyncImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52A81DCF2C172BCD008786D8 /* AsyncImageView.swift */; };
@@ -259,6 +262,9 @@
 		522EFC6B2B9B307500F0B071 /* ALAccountView+stats.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALAccountView+stats.swift"; sourceTree = "<group>"; };
 		522EFC6D2B9B309A00F0B071 /* ALAccountView+favorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALAccountView+favorites.swift"; sourceTree = "<group>"; };
 		522EFC712B9B4D6E00F0B071 /* ALAccountView+activities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALAccountView+activities.swift"; sourceTree = "<group>"; };
+		52588B602C231BFE006B94FD /* CharacterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CharacterView.swift; sourceTree = "<group>"; };
+		52588B632C233F49006B94FD /* CharacterView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CharacterView+extension.swift"; sourceTree = "<group>"; };
+		52588B652C234F67006B94FD /* String+replacing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+replacing.swift"; sourceTree = "<group>"; };
 		5278E3B82B9A81270036CCB8 /* ALAccountView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ALAccountView.swift; sourceTree = "<group>"; };
 		5278E3BD2B9A92E60036CCB8 /* ALAccountView+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALAccountView+extension.swift"; sourceTree = "<group>"; };
 		52A81DCF2C172BCD008786D8 /* AsyncImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncImageView.swift; sourceTree = "<group>"; };
@@ -599,6 +605,7 @@
 				50F44447292E9442001B3CF4 /* UIView+extension.swift */,
 				77B188ED2A1E5B4300B11378 /* URLSession+extension.swift */,
 				774895B92A6EF1BE00CD8F50 /* View+extension.swift */,
+				52588B652C234F67006B94FD /* String+replacing.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1099,12 +1106,46 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
-		5278E3B72B9A7AFC0036CCB8 /* AniList Account */ = {
+		52588B5D2C231BC4006B94FD /* Root */ = {
 			isa = PBXGroup;
 			children = (
 				522EFC672B9AB32D00F0B071 /* ViewModel */,
 				5278E3BC2B9A92BC0036CCB8 /* Extensions */,
 				5278E3BA2B9A812A0036CCB8 /* View */,
+			);
+			path = Root;
+			sourceTree = "<group>";
+		};
+		52588B5E2C231BDA006B94FD /* Character */ = {
+			isa = PBXGroup;
+			children = (
+				52588B622C233F35006B94FD /* Extensions */,
+				52588B5F2C231BE6006B94FD /* View */,
+			);
+			path = Character;
+			sourceTree = "<group>";
+		};
+		52588B5F2C231BE6006B94FD /* View */ = {
+			isa = PBXGroup;
+			children = (
+				52588B602C231BFE006B94FD /* CharacterView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		52588B622C233F35006B94FD /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				52588B632C233F49006B94FD /* CharacterView+extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		5278E3B72B9A7AFC0036CCB8 /* AniList Account */ = {
+			isa = PBXGroup;
+			children = (
+				52588B5E2C231BDA006B94FD /* Character */,
+				52588B5D2C231BC4006B94FD /* Root */,
 			);
 			path = "AniList Account";
 			sourceTree = "<group>";
@@ -1540,6 +1581,7 @@
 				50F44454292F1B21001B3CF4 /* UISliderView.swift in Sources */,
 				50FFAFEE292A83B800B87E0E /* MangaStandardCell+builders.swift in Sources */,
 				50FFAFDC292A668000B87E0E /* LanguagesView.swift in Sources */,
+				52588B612C231BFE006B94FD /* CharacterView.swift in Sources */,
 				77B188E62A1CFC3900B11378 /* Keychain.swift in Sources */,
 				50F44448292E9442001B3CF4 /* UIView+extension.swift in Sources */,
 				52AF1ADE2C0FEE2A00BC1EFC /* CheckboxToggleStyle.swift in Sources */,
@@ -1641,6 +1683,7 @@
 				50FFAFE9292A81B100B87E0E /* MangaView.swift in Sources */,
 				52AF1AE32C108DDD00BC1EFC /* CoverList+extension.swift in Sources */,
 				77B1BD652A6986DA003146B9 /* ProgressIndicator.swift in Sources */,
+				52588B642C233F49006B94FD /* CharacterView+extension.swift in Sources */,
 				5092DF2529292C590094DC18 /* OrochiApp.swift in Sources */,
 				779074152A729F3900031E30 /* SourcePreferences.swift in Sources */,
 				77DE0EEB2A2D2E1F00BF882D /* SettingsView+about.swift in Sources */,
@@ -1650,6 +1693,7 @@
 				52AF1AD72C0F62B600BC1EFC /* CoverQuality.swift in Sources */,
 				50F4444F292F08B9001B3CF4 /* ReaderToolbar+builders.swift in Sources */,
 				50CAD2F029383BE9000C1C0E /* ALTracker+manga.swift in Sources */,
+				52588B662C234F67006B94FD /* String+replacing.swift in Sources */,
 				50F44437292E58A4001B3CF4 /* ReaderPreferencesView+builders.swift in Sources */,
 				52AF1AEE2C12371200BC1EFC /* DiscoverFilterView.swift in Sources */,
 				773F06E52A77167300341E0F /* ALTracker+overlay.swift in Sources */,

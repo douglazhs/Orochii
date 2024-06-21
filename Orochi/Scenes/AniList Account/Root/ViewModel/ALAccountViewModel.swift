@@ -10,6 +10,10 @@ import SwiftUI
 import AniListService
 import Alamofire
 
+enum ToggleFavoriteType {
+    case manga, character, staff
+}
+
 final class ALAccountViewModel: ObservableObject {
     enum ViewState {
         case loading, loaded, failed
@@ -22,8 +26,11 @@ final class ALAccountViewModel: ObservableObject {
     var user: User
     let api: ALServices = AniList()
     
+    var token: String = ""
     @Published var tab: ALTab = .stats
-    @Published var favorites: [Media] = [Media]()
+    @Published var favoriteMangas: [Media] = [Media]()
+    @Published var favoriteChars: [Character] = [Character]()
+    @Published var favoriteStaff: [Staff] = [Staff]()
     @Published var activities: [ActivityUnion] = [ActivityUnion]()
     @Published var activitiesState: ViewState = .loaded
     @Published var favoritesState: ViewState = .loaded
@@ -36,31 +43,64 @@ final class ALAccountViewModel: ObservableObject {
     @Published var loadedFeed: Bool = false
     @Published var page: Int = 1
     @Published var showAlert: Bool = false
+    @Published var coverQuality: AniListCoverQuality = .extraLarge
     
     init(user: User) {
         self.user = user
-        getMediListEntry()
+        loadToken()
+        initialLoad()
     }
     
     /// Load Bearer token for the current authenticated user
-    private func loadToken() -> String? {
+    private func loadToken() {
         if let tokenData = Keychain.standard.read(
             service: "access-token",
             account: "anilist"
         ), let token =  String(data: tokenData, encoding: .utf8) {
-            return token
+            self.token = token
         }
-        
-        return nil
     }
     
-    /// Get Media List Entry for the current Authenticated User
-    func getMediListEntry() {
+    func initialLoad() {
+        coverQuality = AniListCoverQuality(
+            rawValue: Defaults.standard.getInt(
+                of: DefaultsKeys
+                    .SrcPreferences
+                    .CoverQuality
+                    .aniL
+                    .rawValue
+            )
+        ) ?? .medium
+        getFavoritesMangas()
+        getFavoritesCharacters()
+        getFavoritesStaff()
+    }
+    
+    /// Get user favorite mangas
+    func getFavoritesMangas() {
         guard let userFavs = user.favourites,
             let collection = userFavs.manga,
             let mangas = collection.nodes else { return }
         
-        favorites = mangas
+        favoriteMangas = mangas
+    }
+    
+    /// Get user favorite characters
+    func getFavoritesCharacters() {
+        guard let userFavs = user.favourites,
+            let collection = userFavs.characters,
+            let chars = collection.nodes else { return }
+        
+        favoriteChars = chars
+    }
+    
+    /// Get user favorite characters
+    func getFavoritesStaff() {
+        guard let userFavs = user.favourites,
+            let collection = userFavs.staff,
+            let staff = collection.nodes else { return }
+        
+        favoriteStaff = staff
     }
     
     /// Verify if the user scrolled to the end of the list
@@ -110,13 +150,13 @@ final class ALAccountViewModel: ObservableObject {
                 case .mine:
                     guard let response = try await api.getActivities(
                         of: user.id,
-                        token: loadToken(),
+                        token: token,
                         page: page
                     ) else { return }
                     handle(response)
                 case .following:
                     guard let response = try await api.getActivities(
-                        token: loadToken(),
+                        token: token,
                         page: page
                     ) else { return }
                     handle(response)
@@ -213,8 +253,26 @@ final class ALAccountViewModel: ObservableObject {
     /// Unwrap the possible media titles
     /// - Returns: Media unwrapped title
     /// - Parameter manga: Current manga
-    func unwrappedTitle(of manga: ShortMedia?) -> String {
+    func unwrappedTitle(of manga: MangaMedia?) -> String {
         return manga?.title?.english ?? manga?.title?.romaji ?? String.Common.unknown
+    }
+    
+    /// Toggle favorite
+    /// - Parameters:
+    ///   - id: Object Id
+    ///   - type: Object type
+    func toggleFav(id: Int, type: ToggleFavoriteType) {
+        Task { @MainActor in
+            do {
+                switch type {
+                case .manga: _ = try await api.toggleFavoriteManga(id: id, token: token)
+                case .character: _ = try await api.toggleFavoriteCharacter(id: id, token: token)
+                case .staff: try await _ = api.toggleFavoriteStaff(id: id, token: token)
+                }
+            } catch {
+                showAlert(error)
+            }
+        }
     }
     
     /// Handle api error

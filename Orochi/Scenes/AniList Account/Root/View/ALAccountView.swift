@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 import NukeUI
 import struct AniListService.User
+import struct AniListService.Character
+import struct AniListService.Media
 import class AniListService.UserMock
 
 struct ALAccountView: View {
@@ -53,7 +55,7 @@ struct ALAccountView: View {
             content()
                 .standardBars()
                 .toolbarBackground(.hidden, for: .navigationBar)
-                .animation(.easeIn(duration: 0.5), value: !vm.favorites.isEmpty)
+                .animation(.easeIn(duration: 0.5), value: !vm.favoriteMangas.isEmpty)
                 .toolbarRole(.editor)
                 .alert(String.Common.error, isPresented: $vm.showAlert) {
                     Button(role: .none) { } label: {
