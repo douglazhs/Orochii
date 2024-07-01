@@ -6,22 +6,25 @@
 //
 
 import SwiftUI
+import class MangaDex.MangaMock
+import class MangaDex.ChapterMock
 
 struct ReaderPreferencesView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) 
+    var dismiss
     @EnvironmentObject var vm: ChapterViewModel
     
     var body: some View {
         NavigationStack {
             List {
-                self.pageLayoutSection().listRowBackground(Color.clear)
-                self.readingModeSection().listRowBackground(Color.clear)
+                pageLayoutSection().listRowBackground(Color.clear)
+                readingModeSection().listRowBackground(Color.clear)
+                pageQualitySection().listRowBackground(Color.clear)
             }
             .listStyle(.grouped)
             .scrollContentBackground(.hidden)
-            .background(BlurBackground(with: .view_background))
-            .navigationTitle("Reader Preferences")
-            .navigationBarTitleDisplayMode(.inline)
+            .standardBars()
+            .background(Color.ORCH.background)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button {
@@ -30,13 +33,22 @@ struct ReaderPreferencesView: View {
                         Text(String.Common.done)
                     }
                 }
+                
+                ToolbarItem(placement: .principal) {
+                    Text("Reader Preferences")
+                        .font(.title2)
+                        .fontWeight(.heavy)
+                }
             }
         }
     }
 }
 
-struct ReaderPreferencesView_Previews: PreviewProvider {
-    static var previews: some View {
-        ReaderPreferencesView()
-    }
+#Preview {
+    ReaderPreferencesView()
+        .environmentObject(ChapterViewModel(
+            ChapterMock.chapter,
+            [ChapterMock.chapter],
+            MangaMock.manga)
+        )
 }

@@ -6,29 +6,50 @@
 //
 
 import SwiftUI
+import Combine
+import struct MangaDex.Manga
 
 struct SearchStyleView: View {
-    @Environment(\.isSearching) var isSearching
-    var mangas: [MangaDomain]
+    @Environment(\.isSearching) 
+    var isSearching
+    @EnvironmentObject var vm: DiscoverViewModel
     @Binding var viewStyle: ViewStyle
+    @State var showFilter: Bool = false
+    var columns = [
+        GridItem(.adaptive(minimum: CGSize.standardImageCell.width))
+    ]
     
-    init(
-        mangas: [MangaDomain],
-        _ viewStyle: Binding<ViewStyle>
-    ) {
-        self.mangas = mangas
-        self._viewStyle = viewStyle
+    init(_ viewStyle: Binding<ViewStyle>) {
+        _viewStyle = viewStyle
     }
+    
     var body: some View {
-        self.content()
-            .onChange(of: isSearching) { newValue in
-                if !newValue { viewStyle = .initial }
+        content()
+            .onReceive(
+                vm.$nameQuery
+                    .debounce(
+                        for: .seconds(0.75),
+                        scheduler: DispatchQueue.main
+                    )
+            ) { [weak vm] _ in vm?.search() }
+            .onChange(of: vm.nameQuery) { query in
+                if !query.isEmpty {
+                    withTransaction(.init(animation: .easeIn(duration: 0.25))) {
+                        vm.isSearching = true
+                    }
+                }
+            }
+            .onChange(of: isSearching) { searching in
+                if !searching {
+                    vm.isSearching = false
+                    vm.searchResult?.removeAll()
+                    viewStyle = .initial
+                }
             }
     }
 }
 
-struct SearchStyleView_Previews: PreviewProvider {
-    static var previews: some View {
-        SearchStyleView(mangas: MangaDomain.samples, .constant(.search))
-    }
+#Preview {
+    SearchStyleView(.constant(.search))
+        .environmentObject(DiscoverViewModel())
 }

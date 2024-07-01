@@ -6,36 +6,68 @@
 //
 
 import SwiftUI
+import struct MangaDex.Manga
+import class MangaDex.MangaMock
 
 struct ALTracker: View {
-    @Environment(\.dismiss) var dismiss
-    @StateObject var vm = ALTrackerViewModel()
-    @Binding var isPresented: Bool
-    @State var showPopUp: Bool = false
-    var manga: MangaDomain
+    @Environment(\.isSearching)
+    var isSearching
+    @Environment(\.dismissSearch) 
+    var dismissSearch
+    @Environment(\.dismiss) 
+    var dismiss
+    @StateObject var vm: ALTrackerViewModel
+    @State var showNumberPicker: Bool = false
+    @State var showTextField: Bool = false
+    @State var showWebView: Bool = false
+    @State var showConfirmation: Bool = false
+    var cover: URL?
     var action: Binding<Bool>
     
     init(
-        isPresented: Binding<Bool>,
-        of manga: MangaDomain,
+        of manga: Manga,
+        cover: URL? = nil,
         action: Binding<Bool>
     ) {
-        self._isPresented = isPresented
-        self.manga = manga
+        _vm = StateObject(wrappedValue: ALTrackerViewModel(manga)) 
+        self.cover = cover
         self.action = action
     }
     
     var body: some View {
-        self.content()
+        NavigationStack {
+            content()
+                .standardBars()
+                .onSubmit(of: .search) { dismissSearch() }
+                .navigationBarTitleDisplayMode(.inline)
+                .animation(.easeIn, value: [vm.mangas != nil])
+                .toolbarRole(.editor)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        if vm.availableInAL {
+                            anilistMangaOptions()
+                        }
+                    }
+                    ToolbarItem(placement: .principal) { alTitleView() }
+                    ToolbarItem(placement: .status) {
+                        switch vm.context {
+                        case .tracker:
+                            if vm.trackingLocally {
+                                saveButton()
+                            }
+                        case .search:
+                            trackButton()
+                        }
+                    }
+                }
+        }
     }
 }
 
-struct ALTracker_Previews: PreviewProvider {
-    static var previews: some View {
-        ALTracker(
-            isPresented: .constant(true),
-            of: MangaDomain.samples[1],
-            action: .constant(true)
-        )
-    }
+#Preview {
+    ALTracker(
+        of: MangaMock.manga,
+        cover: MangaMock.coverUrl,
+        action: .constant(false)
+    )
 }

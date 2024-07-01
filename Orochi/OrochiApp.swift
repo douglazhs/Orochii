@@ -9,31 +9,25 @@ import SwiftUI
 
 @main
 struct OrochiiApp: App {
+    enum Tab {
+        case discover, library, adjusts
+    }
+    
+    @State var tab: Tab = .discover
+    
     var body: some Scene {
         WindowGroup {
-            TabView {
+            TabView(selection: $tab) {
                 DiscoverView()
-                    .tabItem { Label(
-                        String.Discovery.title,
-                        systemImage: "globe.americas.fill"
-                    ) }
+                    .tabItem { Image(systemName: "globe.americas") }
+                    .tag(Tab.discover)
                 LibraryView()
-                    .tabItem { Label(
-                        String.Library.title,
-                        systemImage: "books.vertical"
-                    ) }
-                /*HistoryView()
-                    .tabItem { Label(
-                        "History",
-                        systemImage: "clock"
-                    ) }*/
+                    .tabItem { Image(systemName: "books.vertical") }
+                    .tag(Tab.library)
                 SettingsView()
-                    .tabItem { Label(
-                        String.Settings.title,
-                        systemImage: "gear"
-                    ) }
+                    .tabItem { Image(systemName: "gear") }
+                    .tag(Tab.adjusts)
             }
-            .tint(Color.indigo)
             .preferredColorScheme(.dark)
         }
     }

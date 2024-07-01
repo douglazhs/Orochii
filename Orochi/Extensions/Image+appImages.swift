@@ -9,12 +9,12 @@ import SwiftUI
 
 /// App standrd images
 enum AppImages: String {
-    case manga_dex_icon, ani_list_logo, view_background
+    case mangaDexIcon, aniListLogo, viewBackground
 }
 
 extension Image {
     /// Custom Image constructor
-    init(appImage: AppImages){
+    init(appImage: AppImages) {
         self = Image(appImage.rawValue)
     }
 }

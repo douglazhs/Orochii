@@ -10,10 +10,38 @@ import SwiftUI
 extension DiscoverView {
     /// Main content
     /// - Returns: Screen variations
-    @ViewBuilder func content() -> some View {
+    @ViewBuilder 
+    func content() -> some View {
         switch viewStyle {
-        case .search:  SearchStyleView(mangas: MangaDomain.samples, $viewStyle)
-        case .initial: InitialStyleView().environmentObject(vm)
+        case .search:
+            SearchStyleView($viewStyle)
+                .environmentObject(vm)
+        case .initial:
+            InitialStyleView($viewStyle)
+                .environmentObject(vm)
+        }
+    }
+    
+    /// Search history from user
+    @ViewBuilder
+    func searchSuggestions() -> some View {
+        if vm.nameQuery.isEmpty && !vm.suggestions.isEmpty {
+            Group {
+                ForEach(vm.suggestions.indices, id: \.self) { index in
+                    Button {
+                        vm.fillWithHistory(on: index)
+                    } label: {
+                        Text(vm.suggestions[index])
+                    }
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            vm.removeQuery(on: index)
+                        } label: {
+                            Text(String.Common.remove)
+                        }
+                    }
+                }
+            }.listSectionSeparator(.hidden)
         }
     }
     
@@ -24,9 +52,13 @@ extension DiscoverView {
         Button { mangaSourcePref = true } label: {
             Image(systemName: "antenna.radiowaves.left.and.right")
                 .foregroundColor(.accentColor)
+                .fontWeight(.semibold)
         }
-        .sheet(isPresented: $mangaSourcePref) {
+        .fullScreenCover(isPresented: $mangaSourcePref) {
+            vm.reload()
+        } content: {
             SourcePreferencesView()
+                .environmentObject(vm)
         }
     }
 }

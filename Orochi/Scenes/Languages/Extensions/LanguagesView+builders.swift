@@ -8,30 +8,32 @@
 import SwiftUI
 
 extension LanguagesView {
-    @ViewBuilder
     /// Source Languages section
+    @ViewBuilder
     func languagesSection() -> some View {
         Section {
             ForEach(Language.allCases) { lang in
                 Button {
                     if !languages.contains(lang) {
                         languages.append(lang)
-                    } else { languages.removeAll(where: { $0 == lang }) }
+                    } else {
+                        languages.removeAll { $0 == lang }
+                    }
                 } label: {
                     HStack {
                         Text(lang.description)
                         Spacer()
                         if languages.contains(lang) {
                             Image(systemName: "checkmark")
-                                .font(.system(size: 12, weight: .semibold))
-                                .foregroundColor(.accentColor)
+                                .foregroundColor(Color.ORCH.button)
+                                .font(.caption2)
+                                .fontWeight(.heavy)
                         } else { EmptyView() }
                     }
                 }
-                .foregroundColor(.primary)
+                .listSectionSeparator(.hidden)
+                .foregroundColor(Color.ORCH.primaryText)
             }
-        } header: {
-            Text("Manga Source Languages")
         }
     }
 }

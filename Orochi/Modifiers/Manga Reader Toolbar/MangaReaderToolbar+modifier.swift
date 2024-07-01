@@ -6,15 +6,14 @@
 //
 
 import SwiftUI
+import struct MangaDex.Manga
 
 extension View {
     func readerToolbar(
-        manga: MangaDomain,
         showChaptersList: Binding<Bool>,
         showReaderPreferences: Binding<Bool>
     ) -> some View {
         modifier(ReaderToolbar(
-            manga: manga,
             showChaptersList: showChaptersList,
             showReaderPreferences: showReaderPreferences)
         )

@@ -6,48 +6,42 @@
 //
 
 import SwiftUI
+import MangaDex
 
 struct ChapterView: View {
-    @Environment(\.dismiss) var dismiss
+    @Environment(\.dismiss) 
+    var dismiss
     @StateObject var vm: ChapterViewModel
     @State var showReadBars: Visibility = .visible
     @State var showChaptersList: Bool = false
     @State var showReaderPreferences: Bool = false
-    var manga: MangaDomain
-    var chapter: ChapterDomain
     
-    init(_ chapter: ChapterDomain, of manga: MangaDomain) {
-        self.chapter = chapter
-        self.manga = manga
+    init(_ current: Chapter, _ feed: [Chapter], of manga: Manga) {
         self._vm = StateObject(
-            wrappedValue: ChapterViewModel(actualChapter: chapter)
+            wrappedValue: ChapterViewModel(current, feed, manga)
         )
     }
     
     var body: some View {
         NavigationStack {
-            self.content()
-                .navigationBarTitleDisplayMode(.inline)
+            content()
                 .toolbarRole(.editor)
-                .toolbar(showReadBars, for: .bottomBar, .navigationBar)
-                .toolbarBackground(.visible, for: .navigationBar, .bottomBar)
+                .toolbar(showReadBars, for: .navigationBar, .bottomBar)
                 .statusBarHidden(showReadBars == .hidden)
                 .readerToolbar(
-                    manga: manga,
                     showChaptersList: $showChaptersList,
                     showReaderPreferences: $showReaderPreferences
                 )
                 .environmentObject(vm)
-                .animation(.spring(), value: [showReadBars])
+                .animation(.default, value: [showReadBars])
         }
     }
 }
 
-struct ChapterView_Previews: PreviewProvider {
-    static var previews: some View {
-        ChapterView(
-            ChapterDomain.samples[0],
-            of: MangaDomain.samples[0]
-        )
-    }
+#Preview {
+    ChapterView(
+        ChapterMock.chapter,
+        [ChapterMock.chapter],
+        of: MangaMock.manga
+    )
 }

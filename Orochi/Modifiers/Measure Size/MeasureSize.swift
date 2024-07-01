@@ -23,7 +23,7 @@ public extension View {
 
 /// ViewModifier to put a GeometryReader on the background of
 /// the View
-fileprivate struct MeasureSizeModifier: ViewModifier {
+private struct MeasureSizeModifier: ViewModifier {
     func body(content: Content) -> some View {
         content.overlay(GeometryReader { geometry in
             Color.clear.preference(

@@ -12,69 +12,103 @@ extension MangaView {
     @ViewBuilder
     func selectChaptersButton() -> some View {
         if vm.isEditingMode {
-            Button { vm.selectAll.toggle() } label:
-            { Text(vm.selectAll ? String.Common.none : String.Common.all) }
+            Button { [weak vm] in
+                vm?.selectAll.toggle()
+                vm?.manageSelection($chSelection)
+            } label: {
+                Text(vm.selectAll ? String.Common.none : String.Common.all)
+            }
+            .disabled(vm.chapters.isEmpty)
+            .tint(!vm.chapters.isEmpty ? Color.ORCH.accentColor : Color.ORCH.secondaryText)
         }
     }
     
     /// Editable view actions
     @ViewBuilder
-    func editButton() ->  some View {
+    func editButton() -> some View {
         if vm.isEditingMode {
             Button {
-                vm.isEditingMode.toggle()
-                vm.showBottomBar.toggle()
+                withTransaction(.init(animation: .easeInOut)) {
+                    vm.isEditingMode = false
+                    vm.showBottomBar = false
+                }
             } label: {
                 Text(String.Common.done)
                     .fontWeight(.semibold)
             }
         } else {
-            Menu {
-                Section {
-                    Button {
-                        vm.isEditingMode.toggle()
-                        if !vm.showBottomBar {
-                            DispatchQueue.main.asyncAfter(deadline: .now() + 0.275) {
-                                vm.showBottomBar = true
-                            }
-                        } else { vm.showBottomBar = false }
-                    } label: {
-                        Label (
-                            String.Manga.selectChapters,
-                            systemImage: "checklist"
-                        )
+            actionsMenu()
+        }
+    }
+    
+    /// Manga actions
+    @ViewBuilder
+    func actionsMenu() -> some View {
+        Menu {
+            Section {
+                Button {
+                    withTransaction(.init(animation: .easeInOut)) {
+                        vm.isEditingMode = true
+                        vm.showBottomBar = true
                     }
-                    Button { } label: {
-                        Label("View on MangaDex.co", systemImage: "safari.fill")
-                    }
-                } header: { Text(manga.title) }
-                Button(role: .destructive) {
-                    
                 } label: {
-                    Label("Remove all Downloads", systemImage: "trash")
+                    Label(
+                        String.Manga.selectChapters,
+                        systemImage: "checklist"
+                    )
                 }
-               
-            } label: { Image(systemName: "ellipsis") }
+                Button {
+                    do {
+                        try UIApplication
+                            .shared
+                            .safariVC(url: "\(AppURLs.mdSite.description)/manga/\(vm.manga.id)")
+                    } catch {
+                        
+                    }
+                } label: {
+                    Label("View on MangaDex.co", systemImage: "safari.fill")
+                }
+            } header: {
+                Text(vm.unwrapTitle(of: vm.manga))
+            }
+            Button(role: .destructive) {
+                
+            } label: {
+                Label("Remove all Downloads", systemImage: "trash")
+            }
+           
+        } label: {
+            Image(systemName: "ellipsis")
         }
     }
     
     /// Chapter actions
     @ViewBuilder
     func chapterActions() -> some View {
-        Button { } label:
-        { Text(String.ContextMenu.download) }
-        .disabled(vm.selection.isEmpty)
+        Button { 
+            
+        } label: {
+            Text(String.ContextMenu.download)
+        }
+        .disabled(chSelection.isEmpty)
         Menu {
             Section {
-                Button { } label:
-                { Label(String.ContextMenu.asRead, systemImage: "eye.fill") }
-                Button { } label:
-                { Label(String.ContextMenu.asUnread, systemImage: "eye.slash.fill") }
+                Button {
+                    
+                } label: {
+                    Label(String.ContextMenu.asRead, systemImage: "eye.fill")
+                }
+                Button { 
+                    
+                } label: {
+                    Label(String.ContextMenu.asUnread, systemImage: "eye.slash.fill")
+                }
             } header: {
-                Text("\(vm.selection.count) "
-                     + String.Manga.selectedChapters.uppercased())
+                Text("\(chSelection.count) " + String.Manga.selectedChapters.uppercased())
             }
-        } label: { Text(String.Manga.mark) }
-        .disabled(vm.selection.isEmpty)
+        } label: {
+            Text(String.Manga.mark)
+        }
+        .disabled(chSelection.isEmpty)
     }
 }

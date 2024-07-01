@@ -28,12 +28,17 @@
 "common_all" = "Todos";
 "common_none" = "Nenhum";
 "common_of" = "de";
+"common_ok" = "OK";
+"common_attention" = "Atenção";
+"common_error" = "Erro";
+"common_unknown" = "Desconhecido";
 
 /* ------------------------------------------------------------ */
 
 // MARK: - DISCOVERY SCREEN
 
 "discovery_title" = "Descubra";
+"discovery_search_placeholder" = "Título do manga";
 
 // MANGA CELL
 
@@ -51,10 +56,10 @@
 
 // MARK: - SOURCE PREFERENCES
 
-"manga_source_title" = "Fonte MangaDex";
+"manga_source_title" = "Fonte";
 "manga_source_site_footer" = "Você será redirecionado para o site do _MangaDex_";
-"manga_source_language_footer" = "Idiomas que serão utilizados para pesquisar seus mangas";
-"manga_source_language_header" = "Linguagens";
+"manga_source_language_footer" = "Idiomas utilizados para pesquisar seus mangas";
+"manga_source_language_header" = "Linguagens Preferidas";
 "manga_source_quality_header" = "Qualidade";
 "manga_source_quality_footer" = "Algumas prefernências do manga, como a **qualidade**";
 "manga_source_quality" = "Qualidade do Manga";
@@ -75,6 +80,11 @@
 // MARK: - LIBRARY SCREEN
 
 "library_title" = "Biblioteca";
+"library_search_placeholder" = "Busque em sua lista";
+"library_auth_message" = "Você bloqueou sua biblioteca.\nClique em desbloquear para ver seus mangas :)";
+"library_auth_error_message" = "Sua biblioteca está bloqueada :(\n Desbloqueie para ver seus mangas :)";
+"library_auth_retry" = "TENTAR NOVAMENTE";
+"library_auth_unlock" = "DESBLOQUEAR";
 
 /* ------------------------------------------------------------ */
 
@@ -122,6 +132,8 @@
 "manga_selected_chapters" = "Capítulos Selecionados";
 "manga_chapters_of" = "Chapters Of";
 
+/* ------------------------------------------------------------ */
+
 // MARK: - ADJUSTS SCREEN
 
 "adjusts_tracker_header" = "Tracker";
@@ -133,8 +145,8 @@
 "adjusts_icloud_footer" = "Sua biblioteca de manga será salva na **Nuvem** para ser acessada de outros dispositivos";
 "adjusts_icloud_sync" = "Sincronizar";
 "adjusts_security_header" = "Segurança";
-"adjusts_security_footer" = "Aqui você tem algumas opções para tornar seu aplicativo e mangas mais seguros";
-"adjusts_security_biometry" = "Biometria";
+"adjusts_security_footer" = "Torne sua biblioteca e seus mangás mais seguros";
+"adjusts_security_biometry" = "Bloquear biblioteca";
 "adjusts_security_level" = "Nível de Segurança";
 "adjusts_security_library" = "Biblioteca";
 "adjusts_security_library_footer" = "Bloqueie apenas sua biblioteca pessoal";
@@ -144,3 +156,35 @@
 "adjusts_notification_updated_mangas" = "Atualização de Capítulo";
 "adjusts_age_rating_header" = "Classificação Etária";
 "adjusts_age_rating_footer" = "**Não é seguro para o trabalho**: material que só deve ser visto em particular porque contém algumas coisas que podem ser _ofensivas_";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - ERRORS
+
+"error_anilist_login" = "Erro ao tentar entrar em sua conta AniList.";
+"error_keychain_save" = "Erro ao tentar salvar suas credenciais no Keychain.";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - ANILIST
+
+"anilist_logout" = "Tem certeza de que deseja sair da sua conta AniList?";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - ACCOUNT DETAILS
+
+"account_noActivities" = "You have no activities :(";
+"account_noFavorites" = "You have no favorites :(";
+"account_section_totalMangas" = "Total de Mangas";
+"account_section_meanScore" = "Nota Média";
+"account_section_chaptersRead" = "Capítulos Lidos";
+"account_section_volumesRead" = "Volumes Lidos";
+"account_section_statuses" = "Status";
+"account_section_genres" = "Distribuição de Gêneros";
+"account_section_tags" = "Distribuição de Tags";
+"account_section_chaptersPerYear" = "Capítulos Lidos Por Ano";
+"account_section_country" = "Mangas Por País";
+"account_tab_stats" = "Estatísticas";
+"account_tab_activity" = "Atividade";
+"account_tab_favorites" = "Favoritos";

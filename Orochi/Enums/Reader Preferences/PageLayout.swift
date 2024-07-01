@@ -7,7 +7,8 @@
 
 import Foundation
 
-enum PageLayout: Pickable {
+/// Page reader layout
+enum PageLayout: Int, Pickable {
     var id: Self { self }
     
     var description: String {

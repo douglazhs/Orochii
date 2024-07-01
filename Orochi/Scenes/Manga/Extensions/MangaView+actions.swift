@@ -12,17 +12,13 @@ extension MangaView {
     @ViewBuilder
     func actions() -> some View {
         HStack {
-            // START READING BUTTON
-            self.startReadingButton()
-            Spacer()
             // ANILIST BUTTON
-            self.aniListButton()
+            aniListButton()
             // ADD/REMOVE BUTTON
-            self.libraryButton()
+            libraryButton()
+            Spacer()
         }
-        .lineLimit(1)
-        .fontWeight(.regular)
-        .listRowBackground(Color.clear)
+        .disabled(vm.occurredAct)
     }
     
     /// Start reading button
@@ -31,90 +27,113 @@ extension MangaView {
         Button {
             // TODO: Start to read the manga
         } label: {
-            Label("START", systemImage: "play.fill")
-                .lineLimit(1)
-                .foregroundColor(.accentColor)
-                .font(.footnote)
-                .frame(maxWidth: CGSize.dynamicImage.width - 22)
-                .fontWeight(.heavy)
+            HStack {
+                Image(systemName: "play")
+                    .foregroundColor(Color.ORCH.button)
+                // TODO: Change to current manga reading status
+                Text("CH. 1")
+                    .foregroundStyle(.white)
+                    .fontWeight(.bold)
+            }
+            .frame(maxWidth: CGSize.dynamicImage.width)
+            .fontWeight(.heavy)
+            .font(.footnote)
+            .lineLimit(1)
         }
-        .tint(.primary)
+        .disabled(vm.occurredAct)
+        .tint(Color.ORCH.actionBackground)
         .buttonStyle(.borderedProminent)
     }
     
     /// AniList tracking button
     @ViewBuilder
     func aniListButton() -> some View {
-        Button {
+        Button { [weak vm] in
             showAniList = true
-            vm.startAction(for: .aniList)
+            vm?.startAction(for: .aniList)
         } label: {
-            Image(systemName: "externaldrive.fill")
-                .foregroundColor(.primary)
+            Image(systemName: "antenna.radiowaves.left.and.right")
+                .foregroundColor(Color.ORCH.button)
                 .font(.footnote)
-                .fontWeight(.semibold)
+                .fontWeight(.heavy)
         }
-        .disabled(vm.occurredAct)
+        .tint(Color.ORCH.actionBackground)
         .buttonStyle(.borderedProminent)
-        .representableSheet(
-            isPresented: $showAniList,
-            content: {
-                ALTracker(
-                    isPresented: $showAniList,
-                    of: manga,
-                    action: $vm.occurredAct
-                )
-            }, detents: []
-        )
+        .sheet(isPresented: $showAniList) {
+            ALTracker(
+                of: vm.manga,
+                cover: vm.api.buildURL(for: .cover(
+                    id: vm.manga.id,
+                    fileName: vm.imgFileName(
+                        of: vm.manga,
+                        quality: vm.mDexCoverQuality.key
+                    )
+                )),
+                action: $vm.occurredAct
+            )
+            .presentationDetents([.medium, .large])
+            .interactiveDismissDisabled()
+            .presentationDragIndicator(.hidden)
+        }
     }
     
     /// Add/Remove from library button
     @ViewBuilder
     func libraryButton() -> some View {
-        Button(role: vm.mangaOnLib ? .destructive : .none) {
-            vm.startAction(for: .lib)
+        Menu {
+            Section {
+                statusPicker()
+            } header: {
+                Text("Current manga state on library")
+            }
+            
+            rmvFromLibBtn().disabled(!vm.mangaOnLib)
         } label: {
             Image(systemName: vm.mangaOnLib
-                  ? "trash.fill"
-                  : "plus"
+                ? "folder.fill.badge.gearshape"
+                : "folder.fill.badge.plus"
             )
+            .foregroundColor(vm.mangaOnLib ? Color.ORCH.attention : Color.ORCH.accentColor)
+            .fontWeight(.heavy)
+            .font(.footnote)
         }
-        .font(.footnote)
-        .fontWeight(.heavy)
-        .tint(.primary)
-        .foregroundColor(vm.mangaOnLib ? .red : .accentColor)
+        .tint(Color.ORCH.actionBackground)
         .buttonStyle(.borderedProminent)
-        .disabled(vm.occurredAct)
     }
     
-    /// Chapters history button
+    /// Manga status picker
     @ViewBuilder
-    func historyButton() -> some View {
-        Menu {
-            Button {
-                showHistory = true
-                vm.startAction(for: .history(clear: false))
-            } label: {
-                Label("View", systemImage: "eye.fill")
-            }
-            Button(role: .destructive) {
-                vm.startAction(for: .history(clear: true))
-            } label: {
-                Label("Clear", systemImage: "trash")
+    func statusPicker() -> some View {
+        Picker(selection: $vm.libStatus) {
+            ForEach(MangaStatus.allCases) {
+                if $0 != .none { Label($0.description, systemImage: $0.icon) }
             }
         } label: {
-           Image(systemName: "clock.arrow.circlepath")
-                .foregroundColor(.primary)
-                .font(.footnote)
+            if vm.libStatus != .none {
+                Label(
+                    vm.libStatus.description,
+                    systemImage: vm.libStatus.icon
+                )
+            } else { Text(vm.libStatus.description) }
         }
-        .buttonStyle(.borderedProminent)
-        .disabled(vm.occurredAct)
-        .sheet(isPresented: $showHistory) {
-            MangaHistoryView(
-                of: manga,
-                action: $vm.occurredAct
+        .pickerStyle(.menu)
+        .onChange(of: vm.libStatus) {
+            if $0 != .none {
+                vm.startAction(for: .lib(.changeFolder))
+            }
+        }
+    }
+    
+    /// Remove from library button
+    @ViewBuilder
+    func rmvFromLibBtn() -> some View {
+        Button(role: .destructive) {
+            vm.startAction(for: .lib(.remove))
+        } label: {
+            Label(
+                "Remove from library",
+                systemImage: "trash.fill"
             )
-            .presentationDetents([.medium, .large])
         }
     }
 }

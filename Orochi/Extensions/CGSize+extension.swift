@@ -14,8 +14,8 @@ extension CGSize {
         let aspectRatio = 92.5 / 62.5
         var proportion: Double {
             switch Constants.device {
-            case .pad: return 0.150
-            default:   return 0.205
+            case .pad: return 0.215
+            default:   return 0.285
             }
         }
         let width = (portrait ? UIScreen.width : UIScreen.height) * proportion
@@ -28,8 +28,8 @@ extension CGSize {
         let aspectRatio = 97.5 / 67.5
         var proportion: Double {
             switch Constants.device {
-            case .pad: return 0.2
-            default:   return 0.335
+            case .pad: return 0.250
+            default:   return 0.425
             }
         }
         let width = (portrait ? UIScreen.width : UIScreen.height) * proportion

@@ -9,32 +9,25 @@ import SwiftUI
 
 struct SettingsView: View {
     @StateObject var vm: SettingsViewModel = SettingsViewModel()
+    @State var showALAccount: Bool = false
     
     var body: some View {
         NavigationStack {
-            List {
-                self.anilistSection()
-                    .listRowSeparator(.hidden)
-                    .listRowBackground(Color.clear)
-                self.icloudSection()
-                    .listRowBackground(Color.clear)
-                self.securitySection()
-                    .listRowBackground(Color.clear)
-                self.notificationsSection()
-                    .listRowBackground(Color.clear)
-            }
-            .listStyle(.grouped)
-            .toolbarBackground(
-                Color.indigo.opacity(0.075),
-                for: .navigationBar
-            )
-            .animation(
-                .easeInOut(duration: 0.175),
-                value: [vm.biometryPreference, vm.logged]
-            )
-            .background(BlurBackground(with: .view_background))
-            .scrollContentBackground(.hidden)
-            .navigationTitle(Text(String.Settings.title))
+            content()
+                .standardBars()
+                .animation(.spring(), value: [vm.isLoading, vm.user != nil])
+                .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
+                    Button(String.Common.ok) { }
+                } message: {
+                    Text(vm.alertInfo.message)
+                }
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        Text(String.Adjusts.title)
+                            .font(.title2)
+                            .fontWeight(.heavy)
+                    }
+                }
         }
     }
 }

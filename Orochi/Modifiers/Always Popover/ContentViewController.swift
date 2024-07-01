@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-class ContentViewController<V>: UIHostingController<V>, UIPopoverPresentationControllerDelegate where V:View {
+class ContentViewController<V>: UIHostingController<V>, UIPopoverPresentationControllerDelegate where V: View {
     var isPresented: Binding<Bool>
     
     init(rootView: V, isPresented: Binding<Bool>) {
@@ -15,7 +15,9 @@ class ContentViewController<V>: UIHostingController<V>, UIPopoverPresentationCon
         super.init(rootView: rootView)
     }
     
-    @MainActor @objc required dynamic init?(coder aDecoder: NSCoder) {
+    @MainActor 
+    @objc
+    dynamic required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -34,4 +36,3 @@ class ContentViewController<V>: UIHostingController<V>, UIPopoverPresentationCon
         self.isPresented.wrappedValue = false
     }
 }
-

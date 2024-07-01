@@ -10,35 +10,54 @@ import SwiftUI
 extension SettingsView {
     typealias Localized = String.Adjusts
     
+    @ViewBuilder
+    func content() -> some View {
+        List {
+            anilistSection()
+                .listRowSeparator(.hidden)
+                .listRowBackground(Color.clear)
+            icloudSection()
+                .listRowBackground(Color.clear)
+            securitySection()
+                .listRowBackground(Color.clear)
+            notificationsSection()
+                .listRowBackground(Color.clear)
+            aboutApp()
+                .listRowBackground(Color.clear)
+        }
+        .refreshable { vm.fetchUser() }
+        .listStyle(.grouped)
+        .animation(
+            .easeInOut(duration: 0.125),
+            value: vm.biometryPreference
+        )
+        .scrollIndicators(.hidden)
+        .scrollContentBackground(.hidden)
+        .background(Color.ORCH.background)
+        .fullScreenCover(isPresented: $showALAccount) {
+            if let user = vm.user {
+                ALAccountView(user: user)
+                    .interactiveDismissDisabled()
+            }
+        }
+    }
+    
     /// App tracker section
     @ViewBuilder
     func anilistSection() -> some View {
         Section {
-            HStack {
-                Button(role: vm.logged ? .destructive : .none) {
-                    vm.logged.toggle()
-                    // TODO: - Login on AniList API
-                } label: {
-                    Text(vm.logged ? Localized.logOut.uppercased() : Localized.logIn.uppercased())
-                        .font(.caption)
-                        .fontWeight(.semibold)
-                }.buttonStyle(.borderless)
-                Spacer()
-                Text(vm.logged ? "\(Localized.trackerUser): **douglazhs**" : "")
-                    .font(.caption)
-                    .foregroundColor(Color(uiColor: .systemGray))
-            }
+            trackerCell()
+                .frame(maxWidth: .infinity)
+                .overlay(alignment: .trailing) {
+                    accButtonHandler()
+                }
         } header: {
-            WebsiteStandardCell(
-                header: Localized.trackerHeader,
-                title: String.Name.aniList,
-                urlString: "https://anilist.co/home",
-                image: .ani_list_logo,
-                customInfo: (show: true, description: vm.logged ? "34 Mangas" : "")
-            )
+            Text(Localized.trackerHeader.capitalized)
         } footer: {
             Text(Localized.trackerFooter)
+                .foregroundColor(Color.ORCH.secondaryText)
         }
+        .foregroundColor(Color.ORCH.primaryText)
     }
     
     /// App iCloud section
@@ -50,14 +69,20 @@ extension SettingsView {
                     Text(Localized.icloudSync)
                 } icon: {
                     Image(systemName: "link.icloud.fill")
-                        .foregroundColor(.primary)
                 }
+            }.onChange(of: vm.iCloud) {
+                Defaults.standard.saveBool(
+                    $0,
+                    key: DefaultsKeys.Settings.sync.rawValue
+                )
             }
         } header: {
             Text(Localized.icloudHeader)
         } footer: {
             Text(Localized.icloudFooter)
+                .foregroundColor(Color.ORCH.secondaryText)
         }
+        .foregroundColor(Color.ORCH.primaryText)
     }
     
     /// App security section
@@ -69,43 +94,29 @@ extension SettingsView {
                     Text(Localized.securityBiometry)
                 } icon: {
                     Image(systemName: "lock.fill")
-                        .foregroundColor(.primary)
+                        
                 }
-            }
-            if vm.biometricState == .active {
-                Picker(Localized.securityLevel, selection: $vm.securityLevel) {
-                    ForEach(SecurityLevel.allCases) { level in
-                        VStack(alignment: .leading, spacing: 5) {
-                            Label {
-                                Text(level.description)
-                            } icon: {
-                                Image(systemName: level.info.0)
-                            }
-                            Text(level.info.1)
-                                .foregroundColor(Color(uiColor: .systemGray))
-                                .font(.caption2)
-                        }
-                    }
-                }
-                .pickerStyle(.inline)
-                .disabled(!vm.biometryPreference)
+            }.onChange(of: vm.biometryPreference) {
+                Defaults.standard.saveBool(
+                    $0,
+                    key: DefaultsKeys.Settings.biometry.rawValue
+                )
             }
         } header: {
             Text(Localized.securityHeader)
         } footer: {
             VStack(alignment: .leading) {
                 Text(Localized.securityFooter)
-                Text(vm.error?.localizedDescription ?? "")
+                Text(vm.biometricsError?.localizedDescription ?? "")
                     .foregroundColor(.accentColor)
                     .bold()
             }
+            .foregroundColor(Color.ORCH.secondaryText)
         }
-        .disabled(!vm.biometrics)
+        .foregroundColor(Color.ORCH.primaryText)
+        .disabled(!vm.biometricsAvailable)
         .onChange(of: vm.biometryPreference) { _ in
-            if vm.error == nil {
-                vm.changeBiometryState()
-            }
-            vm.error = nil
+            vm.changeLocalAuth()
         }
     }
     
@@ -118,13 +129,20 @@ extension SettingsView {
                     Text(Localized.notificationUpdate)
                 } icon: {
                     Image(systemName: "bell.badge")
-                        .foregroundColor(.red)
+                        .foregroundColor(Color.ORCH.attention)
                 }
+            }.onChange(of: vm.notifications) {
+                Defaults.standard.saveBool(
+                    $0,
+                    key: DefaultsKeys.Settings.chUpdate.rawValue
+                )
             }
         } header: {
             Text(Localized.notificationHeader)
         } footer: {
             Text(Localized.notificationFooter)
+                .foregroundColor(Color.ORCH.secondaryText)
         }
+        .foregroundColor(Color.ORCH.primaryText)
     }
 }

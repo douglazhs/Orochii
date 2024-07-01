@@ -13,22 +13,52 @@ enum ViewStyle {
 }
 
 struct DiscoverView: View {
-    @StateObject var vm = DiscoverViewModel()
+    @StateObject var vm: DiscoverViewModel
     @State var viewStyle: ViewStyle = .initial
     @State var mangaSourcePref: Bool = false
     
+    init() {
+        _vm = StateObject(
+            wrappedValue: DiscoverViewModel()
+        )
+    }
+    
     var body: some View {
         NavigationStack {
-            self.content()
-                .navigationTitle(Text(String.Discovery.title))
+            content()
+                .standardBars()
+                .background {
+                    Color.ORCH.background
+                        .ignoresSafeArea(.all)
+                }
+                .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
+                    Button(String.Common.ok, role: .cancel) { }
+                } message: {
+                    Text(vm.alertInfo.message)
+                }
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
-                        self.mangaSourceButton()
+                        mangaSourceButton()
+                    }
+                    
+                    ToolbarItem(placement: .principal) {
+                        Text(String.Discovery.title)
+                            .font(.title2)
+                            .fontWeight(.heavy)
                     }
                 }
         }
-        .searchable(text: $vm.searchText)
-        .onSubmit(of: .search) { viewStyle = .search }
+        .searchable(
+            text: $vm.nameQuery,
+            placement: .navigationBarDrawer(displayMode: .always),
+            prompt: String.Discovery.searchPlaceholder
+        ) {
+            searchSuggestions()
+        }
+        .onSubmit(of: .search) {
+            UIApplication.shared.becomeFirstResponder()
+            vm.submitSearch()
+        }
     }
 }
 
@@ -37,5 +67,3 @@ struct DiscoverView_Previews: PreviewProvider {
         DiscoverView()
     }
 }
-
-

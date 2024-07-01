@@ -6,59 +6,71 @@
 //
 
 import SwiftUI
-
-/// Focused TextField
-enum Field: Int, Hashable {
-    case search
-}
+import struct MangaDex.Manga
+import class MangaDex.MangaMock
+import struct MangaDex.Cover
 
 struct MangaView: View {
-    var manga: MangaDomain
-    @StateObject var vm: MangaViewModel = MangaViewModel()
-    @State var showAniList: Bool = false
-    @State var showHistory: Bool = false
-    @State var showChapterReader: Bool = false
-    @State var searchOffset: CGFloat = -UIScreen.width
-    @State var headerOffset: CGFloat = 0
-    @FocusState var field: Field?
+    enum Field: Int, Hashable {
+        case search
+    }
     
-    init(_ manga: MangaDomain) {
-        self.manga = manga
+    @StateObject var vm: MangaViewModel
+    @State var showAniList: Bool = false
+    @State var showChapterReader: Bool = false
+    @State var showFullName: Bool = false
+    @State var showCover: Bool = false
+    @FocusState var field: Field?
+    @State var chSelection = Set<String?>()
+    
+    init(_ manga: Manga) {
+        _vm = StateObject(
+            wrappedValue: MangaViewModel(manga)
+        )
     }
     
     var body: some View {
-        self.content()
-            .navigationBarTitleDisplayMode(.inline)
+        content()
+            .toolbarRole(.editor)
             .toolbar(vm.showBottomBar ? .visible : .hidden, for: .bottomBar)
-            .toolbar(vm.isEditingMode ? .hidden : .visible, for: .tabBar)
             .navigationBarBackButtonHidden(vm.isEditingMode)
+            .sheet(isPresented: $showCover) {
+                CoverList()
+                    .environmentObject(vm)
+                    .interactiveDismissDisabled()
+                    .presentationContentInteraction(.resizes)
+                    .presentationBackgroundInteraction(.disabled)
+                    .presentationCornerRadius(.zero)
+            }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    self.selectChaptersButton()
+                    selectChaptersButton()
                 }
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    self.editButton()
+                    editButton()
                 }
                 ToolbarItemGroup(placement: .bottomBar) {
-                    self.chapterActions()
+                    chapterActions()
                 }
                 ToolbarItem(placement: .principal) {
-                    ActionPopUp(
-                        title: manga.title,
-                        message: vm.actionMessage,
-                        action: $vm.occurredAct
-                    )
+                    Text(vm.unwrapTitle(of: vm.manga))
+                        .font(.headline)
+                        .lineLimit(1)
+                        .multilineTextAlignment(.center)
+                        .fontWeight(.heavy)
+                        .textSelection(.enabled)
+                        .onTapGesture {
+                            showFullName = true
+                        }
+                        .alwaysPopover(isPresented: $showFullName) {
+                            altTitles()
+                                .background(BackgroundClearView())
+                        }
                 }
             }
-            .animation(
-                .easeInOut,
-                value: [vm.isEditingMode, vm.showBottomBar]
-            )
     }
 }
 
-struct MangaView_Previews: PreviewProvider {
-    static var previews: some View {
-        MangaView(MangaDomain.samples[10])
-    }
+#Preview {
+    MangaView(MangaMock.manga)
 }

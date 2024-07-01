@@ -6,37 +6,52 @@
 //
 
 import SwiftUI
+import struct MangaDex.Manga
 
 struct InitialStyleView: View {
+    @Environment(\.isSearching)
+    var isSearching
+    @Binding var viewStyle: ViewStyle
     @EnvironmentObject var vm: DiscoverViewModel
+    @State var showFilter: Bool = false
+    var columns = [
+        GridItem(.adaptive(minimum: CGSize.standardImageCell.width))
+    ]
+    
+    init(_ viewStyle: Binding<ViewStyle>) {
+        self._viewStyle = viewStyle
+    }
 
     var body: some View {
-        ScrollView(showsIndicators: false) {
-            VStack(alignment: .center) {
-                ForEach(Carousel.allCases, id: \.self) { type in
-                    Section {
-                        self.carousel(of: vm.section[type] ?? [])
-                    } header: {
-                        HStack(alignment: .center) {
-                            Text(type.header.uppercased())
-                                .font(.subheadline)
-                                .foregroundColor(.secondary)
-                                .fontWeight(.regular)
-                                .padding(.trailing, 7.5)
-                            VStack { Divider() }
-                        }.padding(.leading)
-                    }
-                }
-            }.padding(.vertical)
+        ScrollView(.vertical, showsIndicators: false) {
+            filterCarousel()
+            
+            filterButton()
+            
+            discoverGrid()
         }
-        .background(BlurBackground(with: .view_background))
-        .scrollContentBackground(.hidden)
+        .sheet(isPresented: $showFilter) {
+            DiscoverFilterView()
+                .presentationDetents([.medium, .large])
+                .presentationCornerRadius(.zero)
+                .presentationDragIndicator(.visible)
+                .presentationContentInteraction(.resizes)
+                .presentationBackgroundInteraction(.disabled)
+        }
+        .onChange(of: isSearching) { searching in
+            if searching { viewStyle = .search }
+        }
+        .overlay(alignment: .top) {
+            if vm.loading {
+                IndeterminateProgressView()
+            }
+        }
     }
 }
 
 struct InitialStyleView_Previews: PreviewProvider {
     static var previews: some View {
-        InitialStyleView()
+        InitialStyleView(.constant(.initial))
             .environmentObject(DiscoverViewModel())
     }
 }

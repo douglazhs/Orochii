@@ -8,7 +8,7 @@
 import Foundation
 
 /// Object that will be considerated when you filter some mangas
-enum ObjectFilter: Pickable {
+enum ObjectFilter: Int, Pickable {
     var id: Self { self }
     
     case name, lastUpdated, releaseYear

@@ -7,7 +7,8 @@
 
 import Foundation
 
-enum ReadingMode: Pickable {
+/// Reading mode
+enum ReadingMode: Int, Pickable {
     var id: Self { self }
     
     var description: String {
@@ -15,10 +16,9 @@ enum ReadingMode: Pickable {
         case .defaultMode:    return "Default"
         case .leftToRight:    return "Left to Right"
         case .rightToLeft:    return "Right to Left"
-        case .vertical:       return "Vertical"
-        case .verticalScroll: return "Vertical Scroll"
+        case .webtoon:        return "Webtoon"
         }
     }
     
-    case defaultMode, leftToRight, rightToLeft, vertical, verticalScroll
+    case defaultMode, leftToRight, rightToLeft, webtoon
 }

@@ -11,117 +11,27 @@ extension MangaView {
     /// Chapter list header
     @ViewBuilder
     func chaptersHeader() -> some View {
-        ZStack {
-            // STANDARD BAR WITH SOME INFORMATIONS
-            self.standardBar()
-                .offset(x: headerOffset)
-                .frame(maxWidth: .infinity)
-            // SEARCH BAR TO SEARCH A SPECIFIC CHAPTER
-            self.searchBar()
-                .offset(x: searchOffset)
-                .frame(maxWidth: .infinity)
-        }.frame(maxWidth: .infinity)
+        chaptersBar()
+            .disabled(vm.occurredAct)
+            .frame(
+                maxWidth: .infinity,
+                maxHeight: .infinity
+            )
     }
     
     /// Header chaptes bar
     @ViewBuilder
-    func standardBar() -> some View {
+    func chaptersBar() -> some View {
         HStack {
             // CHAPTERS COUNT
-            Text("\(ChapterDomain.samples.count) "
-                 + String.Manga.chapHeader.uppercased())
-                .foregroundColor(.primary)
-                .fontWeight(.regular)
-                .font(.callout)
-                .lineLimit(1)
-            Spacer()
-            // HISTORY BUTTON
-            self.historyButton()
-            // ORDER MENU
-            self.order()
-            // SEARCH BUTTON
-            self.searchChap()
-        }
-        .disabled(vm.occurredAct)
-    }
-    
-    /// Search chapters bar
-    @ViewBuilder
-    func searchBar() -> some View {
-        HStack(alignment: .center) {
-            // TEXTFIELD BAR
-            self.textField()
-            // CANCEL BUTTON
-            self.cancelSearch()
-        }
-    }
-    
-    /// Cancel search button
-    @ViewBuilder
-    func cancelSearch() -> some View {
-        Button {
-            Haptics.shared.play(.medium)
-            withAnimation(.interpolatingSpring(
-                mass: 2.0,
-                stiffness: 5,
-                damping: 5,
-                initialVelocity: 0).speed(10)
-            ) {
-                searchOffset = -UIScreen.width
-                headerOffset = 0
-                vm.search = false
-                UIApplication.shared.endEditing()
-            }
-        } label: { Text(String.Common.cancel) }
-    }
-    
-    /// Text field to search a specific chapter
-    @ViewBuilder
-    func textField() -> some View {
-        HStack {
-            Image(systemName: "magnifyingglass")
-                .foregroundColor(.secondary)
-            TextField(text: $vm.queryFilter, axis: .horizontal) {
-                Text("Search chapter")
-                    .font(.body)
-                    .fontWeight(.regular)
-                    .foregroundColor(.secondary)
-            }.ignoresSafeArea(.keyboard, edges: .bottom)
-        }
-        .foregroundColor(.primary)
-        .padding(.horizontal, 7.5)
-        .padding(.vertical, 5.5)
-        .frame(maxWidth: .infinity, maxHeight: 35)
-        .background(
-            Color.primary.opacity(0.1),
-            in: RoundedRectangle(cornerRadius: 6.5)
-        )
-        .focused($field, equals: .search)
-    }
-    
-    /// Search chapter button
-    @ViewBuilder
-    func searchChap() -> some View {
-        Button {
-            Haptics.shared.play(.medium)
-            withAnimation(.interpolatingSpring(
-                mass: 2.0,
-                stiffness: 5,
-                damping: 5,
-                initialVelocity: 0).speed(9.5)
-            ) {
-                searchOffset = 0
-                headerOffset = UIScreen.width
-                vm.search = true
-                field = .search
-                UIApplication.shared.becomeFirstResponder()
-            }
-        } label: {
-            Image(systemName: "magnifyingglass")
+            Text("\(vm.totalOnFeed) " + String.Manga.chapHeader.uppercased())
+                .foregroundStyle(Color.ORCH.secondaryTitle)
                 .font(.footnote)
-                .foregroundColor(.primary)
-        }.buttonStyle(.borderedProminent)
-        .tint(.accentColor)
+                .fontWeight(.regular)
+            Spacer()
+            // ORDER MENU
+            order()
+        }
     }
     
     /// Manga order
@@ -129,18 +39,17 @@ extension MangaView {
     func order() -> some View {
         Menu {
             Section {
-                Label {
-                    EnumPicker(
-                        vm.chaptersOrder.description,
-                        selection: $vm.chaptersOrder
-                    ).pickerStyle(.menu)
-                } icon: {
-                    Label(
-                        vm.chaptersOrder.description,
-                        systemImage: "arrow.up.arrow.down"
-                    )
+                EnumPicker(
+                    vm.feedOrder.description,
+                    selection: $vm.feedOrder
+                )
+                .pickerStyle(.menu)
+                .onChange(of: vm.feedOrder) { [weak vm] in
+                    vm?.orderFeed(by: $0)
                 }
-            } header: { Text(String.Filter.orderByHeader.uppercased()) }
+            } header: {
+                Text(String.Filter.orderByHeader.uppercased())
+            }
             Section {
                 Button { vm.downloaded.toggle() } label: {
                     HStack {
@@ -152,13 +61,17 @@ extension MangaView {
                         }
                     }
                 }
+                .onChange(of: vm.downloaded) { [weak vm] in
+                    vm?.filterFeed()
+                    Defaults.standard.saveBool(
+                        $0,
+                        key: DefaultsKeys.Chapters.downloaded.rawValue
+                    )
+                }
             }
         } label: {
-            Image(systemName: "arrow.up.arrow.down")
-                .font(.footnote)
-                .foregroundColor(.primary)
+            Image(systemName: "line.3.horizontal.decrease")
+                .foregroundStyle(Color.ORCH.button)
         }
-        .tint(.accentColor)
-        .buttonStyle(.borderedProminent)
     }
 }
