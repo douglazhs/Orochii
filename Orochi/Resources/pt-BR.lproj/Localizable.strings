@@ -178,12 +178,14 @@
 "account_noFavorites" = "You have no favorites :(";
 "account_section_totalMangas" = "Total de Mangas";
 "account_section_meanScore" = "Nota Média";
+"account_section_standardDeviation" = "Desvio Padrão";
 "account_section_chaptersRead" = "Capítulos Lidos";
 "account_section_volumesRead" = "Volumes Lidos";
 "account_section_statuses" = "Status";
 "account_section_genres" = "Distribuição de Gêneros";
 "account_section_tags" = "Distribuição de Tags";
 "account_section_chaptersPerYear" = "Capítulos Lidos Por Ano";
+"account_section_chaptersPerStaff" = "Capítulos Lidos Por Staff";
 "account_section_country" = "Mangas Por País";
 "account_tab_stats" = "Estatísticas";
 "account_tab_activity" = "Atividade";

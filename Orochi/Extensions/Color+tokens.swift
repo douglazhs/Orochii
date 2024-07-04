@@ -20,5 +20,6 @@ public extension Color {
         static let background: Color = { Color("background") }()
         static let secondaryBackground: Color = { Color("secondaryBackground") }()
         static let actionBackground: Color = { Color("actionBackground") }()
+        static let selectedSegment: Color = { Color("selectedSegment") }()
     }
 }

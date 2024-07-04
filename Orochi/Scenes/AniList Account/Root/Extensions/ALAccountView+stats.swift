@@ -22,6 +22,7 @@ extension ALAccountView {
             }
             .listRowBackground(Color.clear)
             .listSectionSeparator(.hidden)
+            .font(.subheadline)
         }
         .listStyle(.inset)
         .scrollIndicators(.hidden)
@@ -35,6 +36,8 @@ extension ALAccountView {
             .badge(vm.user.statistics?.manga?.count ?? 0)
         Text(Localized.meanScore)
             .badge(Int(vm.user.statistics?.manga?.meanScore ?? 0))
+        Text(Localized.standardDeviation)
+            .badge(Int(vm.user.statistics?.manga?.standardDeviation ?? 0))
         Text(Localized.chaptersRead)
             .badge(vm.user.statistics?.manga?.chaptersRead ?? 0)
         Text(Localized.volumesRead)
@@ -71,6 +74,12 @@ extension ALAccountView {
             ForEach(vm.user.statistics?.manga?.countries ?? [], id: \.country) { stat in
                 Text(Locale.current.localizedString(forRegionCode: stat.country ?? "") ?? "")
                     .badge(String(format: "%d", stat.count ?? 0))
+            }
+        }
+        DisclosureGroup(Localized.chaptersPerStaff, isExpanded: $expandStaff) {
+            ForEach(vm.user.statistics?.manga?.staff ?? [], id: \.staff?.id) { stat in
+                Text(stat.staff?.name?.full ?? String.Common.unknown)
+                    .badge(String(format: "%d", stat.chaptersRead ?? 0))
             }
         }
     }
