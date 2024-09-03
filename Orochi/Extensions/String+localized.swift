@@ -170,6 +170,10 @@ extension String {
             "account_section_chaptersPerYear",
             comment: "Chapters Read Per Year"
         )
+        static let mangasPerYear: String = NSLocalizedString(
+            "account_section_mangasPerYear",
+            comment: "Mangas Read Per Year"
+        )
         static let country: String = NSLocalizedString("account_section_country", comment: "Manga Per Country")
         static let stats: String = NSLocalizedString("account_tab_stats", comment: "STATS")
         static let activity: String = NSLocalizedString("account_tab_activity", comment: "ACTIVITY")

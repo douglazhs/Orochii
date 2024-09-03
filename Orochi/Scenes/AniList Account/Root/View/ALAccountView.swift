@@ -17,11 +17,12 @@ struct ALAccountView: View {
     @Environment(\.dismiss) 
     var dismiss
     @State var expandGenre: Bool = false
-    @State var expandStartYears: Bool = false
+    @State var expandChaptersPerYears: Bool = false
     @State var expandCountry: Bool = false
     @State var expandStatus: Bool = false
     @State var expandTag: Bool = false
     @State var expandStaff: Bool = false
+    @State var expandCountPerYears: Bool = false
     @State var showWebView: Bool = false
     @State var showMangaView: Bool = false
     @State var showError: Bool = false

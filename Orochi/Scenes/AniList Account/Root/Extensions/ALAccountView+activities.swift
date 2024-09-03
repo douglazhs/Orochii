@@ -93,13 +93,13 @@ extension ALAccountView {
                     .font(.caption)
                     .foregroundStyle(Color.ORCH.primaryText)
                 
-                HStack(alignment: .center, spacing: 2.5) {
+                HStack(alignment: .center, spacing: 3.5) {
                     Image(systemName: "clock")
                     Text(Date.relativeDate(of: activity.createdAt ?? 0))
                 }
                 .font(.system(size: 10))
-                .fontWeight(.semibold)
-                .foregroundStyle(Color.ORCH.secondaryTitle)
+                .fontWeight(.medium)
+                .foregroundStyle(Color.ORCH.primaryText)
             }
             
             Spacer()

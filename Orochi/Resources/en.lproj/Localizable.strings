@@ -184,6 +184,7 @@
 "account_section_statuses" = "Statuses";
 "account_section_genres" = "Genres Distribution";
 "account_section_tags" = "Tags Distribution";
+"account_section_mangasPerYear" = "Mangas Read Per Year";
 "account_section_chaptersPerYear" = "Chapters Read Per Year";
 "account_section_chaptersPerStaff" = "Chapters Read Per Staff";
 "account_section_country" = "Manga Per Country";
