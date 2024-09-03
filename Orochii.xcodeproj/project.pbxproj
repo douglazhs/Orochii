@@ -473,7 +473,6 @@
 				5092DF2429292C590094DC18 /* OrochiApp.swift */,
 				50FFAFDD292A6A7F00B87E0E /* Enums */,
 				5092DF4F292957770094DC18 /* Extensions */,
-				5092DF5429296FE10094DC18 /* Model */,
 				50F4443F292E9293001B3CF4 /* Modifiers */,
 				5092DF2A29292C5C0094DC18 /* Preview Content */,
 				779074132A729F2200031E30 /* Protocols */,
@@ -608,13 +607,6 @@
 				52588B652C234F67006B94FD /* String+replacing.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		5092DF5429296FE10094DC18 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		5092DF5F292983050094DC18 /* Source Preferences */ = {
@@ -1867,6 +1859,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -1904,6 +1897,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GENERATE_ASSET_SYMBOLS = NO;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
