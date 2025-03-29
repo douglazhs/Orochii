@@ -97,7 +97,7 @@ final class DiscoverViewModel: ObservableObject {
     /// - Parameters:
     ///   - offset: Current request offset
     ///   - completion: Manga request result
-    private func fetch(completion: @escaping([Manga]) -> Void) {
+    private func fetch(completion: @escaping ([Manga]) -> Void) {
         api.getRandomManga(
             params: merge(selectedMainFilter.params, into: defaults()),
             offset: offset
