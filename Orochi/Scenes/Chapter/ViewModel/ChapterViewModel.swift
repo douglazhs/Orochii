@@ -13,9 +13,9 @@ extension ChapterViewModel: MangaHelpers { }
 final class ChapterViewModel: ObservableObject {
  
     /// Actual reading **Manga**
-    private (set) var manga: Manga
+    private(set) var manga: Manga
     /// Current **Manga** feed
-    private (set) var feed: [Chapter]
+    private(set) var feed: [Chapter]
     /// MangaDex Api object
     let api: MangaDexAPI = MangaDexAPI()
     // MARK: - Chapter configuration

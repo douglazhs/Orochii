@@ -156,14 +156,23 @@ extension String {
         static let noFavorites: String = NSLocalizedString("account_noFavorites", comment: "You have no favorites :(")
         static let totalMangas: String = NSLocalizedString("account_section_totalMangas", comment: "Total Mangas")
         static let meanScore: String = NSLocalizedString("account_section_meanScore", comment: "Mean Score")
+        static let standardDeviation: String = NSLocalizedString("account_section_standardDeviation", comment: "Standard Deviation")
         static let chaptersRead: String = NSLocalizedString("account_section_chaptersRead", comment: "Chapters Read")
         static let volumesRead: String = NSLocalizedString("account_section_volumesRead", comment: "Volumes Read")
         static let statuses: String = NSLocalizedString("account_section_statuses", comment: "Statuses")
         static let genres: String = NSLocalizedString("account_section_genres", comment: "Genres Distribution")
         static let tags: String = NSLocalizedString("account_section_tags", comment: "Tags Distribution")
+        static let chaptersPerStaff: String = NSLocalizedString(
+            "account_section_chaptersPerStaff",
+            comment: "Chapters Read Per Staff"
+        )
         static let chaptersPerYear: String = NSLocalizedString(
             "account_section_chaptersPerYear",
             comment: "Chapters Read Per Year"
+        )
+        static let mangasPerYear: String = NSLocalizedString(
+            "account_section_mangasPerYear",
+            comment: "Mangas Read Per Year"
         )
         static let country: String = NSLocalizedString("account_section_country", comment: "Manga Per Country")
         static let stats: String = NSLocalizedString("account_tab_stats", comment: "STATS")

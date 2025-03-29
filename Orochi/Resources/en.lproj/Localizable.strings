@@ -178,12 +178,15 @@
 "account_noFavorites" = "You have no favorites :(";
 "account_section_totalMangas" = "Total Mangas";
 "account_section_meanScore" = "Mean Score";
+"account_section_standardDeviation" = "Standard Deviation";
 "account_section_chaptersRead" = "Chapters Read";
 "account_section_volumesRead" = "Volumes Read";
 "account_section_statuses" = "Statuses";
 "account_section_genres" = "Genres Distribution";
 "account_section_tags" = "Tags Distribution";
+"account_section_mangasPerYear" = "Mangas Read Per Year";
 "account_section_chaptersPerYear" = "Chapters Read Per Year";
+"account_section_chaptersPerStaff" = "Chapters Read Per Staff";
 "account_section_country" = "Manga Per Country";
 "account_tab_stats" = "Stats";
 "account_tab_activity" = "Activity";

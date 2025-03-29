@@ -13,9 +13,9 @@ class SettingsViewModel: ObservableObject {
         case active, inactive, unavailable
     }
     
-    private (set) var biometricsError: Error?
-    private (set) var requestError: Error?
-    private (set) var anilist: AniList = AniList()
+    private(set) var biometricsError: Error?
+    private(set) var requestError: Error?
+    private(set) var anilist: AniList = AniList()
     private var token: String = ""
     @Published var biometricsAvailable: Bool = false
     @Published var biometricState: LockState = .inactive

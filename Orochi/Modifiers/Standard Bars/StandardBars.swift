@@ -13,9 +13,9 @@ private struct StandardBars: ViewModifier {
     func body (content: Content) -> some View {
         content
             .navigationBarTitleDisplayMode(.inline)
-            .toolbarBackground(.visible, for: .tabBar, .navigationBar, .bottomBar)
+            .toolbarBackground(.visible, for: .tabBar, .navigationBar)
             .toolbarBackground(Color.black, for: .navigationBar)
-            .toolbarBackground(Color.ORCH.background, for: .tabBar, .bottomBar)
+            .toolbarBackground(Color.ORCH.background, for: .tabBar)
     }
 }
 

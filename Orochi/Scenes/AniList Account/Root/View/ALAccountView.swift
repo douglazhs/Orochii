@@ -17,10 +17,12 @@ struct ALAccountView: View {
     @Environment(\.dismiss) 
     var dismiss
     @State var expandGenre: Bool = false
-    @State var expandStartYears: Bool = false
+    @State var expandChaptersPerYears: Bool = false
     @State var expandCountry: Bool = false
     @State var expandStatus: Bool = false
     @State var expandTag: Bool = false
+    @State var expandStaff: Bool = false
+    @State var expandCountPerYears: Bool = false
     @State var showWebView: Bool = false
     @State var showMangaView: Bool = false
     @State var showError: Bool = false
@@ -33,18 +35,18 @@ struct ALAccountView: View {
     
     init(user: User) {
         _vm = StateObject(wrappedValue: ALAccountViewModel(user: user))
-        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.ORCH.actionBackground)
+        UISegmentedControl.appearance().selectedSegmentTintColor = UIColor(Color.ORCH.selectedSegment)
         UISegmentedControl.appearance().setTitleTextAttributes(
             [
                 NSAttributedString.Key.foregroundColor: UIColor.white,
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .bold)
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .bold)
             ],
             for: .selected
         )
         UISegmentedControl.appearance().setTitleTextAttributes(
             [
                 NSAttributedString.Key.foregroundColor: UIColor.secondaryLabel,
-                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .bold)
+                NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14, weight: .bold)
             ],
             for: .normal
         )
