@@ -57,12 +57,12 @@ class SettingsViewModel: ObservableObject {
     /// Check if the user is logged on AniList account
     private func checkALToken() {
         if let tokenData = Keychain.standard.read(
-            service: "access-token",
-            account: "anilist"
+            service: KeychainService.Key.accessToken,
+            account: KeychainService.Account.anilist
         ), let expiresData = Keychain.standard.read(
-            service: "expires-in",
-            account: "anilist"
-        ), 
+            service: KeychainService.Key.expiresIn,
+            account: KeychainService.Account.anilist
+        ),
         let token =  String(data: tokenData, encoding: .utf8),
         String(data: expiresData, encoding: .utf8) != nil {
             self.token = token
@@ -76,8 +76,8 @@ class SettingsViewModel: ObservableObject {
     ///            `false`: not saved
     private func savedUserId() -> Bool {
         if let userIdData = Keychain.standard.read(
-            service: "user-id",
-            account: "anilist"
+            service: KeychainService.Key.userId,
+            account: KeychainService.Account.anilist
         ), Int(data: userIdData) != nil {
             return true
         }
@@ -149,12 +149,12 @@ class SettingsViewModel: ObservableObject {
     func logOutAL() {
         do {
             try Keychain.standard.delete(
-                service: "access-token",
-                account: "anilist"
+                service: KeychainService.Key.accessToken,
+                account: KeychainService.Account.anilist
             )
             try Keychain.standard.delete(
-                service: "user-id",
-                account: "anilist"
+                service: KeychainService.Key.userId,
+                account: KeychainService.Account.anilist
             )
             token = ""
             logged = false
@@ -175,13 +175,13 @@ class SettingsViewModel: ObservableObject {
         
         try Keychain.standard.save(
             bearerData,
-            service: "access-token",
-            account: "anilist"
+            service: KeychainService.Key.accessToken,
+            account: KeychainService.Account.anilist
         )
         try Keychain.standard.save(
             expiresData,
-            service: "expires-in",
-            account: "anilist"
+            service: KeychainService.Key.expiresIn,
+            account: KeychainService.Account.anilist
         )
     }
     
@@ -190,8 +190,8 @@ class SettingsViewModel: ObservableObject {
     private func storeUser(_ userId: Int) throws {
         try Keychain.standard.save(
             userId.data,
-            service: "user-id",
-            account: "anilist"
+            service: KeychainService.Key.userId,
+            account: KeychainService.Account.anilist
         )
     }
     

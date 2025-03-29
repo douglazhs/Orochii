@@ -54,8 +54,8 @@ final class ALAccountViewModel: ObservableObject {
     /// Load Bearer token for the current authenticated user
     private func loadToken() {
         if let tokenData = Keychain.standard.read(
-            service: "access-token",
-            account: "anilist"
+            service: KeychainService.Key.accessToken,
+            account: KeychainService.Account.anilist
         ), let token =  String(data: tokenData, encoding: .utf8) {
             self.token = token
         }

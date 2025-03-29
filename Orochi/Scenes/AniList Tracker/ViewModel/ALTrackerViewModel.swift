@@ -29,8 +29,8 @@ enum ALPicker {
 
 final class ALTrackerViewModel: ObservableObject {
     /// Manga rankings
-    enum Rank {
-        case rated, popular
+    enum Rank: String {
+        case rated = "RATED", popular = "POPULAR"
     }
     /// Current view context
     enum Context {
@@ -76,8 +76,8 @@ final class ALTrackerViewModel: ObservableObject {
     /// Check if the user is logged on AniList account
     private func checkALToken() {
         if let tokenData = Keychain.standard.read(
-            service: "access-token",
-            account: "anilist"
+            service: KeychainService.Key.accessToken,
+            account: KeychainService.Account.anilist
         ), let userToken =  String(data: tokenData, encoding: .utf8) {
             token = userToken
         }
@@ -113,12 +113,22 @@ final class ALTrackerViewModel: ObservableObject {
     func getRank(_ type: Rank) -> String {
         switch type {
         case .popular:
-            let popular = alManga?.rankings?.first(where: { $0.type.unwrapped == "POPULAR" && $0.allTime })?.rank
-            guard let popular else { return "-" }
+            guard let popular = alManga?.rankings?
+                .first(
+                    where: {
+                        $0.type.unwrapped == Rank.popular.rawValue && $0.allTime
+                    })?
+                .rank
+            else { return "-"}
             return "#\(popular)"
         case .rated:
-            let rated = alManga?.rankings?.first(where: { $0.type.unwrapped == "RATED" && $0.allTime })?.rank
-            guard let rated else { return "-" }
+            guard let rated = alManga?.rankings?
+                .first(
+                    where: {
+                        $0.type.unwrapped == Rank.rated.rawValue && $0.allTime
+                    })?
+                .rank
+            else { return "-" }
             return "#\(rated)"
         }
     }

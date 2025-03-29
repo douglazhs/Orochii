@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Carousel type
+/// Main home screen content
 enum MainFilter: Int, CaseIterable {
     case mostRelevants, awardWinning, thisYear, shounen, seinen, webComic
     
@@ -29,10 +29,10 @@ enum MainFilter: Int, CaseIterable {
     }
 }
 
-// Carousel parameters
+/// Main home screen parameters
 extension MainFilter {
-    /// Carousel parameters for request
-    /// - Returns: Section parameters
+    /// Parameters for request according to the main filter
+    /// - Returns: Main filter parameters
     func sectionParams() -> [String: Any] {
         var params: [String: Any] = [
             "limit": 30,

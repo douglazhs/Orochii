@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Default app User Defaults keys
+/// App User Defaults keys
 public enum DefaultsKeys {
     public enum Settings: String {
         case sync = "settings.icloud.sync"

@@ -156,7 +156,10 @@ extension String {
         static let noFavorites: String = NSLocalizedString("account_noFavorites", comment: "You have no favorites :(")
         static let totalMangas: String = NSLocalizedString("account_section_totalMangas", comment: "Total Mangas")
         static let meanScore: String = NSLocalizedString("account_section_meanScore", comment: "Mean Score")
-        static let standardDeviation: String = NSLocalizedString("account_section_standardDeviation", comment: "Standard Deviation")
+        static let standardDeviation: String = NSLocalizedString(
+            "account_section_standardDeviation",
+            comment: "Standard Deviation"
+        )
         static let chaptersRead: String = NSLocalizedString("account_section_chaptersRead", comment: "Chapters Read")
         static let volumesRead: String = NSLocalizedString("account_section_volumesRead", comment: "Volumes Read")
         static let statuses: String = NSLocalizedString("account_section_statuses", comment: "Statuses")

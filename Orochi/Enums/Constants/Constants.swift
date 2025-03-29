@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-/// All app constants
+/// Current device constants
 enum Constants {
     /// Current user device
     static let device = UIDevice.current.userInterfaceIdiom

@@ -6,6 +6,8 @@
 //
 
 import Foundation
+
+/// Possible error related to the existence of an object
 enum ObjectError: Error, LocalizedError {
     case empty
     

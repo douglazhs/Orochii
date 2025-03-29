@@ -22,7 +22,7 @@ public enum AniListCoverQuality: Int, Pickable {
     }
 }
 
-/// MangaDex cover quality. `.low`= 256px `.medium` = 512px
+/// MangaDex cover quality. `low`= 256px `medium` = 512px
 public enum MangaDexCoverQuality: Int, Pickable {
     case original, medium, low
     

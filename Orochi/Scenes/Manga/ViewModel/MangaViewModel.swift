@@ -232,11 +232,11 @@ extension MangaViewModel {
                 
                 switch coverFilter.volOrder {
                 case .asc:
-                    covers.sort(by: { Double($0.attributes.volume) ?? 0 < Double($1.attributes.volume) ?? 0 })
-                    filteredCovers.sort(by: { Double($0.attributes.volume) ?? 0 < Double($1.attributes.volume) ?? 0 })
+                    covers.sort { Double($0.attributes.volume) ?? 0 < Double($1.attributes.volume) ?? 0 }
+                    filteredCovers.sort { Double($0.attributes.volume) ?? 0 < Double($1.attributes.volume) ?? 0 }
                 case .desc:
-                    covers.sort(by: { Double($0.attributes.volume) ?? 0 > Double($1.attributes.volume) ?? 0 })
-                    filteredCovers.sort(by: { Double($0.attributes.volume) ?? 0 > Double($1.attributes.volume) ?? 0 })
+                    covers.sort { Double($0.attributes.volume) ?? 0 > Double($1.attributes.volume) ?? 0 }
+                    filteredCovers.sort { Double($0.attributes.volume) ?? 0 > Double($1.attributes.volume) ?? 0 }
                 }
             }
         }

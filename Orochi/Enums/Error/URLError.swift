@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Possible errors when creating URLs
 enum URLError: Error, LocalizedError {
     case invalid, empty
     

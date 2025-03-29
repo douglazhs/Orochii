@@ -73,8 +73,9 @@ final class DiscoverViewModel: ObservableObject {
             withTransaction(.init(animation: .smooth(duration: 0.5))) {
                 self?.loading = true
             }
+            
             self?.fetch { mangas in
-                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) { [weak self] in
                     withTransaction(.init(animation: .smooth(duration: 0.75))) {
                         self?.loading = false
                     }
