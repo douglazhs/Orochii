@@ -11,7 +11,7 @@ struct WebsiteStandardCell: View {
     @State var showWebView: Bool = false
     var title: String
     var urlString: String
-    var image: AppImages
+    var image: Image
     var avatarURL: URL?
     
     var body: some View {
@@ -24,7 +24,7 @@ struct WebsiteStandardCell_Previews: PreviewProvider {
         WebsiteStandardCell(
             title: "Orochii",
             urlString: "https://mangadex.org",
-            image: .mangaDexIcon
+            image: Asset.Assets.mangaDexIcon.swiftUIImage
         )
     }
 }

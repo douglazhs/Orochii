@@ -23,7 +23,7 @@ extension WebsiteStandardCell {
             showWebView = true
         } label: {
             HStack(spacing: 15.0) {
-                Image(appImage: image)
+                image
                     .resizable()
                     .cornerRadius(4.5)
                     .frame(

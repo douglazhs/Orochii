@@ -10,6 +10,10 @@ import Foundation
 // swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
 // swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
 internal enum L10n {
+  /// Following Feed
+  internal static let accountFeedFollowing = L10n.tr("Localizable", "account_feed_following", fallback: "Following Feed")
+  /// Mine
+  internal static let accountFeedMine = L10n.tr("Localizable", "account_feed_mine", fallback: "Mine")
   /// ------------------------------------------------------------
   internal static let accountNoActivities = L10n.tr("Localizable", "account_noActivities", fallback: "You have no activities :(")
   /// You have no favorites :(
@@ -44,10 +48,7 @@ internal enum L10n {
   internal static let accountTabFavorites = L10n.tr("Localizable", "account_tab_favorites", fallback: "Favorites")
   /// Stats
   internal static let accountTabStats = L10n.tr("Localizable", "account_tab_stats", fallback: "Stats")
-  /// Localizable.strings
-  ///   Orochii
-  /// 
-  ///   Created by Douglas Henrique de Souza Pereira on 19/11/22.
+  /// Add to Library
   internal static let actionAddToLibrary = L10n.tr("Localizable", "action_add_to_library", fallback: "Add to Library")
   /// Download
   internal static let actionDownload = L10n.tr("Localizable", "action_download", fallback: "Download")
@@ -131,26 +132,46 @@ internal enum L10n {
   internal static let commonSearch = L10n.tr("Localizable", "common_search", fallback: "Search")
   /// Unknown
   internal static let commonUnknown = L10n.tr("Localizable", "common_unknown", fallback: "Unknown")
+  /// Award Winning
+  internal static let discoveryAwardWinning = L10n.tr("Localizable", "discovery_award_winning", fallback: "Award Winning")
   /// AUTHOR
   internal static let discoveryCellAuthor = L10n.tr("Localizable", "discovery_cell_author", fallback: "AUTHOR")
   /// UPDATED
   internal static let discoveryCellLastUpdated = L10n.tr("Localizable", "discovery_cell_last_updated", fallback: "UPDATED")
   /// YEAR
   internal static let discoveryCellYear = L10n.tr("Localizable", "discovery_cell_year", fallback: "YEAR")
+  /// Most Relevants
+  internal static let discoveryMostRelevants = L10n.tr("Localizable", "discovery_most_relevants", fallback: "Most Relevants")
   /// Manga title
   internal static let discoverySearchPlaceholder = L10n.tr("Localizable", "discovery_search_placeholder", fallback: "Manga title")
+  /// Seinen Public
+  internal static let discoverySeinen = L10n.tr("Localizable", "discovery_seinen", fallback: "Seinen Public")
+  /// Shounen Public
+  internal static let discoveryShounen = L10n.tr("Localizable", "discovery_shounen", fallback: "Shounen Public")
   /// Completed
   internal static let discoveryStatusCompleted = L10n.tr("Localizable", "discovery_status_completed", fallback: "Completed")
   /// Hiatus
   internal static let discoveryStatusHiatus = L10n.tr("Localizable", "discovery_status_hiatus", fallback: "Hiatus")
   /// Ongoing
   internal static let discoveryStatusOngoing = L10n.tr("Localizable", "discovery_status_ongoing", fallback: "Ongoing")
+  /// This Year - %@
+  internal static func discoveryThisYear(_ p1: Any) -> String {
+    return L10n.tr("Localizable", "discovery_this_year", String(describing: p1), fallback: "This Year - %@")
+  }
   /// ------------------------------------------------------------
   internal static let discoveryTitle = L10n.tr("Localizable", "discovery_title", fallback: "Discover")
+  /// Webcomics Full Colored
+  internal static let discoveryWebcomics = L10n.tr("Localizable", "discovery_webcomics", fallback: "Webcomics Full Colored")
   /// ------------------------------------------------------------
   internal static let errorAnilistLogin = L10n.tr("Localizable", "error_anilist_login", fallback: "Error when trying to login on your AniList account.")
+  /// Empty URL.
+  internal static let errorEmptyUrl = L10n.tr("Localizable", "error_empty_url", fallback: "Empty URL.")
+  /// Invalid URL.
+  internal static let errorInvalidUrl = L10n.tr("Localizable", "error_invalid_url", fallback: "Invalid URL.")
+  /// Object is nil.
+  internal static let errorNilObject = L10n.tr("Localizable", "error_nil_object", fallback: "Object is nil.")
   /// Error when trying save your credentials on Keychain.
-  internal static let errorKeychainSave = L10n.tr("Localizable", "error_keychain_save", fallback: "Error when trying save your credentials on Keychain.")
+  internal static let errorSaveKeychain = L10n.tr("Localizable", "error_save_keychain", fallback: "Error when trying save your credentials on Keychain.")
   /// Ascending
   internal static let filterAscending = L10n.tr("Localizable", "filter_ascending", fallback: "Ascending")
   /// Descending
@@ -183,6 +204,13 @@ internal enum L10n {
   internal static let filterTitle = L10n.tr("Localizable", "filter_title", fallback: "Filters")
   /// Year
   internal static let filterYear = L10n.tr("Localizable", "filter_year", fallback: "Year")
+  /// English (US)
+  internal static let languageEnglish = L10n.tr("Localizable", "language_english", fallback: "English (US)")
+  /// Localizable.strings
+  ///   Orochii
+  /// 
+  ///   Created by Douglas Henrique de Souza Pereira on 19/11/22.
+  internal static let languagePortuguese = L10n.tr("Localizable", "language_portuguese", fallback: "Portuguese (Brazil)")
   /// Your library is locked :(
   ///  Unlock It to see your mangas :)
   internal static let libraryAuthErrorMessage = L10n.tr("Localizable", "library_auth_error_message", fallback: "Your library is locked :(\n Unlock It to see your mangas :)")
@@ -197,6 +225,10 @@ internal enum L10n {
   internal static let librarySearchPlaceholder = L10n.tr("Localizable", "library_search_placeholder", fallback: "Search on your list")
   /// ------------------------------------------------------------
   internal static let libraryTitle = L10n.tr("Localizable", "library_title", fallback: "Library")
+  /// AniList
+  internal static let mangaActionAnilist = L10n.tr("Localizable", "manga_action_anilist", fallback: "AniList")
+  /// Library
+  internal static let mangaActionLibrary = L10n.tr("Localizable", "manga_action_library", fallback: "Library")
   /// Add to Library
   internal static let mangaAddToLibrary = L10n.tr("Localizable", "manga_add_to_library", fallback: "Add to Library")
   /// ------------------------------------------------------------
@@ -215,6 +247,12 @@ internal enum L10n {
   internal static let mangaSelectChapters = L10n.tr("Localizable", "manga_select_chapters", fallback: "Select Chapters")
   /// Selected Chapters
   internal static let mangaSelectedChapters = L10n.tr("Localizable", "manga_selected_chapters", fallback: "Selected Chapters")
+  /// Extra Large
+  internal static let mangaSourceAnilistExtraLarge = L10n.tr("Localizable", "manga_source_anilist_extraLarge", fallback: "Extra Large")
+  /// Large
+  internal static let mangaSourceAnilistLarge = L10n.tr("Localizable", "manga_source_anilist_large", fallback: "Large")
+  /// Medium
+  internal static let mangaSourceAnilistMedium = L10n.tr("Localizable", "manga_source_anilist_medium", fallback: "Medium")
   /// High
   internal static let mangaSourceHighQuality = L10n.tr("Localizable", "manga_source_high_quality", fallback: "High")
   /// That will be used to search your mangas
@@ -223,6 +261,12 @@ internal enum L10n {
   internal static let mangaSourceLanguageHeader = L10n.tr("Localizable", "manga_source_language_header", fallback: "Preferred Languages")
   /// Low
   internal static let mangaSourceLowQuality = L10n.tr("Localizable", "manga_source_low_quality", fallback: "Low")
+  /// Low
+  internal static let mangaSourceMdexLow = L10n.tr("Localizable", "manga_source_mdex_low", fallback: "Low")
+  /// Medium
+  internal static let mangaSourceMdexMedium = L10n.tr("Localizable", "manga_source_mdex_medium", fallback: "Medium")
+  /// Original
+  internal static let mangaSourceMdexOriginal = L10n.tr("Localizable", "manga_source_mdex_original", fallback: "Original")
   /// Medium
   internal static let mangaSourceMediumQuality = L10n.tr("Localizable", "manga_source_medium_quality", fallback: "Medium")
   /// Manga Quality
@@ -243,10 +287,66 @@ internal enum L10n {
   internal static let mangaStartReading = L10n.tr("Localizable", "manga_start_reading", fallback: "Start Reading")
   /// Status
   internal static let mangaStatus = L10n.tr("Localizable", "manga_status", fallback: "Status")
+  /// Completed
+  internal static let mangaStatusCompleted = L10n.tr("Localizable", "manga_status_completed", fallback: "Completed")
+  /// Dropped
+  internal static let mangaStatusDropped = L10n.tr("Localizable", "manga_status_dropped", fallback: "Dropped")
+  /// None
+  internal static let mangaStatusNone = L10n.tr("Localizable", "manga_status_none", fallback: "None")
+  /// Paused
+  internal static let mangaStatusPaused = L10n.tr("Localizable", "manga_status_paused", fallback: "Paused")
+  /// Planning
+  internal static let mangaStatusPlanning = L10n.tr("Localizable", "manga_status_planning", fallback: "Planning")
+  /// Reading
+  internal static let mangaStatusReading = L10n.tr("Localizable", "manga_status_reading", fallback: "Reading")
+  /// Rereading
+  internal static let mangaStatusRereading = L10n.tr("Localizable", "manga_status_rereading", fallback: "Rereading")
+  /// Moved
+  internal static let mangaSubActionMoved = L10n.tr("Localizable", "manga_sub_action_moved", fallback: "Moved")
+  /// Removed
+  internal static let mangaSubActionRemoved = L10n.tr("Localizable", "manga_sub_action_removed", fallback: "Removed")
   /// Updated
   internal static let mangaUpdated = L10n.tr("Localizable", "manga_updated", fallback: "Updated")
   /// Year
   internal static let mangaYear = L10n.tr("Localizable", "manga_year", fallback: "Year")
+  /// Automatic
+  internal static let readerAutomaticPage = L10n.tr("Localizable", "reader_automatic_page", fallback: "Automatic")
+  /// Data Saver
+  internal static let readerCoverDataSaver = L10n.tr("Localizable", "reader_cover_data_saver", fallback: "Data Saver")
+  /// Original
+  internal static let readerCoverOriginal = L10n.tr("Localizable", "reader_cover_original", fallback: "Original")
+  /// Default
+  internal static let readerDefaultMode = L10n.tr("Localizable", "reader_default_mode", fallback: "Default")
+  /// Double Pages
+  internal static let readerDoublePage = L10n.tr("Localizable", "reader_double_page", fallback: "Double Pages")
+  /// Left to Right
+  internal static let readerLeftToRightMode = L10n.tr("Localizable", "reader_left_to_right_mode", fallback: "Left to Right")
+  /// Manga quality
+  internal static let readerMangaSection = L10n.tr("Localizable", "reader_manga_section", fallback: "Manga quality")
+  /// Choose the quality of your preference
+  internal static let readerMangaSectionFooter = L10n.tr("Localizable", "reader_manga_section_footer", fallback: "Choose the quality of your preference")
+  /// Page quality
+  internal static let readerMangaSectionHeader = L10n.tr("Localizable", "reader_manga_section_header", fallback: "Page quality")
+  /// Mode
+  internal static let readerModeSection = L10n.tr("Localizable", "reader_mode_section", fallback: "Mode")
+  /// Choose the better reading mode for you
+  internal static let readerModeSectionFooter = L10n.tr("Localizable", "reader_mode_section_footer", fallback: "Choose the better reading mode for you")
+  /// Reading mode
+  internal static let readerModeSectionHeader = L10n.tr("Localizable", "reader_mode_section_header", fallback: "Reading mode")
+  /// Layout
+  internal static let readerPageSection = L10n.tr("Localizable", "reader_page_section", fallback: "Layout")
+  /// Choose a page layout of your preference
+  internal static let readerPageSectionFooter = L10n.tr("Localizable", "reader_page_section_footer", fallback: "Choose a page layout of your preference")
+  /// Page Layout
+  internal static let readerPageSectionHeader = L10n.tr("Localizable", "reader_page_section_header", fallback: "Page Layout")
+  /// Right to Left
+  internal static let readerRightToLeftMode = L10n.tr("Localizable", "reader_right_to_left_mode", fallback: "Right to Left")
+  /// Single Page
+  internal static let readerSinglePage = L10n.tr("Localizable", "reader_single_page", fallback: "Single Page")
+  /// ------------------------------------------------------------
+  internal static let readerTitle = L10n.tr("Localizable", "reader_title", fallback: "Reader Preferences")
+  /// Webtoon
+  internal static let readerWebtoonMode = L10n.tr("Localizable", "reader_webtoon_mode", fallback: "Webtoon")
   /// ------------------------------------------------------------
   internal static let settingsTitle = L10n.tr("Localizable", "settings_title", fallback: "Adjusts")
 }

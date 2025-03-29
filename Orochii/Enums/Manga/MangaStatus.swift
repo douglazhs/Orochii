@@ -22,13 +22,13 @@ enum MangaStatus: String, Pickable {
     /// Status description
     var description: String {
         switch self {
-        case .planning: return "Planning"
-        case .reading: return "Reading"
-        case .completed: return "Completed"
-        case .rereading: return "Rereading"
-        case .paused: return "Paused"
-        case .dropped: return "Dropped"
-        case .none: return "None"
+        case .planning: return L10n.mangaStatusPlanning
+        case .reading: return L10n.mangaStartReading
+        case .completed: return L10n.mangaStatusCompleted
+        case .rereading: return L10n.mangaStatusRereading
+        case .paused: return L10n.mangaStatusPaused
+        case .dropped: return L10n.mangaStatusDropped
+        case .none: return L10n.mangaStatusNone
         }
     }
     

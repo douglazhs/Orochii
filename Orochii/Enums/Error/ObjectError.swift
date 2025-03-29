@@ -13,7 +13,7 @@ enum ObjectError: Error, LocalizedError {
     
     var localizedDescription: String {
         switch self {
-        case .empty: return "Object is nil."
+        case .empty: return L10n.errorNilObject
         }
     }
 }

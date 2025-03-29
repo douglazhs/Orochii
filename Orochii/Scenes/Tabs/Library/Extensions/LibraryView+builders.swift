@@ -60,7 +60,7 @@ extension LibraryView {
             if $0 == .inactive { vm.unlock() }
         }
         .fontDesign(.rounded)
-        .background(BlurBackground(with: .viewBackground))
+        .background(BlurBackground(with: Asset.Assets.viewBackground.swiftUIImage))
     }
     
     /// Local Auth handler

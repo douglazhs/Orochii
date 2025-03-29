@@ -13,8 +13,8 @@ enum URLError: Error, LocalizedError {
     
     var localizedDescription: String {
         switch self {
-        case .empty: return "Empty URL."
-        case .invalid: return "Invalid URL."
+        case .empty: return L10n.errorEmptyUrl
+        case .invalid: return L10n.errorInvalidUrl
         }
     }
 }

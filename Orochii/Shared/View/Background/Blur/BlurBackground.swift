@@ -10,7 +10,7 @@ import NukeUI
 
 struct BlurBackground: View {
     var url: URL?
-    var image: AppImages = .viewBackground
+    var image: Image = Asset.Assets.viewBackground.swiftUIImage
     var radius: Double
     var opacity: Double
     
@@ -25,7 +25,7 @@ struct BlurBackground: View {
     }
     
     init(
-        with image: AppImages = .viewBackground,
+        with image: Image = Asset.Assets.viewBackground.swiftUIImage,
         radius: Double = 55.0,
         opacity: Double =  0.9
     ) {
@@ -56,7 +56,7 @@ struct BlurBackground: View {
                 Color.black.opacity(opacity).edgesIgnoringSafeArea(.all)
             }
         } else {
-            Image(image.rawValue)
+            image
                 .resizable()
                 .scaledToFill()
                 .edgesIgnoringSafeArea(.all)
@@ -68,6 +68,6 @@ struct BlurBackground: View {
 
 struct BlurBackground_Previews: PreviewProvider {
     static var previews: some View {
-        BlurBackground(with: .viewBackground)
+        BlurBackground(with: Asset.Assets.viewBackground.swiftUIImage)
     }
 }

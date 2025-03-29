@@ -6,6 +6,11 @@
   
 */
 
+// MARK: - Languages
+
+"language_portuguese" = "Portuguese (Brazil)";
+"language_english" = "English (US)";
+
 // MARK: - Context Menus
 
 "action_add_to_library" = "Add to Library";
@@ -52,6 +57,14 @@
 "discovery_status_hiatus" = "Hiatus";
 "discovery_status_completed" = "Completed";
 
+// MAIN FILTERS
+"discovery_most_relevants" = "Most Relevants";
+"discovery_award_winning" = "Award Winning";
+"discovery_this_year" = "This Year - %@";
+"discovery_shounen" = "Shounen Public";
+"discovery_seinen" = "Seinen Public";
+"discovery_webcomics" = "Webcomics Full Colored";
+
 /* ------------------------------------------------------------ */
 
 // MARK: - SOURCE PREFERENCES
@@ -63,6 +76,12 @@
 "manga_source_quality_header" = "Quality";
 "manga_source_quality_footer" = "Some manga preferences, such as **quality**";
 "manga_source_quality" = "Manga Quality";
+"manga_source_anilist_large" = "Large";
+"manga_source_anilist_medium" = "Medium";
+"manga_source_anilist_extraLarge" = "Extra Large";
+"manga_source_mdex_low" = "Low";
+"manga_source_mdex_medium" = "Medium";
+"manga_source_mdex_original" = "Original";
 
 // MANGA QUALITY
 
@@ -131,6 +150,17 @@
 "manga_mark" = "Mark";
 "manga_selected_chapters" = "Selected Chapters";
 "manga_chapters_of" = "Chapters Of";
+"manga_status_planning" = "Planning";
+"manga_status_reading" = "Reading";
+"manga_status_completed" = "Completed";
+"manga_status_rereading" = "Rereading";
+"manga_status_paused" = "Paused";
+"manga_status_dropped" = "Dropped";
+"manga_status_none" = "None";
+"manga_action_library" = "Library";
+"manga_action_anilist" = "AniList";
+"manga_sub_action_moved" = "Moved";
+"manga_sub_action_removed" = "Removed";
 
 /* ------------------------------------------------------------ */
 
@@ -162,7 +192,10 @@
 // MARK: - ERRORS
 
 "error_anilist_login" = "Error when trying to login on your AniList account.";
-"error_keychain_save" = "Error when trying save your credentials on Keychain.";
+"error_save_keychain" = "Error when trying save your credentials on Keychain.";
+"error_empty_url" = "Empty URL.";
+"error_invalid_url" = "Invalid URL.";
+"error_nil_object" = "Object is nil.";
 
 /* ------------------------------------------------------------ */
 
@@ -191,3 +224,29 @@
 "account_tab_stats" = "Stats";
 "account_tab_activity" = "Activity";
 "account_tab_favorites" = "Favorites";
+"account_feed_mine" = "Mine";
+"account_feed_following" = "Following Feed";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - READER PREFERENCES
+
+"reader_title" = "Reader Preferences";
+"reader_page_section" = "Layout";
+"reader_page_section_header" = "Page Layout";
+"reader_page_section_footer" = "Choose a page layout of your preference";
+"reader_manga_section" = "Manga quality";
+"reader_manga_section_header" = "Page quality";
+"reader_manga_section_footer" = "Choose the quality of your preference";
+"reader_mode_section" = "Mode";
+"reader_mode_section_header" = "Reading mode";
+"reader_mode_section_footer" = "Choose the better reading mode for you";
+"reader_single_page" = "Single Page";
+"reader_double_page" = "Double Pages";
+"reader_automatic_page" = "Automatic";
+"reader_default_mode" = "Default";
+"reader_left_to_right_mode" = "Left to Right";
+"reader_right_to_left_mode" = "Right to Left";
+"reader_webtoon_mode" = "Webtoon";
+"reader_cover_original" = "Original";
+"reader_cover_data_saver" = "Data Saver";

@@ -17,7 +17,7 @@ extension SourcePreferencesView {
             WebsiteStandardCell(
                 title: "mangadex.org",
                 urlString: AppURLs.mdSite.description,
-                image: .mangaDexIcon
+                image: Asset.Assets.mangaDexIcon.swiftUIImage
             )
         } header: {
             Text("Main Orochii Source")

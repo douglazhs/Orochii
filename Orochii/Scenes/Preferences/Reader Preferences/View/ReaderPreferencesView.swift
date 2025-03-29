@@ -35,7 +35,7 @@ struct ReaderPreferencesView: View {
                 }
                 
                 ToolbarItem(placement: .principal) {
-                    Text("Reader Preferences")
+                    Text(L10n.readerTitle)
                         .font(.title2)
                         .fontWeight(.heavy)
                 }

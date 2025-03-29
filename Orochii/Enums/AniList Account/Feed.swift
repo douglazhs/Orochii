@@ -16,8 +16,8 @@ enum Feed: Pickable {
     /// Current feed title
     var description: String {
         switch self {
-        case .mine: return "Your Feed"
-        case .following: return "Following Feed"
+        case .mine: return L10n.accountFeedMine
+        case .following: return L10n.accountFeedFollowing
         }
     }
     

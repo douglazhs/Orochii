@@ -17,7 +17,7 @@ extension SettingsView {
             WebsiteStandardCell(
                 title: String.Name.aniList,
                 urlString: AppURLs.alSite.description,
-                image: .aniListLogo
+                image: Asset.Assets.aniListLogo.swiftUIImage
             )
         }
     }

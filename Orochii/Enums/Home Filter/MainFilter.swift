@@ -14,12 +14,12 @@ enum MainFilter: Int, CaseIterable {
     /// Carousel header
     var header: String {
         switch self {
-        case .mostRelevants:  return "Most Relevants"
-        case .awardWinning:   return "Award Winning"
-        case .thisYear:       return "This Year - \(Date.now.formatted(.dateTime.year()))"
-        case .shounen:        return "Shounen Public"
-        case .seinen:         return "Seinen Public"
-        case .webComic:       return "Webcomics Full Colored"
+        case .mostRelevants:  return L10n.discoveryMostRelevants
+        case .awardWinning:   return L10n.discoveryAwardWinning
+        case .thisYear:       return L10n.discoveryThisYear(Date.now.formatted(.dateTime.year()))
+        case .shounen:        return L10n.discoveryShounen
+        case .seinen:         return L10n.discoverySeinen
+        case .webComic:       return L10n.discoveryWebcomics
         }
     }
     

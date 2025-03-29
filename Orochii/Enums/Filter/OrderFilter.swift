@@ -23,11 +23,11 @@ enum OrderFilter: Int, Pickable {
         }
     }
     
-    /// Order description
+    /// Order title
     var description: String {
         switch self {
-        case .asc:  return String.Filter.ascending
-        case .desc: return String.Filter.descending
+        case .asc:  return L10n.filterAscending
+        case .desc: return L10n.filterDescending
         }
     }
 }
