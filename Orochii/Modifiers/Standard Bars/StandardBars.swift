@@ -1,0 +1,26 @@
+//
+//  StandardBars.swift
+//  Orochii
+//
+//  Created by Douglas Henrique de Souza Pereira on 20/03/24.
+//
+
+import Foundation
+import SwiftUI
+
+/// Standard navigation and tab bars
+private struct StandardBars: ViewModifier {
+    func body (content: Content) -> some View {
+        content
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbarBackground(.visible, for: .tabBar, .navigationBar)
+            .toolbarBackground(Color.black, for: .navigationBar)
+            .toolbarBackground(Asset.Colors.background.swiftUIColor, for: .tabBar)
+    }
+}
+
+public extension View {
+    func standardBars() -> some View {
+        modifier(StandardBars())
+    }
+}

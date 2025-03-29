@@ -1,0 +1,14 @@
+xcassets:
+  inputs:
+    - Orochii/Resources/Assets.xcassets
+    - Orochii/Resources/Colors.xcassets
+  outputs:
+    - templateName: swift5
+      output: Orochii/Resources/Generated/Assets+Generated.swift
+
+strings:
+   inputs:
+     - Orochii/Resources/en.lproj
+   outputs:
+     - templateName: structured-swift5
+       output: Orochii/Resources/Generated/Strings+Generated.swift

@@ -120,6 +120,8 @@
 		52D0E2E12C001CB1009374C5 /* ReadWdithModifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D0E2E02C001CB1009374C5 /* ReadWdithModifier.swift */; };
 		52D0E2E42C00D373009374C5 /* GridCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52D0E2E32C00D373009374C5 /* GridCell.swift */; };
 		52F2ABD42D9855A400781B51 /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 52F2ABD32D9855A400781B51 /* Colors.xcassets */; };
+		52F2AC2C2D98770D00781B51 /* Assets+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F2AC292D98770D00781B51 /* Assets+Generated.swift */; };
+		52F2AC2D2D98770D00781B51 /* Strings+Generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52F2AC2A2D98770D00781B51 /* Strings+Generated.swift */; };
 		770611AB2A5EDA2C00A2CD0A /* Defaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770611AA2A5EDA2C00A2CD0A /* Defaults.swift */; };
 		770611AD2A5EDC6100A2CD0A /* DefaultsKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 770611AC2A5EDC6100A2CD0A /* DefaultsKeys.swift */; };
 		770611B82A5F252800A2CD0A /* MangaDex in Frameworks */ = {isa = PBXBuildFile; productRef = 770611B72A5F252800A2CD0A /* MangaDex */; };
@@ -184,7 +186,6 @@
 		506EEBF729364D3300D89777 /* MangaView+filters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaView+filters.swift"; sourceTree = "<group>"; };
 		507803D1292DB5F40041D5BD /* MainFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainFilter.swift; sourceTree = "<group>"; };
 		507803DB292DC0530041D5BD /* ActivityIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicator.swift; sourceTree = "<group>"; };
-		508C2DCC2950AB4800355F13 /* Orochii-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Orochii-Info.plist"; sourceTree = "<group>"; };
 		508D1B8E2936FE900069012C /* ActionPopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActionPopUp.swift; sourceTree = "<group>"; };
 		508D1B902937055A0069012C /* Haptics+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Haptics+extension.swift"; sourceTree = "<group>"; };
 		5092DF2129292C590094DC18 /* Orochii.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Orochii.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -283,6 +284,10 @@
 		52D0E2E02C001CB1009374C5 /* ReadWdithModifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadWdithModifier.swift; sourceTree = "<group>"; };
 		52D0E2E32C00D373009374C5 /* GridCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridCell.swift; sourceTree = "<group>"; };
 		52F2ABD32D9855A400781B51 /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
+		52F2AC192D9867CB00781B51 /* swiftgen.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = swiftgen.yml; sourceTree = "<group>"; };
+		52F2AC272D9875CE00781B51 /* Orochii-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Orochii-Info.plist"; sourceTree = "<group>"; };
+		52F2AC292D98770D00781B51 /* Assets+Generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Assets+Generated.swift"; sourceTree = "<group>"; };
+		52F2AC2A2D98770D00781B51 /* Strings+Generated.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Strings+Generated.swift"; sourceTree = "<group>"; };
 		770611AA2A5EDA2C00A2CD0A /* Defaults.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Defaults.swift; sourceTree = "<group>"; };
 		770611AC2A5EDC6100A2CD0A /* DefaultsKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultsKeys.swift; sourceTree = "<group>"; };
 		770611BF2A61EF5C00A2CD0A /* Placeholder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Placeholder.swift; sourceTree = "<group>"; };
@@ -454,8 +459,9 @@
 		5092DF1829292C590094DC18 = {
 			isa = PBXGroup;
 			children = (
-				508C2DCC2950AB4800355F13 /* Orochii-Info.plist */,
-				5092DF2329292C590094DC18 /* Orochi */,
+				52F2AC272D9875CE00781B51 /* Orochii-Info.plist */,
+				52F2AC192D9867CB00781B51 /* swiftgen.yml */,
+				5092DF2329292C590094DC18 /* Orochii */,
 				5092DF2229292C590094DC18 /* Products */,
 				776323BC2A16F000009B5966 /* Frameworks */,
 			);
@@ -469,7 +475,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		5092DF2329292C590094DC18 /* Orochi */ = {
+		5092DF2329292C590094DC18 /* Orochii */ = {
 			isa = PBXGroup;
 			children = (
 				5092DF2429292C590094DC18 /* OrochiApp.swift */,
@@ -483,7 +489,7 @@
 				77B188DF2A1CE01D00B11378 /* Services */,
 				50FFAFEA292A832F00B87E0E /* Shared */,
 			);
-			path = Orochi;
+			path = Orochii;
 			sourceTree = "<group>";
 		};
 		5092DF2A29292C5C0094DC18 /* Preview Content */ = {
@@ -514,6 +520,7 @@
 		5092DF33292942820094DC18 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				52F2AC2B2D98770D00781B51 /* Generated */,
 				771B766029DC788700F7CCB6 /* anilist_api.json */,
 				5092DF5B292971580094DC18 /* Localizable.strings */,
 				5092DF2829292C5C0094DC18 /* Assets.xcassets */,
@@ -1229,6 +1236,15 @@
 			path = "Grid Cell";
 			sourceTree = "<group>";
 		};
+		52F2AC2B2D98770D00781B51 /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				52F2AC292D98770D00781B51 /* Assets+Generated.swift */,
+				52F2AC2A2D98770D00781B51 /* Strings+Generated.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
 		770611A92A5EDA1E00A2CD0A /* User Defaults */ = {
 			isa = PBXGroup;
 			children = (
@@ -1539,6 +1555,7 @@
 			files = (
 				52F2ABD42D9855A400781B51 /* Colors.xcassets in Resources */,
 				5092DF2C29292C5C0094DC18 /* Preview Assets.xcassets in Resources */,
+				52F2AC282D9875CE00781B51 /* Orochii-Info.plist in Resources */,
 				771B766129DC788700F7CCB6 /* anilist_api.json in Resources */,
 				5092DF59292971580094DC18 /* Localizable.strings in Resources */,
 				5092DF2929292C5C0094DC18 /* Assets.xcassets in Resources */,
@@ -1604,6 +1621,8 @@
 				50CE85C92948C61700169922 /* SizePreference.swift in Sources */,
 				77B1BD692A69BD63003146B9 /* ChaptersListView.swift in Sources */,
 				50FFAFF7292A8C8800B87E0E /* LibraryViewModel.swift in Sources */,
+				52F2AC2C2D98770D00781B51 /* Assets+Generated.swift in Sources */,
+				52F2AC2D2D98770D00781B51 /* Strings+Generated.swift in Sources */,
 				522EFC6A2B9AB35B00F0B071 /* ALAccountViewModel.swift in Sources */,
 				52AF1AD42C0F5EC300BC1EFC /* CoverList.swift in Sources */,
 				50FE08D0292D035600432F21 /* PrimaryGradient.swift in Sources */,
@@ -1867,7 +1886,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Orochi/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Orochii/Preview Content\"";
 				DEVELOPMENT_TEAM = 22298649MR;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
@@ -1905,7 +1924,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Orochi/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Orochii/Preview Content\"";
 				DEVELOPMENT_TEAM = 22298649MR;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
