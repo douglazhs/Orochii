@@ -56,7 +56,7 @@ struct ChaptersListView: View {
                 .standardBars()
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        Text("\(vm.feed.count) chapter(s)")
+                        Text(L.Manga.chaptersCount(vm.feed.count))
                             .font(.headline)
                             .fontWeight(.bold)
                     }

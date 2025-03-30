@@ -52,8 +52,8 @@ struct GridCell: View {
                 Button { action() } label: {
                     Label(
                         mangaOnLibrary
-                        ? String.ContextMenu.rmvFromLib
-                        : String.ContextMenu.addToLib,
+                        ? L.Action.removeFromLibrary
+                        : L.Action.addToLibrary,
                         systemImage: mangaOnLibrary
                         ? "trash"
                         : "plus.rectangle.on.folder"

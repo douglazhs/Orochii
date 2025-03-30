@@ -11,4 +11,6 @@ strings:
      - Orochii/Resources/en.lproj
    outputs:
      - templateName: structured-swift5
+       params:
+        enumName: L
        output: Orochii/Resources/Generated/Strings+Generated.swift

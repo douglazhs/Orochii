@@ -59,8 +59,8 @@ extension CharacterView {
     @ViewBuilder
     func mainInformation() -> some View {
         VStack(alignment: .leading, spacing: 15.0) {
-            infoLine(title: "NATIVE", character.name?.native?.notEmpty ?? "-", .leading)
-            infoLine(title: "USER PREFERRED", character.name?.userPreferred?.notEmpty ?? "-", .leading)
+            infoLine(title: L.Account.Character.Title.native, character.name?.native?.notEmpty ?? "-", .leading)
+            infoLine(title: L.Account.Character.Title.userPreferred, character.name?.userPreferred?.notEmpty ?? "-", .leading)
         }
     }
     
@@ -80,7 +80,7 @@ extension CharacterView {
     func mainTitles() -> some View {
         if let alternative = character.name?.alternative, !alternative.isEmpty {
             VStack(alignment: .leading, spacing: 5.0) {
-                Text("ALTERNATIVE TITLES")
+                Text(L.Account.Character.Title.alternative)
                     .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
                     .font(.caption)
                 VStack(alignment: .leading, spacing: 7.5) {
@@ -102,7 +102,7 @@ extension CharacterView {
         if let alternativeSpoilers = character.name?.alternativeSpoiler, !alternativeSpoilers.isEmpty {
             VStack(alignment: .trailing, spacing: 5.0) {
                 HStack(alignment: .top) {
-                    Text("SPOILER TITLES")
+                    Text(L.Account.Character.Title.spoiler)
                         .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
                         .font(.caption)
                     Button {
@@ -134,16 +134,16 @@ extension CharacterView {
     func complementaryInfo() -> some View {
         HStack {
             infoLine(
-                title: "AGE",
+                title: L.Account.Character.age,
                 character.age?.last == "-"
                 ? character.age?.replacingOccurrences(of: "-", with: "") ?? "-"
                 : character.age.notEmpty,
                 .leading
             )
             Spacer()
-            infoLine(title: "GENDER", character.gender.notEmpty, .leading)
+            infoLine(title: L.Account.Character.gender, character.gender.notEmpty, .leading)
             Spacer()
-            infoLine(title: "MEMBER FAVORITES", character.favourites.nilToStr, .trailing)
+            infoLine(title: L.Account.Character.memberFavorites, character.favourites.nilToStr, .trailing)
         }
     }
     
@@ -159,7 +159,7 @@ extension CharacterView {
     @ViewBuilder
     func summaryTitle() -> some View {
         HStack(alignment: .top) {
-            Text("SUMMARY")
+            Text(L.Account.Character.summary)
                 .font(.caption)
                 .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
             Spacer()
@@ -189,7 +189,7 @@ extension CharacterView {
             showSummarySpoiler
             ? character.description?
                 .replacingOccurrences(of: "~!", with: "")
-                .replacingOccurrences(of: "!~", with: "") ?? String.Common.none
+                .replacingOccurrences(of: "!~", with: "") ?? L.Common.done
             : summaryHiddenSpoilers
         )
         .markdownTextStyle(\.text) {
@@ -227,7 +227,7 @@ extension CharacterView {
             VStack(alignment: .leading, spacing: 15.0) {
                 VStack(alignment: .leading, spacing: 15.0) {
                     Divider()
-                    Text("MANGA APPEARENCES")
+                    Text(L.Account.Character.mangaAppearences)
                         .font(.caption)
                         .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
                         
@@ -258,9 +258,12 @@ extension CharacterView {
     func mediaListEntry(_ media: Media) -> some View {
         if let mediaListEntry = media.mediaListEntry {
             VStack(alignment: .leading, spacing: 5.0) {
-                Text("\(mediaListEntry.status ?? "-") / CH. \(mediaListEntry.progress ?? 0)")
-                    .lineLimit(2)
-                    .multilineTextAlignment(.leading)
+                Text(
+                    mediaListEntry.status ?? "-" + "/" +
+                    L.Tracker.Info.chapter(mediaListEntry.progress ?? 0)
+                )
+                .lineLimit(2)
+                .multilineTextAlignment(.leading)
                 HStack(alignment: .center) {
                     Image(systemName: "star")
                     Text(

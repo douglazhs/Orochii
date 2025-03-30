@@ -27,7 +27,7 @@ extension ALAccountView {
     func mangas() -> some View {
         if !vm.favoriteMangas.isEmpty {
             VStack(alignment: .leading) {
-                Text("MANGAS")
+                Text(L.Account.Tab.Favorites.mangas)
                     .font(.footnote)
                     .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
                     .padding([.horizontal, .top])
@@ -43,7 +43,7 @@ extension ALAccountView {
                                 ),
                                 title: $0.title?.english
                                 ?? $0.title?.romaji
-                                ?? String.Common.unknown
+                                ?? L.Common.unknown
                             ) { print("Favorite manga context menu action") }
                         }
                     }
@@ -58,7 +58,7 @@ extension ALAccountView {
     func characters() -> some View {
         if !vm.favoriteChars.isEmpty {
             VStack(alignment: .leading) {
-                Text("CHARACTERS")
+                Text(L.Account.Tab.Favorites.characters)
                     .font(.footnote)
                     .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
                     .padding(.horizontal)
@@ -71,7 +71,7 @@ extension ALAccountView {
                             } label: {
                                 GridCell(
                                     coverURL: URL(string: char.image?.large ?? char.image?.medium ?? ""),
-                                    title: char.name?.full ?? char.name?.first ?? String.Common.unknown
+                                    title: char.name?.full ?? char.name?.first ?? L.Common.unknown
                                 ) {
                                     print("Favorite character context menu action")
                                 }
@@ -89,7 +89,7 @@ extension ALAccountView {
     func staff() -> some View {
         if !vm.favoriteStaff.isEmpty {
             VStack(alignment: .leading) {
-                Text("STAFF")
+                Text(L.Account.Tab.Favorites.staff)
                     .font(.footnote)
                     .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
                     .padding(.horizontal)
@@ -98,7 +98,7 @@ extension ALAccountView {
                         ForEach(vm.favoriteStaff, id: \.id) { staff in
                             GridCell(
                                 coverURL: URL(string: staff.image?.large ?? staff.image?.medium ?? ""),
-                                title: staff.name?.full ?? staff.name?.first ?? String.Common.unknown
+                                title: staff.name?.full ?? staff.name?.first ?? L.Common.unknown
                             ) {
                                 print("Favorite staff context menu action")
                             }

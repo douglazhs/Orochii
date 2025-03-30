@@ -14,8 +14,8 @@ enum MangaAction: CaseIterable, CustomStringConvertible {
         
         var description: String {
             switch self {
-            case .changeFolder: return L10n.mangaSubActionMoved
-            case .remove: return L10n.mangaSubActionRemoved
+            case .changeFolder: return L.Manga.SubAction.moved
+            case .remove: return L.Manga.SubAction.removed
             }
         }
     }
@@ -27,8 +27,8 @@ enum MangaAction: CaseIterable, CustomStringConvertible {
     /// Action ID
     var description: String {
         switch self {
-        case .lib:     return L10n.mangaActionLibrary
-        case .aniList: return L10n.mangaActionAnilist
+        case .lib:     return L.Manga.Action.library
+        case .aniList: return L.Manga.Action.anilist
         }
     }
 }

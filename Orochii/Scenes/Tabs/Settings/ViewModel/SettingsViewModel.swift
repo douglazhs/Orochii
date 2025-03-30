@@ -202,7 +202,7 @@ class SettingsViewModel: ObservableObject {
         showAlert = true
         let failureReason = (error as? HTTPStatusCode)?.failureReason
         alertInfo = .init(
-            title: failureReason ?? String.Common.error,
+            title: failureReason ?? L.Common.error,
             message: error.localizedDescription
         )
     }

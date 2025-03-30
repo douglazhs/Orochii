@@ -16,9 +16,9 @@ enum ObjectFilter: Int, Pickable {
     /// Object filter decription
     var description: String {
         switch self {
-        case .name:        return L10n.filterName
-        case .lastUpdated: return L10n.filterLastUpdated
-        case .releaseYear: return L10n.filterReleaseYear
+        case .name:        return L.Filter.name
+        case .lastUpdated: return L.Filter.lastUpdated
+        case .releaseYear: return L.Filter.releaseYear
         }
     }
 }

@@ -20,10 +20,10 @@ extension SourcePreferencesView {
                 image: Asset.Assets.mangaDexIcon.swiftUIImage
             )
         } header: {
-            Text("Main Orochii Source")
+            Text(L.MangaSource.Site.header)
                 .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
-            Text(String.MangaSource.siteFooter)
+            Text(L.MangaSource.Site.footer.attributedString)
                 .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
     }
@@ -48,15 +48,15 @@ extension SourcePreferencesView {
                 Text(
                     !vm.languages.isEmpty
                     ? vm.languages.map { $0.description }.joined(separator: ", ")
-                    : String.Common.none
+                    : L.Common.done
                 )
                 .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
             }
         } header: {
-            Text(String.MangaSource.languageHeader)
+            Text(L.MangaSource.Language.header)
                 .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
-            Text(String.MangaSource.languageFooter)
+            Text(L.MangaSource.Language.footer)
                 .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
     }
@@ -67,7 +67,7 @@ extension SourcePreferencesView {
         Section {
             Toggle(isOn: $vm.nsfw) {
                 Label {
-                    Text("NSFW")
+                    Text(L.Common.nsfw)
                         .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
                 } icon: {
                     Image(systemName: "eyes.inverse")
@@ -83,10 +83,10 @@ extension SourcePreferencesView {
                 }
             }
         } header: {
-            Text(String.Adjusts.ageRatingHeader)
+            Text(L.Adjusts.AgeRating.header)
                 .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
-            Text(String.Adjusts.ageRatingFooter)
+            Text(L.Adjusts.AgeRating.footer.attributedString)
                 .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
     }
@@ -114,10 +114,10 @@ extension SourcePreferencesView {
                 .pickerStyle(.menu)
                 .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
         } header: {
-            Text("Source Cover")
+            Text(L.MangaSource.Cover.header)
                 .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
-            Text("Sources cover quality")
+            Text(L.MangaSource.Cover.footer.attributedString)
                 .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
     }
@@ -127,7 +127,7 @@ extension SourcePreferencesView {
     @ViewBuilder 
     func doneButton() -> some View {
         Button { dismiss() } label: {
-            Text(String.Common.done)
+            Text(L.Common.done)
                 .fontWeight(.semibold)
         }
     }

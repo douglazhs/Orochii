@@ -219,19 +219,25 @@ extension MangaView {
         VStack(alignment: .leading, spacing: 10) {
             // AUTHOR & ARTIST
             MediaAttributes(
-                leading: ("STATE", vm.manga.attributes?.state?.uppercased() ?? "-"),
-                trailing: (String.Manga.year.uppercased(), vm.manga.attributes?.year.nilToStr ?? "-")
+                leading: (L.Manga.state.uppercased(), vm.manga.attributes?.state?.uppercased() ?? "-"),
+                trailing: (L.Manga.year.uppercased(), vm.manga.attributes?.year.nilToStr ?? "-")
             )
             
             // STATUS & UPDADATED
             MediaAttributes(
-                leading: ("DEMOGRAPHIC", vm.manga.attributes?.publicationDemographic?.uppercased() ?? "NONE"),
-                trailing: ("COUNTRY", vm.manga.attributes?.originalLanguage?.uppercased() ?? "-")
+                leading: (
+                    L.Manga.demographic.uppercased(),
+                    vm.manga.attributes?.publicationDemographic?.notEmpty.uppercased() ?? "-"
+                ),
+                trailing: (
+                    L.Manga.country.uppercased(),
+                    Locale.current.country(forLanguageCode: vm.manga.attributes?.originalLanguage).uppercased()
+                )
             )
             // COUNTRY OF ORIGIN & YEAR
             MediaAttributes(
-                leading: (String.Manga.status.uppercased(), vm.manga.attributes?.status?.uppercased() ?? ""),
-                trailing: (String.Manga.updated.uppercased(), Date.fromString(vm.manga.attributes?.updatedAt ?? ""))
+                leading: (L.Manga.status.uppercased(), vm.manga.attributes?.status?.uppercased() ?? ""),
+                trailing: (L.Manga.updated.uppercased(), Date.fromString(vm.manga.attributes?.updatedAt ?? ""))
             )
             Divider()
             // ACTIONS
@@ -265,7 +271,7 @@ extension MangaView {
                 .textSelection(.enabled)
         } header: {
             HStack {
-                Text(String.Manga.descHeader.uppercased())
+                Text(L.Manga.descriptionHeader.uppercased())
                     .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
                     .font(.footnote)
                     .fontWeight(.regular)
@@ -283,16 +289,13 @@ extension MangaView {
         Menu {
             Picker("", selection: $vm.descLang) {
                 ForEach((vm.manga.attributes?.description ?? [:]).sorted(by: >), id: \.key) { key, _ in
-                    Text((Locale.current.localizedString(
-                        forLanguageCode: key
-                    ) ?? key) + " - " + key.uppercased())
+                    Text(Locale.current.country(forLanguageCode: key).capitalized + " - " + key)
                 }
             }
         } label: {
             Label(
-                (((Locale.current.localizedString(
-                    forLanguageCode: vm.descLang
-                ) ?? vm.descLang) + " - " + vm.descLang)).uppercased(),
+                (Locale.current.country(forLanguageCode: vm.descLang) + " - " +
+                vm.descLang).uppercased(),
                 systemImage: "chevron.up.chevron.down"
             )
             .font(.footnote)
@@ -366,7 +369,7 @@ extension MangaView {
         } else {
             HStack {
                 Spacer()
-                Text("No chapters found :(")
+                Text(L.Manga.noChapters)
                     .font(.subheadline)
                     .fontWeight(.medium)
                     .foregroundColor(Asset.Colors.primaryText.swiftUIColor)

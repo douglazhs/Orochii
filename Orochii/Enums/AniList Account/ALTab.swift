@@ -14,9 +14,9 @@ enum ALTab: Int, CaseIterable {
     /// Localized tab title
     var title: String {
         switch self {
-        case .stats: return L10n.accountTabStats
-        case .activity: return L10n.accountTabActivity
-        case .favorites: return L10n.accountTabFavorites
+        case .stats: return L.Account.Tab.stats
+        case .activity: return L.Account.Tab.activity
+        case .favorites: return L.Account.Tab.favorites
         }
     }
 }

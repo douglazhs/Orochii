@@ -24,7 +24,7 @@ extension MangaView {
     func chaptersBar() -> some View {
         HStack {
             // CHAPTERS COUNT
-            Text("\(vm.totalOnFeed) " + String.Manga.chapHeader.uppercased())
+            Text(L.Manga.chaptersCount(vm.totalOnFeed).uppercased())
                 .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
                 .font(.footnote)
                 .fontWeight(.regular)
@@ -48,12 +48,12 @@ extension MangaView {
                     vm?.orderFeed(by: $0)
                 }
             } header: {
-                Text(String.Filter.orderByHeader.uppercased())
+                Text(L.OrderBy.header)
             }
             Section {
                 Button { vm.downloaded.toggle() } label: {
                     HStack {
-                        Text("Downloaded")
+                        Text(L.Filter.downloaded)
                         Spacer()
                         if vm.downloaded {
                             Image(systemName: "checkmark")

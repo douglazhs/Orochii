@@ -15,8 +15,8 @@ enum Language: Int, Pickable {
     
     var description: String {
         switch self {
-        case .ptBr: return L10n.languagePortuguese
-        case .enUS: return L10n.languageEnglish
+        case .ptBr: return L.Language.portuguese
+        case .enUS: return L.Language.english
         }
     }
     

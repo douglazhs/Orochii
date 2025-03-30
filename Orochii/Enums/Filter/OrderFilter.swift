@@ -26,8 +26,8 @@ enum OrderFilter: Int, Pickable {
     /// Order title
     var description: String {
         switch self {
-        case .asc:  return L10n.filterAscending
-        case .desc: return L10n.filterDescending
+        case .asc:  return L.Order.ascending
+        case .desc: return L.Order.descending
         }
     }
 }

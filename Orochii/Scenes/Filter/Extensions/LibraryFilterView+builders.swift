@@ -15,7 +15,9 @@ extension LibraryFilterView {
         Section {
             EnumPicker(vm.objectFilter.description, selection: $vm.objectFilter).pickerStyle(.inline)
         } header: {
-            Text(String.Filter.filterByHeader.uppercased())
+            Text(L.OrderBy.header.uppercased())
+        } footer: {
+            Text(L.OrderBy.footer)
         }
     }
     
@@ -24,9 +26,9 @@ extension LibraryFilterView {
     @ViewBuilder
     func orderSection() -> some View {
         Section {
-            EnumPicker(String.Filter.orderByHeader, selection: $vm.filterOrder).pickerStyle(.automatic)
+            EnumPicker(L.OrderBy.header, selection: $vm.filterOrder).pickerStyle(.automatic)
         } header: {
-            Text(String.Filter.orderByHeader.uppercased())
+            Text(L.OrderBy.header.uppercased())
         }
     }
 }

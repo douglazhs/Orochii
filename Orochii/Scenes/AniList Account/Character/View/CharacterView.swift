@@ -42,13 +42,13 @@ struct CharacterView: View {
             ]
         )
         guard !fullName.isEmpty, character.name?.first != nil else {
-            return character.name?.full ?? String.Common.unknown
+            return character.name?.full ?? L.Common.unknown
         }
         return fullName.compactMap { $0 }.joined(separator: " ")
     }
     
     func getSpoilers() -> String {
-        guard var summary = character.description else { return String.Common.none }
+        guard var summary = character.description else { return L.Common.none }
         
         while summary.contains("~!") {
             summary = summary.replaced(

@@ -16,8 +16,8 @@ enum MangaQuality: Int, Pickable {
     /// Manga quality ID
     var description: String {
         switch self {
-        case .original:  return L10n.readerCoverOriginal
-        case .dataSaver: return L10n.readerCoverDataSaver
+        case .original:  return L.Reader.Cover.original
+        case .dataSaver: return L.Reader.Cover.dataSaver
         }
     }
 }

@@ -71,11 +71,11 @@ extension SettingsView {
     func userInfo() -> some View {
         VStack(alignment: .leading, spacing: 5) {
             // USERNAME
-            Text(vm.user?.name ?? "Unknown")
+            Text(vm.user?.name ?? L.Common.unknown)
                 .font(.subheadline)
                 .fontWeight(.semibold)
             // MANGAS
-            Text("\(vm.user?.statistics?.manga?.count ?? 0) MANGAS")
+            Text(L.Adjusts.Tracker.mangasCount(vm.user?.statistics?.manga?.count ?? 0))
                 .font(.caption)
                 .fontWeight(.regular)
                 .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
@@ -90,9 +90,10 @@ extension SettingsView {
             ? (vm.showDialog = true)
             : vm.logInAL()
         } label: {
-            Text(vm.logged
-                ? Localized.logOut.uppercased()
-                : Localized.logIn.uppercased()
+            Text(
+                vm.logged
+                ? L.Adjusts.Tracker.logOut.uppercased()
+                : L.Adjusts.Tracker.logIn.uppercased()
             )
             .font(.caption)
             .fontWeight(.heavy)
@@ -100,13 +101,13 @@ extension SettingsView {
         }
         .buttonStyle(.borderedProminent)
         .tint(Asset.Colors.secondaryBackground.swiftUIColor)
-        .confirmationDialog(String.Common.attention, isPresented: $vm.showDialog) {
-            Button(String.Common.cancel, role: .cancel) { }
-            Button(String.Adjusts.logOut, role: .destructive) {
+        .confirmationDialog(L.Common.attention, isPresented: $vm.showDialog) {
+            Button(L.Common.cancel, role: .cancel) { }
+            Button(L.Adjusts.Tracker.logOut, role: .destructive) {
                 vm.logOutAL()
             }
         } message: {
-            Text(String.Anilist.logOutMessage)
+            Text(L.Anilist.logout)
         }
     }
 }

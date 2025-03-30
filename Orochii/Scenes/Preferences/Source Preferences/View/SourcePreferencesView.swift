@@ -31,7 +31,7 @@ struct SourcePreferencesView: View {
                 }
                 
                 ToolbarItem(placement: .principal) {
-                    Text(String.MangaSource.title)
+                    Text(L.MangaSource.title)
                         .font(.title2)
                         .fontWeight(.heavy)
                 }

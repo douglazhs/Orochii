@@ -12,7 +12,7 @@ extension ReaderPreferencesView {
     @ViewBuilder
     func pageLayoutSection() -> some View {
         Section {
-            EnumPicker(L10n.readerPageSection, selection: $vm.pageLayout)
+            EnumPicker(L.Reader.layout, selection: $vm.pageLayout)
                 .onChange(of: vm.pageLayout) {
                     Defaults.standard.saveInt(
                         $0.rawValue,
@@ -20,10 +20,10 @@ extension ReaderPreferencesView {
                     )
                 }
         } header: {
-            Text(L10n.readerPageSectionHeader)
+            Text(L.Reader.Layout.header)
                 .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
-            Text(L10n.readerPageSectionFooter)
+            Text(L.Reader.Layout.footer)
                 .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
         .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
@@ -33,7 +33,7 @@ extension ReaderPreferencesView {
     @ViewBuilder
     func pageQualitySection() -> some View {
         Section {
-            EnumPicker(L10n.readerMangaSection, selection: $vm.pageQuality)
+            EnumPicker(L.Reader.manga, selection: $vm.pageQuality)
                 .onChange(of: vm.pageQuality) {
                     Defaults.standard.saveInt(
                         $0.rawValue,
@@ -41,10 +41,10 @@ extension ReaderPreferencesView {
                     )
                 }
         } header: {
-            Text(L10n.readerMangaSectionHeader)
+            Text(L.Reader.Manga.header)
                 .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
-            Text(L10n.readerMangaSectionFooter)
+            Text(L.Reader.Manga.footer)
                 .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
         .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
@@ -54,7 +54,7 @@ extension ReaderPreferencesView {
     @ViewBuilder
     func readingModeSection() -> some View {
         Section {
-            EnumPicker(L10n.readerModeSection, selection: $vm.readingMode)
+            EnumPicker(L.Reader.mode, selection: $vm.readingMode)
                 .onChange(of: vm.readingMode) {
                     Defaults.standard.saveInt(
                         $0.rawValue,
@@ -62,10 +62,10 @@ extension ReaderPreferencesView {
                     )
                 }
         } header: {
-            Text(L10n.readerModeSectionHeader)
+            Text(L.Reader.Mode.header)
                 .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
-            Text(L10n.readerModeSectionFooter)
+            Text(L.Reader.Mode.footer)
                 .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
         .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)

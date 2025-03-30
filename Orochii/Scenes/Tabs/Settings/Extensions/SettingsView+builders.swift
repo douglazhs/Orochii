@@ -8,8 +8,6 @@
 import SwiftUI
 
 extension SettingsView {
-    typealias Localized = String.Adjusts
-    
     @ViewBuilder
     func content() -> some View {
         List {
@@ -52,9 +50,9 @@ extension SettingsView {
                     accButtonHandler()
                 }
         } header: {
-            Text(Localized.trackerHeader.capitalized)
+            Text(L.Adjusts.Tracker.header.capitalized)
         } footer: {
-            Text(Localized.trackerFooter)
+            Text(L.Adjusts.Tracker.footer.attributedString)
                 .foregroundColor(Asset.Colors.secondaryText.swiftUIColor)
         }
         .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
@@ -66,7 +64,7 @@ extension SettingsView {
         Section {
             Toggle(isOn: $vm.iCloud) {
                 Label {
-                    Text(Localized.icloudSync)
+                    Text(L.Adjusts.Icloud.sync)
                 } icon: {
                     Image(systemName: "link.icloud.fill")
                 }
@@ -77,9 +75,9 @@ extension SettingsView {
                 )
             }
         } header: {
-            Text(Localized.icloudHeader)
+            Text(L.Adjusts.Icloud.header)
         } footer: {
-            Text(Localized.icloudFooter)
+            Text(L.Adjusts.Icloud.footer.attributedString)
                 .foregroundColor(Asset.Colors.secondaryText.swiftUIColor)
         }
         .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
@@ -91,7 +89,7 @@ extension SettingsView {
         Section {
             Toggle(isOn: $vm.biometryPreference) {
                 Label {
-                    Text(Localized.securityBiometry)
+                    Text(L.Adjusts.Security.biometry)
                 } icon: {
                     Image(systemName: "lock.fill")
                         
@@ -103,10 +101,10 @@ extension SettingsView {
                 )
             }
         } header: {
-            Text(Localized.securityHeader)
+            Text(L.Adjusts.Security.header)
         } footer: {
             VStack(alignment: .leading) {
-                Text(Localized.securityFooter)
+                Text(L.Adjusts.Security.footer)
                 Text(vm.biometricsError?.localizedDescription ?? "")
                     .foregroundColor(.accentColor)
                     .bold()
@@ -126,7 +124,7 @@ extension SettingsView {
         Section {
             Toggle(isOn: $vm.notifications) {
                 Label {
-                    Text(Localized.notificationUpdate)
+                    Text(L.Adjusts.Notification.updatedMangas)
                 } icon: {
                     Image(systemName: "bell.badge")
                         .foregroundColor(Asset.Colors.attention.swiftUIColor)
@@ -138,9 +136,9 @@ extension SettingsView {
                 )
             }
         } header: {
-            Text(Localized.notificationHeader)
+            Text(L.Adjusts.Notification.header)
         } footer: {
-            Text(Localized.notificationFooter)
+            Text(L.Adjusts.Notification.footer)
                 .foregroundColor(Asset.Colors.secondaryText.swiftUIColor)
         }
         .foregroundColor(Asset.Colors.primaryText.swiftUIColor)

@@ -33,14 +33,14 @@ extension LibraryView {
                 }
                 
                 ToolbarItem(placement: .principal) {
-                    Text(String.Library.title)
+                    Text(L.Library.title)
                         .font(.title2)
                         .fontWeight(.heavy)
                 }
             }
             .searchable(
                 text: $vm.query,
-                prompt: String.Library.searchPlaceholder
+                prompt: L.Library.Search.placeholder
             )
     }
     
@@ -79,7 +79,7 @@ extension LibraryView {
         VStack(spacing: 15.0) {
             Spacer()
             
-            Text(String.Library.authErrorMessage)
+            Text(L.Library.Auth.errorMessage)
                 .font(.callout)
                 .fontWeight(.semibold)
                 .multilineTextAlignment(.center)
@@ -89,7 +89,7 @@ extension LibraryView {
                 .fontWeight(.semibold)
                 .foregroundStyle(Color(uiColor: .systemRed).opacity(0.75))
             
-            Button(String.Library.authRetry) { vm.localAuth() }
+            Button(L.Library.Auth.retry) { vm.localAuth() }
                 .font(.callout)
                 .fontWeight(.heavy)
             
@@ -109,12 +109,12 @@ extension LibraryView {
             
             if vm.lockClick != nil {
                 VStack(spacing: 15.0) {
-                    Text(String.Library.authMessage)
+                    Text(L.Library.Auth.message)
                         .font(.callout)
                         .fontWeight(.semibold)
                         .multilineTextAlignment(.center)
                     
-                    Button(String.Library.authUnlock) { vm.localAuth() }
+                    Button(L.Library.Auth.unlock) { vm.localAuth() }
                         .font(.callout)
                         .fontWeight(.heavy)
                 }
@@ -144,7 +144,7 @@ extension LibraryView {
                             .contextMenu {
                                 // TODO: - Context menu features
                                 Button(role: .destructive) { } label: {
-                                    Label(String.ContextMenu.rmvFromLib, systemImage: "trash")
+                                    Label(L.Action.removeFromLibrary, systemImage: "trash")
                                 }
                             }
                     }

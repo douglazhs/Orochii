@@ -39,7 +39,6 @@ extension SearchStyleView {
                         title: vm.unwrapTitle(of: manga)
                     ) {
                         // TODO: - ADD/REMOVE from library
-                        print("Context menu action")
                     }
                 }
             }
@@ -53,7 +52,7 @@ extension SearchStyleView {
     @ViewBuilder
     func searchHandler() -> some View {
         if !vm.isSearching && isSearching {
-            Text("No results found for: *\(vm.nameQuery)*")
+            Text(L.Discovery.Search.noResults(vm.nameQuery))
                 .lineLimit(1)
                 .font(.subheadline)
                 .fontWeight(.medium)
@@ -99,7 +98,7 @@ extension SearchStyleView {
                 vm.searchOrder = .title
                 vm.ascendingOrder.toggle()
             } label: {
-                Text("Title")
+                Text(L.Filter.name)
                     .overlay(alignment: .trailing) {
                         if vm.searchOrder == .title {
                             Image(systemName: vm.ascendingOrder ? "chevron.down" : "chevron.up")
@@ -111,7 +110,7 @@ extension SearchStyleView {
                 vm.searchOrder = .lastUpdated
                 vm.ascendingOrder.toggle()
             } label: {
-                Text("Last Updated")
+                Text(L.Filter.lastUpdated)
                     .overlay(alignment: .trailing) {
                         if vm.searchOrder == .lastUpdated {
                             Image(systemName: vm.ascendingOrder ? "chevron.down" : "chevron.up")
@@ -119,7 +118,7 @@ extension SearchStyleView {
                     }
             }
         } header: {
-            Text(String.Filter.orderByHeader)
+            Text(L.OrderBy.header)
         }
     }
     
@@ -127,7 +126,7 @@ extension SearchStyleView {
     func noOrderSection() -> some View {
         Section {
             Button { vm.searchOrder = .none } label: {
-                Text(String.Common.none)
+                Text(L.Common.none)
                     .overlay {
                         if vm.searchOrder == .none {
                             Image(systemName: "checkmark")
@@ -135,8 +134,6 @@ extension SearchStyleView {
                     }
             }
             .tint(.white)
-        } header: {
-            Text("No filter")
         }
     }
 }

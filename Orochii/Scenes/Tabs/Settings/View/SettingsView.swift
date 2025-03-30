@@ -17,13 +17,13 @@ struct SettingsView: View {
                 .standardBars()
                 .animation(.spring(), value: [vm.isLoading, vm.user != nil])
                 .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
-                    Button(String.Common.ok) { }
+                    Button(L.Common.ok) { }
                 } message: {
                     Text(vm.alertInfo.message)
                 }
                 .toolbar {
                     ToolbarItem(placement: .principal) {
-                        Text(String.Adjusts.title)
+                        Text(L.Adjusts.title)
                             .font(.title2)
                             .fontWeight(.heavy)
                     }

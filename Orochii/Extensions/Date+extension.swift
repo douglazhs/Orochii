@@ -15,6 +15,7 @@ extension Date {
         of time: Int,
         format: String = "EEEE, d MMMM yyyy"
     ) -> String {
+        guard time != 0 else { return "-" }
         let timeInterval = TimeInterval(time)
         let myNsDate = Date(timeIntervalSince1970: timeInterval)
         let formatter = DateFormatter()

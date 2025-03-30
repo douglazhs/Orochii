@@ -8,245 +8,294 @@
 
 // MARK: - Languages
 
-"language_portuguese" = "Portuguese (Brazil)";
-"language_english" = "English (US)";
+"language.portuguese" = "Portuguese (Brazil)";
+"language.english" = "English (US)";
 
 // MARK: - Context Menus
 
-"action_add_to_library" = "Add to Library";
-"action_remove_from_library" = "Remove from Library";
-"action_mark_as_read" = "Mark as Read";
-"action_mark_as_unread" = "Mark as Unread";
-"action_read" = "as Read";
-"action_unread" = "as Unread";
-"action_download" = "Download";
-"action_mark_previous" = "Mark Previous";
-"action_save_page" = "Save Page";
+"action.add_to_library" = "Add to Library";
+"action.remove_from_library" = "Remove from Library";
+"action.mark_as_read" = "Mark as Read";
+"action.mark_as_unread" = "Mark as Unread";
+"action.read" = "as Read";
+"action.unread" = "as Unread";
+"action.download" = "Download";
+"action.mark_previous" = "Mark Previous";
+"action.save_page" = "Save Page";
 
 // MARK: - Commons
 
-"common_cancel" = "Cancel";
-"common_done" = "Done";
-"common_add" = "Add";
-"common_remove" = "Remove";
-"common_search" = "Search";
-"common_all" = "All";
-"common_none" = "None";
-"common_of" = "of";
-"common_ok" = "OK";
-"common_attention" = "Attention";
-"common_error" = "Error";
-"common_unknown" = "Unknown";
+"common.cancel" = "Cancel";
+"common.mark" = "Mark";
+"common.done" = "Done";
+"common.add" = "Add";
+"common.remove" = "Remove";
+"common.search" = "Search";
+"common.all" = "All";
+"common.none" = "None";
+"common.of" = "of";
+"common.ok" = "OK";
+"common.attention" = "Attention";
+"common.error" = "Error";
+"common.unknown" = "Unknown";
+"common.nsfw" = "NSFW";
+"common.save" = "Save";
 
 /* ------------------------------------------------------------ */
 
 // MARK: - DISCOVERY SCREEN
 
-"discovery_title" = "Discover";
-"discovery_search_placeholder" = "Manga title";
+"discovery.title" = "Discover";
+"discovery.search.placeholder" = "Manga title";
+"discovery.search.no_results" = "No results found for: *%@*";
 
 // MANGA CELL
 
-"discovery_cell_author" = "AUTHOR";
-"discovery_cell_year" = "YEAR";
-"discovery_cell_last_updated" = "UPDATED";
+"discovery.cell.author" = "AUTHOR";
+"discovery.cell.year" = "YEAR";
+"discovery.cell.last_updated" = "UPDATED";
 
 // MANGA STATUS
 
-"discovery_status_ongoing" = "Ongoing";
-"discovery_status_hiatus" = "Hiatus";
-"discovery_status_completed" = "Completed";
+"discovery.status.ongoing" = "Ongoing";
+"discovery.status.hiatus" = "Hiatus";
+"discovery.status.completed" = "Completed";
 
 // MAIN FILTERS
-"discovery_most_relevants" = "Most Relevants";
-"discovery_award_winning" = "Award Winning";
-"discovery_this_year" = "This Year - %@";
-"discovery_shounen" = "Shounen Public";
-"discovery_seinen" = "Seinen Public";
-"discovery_webcomics" = "Webcomics Full Colored";
+"discovery.most_relevants" = "Most Relevants";
+"discovery.award_winning" = "Award Winning";
+"discovery.this_year" = "%@";
+"discovery.shounen" = "Shounen Public";
+"discovery.seinen" = "Seinen Public";
+"discovery.webcomics" = "Webcomics Full Colored";
 
 /* ------------------------------------------------------------ */
 
 // MARK: - SOURCE PREFERENCES
 
-"manga_source_title" = "Source";
-"manga_source_site_footer" = "You will be redirected to _MangaDex_ website";
-"manga_source_language_footer" = "That will be used to search your mangas";
-"manga_source_language_header" = "Preferred Languages";
-"manga_source_quality_header" = "Quality";
-"manga_source_quality_footer" = "Some manga preferences, such as **quality**";
-"manga_source_quality" = "Manga Quality";
-"manga_source_anilist_large" = "Large";
-"manga_source_anilist_medium" = "Medium";
-"manga_source_anilist_extraLarge" = "Extra Large";
-"manga_source_mdex_low" = "Low";
-"manga_source_mdex_medium" = "Medium";
-"manga_source_mdex_original" = "Original";
+"manga_source.title" = "Source";
+"manga_source.site.header" = "Main Source";
+"manga_source.site.footer" = "You will be redirected to _MangaDex_ website";
+"manga_source.language.footer" = "That will be used to search your mangas";
+"manga_source.language.header" = "Preferred Languages";
+"manga_source.cover.header" = "Manga Source Covers";
+"manga_source.cover.footer" = "Cover quality of the available **sources** that **Orochii** App uses";
 
-// MANGA QUALITY
+// MANGADEX COVER QUALITY
 
-"manga_source_low_quality" = "Low";
-"manga_source_medium_quality" = "Medium";
-"manga_source_high_quality" = "High";
+"manga_source.mdex.cover.low" = "Low";
+"manga_source.mdex.cover.medium" = "Medium";
+"manga_source.mdex.cover.original" = "Original";
 
-// SWIFT ACTIONS
+// ANILIST COVER QUALITY
 
-"manga_source_quality_title" = "Manga Quality";
-"manga_source_quality_dialog" = "Choose manga download quality";
+"manga_source.anilist.cover.large" = "Large";
+"manga_source.anilist.cover.medium" = "Medium";
+"manga_source.anilist.cover.extraLarge" = "Extra Large";
 
 /* ------------------------------------------------------------ */
 
 // MARK: - LIBRARY SCREEN
 
-"library_title" = "Library";
-"library_search_placeholder" = "Search on your list";
-"library_auth_message" = "You locked your library.\n Click on unlock button to see your mangas :)";
-"library_auth_error_message" = "Your library is locked :(\n Unlock It to see your mangas :)";
-"library_auth_retry" = "TRY AGAIN";
-"library_auth_unlock" = "UNLOCK";
+"library.title" = "Library";
+"library.search.placeholder" = "Search on your list";
+"library.auth.message" = "You locked your library.\n Click on unlock button to see your mangas :)";
+"library.auth.error_message" = "Your library is locked :(\n Unlock It to see your mangas :)";
+"library.auth.retry" = "TRY AGAIN";
+"library.auth.unlock" = "UNLOCK";
 
 /* ------------------------------------------------------------ */
 
-// MARK: - SETTINGS SCREEN
+// MARK: - FILTER & ORDER
 
-"settings_title" = "Adjusts";
-
-/* ------------------------------------------------------------ */
-
-// MARK: - FILTER
-
-"filter_title" = "Filters";
-"filter_filter_by_header" = "Filter By";
-"filter_filter_by_footer" = "Here you have some preferences to change the order of your mangas";
-"filter_order_by_header" = "Order By";
-"filter_order_by_footer" = "Ascending or descending order";
-"filter_manga_info_header" = "Manga Information";
-"filter_manga_info_footer" = "Filter your mangas by their informations";
-"filter_ascending" = "Ascending";
-"filter_descending" = "Descending";
-"filter_none" = "None";
-"filter_name" = "Name (A-Z)";
-"filter_last_updated" = "Last Updated";
-"filter_release_year" = "Release Year";
-"filter_language" = "Language";
-"filter_year" = "Year";
-"filter_public" = "Public";
-//"filter_status" = "Status";
+"filter.title" = "Filters";
+"filter.action" = "Filter";
+"filter.by_header" = "Filter By";
+"filter.by_footer" = "Here you have some preferences to change the order of your mangas";
+"filter.manga_info_header" = "Manga Information";
+"filter.manga_info_footer" = "Filter your mangas by their informations";
+"filter.none" = "None";
+"filter.name" = "Name (A-Z)";
+"filter.last_updated" = "Last Updated";
+"filter.release_year" = "Release Year";
+"filter.language" = "Language";
+"filter.year" = "Year";
+"filter.public" = "Public";
+"filter.status" = "Status";
+"filter.downloaded" = "Downloaded";
+"orderBy.header" = "Order By";
+"orderBy.footer" = "Order your mangas ascending or descending";
+"order" = "Order";
+"order.ascending" = "Ascending";
+"order.descending" = "Descending";
 
 /* ------------------------------------------------------------ */
 
 // MARK: - MANGA SCREEN
 
-"manga_author" = "Author";
-"manga_status" = "Status";
-"manga_year" = "Year";
-"manga_genres" = "Genres";
-"manga_updated" = "Updated";
-"manga_start_reading" = "Start Reading";
-"manga_add_to_library" = "Add to Library";
-"manga_select_chapters" = "Select Chapters";
-"manga_description_header" = "Description";
-"manga_chapter_header" = "Chapters";
-"manga_mark" = "Mark";
-"manga_selected_chapters" = "Selected Chapters";
-"manga_chapters_of" = "Chapters Of";
-"manga_status_planning" = "Planning";
-"manga_status_reading" = "Reading";
-"manga_status_completed" = "Completed";
-"manga_status_rereading" = "Rereading";
-"manga_status_paused" = "Paused";
-"manga_status_dropped" = "Dropped";
-"manga_status_none" = "None";
-"manga_action_library" = "Library";
-"manga_action_anilist" = "AniList";
-"manga_sub_action_moved" = "Moved";
-"manga_sub_action_removed" = "Removed";
+"manga.author" = "Author";
+"manga.status" = "Status";
+"manga.year" = "Year";
+"manga.genres" = "Genres";
+"manga.updated" = "Updated";
+"manga.state" = "State";
+"manga.country" = "Country";
+"manga.demographic" = "Public";
+"manga.start_reading" = "Start Reading";
+"manga.add_to_library" = "Add to Library";
+"manga.select_chapters" = "Select Chapters";
+"manga.description_header" = "Description";
+"manga.selected_chapters" = "Selected Chapters";
+"manga.chapters_of" = "Chapters Of";
+"manga.status.planning" = "Planning";
+"manga.status.reading" = "Reading";
+"manga.status.completed" = "Completed";
+"manga.status.rereading" = "Rereading";
+"manga.status.paused" = "Paused";
+"manga.status.dropped" = "Dropped";
+"manga.status.none" = "None";
+"manga.action.library" = "Library";
+"manga.action.anilist" = "AniList";
+"manga.action.view_on_mdex" = "View on MangaDex.co";
+"manga.action.remove_downloads" = "Remove All Downloads";
+"manga.sub_action.moved" = "Moved";
+"manga.sub_action.removed" = "Removed";
+"manga.no_chapters" = "No chapters found :(";
+"manga.chapters_count" = "%@ Chapter(s)";
+"manga.covers.title" = "All Available Covers";
+"manga.covers.not_available" = "No other covers available for *%@*";
+"manga.covers.filter.languages" = "Language Selection";
+"manga.covers.filter.volume" = "Volume";
+"manga.reader.pages_left" = "%@ pages left";
 
 /* ------------------------------------------------------------ */
 
 // MARK: - ADJUSTS SCREEN
 
-"adjusts_tracker_header" = "Tracker";
-"adjusts_tracker_footer" = "You can connect your **AniList** account and track your mangas";
-"adjusts_tracker_log_in" = "LogIn";
-"adjusts_tracker_log_out" = "Log Out";
-"adjusts_tracker_user" = "User";
-"adjusts_icloud_header" = "iCloud";
-"adjusts_icloud_footer" = "Your manga library will be saved in the **Cloud** to be accessed from other devices";
-"adjusts_icloud_sync" = "Sync";
-"adjusts_security_header" = "Security";
-"adjusts_security_footer" = "Make your library and your mangas more secure";
-"adjusts_security_biometry" = "Lock library";
-"adjusts_security_level" = "Security Level";
-"adjusts_security_library" = "Library";
-"adjusts_security_library_footer" = "Lock only your personal library";
-"adjusts_security_app_footer" = "Lock entry into your app";
-"adjusts_notification_header" = "Notification";
-"adjusts_notification_footer" = "You will be notified every time a new manga chapter is released";
-"adjusts_notification_updated_mangas" = "Chapter Update";
-"adjusts_age_rating_header" = "Age Rating";
-"adjusts_age_rating_footer" = "**Not safe for work**: material that should only be looked at in private because it contains some things that could be _offensive_";
+"adjusts.title" = "Adjusts";
+"adjusts.tracker.header" = "Tracker";
+"adjusts.tracker.footer" = "You can connect your <b>AniList</b> account and track your mangas";
+"adjusts.tracker.mangas_count" = "%@ Mangas";
+"adjusts.tracker.log_in" = "LogIn";
+"adjusts.tracker.log_out" = "Log Out";
+"adjusts.tracker.user" = "User";
+"adjusts.icloud.header" = "iCloud";
+"adjusts.icloud.footer" = "Your manga library will be saved in the **Cloud** to be accessed from other devices";
+"adjusts.icloud.sync" = "Sync";
+"adjusts.security.header" = "Security";
+"adjusts.security.footer" = "Make your library and your mangas more secure";
+"adjusts.security.biometry" = "Lock library";
+"adjusts.security.library" = "Library";
+"adjusts.notification.header" = "Notification";
+"adjusts.notification.footer" = "You will be notified every time a new manga chapter is released";
+"adjusts.notification.updated_mangas" = "Chapter Update";
+"adjusts.age_rating.header" = "Age Rating";
+"adjusts.age_rating.footer" = "**Not safe for work**: material that should only be looked at in private because it contains some things that could be _offensive_";
+"adjusts.about.version" = "Version";
+"adjusts.about.build" = "Build";
+"adjusts.about.header" = "About";
+"adjusts.about.footer" = "Some informations about the App";
 
 /* ------------------------------------------------------------ */
 
 // MARK: - ERRORS
 
-"error_anilist_login" = "Error when trying to login on your AniList account.";
-"error_save_keychain" = "Error when trying save your credentials on Keychain.";
-"error_empty_url" = "Empty URL.";
-"error_invalid_url" = "Invalid URL.";
-"error_nil_object" = "Object is nil.";
+"error.anilist_login" = "Error when trying to login on your AniList account.";
+"error.save_keychain" = "Error when trying save your credentials on Keychain.";
+"error.empty_url" = "Empty URL.";
+"error.invalid_url" = "Invalid URL.";
+"error.nil_object" = "Object is nil.";
 
 /* ------------------------------------------------------------ */
 
 // MARK: - ANILIST
 
-"anilist_logout" = "Are you sure you want to Log Out of your AniList account?";
+"anilist.logout" = "Are you sure you want to Log Out of your AniList account?";
+
+// TRACKER
+
+"tracker.info.status" = "STATUS";
+"tracker.info.progress" = "PROGRESS";
+"tracker.info.chapter" = "CH. %@";
+"tracker.info.updated" = "UPDATED";
+"tracker.info.started" = "STARTED";
+"tracker.info.ended" = "ENDED";
+"tracker.info.score" = "SCORE";
+"tracker.stop.confirmation.title" = "Stop Tracking Locally";
+"tracker.stop.confirmation.message" = "You will not lose your AniList progress, It just remove the tracking information locally.";
+"tracker.action.stop" = "Stop";
+"tracker.action.track" = "TRACK";
+"tracker.action.track_locally" = "TRACK LOCALLY";
+"tracker.action.start_tracking" = "START TRACKING";
+"tracker.action.stop_tracking" = "Stop Tracking";
+"tracker.action.see_on_anilist" = "See on AniList";
+"tracker.search" = "Search";
+"tracker.search.no_results" = "No results found on **AniList**";
+"tracker.manga.format" = "FORMAT";
+"tracker.manga.status" = "STATUS";
+"tracker.manga.average_score" = "AVERAGE SCORE";
+"tracker.manga.country" = "COUNTRY";
+"tracker.manga.source" = "SOURCE";
+"tracker.manga.year" = "YEAR";
+"tracker.manga.popular_rank" = "PUPULAR RANK";
+"tracker.manga.rated_rank" = "RATED RANK";
 
 /* ------------------------------------------------------------ */
 
 // MARK: - ACCOUNT DETAILS
 
-"account_noActivities" = "You have no activities :(";
-"account_noFavorites" = "You have no favorites :(";
-"account_section_totalMangas" = "Total Mangas";
-"account_section_meanScore" = "Mean Score";
-"account_section_standardDeviation" = "Standard Deviation";
-"account_section_chaptersRead" = "Chapters Read";
-"account_section_volumesRead" = "Volumes Read";
-"account_section_statuses" = "Statuses";
-"account_section_genres" = "Genres Distribution";
-"account_section_tags" = "Tags Distribution";
-"account_section_mangasPerYear" = "Mangas Read Per Year";
-"account_section_chaptersPerYear" = "Chapters Read Per Year";
-"account_section_chaptersPerStaff" = "Chapters Read Per Staff";
-"account_section_country" = "Manga Per Country";
-"account_tab_stats" = "Stats";
-"account_tab_activity" = "Activity";
-"account_tab_favorites" = "Favorites";
-"account_feed_mine" = "Mine";
-"account_feed_following" = "Following Feed";
+"account.no_activities" = "You have no activities :(";
+"account.no_favorites" = "You have no favorites :(";
+"account.section.total_mangas" = "Total Mangas";
+"account.section.mean_score" = "Mean Score";
+"account.section.standard_deviation" = "Standard Deviation";
+"account.section.chapters_read" = "Chapters Read";
+"account.section.volumes_read" = "Volumes Read";
+"account.section.statuses" = "Statuses";
+"account.section.genres" = "Genres Distribution";
+"account.section.tags" = "Tags Distribution";
+"account.section.mangas_per_year" = "Mangas Read Per Year";
+"account.section.chapters_per_year" = "Chapters Read Per Year";
+"account.section.chapters_per_staff" = "Chapters Read Per Staff";
+"account.section.country" = "Manga Per Country";
+"account.tab.stats" = "Stats";
+"account.tab.activity" = "Activity";
+"account.tab.favorites" = "Favorites";
+"account.tab.favorites.mangas" = "Mangas";
+"account.tab.favorites.characters" = "Characters";
+"account.tab.favorites.staff" = "Authors";
+"account.feed.mine" = "Mine";
+"account.feed.following" = "Following Feed";
+"account.character.title.native" = "NATIVE";
+"account.character.title.user_preferred" = "USER PREFERRED";
+"account.character.title.alternative" = "ALTERNATIVE TITLES";
+"account.character.title.spoiler" = "SPOILER TITLES";
+"account.character.age" = "AGE";
+"account.character.gender" = "GENDER";
+"account.character.member_favorites" = "MEMBER FAVORITES";
+"account.character.summary" = "SUMMARY";
+"account.character.manga_appearences" = "MANGA APPEARENCES";
 
 /* ------------------------------------------------------------ */
 
 // MARK: - READER PREFERENCES
 
-"reader_title" = "Reader Preferences";
-"reader_page_section" = "Layout";
-"reader_page_section_header" = "Page Layout";
-"reader_page_section_footer" = "Choose a page layout of your preference";
-"reader_manga_section" = "Manga quality";
-"reader_manga_section_header" = "Page quality";
-"reader_manga_section_footer" = "Choose the quality of your preference";
-"reader_mode_section" = "Mode";
-"reader_mode_section_header" = "Reading mode";
-"reader_mode_section_footer" = "Choose the better reading mode for you";
-"reader_single_page" = "Single Page";
-"reader_double_page" = "Double Pages";
-"reader_automatic_page" = "Automatic";
-"reader_default_mode" = "Default";
-"reader_left_to_right_mode" = "Left to Right";
-"reader_right_to_left_mode" = "Right to Left";
-"reader_webtoon_mode" = "Webtoon";
-"reader_cover_original" = "Original";
-"reader_cover_data_saver" = "Data Saver";
+"reader.title" = "Reader Preferences";
+"reader.layout" = "Layout";
+"reader.layout.header" = "Page Layout";
+"reader.layout.footer" = "Choose a page layout of your preference";
+"reader.layout.single_page" = "Single Page";
+"reader.layout.double_page" = "Double Pages";
+"reader.layout.automatic" = "Automatic";
+"reader.manga" = "Quality";
+"reader.manga.header" = "Page quality";
+"reader.manga.footer" = "Choose the quality of your preference";
+"reader.mode" = "Mode";
+"reader.mode.header" = "Reading mode";
+"reader.mode.footer" = "Choose the better reading mode for you";
+"reader.mode.default" = "Default";
+"reader.mode.left_to_right" = "Left to Right";
+"reader.mode.right_to_left" = "Right to Left";
+"reader.mode.webtoon" = "Webtoon";
+"reader.cover.original" = "Original";
+"reader.cover.data_saver" = "Data Saver";

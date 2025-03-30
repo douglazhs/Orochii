@@ -25,32 +25,43 @@ extension ALTracker {
                 )
             )
             
-            VStack(alignment: .leading, spacing: 8.5) {
-                MediaAttributes(
-                    leading: (title: "FORMAT", value: vm.alManga?.format ?? "-"),
-                    trailing: (title: "STATUS", value: vm.alManga?.status ?? "-")
-                )
-                
-                MediaAttributes(
-                    leading: (
-                        title: "AVERAGE SCORE",
-                        value: vm.alManga?.averageScore != nil ?
-                        "\(vm.alManga?.averageScore ?? 0)%" :
-                        vm.alManga?.averageScore.nilToStr ?? "-"
-                    ),
-                    trailing: (title: "COUNTRY", value: vm.alManga?.countryOfOrigin ?? "-")
-                )
-                
-                MediaAttributes(
-                    leading: (title: "SOURCE", value: vm.alManga?.source?.replacingOccurrences(of: "_", with: " ") ?? "-"),
-                    trailing: (title: "YEAR", value: vm.alManga?.startDate?.year.nilToStr ?? "-")
-                )
-                
-                MediaAttributes(
-                    leading: (title: "PUPULAR RANK", value: vm.getRank(.popular)),
-                    trailing: (title: "RATED RANK", value: vm.getRank(.rated))
-                )
-            }
+            attributes()
         }.lineLimit(1)
+    }
+    
+    @ViewBuilder
+    func attributes() -> some View {
+        VStack(alignment: .leading, spacing: 8.5) {
+            MediaAttributes(
+                leading: (title: L.Tracker.Manga.format, value: vm.alManga?.format ?? "-"),
+                trailing: (title: L.Tracker.Manga.status, value: vm.alManga?.status ?? "-")
+            )
+            
+            MediaAttributes(
+                leading: (
+                    title: L.Tracker.Manga.averageScore,
+                    value: vm.alManga?.averageScore != nil ?
+                    "\(vm.alManga?.averageScore ?? 0)%" :
+                    vm.alManga?.averageScore.nilToStr ?? "-"
+                ),
+                trailing: (
+                    title: L.Tracker.Manga.country,
+                    value: Locale.current.country(forRegionCode: vm.alManga?.countryOfOrigin).uppercased()
+                )
+            )
+            
+            MediaAttributes(
+                leading: (
+                    title: L.Tracker.Manga.source,
+                    value: vm.alManga?.source?.replacingOccurrences(of: "_", with: " ") ?? "-"
+                ),
+                trailing: (title: L.Tracker.Manga.year, value: vm.alManga?.startDate?.year.nilToStr ?? "-")
+            )
+            
+            MediaAttributes(
+                leading: (title: L.Tracker.Manga.popularRank, value: vm.getRank(.popular)),
+                trailing: (title: L.Tracker.Manga.ratedRank, value: vm.getRank(.rated))
+            )
+        }
     }
 }

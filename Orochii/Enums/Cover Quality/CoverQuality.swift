@@ -15,9 +15,9 @@ public enum AniListCoverQuality: Int, Pickable {
     
     public var description: String {
         switch self {
-        case .large: return L10n.mangaSourceAnilistLarge
-        case .medium: return L10n.mangaSourceAnilistMedium
-        case .extraLarge: return  L10n.mangaSourceAnilistExtraLarge
+        case .large: return L.MangaSource.Anilist.Cover.large
+        case .medium: return L.MangaSource.Anilist.Cover.medium
+        case .extraLarge: return  L.MangaSource.Anilist.Cover.extraLarge
         }
     }
 }
@@ -30,9 +30,9 @@ public enum MangaDexCoverQuality: Int, Pickable {
     
     public var description: String {
         switch self {
-        case .low: return L10n.mangaSourceMdexLow
-        case .medium: return L10n.mangaSourceMdexMedium
-        case .original: return L10n.mangaSourceMdexOriginal
+        case .low: return L.MangaSource.Mdex.Cover.low
+        case .medium: return L.MangaSource.Mdex.Cover.medium
+        case .original: return L.MangaSource.Mdex.Cover.original
         }
     }
     

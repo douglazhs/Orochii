@@ -30,12 +30,12 @@ struct ReaderPreferencesView: View {
                     Button {
                         dismiss()
                     } label: {
-                        Text(String.Common.done)
+                        Text(L.Common.done)
                     }
                 }
                 
                 ToolbarItem(placement: .principal) {
-                    Text(L10n.readerTitle)
+                    Text(L.Reader.title)
                         .font(.title2)
                         .fontWeight(.heavy)
                 }

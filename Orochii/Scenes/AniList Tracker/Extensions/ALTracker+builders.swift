@@ -67,7 +67,7 @@ extension ALTracker {
                     Text(
                         vm.alManga?.title?.romaji ??
                         vm.alManga?.title?.english ??
-                        (vm.isLoading ? "" : "Unknown")
+                        (vm.isLoading ? "" : L.Common.unknown)
                     )
                     .font(.headline)
                     .lineLimit(1)
@@ -83,7 +83,7 @@ extension ALTracker {
                     }
                 }
             case .search: 
-                Text("Search")
+                Text(L.Tracker.search)
                     .font(.title2)
                     .fontWeight(.heavy)
             }
@@ -134,7 +134,7 @@ extension ALTracker {
                 .listSectionSeparator(.hidden)
             } else {
                 if !vm.isSearching {
-                    Text("No results found on **AniList**")
+                    Text(L.Tracker.Search.noResults.attributedString)
                         .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
                         .font(.subheadline)
                         .fontWeight(.regular)

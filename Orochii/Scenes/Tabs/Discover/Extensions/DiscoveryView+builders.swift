@@ -37,7 +37,7 @@ extension DiscoverView {
                         Button(role: .destructive) {
                             vm.removeQuery(on: index)
                         } label: {
-                            Text(String.Common.remove)
+                            Text(L.Common.remove)
                         }
                     }
                 }

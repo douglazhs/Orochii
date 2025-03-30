@@ -17,7 +17,7 @@ extension ALTracker {
                     Button {
                         showConfirmation = true
                     } label: {
-                        Label("Stop tracking", systemImage: "stop.fill")
+                        Label(L.Tracker.Action.stopTracking, systemImage: "stop.fill")
                     }
                 }
                 
@@ -28,7 +28,7 @@ extension ALTracker {
                         showWebView = true
                     }
                 } label: {
-                    Label("See on AniList", systemImage: "safari")
+                    Label(L.Tracker.Action.seeOnAnilist, systemImage: "safari")
                 }
             } header: {
                 Text(vm.alManga?.title?.romaji ?? vm.alManga?.title?.english ?? "")
@@ -37,13 +37,13 @@ extension ALTracker {
             Image(systemName: "ellipsis")
         }
         .confirmationDialog(
-            "Stop tracking locally",
+            L.Tracker.Stop.Confirmation.title,
             isPresented: $showConfirmation,
             titleVisibility: .visible
         ) {
-            Button("Stop", role: .destructive) { dismiss() }
+            Button(L.Tracker.Action.stop, role: .destructive) { dismiss() }
         } message: {
-            Text("You will not lose your AniList progress, just remove the track information locally.")
+            Text(L.Tracker.Stop.Confirmation.message)
         }
     }
     
@@ -54,7 +54,7 @@ extension ALTracker {
             vm?.trackingLocally = true
             vm?.handleTracking()
         } label: {
-            Text("TRACK")
+            Text(L.Tracker.Action.track)
                 .font(.subheadline)
                 .fontWeight(.heavy)
                 .foregroundStyle(vm.alManga == nil ? Asset.Colors.secondaryText.swiftUIColor : Asset.Colors.button.swiftUIColor)
@@ -66,7 +66,7 @@ extension ALTracker {
     /// Save progress button
     @ViewBuilder
     func saveButton() -> some View {
-        Button("SAVE") { dismiss() }
+        Button(L.Common.save.uppercased()) { dismiss() }
             .font(.subheadline)
             .fontWeight(.heavy)
             .foregroundStyle(Asset.Colors.button.swiftUIColor)

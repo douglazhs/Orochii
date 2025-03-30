@@ -40,7 +40,7 @@ extension ReaderToolbar {
                         .font(.footnote)
                         .fontWeight(.medium)
                 }
-                Text("\(vm.pages.count - Int(vm.actualPage + 1)) pages left")
+                Text(L.Manga.Reader.pagesLeft(vm.pages.count - Int(vm.actualPage + 1)))
                     .font(.caption)
                     .fontWeight(.medium)
             }

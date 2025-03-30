@@ -16,7 +16,7 @@ extension MangaView {
                 vm?.selectAll.toggle()
                 vm?.manageSelection($chSelection)
             } label: {
-                Text(vm.selectAll ? String.Common.none : String.Common.all)
+                Text(vm.selectAll ? L.Common.none : L.Common.all)
             }
             .disabled(vm.chapters.isEmpty)
             .tint(!vm.chapters.isEmpty ? Asset.Colors.accentColor.swiftUIColor : Asset.Colors.secondaryText.swiftUIColor)
@@ -33,7 +33,7 @@ extension MangaView {
                     vm.showBottomBar = false
                 }
             } label: {
-                Text(String.Common.done)
+                Text(L.Common.done)
                     .fontWeight(.semibold)
             }
         } else {
@@ -53,7 +53,7 @@ extension MangaView {
                     }
                 } label: {
                     Label(
-                        String.Manga.selectChapters,
+                        L.Manga.selectChapters,
                         systemImage: "checklist"
                     )
                 }
@@ -66,7 +66,7 @@ extension MangaView {
                         
                     }
                 } label: {
-                    Label("View on MangaDex.co", systemImage: "safari.fill")
+                    Label(L.Manga.Action.viewOnMdex, systemImage: "safari.fill")
                 }
             } header: {
                 Text(vm.unwrapTitle(of: vm.manga))
@@ -74,7 +74,7 @@ extension MangaView {
             Button(role: .destructive) {
                 
             } label: {
-                Label("Remove all Downloads", systemImage: "trash")
+                Label(L.Manga.Action.removeDownloads, systemImage: "trash")
             }
            
         } label: {
@@ -88,7 +88,7 @@ extension MangaView {
         Button { 
             
         } label: {
-            Text(String.ContextMenu.download)
+            Text(L.Action.download)
         }
         .disabled(chSelection.isEmpty)
         Menu {
@@ -96,18 +96,18 @@ extension MangaView {
                 Button {
                     
                 } label: {
-                    Label(String.ContextMenu.asRead, systemImage: "eye.fill")
+                    Label(L.Action.read, systemImage: "eye.fill")
                 }
                 Button { 
                     
                 } label: {
-                    Label(String.ContextMenu.asUnread, systemImage: "eye.slash.fill")
+                    Label(L.Action.unread, systemImage: "eye.slash.fill")
                 }
             } header: {
-                Text("\(chSelection.count) " + String.Manga.selectedChapters.uppercased())
+                Text("\(chSelection.count) " + L.Manga.selectedChapters.uppercased())
             }
         } label: {
-            Text(String.Manga.mark)
+            Text(L.Common.mark)
         }
         .disabled(chSelection.isEmpty)
     }

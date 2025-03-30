@@ -32,7 +32,7 @@ struct DiscoverView: View {
                         .ignoresSafeArea(.all)
                 }
                 .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
-                    Button(String.Common.ok, role: .cancel) { }
+                    Button(L.Common.ok, role: .cancel) { }
                 } message: {
                     Text(vm.alertInfo.message)
                 }
@@ -42,7 +42,7 @@ struct DiscoverView: View {
                     }
                     
                     ToolbarItem(placement: .principal) {
-                        Text(String.Discovery.title)
+                        Text(L.Discovery.title)
                             .font(.title2)
                             .fontWeight(.heavy)
                     }
@@ -51,7 +51,7 @@ struct DiscoverView: View {
         .searchable(
             text: $vm.nameQuery,
             placement: .navigationBarDrawer(displayMode: .always),
-            prompt: String.Discovery.searchPlaceholder
+            prompt: L.Discovery.Search.placeholder
         ) {
             searchSuggestions()
         }

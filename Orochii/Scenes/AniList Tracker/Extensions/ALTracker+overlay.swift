@@ -33,31 +33,34 @@ extension ALTracker {
             VStack(spacing: 20.0) {
                 HStack(spacing: 30.0) {
                     VStack(alignment: .leading, spacing: 5.0) {
-                        Text("STATUS")
+                        Text(L.Tracker.Info.status)
                             .font(.caption2)
                             .fontWeight(.regular)
                             .foregroundColor(Asset.Colors.secondaryText.swiftUIColor)
                         Text(vm.alManga?.mediaListEntry?.status ?? "-")
                     }
                     VStack(alignment: .center, spacing: 5.0) {
-                        Text("PROGRESS")
+                        Text(L.Tracker.Info.progress)
                             .font(.caption2)
                             .fontWeight(.regular)
                             .foregroundColor(Asset.Colors.secondaryText.swiftUIColor)
-                        Text("CH. \(vm.alManga?.mediaListEntry?.progress.nilToStr ?? "-")" +
-                            "/\(vm.alManga?.chapters.nilToStr ?? "-")")
+                        Text(
+                            L.Tracker.Info.chapter(
+                                (vm.alManga?.mediaListEntry?.progress.nilToStr ?? "-") + "/" +
+                                (vm.alManga?.chapters.nilToStr ?? "-")
+                            )
+                        )
                     }
                     VStack(alignment: .trailing, spacing: 5.0) {
-                        Text("UPDATED")
+                        Text(L.Tracker.Info.updated)
                             .font(.caption2)
                             .fontWeight(.regular)
                             .foregroundColor(Asset.Colors.secondaryText.swiftUIColor)
-                        if vm.alManga?.mediaListEntry != nil {
-                            Text(Date.getDate(
-                                of: vm.alManga?.mediaListEntry?.updatedAt ?? 0,
-                                format: "dd MMM yy"
-                            ))
-                        } else { Text("-") }
+                        
+                        Text(Date.getDate(
+                            of: vm.alManga?.mediaListEntry?.updatedAt ?? 0,
+                            format: "dd MMM yy"
+                        ))
                     }
                 }
             }
@@ -78,8 +81,8 @@ extension ALTracker {
         } label: {
             Label(
                 vm.alManga?.mediaListEntry != nil
-                ? "TRACK LOCALLY"
-                : "START TRACKING",
+                ? L.Tracker.Action.trackLocally
+                : L.Tracker.Action.startTracking,
                 systemImage: vm.alManga?.mediaListEntry != nil
                 ? "icloud.and.arrow.down"
                 : "play"

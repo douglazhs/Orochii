@@ -22,7 +22,7 @@ extension ALTracker {
     @ViewBuilder
     func started() -> some View {
         VStack(alignment: .leading, spacing: 5.0) {
-            Text("STARTED")
+            Text(L.Tracker.Info.started)
                 .font(.footnote)
                 .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
             Text(vm.startDate.formatted(date: .numeric, time: .omitted))
@@ -50,7 +50,7 @@ extension ALTracker {
     @ViewBuilder
     func ended() -> some View {
         VStack(alignment: .leading, spacing: 5.0) {
-            Text("ENDED")
+            Text(L.Tracker.Info.ended)
                 .font(.footnote)
                 .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
             Text(vm.endDate.formatted(date: .numeric, time: .omitted))
@@ -79,7 +79,7 @@ extension ALTracker {
     func score() -> some View {
         VStack(alignment: .leading, spacing: 5) {
             HStack {
-                Text("SCORE")
+                Text(L.Tracker.Info.score)
                     .font(.footnote)
                     .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
             }

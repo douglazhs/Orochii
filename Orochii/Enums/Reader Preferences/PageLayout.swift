@@ -13,9 +13,9 @@ enum PageLayout: Int, Pickable {
     
     var description: String {
         switch self {
-        case .singlePage: return L10n.readerSinglePage
-        case .doublePage: return L10n.readerDoublePage
-        case .automatic:  return L10n.readerAutomaticPage
+        case .singlePage: return L.Reader.Layout.singlePage
+        case .doublePage: return L.Reader.Layout.doublePage
+        case .automatic:  return L.Reader.Layout.automatic
         }
     }
     

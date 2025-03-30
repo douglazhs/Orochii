@@ -192,7 +192,7 @@ final class ALAccountViewModel: ObservableObject {
     /// - Parameter activity: User activity
     /// - Returns: Built text
     func buildActivity(_ activity: ActivityUnion) -> AttributedString {
-        let user = "**\(activity.user?.name ?? String.Common.unknown)**"
+        let user = "**\(activity.user?.name ?? L.Common.unknown)**"
         let status = activity.status?.capitalized ?? ""
         var progress = "\(activity.progress ?? "")"
         if !progress.isEmpty { progress += " of" }
@@ -254,7 +254,7 @@ final class ALAccountViewModel: ObservableObject {
     /// - Returns: Media unwrapped title
     /// - Parameter manga: Current manga
     func unwrappedTitle(of manga: MangaMedia?) -> String {
-        return manga?.title?.english ?? manga?.title?.romaji ?? String.Common.unknown
+        return manga?.title?.english ?? manga?.title?.romaji ?? L.Common.unknown
     }
     
     /// Toggle favorite

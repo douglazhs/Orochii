@@ -19,18 +19,18 @@ struct ChapterMenu: View {
             Button {
                 action(.markAsRead)
             } label: {
-                Label(String.ContextMenu.markAsRead, systemImage: "eye.fill")
+                Label(L.Action.markAsRead, systemImage: "eye.fill")
             }
-            Menu(String.ContextMenu.markPrevious) {
+            Menu(L.Action.markPrevious) {
                 Button {
                     action(.previousAsRead)
                 } label: {
-                    Label(String.ContextMenu.markAsRead, systemImage: "eye.fill")
+                    Label(L.Action.markAsRead, systemImage: "eye.fill")
                 }
                 Button {
                     action(.previousAsUnread)
                 } label: {
-                    Label(String.ContextMenu.markAsUnread, systemImage: "eye.slash.fill")
+                    Label(L.Action.markAsUnread, systemImage: "eye.slash.fill")
                 }
             }
         }
@@ -38,7 +38,7 @@ struct ChapterMenu: View {
             Button {
                 action(.download)
             } label: { 
-                Label(String.ContextMenu.download, systemImage: "arrow.down")
+                Label(L.Action.download, systemImage: "arrow.down")
             }
         }
     }

@@ -33,7 +33,7 @@ struct PickerTextField: UIViewRepresentable {
             action: nil
         )
         let doneButton = UIBarButtonItem(
-            title: String.Common.done,
+            title: L.Common.done,
             style: .done,
             target: helper,
             action: #selector(helper.doneButtonAction)
@@ -55,7 +55,7 @@ struct PickerTextField: UIViewRepresentable {
         textField.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
         
         textField.textAlignment = .center
-        textField.backgroundColor = UIColor(named: "tabBar")
+        textField.backgroundColor = Asset.Colors.actionBackground.color
         textField.textColor = .clear
         textField.tintColor = .clear
         textField.layer.cornerRadius = 4.25

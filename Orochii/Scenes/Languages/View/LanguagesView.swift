@@ -16,7 +16,7 @@ struct LanguagesView: View {
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text(String.MangaSource.languageHeader)
+                Text(L.MangaSource.Language.header)
                     .font(.title2)
                     .fontWeight(.heavy)
             }

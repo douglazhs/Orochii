@@ -60,7 +60,7 @@ extension ChapterView {
                 .contextMenu {
                     Button { vm.savePage(of: index) } label: {
                         Label(
-                            String.ContextMenu.savePage,
+                            L.Action.savePage,
                             systemImage: "icloud.and.arrow.down.fill"
                         )
                     }
@@ -91,7 +91,7 @@ extension ChapterView {
                                 vm.savePage(of: index)
                             } label: {
                                 Label(
-                                    String.ContextMenu.savePage,
+                                    L.Action.savePage,
                                     systemImage: "icloud.and.arrow.down.fill"
                                 )
                             }

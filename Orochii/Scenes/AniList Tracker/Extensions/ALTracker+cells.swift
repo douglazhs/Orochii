@@ -47,7 +47,7 @@ extension ALTracker {
     @ViewBuilder 
     func info(of manga: Media) -> some View {
         VStack(alignment: .leading, spacing: 3.5) {
-            Text(manga.title?.romaji ?? "Unknown")
+            Text(manga.title?.romaji ?? L.Common.unknown)
                 .lineLimit(2)
                 .font(.subheadline)
                 .fontWeight(.medium)

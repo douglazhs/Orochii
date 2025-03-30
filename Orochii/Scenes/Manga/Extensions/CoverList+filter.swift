@@ -26,7 +26,7 @@ extension CoverList {
             .toolbar {
                 ToolbarItemGroup(placement: .bottomBar) {
                     Spacer()
-                    Button("Go!") {
+                    Button(L.Filter.action) {
                         showFilter = false
                     }
                     .fontWeight(.semibold)
@@ -62,7 +62,7 @@ extension CoverList {
                         vm.coverFilter.locales.removeAll { $0 == locale }
                     }
                 } label: {
-                    Text(Locale.current.localizedString(forLanguageCode: locale) ?? locale)
+                    Text(Locale.current.country(forLanguageCode: locale).capitalized)
                         .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
                         .font(.callout)
                 }
@@ -83,7 +83,7 @@ extension CoverList {
     @ViewBuilder
     func languageSelectionHeader() -> some View {
         HStack {
-            Text("Language Selection")
+            Text(L.Manga.Covers.Filter.languages)
             Spacer()
             Button {
                 vm.toggleLocaleSelection()
@@ -110,7 +110,7 @@ extension CoverList {
     func orderSection() -> some View {
         Section {
             HStack {
-                Text("Volume Order")
+                Text(L.Manga.Covers.Filter.volume)
                     .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
                 Spacer()
                 Button {
@@ -128,7 +128,7 @@ extension CoverList {
             }
             .font(.subheadline)
         } header: {
-            Text("Order")
+            Text(L.order)
         }
         .listRowBackground(Color.clear)
     }

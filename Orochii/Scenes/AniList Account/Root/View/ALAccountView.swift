@@ -59,9 +59,9 @@ struct ALAccountView: View {
                 .toolbarBackground(.hidden, for: .navigationBar)
                 .animation(.easeIn(duration: 0.5), value: !vm.favoriteMangas.isEmpty)
                 .toolbarRole(.editor)
-                .alert(String.Common.error, isPresented: $vm.showAlert) {
+                .alert(L.Common.error, isPresented: $vm.showAlert) {
                     Button(role: .none) { } label: {
-                        Text(String.Common.ok)
+                        Text(L.Common.ok)
                     }
                 } message: {
                     Text(vm.errorMessage ?? "")

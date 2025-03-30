@@ -13,10 +13,10 @@ enum ReadingMode: Int, Pickable {
     
     var description: String {
         switch self {
-        case .defaultMode:    return L10n.readerDefaultMode
-        case .leftToRight:    return L10n.readerLeftToRightMode
-        case .rightToLeft:    return L10n.readerRightToLeftMode
-        case .webtoon:        return L10n.readerWebtoonMode
+        case .defaultMode:    return L.Reader.Mode.default
+        case .leftToRight:    return L.Reader.Mode.leftToRight
+        case .rightToLeft:    return L.Reader.Mode.rightToLeft
+        case .webtoon:        return L.Reader.Mode.webtoon
         }
     }
     

@@ -82,7 +82,7 @@ extension ALTracker {
     @ViewBuilder
     func status() -> some View {
         VStack(alignment: .leading, spacing: 5) {
-            Text("STATUS")
+            Text(L.Tracker.Info.status)
                 .font(.footnote)
                 .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
             Menu {

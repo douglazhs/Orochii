@@ -44,14 +44,14 @@ struct CoverList: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .topBarTrailing) {
-                    Button(String.Common.done) {
+                    Button(L.Common.done) {
                         dismiss()
                     }
                     .fontWeight(.semibold)
                 }
                 
                 ToolbarItem(placement: .principal) {
-                    Text("All Available Covers")
+                    Text(L.Manga.Covers.title)
                         .font(.headline)
                         .fontWeight(.bold)
                 }
@@ -61,7 +61,7 @@ struct CoverList: View {
                 if vm.loadingCovers {
                     ActivityIndicator()
                 } else if !vm.loadingCovers && vm.covers.isEmpty {
-                    Text("No other covers available for *\(vm.unwrapTitle(of: vm.manga))*")
+                    Text(L.Manga.Covers.notAvailable(vm.unwrapTitle(of: vm.manga)))
                         .font(.subheadline)
                         .fontWeight(.semibold)
                         .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)

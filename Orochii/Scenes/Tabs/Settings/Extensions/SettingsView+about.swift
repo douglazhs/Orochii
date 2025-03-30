@@ -15,14 +15,14 @@ extension SettingsView {
             NavigationLink {
                 appVersion()
             } label: {
-                Text("Version")
+                Text(L.Adjusts.About.version)
             }
             gitHub()
         } header: {
-            Text("About")
+            Text(L.Adjusts.About.header)
                 .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
-            Text("Some informations about the app")
+            Text(L.Adjusts.About.footer)
                 .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
         .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
@@ -33,9 +33,9 @@ extension SettingsView {
     func appVersion() -> some View {
         List {
             HStack {
-                Text("Version")
+                Text(L.Adjusts.About.version)
                 Spacer()
-                Text(UIApplication.appVersion ?? "Unknown")
+                Text(UIApplication.appVersion ?? L.Common.unknown)
             }
             .listRowBackground(Color.clear)
             .listSectionSeparator(.hidden)
@@ -44,9 +44,9 @@ extension SettingsView {
             .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
             
             HStack {
-                Text("Build")
+                Text(L.Adjusts.About.build)
                 Spacer()
-                Text(UIApplication.appBuild ?? "Unknown")
+                Text(UIApplication.appBuild ?? L.Common.unknown)
             }
             .listRowBackground(Color.clear)
             .listSectionSeparator(.hidden)
@@ -61,7 +61,7 @@ extension SettingsView {
         .background(Asset.Colors.background.swiftUIColor)
         .toolbar {
             ToolbarItem(placement: .principal) {
-                Text("Version")
+                Text(L.Adjusts.About.version)
                     .font(.title2)
                     .fontWeight(.heavy)
             }
@@ -71,7 +71,7 @@ extension SettingsView {
     /// GitHub repository
     @ViewBuilder
     func gitHub() -> some View {
-        Button("GitHub") {
+        Button(String.Name.gitHub) {
             do {
                 try UIApplication
                     .shared
@@ -79,7 +79,7 @@ extension SettingsView {
             } catch let error {
                 vm.showAlert = true
                 vm.alertInfo = .init(
-                    title: String.Common.error,
+                    title: L.Common.error,
                     message: error.localizedDescription
                 )
             }
