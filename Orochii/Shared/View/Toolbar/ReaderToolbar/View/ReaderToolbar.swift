@@ -28,11 +28,12 @@ struct ReaderToolbar: ViewModifier {
                 ToolbarItem(placement: .navigationBarTrailing) { readerPreferences() }
                 ToolbarItem(placement: .bottomBar) { pageSlider() }
                 ToolbarItem(placement: .principal) {
+                    let oneshot = vm.getTag(.oneshot, of: vm.manga)
                     Group {
-                        if vm.getTag("Oneshot", of: vm.manga) != nil, let title = vm.current.attributes?.title {
+                        if oneshot != nil, let title = vm.current.attributes?.title {
                             Text(title)
-                        } else if vm.getTag("Oneshot", of: vm.manga) != nil, vm.current.attributes?.title == nil {
-                            Text("Oneshot")
+                        } else if oneshot != nil, vm.current.attributes?.title == nil {
+                            Text(oneshot.notEmpty)
                         } else {
                             Text("Ch. \(vm.current.attributes?.chapter ?? "-")")
                         }
@@ -42,9 +43,7 @@ struct ReaderToolbar: ViewModifier {
                 }
             }
             .onAppear {
-                let thumbImage = UIImage(
-                    systemName: "circle.fill"
-                )
+                let thumbImage = UIImage(systemName: "circle.fill")
                 UISlider.appearance().setThumbImage(
                     thumbImage,
                     for: .normal

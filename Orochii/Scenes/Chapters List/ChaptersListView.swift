@@ -23,10 +23,10 @@ struct ChaptersListView: View {
                         ChapterStandardCell(
                             ch,
                             scanlationGroup: vm.relationship(
-                                "scanlation_group",
+                                .scanlationGroup,
                                 with: ch
                             ),
-                            isOneshot: vm.getTag("Oneshot", of: vm.manga) != nil
+                            isOneshot: vm.getTag(.oneshot, of: vm.manga) != nil
                         )
                         .listRowBackground(Color.clear)
                         .listRowSeparator(.visible, edges: .bottom)

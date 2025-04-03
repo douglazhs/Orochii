@@ -8,6 +8,7 @@
 import SwiftUI
 import MarkdownUI
 import struct MangaDex.Cover
+import enum MangaDex.MangaHelpersKeys
 
 extension MangaView {
     /// All manga information, including  chapters
@@ -74,8 +75,8 @@ extension MangaView {
             VStack(alignment: .leading, spacing: 10.0) {
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 5.0) {
-                        relationship("author", img: "person")
-                        relationship("artist", img: "paintpalette")
+                        relationship(.author, img: "person")
+                        relationship(.artist, img: "paintpalette")
                         tags()
                     }
                     .padding(.horizontal, 22.0)
@@ -99,7 +100,7 @@ extension MangaView {
     
     /// Manga relationship label
     @ViewBuilder
-    func relationship(_ relation: String, img: String) -> some View {
+    func relationship(_ relation: MangaHelpersKeys.Relationship, img: String) -> some View {
         Label(vm.relationship(relation, with: vm.manga).notEmpty, systemImage: img)
             .foregroundStyle(.white)
             .padding(5.0)
@@ -323,8 +324,8 @@ extension MangaView {
                     } label: {
                         ChapterStandardCell(
                             ch,
-                            scanlationGroup: vm.relationship("scanlation_group", with: ch),
-                            isOneshot: vm.getTag("Oneshot", of: vm.manga) != nil,
+                            scanlationGroup: vm.relationship(.scanlationGroup, with: ch),
+                            isOneshot: vm.getTag(.oneshot, of: vm.manga) != nil,
                             editingMode: vm.isEditingMode
                         )
                     }

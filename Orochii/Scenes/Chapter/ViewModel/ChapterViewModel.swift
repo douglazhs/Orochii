@@ -73,8 +73,8 @@ final class ChapterViewModel: ObservableObject {
     
     /// Define manga reading mode based on ``Format``
     private func defineReadingMode() {
-        guard getTag("Web Comic", of: manga) != nil,
-            getTag("Full Color", of: manga) != nil
+        guard getTag(.webcomic, of: manga) != nil,
+            getTag(.fullColor, of: manga) != nil
         else {
             format = .normal
             return
