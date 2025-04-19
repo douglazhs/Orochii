@@ -41,7 +41,6 @@ struct DiscoverView: View {
                         mangaSourceButton()
                     }
                 }
-                
         }
         .searchable(
             text: $vm.nameQuery,

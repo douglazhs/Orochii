@@ -68,9 +68,9 @@ extension SettingsView {
                 } icon: {
                     Image(systemName: "link.icloud.fill")
                 }
-            }.onChange(of: vm.iCloud) {
+            }.onChange(of: vm.iCloud) { _, newValue in
                 Defaults.standard.saveBool(
-                    $0,
+                    newValue,
                     key: DefaultsKeys.Settings.sync.rawValue
                 )
             }
@@ -94,9 +94,9 @@ extension SettingsView {
                     Image(systemName: "lock.fill")
                         
                 }
-            }.onChange(of: vm.biometryPreference) {
+            }.onChange(of: vm.biometryPreference) { _, newValue in
                 Defaults.standard.saveBool(
-                    $0,
+                    newValue,
                     key: DefaultsKeys.Settings.biometry.rawValue
                 )
             }
@@ -113,7 +113,7 @@ extension SettingsView {
         }
         .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
         .disabled(!vm.biometricsAvailable)
-        .onChange(of: vm.biometryPreference) { _ in
+        .onChange(of: vm.biometryPreference) { _, _ in
             vm.changeLocalAuth()
         }
     }
@@ -129,9 +129,9 @@ extension SettingsView {
                     Image(systemName: "bell.badge")
                         .foregroundColor(Asset.Colors.attention.swiftUIColor)
                 }
-            }.onChange(of: vm.notifications) {
+            }.onChange(of: vm.notifications) { _, newValue in
                 Defaults.standard.saveBool(
-                    $0,
+                    newValue,
                     key: DefaultsKeys.Settings.chUpdate.rawValue
                 )
             }
