@@ -57,21 +57,6 @@ struct MangaView: View {
                 ToolbarItemGroup(placement: .bottomBar) {
                     chapterActions()
                 }
-                ToolbarItem(placement: .principal) {
-                    Text(vm.unwrapTitle(of: vm.manga))
-                        .font(.headline)
-                        .lineLimit(1)
-                        .multilineTextAlignment(.center)
-                        .fontWeight(.heavy)
-                        .textSelection(.enabled)
-                        .onTapGesture {
-                            showFullName = true
-                        }
-                        .alwaysPopover(isPresented: $showFullName) {
-                            altTitles()
-                                .background(BackgroundClearView())
-                        }
-                }
             }
     }
 }

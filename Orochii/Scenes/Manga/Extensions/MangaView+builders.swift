@@ -73,6 +73,7 @@ extension MangaView {
     func banner() -> some View {
         Section {
             VStack(alignment: .leading, spacing: 10.0) {
+                title()
                 ScrollView(.horizontal, showsIndicators: false) {
                     HStack(spacing: 5.0) {
                         relationship(.author, img: "person")
@@ -96,6 +97,24 @@ extension MangaView {
         .listRowBackground(Color.clear)
         /*.listRowBackground(bannerBackground())
         .frame(maxHeight: UIScreen.height * 0.425)*/
+    }
+    
+    /// Manga title
+    @ViewBuilder
+    func title() -> some View {
+        Text(vm.unwrapTitle(of: vm.manga))
+            .font(.title3)
+            .multilineTextAlignment(.leading)
+            .fontWeight(.heavy)
+            .textSelection(.enabled)
+            .onTapGesture {
+                showFullName = true
+            }
+            .alwaysPopover(isPresented: $showFullName) {
+                altTitles()
+                    .background(BackgroundClearView())
+            }
+            .padding(.horizontal)
     }
     
     /// Manga relationship label
