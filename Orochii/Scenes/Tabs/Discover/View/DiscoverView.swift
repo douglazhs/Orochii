@@ -26,7 +26,10 @@ struct DiscoverView: View {
     var body: some View {
         NavigationStack {
             content()
-                .standardBars(isOpaque: Constants.device == .pad ? false : true)
+                .standardBars(
+                    title: L.Discovery.title,
+                    isOpaque: Constants.device == .pad ? false : true
+                )
                 .background {
                     Asset.Colors.background.swiftUIColor
                         .ignoresSafeArea(.all)

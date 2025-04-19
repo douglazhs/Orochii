@@ -14,7 +14,10 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             content()
-                .standardBars(isOpaque: Constants.device == .pad ? false : true)
+                .standardBars(
+                    title: L.Adjusts.title,
+                    isOpaque: Constants.device == .pad ? false : true
+                )
                 .animation(.spring(), value: [vm.isLoading, vm.user != nil])
                 .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
                     Button(L.Common.ok) { }

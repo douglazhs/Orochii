@@ -20,7 +20,7 @@ private struct StandardBars: ViewModifier {
             .toolbarBackground(isOpaque ? Color.black : .clear, for: .navigationBar)
             .toolbarBackground(isOpaque ? Asset.Colors.background.swiftUIColor : .clear, for: .tabBar)
             .toolbar {
-                if let title {
+                if Constants.device != .pad, let title {
                     ToolbarItem(placement: .principal) {
                         Text(title)
                             .font(.title2)

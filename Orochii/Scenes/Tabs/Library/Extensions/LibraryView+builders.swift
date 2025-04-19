@@ -22,7 +22,10 @@ extension LibraryView {
     @ViewBuilder
     func unlockedContent() -> some View {
         list()
-            .standardBars(isOpaque: Constants.device == .pad ? false : true)
+            .standardBars(
+                title: L.Library.title,
+                isOpaque: Constants.device == .pad ? false : true
+            )
             .onChange(of: vm.biometricsState) { _, newValue in
                 if newValue == .active { vm.lock() }
             }
