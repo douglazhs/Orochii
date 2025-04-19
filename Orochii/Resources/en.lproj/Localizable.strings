@@ -156,8 +156,9 @@
 "manga.status.none" = "None";
 "manga.action.library" = "Library";
 "manga.action.anilist" = "AniList";
-"manga.action.view_on_mdex" = "View on MangaDex.co";
-"manga.action.remove_downloads" = "Remove All Downloads";
+"manga.action.view_on_mdex" = "See On Site";
+"manga.action.remove_downloads" = "Clear All Downloads";
+"manga.action.share.message" = "See %@ on MangaDex.co";
 "manga.sub_action.moved" = "Moved";
 "manga.sub_action.removed" = "Removed";
 "manga.no_chapters" = "No chapters found :(";
@@ -168,13 +169,14 @@
 "manga.covers.filter.volume" = "Volume";
 "manga.reader.pages_left" = "%@ pages left";
 
+
 /* ------------------------------------------------------------ */
 
 // MARK: - ADJUSTS SCREEN
 
 "adjusts.title" = "Adjusts";
 "adjusts.tracker.header" = "Tracker";
-"adjusts.tracker.footer" = "You can connect your <b>AniList</b> account and track your mangas";
+"adjusts.tracker.footer" = "You can connect your **AniList** account and track your mangas";
 "adjusts.tracker.mangas_count" = "%@ Mangas";
 "adjusts.tracker.log_in" = "LogIn";
 "adjusts.tracker.log_out" = "Log Out";

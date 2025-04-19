@@ -156,8 +156,9 @@
 "manga.status.none" = "Nenhum";
 "manga.action.library" = "Biblioteca";
 "manga.action.anilist" = "AniList";
-"manga.action.view_on_mdex" = "Ver em MangaDex.co";
+"manga.action.view_on_mdex" = "Ver No Site";
 "manga.action.remove_downloads" = "Remover Todos Downloads";
+"manga.action.share.message" = "Ver %@ no site MangaDex.co";
 "manga.sub_action.moved" = "Movido";
 "manga.sub_action.removed" = "Removido";
 "manga.no_chapters" = "Capítulos não encontrados :(";

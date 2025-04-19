@@ -339,7 +339,7 @@ extension MangaView {
                 chaptersHeader()
             }
             .listRowBackground(Color.clear)
-            .onChange(of: chSelection) { _ in
+            .onChange(of: chSelection) { _, _ in
                 if chSelection.count == vm.filtered.count {
                     vm.selectAll = true
                 } else { vm.selectAll = false }

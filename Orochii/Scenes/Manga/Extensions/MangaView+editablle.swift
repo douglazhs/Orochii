@@ -44,41 +44,37 @@ extension MangaView {
     /// Manga actions
     @ViewBuilder
     func actionsMenu() -> some View {
-        Menu {
-            Section {
-                Button {
-                    withTransaction(.init(animation: .easeInOut)) {
-                        vm.isEditingMode = true
-                        vm.showBottomBar = true
-                    }
-                } label: {
-                    Label(
-                        L.Manga.selectChapters,
-                        systemImage: "checklist"
-                    )
+        Menu(vm.unwrapTitle(of: vm.manga), systemImage: "ellipsis") {
+            Button {
+                withTransaction(.init(animation: .easeInOut)) {
+                    vm.isEditingMode = true
+                    vm.showBottomBar = true
                 }
-                Button {
-                    do {
-                        try UIApplication
-                            .shared
-                            .safariVC(url: "\(AppURLs.mdSite.description)/manga/\(vm.manga.id)")
-                    } catch {
-                        
-                    }
-                } label: {
-                    Label(L.Manga.Action.viewOnMdex, systemImage: "safari.fill")
-                }
-            } header: {
-                Text(vm.unwrapTitle(of: vm.manga))
-            }
-            Button(role: .destructive) {
-                
             } label: {
-                Label(L.Manga.Action.removeDownloads, systemImage: "trash")
+                Label(
+                    L.Manga.selectChapters,
+                    systemImage: "checklist"
+                )
             }
-           
-        } label: {
-            Image(systemName: "ellipsis")
+            Button {
+                do {
+                    try UIApplication
+                        .shared
+                        .safariVC(url: "\(AppURLs.mdSite.description)/manga/\(vm.manga.id)")
+                } catch {
+                    
+                }
+            } label: {
+                Label(L.Manga.Action.viewOnMdex, systemImage: "safari.fill")
+            }
+            
+            ControlGroup {
+                Button(role: .destructive) {
+                    
+                } label: {
+                    Label(L.Manga.Action.removeDownloads, systemImage: "trash")
+                }
+            }
         }
     }
     

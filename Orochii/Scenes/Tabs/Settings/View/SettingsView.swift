@@ -14,19 +14,12 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack {
             content()
-                .standardBars()
+                .standardBars(isOpaque: Constants.device == .pad ? false : true)
                 .animation(.spring(), value: [vm.isLoading, vm.user != nil])
                 .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
                     Button(L.Common.ok) { }
                 } message: {
                     Text(vm.alertInfo.message)
-                }
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Text(L.Adjusts.title)
-                            .font(.title2)
-                            .fontWeight(.heavy)
-                    }
                 }
         }
     }

@@ -154,8 +154,8 @@ internal enum L {
       internal static let library = L.tr("Localizable", "adjusts.security.library", fallback: "Library")
     }
     internal enum Tracker {
-      /// You can connect your <b>AniList</b> account and track your mangas
-      internal static let footer = L.tr("Localizable", "adjusts.tracker.footer", fallback: "You can connect your <b>AniList</b> account and track your mangas")
+      /// You can connect your **AniList** account and track your mangas
+      internal static let footer = L.tr("Localizable", "adjusts.tracker.footer", fallback: "You can connect your **AniList** account and track your mangas")
       /// Tracker
       internal static let header = L.tr("Localizable", "adjusts.tracker.header", fallback: "Tracker")
       /// LogIn
@@ -365,6 +365,12 @@ internal enum L {
       internal static let removeDownloads = L.tr("Localizable", "manga.action.remove_downloads", fallback: "Remove All Downloads")
       /// View on MangaDex.co
       internal static let viewOnMdex = L.tr("Localizable", "manga.action.view_on_mdex", fallback: "View on MangaDex.co")
+      internal enum Share {
+        /// See %@ on MangaDex.co
+        internal static func message(_ p1: Any) -> String {
+          return L.tr("Localizable", "manga.action.share.message", String(describing: p1), fallback: "See %@ on MangaDex.co")
+        }
+      }
     }
     internal enum Covers {
       /// No other covers available for *%@*

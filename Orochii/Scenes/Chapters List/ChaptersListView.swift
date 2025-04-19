@@ -53,14 +53,7 @@ struct ChaptersListView: View {
                 .listStyle(.plain)
                 .scrollContentBackground(.hidden)
                 .background(Asset.Colors.background.swiftUIColor)
-                .standardBars()
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        Text(L.Manga.chaptersCount(vm.feed.count))
-                            .font(.headline)
-                            .fontWeight(.bold)
-                    }
-                }
+                .standardBars(title: L.Manga.chaptersCount(vm.feed.count))
             }
         }
     }

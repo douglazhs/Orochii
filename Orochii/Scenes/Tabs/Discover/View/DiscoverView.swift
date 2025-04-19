@@ -26,7 +26,7 @@ struct DiscoverView: View {
     var body: some View {
         NavigationStack {
             content()
-                .standardBars()
+                .standardBars(isOpaque: Constants.device == .pad ? false : true)
                 .background {
                     Asset.Colors.background.swiftUIColor
                         .ignoresSafeArea(.all)
@@ -40,13 +40,8 @@ struct DiscoverView: View {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         mangaSourceButton()
                     }
-                    
-                    ToolbarItem(placement: .principal) {
-                        Text(L.Discovery.title)
-                            .font(.title2)
-                            .fontWeight(.heavy)
-                    }
                 }
+                
         }
         .searchable(
             text: $vm.nameQuery,
@@ -59,6 +54,7 @@ struct DiscoverView: View {
             UIApplication.shared.becomeFirstResponder()
             vm.submitSearch()
         }
+        
     }
 }
 

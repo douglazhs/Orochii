@@ -22,20 +22,14 @@ extension LibraryView {
     @ViewBuilder
     func unlockedContent() -> some View {
         list()
-            .standardBars()
-            .onChange(of: vm.biometricsState) {
-                if $0 == .active { vm.lock() }
+            .standardBars(isOpaque: Constants.device == .pad ? false : true)
+            .onChange(of: vm.biometricsState) { _, newValue in
+                if newValue == .active { vm.lock() }
             }
             .toolbar {
                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                     lockButton()
                     filterButton()
-                }
-                
-                ToolbarItem(placement: .principal) {
-                    Text(L.Library.title)
-                        .font(.title2)
-                        .fontWeight(.heavy)
                 }
             }
             .searchable(
@@ -56,8 +50,8 @@ extension LibraryView {
                     }
                 }
         }
-        .onChange(of: vm.biometricsState) {
-            if $0 == .inactive { vm.unlock() }
+        .onChange(of: vm.biometricsState) { _, newValue in
+            if newValue == .inactive { vm.unlock() }
         }
         .fontDesign(.rounded)
         .background(BlurBackground(with: Asset.Assets.viewBackground.swiftUIImage))

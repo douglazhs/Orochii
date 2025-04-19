@@ -46,8 +46,13 @@ struct MangaView: View {
                 ToolbarItem(placement: .navigationBarLeading) {
                     selectChaptersButton()
                 }
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItemGroup(placement: .navigationBarTrailing) {
                     editButton()
+                    ShareLink(
+                        item: "\(AppURLs.mdSite.description)/manga/\(vm.manga.id)",
+                        subject: Text("\(vm.unwrapTitle(of: vm.manga))"),
+                        message: Text(L.Manga.Action.Share.message(vm.unwrapTitle(of: vm.manga)))
+                    )
                 }
                 ToolbarItemGroup(placement: .bottomBar) {
                     chapterActions()

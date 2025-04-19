@@ -32,15 +32,15 @@ struct SearchStyleView: View {
                         scheduler: DispatchQueue.main
                     )
             ) { [weak vm] _ in vm?.search() }
-            .onChange(of: vm.nameQuery) { query in
-                if !query.isEmpty {
+            .onChange(of: vm.nameQuery) { _, newValue in
+                if !newValue.isEmpty {
                     withTransaction(.init(animation: .easeIn(duration: 0.25))) {
                         vm.isSearching = true
                     }
                 }
             }
-            .onChange(of: isSearching) { searching in
-                if !searching {
+            .onChange(of: isSearching) { _, newValue in
+                if !newValue {
                     vm.isSearching = false
                     vm.searchResult?.removeAll()
                     viewStyle = .initial

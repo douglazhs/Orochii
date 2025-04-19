@@ -117,8 +117,8 @@ extension MangaView {
             } else { Text(vm.libStatus.description) }
         }
         .pickerStyle(.menu)
-        .onChange(of: vm.libStatus) {
-            if $0 != .none {
+        .onChange(of: vm.libStatus) { _, newValue in
+            if newValue != .none {
                 vm.startAction(for: .lib(.changeFolder))
             }
         }

@@ -54,18 +54,11 @@ extension SettingsView {
             .fontWeight(.regular)
             .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
         }
-        .standardBars()
+        .standardBars(title: L.Adjusts.About.version)
         .toolbarRole(.editor)
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
         .background(Asset.Colors.background.swiftUIColor)
-        .toolbar {
-            ToolbarItem(placement: .principal) {
-                Text(L.Adjusts.About.version)
-                    .font(.title2)
-                    .fontWeight(.heavy)
-            }
-        }
     }
     
     /// GitHub repository

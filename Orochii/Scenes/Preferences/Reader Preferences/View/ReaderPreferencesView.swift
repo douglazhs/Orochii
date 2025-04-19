@@ -23,7 +23,7 @@ struct ReaderPreferencesView: View {
             }
             .listStyle(.grouped)
             .scrollContentBackground(.hidden)
-            .standardBars()
+            .standardBars(title: L.Reader.title)
             .background(Asset.Colors.background.swiftUIColor)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
@@ -32,12 +32,6 @@ struct ReaderPreferencesView: View {
                     } label: {
                         Text(L.Common.done)
                     }
-                }
-                
-                ToolbarItem(placement: .principal) {
-                    Text(L.Reader.title)
-                        .font(.title2)
-                        .fontWeight(.heavy)
                 }
             }
         }

@@ -61,8 +61,8 @@ class LibraryViewModel: ObservableObject {
         if biometricsState == .active && !unlocked {
             if availableBiometricsError == nil {
                 Biometry.shared.changeBiometryState { error in
-                    self.biometricsError = error
                     Task { @MainActor in
+                        self.biometricsError = error
                         withAnimation(.linear(duration: 0.25)) {
                             self.unlocked = error == nil
                             self.lockClick = nil

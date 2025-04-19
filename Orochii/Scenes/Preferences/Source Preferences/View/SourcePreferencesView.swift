@@ -29,17 +29,11 @@ struct SourcePreferencesView: View {
                 ToolbarItem(placement: .confirmationAction) {
                     doneButton()
                 }
-                
-                ToolbarItem(placement: .principal) {
-                    Text(L.MangaSource.title)
-                        .font(.title2)
-                        .fontWeight(.heavy)
-                }
             }
             .listStyle(.grouped)
             .scrollContentBackground(.hidden)
             .background(Asset.Colors.background.swiftUIColor)
-            .standardBars()
+            .standardBars(title: L.MangaSource.title)
         }
     }
 }
