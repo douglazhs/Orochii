@@ -113,4 +113,17 @@ final class ChapterViewModel: ObservableObject {
             rawValue: Defaults.standard.getInt(of: DefaultsKeys.ReaderPreferences.pageQuality.rawValue)
         ) ?? .original
     }
+    
+    /// Mount chapter title based on the string content
+    func mountChapterTitle() -> String {
+        let oneshot = getTag(.oneshot, of: manga)
+        
+        if oneshot != nil, let title = current.attributes?.title {
+            return title
+        } else if oneshot != nil, current.attributes?.title == nil {
+            return oneshot.notEmpty
+        }
+        
+        return "Ch. \(current.attributes?.chapter ?? "-")"
+    }
 }

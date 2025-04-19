@@ -16,6 +16,7 @@ struct SettingsView: View {
             content()
                 .standardBars(
                     title: L.Adjusts.title,
+                    showTitle: Constants.device == .pad ? false : true,
                     isOpaque: Constants.device == .pad ? false : true
                 )
                 .animation(.spring(), value: [vm.isLoading, vm.user != nil])

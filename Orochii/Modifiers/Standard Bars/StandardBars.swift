@@ -11,7 +11,9 @@ import SwiftUI
 /// Standard navigation and tab bars
 private struct StandardBars: ViewModifier {
     let title: String?
+    var showTitle: Bool
     let isOpaque: Bool
+    
     
     func body (content: Content) -> some View {
         content
@@ -20,7 +22,7 @@ private struct StandardBars: ViewModifier {
             .toolbarBackground(isOpaque ? Color.black : .clear, for: .navigationBar)
             .toolbarBackground(isOpaque ? Asset.Colors.background.swiftUIColor : .clear, for: .tabBar)
             .toolbar {
-                if Constants.device != .pad, let title {
+                if showTitle, let title {
                     ToolbarItem(placement: .principal) {
                         Text(title)
                             .font(.title2)
@@ -32,7 +34,7 @@ private struct StandardBars: ViewModifier {
 }
 
 public extension View {
-    func standardBars(title: String? = nil, isOpaque: Bool = true) -> some View {
-        modifier(StandardBars(title: title, isOpaque: isOpaque))
+    func standardBars(title: String? = nil, showTitle: Bool = true, isOpaque: Bool = true) -> some View {
+        modifier(StandardBars(title: title, showTitle: showTitle, isOpaque: isOpaque))
     }
 }

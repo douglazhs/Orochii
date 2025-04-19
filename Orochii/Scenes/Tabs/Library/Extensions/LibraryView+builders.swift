@@ -24,6 +24,7 @@ extension LibraryView {
         list()
             .standardBars(
                 title: L.Library.title,
+                showTitle: Constants.device == .pad ? false : true,
                 isOpaque: Constants.device == .pad ? false : true
             )
             .onChange(of: vm.biometricsState) { _, newValue in

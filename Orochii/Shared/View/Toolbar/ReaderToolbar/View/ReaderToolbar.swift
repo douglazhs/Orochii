@@ -15,7 +15,7 @@ struct ReaderToolbar: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .standardBars()
+            .standardBars(title: vm.mountChapterTitle())
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button { showChaptersList = true } label: {
@@ -27,20 +27,6 @@ struct ReaderToolbar: ViewModifier {
                 }
                 ToolbarItem(placement: .navigationBarTrailing) { readerPreferences() }
                 ToolbarItem(placement: .bottomBar) { pageSlider() }
-                ToolbarItem(placement: .principal) {
-                    let oneshot = vm.getTag(.oneshot, of: vm.manga)
-                    Group {
-                        if oneshot != nil, let title = vm.current.attributes?.title {
-                            Text(title)
-                        } else if oneshot != nil, vm.current.attributes?.title == nil {
-                            Text(oneshot.notEmpty)
-                        } else {
-                            Text("Ch. \(vm.current.attributes?.chapter ?? "-")")
-                        }
-                    }
-                    .font(.headline)
-                    .fontWeight(.bold)
-                }
             }
             .onAppear {
                 let thumbImage = UIImage(systemName: "circle.fill")

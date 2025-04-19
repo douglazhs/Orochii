@@ -28,6 +28,7 @@ struct DiscoverView: View {
             content()
                 .standardBars(
                     title: L.Discovery.title,
+                    showTitle: Constants.device == .pad ? false : true,
                     isOpaque: Constants.device == .pad ? false : true
                 )
                 .background {

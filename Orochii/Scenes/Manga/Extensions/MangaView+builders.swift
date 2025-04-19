@@ -363,13 +363,6 @@ extension MangaView {
                     vm.selectAll = true
                 } else { vm.selectAll = false }
             }
-            .fullScreenCover(item: $vm.selectedChapter) {
-                ChapterView(
-                    $0,
-                    vm.chapters,
-                    of: vm.manga
-                )
-            }
         } else {
             loadHandler()
                 .listRowBackground(Color.clear)

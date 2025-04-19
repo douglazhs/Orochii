@@ -34,6 +34,13 @@ struct MangaView: View {
             .toolbarRole(.editor)
             .toolbar(vm.showBottomBar ? .visible : .hidden, for: .bottomBar)
             .navigationBarBackButtonHidden(vm.isEditingMode)
+            .fullScreenCover(item: $vm.selectedChapter) {
+                ChapterView(
+                    $0,
+                    vm.chapters,
+                    of: vm.manga
+                )
+            }
             .sheet(isPresented: $showCover) {
                 CoverList()
                     .environmentObject(vm)
