@@ -1,0 +1,302 @@
+/* 
+  Localizable.strings
+  Orochii
+
+  Created by Douglas Henrique de Souza Pereira on 19/11/22.
+  
+*/
+
+// MARK: - Languages
+
+"language.portuguese" = "Português (Brasil)";
+"language.english" = "Inglês (EUA)";
+
+// MARK: - Context Menus
+
+"action.add_to_library" = "Adicionar à Biblioteca";
+"action.remove_from_library" = "Remover da Biblioteca";
+"action.mark_as_read" = "Marcar como Lido";
+"action.mark_as_unread" = "Marcar como Não Lido";
+"action.read" = "como Lido";
+"action.unread" = "como Não Lido";
+"action.download" = "Baixar";
+"action.mark_previous" = "Marcar Anteriores";
+"action.save_page" = "Salvar Página";
+
+// MARK: - Commons
+
+"common.cancel" = "Cancelar";
+"common.mark" = "Marcar";
+"common.done" = "Pronto";
+"common.add" = "Adicionar";
+"common.remove" = "Remover";
+"common.search" = "Buscar";
+"common.all" = "Todos";
+"common.none" = "Nenhum";
+"common.of" = "de";
+"common.ok" = "OK";
+"common.attention" = "Atenção";
+"common.error" = "Erro";
+"common.unknown" = "Desconhecido";
+"common.nsfw" = "NSFW";
+"common.save" = "Salvar";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - DISCOVERY SCREEN
+
+"discovery.title" = "Descubra";
+"discovery.search.placeholder" = "Título do manga";
+"discovery.search.no_results" = "No results found for: *%@*";
+
+// MANGA CELL
+
+"discovery.cell.author" = "AUTOR";
+"discovery.cell.year" = "ANO";
+"discovery.cell.last_updated" = "ATUALIZADO";
+
+// MANGA STATUS
+
+"discovery.status.ongoing" = "Em andamento";
+"discovery.status.hiatus" = "Hiato";
+"discovery.status.completed" = "Completo";
+
+// MAIN FILTERS
+"discovery.most_relevants" = "Mais Relevantes";
+"discovery.award_winning" = "Premiados";
+"discovery.this_year" = "%@";
+"discovery.shounen" = "Público Shounen";
+"discovery.seinen" = "Público Seinen";
+"discovery.webcomics" = "Webcomics Coloridas";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - SOURCE PREFERENCES
+
+"manga_source.title" = "Fonte";
+"manga_source.site.header" = "Principal Fonte";
+"manga_source.site.footer" = "Você será redirecionado para o site do _MangaDex_";
+"manga_source.language.footer" = "Idiomas utilizados para pesquisar seus mangas";
+"manga_source.language.header" = "Linguagens Preferidas";
+"manga_source.cover.header" = "Capa das Fontes de Manga";
+"manga_source.cover.footer" = "Qualidade das capas das **fontes** que o App **Orochii** utiliza";
+
+// MANGADEX COVER QUALITY
+
+"manga_source.mdex.cover.low" = "Baixa";
+"manga_source.mdex.cover.medium" = "Média";
+"manga_source.mdex.cover.original" = "Original";
+
+// ANILIST COVER QUALITY
+
+"manga_source.anilist.cover.large" = "Grande";
+"manga_source.anilist.cover.medium" = "Média";
+"manga_source.anilist.cover.extraLarge" = "Muito Grande";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - LIBRARY SCREEN
+
+"library.title" = "Biblioteca";
+"library.search.placeholder" = "Busque em sua lista";
+"library.auth.message" = "Você bloqueou sua biblioteca.\nClique em desbloquear para ver seus mangas :)";
+"library.auth.error_message" = "Sua biblioteca está bloqueada :(\n Desbloqueie para ver seus mangas :)";
+"library.auth.retry" = "TENTAR NOVAMENTE";
+"library.auth.unlock" = "DESBLOQUEAR";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - FILTER & ORDER
+
+"filter.title" = "Filtros";
+"filter.action" = "Filtrar";
+"filter.by_header" = "Ordenar Por";
+"filter.by_footer" = "Ordem Ascendente ou descendente";
+"filter.manga_info_header" = "Informações do Manga";
+"filter.manga_info_footer" = "Filtre seus mangas pelas suas informações";
+"filter.none" = "Nenhum";
+"filter.name" = "Nome (A-Z)";
+"filter.last_updated" = "Último Atualizado";
+"filter.release_year" = "Lançamento";
+"filter.language" = "Linguagem";
+"filter.year" = "Ano";
+"filter.public" = "Público";
+"filter.status" = "Status";
+"filter.downloaded" = "Baixado";
+"orderBy.header" = "Filtrar Por";
+"orderBy.footer" = "Ordene de seus mangas de forma crescente ou decrescente";
+"order" = "Ordem";
+"order.ascending" = "Crescente";
+"order.descending" = "Decrescente";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - MANGA SCREEN
+
+"manga.author" = "Author";
+"manga.status" = "Status";
+"manga.year" = "Ano";
+"manga.genres" = "Genres";
+"manga.updated" = "Atualizado";
+"manga.state" = "Estado";
+"manga.country" = "País";
+"manga.demographic" = "Público";
+"manga.start_reading" = "Comece a Ler";
+"manga.add_to_library" = "Adicionar a Biblioteca";
+"manga.select_chapters" = "Selecione Capítulos";
+"manga.description_header" = "Descrição";
+"manga.selected_chapters" = "Capítulos Selecionados";
+"manga.chapters_of" = "Chapters Of";
+"manga.status.planning" = "Planejando";
+"manga.status.reading" = "Lendo";
+"manga.status.completed" = "Completo";
+"manga.status.rereading" = "Relendo";
+"manga.status.paused" = "Pausado";
+"manga.status.dropped" = "Dropado";
+"manga.status.none" = "Nenhum";
+"manga.action.library" = "Biblioteca";
+"manga.action.anilist" = "AniList";
+"manga.action.view_on_mdex" = "Ver No Site";
+"manga.action.remove_downloads" = "Remover Todos Downloads";
+"manga.action.share.message" = "Ver %@ no site MangaDex.co";
+"manga.sub_action.moved" = "Movido";
+"manga.sub_action.removed" = "Removido";
+"manga.no_chapters" = "Capítulos não encontrados :(";
+"manga.chapters_count" = "%@ Capítulo(s)";
+"manga.covers.title" = "Todas Capas Disponíveis";
+"manga.covers.not_available" = "Sem outras capas disponíveis para *%@*";
+"manga.covers.filter.languages" = "Seleção de Idiomas";
+"manga.covers.filter.volume" = "Volume";
+"manga.reader.pages_left" = "%@ restantes";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - ADJUSTS SCREEN
+
+"adjusts.title" = "Ajustes";
+"adjusts.tracker.header" = "Tracker";
+"adjusts.tracker.footer" = "Você pode conectar sua conta **AniList** e fazer o track seus mangas";
+"adjusts.tracker.mangas_count" = "%@ Mangas";
+"adjusts.tracker.log_in" = "Entrar";
+"adjusts.tracker.log_out" = "Sair";
+"adjusts.tracker.user" = "Usuário";
+"adjusts.icloud.header" = "iCloud";
+"adjusts.icloud.footer" = "Sua biblioteca de manga será salva na **Nuvem** para ser acessada de outros dispositivos";
+"adjusts.icloud.sync" = "Sincronizar";
+"adjusts.security.header" = "Segurança";
+"adjusts.security.footer" = "Torne sua biblioteca e seus mangás mais seguros";
+"adjusts.security.biometry" = "Bloquear Biblioteca";
+"adjusts.security.library" = "Biblioteca";
+"adjusts.notification.header" = "Notificação";
+"adjusts.notification.footer" = "Você será notificado toda vez que um novo capítulo de manga for lançado";
+"adjusts.notification.updated_mangas" = "Atualização de Capítulo";
+"adjusts.age_rating.header" = "Classificação Etária";
+"adjusts.age_rating.footer" = "**Não é seguro para o trabalho**: material que só deve ser visto em particular porque contém algumas coisas que podem ser _ofensivas_";
+"adjusts.about.version" = "Versão";
+"adjusts.about.build" = "Build";
+"adjusts.about.header" = "Sobre";
+"adjusts.about.footer" = "Algumas informações sobre o App";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - ERRORS
+
+"error.anilist_login" = "Erro ao tentar entrar em sua conta AniList.";
+"error.keychain_save" = "Erro ao tentar salvar suas credenciais no Keychain.";
+"error.url_empty" = "Empty URL.";
+"error.url_invalid" = "Invalid URL.";
+"error.object_nil" = "Object is nil.";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - ANILIST
+
+"anilist.logout" = "Tem certeza de que deseja sair da sua conta AniList?";
+
+// TRACKER
+
+"tracker.info.status" = "STATUS";
+"tracker.info.progress" = "PROGRESSO";
+"tracker.info.chapter" = "CH. %@";
+"tracker.info.updated" = "ATUALIZADO";
+"tracker.info.started" = "INICIADO";
+"tracker.info.ended" = "TERMINADO";
+"tracker.info.score" = "NOTA";
+"tracker.stop.confirmation.title" = "Parar de Acompanhar Localmente";
+"tracker.stop.confirmation.message" = "Você não perderá seu progresso no AniList, ele apenas removerá as informações de tracking localmente.";
+"tracker.action.stop" = "Parar";
+"tracker.action.track" = "TRACK";
+"tracker.action.track_locally" = "ACOMPANHAR LOCALMENTE";
+"tracker.action.start_tracking" = "COMEÇAR A ACOMPANHAR";
+"tracker.action.stop_tracking" = "Parar de Acompanhar";
+"tracker.action.see_on_anilist" = "Ver no AniList";
+"tracker.search" = "Search";
+"tracker.search.no_results" = "Resultados não encontrados em **AniList**";
+"tracker.manga.format" = "FORMATO";
+"tracker.manga.status" = "STATUS";
+"tracker.manga.average_score" = "NOTA MÉDIA";
+"tracker.manga.country" = "PAÍS";
+"tracker.manga.source" = "FONTE";
+"tracker.manga.year" = "ANO";
+"tracker.manga.popular_rank" = "RANK DE POPULARIDADE";
+"tracker.manga.rated_rank" = "RANK DE NOTA";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - ACCOUNT DETAILS
+
+"account.no_activities" = "You have no activities :(";
+"account.no_favorites" = "You have no favorites :(";
+"account.section.total_mangas" = "Total de Mangas";
+"account.section.mean_score" = "Nota Média";
+"account.section.standard_deviation" = "Desvio Padrão";
+"account.section.chapters_read" = "Capítulos Lidos";
+"account.section.volumes_read" = "Volumes Lidos";
+"account.section.statuses" = "Status";
+"account.section.genres" = "Distribuição de Gêneros";
+"account.section.tags" = "Distribuição de Tags";
+"account.section.mangas_per_year" = "Mangas Lidos Por Ano";
+"account.section.chapters_per_year" = "Capítulos Lidos Por Ano";
+"account.section.chapters_per_staff" = "Capítulos Lidos Por Staff";
+"account.section.country" = "Mangas Por País";
+"account.tab.stats" = "Estatísticas";
+"account.tab.activity" = "Atividade";
+"account.tab.favorites" = "Favoritos";
+"account.tab.favorites.mangas" = "Mangas";
+"account.tab.favorites.characters" = "Personagens";
+"account.tab.favorites.staff" = "Autores";
+"account.feed.mine" = "Meu feed";
+"account.feed.following" = "Amigos";
+"account.character.title.native" = "NATIVO";
+"account.character.title.user_preferred" = "PREFERÊNCIA DO USUÁRIO";
+"account.character.title.alternative" = "TÍTULOS ALTERNATIVOS";
+"account.character.title.spoiler" = "TÍTULOS COM SPOILER";
+"account.character.age" = "IDADE";
+"account.character.gender" = "GÊNERO";
+"account.character.member_favorites" = "FAVORITO";
+"account.character.summary" = "RESUMO";
+"account.character.manga_appearences" = "APARIÇÕES EM MANGAS";
+
+/* ------------------------------------------------------------ */
+
+// MARK: - READER PREFERENCES
+
+"reader.title" = "Preferências de Leitura";
+"reader.layout" = "Disposição";
+"reader.layout.header" = "Disposição das páginas";
+"reader.layout.footer" = "Escolha a disposição de páginas de sua preferência";
+"reader.layout.single_page" = "Página Única";
+"reader.layout.double_page" = "Página Dupla";
+"reader.layout.automatic" = "Automatico";
+"reader.manga" = "Qualidade";
+"reader.manga.header" = "Qualiade da página";
+"reader.manga.footer" = "Escolha a qualidade de sua preferência";
+"reader.mode" = "Modo";
+"reader.mode.header" = "Mode de leitura";
+"reader.mode.footer" = "Escolha o melhor modo de leitura para você";
+"reader.mode.default" = "Padrão";
+"reader.mode.left_to_right" = "Esquerda Para Direita";
+"reader.mode.right_to_left" = "Direita Para Esquerda";
+"reader.mode.webtoon" = "Webtoon";
+"reader.cover.original" = "Original";
+"reader.cover.data_saver" = "Econômico";
