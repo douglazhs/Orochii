@@ -1,25 +1,27 @@
+![Orochii App Logo](https://github.com/user-attachments/assets/0dfcde34-9d12-4965-92e7-96b2822d8faa)
 # Orochii: A Diverse Manga Reader
+A free and open source native manga reading for iOS and iPadOS.
 
-## About the Project
+## About
 Orochii is a manga reader project developed to offer a fluid and diverse reading experience. Our goal is to create an intuitive and feature-rich platform for manga enthusiasts to conveniently enjoy their favorite stories.
 
-## Project Status
+## Status
 This project is currently under active development. We're working to add new functionalities and improve the user experience.
 
 ## Technologies Used
 Orochii is built with a focus on performance and native integration, using the following technologies:
 
-- **Swift:** The main programming language for application development.
-- **SwiftUI:** The main UI framework for application development.
-- **Nuke:** Load of images.
-- **MangaDex:** Self-Developed SPM to manage MangaDex API.
-- **AniList:** Self-Developed SPM to manage AniList API.
-- **MarkdownUI:** Render mangas with Markdown descriptions.
+- [Swift](https://www.swift.org): The main programming language for application development.
+- [SwiftUI](https://developer.apple.com/swiftui/): The main UI framework for application development.
+- [Nuke](https://github.com/kean/Nuke): Load of images.
+- [MangaDex](https://api.mangadex.org/docs/): Self-Developed SPM to manage MangaDex API.
+- [AniList](https://docs.anilist.co/guide/introduction): Self-Developed SPM to manage AniList API.
+- [MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui): Render mangas with Markdown descriptions.
 
 ## Features (under development)
 - Intuitive user interface for manga navigation and reading.
-- Support for various manga formats.
-- Favorites management and reading history.
+- Support for various manga reading configurations(webtoon, horizontal, etc).
+- Favorites management and reading history (planned).
 - Offline reading mode (planned).
 
 ## Getting Started
@@ -28,7 +30,7 @@ Orochii is built with a focus on performance and native integration, using the f
 To compile and run the Orochii project, you'll need to have **Xcode** installed on your macOS.
 
 ### Installation (coming soon)
-Details on how to install and configure Orochii will be provided once the project reaches a more mature stage. For now, you can clone the repository:
+Details on how to install and configure Orochii will be provided once the project reaches a more mature stage. For now, you can clone the repository and run locally:
 
 ```bash
 git clone https://github.com/douglazhs/Orochii.git
