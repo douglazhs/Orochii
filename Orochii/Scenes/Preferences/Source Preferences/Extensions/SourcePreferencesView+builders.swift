@@ -48,7 +48,7 @@ extension SourcePreferencesView {
                 Text(
                     !vm.languages.isEmpty
                     ? vm.languages.map { $0.description }.joined(separator: ", ")
-                    : L.Common.done
+                    : L.Common.none
                 )
                 .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
             }
