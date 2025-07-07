@@ -73,8 +73,8 @@ extension CoverList {
         .listRowBackground(Color.clear)
         .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
         .listRowBackground(Color.clear)
-        .onChange(of: vm.coverFilter.locales) { locales in
-            if locales.count == vm.locales.count {
+        .onChange(of: vm.coverFilter.locales) { _, newLocales in
+            if newLocales.count == vm.locales.count {
                 vm.markAll = true
             } else { vm.markAll = false }
         }

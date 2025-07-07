@@ -38,7 +38,7 @@ struct InitialStyleView: View {
                 .presentationContentInteraction(.resizes)
                 .presentationBackgroundInteraction(.disabled)
         }
-        .onChange(of: isSearching) { searching in
+        .onChange(of: isSearching) { _, searching in
             if searching { viewStyle = .search }
         }
         .overlay(alignment: .top) {

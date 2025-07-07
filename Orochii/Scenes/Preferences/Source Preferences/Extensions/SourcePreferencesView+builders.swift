@@ -35,9 +35,9 @@ extension SourcePreferencesView {
         Section {
             NavigationLink {
                 LanguagesView(languages: $vm.languages)
-                    .onChange(of: vm.languages) {
+                    .onChange(of: vm.languages) { _, newValue in
                         Defaults.standard.saveObj(
-                            $0.map { $0.rawValue },
+                            newValue.map { $0.rawValue },
                             key: DefaultsKeys.SrcPreferences.languages.rawValue
                         )
                         withTransaction(.init(animation: .snappy(duration: 0.5))) {
@@ -73,9 +73,9 @@ extension SourcePreferencesView {
                     Image(systemName: "eyes.inverse")
                         .foregroundColor(Asset.Colors.attention.swiftUIColor)
                 }
-            }.onChange(of: vm.nsfw) {
+            }.onChange(of: vm.nsfw) { _, newValue in
                 Defaults.standard.saveBool(
-                    $0,
+                    newValue,
                     key: DefaultsKeys.SrcPreferences.nsfw.rawValue
                 )
                 withTransaction(.init(animation: .snappy(duration: 0.5))) {
@@ -96,18 +96,18 @@ extension SourcePreferencesView {
     func coverQualitySection() -> some View {
         Section {
             EnumPicker(String.Name.mangaDex, selection: $vm.mDexCoverQuality)
-                .onChange(of: vm.mDexCoverQuality) {
+                .onChange(of: vm.mDexCoverQuality) { _, newValue in
                     Defaults.standard.saveInt(
-                        $0.rawValue,
+                        newValue.rawValue,
                         key: DefaultsKeys.SrcPreferences.CoverQuality.mDex.rawValue
                     )
                 }
                 .pickerStyle(.menu)
                 .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
             EnumPicker(String.Name.aniList, selection: $vm.aniLCoverQuality)
-                .onChange(of: vm.aniLCoverQuality) {
+                .onChange(of: vm.aniLCoverQuality) {_, newValue in
                     Defaults.standard.saveInt(
-                        $0.rawValue,
+                        newValue.rawValue,
                         key: DefaultsKeys.SrcPreferences.CoverQuality.aniL.rawValue
                     )
                 }

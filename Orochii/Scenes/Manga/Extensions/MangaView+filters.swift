@@ -44,8 +44,8 @@ extension MangaView {
                     selection: $vm.feedOrder
                 )
                 .pickerStyle(.menu)
-                .onChange(of: vm.feedOrder) { [weak vm] in
-                    vm?.orderFeed(by: $0)
+                .onChange(of: vm.feedOrder) { [weak vm]  _, newValue in
+                    vm?.orderFeed(by: newValue)
                 }
             } header: {
                 Text(L.OrderBy.header)
@@ -61,10 +61,10 @@ extension MangaView {
                         }
                     }
                 }
-                .onChange(of: vm.downloaded) { [weak vm] in
+                .onChange(of: vm.downloaded) { [weak vm] _, newValue in
                     vm?.filterFeed()
                     Defaults.standard.saveBool(
-                        $0,
+                        newValue,
                         key: DefaultsKeys.Chapters.downloaded.rawValue
                     )
                 }

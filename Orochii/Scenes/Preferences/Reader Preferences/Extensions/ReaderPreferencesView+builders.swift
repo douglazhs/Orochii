@@ -13,9 +13,9 @@ extension ReaderPreferencesView {
     func pageLayoutSection() -> some View {
         Section {
             EnumPicker(L.Reader.layout, selection: $vm.pageLayout)
-                .onChange(of: vm.pageLayout) {
+                .onChange(of: vm.pageLayout) { _, newValue in
                     Defaults.standard.saveInt(
-                        $0.rawValue,
+                        newValue.rawValue,
                         key: DefaultsKeys.ReaderPreferences.pageLayout.rawValue
                     )
                 }
@@ -34,9 +34,9 @@ extension ReaderPreferencesView {
     func pageQualitySection() -> some View {
         Section {
             EnumPicker(L.Reader.manga, selection: $vm.pageQuality)
-                .onChange(of: vm.pageQuality) {
+                .onChange(of: vm.pageQuality) { _, newValue in
                     Defaults.standard.saveInt(
-                        $0.rawValue,
+                        newValue.rawValue,
                         key: DefaultsKeys.ReaderPreferences.pageQuality.rawValue
                     )
                 }
@@ -55,9 +55,9 @@ extension ReaderPreferencesView {
     func readingModeSection() -> some View {
         Section {
             EnumPicker(L.Reader.mode, selection: $vm.readingMode)
-                .onChange(of: vm.readingMode) {
+                .onChange(of: vm.readingMode) { _, newValue in
                     Defaults.standard.saveInt(
-                        $0.rawValue,
+                        newValue.rawValue,
                         key: DefaultsKeys.ReaderPreferences.mode.rawValue
                     )
                 }

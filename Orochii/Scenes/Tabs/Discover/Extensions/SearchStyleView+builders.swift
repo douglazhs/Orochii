@@ -81,11 +81,11 @@ extension SearchStyleView {
             } label: {
                 orderButton()
             }
-            .onChange(of: vm.searchOrder) { _ in
+            .onChange(of: vm.searchOrder) { 
                 vm.ascendingOrder = true
                 vm.orderSearchResult()
             }
-            .onChange(of: vm.ascendingOrder) { _ in
+            .onChange(of: vm.ascendingOrder) {
                 vm.orderSearchResult()
             }
         }

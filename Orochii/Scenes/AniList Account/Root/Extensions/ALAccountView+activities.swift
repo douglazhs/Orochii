@@ -77,7 +77,7 @@ extension ALAccountView {
         }
         .menuOrder(.priority)
         .menuStyle(.button)
-        .onChange(of: vm.feed) { [weak vm] _ in
+        .onChange(of: vm.feed) { [weak vm] in
             vm?.changeFeed()
         }
     }

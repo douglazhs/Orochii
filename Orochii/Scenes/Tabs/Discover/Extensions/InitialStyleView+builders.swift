@@ -76,7 +76,7 @@ extension InitialStyleView {
         } label: {
             cellBuild(of: filter)
         }
-        .onChange(of: vm.selectedMainFilter) { [weak vm] _ in
+        .onChange(of: vm.selectedMainFilter) { [weak vm] in
             vm?.fetchSelectedFilter()
         }
     }
