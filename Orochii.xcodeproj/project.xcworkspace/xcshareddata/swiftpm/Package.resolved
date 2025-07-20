@@ -1,4 +1,5 @@
 {
+  "originHash" : "510c0281855f675589f4b7277e5c718580603867c3502c18154517200a91fc97",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -7,6 +8,15 @@
       "state" : {
         "revision" : "513364f870f6bfc468f9d2ff0a95caccc10044c5",
         "version" : "5.10.2"
+      }
+    },
+    {
+      "identity" : "anilisttracker",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/douglazhs/AniListTracker.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "30c005569609cb053dec844027d37f9b33f692de"
       }
     },
     {
@@ -64,5 +74,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

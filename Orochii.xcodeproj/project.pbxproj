@@ -233,7 +233,6 @@
 		50C49B9C2E2C5737003E962A /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
 		50C49B9E2E2C5737003E962A /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		50C49BBB2E2C5BD2003E962A /* Development.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Development.xcconfig; sourceTree = "<group>"; };
-		50C49BC02E2C635D003E962A /* AniListTracker */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = AniListTracker; path = ../AniListTracker; sourceTree = SOURCE_ROOT; };
 		50CAD2E729383887000C1C0E /* MangaView+actions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MangaView+actions.swift"; sourceTree = "<group>"; };
 		50CAD2EB29383B04000C1C0E /* ALTracker+secondaryStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALTracker+secondaryStates.swift"; sourceTree = "<group>"; };
 		50CAD2ED29383B86000C1C0E /* ALTracker+mainStates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ALTracker+mainStates.swift"; sourceTree = "<group>"; };
@@ -510,7 +509,6 @@
 		5092DF1829292C590094DC18 = {
 			isa = PBXGroup;
 			children = (
-				50C49BC02E2C635D003E962A /* AniListTracker */,
 				52F2AC272D9875CE00781B51 /* Orochii-Info.plist */,
 				52F2AC192D9867CB00781B51 /* swiftgen.yml */,
 				5092DF2329292C590094DC18 /* Orochii */,
