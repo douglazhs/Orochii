@@ -11,13 +11,25 @@
 		</dict>
 		<key>Orochii.xcscheme_^#shared#^_</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>OrochiiWidget.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>5092DF2029292C590094DC18</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>50C49B9A2E2C5737003E962A</key>
 		<dict>
 			<key>primary</key>
 			<true/>

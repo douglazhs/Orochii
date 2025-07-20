@@ -2,6 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>API_REDIRECT_URL</key>
+	<string>$(API_REDIRECT_URL)</string>
+	<key>API_SECRET_KEY</key>
+	<string>$(API_SECRET_KEY)</string>
+	<key>APP_ID</key>
+	<string>$(APP_ID)</string>
+	<key>APP_NAME</key>
+	<string>$(APP_NAME)</string>
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>

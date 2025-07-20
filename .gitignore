@@ -91,3 +91,5 @@ fastlane/test_output
 iOSInjectionProject/
 Orochii.xcodeproj/project.xcworkspace/xcuserdata/douglashenrique.xcuserdatad/UserInterfaceState.xcuserstate
 *.xcuserstate
+Orochii/Resources/Development.xcconfig
+.env
