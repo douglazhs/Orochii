@@ -20,7 +20,8 @@ extension ALAccountView {
                 characters()
                 staff()
             }
-        }.background(Asset.Colors.background.swiftUIColor)
+        }
+        .background(.background)
     }
     
     @ViewBuilder
@@ -29,7 +30,7 @@ extension ALAccountView {
             VStack(alignment: .leading) {
                 Text(L.Account.Tab.Favorites.mangas)
                     .font(.footnote)
-                    .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                    .foregroundStyle(.secondary)
                     .padding([.horizontal, .top])
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 10.0) {
@@ -60,7 +61,7 @@ extension ALAccountView {
             VStack(alignment: .leading) {
                 Text(L.Account.Tab.Favorites.characters)
                     .font(.footnote)
-                    .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                    .foregroundStyle(.secondary)
                     .padding(.horizontal)
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 10.0) {
@@ -91,7 +92,7 @@ extension ALAccountView {
             VStack(alignment: .leading) {
                 Text(L.Account.Tab.Favorites.staff)
                     .font(.footnote)
-                    .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                    .foregroundStyle(.secondary)
                     .padding(.horizontal)
                 ScrollView(.horizontal, showsIndicators: false) {
                     LazyHStack(spacing: 10.0) {

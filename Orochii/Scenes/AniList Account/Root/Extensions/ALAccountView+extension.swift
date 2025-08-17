@@ -13,7 +13,7 @@ extension ALAccountView {
     func content() -> some View {
         VStack {
             picker()
-            tabs().foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
+            tabs()
         }
     }
     
@@ -39,7 +39,7 @@ extension ALAccountView {
             }
         }
         .pickerStyle(.segmented)
-        .padding(.horizontal, 5.0)
+        .padding(.horizontal)
     }
     
     /// NavBar trailing buttons
@@ -67,7 +67,7 @@ extension ALAccountView {
         Text(message)
             .font(.callout)
             .fontWeight(.medium)
-            .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
+            .foregroundStyle(.primary)
             .frame(maxWidth: .infinity)
     }
 }

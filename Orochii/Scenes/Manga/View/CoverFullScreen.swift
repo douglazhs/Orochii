@@ -37,21 +37,6 @@ struct CoverFullScreen: View {
             .navigationTitle("VOL. \(cover.attributes.volume)")
             .toolbarRole(.editor)
         }
-        .background {
-            BlurBackground(
-                with: vm.api.buildURL(
-                    for: .cover(
-                        id: vm.manga.id,
-                        fileName: vm.imgFileName(
-                            of: cover,
-                            quality: vm.mDexCoverQuality.key
-                        )
-                    )
-                ),
-                radius: 50,
-                opacity: 0.75
-            )
-        }
     }
     
     /// Cover main information
@@ -74,7 +59,7 @@ struct CoverFullScreen: View {
                 .font(.footnote)
                 .multilineTextAlignment(.leading)
                 .fontWeight(.medium)
-                .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
+                .foregroundStyle(.primary)
                 
             }
             Spacer()

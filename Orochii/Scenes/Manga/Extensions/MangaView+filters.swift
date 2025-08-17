@@ -25,7 +25,7 @@ extension MangaView {
         HStack {
             // CHAPTERS COUNT
             Text(L.Manga.chaptersCount(vm.totalOnFeed).uppercased())
-                .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                .foregroundStyle(.primary)
                 .font(.footnote)
                 .fontWeight(.regular)
             Spacer()
@@ -71,7 +71,11 @@ extension MangaView {
             }
         } label: {
             Image(systemName: "line.3.horizontal.decrease")
-                .foregroundStyle(Asset.Colors.button.swiftUIColor)
         }
+        .tint(.accentColor)
+        .menuOrder(.fixed)
+        .controlSize(.large)
+        .buttonStyle(.bordered)
+        .buttonBorderShape(.circle)
     }
 }

@@ -62,14 +62,6 @@ extension SearchStyleView {
         }
     }
     
-    @ViewBuilder
-    func orderButton() -> some View {
-        Image(systemName: "line.3.horizontal.decrease")
-            .padding(.horizontal)
-            .padding(.vertical, 15.0)
-            .tint(Asset.Colors.button.swiftUIColor)
-    }
-    
     @ViewBuilder 
     func orderMenu() -> some View {
         HStack {
@@ -79,9 +71,16 @@ extension SearchStyleView {
                 customOrderSection()
                 noOrderSection()
             } label: {
-                orderButton()
+                Image(systemName: "line.3.horizontal.decrease")
             }
-            .onChange(of: vm.searchOrder) { 
+            .tint(.accentColor)
+            .menuOrder(.fixed)
+            .controlSize(.large)
+            .buttonStyle(.bordered)
+            .buttonBorderShape(.circle)
+            .padding(.horizontal)
+            .padding(.vertical, 10.0)
+            .onChange(of: vm.searchOrder) {
                 vm.ascendingOrder = true
                 vm.orderSearchResult()
             }

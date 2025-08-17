@@ -27,6 +27,7 @@ struct CoverList: View {
                         NavigationLink(value: cover) {
                             coverGridCell(cover)
                         }
+                        .foregroundStyle(.primary)
                     }
                 }
                 .padding()
@@ -35,28 +36,12 @@ struct CoverList: View {
                 vm.filterCovers()
             }, content: {
                 filterBottomView()
-                    .presentationDetents([.medium, .large])
-                    .presentationCornerRadius(.zero)
-                    .presentationDragIndicator(.visible)
                     .presentationBackgroundInteraction(.disabled)
                     .presentationContentInteraction(.resizes)
             })
             .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button(L.Common.done) {
-                        dismiss()
-                    }
-                    .fontWeight(.semibold)
-                }
-                
-                ToolbarItem(placement: .principal) {
-                    Text(L.Manga.Covers.title)
-                        .font(.headline)
-                        .fontWeight(.bold)
-                }
-            }
-            .scrollContentBackground(.hidden)
+            .navigationTitle(L.Manga.Covers.title)
+            .toolbarRole(.editor)
             .overlay(alignment: .center) {
                 if vm.loadingCovers {
                     ActivityIndicator()
@@ -64,11 +49,10 @@ struct CoverList: View {
                     Text(L.Manga.Covers.notAvailable(vm.unwrapTitle(of: vm.manga)))
                         .font(.subheadline)
                         .fontWeight(.semibold)
-                        .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
+                        .foregroundStyle(.primary)
                         .padding()
                 }
             }
-            .background(blurBackground())
             .navigationDestination(for: Cover.self) {
                 CoverFullScreen($0)
                     .environmentObject(vm)
@@ -95,12 +79,11 @@ struct CoverList: View {
             )
             
             Group {
-                Text("VOL. \(cover.attributes.volume)") +
+                Text("VOL. \(cover.attributes.volume)")
                 Text(" (\(Locale.current.localizedString(forLanguageCode: cover.attributes.locale ?? "") ?? "?"))")
             }
             .font(.subheadline)
             .fontWeight(.regular)
-            .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
         }
     }
 }

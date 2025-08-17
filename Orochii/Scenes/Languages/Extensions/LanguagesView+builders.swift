@@ -25,14 +25,13 @@ extension LanguagesView {
                         Spacer()
                         if languages.contains(lang) {
                             Image(systemName: "checkmark")
-                                .foregroundColor(Asset.Colors.button.swiftUIColor)
+                                .foregroundStyle(Color.accentColor)
                                 .font(.caption2)
                                 .fontWeight(.heavy)
                         } else { EmptyView() }
                     }
                 }
-                .listSectionSeparator(.hidden)
-                .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
+                .tint(.primary)
             }
         }
     }

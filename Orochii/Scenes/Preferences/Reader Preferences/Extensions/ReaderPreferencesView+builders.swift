@@ -21,12 +21,9 @@ extension ReaderPreferencesView {
                 }
         } header: {
             Text(L.Reader.Layout.header)
-                .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
             Text(L.Reader.Layout.footer)
-                .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
-        .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
     }
     
     /// Manga quality
@@ -42,12 +39,9 @@ extension ReaderPreferencesView {
                 }
         } header: {
             Text(L.Reader.Manga.header)
-                .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
             Text(L.Reader.Manga.footer)
-                .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
-        .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
     }
     
     /// Reading mode chooser
@@ -63,11 +57,8 @@ extension ReaderPreferencesView {
                 }
         } header: {
             Text(L.Reader.Mode.header)
-                .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
             Text(L.Reader.Mode.footer)
-                .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
-        .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
     }
 }

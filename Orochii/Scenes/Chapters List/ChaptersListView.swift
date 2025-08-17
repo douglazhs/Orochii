@@ -28,9 +28,6 @@ struct ChaptersListView: View {
                             ),
                             isOneshot: vm.getTag(.oneshot, of: vm.manga) != nil
                         )
-                        .listRowBackground(Color.clear)
-                        .listRowSeparator(.visible, edges: .bottom)
-                        .listSectionSeparator(.hidden)
                         .id(ch.id)
                         .onTapGesture {
                             if vm.current != ch {
@@ -43,17 +40,14 @@ struct ChaptersListView: View {
                                 Image(systemName: "checkmark")
                                     .font(.caption2)
                                     .fontWeight(.heavy)
-                                    .foregroundColor(Asset.Colors.button.swiftUIColor)
+                                    .foregroundStyle(Color.accentColor)
                             }
                         }
                     }
                 }
                 .onAppear { reader.scrollTo(vm.current.id) }
                 .toolbarRole(.editor)
-                .listStyle(.plain)
-                .scrollContentBackground(.hidden)
-                .background(Asset.Colors.background.swiftUIColor)
-                .standardBars(title: L.Manga.chaptersCount(vm.feed.count))
+                .standardBars(title: L.Manga.chaptersCount(vm.feed.count), inline: true)
             }
         }
     }

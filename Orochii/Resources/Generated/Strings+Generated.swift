@@ -361,10 +361,10 @@ internal enum L {
       internal static let anilist = L.tr("Localizable", "manga.action.anilist", fallback: "AniList")
       /// Library
       internal static let library = L.tr("Localizable", "manga.action.library", fallback: "Library")
-      /// Remove All Downloads
-      internal static let removeDownloads = L.tr("Localizable", "manga.action.remove_downloads", fallback: "Remove All Downloads")
-      /// View on MangaDex.co
-      internal static let viewOnMdex = L.tr("Localizable", "manga.action.view_on_mdex", fallback: "View on MangaDex.co")
+      /// Clear All Downloads
+      internal static let removeDownloads = L.tr("Localizable", "manga.action.remove_downloads", fallback: "Clear All Downloads")
+      /// See On Site
+      internal static let viewOnMdex = L.tr("Localizable", "manga.action.view_on_mdex", fallback: "See On Site")
       internal enum Share {
         /// See %@ on MangaDex.co
         internal static func message(_ p1: Any) -> String {
@@ -377,11 +377,11 @@ internal enum L {
       internal static func notAvailable(_ p1: Any) -> String {
         return L.tr("Localizable", "manga.covers.not_available", String(describing: p1), fallback: "No other covers available for *%@*")
       }
-      /// All Available Covers
-      internal static let title = L.tr("Localizable", "manga.covers.title", fallback: "All Available Covers")
+      /// Covers
+      internal static let title = L.tr("Localizable", "manga.covers.title", fallback: "Covers")
       internal enum Filter {
-        /// Language Selection
-        internal static let languages = L.tr("Localizable", "manga.covers.filter.languages", fallback: "Language Selection")
+        /// Language
+        internal static let languages = L.tr("Localizable", "manga.covers.filter.languages", fallback: "Language")
         /// Volume
         internal static let volume = L.tr("Localizable", "manga.covers.filter.volume", fallback: "Volume")
       }
@@ -529,8 +529,8 @@ internal enum L {
       internal static let stop = L.tr("Localizable", "tracker.action.stop", fallback: "Stop")
       /// Stop Tracking
       internal static let stopTracking = L.tr("Localizable", "tracker.action.stop_tracking", fallback: "Stop Tracking")
-      /// TRACK
-      internal static let track = L.tr("Localizable", "tracker.action.track", fallback: "TRACK")
+      /// Track
+      internal static let track = L.tr("Localizable", "tracker.action.track", fallback: "Track")
       /// TRACK LOCALLY
       internal static let trackLocally = L.tr("Localizable", "tracker.action.track_locally", fallback: "TRACK LOCALLY")
     }

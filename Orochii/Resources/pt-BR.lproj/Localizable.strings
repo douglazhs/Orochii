@@ -163,9 +163,9 @@
 "manga.sub_action.removed" = "Removido";
 "manga.no_chapters" = "Capítulos não encontrados :(";
 "manga.chapters_count" = "%@ Capítulo(s)";
-"manga.covers.title" = "Todas Capas Disponíveis";
+"manga.covers.title" = "Capas";
 "manga.covers.not_available" = "Sem outras capas disponíveis para *%@*";
-"manga.covers.filter.languages" = "Seleção de Idiomas";
+"manga.covers.filter.languages" = "Idiomas";
 "manga.covers.filter.volume" = "Volume";
 "manga.reader.pages_left" = "%@ restantes";
 
@@ -225,7 +225,7 @@
 "tracker.stop.confirmation.title" = "Parar de Acompanhar Localmente";
 "tracker.stop.confirmation.message" = "Você não perderá seu progresso no AniList, ele apenas removerá as informações de tracking localmente.";
 "tracker.action.stop" = "Parar";
-"tracker.action.track" = "TRACK";
+"tracker.action.track" = "Track";
 "tracker.action.track_locally" = "ACOMPANHAR LOCALMENTE";
 "tracker.action.start_tracking" = "COMEÇAR A ACOMPANHAR";
 "tracker.action.stop_tracking" = "Parar de Acompanhar";

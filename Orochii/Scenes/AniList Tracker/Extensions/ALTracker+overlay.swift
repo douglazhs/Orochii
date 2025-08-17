@@ -14,7 +14,8 @@ extension ALTracker {
         if !vm.trackingLocally {
             ZStack {
                 Color.black.opacity(0.9)
-                    .edgesIgnoringSafeArea(.all)
+                    .edgesIgnoringSafeArea([.horizontal, .bottom])
+                    
                 VStack(spacing: 20.0) {
                     if !vm.isLoading {
                         trackingInfo()
@@ -36,14 +37,14 @@ extension ALTracker {
                         Text(L.Tracker.Info.status)
                             .font(.caption2)
                             .fontWeight(.regular)
-                            .foregroundColor(Asset.Colors.secondaryText.swiftUIColor)
+                            .foregroundColor(.white.opacity(0.75))
                         Text(vm.alManga?.mediaListEntry?.status ?? "-")
                     }
                     VStack(alignment: .center, spacing: 5.0) {
                         Text(L.Tracker.Info.progress)
                             .font(.caption2)
                             .fontWeight(.regular)
-                            .foregroundColor(Asset.Colors.secondaryText.swiftUIColor)
+                            .foregroundColor(.white.opacity(0.75))
                         Text(
                             L.Tracker.Info.chapter(
                                 (vm.alManga?.mediaListEntry?.progress.nilToStr ?? "-") + "/" +
@@ -55,7 +56,7 @@ extension ALTracker {
                         Text(L.Tracker.Info.updated)
                             .font(.caption2)
                             .fontWeight(.regular)
-                            .foregroundColor(Asset.Colors.secondaryText.swiftUIColor)
+                            .foregroundColor(.white.opacity(0.75))
                         
                         Text(Date.getDate(
                             of: vm.alManga?.mediaListEntry?.updatedAt ?? 0,
@@ -68,7 +69,7 @@ extension ALTracker {
         .font(.subheadline)
         .multilineTextAlignment(.center)
         .fontWeight(.semibold)
-        .foregroundColor(.primary.opacity(0.85))
+        .foregroundColor(.white)
     }
     
     /// Start tracking or track locally action
@@ -89,11 +90,7 @@ extension ALTracker {
             )
             .font(.subheadline)
             .fontWeight(.heavy)
-            .foregroundStyle(
-                vm.alManga?.mediaListEntry != nil
-                ? .accentColor
-                : Asset.Colors.button.swiftUIColor
-            )
+            .foregroundStyle(Color.accentColor)
         }
         .buttonStyle(.borderless)
     }

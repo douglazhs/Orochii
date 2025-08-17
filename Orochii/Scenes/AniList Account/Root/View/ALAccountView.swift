@@ -55,8 +55,6 @@ struct ALAccountView: View {
     var body: some View {
         NavigationStack {
             content()
-                .standardBars()
-                .toolbarBackground(.hidden, for: .navigationBar)
                 .animation(.easeIn(duration: 0.5), value: !vm.favoriteMangas.isEmpty)
                 .toolbarRole(.editor)
                 .alert(L.Common.error, isPresented: $vm.showAlert) {
@@ -66,19 +64,10 @@ struct ALAccountView: View {
                 } message: {
                     Text(vm.errorMessage ?? "")
                 }
+                .standardBars(title: vm.user.name, inline: true)
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         navBarButtons()
-                    }
-                    
-                    ToolbarItem(placement: .principal) {
-                        VStack {
-                            Text(vm.user.name)
-                                .font(.headline)
-                                .lineLimit(1)
-                                .multilineTextAlignment(.leading)
-                                .fontWeight(.heavy)
-                        }
                     }
                 }
                 .fullScreenCover(isPresented: $showWebView) {
@@ -92,6 +81,4 @@ struct ALAccountView: View {
     }
 }
 
-#Preview {
-    ALAccountView(user: UserMock.user)
-}
+#Preview { ALAccountView(user: UserMock.user) }

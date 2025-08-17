@@ -23,17 +23,6 @@ extension CharacterView {
                 relatedMedia()
             }
         }
-        .background {
-            BlurBackground(
-                with: URL(
-                    string: character.image?.large
-                    ?? character.image?.medium
-                    ?? ""
-                ),
-                radius: 65.0,
-                opacity: 0.85
-            )
-        }
     }
     
     @ViewBuilder
@@ -81,12 +70,12 @@ extension CharacterView {
         if let alternative = character.name?.alternative, !alternative.isEmpty {
             VStack(alignment: .leading, spacing: 5.0) {
                 Text(L.Account.Character.Title.alternative)
-                    .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                    .foregroundStyle(.secondary)
                     .font(.caption)
                 VStack(alignment: .leading, spacing: 7.5) {
                     ForEach(alternative, id: \.self) {
                         Text($0)
-                            .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
+                            .foregroundStyle(.primary)
                             .font(.subheadline)
                     }
                 }
@@ -103,7 +92,7 @@ extension CharacterView {
             VStack(alignment: .trailing, spacing: 5.0) {
                 HStack(alignment: .top) {
                     Text(L.Account.Character.Title.spoiler)
-                        .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                        .foregroundStyle(.secondary)
                         .font(.caption)
                     Button {
                         withAnimation(.bouncy) {
@@ -114,13 +103,13 @@ extension CharacterView {
                         Image(systemName: showTitlesSpoiler ? "eye" : "eye.slash")
                             .imageScale(.small)
                     }
-                    .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                    .foregroundStyle(.secondary)
                 }
                 if showTitlesSpoiler {
                     VStack(alignment: .trailing, spacing: 7.5) {
                         ForEach(alternativeSpoilers, id: \.self) {
                             Text($0)
-                                .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
+                                .foregroundStyle(.primary)
                                 .font(.subheadline)
                         }
                     }
@@ -161,7 +150,7 @@ extension CharacterView {
         HStack(alignment: .top) {
             Text(L.Account.Character.summary)
                 .font(.caption)
-                .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                .foregroundStyle(.secondary)
             Spacer()
             if summaryHaveSpoiler {
                 Button {
@@ -177,7 +166,7 @@ extension CharacterView {
                     )
                     .imageScale(.small)
                 }
-                .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                .foregroundStyle(.secondary)
             }
         }
     }
@@ -195,10 +184,10 @@ extension CharacterView {
         .markdownTextStyle(\.text) {
             FontSize(15)
             FontWeight(.regular)
-            ForegroundColor(Asset.Colors.primaryText.swiftUIColor)
+            ForegroundColor(.primary)
         }
         .markdownTextStyle(\.link) {
-            ForegroundColor(Asset.Colors.primaryText.swiftUIColor)
+            ForegroundColor(.primary)
         }
         .markdownTextStyle(\.strong) {
             FontWeight(.semibold)
@@ -212,10 +201,10 @@ extension CharacterView {
     func infoLine(title: String, _ content: String, _ alignment: HorizontalAlignment) -> some View {
         VStack(alignment: alignment, spacing: 5.0) {
             Text(title)
-                .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                .foregroundStyle(.secondary)
                 .font(.caption)
             Text(content)
-                .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
+                .foregroundStyle(.primary)
                 .font(.callout)
         }
     }
@@ -229,7 +218,7 @@ extension CharacterView {
                     Divider()
                     Text(L.Account.Character.mangaAppearences)
                         .font(.caption)
-                        .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                        .foregroundStyle(.secondary)
                         
                 }
                 .padding(.leading)
@@ -273,7 +262,7 @@ extension CharacterView {
                 }
             }
             .font(.caption2)
-            .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
+            .foregroundStyle(.primary)
             .frame(width: CGSize.standardImageCell.width, alignment: .leading)
         }
     }

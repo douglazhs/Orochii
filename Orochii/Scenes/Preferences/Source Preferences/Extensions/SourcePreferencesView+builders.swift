@@ -21,10 +21,8 @@ extension SourcePreferencesView {
             )
         } header: {
             Text(L.MangaSource.Site.header)
-                .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
             Text(L.MangaSource.Site.footer.attributedString)
-                .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
     }
     
@@ -50,14 +48,11 @@ extension SourcePreferencesView {
                     ? vm.languages.map { $0.description }.joined(separator: ", ")
                     : L.Common.none
                 )
-                .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
             }
         } header: {
             Text(L.MangaSource.Language.header)
-                .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
             Text(L.MangaSource.Language.footer)
-                .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
     }
 
@@ -68,10 +63,9 @@ extension SourcePreferencesView {
             Toggle(isOn: $vm.nsfw) {
                 Label {
                     Text(L.Common.nsfw)
-                        .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
                 } icon: {
                     Image(systemName: "eyes.inverse")
-                        .foregroundColor(Asset.Colors.attention.swiftUIColor)
+                        .foregroundStyle(.primary)
                 }
             }.onChange(of: vm.nsfw) { _, newValue in
                 Defaults.standard.saveBool(
@@ -84,10 +78,8 @@ extension SourcePreferencesView {
             }
         } header: {
             Text(L.Adjusts.AgeRating.header)
-                .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
             Text(L.Adjusts.AgeRating.footer.attributedString)
-                .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
     }
     
@@ -102,8 +94,7 @@ extension SourcePreferencesView {
                         key: DefaultsKeys.SrcPreferences.CoverQuality.mDex.rawValue
                     )
                 }
-                .pickerStyle(.menu)
-                .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
+            
             EnumPicker(String.Name.aniList, selection: $vm.aniLCoverQuality)
                 .onChange(of: vm.aniLCoverQuality) {_, newValue in
                     Defaults.standard.saveInt(
@@ -111,14 +102,10 @@ extension SourcePreferencesView {
                         key: DefaultsKeys.SrcPreferences.CoverQuality.aniL.rawValue
                     )
                 }
-                .pickerStyle(.menu)
-                .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
         } header: {
             Text(L.MangaSource.Cover.header)
-                .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
             Text(L.MangaSource.Cover.footer.attributedString)
-                .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
     }
 

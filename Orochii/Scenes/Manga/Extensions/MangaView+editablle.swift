@@ -19,7 +19,7 @@ extension MangaView {
                 Text(vm.selectAll ? L.Common.none : L.Common.all)
             }
             .disabled(vm.chapters.isEmpty)
-            .tint(!vm.chapters.isEmpty ? Asset.Colors.accentColor.swiftUIColor : Asset.Colors.secondaryText.swiftUIColor)
+            .tint(!vm.chapters.isEmpty ? .accentColor : .secondary)
         }
     }
     
@@ -34,7 +34,6 @@ extension MangaView {
                 }
             } label: {
                 Text(L.Common.done)
-                    .fontWeight(.semibold)
             }
         } else {
             actionsMenu()

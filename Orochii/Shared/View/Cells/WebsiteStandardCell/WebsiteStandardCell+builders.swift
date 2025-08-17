@@ -13,7 +13,6 @@ extension WebsiteStandardCell {
     func content() -> some View {
         link()
             .padding(10)
-            .background(PrimaryGradient())
     }
     
     /// Link to URL
@@ -33,10 +32,9 @@ extension WebsiteStandardCell {
                 Text(title)
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .foregroundStyle(Asset.Colors.button.swiftUIColor)
             }
         }
-        .tint(.accentColor.opacity(0.9))
+        .tint(.accentColor)
         .frame(maxWidth: .infinity, alignment: .leading)
         .fullScreenCover(isPresented: $showWebView) {
             if let url = URL(string: urlString) {

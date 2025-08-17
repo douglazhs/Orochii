@@ -47,7 +47,6 @@ struct MangaView: View {
                     .interactiveDismissDisabled()
                     .presentationContentInteraction(.resizes)
                     .presentationBackgroundInteraction(.disabled)
-                    .presentationCornerRadius(.zero)
             }
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {

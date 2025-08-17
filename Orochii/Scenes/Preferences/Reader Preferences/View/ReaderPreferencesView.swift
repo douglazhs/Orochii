@@ -17,14 +17,11 @@ struct ReaderPreferencesView: View {
     var body: some View {
         NavigationStack {
             List {
-                pageLayoutSection().listRowBackground(Color.clear)
-                readingModeSection().listRowBackground(Color.clear)
-                pageQualitySection().listRowBackground(Color.clear)
+                pageLayoutSection()
+                readingModeSection()
+                pageQualitySection()
             }
-            .listStyle(.grouped)
-            .scrollContentBackground(.hidden)
-            .standardBars(title: L.Reader.title)
-            .background(Asset.Colors.background.swiftUIColor)
+            .standardBars(title: L.Reader.title, inline: true)
             .toolbar {
                 ToolbarItem(placement: .confirmationAction) {
                     Button {

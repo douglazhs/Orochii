@@ -78,7 +78,6 @@ extension SettingsView {
             Text(L.Adjusts.Tracker.mangasCount(vm.user?.statistics?.manga?.count ?? 0))
                 .font(.caption)
                 .fontWeight(.regular)
-                .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
         }
     }
     
@@ -97,10 +96,11 @@ extension SettingsView {
             )
             .font(.caption)
             .fontWeight(.heavy)
-            .foregroundColor(vm.logged ? Asset.Colors.attention.swiftUIColor : Asset.Colors.button.swiftUIColor)
+            .foregroundColor(vm.logged ? Asset.Colors.attention.swiftUIColor : Color.accentColor)
         }
-        .buttonStyle(.borderedProminent)
-        .tint(Asset.Colors.secondaryBackground.swiftUIColor)
+        .controlSize(.large)
+        .buttonBorderShape(.capsule)
+        .buttonStyle(.glass)
         .confirmationDialog(L.Common.attention, isPresented: $vm.showDialog) {
             Button(L.Common.cancel, role: .cancel) { }
             Button(L.Adjusts.Tracker.logOut, role: .destructive) {

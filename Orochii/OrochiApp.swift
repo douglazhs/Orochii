@@ -46,8 +46,7 @@ struct OrochiiApp: App {
                     SettingsView()
                 }
             }
-            .preferredColorScheme(.dark)
-            .tabViewStyle(.sidebarAdaptable)
+            .tabViewStyle(.tabBarOnly)
         }
     }
 }

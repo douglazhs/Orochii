@@ -51,7 +51,6 @@ extension DiscoverView {
     func mangaSourceButton() -> some View {
         Button { mangaSourcePref = true } label: {
             Image(systemName: "antenna.radiowaves.left.and.right")
-                .foregroundColor(.accentColor)
                 .fontWeight(.semibold)
         }
         .fullScreenCover(isPresented: $mangaSourcePref) {

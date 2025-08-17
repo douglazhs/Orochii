@@ -20,12 +20,9 @@ extension SettingsView {
             gitHub()
         } header: {
             Text(L.Adjusts.About.header)
-                .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
         } footer: {
             Text(L.Adjusts.About.footer)
-                .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
         }
-        .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
     }
     
     /// App version and build
@@ -37,28 +34,20 @@ extension SettingsView {
                 Spacer()
                 Text(UIApplication.appVersion ?? L.Common.unknown)
             }
-            .listRowBackground(Color.clear)
-            .listSectionSeparator(.hidden)
             .font(.body)
             .fontWeight(.regular)
-            .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
             
             HStack {
                 Text(L.Adjusts.About.build)
                 Spacer()
                 Text(UIApplication.appBuild ?? L.Common.unknown)
             }
-            .listRowBackground(Color.clear)
-            .listSectionSeparator(.hidden)
             .font(.body)
             .fontWeight(.regular)
-            .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
         }
-        .standardBars(title: L.Adjusts.About.version)
+        .standardBars(title: L.Adjusts.About.version, inline: true)
         .toolbarRole(.editor)
-        .listStyle(.plain)
-        .scrollContentBackground(.hidden)
-        .background(Asset.Colors.background.swiftUIColor)
+        .listStyle(.automatic)
     }
     
     /// GitHub repository
@@ -77,6 +66,6 @@ extension SettingsView {
                 )
             }
         }
-        .foregroundStyle(Asset.Colors.button.swiftUIColor)
+        .foregroundStyle(.tint)
     }
 }

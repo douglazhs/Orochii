@@ -49,8 +49,7 @@ extension InitialStyleView {
                     mainFilterCell(filter: $0)
                 }
             }
-            .padding([.horizontal, .top])
-            .padding(.bottom, 0.5)
+            .padding()
         }
     }
     
@@ -62,9 +61,13 @@ extension InitialStyleView {
             Button("", systemImage: "line.3.horizontal.decrease") {
                 showFilter = true
             }
+            .tint(.accentColor)
+            .buttonBorderShape(.circle)
+            .buttonStyle(.bordered)
+            .controlSize(.large)
             .padding(.horizontal)
-            .padding(.vertical, 10.0)
-            .tint(Asset.Colors.button.swiftUIColor)
+            .padding(.bottom)
+            
         }
     }
     
@@ -79,6 +82,7 @@ extension InitialStyleView {
         .onChange(of: vm.selectedMainFilter) { [weak vm] in
             vm?.fetchSelectedFilter()
         }
+        .controlSize(.large)
     }
     
     ///  Filter cell build
@@ -89,24 +93,16 @@ extension InitialStyleView {
             .fontWeight(.semibold)
             .foregroundStyle(
                 vm.selectedMainFilter == filter
-                ? Asset.Colors.button.swiftUIColor
-                : Asset.Colors.primaryText.swiftUIColor
+                ? Color.accentColor
+                : .secondary
             )
             .padding(8.5)
-            .background(
+            .glassEffect(
                 vm.selectedMainFilter == filter
-                ? Asset.Colors.button.swiftUIColor.opacity(0.25)
-                : Asset.Colors.primaryText.swiftUIColor.opacity(0.25)
+                ? .regular.tint(.accentColor.opacity(0.25))
+                : .regular,
+                in: .capsule
             )
-            .clipShape(RoundedRectangle(cornerRadius: 8.5))
-            .overlay(
-                RoundedRectangle(cornerRadius: 8.5)
-                    .stroke(
-                        vm.selectedMainFilter == filter
-                        ? Asset.Colors.button.swiftUIColor
-                        : Asset.Colors.primaryText.swiftUIColor,
-                        lineWidth: 0.5
-                    )
-            )
+            .shadow(radius: 0.65, x: 1.15, y: 1.15)
     }
 }

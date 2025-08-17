@@ -24,10 +24,10 @@ extension ALTracker {
         VStack(alignment: .leading, spacing: 5.0) {
             Text(L.Tracker.Info.started)
                 .font(.footnote)
-                .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
+                .foregroundColor(.primary)
             Text(vm.startDate.formatted(date: .numeric, time: .omitted))
                 .frame(maxWidth: .infinity)
-                .foregroundColor(Asset.Colors.secondaryTitle.swiftUIColor)
+                .foregroundColor(.secondary)
                 .font(.footnote)
                 .fontWeight(.medium)
                 .overlay {
@@ -40,9 +40,8 @@ extension ALTracker {
                     .blendMode(.destinationOver)
                     .labelsHidden()
                 }
-                .frame(height: 30.5, alignment: .center)
-                .background(Asset.Colors.actionBackground.swiftUIColor)
-                .clipShape(RoundedRectangle(cornerRadius: 4.25))
+                .frame(height: 35.0, alignment: .center)
+                .glassEffect(.regular.tint(.accentColor.opacity(0.5)), in: .capsule)
         }
     }
     
@@ -52,10 +51,10 @@ extension ALTracker {
         VStack(alignment: .leading, spacing: 5.0) {
             Text(L.Tracker.Info.ended)
                 .font(.footnote)
-                .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
+                .foregroundColor(.primary)
             Text(vm.endDate.formatted(date: .numeric, time: .omitted))
                 .frame(maxWidth: .infinity)
-                .foregroundColor(Asset.Colors.secondaryTitle.swiftUIColor)
+                .foregroundColor(.secondary)
                 .font(.footnote)
                 .fontWeight(.medium)
                 .overlay {
@@ -68,9 +67,8 @@ extension ALTracker {
                     .blendMode(.destinationOver)
                     .labelsHidden()
                 }
-                .frame(height: 30.5, alignment: .center)
-                .background(Asset.Colors.actionBackground.swiftUIColor)
-                .clipShape(RoundedRectangle(cornerRadius: 4.25))
+                .frame(height: 35.0, alignment: .center)
+                .glassEffect(.regular.tint(.accentColor.opacity(0.5)), in: .capsule)
         }
     }
     
@@ -81,7 +79,7 @@ extension ALTracker {
             HStack {
                 Text(L.Tracker.Info.score)
                     .font(.footnote)
-                    .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
+                    .foregroundStyle(.primary)
             }
             PickerTextField(
                 data: Array(stride(from: 0.0, through: 10.0, by: 0.1)),
@@ -90,12 +88,13 @@ extension ALTracker {
                 field: .score,
                 selection: $vm.score
             )
-            .frame(height: 30.5, alignment: .center)
+            .frame(height: 35.0, alignment: .center)
+            .glassEffect(.regular.tint(.accentColor.opacity(0.5)), in: .capsule)
             .overlay {
                 Text("\(String(format: "%.1f", vm.score ?? 0)) / 10")
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                    .foregroundStyle(.secondary)
             }
         }
     }

@@ -26,15 +26,8 @@ struct DiscoverView: View {
     var body: some View {
         NavigationStack {
             content()
-                .standardBars(
-                    title: L.Discovery.title,
-                    showTitle: Constants.device == .pad ? false : true,
-                    isOpaque: Constants.device == .pad ? false : true
-                )
-                .background {
-                    Asset.Colors.background.swiftUIColor
-                        .ignoresSafeArea(.all)
-                }
+                .standardBars(title: L.Discovery.title)
+                .navigationSubtitle("Discover your new reading on MangaDex right now!")
                 .alert(vm.alertInfo.title, isPresented: $vm.showAlert) {
                     Button(L.Common.ok, role: .cancel) { }
                 } message: {
@@ -57,7 +50,6 @@ struct DiscoverView: View {
             UIApplication.shared.becomeFirstResponder()
             vm.submitSearch()
         }
-        
     }
 }
 

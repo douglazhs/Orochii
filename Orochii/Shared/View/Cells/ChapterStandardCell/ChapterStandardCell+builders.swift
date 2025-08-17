@@ -35,8 +35,8 @@ extension ChapterStandardCell {
                     }
                 }
                 .font(.footnote)
-                .fontWeight(.bold)
-                .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                .fontWeight(.semibold)
+                .foregroundStyle(.primary)
             }
             // CHAPTER TITLE
             title()
@@ -50,7 +50,7 @@ extension ChapterStandardCell {
             chapter.attributes?.title != nil {
             HStack(spacing: 5.0) {
                 Text("•")
-                    .foregroundColor(Asset.Colors.secondaryText.swiftUIColor)
+                    .foregroundStyle(.primary)
                     .font(.caption)
                     .fontWeight(.heavy)
                 Text(chapter.attributes?.title ?? "")
@@ -58,8 +58,8 @@ extension ChapterStandardCell {
                     .lineLimit(1)
                     .multilineTextAlignment(.leading)
                     .truncationMode(.tail)
-                    .fontWeight(.heavy)
-                    .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                    .fontWeight(.semibold)
+                    .foregroundStyle(.primary)
             }
         } else { EmptyView() }
     }
@@ -93,7 +93,7 @@ extension ChapterStandardCell {
                 Text("• MISSING SCAN GROUP")
             }
         }
-        .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
+        .foregroundStyle(.secondary)
         .font(.footnote)
         .lineLimit(1)
     }

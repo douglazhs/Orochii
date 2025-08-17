@@ -39,17 +39,12 @@ extension MediaAttributes {
         VStack(alignment: alignment, spacing: 2.5) {
             Text(title)
                 .font(.caption2)
-                .foregroundColor(Asset.Colors.secondaryText.swiftUIColor)
-                .shadow(
-                    color: .black.opacity(0.5),
-                    radius: 2.25,
-                    x: 1.0,
-                    y: 1.0
-                )
+                .foregroundColor(.secondary)
+            
             Text(description)
                 .font(.caption)
                 .fontWeight(.semibold)
-                .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
+                .foregroundColor(.primary)
         }
     }
 }

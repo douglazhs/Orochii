@@ -37,24 +37,20 @@ struct ALTracker: View {
     var body: some View {
         NavigationStack {
             content()
-                .standardBars()
                 .onSubmit(of: .search) { dismissSearch() }
-                .navigationBarTitleDisplayMode(.inline)
                 .animation(.easeIn, value: [vm.mangas != nil])
                 .toolbarRole(.editor)
+                .navigationBarTitleDisplayMode(.large)
+                .navigationTitle(vm.buildTitle())
+                .navigationSubtitle(Text(vm.buildAltTitle()))
                 .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
+                    ToolbarItemGroup(placement: .topBarTrailing) {
                         if vm.availableInAL {
                             anilistMangaOptions()
                         }
-                    }
-                    ToolbarItem(placement: .principal) { alTitleView() }
-                    ToolbarItem(placement: .status) {
                         switch vm.context {
                         case .tracker:
-                            if vm.trackingLocally {
-                                saveButton()
-                            }
+                            saveButton()
                         case .search:
                             trackButton()
                         }

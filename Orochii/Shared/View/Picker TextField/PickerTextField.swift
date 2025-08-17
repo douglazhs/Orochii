@@ -25,7 +25,7 @@ struct PickerTextField: UIViewRepresentable {
             width: UIScreen.width,
             height: 44.0
         ))
-        toolbar.isTranslucent = true
+        toolbar.isTranslucent = false
         toolbar.sizeToFit()
         let flexible = UIBarButtonItem(
             barButtonSystemItem: .flexibleSpace,
@@ -34,7 +34,7 @@ struct PickerTextField: UIViewRepresentable {
         )
         let doneButton = UIBarButtonItem(
             title: L.Common.done,
-            style: .done,
+            style: .prominent,
             target: helper,
             action: #selector(helper.doneButtonAction)
         )
@@ -55,10 +55,8 @@ struct PickerTextField: UIViewRepresentable {
         textField.font = UIFont.systemFont(ofSize: 13.0, weight: .medium)
         
         textField.textAlignment = .center
-        textField.backgroundColor = Asset.Colors.actionBackground.color
         textField.textColor = .clear
         textField.tintColor = .clear
-        textField.layer.cornerRadius = 4.25
         textField.borderStyle = .none
         
         return textField

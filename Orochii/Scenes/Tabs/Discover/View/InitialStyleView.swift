@@ -33,7 +33,6 @@ struct InitialStyleView: View {
         .sheet(isPresented: $showFilter) {
             DiscoverFilterView()
                 .presentationDetents([.medium, .large])
-                .presentationCornerRadius(.zero)
                 .presentationDragIndicator(.visible)
                 .presentationContentInteraction(.resizes)
                 .presentationBackgroundInteraction(.disabled)

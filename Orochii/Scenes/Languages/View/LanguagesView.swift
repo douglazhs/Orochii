@@ -11,13 +11,8 @@ struct LanguagesView: View {
     @Binding var languages: [Language]
     var body: some View {
         List {
-            languagesSection().listRowBackground(Color.clear)
+            languagesSection()
         }
-        .toolbarRole(.editor)
-        .listStyle(.plain)
-        .scrollContentBackground(.hidden)
-        .background(Asset.Colors.background.swiftUIColor)
-        .standardBars(title: L.MangaSource.Language.header)
     }
 }
 

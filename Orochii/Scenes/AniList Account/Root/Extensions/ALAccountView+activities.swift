@@ -24,7 +24,6 @@ extension ALAccountView {
                     if !vm.activities.isEmpty {
                         ForEach(vm.activities) { activity in
                             activityCard(activity)
-                                .listRowBackground(Asset.Colors.secondaryBackground.swiftUIColor)
                                 .task { [weak vm] in
                                     if vm?.hasReachedEnd(in: activity) ?? false {
                                         vm?.paginateFeed()
@@ -43,8 +42,6 @@ extension ALAccountView {
             .listSectionSeparator(.hidden)
         }
         .listStyle(.inset)
-        .scrollContentBackground(.hidden)
-        .background(Asset.Colors.background.swiftUIColor)
         .overlay(alignment: .top) {
             // Loading de primeira request/refresh
             if vm.activitiesState == .loading  || vm.favoritesState == .loading {
@@ -72,11 +69,13 @@ extension ALAccountView {
                 Image(systemName: "chevron.down")
                     .font(.footnote)
             }
-            .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
             .fontWeight(.medium)
         }
+        .tint(.primary)
         .menuOrder(.priority)
         .menuStyle(.button)
+        .padding()
+        .glassEffect(in: .capsule)
         .onChange(of: vm.feed) { [weak vm] in
             vm?.changeFeed()
         }
@@ -91,7 +90,7 @@ extension ALAccountView {
             VStack(alignment: .leading, spacing: 10) {
                 Text(vm.buildActivity(activity))
                     .font(.caption)
-                    .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
+                    .foregroundStyle(.primary)
                 
                 HStack(alignment: .center, spacing: 3.5) {
                     Image(systemName: "clock")
@@ -99,7 +98,7 @@ extension ALAccountView {
                 }
                 .font(.system(size: 10))
                 .fontWeight(.medium)
-                .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
+                .foregroundStyle(.primary)
             }
             
             Spacer()

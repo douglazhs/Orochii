@@ -201,4 +201,25 @@ final class ALTrackerViewModel: ObservableObject {
         }
         fillInfo()
     }
+    
+    /// Build Manga main title
+    func buildTitle() -> String {
+        switch context {
+        case .tracker:
+                return alManga?.title?.romaji ??
+                alManga?.title?.english ??
+                (isLoading ? "" : L.Common.unknown)
+        case .search:
+            return L.Tracker.search
+        }
+    }
+    
+    /// Build Manga alternative title
+    func buildAltTitle() -> String {
+        guard let english = alManga?.title?.english,
+            english != alManga?.title?.romaji ?? "" else {
+            return ""
+        }
+        return english
+    }
 }

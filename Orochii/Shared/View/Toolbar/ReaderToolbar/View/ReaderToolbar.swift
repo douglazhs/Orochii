@@ -15,7 +15,7 @@ struct ReaderToolbar: ViewModifier {
     
     func body(content: Content) -> some View {
         content
-            .standardBars(title: vm.mountChapterTitle())
+            .standardBars(title: vm.mountChapterTitle(), inline: true)
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button { showChaptersList = true } label: {

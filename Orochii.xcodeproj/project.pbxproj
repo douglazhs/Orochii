@@ -41,8 +41,6 @@
 		50C49B9D2E2C5737003E962A /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C49B9C2E2C5737003E962A /* WidgetKit.framework */; };
 		50C49B9F2E2C5737003E962A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 50C49B9E2E2C5737003E962A /* SwiftUI.framework */; };
 		50C49BB02E2C5738003E962A /* OrochiiWidget.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 50C49B9B2E2C5737003E962A /* OrochiiWidget.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
-		50C49BBC2E2C5BD2003E962A /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 50C49BBB2E2C5BD2003E962A /* Development.xcconfig */; };
-		50C49BBD2E2C5BD2003E962A /* Development.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 50C49BBB2E2C5BD2003E962A /* Development.xcconfig */; };
 		50CAD2E829383887000C1C0E /* MangaView+actions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAD2E729383887000C1C0E /* MangaView+actions.swift */; };
 		50CAD2EC29383B04000C1C0E /* ALTracker+secondaryStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAD2EB29383B04000C1C0E /* ALTracker+secondaryStates.swift */; };
 		50CAD2EE29383B86000C1C0E /* ALTracker+mainStates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 50CAD2ED29383B86000C1C0E /* ALTracker+mainStates.swift */; };
@@ -114,7 +112,6 @@
 		52AF1ADB2C0FEC5E00BC1EFC /* CoverList+filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1ADA2C0FEC5E00BC1EFC /* CoverList+filter.swift */; };
 		52AF1ADE2C0FEE2A00BC1EFC /* CheckboxToggleStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1ADD2C0FEE2A00BC1EFC /* CheckboxToggleStyle.swift */; };
 		52AF1AE12C0FF40E00BC1EFC /* CheckboxView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1AE02C0FF40E00BC1EFC /* CheckboxView.swift */; };
-		52AF1AE32C108DDD00BC1EFC /* CoverList+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1AE22C108DDD00BC1EFC /* CoverList+extension.swift */; };
 		52AF1AEE2C12371200BC1EFC /* DiscoverFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1AED2C12371200BC1EFC /* DiscoverFilterView.swift */; };
 		52AF1AF02C12371D00BC1EFC /* DiscoverFilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52AF1AEF2C12371D00BC1EFC /* DiscoverFilterViewModel.swift */; };
 		52AF1AF32C14C9BE00BC1EFC /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = 52AF1AF22C14C9BE00BC1EFC /* MarkdownUI */; };
@@ -304,7 +301,6 @@
 		52AF1ADA2C0FEC5E00BC1EFC /* CoverList+filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoverList+filter.swift"; sourceTree = "<group>"; };
 		52AF1ADD2C0FEE2A00BC1EFC /* CheckboxToggleStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxToggleStyle.swift; sourceTree = "<group>"; };
 		52AF1AE02C0FF40E00BC1EFC /* CheckboxView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckboxView.swift; sourceTree = "<group>"; };
-		52AF1AE22C108DDD00BC1EFC /* CoverList+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoverList+extension.swift"; sourceTree = "<group>"; };
 		52AF1AED2C12371200BC1EFC /* DiscoverFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverFilterView.swift; sourceTree = "<group>"; };
 		52AF1AEF2C12371D00BC1EFC /* DiscoverFilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverFilterViewModel.swift; sourceTree = "<group>"; };
 		52D0E2DD2C001C4E009374C5 /* IndeterminateProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IndeterminateProgressView.swift; sourceTree = "<group>"; };
@@ -1128,7 +1124,6 @@
 				506EEBF729364D3300D89777 /* MangaView+filters.swift */,
 				50CAD2E729383887000C1C0E /* MangaView+actions.swift */,
 				52AF1ADA2C0FEC5E00BC1EFC /* CoverList+filter.swift */,
-				52AF1AE22C108DDD00BC1EFC /* CoverList+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1591,7 +1586,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1640;
-				LastUpgradeCheck = 1520;
+				LastUpgradeCheck = 2600;
 				TargetAttributes = {
 					5092DF2029292C590094DC18 = {
 						CreatedOnToolsVersion = 14.1;
@@ -1637,7 +1632,6 @@
 				5092DF2C29292C5C0094DC18 /* Preview Assets.xcassets in Resources */,
 				5092DF59292971580094DC18 /* Localizable.strings in Resources */,
 				5092DF2929292C5C0094DC18 /* Assets.xcassets in Resources */,
-				50C49BBC2E2C5BD2003E962A /* Development.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1645,7 +1639,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				50C49BBD2E2C5BD2003E962A /* Development.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1782,7 +1775,6 @@
 				50F44429292E4244001B3CF4 /* ChapterView.swift in Sources */,
 				500183CB292C0CCA0094B223 /* ChapterStandardCell.swift in Sources */,
 				50FFAFE9292A81B100B87E0E /* MangaView.swift in Sources */,
-				52AF1AE32C108DDD00BC1EFC /* CoverList+extension.swift in Sources */,
 				77B1BD652A6986DA003146B9 /* ProgressIndicator.swift in Sources */,
 				52588B642C233F49006B94FD /* CharacterView+extension.swift in Sources */,
 				5092DF2529292C590094DC18 /* OrochiApp.swift in Sources */,
@@ -1894,6 +1886,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 22298649MR;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -1916,6 +1909,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -1957,6 +1951,7 @@
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 22298649MR;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -1972,6 +1967,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 				VALIDATE_PRODUCT = YES;
@@ -1989,7 +1985,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Orochii/Preview Content\"";
-				DEVELOPMENT_TEAM = 22298649MR;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2004,7 +1999,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2034,7 +2029,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Orochii/Preview Content\"";
-				DEVELOPMENT_TEAM = 22298649MR;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -2049,7 +2043,7 @@
 				INFOPLIST_KEY_UIStatusBarStyle = UIStatusBarStyleDefault;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2076,7 +2070,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 22298649MR;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Orochii Widget/Info.plist";
@@ -2089,7 +2082,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.douglashenrique.orochii.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -2112,7 +2105,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 22298649MR;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Orochii Widget/Info.plist";
@@ -2125,7 +2117,7 @@
 					"@executable_path/../../Frameworks",
 				);
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1;
 				PRODUCT_BUNDLE_IDENTIFIER = com.douglashenrique.orochii.widget;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

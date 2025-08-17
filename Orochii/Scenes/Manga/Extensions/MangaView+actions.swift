@@ -29,10 +29,9 @@ extension MangaView {
         } label: {
             HStack {
                 Image(systemName: "play")
-                    .foregroundColor(Asset.Colors.button.swiftUIColor)
                 // TODO: Change to current manga reading status
                 Text("CH. 1")
-                    .foregroundStyle(.white)
+                    .foregroundStyle(.primary)
                     .fontWeight(.bold)
             }
             .frame(maxWidth: CGSize.dynamicImage.width)
@@ -41,8 +40,10 @@ extension MangaView {
             .lineLimit(1)
         }
         .disabled(vm.occurredAct)
-        .tint(Asset.Colors.actionBackground.swiftUIColor)
-        .buttonStyle(.borderedProminent)
+        .tint(.accentColor)
+        .controlSize(.large)
+        .buttonStyle(.bordered)
+        .buttonBorderShape(.capsule)
     }
     
     /// AniList tracking button
@@ -53,12 +54,13 @@ extension MangaView {
             vm?.startAction(for: .aniList)
         } label: {
             Image(systemName: "antenna.radiowaves.left.and.right")
-                .foregroundColor(Asset.Colors.button.swiftUIColor)
                 .font(.footnote)
                 .fontWeight(.heavy)
         }
-        .tint(Asset.Colors.actionBackground.swiftUIColor)
-        .buttonStyle(.borderedProminent)
+        .tint(.accentColor)
+        .controlSize(.large)
+        .buttonStyle(.bordered)
+        .buttonBorderShape(.circle)
         .sheet(isPresented: $showAniList) {
             ALTracker(
                 of: vm.manga,
@@ -71,7 +73,6 @@ extension MangaView {
                 )),
                 action: $vm.occurredAct
             )
-            .presentationDetents([.medium, .large])
             .interactiveDismissDisabled()
             .presentationDragIndicator(.hidden)
         }
@@ -97,8 +98,11 @@ extension MangaView {
             .fontWeight(.heavy)
             .font(.footnote)
         }
-        .tint(Asset.Colors.actionBackground.swiftUIColor)
-        .buttonStyle(.borderedProminent)
+        .tint(.accentColor)
+        .menuOrder(.fixed)
+        .controlSize(.large)
+        .buttonStyle(.bordered)
+        .buttonBorderShape(.circle)
     }
     
     /// Manga status picker

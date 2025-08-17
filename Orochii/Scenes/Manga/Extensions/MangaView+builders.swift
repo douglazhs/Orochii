@@ -33,22 +33,6 @@ extension MangaView {
             : EditMode.inactive
         ))
         .listStyle(.plain)
-        .scrollContentBackground(.hidden)
-        .background {
-            BlurBackground(
-                with: vm.api.buildURL(
-                    for: .cover(
-                        id: vm.manga.id,
-                        fileName: vm.imgFileName(
-                            of: vm.manga,
-                            quality: vm.mDexCoverQuality.key
-                        )
-                    )
-                ),
-                radius: 100,
-                opacity: 0.825
-            )
-        }
     }
     
     /// All List Sections
@@ -80,23 +64,20 @@ extension MangaView {
                         relationship(.artist, img: "paintpalette")
                         tags()
                     }
-                    .padding(.horizontal, 22.0)
+                    .padding(.horizontal)
                     .padding(.top, 10.0)
+                    .padding(.bottom, 7.5)
                 }
                 
                 Text(vm.getGenres(of: vm.manga).joined(separator: ", "))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
                     .padding(.horizontal, 22.0)
             }
-            .padding(.vertical, 10.0)
-            .font(.caption)
             .fontWeight(.semibold)
-            .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
+            .padding(.vertical, 10.0)
         }
         .listRowInsets(.init(top: 0, leading: 0, bottom: 0, trailing: 0))
-        .listSectionSeparator(.hidden)
-        .listRowBackground(Color.clear)
-        /*.listRowBackground(bannerBackground())
-        .frame(maxHeight: UIScreen.height * 0.425)*/
     }
     
     /// Manga title
@@ -107,6 +88,7 @@ extension MangaView {
             .multilineTextAlignment(.leading)
             .fontWeight(.heavy)
             .textSelection(.enabled)
+            .padding(.horizontal)
             .onTapGesture {
                 showFullName = true
             }
@@ -114,67 +96,18 @@ extension MangaView {
                 altTitles()
                     .background(BackgroundClearView())
             }
-            .padding(.horizontal)
     }
     
     /// Manga relationship label
     @ViewBuilder
     func relationship(_ relation: MangaHelpersKeys.Relationship, img: String) -> some View {
         Label(vm.relationship(relation, with: vm.manga).notEmpty, systemImage: img)
-            .foregroundStyle(.white)
-            .padding(5.0)
-            .background {
-                RoundedRectangle(cornerRadius: 5.5)
-                    .foregroundStyle(Asset.Colors.primaryText.swiftUIColor.opacity(0.385))
-            }
-            .overlay(
-                RoundedRectangle(cornerRadius: 5.5)
-                    .stroke(
-                        Asset.Colors.primaryText.swiftUIColor,
-                        lineWidth: 0.3
-                    )
-            )
-            .padding(0.25)
-    }
-    
-    /// Manga cover art as a banner
-    @ViewBuilder
-    func bannerBackground() -> some View {
-        GeometryReader { geometry in
-            let minY = geometry.frame(in: .named("MANGALIST")).minY
-            let size = geometry.size
-            let height = size.height + max(0, minY)
-            
-            BlurBackground(
-                with: vm.api.buildURL(
-                    for: .cover(
-                        id: vm.manga.id,
-                        fileName: vm.imgFileName(
-                            of: vm.manga,
-                            quality: vm.mDexCoverQuality.key
-                        )
-                    )
-                ),
-                radius: 0.0,
-                opacity: 0.695
-            )
-            .padding(.horizontal, min(0, -minY))
-            .frame(width: size.width, height: height)
-            .clipped()
-            .mask {
-                LinearGradient(
-                    colors: [
-                        .black,
-                        .black,
-                        .clear
-                    ],
-                    startPoint: .top,
-                    endPoint: .bottom
-                )
-            }
-            .offset(CGSize(width: 0, height: -minY))
-        }
-        .frame(height: UIScreen.height * 0.425)
+            .font(.caption)
+            .foregroundStyle(.secondary)
+            .padding(10.0)
+            .glassEffect(in: .capsule)
+            .shadow(radius: 0.75, x: 1.25, y: 1.25)
+            .padding(1.0)
     }
     
     /// Manga information area, contatining all main details
@@ -203,7 +136,6 @@ extension MangaView {
                 mangaTexts().frame(maxHeight: .infinity, alignment: .bottom)
             }
         }
-        .listRowBackground(Color.clear)
         .zIndex(1)
     }
     
@@ -213,22 +145,11 @@ extension MangaView {
         HStack(spacing: 5.0) {
             ForEach(vm.tags) { value in
                 Text(value.title)
-                    .tint(value.color)
-                    .padding(5.0)
-                    .background {
-                        RoundedRectangle(cornerRadius: 5.5)
-                            .foregroundStyle(value.color.opacity(0.225))
-                    }
-                    .overlay(
-                        RoundedRectangle(cornerRadius: 5.5)
-                            .stroke(
-                                value.color,
-                                lineWidth: 0.3
-                            )
-                    )
-                    .padding(0.25)
                     .font(.caption)
+                    .padding(10.0)
                     .foregroundStyle(value.color)
+                    .glassEffect(.regular.tint(value.color.opacity(0.125)), in: .capsule)
+                    .shadow(radius: 0.65, x: 1.15, y: 1.15)
             }
         }
     }
@@ -276,10 +197,10 @@ extension MangaView {
                 .markdownTextStyle(\.text) {
                     FontSize(15)
                     FontWeight(.regular)
-                    ForegroundColor(Asset.Colors.primaryText.swiftUIColor)
+                    ForegroundColor(.primary)
                 }
                 .markdownTextStyle(\.link) {
-                    ForegroundColor(Asset.Colors.accentColor.swiftUIColor)
+                    ForegroundColor(.accentColor)
                 }
                 .markdownTextStyle(\.strong) {
                     FontWeight(.semibold)
@@ -292,7 +213,7 @@ extension MangaView {
         } header: {
             HStack {
                 Text(L.Manga.descriptionHeader.uppercased())
-                    .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                    .foregroundStyle(.primary)
                     .font(.footnote)
                     .fontWeight(.regular)
                 Spacer()
@@ -300,7 +221,6 @@ extension MangaView {
                 languageMenu()
             }
         }
-        .listRowBackground(Color.clear)
     }
     
     /// Language choose menu
@@ -314,19 +234,21 @@ extension MangaView {
             }
         } label: {
             Label(
-                (Locale.current.country(forLanguageCode: vm.descLang) + " - " +
-                vm.descLang).uppercased(),
+                (Locale.current.country(forLanguageCode: vm.descLang).lowercased() + " - " +
+                 vm.descLang.lowercased()),
                 systemImage: "chevron.up.chevron.down"
             )
             .font(.footnote)
-            .fontWeight(.regular)
+            .fontWeight(.semibold)
         }
-        .menuOrder(.priority)
-        .menuStyle(.button)
+        .menuOrder(.fixed)
+        .tint(.accentColor)
+        .controlSize(.regular)
+        .buttonStyle(.bordered)
         .foregroundStyle(
             !(vm.manga.attributes?.description?.isEmpty ?? false)
-            ? Asset.Colors.button.swiftUIColor
-            : Asset.Colors.secondaryText.swiftUIColor
+            ? Color.accentColor
+            : .secondary
         )
         .disabled((vm.manga.attributes?.description) == nil)
     }
@@ -357,7 +279,6 @@ extension MangaView {
             } header: {
                 chaptersHeader()
             }
-            .listRowBackground(Color.clear)
             .onChange(of: chSelection) { _, _ in
                 if chSelection.count == vm.filtered.count {
                     vm.selectAll = true
@@ -365,7 +286,6 @@ extension MangaView {
             }
         } else {
             loadHandler()
-                .listRowBackground(Color.clear)
                 .listSectionSeparator(.hidden)
         }
     }
@@ -385,7 +305,7 @@ extension MangaView {
                 Text(L.Manga.noChapters)
                     .font(.subheadline)
                     .fontWeight(.medium)
-                    .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
+                    .foregroundStyle(.primary)
                 Spacer()
             }
         }
@@ -405,11 +325,11 @@ extension MangaView {
                     VStack(alignment: .leading) {
                         Text((Locale.current as NSLocale).localizedString(forLanguageCode: country)?.uppercased() ?? country)
                             .font(.caption)
-                            .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                            .foregroundStyle(.secondary)
                         Text(title)
                             .font(.subheadline)
                             .fontWeight(.heavy)
-                            .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
+                            .foregroundStyle(.primary)
                             .textSelection(.enabled)
                     }
                 }

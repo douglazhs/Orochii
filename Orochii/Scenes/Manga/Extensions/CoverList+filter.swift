@@ -15,24 +15,12 @@ extension CoverList {
             List {
                 localesSection()
                 orderSection()
-                    .listSectionSeparator(.hidden, edges: .bottom)
+                filterActions()
             }
-            .listStyle(.grouped)
-            .scrollContentBackground(.hidden)
+            .standardBars(title: L.Filter.action, inline: true)
+            .toolbarRole(.editor)
             .scrollIndicators(.never)
             .scrollBounceBehavior(.basedOnSize)
-            .background(blurBackground())
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItemGroup(placement: .bottomBar) {
-                    Spacer()
-                    Button(L.Filter.action) {
-                        showFilter = false
-                    }
-                    .fontWeight(.semibold)
-                    .tint(Asset.Colors.button.swiftUIColor)
-                }
-            }
         }
     }
     
@@ -45,10 +33,13 @@ extension CoverList {
                 vm.oldCoverFilter = vm.coverFilter
             }
             .disabled(vm.covers.isEmpty)
-            .tint(!vm.covers.isEmpty ? Asset.Colors.button.swiftUIColor : Asset.Colors.secondaryText.swiftUIColor)
+            .tint(!vm.covers.isEmpty ? Color.accentColor : .secondary)
+            .buttonBorderShape(.circle)
+            .buttonStyle(.bordered)
+            .controlSize(.large)
         }
         .padding(.horizontal)
-        .padding(.vertical, 5.5)
+        .padding(.top, 10.0)
     }
     
     @ViewBuilder
@@ -63,16 +54,13 @@ extension CoverList {
                     }
                 } label: {
                     Text(Locale.current.country(forLanguageCode: locale).capitalized)
-                        .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
-                        .font(.callout)
+                        .foregroundStyle(.primary)
                 }
             }
         } header: {
             languageSelectionHeader()
         }
-        .listRowBackground(Color.clear)
-        .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
-        .listRowBackground(Color.clear)
+        .foregroundStyle(.primary)
         .onChange(of: vm.coverFilter.locales) { _, newLocales in
             if newLocales.count == vm.locales.count {
                 vm.markAll = true
@@ -83,7 +71,6 @@ extension CoverList {
     @ViewBuilder
     func languageSelectionHeader() -> some View {
         HStack {
-            Text(L.Manga.Covers.Filter.languages)
             Spacer()
             Button {
                 vm.toggleLocaleSelection()
@@ -97,11 +84,12 @@ extension CoverList {
                 .imageScale(.large)
             }
             .buttonStyle(.borderless)
+            .controlSize(.large)
             .disabled(vm.locales.isEmpty)
             .foregroundStyle(
                 !vm.locales.isEmpty
-                ? Asset.Colors.button.swiftUIColor
-                : Asset.Colors.secondaryText.swiftUIColor
+                ? Color.accentColor
+                : .secondary
             )
         }
     }
@@ -111,25 +99,39 @@ extension CoverList {
         Section {
             HStack {
                 Text(L.Manga.Covers.Filter.volume)
-                    .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
+                    .foregroundStyle(.primary)
+                
                 Spacer()
+                
                 Button {
                     vm.coverFilter.volOrder = (vm.coverFilter.volOrder == .asc) ? .desc : .asc
                 } label: {
                     HStack {
                         Text("\(vm.coverFilter.volOrder.description)")
-                            .foregroundStyle(Asset.Colors.secondaryText.swiftUIColor)
                         Image(systemName: vm.coverFilter.volOrder == .desc ? "chevron.up" : "chevron.down")
-                            .fontWeight(.semibold)
-                            .font(.caption)
                     }
                 }
+                .tint(.secondary)
+                .font(.subheadline)
                 .buttonStyle(.borderless)
             }
-            .font(.subheadline)
         } header: {
             Text(L.order)
         }
-        .listRowBackground(Color.clear)
+    }
+    
+    @ViewBuilder
+    func filterActions() -> some View {
+        Section {
+            Button(L.Filter.action) {
+                showFilter = false
+            }
+            .tint(.accentColor)
+            
+            Button("Reset") {
+                
+            }
+            .tint(.red)
+        }
     }
 }

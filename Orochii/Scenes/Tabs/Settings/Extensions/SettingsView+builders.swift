@@ -12,26 +12,17 @@ extension SettingsView {
     func content() -> some View {
         List {
             anilistSection()
-                .listRowSeparator(.hidden)
-                .listRowBackground(Color.clear)
             icloudSection()
-                .listRowBackground(Color.clear)
             securitySection()
-                .listRowBackground(Color.clear)
             notificationsSection()
-                .listRowBackground(Color.clear)
             aboutApp()
-                .listRowBackground(Color.clear)
         }
         .refreshable { vm.fetchUser() }
-        .listStyle(.grouped)
         .animation(
             .easeInOut(duration: 0.125),
             value: vm.biometryPreference
         )
         .scrollIndicators(.hidden)
-        .scrollContentBackground(.hidden)
-        .background(Asset.Colors.background.swiftUIColor)
         .fullScreenCover(isPresented: $showALAccount) {
             if let user = vm.user {
                 ALAccountView(user: user)
@@ -53,9 +44,7 @@ extension SettingsView {
             Text(L.Adjusts.Tracker.header.capitalized)
         } footer: {
             Text(L.Adjusts.Tracker.footer.attributedString)
-                .foregroundColor(Asset.Colors.secondaryText.swiftUIColor)
         }
-        .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
     }
     
     /// App iCloud section
@@ -67,6 +56,7 @@ extension SettingsView {
                     Text(L.Adjusts.Icloud.sync)
                 } icon: {
                     Image(systemName: "link.icloud.fill")
+                        .foregroundStyle(.primary)
                 }
             }.onChange(of: vm.iCloud) { _, newValue in
                 Defaults.standard.saveBool(
@@ -78,9 +68,7 @@ extension SettingsView {
             Text(L.Adjusts.Icloud.header)
         } footer: {
             Text(L.Adjusts.Icloud.footer.attributedString)
-                .foregroundColor(Asset.Colors.secondaryText.swiftUIColor)
         }
-        .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
     }
     
     /// App security section
@@ -92,7 +80,7 @@ extension SettingsView {
                     Text(L.Adjusts.Security.biometry)
                 } icon: {
                     Image(systemName: "lock.fill")
-                        
+                        .foregroundStyle(.primary)
                 }
             }.onChange(of: vm.biometryPreference) { _, newValue in
                 Defaults.standard.saveBool(
@@ -109,9 +97,7 @@ extension SettingsView {
                     .foregroundColor(.accentColor)
                     .bold()
             }
-            .foregroundColor(Asset.Colors.secondaryText.swiftUIColor)
         }
-        .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
         .disabled(!vm.biometricsAvailable)
         .onChange(of: vm.biometryPreference) { _, _ in
             vm.changeLocalAuth()
@@ -127,7 +113,7 @@ extension SettingsView {
                     Text(L.Adjusts.Notification.updatedMangas)
                 } icon: {
                     Image(systemName: "bell.badge")
-                        .foregroundColor(Asset.Colors.attention.swiftUIColor)
+                        .foregroundStyle(.primary)
                 }
             }.onChange(of: vm.notifications) { _, newValue in
                 Defaults.standard.saveBool(
@@ -139,8 +125,6 @@ extension SettingsView {
             Text(L.Adjusts.Notification.header)
         } footer: {
             Text(L.Adjusts.Notification.footer)
-                .foregroundColor(Asset.Colors.secondaryText.swiftUIColor)
         }
-        .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
     }
 }

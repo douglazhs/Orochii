@@ -50,25 +50,20 @@ extension ALTracker {
     /// Track manga button
     @ViewBuilder
     func trackButton() -> some View {
-        Button { [weak vm] in
+        Button(L.Tracker.Action.track) { [weak vm] in
             vm?.trackingLocally = true
             vm?.handleTracking()
-        } label: {
-            Text(L.Tracker.Action.track)
-                .font(.subheadline)
-                .fontWeight(.heavy)
-                .foregroundStyle(vm.alManga == nil ? Asset.Colors.secondaryText.swiftUIColor : Asset.Colors.button.swiftUIColor)
         }
-        .buttonStyle(.borderless)
+        .fontWeight(.semibold)
         .disabled(vm.alManga == nil)
     }
     
     /// Save progress button
     @ViewBuilder
     func saveButton() -> some View {
-        Button(L.Common.save.uppercased()) { dismiss() }
-            .font(.subheadline)
-            .fontWeight(.heavy)
-            .foregroundStyle(Asset.Colors.button.swiftUIColor)
+        Button(L.Common.save) {
+            dismiss()
+        }
+        .fontWeight(.semibold)
     }
 }

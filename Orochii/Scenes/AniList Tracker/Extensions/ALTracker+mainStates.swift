@@ -28,7 +28,7 @@ extension ALTracker {
         VStack(alignment: .leading, spacing: 5.0) {
             Text("CH.")
                 .font(.footnote)
-                .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
+                .foregroundColor(.primary)
             PickerTextField(
                 data: Array(stride(
                     from: 0,
@@ -40,12 +40,13 @@ extension ALTracker {
                 field: .chapter,
                 selection: $vm.chapter
             )
-            .frame(height: 30.5, alignment: .center)
+            .frame(height: 35.0, alignment: .center)
+            .glassEffect(.regular.tint(.accentColor.opacity(0.5)), in: .capsule)
             .overlay {
                 Text("\(String(format: "%.0f", vm.chapter ?? 0)) / \(vm.alManga?.chapters.nilToStr ?? "-")")
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                    .foregroundStyle(.secondary)
             }
         }
     }
@@ -56,7 +57,7 @@ extension ALTracker {
         VStack(alignment: .leading, spacing: 5.0) {
             Text("VOL.")
                 .font(.footnote)
-                .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
+                .foregroundColor(.primary)
             PickerTextField(
                 data: Array(stride(
                     from: 0,
@@ -68,12 +69,13 @@ extension ALTracker {
                 field: .volume,
                 selection: $vm.volume
             )
-            .frame(height: 30.5, alignment: .center)
+            .frame(height: 35.0, alignment: .center)
+            .glassEffect(.regular.tint(.accentColor.opacity(0.5)), in: .capsule)
             .overlay {
                 Text("\(String(format: "%.0f", vm.volume ?? 0)) / \(vm.alManga?.volumes.nilToStr ?? "-")")
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .foregroundStyle(Asset.Colors.secondaryTitle.swiftUIColor)
+                    .foregroundStyle(.secondary)
             }
         }
     }
@@ -84,7 +86,7 @@ extension ALTracker {
         VStack(alignment: .leading, spacing: 5) {
             Text(L.Tracker.Info.status)
                 .font(.footnote)
-                .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
+                .foregroundColor(.primary)
             Menu {
                 Picker("", selection: $vm.status) {
                     ForEach(MangaStatus.allCases) {
@@ -98,11 +100,10 @@ extension ALTracker {
                     .frame(maxWidth: .infinity)
                     .font(.footnote)
                     .fontWeight(.medium)
-                    .foregroundColor(Asset.Colors.secondaryTitle.swiftUIColor)
+                    .foregroundColor(.secondary)
             }
-            .frame(height: 30.5, alignment: .center)
-            .background(Asset.Colors.actionBackground.swiftUIColor)
-            .clipShape(RoundedRectangle(cornerRadius: 4.25))
+            .frame(height: 35.0, alignment: .center)
+            .glassEffect(.regular.tint(.accentColor.opacity(0.5)), in: .capsule)
         }
     }
 }

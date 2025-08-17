@@ -25,7 +25,6 @@ struct EnumPicker<Enum: Pickable, Label: View>: View {
         } label: {
             self.label
         }
-        .tint(Asset.Colors.secondaryTitle.swiftUIColor)
     }
     
     init(selection: Binding<Enum>, label: Label) {

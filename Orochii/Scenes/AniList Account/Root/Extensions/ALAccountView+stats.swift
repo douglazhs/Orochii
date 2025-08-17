@@ -18,14 +18,8 @@ extension ALAccountView {
                 staticRows()
                 disclosureGroups()
             }
-            .listRowBackground(Color.clear)
-            .listSectionSeparator(.hidden)
-            .font(.subheadline)
         }
-        .listStyle(.inset)
         .scrollIndicators(.hidden)
-        .scrollContentBackground(.hidden)
-        .background(Asset.Colors.background.swiftUIColor)
     }
     
     @ViewBuilder 

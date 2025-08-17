@@ -23,21 +23,19 @@ extension ALTracker {
     @ViewBuilder
     func aniList() -> some View {
         trackerInfoList()
-            .background(Asset.Colors.background.swiftUIColor)
+            .overlay { trackLocallyOverlay() }
             .fullScreenCover(isPresented: $showWebView) {
                 if let url = vm.alUrl {
                     SafariWebView(url: url)
                         .ignoresSafeArea()
                 }
             }
-            .overlay { trackLocallyOverlay() }
     }
     
     /// Search screen
     @ViewBuilder
     func search() -> some View {
         trackerSearchList()
-            .background(Asset.Colors.background.swiftUIColor)
             .searchable(
                 text: $vm.text,
                 prompt: "Search for title in AniList"
@@ -57,42 +55,6 @@ extension ALTracker {
             }
     }
     
-    /// AniList title view
-    @ViewBuilder
-    func alTitleView() -> some View {
-        Group {
-            switch vm.context {
-            case .tracker:
-                VStack(spacing: .zero) {
-                    Text(
-                        vm.alManga?.title?.romaji ??
-                        vm.alManga?.title?.english ??
-                        (vm.isLoading ? "" : L.Common.unknown)
-                    )
-                    .font(.headline)
-                    .lineLimit(1)
-                    .multilineTextAlignment(.leading)
-                    .fontWeight(.heavy)
-                    
-                    if let english = vm.alManga?.title?.english,
-                        english != vm.alManga?.title?.romaji ?? "" {
-                        Text(english)
-                            .font(.caption2)
-                            .fontWeight(.medium)
-                            .foregroundStyle(Asset.Colors.primaryText.swiftUIColor)
-                    }
-                }
-            case .search: 
-                Text(L.Tracker.search)
-                    .font(.title2)
-                    .fontWeight(.heavy)
-            }
-        }
-        .font(.subheadline)
-        .fontWeight(.semibold)
-        .lineLimit(1)
-    }
-    
     /// Tracking manga view
     @ViewBuilder
     func trackerInfoList() -> some View {
@@ -100,14 +62,11 @@ extension ALTracker {
             // MANGA INFORMATION
             mangaSection()
                 .listRowSeparator(.hidden)
-                .listRowBackground(Color.clear)
             // ANILIST ACTIONS
             pickers()
-                .listRowBackground(Color.clear)
                 .listRowSeparator(.hidden)
         }
         .listStyle(.inset)
-        .scrollContentBackground(.hidden)
         .scrollIndicators(.hidden)
     }
     
@@ -135,7 +94,7 @@ extension ALTracker {
             } else {
                 if !vm.isSearching {
                     Text(L.Tracker.Search.noResults.attributedString)
-                        .foregroundColor(Asset.Colors.primaryText.swiftUIColor)
+                        .foregroundColor(.secondary)
                         .font(.subheadline)
                         .fontWeight(.regular)
                         .listRowBackground(Color.clear)
@@ -143,8 +102,8 @@ extension ALTracker {
                 }
             }
         }
-        .listStyle(.grouped)
-        .scrollContentBackground(.hidden)
+        .navigationTitle(vm.buildTitle())
+        .listStyle(.inset)
         .scrollIndicators(.hidden)
         .overlay(alignment: .top) {
             if vm.isSearching {

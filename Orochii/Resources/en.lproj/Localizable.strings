@@ -163,9 +163,9 @@
 "manga.sub_action.removed" = "Removed";
 "manga.no_chapters" = "No chapters found :(";
 "manga.chapters_count" = "%@ Chapter(s)";
-"manga.covers.title" = "All Available Covers";
+"manga.covers.title" = "Covers";
 "manga.covers.not_available" = "No other covers available for *%@*";
-"manga.covers.filter.languages" = "Language Selection";
+"manga.covers.filter.languages" = "Language";
 "manga.covers.filter.volume" = "Volume";
 "manga.reader.pages_left" = "%@ pages left";
 
@@ -226,7 +226,7 @@
 "tracker.stop.confirmation.title" = "Stop Tracking Locally";
 "tracker.stop.confirmation.message" = "You will not lose your AniList progress, It just remove the tracking information locally.";
 "tracker.action.stop" = "Stop";
-"tracker.action.track" = "TRACK";
+"tracker.action.track" = "Track";
 "tracker.action.track_locally" = "TRACK LOCALLY";
 "tracker.action.start_tracking" = "START TRACKING";
 "tracker.action.stop_tracking" = "Stop Tracking";

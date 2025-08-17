@@ -23,10 +23,9 @@ extension LibraryView {
     func unlockedContent() -> some View {
         list()
             .standardBars(
-                title: L.Library.title,
-                showTitle: Constants.device == .pad ? false : true,
-                isOpaque: Constants.device == .pad ? false : true
+                title: L.Library.title
             )
+            .navigationSubtitle("Your current readings and favorites!")
             .onChange(of: vm.biometricsState) { _, newValue in
                 if newValue == .active { vm.lock() }
             }
@@ -38,6 +37,7 @@ extension LibraryView {
             }
             .searchable(
                 text: $vm.query,
+                placement: .navigationBarDrawer(displayMode: .always),
                 prompt: L.Library.Search.placeholder
             )
     }
@@ -58,7 +58,6 @@ extension LibraryView {
             if newValue == .inactive { vm.unlock() }
         }
         .fontDesign(.rounded)
-        .background(BlurBackground(with: Asset.Assets.viewBackground.swiftUIImage))
     }
     
     /// Local Auth handler
@@ -135,10 +134,6 @@ extension LibraryView {
                 ForEach([MangaMock.manga]) { manga in
                     if (MangaStatus(rawValue: manga.attributes?.status ?? "") ?? MangaStatus.none) == status {
                         cell(of: manga)
-                            .listRowInsets(.init(top: 5.5, leading: 0, bottom: 5.5, trailing: 8.5))
-                            .listRowSeparator(.hidden)
-                            .listSectionSeparator(.hidden)
-                            .listRowBackground(Color.clear)
                             .contextMenu {
                                 // TODO: - Context menu features
                                 Button(role: .destructive) { } label: {
@@ -148,13 +143,12 @@ extension LibraryView {
                     }
                 }
             }
-            .listRowInsets(.init(top: 11.0, leading: 0, bottom: 4.5, trailing: 0))
         }
         .scrollIndicators(.hidden)
-        .refreshable { }
+        .refreshable {
+            // TODO: Refresh stats
+        }
         .listStyle(.sidebar)
-        .scrollContentBackground(.hidden)
-        .background(Asset.Colors.background.swiftUIColor)
         .animation(.spring(), value: [isSearching])
     }
     
